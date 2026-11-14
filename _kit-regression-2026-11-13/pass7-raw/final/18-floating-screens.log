@@ -1,0 +1,40 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 14 old file(s): RUN.txt t1.2.png t1.5.png t10.3.png t11.6.png t12.8.png t14.6.png t2.6.png t4.6.png t5.8.png t5.png t7.6.png t9.6.png t9.png
+check-frames run: 2026-11-14 05:14:59 UTC
+times: 1.2, 1.5, 2.6, 4.6, 5, 5.8, 7.6, 9, 9.6, 10.3, 11.6, 12.8, 14.6
+newest code edit: 2026-11-13 18:38:20 UTC (floating-screens/choreo.js)
+mp4: 18-floating-screens.mp4 2026-11-13 16:08:17 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+1.2       renders/checks/t1.2.png       47286744c7bd335be4005d9b38f6ceb1  SAME
+1.5       renders/checks/t1.5.png       3bcf26818162c532bbb0553b04ee845c  SAME
+2.6       renders/checks/t2.6.png       c81d1397deb76a1fd5c945cec5dd1fe5  SAME
+4.6       renders/checks/t4.6.png       39de31d88b99cd9032ee808fa5d466b2  SAME
+5         renders/checks/t5.png         cf179d17320f69c4f4ca4af1d4132f35  SAME
+5.8       renders/checks/t5.8.png       b53374043fdb9a3669d8d3363f3460f1  SAME
+7.6       renders/checks/t7.6.png       fa429a6973ef96f3add6574f2cc2edef  SAME
+9         renders/checks/t9.png         ca7f6b784092d7162e98eee1c72b42c1  SAME
+9.6       renders/checks/t9.6.png       1298f6603d49504ff3f334d1bbe745c8  SAME
+10.3      renders/checks/t10.3.png      615af73ee4eab684129bae891bfa2fa2  SAME
+11.6      renders/checks/t11.6.png      0fbf5eb4a2a1062a971d1665ad1bff28  SAME
+12.8      renders/checks/t12.8.png      9b886f981647a11084f32477dd505158  SAME
+14.6      renders/checks/t14.6.png      1c9f02ef3757dae7252b602f4d281993  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 38.0 dB, frame 270)
+determinism: OK (13 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -24.0 dB, max -5.3 dB
+audio 18-floating-screens.mp4: mean -24.1 dB, max -5.4 dB  (5.1 MB)
+deep t=5: hash c1c42eed mean 227.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9: hash 897b880a mean 228.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.2: hash 43c4ac50 mean 228 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.5: hash 9e05fcda mean 228 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.6: hash c94a78bb mean 227.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.6: hash 5df9020e mean 227.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5.8: hash 236ac857 mean 228.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.6: hash 2d9c418d mean 229.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.6: hash 0ece2493 mean 215.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.3: hash b23c177b mean 217.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=11.6: hash 9dd3e72c mean 231.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.8: hash 45c05536 mean 229.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.6: hash 9668f715 mean 229.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

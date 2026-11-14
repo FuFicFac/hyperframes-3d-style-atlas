@@ -1,0 +1,7 @@
+12-studio-product old-kit+DoF-only in-page = baseline: 8/8 | 3=912f24e1 8=39560d36 1.1=70ece278 2.1=e186f098 5.4=a682c4e3 10.9=3fc99f2b 12.9=5e1ca923 14.5=fb35d93e OK
+16-toy-brick old-kit+DoF-only in-page = baseline: 8/8 | 0.3=3e9ef974 1.6=bb9bd21d 3.4=c07c1177 5.9=56df1b2b 7.3=8f20ba9c 8.6=818041ac 11.6=1c8b873b 14.6=72fd24aa OK
+18-floating-screens old-kit+DoF-only in-page = baseline: 13/13 | 5=9c596880 9=eb03ff9d 1.2=a5ca92aa 1.5=dedb250a 2.6=ac81e201 4.6=c50d470d 5.8=b8f86317 7.6=445ad364 9.6=0b95b9c8 10.3=921e70d8 11.6=d6dd6945 12.8=378e742b 14.6=41251d69 OK
+22-glass-light old-kit+DoF-only in-page = baseline: 8/8 | 6=1dcbb406 12=705a23d3 1.2=db2b44f7 2.6=c1121ddd 4.6=53b5e000 8.2=5696fa5b 10.9=d2e68f54 14.6=91e0bf0c OK
+27-circuit-board old-kit+DoF-only in-page = baseline: 5/5 | 1.2=cecf7a38 4.5=6b801f7b 7.5=bd881be6 10.6=60d39d97 14.5=27daa27f OK
+34-clockwork old-kit+DoF-only in-page = baseline: 6/6 | 1=fed0171b 4.6=9af602e7 6.6=a3d9dd63 9.84=2fdee2ca 12.5=b33976a2 14.5=a94d2c00 OK
+46-mixing-console old-kit+DoF-only in-page = baseline: 6/6 | 5=fdec072b 1.2=a416710c 3.6=2976f4c8 7.6=1f9aff52 10.8=41e29316 14.5=d239fd49 OK

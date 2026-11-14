@@ -1,0 +1,26 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 7 old file(s): RUN.txt t1.5.png t10.9.png t12.4.png t14.9.png t5.6.png t7.4.png
+check-frames run: 2026-11-14 03:53:13 UTC
+times: 1.5, 5.6, 7.4, 10.9, 12.4, 14.9
+newest code edit: 2026-11-14 03:19:42 UTC (lab-glassware/style.js)
+mp4: 45-lab-glassware.mp4 2026-11-14 03:07:30 UTC
+kit last changed: 2026-11-14 03:19:42 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+1.5       renders/checks/t1.5.png       b4d5502fd5139b0a5ac1d84f711c1055  SAME
+5.6       renders/checks/t5.6.png       57b27414e18aba081d9b8d23d8e5da3d  SAME
+7.4       renders/checks/t7.4.png       09e3bd3f0836963589c5acbed6238bc1  SAME
+10.9      renders/checks/t10.9.png      e8ab1e4a47a7de109e629c438567417b  SAME
+12.4      renders/checks/t12.4.png      c8bea29e57cbd46ede98ebfd783e5b93  SAME
+14.9      renders/checks/t14.9.png      3e0d92aea4d434aa9673dd353a05ce7f  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.8 dB, frame 168)
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -21.4 dB, max -5.1 dB
+audio 45-lab-glassware.mp4: mean -21.5 dB, max -5.8 dB  (6.1 MB)
+deep t=1.5: hash d6a57fe6 mean 178.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5.6: hash d70b2851 mean 181.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.4: hash 2fc42e41 mean 180.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.9: hash b1aec0c6 mean 181.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.4: hash 0d507f08 mean 180 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.9: hash 7d6496cf mean 180.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

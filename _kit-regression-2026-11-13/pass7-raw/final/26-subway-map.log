@@ -1,0 +1,27 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 8 old file(s): RUN.txt t1.png t12.png t14.5.png t2.6.png t5.png t7.2.png t9.6.png
+check-frames run: 2026-11-14 05:21:51 UTC
+times: 1, 2.6, 5, 7.2, 9.6, 12, 14.5
+newest code edit: 2026-11-13 23:02:54 UTC (subway-map/style.js)
+mp4: 26-subway-map.mp4 2026-11-13 23:03:20 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1         renders/checks/t1.png         bb08d580ccdbb278a92d20f04d451de2  SAME
+2.6       renders/checks/t2.6.png       c69b5a985287ae766a5a2d2a67ea1fb4  SAME
+5         renders/checks/t5.png         04c42e119d684c9a34dda21ddc5c739d  SAME
+7.2       renders/checks/t7.2.png       462091a48785366f3a18c35ccf1b50df  SAME
+9.6       renders/checks/t9.6.png       e9f9f58b52c2f1942a4a5c07092486f2  SAME
+12        renders/checks/t12.png        f2de6c4b4989b43aa51c9e5a1422c9ee  SAME
+14.5      renders/checks/t14.5.png      7abd3c17c8a7aff4a93d02bd711ac274  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 39.4 dB, frame 435)
+determinism: OK (7 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -21.1 dB, max -6.6 dB
+audio 26-subway-map.mp4: mean -21.1 dB, max -6.7 dB  (2.7 MB)
+deep t=1: hash d1e71e22 mean 210.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5: hash cb1a878f mean 211.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12: hash b081f308 mean 204.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.6: hash 0dc7dac6 mean 209.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.2: hash f12c4d11 mean 207.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.6: hash b8149a30 mean 208 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.5: hash 4fa2a7f4 mean 203.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

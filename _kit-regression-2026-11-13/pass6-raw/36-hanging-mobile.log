@@ -1,0 +1,23 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 6 old file(s): RUN.txt t1.5.png t10.8.png t14.5.png t4.6.png t7.5.png
+check-frames run: 2026-11-14 00:44:03 UTC
+times: 1.5, 4.6, 7.5, 10.8, 14.5
+newest code edit: 2026-11-13 23:45:39 UTC (36-hanging-mobile/scene.config.js)
+mp4: 36-hanging-mobile.mp4 2026-11-13 23:46:33 UTC
+kit last changed: 2026-11-14 00:14:11 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1.5       renders/checks/t1.5.png       a1e7a364c3c26cf3ba16275446f1d2e8  SAME
+4.6       renders/checks/t4.6.png       5ec982b0a57920ef8fed7fc790fc78f3  SAME
+7.5       renders/checks/t7.5.png       a04961c5f741b9f7673d6e17c1260d49  SAME
+10.8      renders/checks/t10.8.png      e79a17e24754aad149e003da984640ed  SAME
+14.5      renders/checks/t14.5.png      c0bf6ba5f2df8b0d73bc20580b9f6942  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 41.1 dB, frame 435)
+determinism: OK (5 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -19.9 dB, max -4.5 dB
+audio 36-hanging-mobile.mp4: mean -19.9 dB, max -4.5 dB  (4.0 MB)
+deep t=1.5: hash 53bc91f8 mean 226.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.6: hash 82852d4b mean 226.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.5: hash b4a273ea mean 227.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.8: hash 53f8714b mean 224.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.5: hash 57ca6681 mean 222.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

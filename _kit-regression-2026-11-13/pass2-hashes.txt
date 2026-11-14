@@ -1,0 +1,49 @@
+# Pass 2 (kit maintenance after demos 04-08). md5 of decoded pixels from hyperframes snapshot --at.
+# before = kit before pass 2; after = all fixes + promotions + style switches, re-synced.
+## 00-smoke
+0.6s before 5bb4f7a54e31e5cc387c0a1c466d6ee6 after 5bb4f7a54e31e5cc387c0a1c466d6ee6 IDENTICAL
+1.5s before 4ad519fae5bfd273d2855d8003b19411 after 4ad519fae5bfd273d2855d8003b19411 IDENTICAL
+3.2s before 73f2e2dcfb650ca41f37ca2cb976a7e9 after 73f2e2dcfb650ca41f37ca2cb976a7e9 IDENTICAL
+4.8s before a3052e66f1cd2b57d2064f7bf2ff5423 after a3052e66f1cd2b57d2064f7bf2ff5423 IDENTICAL
+## 01-low-poly
+13.5s before 6d529b174f198f1d6b65b4c08f920640 after 6d529b174f198f1d6b65b4c08f920640 IDENTICAL
+2.6s before 97ad2a48983ae600dae00afc330d9edb after 97ad2a48983ae600dae00afc330d9edb IDENTICAL
+5s before eb395f2cf35d7cc49374e91daf1abd8a after eb395f2cf35d7cc49374e91daf1abd8a IDENTICAL
+8s before 42f46028c5ab2dc87458732ab74e8146 after 42f46028c5ab2dc87458732ab74e8146 IDENTICAL
+## 02-paper-pop-up
+14s before 7c75cb8293c98e11874e89294c64ecb1 after 7c75cb8293c98e11874e89294c64ecb1 IDENTICAL
+2.5s before 7765eafc7fd724a23bdb64295125c365 after 7765eafc7fd724a23bdb64295125c365 IDENTICAL
+4.5s before ee9deef7c9f9bc75b5059f6aece73ed3 after ee9deef7c9f9bc75b5059f6aece73ed3 IDENTICAL
+9s before 25baccd829a844f3469148f0b8771a9d after 25baccd829a844f3469148f0b8771a9d IDENTICAL
+## 03-neon-sign
+1.5s before b7f3292da49f95395c8433918d5d183b after b7f3292da49f95395c8433918d5d183b IDENTICAL
+14s before e0bb06e76e95f80cd2e7a58426f5566b after e0bb06e76e95f80cd2e7a58426f5566b IDENTICAL
+4s before 51081a3346174148b19f6e6e759165be after 51081a3346174148b19f6e6e759165be IDENTICAL
+9.5s before 268cb4b9802854af862638e46d0f5599 after 268cb4b9802854af862638e46d0f5599 IDENTICAL
+## 04-soft-clay
+1.5s before eb650f729943dd5b43af20d073642245 after eb650f729943dd5b43af20d073642245 IDENTICAL
+13.5s before 76607334b404faf9c1c9790915c834d8 after 76607334b404faf9c1c9790915c834d8 IDENTICAL
+5s before 97626255fe748cfb08817aad9b208397 after 97626255fe748cfb08817aad9b208397 IDENTICAL
+9s before 997f74c4ea822b5d24097419ec0e409c after 997f74c4ea822b5d24097419ec0e409c IDENTICAL
+## 05-tiny-diorama
+1.5s before 0b67189f8716a491400af7f6062672b4 after 0b67189f8716a491400af7f6062672b4 IDENTICAL
+13.5s before 8cd8bbac258da3d107ab790881dc8136 after 8cd8bbac258da3d107ab790881dc8136 IDENTICAL
+5s before df79e67a0cd604aee26a68d4c47b38ab after df79e67a0cd604aee26a68d4c47b38ab IDENTICAL
+9s before f44aa1b75da89f546f786b4784482308 after f44aa1b75da89f546f786b4784482308 IDENTICAL
+## 06-blueprint-build
+1.5s before 70a167980f38bb8c765f73316745cb53 after 70a167980f38bb8c765f73316745cb53 IDENTICAL
+13.5s before f4198f72594c0efff6cc4b4f22087398 after f4198f72594c0efff6cc4b4f22087398 IDENTICAL
+5s before a372b508a4383c8cbad759613225e2ca after a372b508a4383c8cbad759613225e2ca IDENTICAL
+9s before cdb977bb65a3c1028804b7139390b025 after cdb977bb65a3c1028804b7139390b025 IDENTICAL
+## 07-split-flap-board
+1.5s before 9cd23c91d7f3f6708a3116b4352e3f27 after 9cd23c91d7f3f6708a3116b4352e3f27 IDENTICAL
+13.5s before 9ba9c8121a136a62df8bb4da84041edd after 9ba9c8121a136a62df8bb4da84041edd IDENTICAL
+5s before d2ef58e786a22f5a9cf8941deda19a35 after d2ef58e786a22f5a9cf8941deda19a35 IDENTICAL
+9s before 867e825b0bf7fd6ec22d74a5600b9770 after 867e825b0bf7fd6ec22d74a5600b9770 IDENTICAL
+## 08-voxel
+1.5s before 6c0ec277f661ac8c0663cd4dbb883c4f after 6c0ec277f661ac8c0663cd4dbb883c4f IDENTICAL
+13.5s before fb59f4b36ae5ccb20b1f1d4f5c2a0b20 after fb59f4b36ae5ccb20b1f1d4f5c2a0b20 IDENTICAL
+5s before 4aa16528491051b3c5d8aea0e61699c6 after 4aa16528491051b3c5d8aea0e61699c6 IDENTICAL
+9s before e849f4459bc4d24be5e3cc8415b2e067 after e849f4459bc4d24be5e3cc8415b2e067 IDENTICAL
+
+# Note: one of five extra neon runs showed GPU noise (+-1 level on ~40 px) on an unchanged kit; re-runs matched.

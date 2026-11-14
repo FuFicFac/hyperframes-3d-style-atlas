@@ -1,0 +1,4030 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "blueprint-build",
+    "name": "Blueprint Build",
+    "description": "A cyanotype drafting sheet come to life: deep Prussian-blue paper with a faint grid, fibres and fold creases; objects drawn as crisp pale hidden-line linework (visible edges solid, hidden edges dashed) that plots on stroke by stroke, with dash-dot centre-lines, dimensions, leaders, hatching and a title block in single-stroke technical lettering. Front elevation tilts into an isometric view.",
+    "palette": {
+      "bg": "#1a5296",
+      "paper": "#1a5296",
+      "paperDark": "#134581",
+      "paperLight": "#2463ab",
+      "grid": "#7aa6dc",
+      "ink": "#eef6ff",
+      "inkSoft": "#c4dcf6",
+      "construction": "#8db4e4",
+      "hidden": "#a9c8ee",
+      "accent": "#ffd27a",
+      "primary": "#eef6ff",
+      "secondary": "#8db4e4"
+    },
+    "world": {
+      "background": "#1a5296",
+      "fog": null,
+      "environment": null,
+      "toneMapping": "none",
+      "exposure": 1
+    },
+    "materials": {
+      "fill": {
+        "type": "basic",
+        "baseColor": "#000000",
+        "description": "depth-only occluder (colorWrite off, polygonOffset 1/1)"
+      },
+      "ink": {
+        "type": "basic",
+        "baseColor": "#eef6ff",
+        "description": "line/arrowhead colour; blended with MAX (lighten) so overlaps never double"
+      }
+    },
+    "lights": [],
+    "post": {},
+    "camera": {
+      "fov": 9,
+      "near": 20,
+      "far": 120,
+      "distance": 46,
+      "drift": {
+        "amp": 0,
+        "speed": 0
+      }
+    },
+    "text": {
+      "font": "mono",
+      "weight": 600,
+      "color": "#eef6ff",
+      "height": 0.3
+    },
+    "sfx": {
+      "enter": "click",
+      "exit": "click",
+      "move": "whoosh",
+      "land": "clack",
+      "emphasis": "fold",
+      "ui": "tick",
+      "bed": "hum",
+      "plot": "paper"
+    },
+    "motion": [
+      "Lines plot on along their length in drafting order: construction lines, then outlines, then dimensions, then lettering.",
+      "One pen at a time: a small amber plotter-head crosshair rides the tip of whatever is being drawn.",
+      "Parts slide apart along their dash-dot axis lines (exploded view) with an inOutCubic ease and a soft clack at rest.",
+      "Camera: orthographic-like long lens (9° fov); holds a flat front elevation, then one slow tilt to isometric; never cuts.",
+      "Annotation lives on the sheet (screen space): leaders re-attach to their 3D anchors as the view tilts."
+    ],
+    "line": {
+      "weights": {
+        "outline": 3.6,
+        "silhouette": 3.6,
+        "hidden": 1.7,
+        "construction": 1.3,
+        "centre": 1.6,
+        "dimension": 1.9,
+        "hatch": 1.3,
+        "leader": 1.9,
+        "text": 2.6,
+        "title": 3,
+        "border": 2.4,
+        "detail": 2.2
+      },
+      "levels": {
+        "outline": 1,
+        "silhouette": 1,
+        "hidden": 0.62,
+        "construction": 0.5,
+        "centre": 0.7,
+        "dimension": 0.85,
+        "hatch": 0.6,
+        "leader": 0.85,
+        "text": 1,
+        "title": 1,
+        "border": 0.8,
+        "detail": 0.85
+      },
+      "colors": {
+        "outline": "ink",
+        "silhouette": "ink",
+        "hidden": "hidden",
+        "construction": "construction",
+        "centre": "construction",
+        "dimension": "inkSoft",
+        "hatch": "inkSoft",
+        "leader": "inkSoft",
+        "text": "ink",
+        "title": "ink",
+        "border": "inkSoft",
+        "detail": "inkSoft"
+      },
+      "dash": {
+        "hidden": [
+          0.085,
+          0.055,
+          0,
+          0
+        ],
+        "centre": [
+          0.34,
+          0.06,
+          0.035,
+          0.06
+        ],
+        "construction": null
+      },
+      "dashPx": {
+        "hidden": [
+          10,
+          7,
+          0,
+          0
+        ],
+        "centre": [
+          30,
+          7,
+          4,
+          7
+        ]
+      },
+      "bias": 0.03,
+      "featureAngle": 24,
+      "penGap": 0.015
+    },
+    "lettering": {
+      "letterSpacing": 0.28,
+      "wordSpacing": 0.62,
+      "lineHeight": 1.6,
+      "bendRadius": 0,
+      "slant": 0
+    },
+    "dimension": {
+      "arrowLen": 0.17,
+      "arrowWidth": 0.055,
+      "extGap": 0.07,
+      "extOver": 0.12,
+      "textCap": 0.17,
+      "textGap": 0.08,
+      "tickLen": 0.12
+    },
+    "hatch": {
+      "spacing": 0.075,
+      "angle": 0.785
+    },
+    "loopArrow": {
+      "headLen": 0.32,
+      "headWidth": 0.13
+    },
+    "head": {
+      "radius": 11,
+      "cross": 22,
+      "weight": 2
+    },
+    "sheet": {
+      "width": 1920,
+      "height": 1080,
+      "seed": 31,
+      "gridMinor": 27,
+      "gridMajor": 135,
+      "gridMinorAlpha": 0.13,
+      "gridMajorAlpha": 0.26,
+      "gridLine": 1,
+      "mottle": 0.4,
+      "mottleScale": 4,
+      "grain": 6,
+      "fibres": 900,
+      "creases": {
+        "x": [
+          0.515
+        ],
+        "y": [
+          0.49
+        ],
+        "width": 26,
+        "light": 0.12,
+        "dark": 0.12
+      },
+      "vignette": 0.32,
+      "fade": [
+        {
+          "x": 0.08,
+          "y": 0.12,
+          "r": 0.32,
+          "a": 0.06
+        },
+        {
+          "x": 0.82,
+          "y": 0.86,
+          "r": 0.36,
+          "a": 0.05
+        }
+      ],
+      "border": {
+        "outer": 30,
+        "inner": 44,
+        "zones": 6,
+        "rows": 4
+      }
+    },
+    "plot": {
+      "charTime": 0.034,
+      "minTime": 0.25
+    },
+    "font": {
+      "cap": 1,
+      "glyphs": {
+        "0": {
+          "w": 0.56,
+          "s": [
+            [
+              [
+                "a",
+                0.28,
+                0.5,
+                0.28,
+                0.5,
+                98,
+                442
+              ]
+            ]
+          ]
+        },
+        "1": {
+          "w": 0.26,
+          "s": [
+            [
+              [
+                0,
+                0.78
+              ],
+              [
+                0.24,
+                1
+              ],
+              [
+                0.24,
+                0
+              ]
+            ]
+          ]
+        },
+        "2": {
+          "w": 0.56,
+          "s": [
+            [
+              [
+                "a",
+                0.28,
+                0.72,
+                0.27,
+                0.28,
+                165,
+                -25
+              ],
+              [
+                0,
+                0
+              ],
+              [
+                0.56,
+                0
+              ]
+            ]
+          ]
+        },
+        "3": {
+          "w": 0.56,
+          "s": [
+            [
+              [
+                "a",
+                0.27,
+                0.75,
+                0.25,
+                0.25,
+                155,
+                -90
+              ],
+              [
+                "a",
+                0.27,
+                0.25,
+                0.29,
+                0.25,
+                90,
+                -155
+              ]
+            ]
+          ]
+        },
+        "4": {
+          "w": 0.58,
+          "s": [
+            [
+              [
+                0.44,
+                0
+              ],
+              [
+                0.44,
+                1
+              ],
+              [
+                0,
+                0.32
+              ],
+              [
+                0.58,
+                0.32
+              ]
+            ]
+          ]
+        },
+        "5": {
+          "w": 0.56,
+          "s": [
+            [
+              [
+                0.52,
+                1
+              ],
+              [
+                0.08,
+                1
+              ],
+              [
+                0.1,
+                0.57
+              ],
+              [
+                "a",
+                0.28,
+                0.32,
+                0.28,
+                0.32,
+                128,
+                -152
+              ]
+            ]
+          ]
+        },
+        "6": {
+          "w": 0.58,
+          "s": [
+            [
+              [
+                0.46,
+                1
+              ],
+              [
+                0.04,
+                0.42
+              ],
+              [
+                "a",
+                0.29,
+                0.3,
+                0.29,
+                0.3,
+                155,
+                505
+              ]
+            ]
+          ]
+        },
+        "7": {
+          "w": 0.56,
+          "s": [
+            [
+              [
+                0,
+                1
+              ],
+              [
+                0.56,
+                1
+              ],
+              [
+                0.18,
+                0
+              ]
+            ]
+          ]
+        },
+        "8": {
+          "w": 0.58,
+          "s": [
+            [
+              [
+                "a",
+                0.29,
+                0.77,
+                0.23,
+                0.23,
+                -82,
+                262
+              ]
+            ],
+            [
+              [
+                "a",
+                0.29,
+                0.27,
+                0.29,
+                0.27,
+                98,
+                442
+              ]
+            ]
+          ]
+        },
+        "9": {
+          "w": 0.58,
+          "s": [
+            [
+              [
+                0.12,
+                0
+              ],
+              [
+                0.54,
+                0.58
+              ],
+              [
+                "a",
+                0.29,
+                0.7,
+                0.29,
+                0.3,
+                -25,
+                325
+              ]
+            ]
+          ]
+        },
+        "A": {
+          "w": 0.62,
+          "s": [
+            [
+              [
+                0,
+                0
+              ],
+              [
+                0.31,
+                1
+              ],
+              [
+                0.62,
+                0
+              ]
+            ],
+            [
+              [
+                0.13,
+                0.36
+              ],
+              [
+                0.49,
+                0.36
+              ]
+            ]
+          ]
+        },
+        "B": {
+          "w": 0.58,
+          "s": [
+            [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0.3,
+                1
+              ],
+              [
+                "a",
+                0.3,
+                0.76,
+                0.24,
+                0.24,
+                90,
+                -90
+              ],
+              [
+                0.06,
+                0.52
+              ]
+            ],
+            [
+              [
+                0.08,
+                0.52
+              ],
+              [
+                0.32,
+                0.52
+              ],
+              [
+                "a",
+                0.32,
+                0.26,
+                0.26,
+                0.26,
+                90,
+                -90
+              ],
+              [
+                0.07,
+                0
+              ]
+            ]
+          ]
+        },
+        "C": {
+          "w": 0.62,
+          "s": [
+            [
+              [
+                "a",
+                0.34,
+                0.5,
+                0.34,
+                0.5,
+                48,
+                312
+              ]
+            ]
+          ]
+        },
+        "D": {
+          "w": 0.6,
+          "s": [
+            [
+              [
+                0,
+                0.06
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0.2,
+                1
+              ],
+              [
+                "a",
+                0.2,
+                0.5,
+                0.4,
+                0.5,
+                90,
+                -90
+              ],
+              [
+                0.05,
+                0
+              ]
+            ]
+          ]
+        },
+        "E": {
+          "w": 0.52,
+          "s": [
+            [
+              [
+                0.52,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                0
+              ],
+              [
+                0.52,
+                0
+              ]
+            ],
+            [
+              [
+                0.05,
+                0.5
+              ],
+              [
+                0.42,
+                0.5
+              ]
+            ]
+          ]
+        },
+        "F": {
+          "w": 0.5,
+          "s": [
+            [
+              [
+                0.5,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0.05,
+                0.5
+              ],
+              [
+                0.4,
+                0.5
+              ]
+            ]
+          ]
+        },
+        "G": {
+          "w": 0.66,
+          "s": [
+            [
+              [
+                "a",
+                0.34,
+                0.5,
+                0.34,
+                0.5,
+                50,
+                345
+              ],
+              [
+                0.68,
+                0.46
+              ],
+              [
+                0.4,
+                0.46
+              ]
+            ]
+          ]
+        },
+        "H": {
+          "w": 0.58,
+          "s": [
+            [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            [
+              [
+                0.58,
+                0
+              ],
+              [
+                0.58,
+                1
+              ]
+            ],
+            [
+              [
+                0.05,
+                0.5
+              ],
+              [
+                0.53,
+                0.5
+              ]
+            ]
+          ]
+        },
+        "I": {
+          "w": 0,
+          "s": [
+            [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ]
+          ]
+        },
+        "J": {
+          "w": 0.46,
+          "s": [
+            [
+              [
+                0.46,
+                1
+              ],
+              [
+                0.46,
+                0.27
+              ],
+              [
+                "a",
+                0.23,
+                0.27,
+                0.23,
+                0.27,
+                0,
+                -180
+              ]
+            ]
+          ]
+        },
+        "K": {
+          "w": 0.56,
+          "s": [
+            [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            [
+              [
+                0.54,
+                1
+              ],
+              [
+                0.04,
+                0.42
+              ]
+            ],
+            [
+              [
+                0.2,
+                0.6
+              ],
+              [
+                0.58,
+                0
+              ]
+            ]
+          ]
+        },
+        "L": {
+          "w": 0.48,
+          "s": [
+            [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                0
+              ],
+              [
+                0.48,
+                0
+              ]
+            ]
+          ]
+        },
+        "M": {
+          "w": 0.72,
+          "s": [
+            [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0.36,
+                0.38
+              ],
+              [
+                0.72,
+                1
+              ],
+              [
+                0.72,
+                0
+              ]
+            ]
+          ]
+        },
+        "N": {
+          "w": 0.58,
+          "s": [
+            [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0.58,
+                0
+              ],
+              [
+                0.58,
+                1
+              ]
+            ]
+          ]
+        },
+        "O": {
+          "w": 0.7,
+          "s": [
+            [
+              [
+                "a",
+                0.35,
+                0.5,
+                0.35,
+                0.5,
+                98,
+                442
+              ]
+            ]
+          ]
+        },
+        "P": {
+          "w": 0.55,
+          "s": [
+            [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0.29,
+                1
+              ],
+              [
+                "a",
+                0.29,
+                0.74,
+                0.26,
+                0.26,
+                90,
+                -90
+              ],
+              [
+                0.05,
+                0.48
+              ]
+            ]
+          ]
+        },
+        "Q": {
+          "w": 0.7,
+          "s": [
+            [
+              [
+                "a",
+                0.35,
+                0.5,
+                0.35,
+                0.5,
+                98,
+                442
+              ]
+            ],
+            [
+              [
+                0.44,
+                0.24
+              ],
+              [
+                0.74,
+                -0.06
+              ]
+            ]
+          ]
+        },
+        "R": {
+          "w": 0.57,
+          "s": [
+            [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0.29,
+                1
+              ],
+              [
+                "a",
+                0.29,
+                0.74,
+                0.26,
+                0.26,
+                90,
+                -90
+              ],
+              [
+                0.05,
+                0.48
+              ]
+            ],
+            [
+              [
+                0.24,
+                0.48
+              ],
+              [
+                0.58,
+                0
+              ]
+            ]
+          ]
+        },
+        "S": {
+          "w": 0.58,
+          "s": [
+            [
+              [
+                "a",
+                0.3,
+                0.75,
+                0.27,
+                0.25,
+                25,
+                270
+              ],
+              [
+                "a",
+                0.3,
+                0.25,
+                0.29,
+                0.25,
+                90,
+                -155
+              ]
+            ]
+          ]
+        },
+        "T": {
+          "w": 0.6,
+          "s": [
+            [
+              [
+                0,
+                1
+              ],
+              [
+                0.6,
+                1
+              ]
+            ],
+            [
+              [
+                0.3,
+                0.95
+              ],
+              [
+                0.3,
+                0
+              ]
+            ]
+          ]
+        },
+        "U": {
+          "w": 0.58,
+          "s": [
+            [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                0.3
+              ],
+              [
+                "a",
+                0.29,
+                0.3,
+                0.29,
+                0.3,
+                180,
+                360
+              ],
+              [
+                0.58,
+                1
+              ]
+            ]
+          ]
+        },
+        "V": {
+          "w": 0.62,
+          "s": [
+            [
+              [
+                0,
+                1
+              ],
+              [
+                0.31,
+                0
+              ],
+              [
+                0.62,
+                1
+              ]
+            ]
+          ]
+        },
+        "W": {
+          "w": 0.86,
+          "s": [
+            [
+              [
+                0,
+                1
+              ],
+              [
+                0.2,
+                0
+              ],
+              [
+                0.43,
+                0.72
+              ],
+              [
+                0.66,
+                0
+              ],
+              [
+                0.86,
+                1
+              ]
+            ]
+          ]
+        },
+        "X": {
+          "w": 0.58,
+          "s": [
+            [
+              [
+                0,
+                1
+              ],
+              [
+                0.58,
+                0
+              ]
+            ],
+            [
+              [
+                0.58,
+                1
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          ]
+        },
+        "Y": {
+          "w": 0.6,
+          "s": [
+            [
+              [
+                0,
+                1
+              ],
+              [
+                0.3,
+                0.5
+              ],
+              [
+                0.6,
+                1
+              ]
+            ],
+            [
+              [
+                0.3,
+                0.45
+              ],
+              [
+                0.3,
+                0
+              ]
+            ]
+          ]
+        },
+        "Z": {
+          "w": 0.56,
+          "s": [
+            [
+              [
+                0,
+                1
+              ],
+              [
+                0.56,
+                1
+              ],
+              [
+                0,
+                0
+              ],
+              [
+                0.56,
+                0
+              ]
+            ]
+          ]
+        },
+        "?": {
+          "w": 0.5,
+          "s": [
+            [
+              [
+                "a",
+                0.25,
+                0.74,
+                0.25,
+                0.26,
+                165,
+                -60
+              ],
+              [
+                0.26,
+                0.42
+              ],
+              [
+                0.26,
+                0.28
+              ]
+            ],
+            [
+              [
+                0.26,
+                0.06
+              ],
+              [
+                0.26,
+                0
+              ]
+            ]
+          ]
+        },
+        "!": {
+          "w": 0,
+          "s": [
+            [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                0.3
+              ]
+            ],
+            [
+              [
+                0,
+                0.06
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          ]
+        },
+        ".": {
+          "w": 0,
+          "s": [
+            [
+              [
+                0,
+                0.06
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          ]
+        },
+        ",": {
+          "w": 0.06,
+          "s": [
+            [
+              [
+                0.06,
+                0.08
+              ],
+              [
+                0,
+                -0.14
+              ]
+            ]
+          ]
+        },
+        ":": {
+          "w": 0,
+          "s": [
+            [
+              [
+                0,
+                0.66
+              ],
+              [
+                0,
+                0.6
+              ]
+            ],
+            [
+              [
+                0,
+                0.06
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          ]
+        },
+        ";": {
+          "w": 0.06,
+          "s": [
+            [
+              [
+                0.06,
+                0.66
+              ],
+              [
+                0.06,
+                0.6
+              ]
+            ],
+            [
+              [
+                0.06,
+                0.08
+              ],
+              [
+                0,
+                -0.14
+              ]
+            ]
+          ]
+        },
+        "'": {
+          "w": 0,
+          "s": [
+            [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                0.74
+              ]
+            ]
+          ]
+        },
+        "\"": {
+          "w": 0.16,
+          "s": [
+            [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                0.74
+              ]
+            ],
+            [
+              [
+                0.16,
+                1
+              ],
+              [
+                0.16,
+                0.74
+              ]
+            ]
+          ]
+        },
+        "-": {
+          "w": 0.36,
+          "s": [
+            [
+              [
+                0,
+                0.46
+              ],
+              [
+                0.36,
+                0.46
+              ]
+            ]
+          ]
+        },
+        "+": {
+          "w": 0.5,
+          "s": [
+            [
+              [
+                0,
+                0.46
+              ],
+              [
+                0.5,
+                0.46
+              ]
+            ],
+            [
+              [
+                0.25,
+                0.21
+              ],
+              [
+                0.25,
+                0.71
+              ]
+            ]
+          ]
+        },
+        "=": {
+          "w": 0.5,
+          "s": [
+            [
+              [
+                0,
+                0.6
+              ],
+              [
+                0.5,
+                0.6
+              ]
+            ],
+            [
+              [
+                0,
+                0.32
+              ],
+              [
+                0.5,
+                0.32
+              ]
+            ]
+          ]
+        },
+        "/": {
+          "w": 0.46,
+          "s": [
+            [
+              [
+                0,
+                -0.06
+              ],
+              [
+                0.46,
+                1.06
+              ]
+            ]
+          ]
+        },
+        "|": {
+          "w": 0,
+          "s": [
+            [
+              [
+                0,
+                -0.15
+              ],
+              [
+                0,
+                1.15
+              ]
+            ]
+          ]
+        },
+        "(": {
+          "w": 0.24,
+          "s": [
+            [
+              [
+                "a",
+                0.6,
+                0.5,
+                0.6,
+                0.66,
+                130,
+                230
+              ]
+            ]
+          ]
+        },
+        ")": {
+          "w": 0.24,
+          "s": [
+            [
+              [
+                "a",
+                -0.36,
+                0.5,
+                0.6,
+                0.66,
+                50,
+                -50
+              ]
+            ]
+          ]
+        },
+        "[": {
+          "w": 0.24,
+          "s": [
+            [
+              [
+                0.24,
+                1.12
+              ],
+              [
+                0,
+                1.12
+              ],
+              [
+                0,
+                -0.12
+              ],
+              [
+                0.24,
+                -0.12
+              ]
+            ]
+          ]
+        },
+        "]": {
+          "w": 0.24,
+          "s": [
+            [
+              [
+                0,
+                1.12
+              ],
+              [
+                0.24,
+                1.12
+              ],
+              [
+                0.24,
+                -0.12
+              ],
+              [
+                0,
+                -0.12
+              ]
+            ]
+          ]
+        },
+        "<": {
+          "w": 0.46,
+          "s": [
+            [
+              [
+                0.46,
+                0.84
+              ],
+              [
+                0,
+                0.46
+              ],
+              [
+                0.46,
+                0.08
+              ]
+            ]
+          ]
+        },
+        ">": {
+          "w": 0.46,
+          "s": [
+            [
+              [
+                0,
+                0.84
+              ],
+              [
+                0.46,
+                0.46
+              ],
+              [
+                0,
+                0.08
+              ]
+            ]
+          ]
+        },
+        "#": {
+          "w": 0.6,
+          "s": [
+            [
+              [
+                0.2,
+                0
+              ],
+              [
+                0.26,
+                1
+              ]
+            ],
+            [
+              [
+                0.4,
+                0
+              ],
+              [
+                0.46,
+                1
+              ]
+            ],
+            [
+              [
+                0,
+                0.66
+              ],
+              [
+                0.6,
+                0.66
+              ]
+            ],
+            [
+              [
+                0,
+                0.32
+              ],
+              [
+                0.6,
+                0.32
+              ]
+            ]
+          ]
+        },
+        "%": {
+          "w": 0.62,
+          "s": [
+            [
+              [
+                "a",
+                0.14,
+                0.8,
+                0.12,
+                0.17,
+                98,
+                442
+              ]
+            ],
+            [
+              [
+                0,
+                0
+              ],
+              [
+                0.62,
+                1
+              ]
+            ],
+            [
+              [
+                "a",
+                0.48,
+                0.2,
+                0.12,
+                0.17,
+                98,
+                442
+              ]
+            ]
+          ]
+        },
+        "&": {
+          "w": 0.64,
+          "s": [
+            [
+              [
+                0.64,
+                0
+              ],
+              [
+                "a",
+                0.24,
+                0.72,
+                0.17,
+                0.25,
+                -50,
+                210
+              ],
+              [
+                "a",
+                0.27,
+                0.24,
+                0.27,
+                0.24,
+                140,
+                330
+              ],
+              [
+                0.62,
+                0.44
+              ]
+            ]
+          ]
+        },
+        "*": {
+          "w": 0.44,
+          "s": [
+            [
+              [
+                0.22,
+                0.98
+              ],
+              [
+                0.22,
+                0.5
+              ]
+            ],
+            [
+              [
+                0,
+                0.86
+              ],
+              [
+                0.44,
+                0.62
+              ]
+            ],
+            [
+              [
+                0,
+                0.62
+              ],
+              [
+                0.44,
+                0.86
+              ]
+            ]
+          ]
+        },
+        "—": {
+          "w": 0.8,
+          "s": [
+            [
+              [
+                0,
+                0.46
+              ],
+              [
+                0.8,
+                0.46
+              ]
+            ]
+          ]
+        },
+        "·": {
+          "w": 0,
+          "s": [
+            [
+              [
+                0,
+                0.5
+              ],
+              [
+                0,
+                0.44
+              ]
+            ]
+          ]
+        },
+        "→": {
+          "w": 0.86,
+          "s": [
+            [
+              [
+                0,
+                0.46
+              ],
+              [
+                0.84,
+                0.46
+              ]
+            ],
+            [
+              [
+                0.56,
+                0.7
+              ],
+              [
+                0.86,
+                0.46
+              ],
+              [
+                0.56,
+                0.22
+              ]
+            ]
+          ]
+        },
+        "Ø": {
+          "w": 0.7,
+          "s": [
+            [
+              [
+                "a",
+                0.35,
+                0.5,
+                0.35,
+                0.5,
+                98,
+                442
+              ]
+            ],
+            [
+              [
+                0,
+                -0.06
+              ],
+              [
+                0.7,
+                1.06
+              ]
+            ]
+          ]
+        },
+        "×": {
+          "w": 0.44,
+          "s": [
+            [
+              [
+                0,
+                0.68
+              ],
+              [
+                0.44,
+                0.24
+              ]
+            ],
+            [
+              [
+                0.44,
+                0.68
+              ],
+              [
+                0,
+                0.24
+              ]
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "scene": {
+    "id": "06-blueprint-build",
+    "style": "blueprint-build",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "sheet",
+        "t": 0,
+        "dur": 1.3
+      },
+      {
+        "id": "model",
+        "t": 1.3,
+        "dur": 2.2
+      },
+      {
+        "id": "tools",
+        "t": 3.5,
+        "dur": 2.9
+      },
+      {
+        "id": "memory",
+        "t": 6.4,
+        "dur": 2
+      },
+      {
+        "id": "tilt",
+        "t": 8.45,
+        "dur": 2
+      },
+      {
+        "id": "loop",
+        "t": 10.45,
+        "dur": 2
+      },
+      {
+        "id": "dims",
+        "t": 12.45,
+        "dur": 2.55
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0,
+          -0.72,
+          46
+        ],
+        "target": [
+          0,
+          -0.72,
+          0
+        ],
+        "fov": 9
+      },
+      {
+        "t": 8.45,
+        "pos": [
+          0,
+          -0.72,
+          46
+        ],
+        "target": [
+          0,
+          -0.72,
+          0
+        ],
+        "fov": 9
+      },
+      {
+        "t": 10.399999999999999,
+        "pos": [
+          23.455690937704762,
+          21.553574775793336,
+          32.855294889003304
+        ],
+        "target": [
+          0,
+          -0.5,
+          0
+        ],
+        "fov": 9,
+        "ease": "inOutCubic"
+      }
+    ],
+    "objects": [
+      {
+        "id": "sheet",
+        "primitive": "procedural",
+        "factory": "sheet",
+        "procedural": "full-frame cyanotype paper: Prussian-blue wash with fbm mottling, fibres, two fold creases, vignette, per-pixel grain; 27 px drafting grid (major every 135 px) that fades in"
+      },
+      {
+        "id": "core",
+        "primitive": "procedural",
+        "factory": "lathe",
+        "procedural": "MODEL core: lathe-turned chamfered cylinder Ø2.0 x 1.28 m with a groove band and a Ø1.12 boss, drawn as hidden-line edges (feature creases > 24°, view-dependent silhouettes)"
+      },
+      {
+        "id": "tools",
+        "primitive": "procedural",
+        "factory": "chamferBox",
+        "procedural": "three TOOL modules 1.0 x 0.72 x 0.72 m chamfered boxes at r = 2.55 m (left, right, back), each on a Ø0.18 connector shaft, top-face icons"
+      },
+      {
+        "id": "memory",
+        "primitive": "procedural",
+        "factory": "drum",
+        "procedural": "MEMORY stack: three chamfered drums Ø1.64 x 0.26 m on a Ø0.32 shaft under the core; explodes along the vertical centre-line"
+      },
+      {
+        "id": "loop",
+        "primitive": "procedural",
+        "factory": "loopArrow",
+        "procedural": "loop arrow: R 3.3 m ring at y = 0.2 sweeping 310° with a filled arrowhead; hidden stretches dashed"
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "hum",
+        "dur": 15,
+        "gain": 0.03,
+        "pitch": 0.9
+      },
+      {
+        "t": 0.02,
+        "type": "fold",
+        "dur": 0.55,
+        "gain": 0.5
+      },
+      {
+        "t": 0.1,
+        "type": "click",
+        "gain": 0.238,
+        "pitch": 1.25,
+        "pan": 0
+      },
+      {
+        "t": 0.11,
+        "type": "paper",
+        "dur": 0.9500000000000001,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.13999999999999999,
+        "pan": 0
+      },
+      {
+        "t": 1.05,
+        "type": "click",
+        "gain": 0.13999999999999999,
+        "pitch": 0.85,
+        "pan": 0
+      },
+      {
+        "t": 0.15000000000000002,
+        "type": "tick",
+        "gain": 0.077,
+        "pitch": 1.2096558650726366,
+        "pan": 0
+      },
+      {
+        "t": 0.22500000000000003,
+        "type": "tick",
+        "gain": 0.077,
+        "pitch": 0.8523412127549819,
+        "pan": 0
+      },
+      {
+        "t": 0.30000000000000004,
+        "type": "tick",
+        "gain": 0.077,
+        "pitch": 1.200053541219677,
+        "pan": 0
+      },
+      {
+        "t": 0.37500000000000006,
+        "type": "tick",
+        "gain": 0.077,
+        "pitch": 1.1148510873543274,
+        "pan": 0
+      },
+      {
+        "t": 0.45000000000000007,
+        "type": "tick",
+        "gain": 0.077,
+        "pitch": 1.1892514143240078,
+        "pan": 0
+      },
+      {
+        "t": 0.525,
+        "type": "tick",
+        "gain": 0.077,
+        "pitch": 1.081190617421089,
+        "pan": 0
+      },
+      {
+        "t": 0.6,
+        "type": "tick",
+        "gain": 0.077,
+        "pitch": 1.290973253973607,
+        "pan": 0
+      },
+      {
+        "t": 0.6749999999999999,
+        "type": "tick",
+        "gain": 0.077,
+        "pitch": 1.2589274968820974,
+        "pan": 0
+      },
+      {
+        "t": 0.7499999999999999,
+        "type": "tick",
+        "gain": 0.077,
+        "pitch": 1.2111546997664846,
+        "pan": 0
+      },
+      {
+        "t": 0.8249999999999998,
+        "type": "tick",
+        "gain": 0.077,
+        "pitch": 1.2743816997615796,
+        "pan": 0
+      },
+      {
+        "t": 0.8999999999999998,
+        "type": "tick",
+        "gain": 0.077,
+        "pitch": 1.1748380781162269,
+        "pan": 0
+      },
+      {
+        "t": 0.9749999999999998,
+        "type": "tick",
+        "gain": 0.077,
+        "pitch": 1.1247657314550452,
+        "pan": 0
+      },
+      {
+        "t": 0.55,
+        "type": "click",
+        "gain": 0.20400000000000001,
+        "pitch": 1.25,
+        "pan": -0.2
+      },
+      {
+        "t": 0.56,
+        "type": "paper",
+        "dur": 0.8499999999999999,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.12,
+        "pan": -0.2
+      },
+      {
+        "t": 1.4,
+        "type": "click",
+        "gain": 0.12,
+        "pitch": 0.85,
+        "pan": -0.2
+      },
+      {
+        "t": 0.6000000000000001,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.902856126624829,
+        "pan": -0.2
+      },
+      {
+        "t": 0.675,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.2678957736869052,
+        "pan": -0.2
+      },
+      {
+        "t": 0.75,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.8603296106637572,
+        "pan": -0.2
+      },
+      {
+        "t": 0.825,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.2151756319524794,
+        "pan": -0.2
+      },
+      {
+        "t": 0.8999999999999999,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.8866574947940535,
+        "pan": -0.2
+      },
+      {
+        "t": 0.9749999999999999,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.833655837595461,
+        "pan": -0.2
+      },
+      {
+        "t": 1.0499999999999998,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.2726091576521867,
+        "pan": -0.2
+      },
+      {
+        "t": 1.1249999999999998,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.8995460100457422,
+        "pan": -0.2
+      },
+      {
+        "t": 1.1999999999999997,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.1640869444061537,
+        "pan": -0.2
+      },
+      {
+        "t": 1.2749999999999997,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.8534207413711556,
+        "pan": -0.2
+      },
+      {
+        "t": 1.3499999999999996,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.9967435369406303,
+        "pan": -0.2
+      },
+      {
+        "t": 1.35,
+        "type": "click",
+        "gain": 0.34,
+        "pitch": 1.25,
+        "pan": 0
+      },
+      {
+        "t": 1.36,
+        "type": "paper",
+        "dur": 1.3000000000000003,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.2,
+        "pan": 0
+      },
+      {
+        "t": 2.6500000000000004,
+        "type": "click",
+        "gain": 0.2,
+        "pitch": 0.85,
+        "pan": 0
+      },
+      {
+        "t": 1.4000000000000001,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.2254367844368972,
+        "pan": 0
+      },
+      {
+        "t": 1.475,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.913844283441722,
+        "pan": 0
+      },
+      {
+        "t": 1.55,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.0663830785095343,
+        "pan": 0
+      },
+      {
+        "t": 1.625,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.0917755034277434,
+        "pan": 0
+      },
+      {
+        "t": 1.7,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.044922359699558,
+        "pan": 0
+      },
+      {
+        "t": 1.775,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.8270419586456683,
+        "pan": 0
+      },
+      {
+        "t": 1.8499999999999999,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.8284779295834597,
+        "pan": 0
+      },
+      {
+        "t": 1.9249999999999998,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.9454287602236946,
+        "pan": 0
+      },
+      {
+        "t": 1.9999999999999998,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.116786660510843,
+        "pan": 0
+      },
+      {
+        "t": 2.0749999999999997,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.8199386828135176,
+        "pan": 0
+      },
+      {
+        "t": 2.15,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.9800054025261489,
+        "pan": 0
+      },
+      {
+        "t": 2.225,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.1724156847783889,
+        "pan": 0
+      },
+      {
+        "t": 2.3000000000000003,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.819164550694768,
+        "pan": 0
+      },
+      {
+        "t": 2.3750000000000004,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.2942008267826168,
+        "pan": 0
+      },
+      {
+        "t": 2.4500000000000006,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.825653994671302,
+        "pan": 0
+      },
+      {
+        "t": 2.525000000000001,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.9533568183767784,
+        "pan": 0
+      },
+      {
+        "t": 2.600000000000001,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.2426961621484225,
+        "pan": 0
+      },
+      {
+        "t": 1.35,
+        "type": "buzz",
+        "dur": 1.3000000000000003,
+        "hz": 150,
+        "flicker": 0,
+        "gain": 0.035,
+        "pan": 0
+      },
+      {
+        "t": 2.5,
+        "type": "click",
+        "gain": 0.20400000000000001,
+        "pitch": 1.25,
+        "pan": 0.4
+      },
+      {
+        "t": 2.51,
+        "type": "paper",
+        "dur": 0.6500000000000004,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.12,
+        "pan": 0.4
+      },
+      {
+        "t": 3.1500000000000004,
+        "type": "click",
+        "gain": 0.12,
+        "pitch": 0.85,
+        "pan": 0.4
+      },
+      {
+        "t": 2.55,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.864781819943164,
+        "pan": 0.4
+      },
+      {
+        "t": 2.625,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.0817807087826623,
+        "pan": 0.4
+      },
+      {
+        "t": 2.7,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.9455659367857152,
+        "pan": 0.4
+      },
+      {
+        "t": 2.7750000000000004,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.077559104592001,
+        "pan": 0.4
+      },
+      {
+        "t": 2.8500000000000005,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.0370390755932022,
+        "pan": 0.4
+      },
+      {
+        "t": 2.9250000000000007,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.164564042436541,
+        "pan": 0.4
+      },
+      {
+        "t": 3.000000000000001,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.1195033181436884,
+        "pan": 0.4
+      },
+      {
+        "t": 3.075000000000001,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.0263125555073203,
+        "pan": 0.4
+      },
+      {
+        "t": 3.5,
+        "type": "click",
+        "gain": 0.17,
+        "pitch": 1.25,
+        "pan": 0
+      },
+      {
+        "t": 3.51,
+        "type": "paper",
+        "dur": 0.4500000000000002,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.1,
+        "pan": 0
+      },
+      {
+        "t": 3.95,
+        "type": "click",
+        "gain": 0.1,
+        "pitch": 0.85,
+        "pan": 0
+      },
+      {
+        "t": 3.55,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 0.910009795125734,
+        "pan": 0
+      },
+      {
+        "t": 3.625,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 1.1010857303306694,
+        "pan": 0
+      },
+      {
+        "t": 3.7,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 0.8290252786708152,
+        "pan": 0
+      },
+      {
+        "t": 3.7750000000000004,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 1.0322827202624467,
+        "pan": 0
+      },
+      {
+        "t": 3.8500000000000005,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 0.8087216717477077,
+        "pan": 0
+      },
+      {
+        "t": 3.9250000000000007,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 0.9598654877743684,
+        "pan": 0
+      },
+      {
+        "t": 3.85,
+        "type": "click",
+        "gain": 0.272,
+        "pitch": 1.25,
+        "pan": -0.5
+      },
+      {
+        "t": 3.86,
+        "type": "paper",
+        "dur": 0.8000000000000003,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.16000000000000003,
+        "pan": -0.5
+      },
+      {
+        "t": 4.65,
+        "type": "click",
+        "gain": 0.16000000000000003,
+        "pitch": 0.85,
+        "pan": -0.5
+      },
+      {
+        "t": 3.9,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.2812960928975372,
+        "pan": -0.5
+      },
+      {
+        "t": 3.975,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 0.8986722454981646,
+        "pan": -0.5
+      },
+      {
+        "t": 4.05,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 0.8351468264561845,
+        "pan": -0.5
+      },
+      {
+        "t": 4.125,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.022036652990937,
+        "pan": -0.5
+      },
+      {
+        "t": 4.2,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.0132625183385244,
+        "pan": -0.5
+      },
+      {
+        "t": 4.275,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.239365297830591,
+        "pan": -0.5
+      },
+      {
+        "t": 4.3500000000000005,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.0646917598322034,
+        "pan": -0.5
+      },
+      {
+        "t": 4.425000000000001,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.1606554842845072,
+        "pan": -0.5
+      },
+      {
+        "t": 4.500000000000001,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 0.8797258825004974,
+        "pan": -0.5
+      },
+      {
+        "t": 4.575000000000001,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.2118461529317301,
+        "pan": -0.5
+      },
+      {
+        "t": 3.85,
+        "type": "buzz",
+        "dur": 0.8000000000000003,
+        "hz": 150,
+        "flicker": 0,
+        "gain": 0.028000000000000004,
+        "pan": -0.5
+      },
+      {
+        "t": 4.17,
+        "type": "click",
+        "gain": 0.272,
+        "pitch": 1.25,
+        "pan": 0.5
+      },
+      {
+        "t": 4.18,
+        "type": "paper",
+        "dur": 0.7999999999999998,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.16000000000000003,
+        "pan": 0.5
+      },
+      {
+        "t": 4.97,
+        "type": "click",
+        "gain": 0.16000000000000003,
+        "pitch": 0.85,
+        "pan": 0.5
+      },
+      {
+        "t": 4.22,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.1232107533040108,
+        "pan": 0.5
+      },
+      {
+        "t": 4.295,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.1511296770220725,
+        "pan": 0.5
+      },
+      {
+        "t": 4.37,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.2531796361297893,
+        "pan": 0.5
+      },
+      {
+        "t": 4.445,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.1299099009927887,
+        "pan": 0.5
+      },
+      {
+        "t": 4.5200000000000005,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 0.8688412620693271,
+        "pan": 0.5
+      },
+      {
+        "t": 4.595000000000001,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.0584031169026276,
+        "pan": 0.5
+      },
+      {
+        "t": 4.670000000000001,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.2487682181243145,
+        "pan": 0.5
+      },
+      {
+        "t": 4.745000000000001,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.1655722486982996,
+        "pan": 0.5
+      },
+      {
+        "t": 4.820000000000001,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.2463521875022707,
+        "pan": 0.5
+      },
+      {
+        "t": 4.895000000000001,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 0.807397092122119,
+        "pan": 0.5
+      },
+      {
+        "t": 4.17,
+        "type": "buzz",
+        "dur": 0.7999999999999998,
+        "hz": 150,
+        "flicker": 0,
+        "gain": 0.028000000000000004,
+        "pan": 0.5
+      },
+      {
+        "t": 4.49,
+        "type": "click",
+        "gain": 0.272,
+        "pitch": 1.25,
+        "pan": 0
+      },
+      {
+        "t": 4.5,
+        "type": "paper",
+        "dur": 0.7999999999999998,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.16000000000000003,
+        "pan": 0
+      },
+      {
+        "t": 5.29,
+        "type": "click",
+        "gain": 0.16000000000000003,
+        "pitch": 0.85,
+        "pan": 0
+      },
+      {
+        "t": 4.54,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 0.8711121365093277,
+        "pan": 0
+      },
+      {
+        "t": 4.615,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.1529453649534844,
+        "pan": 0
+      },
+      {
+        "t": 4.69,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 0.9329405308720198,
+        "pan": 0
+      },
+      {
+        "t": 4.765000000000001,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.1438181993224135,
+        "pan": 0
+      },
+      {
+        "t": 4.840000000000001,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.2526286688487744,
+        "pan": 0
+      },
+      {
+        "t": 4.915000000000001,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.2367676473630127,
+        "pan": 0
+      },
+      {
+        "t": 4.990000000000001,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 0.9628449982745224,
+        "pan": 0
+      },
+      {
+        "t": 5.065000000000001,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.2599225049660163,
+        "pan": 0
+      },
+      {
+        "t": 5.1400000000000015,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.246187723613548,
+        "pan": 0
+      },
+      {
+        "t": 5.215000000000002,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.2982039133356011,
+        "pan": 0
+      },
+      {
+        "t": 4.49,
+        "type": "buzz",
+        "dur": 0.7999999999999998,
+        "hz": 150,
+        "flicker": 0,
+        "gain": 0.028000000000000004,
+        "pan": 0
+      },
+      {
+        "t": 4.75,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.5,
+        "gain": 0.13,
+        "pitch": 0.7,
+        "pan": -0.5
+      },
+      {
+        "t": 5.25,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 1.1,
+        "pan": -0.5
+      },
+      {
+        "t": 5.07,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.5,
+        "gain": 0.13,
+        "pitch": 0.7,
+        "pan": 0.5
+      },
+      {
+        "t": 5.57,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 1.1,
+        "pan": 0.5
+      },
+      {
+        "t": 5.390000000000001,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.5,
+        "gain": 0.13,
+        "pitch": 0.7,
+        "pan": 0
+      },
+      {
+        "t": 5.890000000000001,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 1.1,
+        "pan": 0
+      },
+      {
+        "t": 5,
+        "type": "click",
+        "gain": 0.15300000000000002,
+        "pitch": 1.25,
+        "pan": -0.5
+      },
+      {
+        "t": 5.01,
+        "type": "paper",
+        "dur": 0.5499999999999998,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.09000000000000001,
+        "pan": -0.5
+      },
+      {
+        "t": 5.55,
+        "type": "click",
+        "gain": 0.09000000000000001,
+        "pitch": 0.85,
+        "pan": -0.5
+      },
+      {
+        "t": 5.05,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 0.8114204770907236,
+        "pan": -0.5
+      },
+      {
+        "t": 5.125,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 0.8227332544209276,
+        "pan": -0.5
+      },
+      {
+        "t": 5.2,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.1761079736650573,
+        "pan": -0.5
+      },
+      {
+        "t": 5.275,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.269349163248694,
+        "pan": -0.5
+      },
+      {
+        "t": 5.3500000000000005,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.145049494470004,
+        "pan": -0.5
+      },
+      {
+        "t": 5.425000000000001,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 0.8110260539368028,
+        "pan": -0.5
+      },
+      {
+        "t": 5.500000000000001,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.1750172675572685,
+        "pan": -0.5
+      },
+      {
+        "t": 5.3,
+        "type": "click",
+        "gain": 0.15300000000000002,
+        "pitch": 1.25,
+        "pan": 0.5
+      },
+      {
+        "t": 5.31,
+        "type": "paper",
+        "dur": 0.5499999999999998,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.09000000000000001,
+        "pan": 0.5
+      },
+      {
+        "t": 5.85,
+        "type": "click",
+        "gain": 0.09000000000000001,
+        "pitch": 0.85,
+        "pan": 0.5
+      },
+      {
+        "t": 5.35,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.0459954569912953,
+        "pan": 0.5
+      },
+      {
+        "t": 5.425,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 0.9329222015701817,
+        "pan": 0.5
+      },
+      {
+        "t": 5.5,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.1753794865351666,
+        "pan": 0.5
+      },
+      {
+        "t": 5.575,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.2796767722618825,
+        "pan": 0.5
+      },
+      {
+        "t": 5.65,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.1122175598000468,
+        "pan": 0.5
+      },
+      {
+        "t": 5.7250000000000005,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 0.8938474874692475,
+        "pan": 0.5
+      },
+      {
+        "t": 5.800000000000001,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.2093798745052482,
+        "pan": 0.5
+      },
+      {
+        "t": 5.6,
+        "type": "click",
+        "gain": 0.15300000000000002,
+        "pitch": 1.25,
+        "pan": 0
+      },
+      {
+        "t": 5.609999999999999,
+        "type": "paper",
+        "dur": 0.5500000000000007,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.09000000000000001,
+        "pan": 0
+      },
+      {
+        "t": 6.15,
+        "type": "click",
+        "gain": 0.09000000000000001,
+        "pitch": 0.85,
+        "pan": 0
+      },
+      {
+        "t": 5.6499999999999995,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.0650545208816766,
+        "pan": 0
+      },
+      {
+        "t": 5.725,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 0.9146192794840318,
+        "pan": 0
+      },
+      {
+        "t": 5.8,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.2534375798848487,
+        "pan": 0
+      },
+      {
+        "t": 5.875,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 0.8651674761247705,
+        "pan": 0
+      },
+      {
+        "t": 5.95,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.1708261136762304,
+        "pan": 0
+      },
+      {
+        "t": 6.025,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 0.8440204736441956,
+        "pan": 0
+      },
+      {
+        "t": 6.1000000000000005,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.1025050967899006,
+        "pan": 0
+      },
+      {
+        "t": 6.45,
+        "type": "click",
+        "gain": 0.34,
+        "pitch": 1.25,
+        "pan": 0
+      },
+      {
+        "t": 6.46,
+        "type": "paper",
+        "dur": 0.9000000000000004,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.2,
+        "pan": 0
+      },
+      {
+        "t": 7.3500000000000005,
+        "type": "click",
+        "gain": 0.2,
+        "pitch": 0.85,
+        "pan": 0
+      },
+      {
+        "t": 6.5,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.000336718624385,
+        "pan": 0
+      },
+      {
+        "t": 6.575,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.9651783154047735,
+        "pan": 0
+      },
+      {
+        "t": 6.65,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.9599357860250166,
+        "pan": 0
+      },
+      {
+        "t": 6.7250000000000005,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.177655666667124,
+        "pan": 0
+      },
+      {
+        "t": 6.800000000000001,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.076895093668827,
+        "pan": 0
+      },
+      {
+        "t": 6.875000000000001,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.9456400092974946,
+        "pan": 0
+      },
+      {
+        "t": 6.950000000000001,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.8420458187618352,
+        "pan": 0
+      },
+      {
+        "t": 7.025000000000001,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.8530800434898993,
+        "pan": 0
+      },
+      {
+        "t": 7.100000000000001,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.2386081067759733,
+        "pan": 0
+      },
+      {
+        "t": 7.175000000000002,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.8747736998237088,
+        "pan": 0
+      },
+      {
+        "t": 7.250000000000002,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.0677597083020374,
+        "pan": 0
+      },
+      {
+        "t": 7.325000000000002,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.0443016807646928,
+        "pan": 0
+      },
+      {
+        "t": 6.45,
+        "type": "buzz",
+        "dur": 0.9000000000000004,
+        "hz": 150,
+        "flicker": 0,
+        "gain": 0.035,
+        "pan": 0
+      },
+      {
+        "t": 7.3500000000000005,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.5,
+        "gain": 0.15,
+        "pitch": 0.6
+      },
+      {
+        "t": 7.73,
+        "type": "clack",
+        "gain": 0.35,
+        "pitch": 1.3
+      },
+      {
+        "t": 7.8500000000000005,
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1
+      },
+      {
+        "t": 7.6000000000000005,
+        "type": "click",
+        "gain": 0.17,
+        "pitch": 1.25,
+        "pan": -0.4
+      },
+      {
+        "t": 7.61,
+        "type": "paper",
+        "dur": 0.6000000000000005,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.1,
+        "pan": -0.4
+      },
+      {
+        "t": 8.200000000000001,
+        "type": "click",
+        "gain": 0.1,
+        "pitch": 0.85,
+        "pan": -0.4
+      },
+      {
+        "t": 7.65,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 1.0639411345480767,
+        "pan": -0.4
+      },
+      {
+        "t": 7.7250000000000005,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 0.9345911264634197,
+        "pan": -0.4
+      },
+      {
+        "t": 7.800000000000001,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 0.9904410127281154,
+        "pan": -0.4
+      },
+      {
+        "t": 7.875000000000001,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 1.1939471250641873,
+        "pan": -0.4
+      },
+      {
+        "t": 7.950000000000001,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 0.8183951894105121,
+        "pan": -0.4
+      },
+      {
+        "t": 8.025,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 1.2179609531890379,
+        "pan": -0.4
+      },
+      {
+        "t": 8.1,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 0.8285490047754138,
+        "pan": -0.4
+      },
+      {
+        "t": 8.174999999999999,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 0.9864172154500921,
+        "pan": -0.4
+      },
+      {
+        "t": 8.45,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.9,
+        "gain": 0.24,
+        "pitch": 0.55
+      },
+      {
+        "t": 10.299999999999999,
+        "type": "thud",
+        "gain": 0.22,
+        "pitch": 1.4
+      },
+      {
+        "t": 9.5,
+        "type": "click",
+        "gain": 0.17,
+        "pitch": 1.25,
+        "pan": 0
+      },
+      {
+        "t": 9.51,
+        "type": "paper",
+        "dur": 0.8999999999999986,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.1,
+        "pan": 0
+      },
+      {
+        "t": 10.399999999999999,
+        "type": "click",
+        "gain": 0.1,
+        "pitch": 0.85,
+        "pan": 0
+      },
+      {
+        "t": 9.55,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 0.9921123309584801,
+        "pan": 0
+      },
+      {
+        "t": 9.625,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 0.9880145863651706,
+        "pan": 0
+      },
+      {
+        "t": 9.7,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 1.2309590917655442,
+        "pan": 0
+      },
+      {
+        "t": 9.774999999999999,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 1.2101578958088794,
+        "pan": 0
+      },
+      {
+        "t": 9.849999999999998,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 1.0327826648852352,
+        "pan": 0
+      },
+      {
+        "t": 9.924999999999997,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 1.210054946121818,
+        "pan": 0
+      },
+      {
+        "t": 9.999999999999996,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 1.2936410243517458,
+        "pan": 0
+      },
+      {
+        "t": 10.074999999999996,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 1.033403926162282,
+        "pan": 0
+      },
+      {
+        "t": 10.149999999999995,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 0.8842487250506565,
+        "pan": 0
+      },
+      {
+        "t": 10.224999999999994,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 1.2025353372308019,
+        "pan": 0
+      },
+      {
+        "t": 10.299999999999994,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 1.2547256944624678,
+        "pan": 0
+      },
+      {
+        "t": 10.374999999999993,
+        "type": "tick",
+        "gain": 0.055,
+        "pitch": 0.9535548087667849,
+        "pan": 0
+      },
+      {
+        "t": 10.549999999999999,
+        "type": "click",
+        "gain": 0.34,
+        "pitch": 1.25,
+        "pan": 0
+      },
+      {
+        "t": 10.559999999999999,
+        "type": "paper",
+        "dur": 1.3499999999999996,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.2,
+        "pan": 0
+      },
+      {
+        "t": 11.899999999999999,
+        "type": "click",
+        "gain": 0.2,
+        "pitch": 0.85,
+        "pan": 0
+      },
+      {
+        "t": 10.6,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.9405299171510706,
+        "pan": 0
+      },
+      {
+        "t": 10.674999999999999,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.9041597623006965,
+        "pan": 0
+      },
+      {
+        "t": 10.749999999999998,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.8065080918266176,
+        "pan": 0
+      },
+      {
+        "t": 10.824999999999998,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.075732428624906,
+        "pan": 0
+      },
+      {
+        "t": 10.899999999999997,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.1917321210392402,
+        "pan": 0
+      },
+      {
+        "t": 10.974999999999996,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.964197276433697,
+        "pan": 0
+      },
+      {
+        "t": 11.049999999999995,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.0648274581006263,
+        "pan": 0
+      },
+      {
+        "t": 11.124999999999995,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.8624389758859252,
+        "pan": 0
+      },
+      {
+        "t": 11.199999999999994,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.2428128742802074,
+        "pan": 0
+      },
+      {
+        "t": 11.274999999999993,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.8066885865267068,
+        "pan": 0
+      },
+      {
+        "t": 11.349999999999993,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.072758517152397,
+        "pan": 0
+      },
+      {
+        "t": 11.424999999999992,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.0377464938190315,
+        "pan": 0
+      },
+      {
+        "t": 11.499999999999991,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.9522533938805282,
+        "pan": 0
+      },
+      {
+        "t": 11.57499999999999,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.9773799141556083,
+        "pan": 0
+      },
+      {
+        "t": 11.64999999999999,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.9709276260316984,
+        "pan": 0
+      },
+      {
+        "t": 11.724999999999989,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.9810415391810239,
+        "pan": 0
+      },
+      {
+        "t": 11.799999999999988,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 0.8212786388128734,
+        "pan": 0
+      },
+      {
+        "t": 11.874999999999988,
+        "type": "tick",
+        "gain": 0.11,
+        "pitch": 1.1372436996469333,
+        "pan": 0
+      },
+      {
+        "t": 10.549999999999999,
+        "type": "buzz",
+        "dur": 1.3499999999999996,
+        "hz": 150,
+        "flicker": 0,
+        "gain": 0.035,
+        "pan": 0
+      },
+      {
+        "t": 10.910499999999999,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.06,
+        "gain": 0.16,
+        "pitch": 1
+      },
+      {
+        "t": 11.3155,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.06,
+        "gain": 0.16,
+        "pitch": 1.26
+      },
+      {
+        "t": 11.7205,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.06,
+        "gain": 0.16,
+        "pitch": 1.5
+      },
+      {
+        "t": 12.45,
+        "type": "click",
+        "gain": 0.20400000000000001,
+        "pitch": 1.25,
+        "pan": 0
+      },
+      {
+        "t": 12.459999999999999,
+        "type": "paper",
+        "dur": 0.8000000000000007,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.12,
+        "pan": 0
+      },
+      {
+        "t": 13.25,
+        "type": "click",
+        "gain": 0.12,
+        "pitch": 0.85,
+        "pan": 0
+      },
+      {
+        "t": 12.5,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.9403173396392959,
+        "pan": 0
+      },
+      {
+        "t": 12.575,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.9594178420709796,
+        "pan": 0
+      },
+      {
+        "t": 12.649999999999999,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.1569799199966042,
+        "pan": 0
+      },
+      {
+        "t": 12.724999999999998,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.010740341244673,
+        "pan": 0
+      },
+      {
+        "t": 12.799999999999997,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.8051475685668266,
+        "pan": 0
+      },
+      {
+        "t": 12.874999999999996,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.8489583732014581,
+        "pan": 0
+      },
+      {
+        "t": 12.949999999999996,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.1632581578312966,
+        "pan": 0
+      },
+      {
+        "t": 13.024999999999995,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.9176971765926283,
+        "pan": 0
+      },
+      {
+        "t": 13.099999999999994,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.1159594045828272,
+        "pan": 0
+      },
+      {
+        "t": 13.174999999999994,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.9966937051456626,
+        "pan": 0
+      },
+      {
+        "t": 12.978,
+        "type": "tick",
+        "gain": 0.45
+      },
+      {
+        "t": 13.01,
+        "type": "tick",
+        "gain": 0.45
+      },
+      {
+        "t": 12.799999999999999,
+        "type": "click",
+        "gain": 0.20400000000000001,
+        "pitch": 1.25,
+        "pan": 0
+      },
+      {
+        "t": 12.809999999999999,
+        "type": "paper",
+        "dur": 0.75,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.12,
+        "pan": 0
+      },
+      {
+        "t": 13.549999999999999,
+        "type": "click",
+        "gain": 0.12,
+        "pitch": 0.85,
+        "pan": 0
+      },
+      {
+        "t": 12.85,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.8593087312627177,
+        "pan": 0
+      },
+      {
+        "t": 12.924999999999999,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.8623217543616193,
+        "pan": 0
+      },
+      {
+        "t": 12.999999999999998,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.8513062013924355,
+        "pan": 0
+      },
+      {
+        "t": 13.074999999999998,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.16701120256771,
+        "pan": 0
+      },
+      {
+        "t": 13.149999999999997,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.986802374340914,
+        "pan": 0
+      },
+      {
+        "t": 13.224999999999996,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.1573695957948076,
+        "pan": 0
+      },
+      {
+        "t": 13.299999999999995,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.0191353210437228,
+        "pan": 0
+      },
+      {
+        "t": 13.374999999999995,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 0.936858524330819,
+        "pan": 0
+      },
+      {
+        "t": 13.449999999999994,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.0478854256041814,
+        "pan": 0
+      },
+      {
+        "t": 13.524999999999993,
+        "type": "tick",
+        "gain": 0.066,
+        "pitch": 1.1722063395834994,
+        "pan": 0
+      },
+      {
+        "t": 13.294999999999998,
+        "type": "tick",
+        "gain": 0.45
+      },
+      {
+        "t": 13.325,
+        "type": "tick",
+        "gain": 0.45
+      },
+      {
+        "t": 13,
+        "type": "click",
+        "gain": 0.272,
+        "pitch": 1.25,
+        "pan": 0
+      },
+      {
+        "t": 13.01,
+        "type": "paper",
+        "dur": 0.9499999999999993,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.16000000000000003,
+        "pan": 0
+      },
+      {
+        "t": 13.95,
+        "type": "click",
+        "gain": 0.16000000000000003,
+        "pitch": 0.85,
+        "pan": 0
+      },
+      {
+        "t": 13.05,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 0.9768102711648681,
+        "pan": 0
+      },
+      {
+        "t": 13.125,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 0.8439368283477962,
+        "pan": 0
+      },
+      {
+        "t": 13.2,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.256933864270468,
+        "pan": 0
+      },
+      {
+        "t": 13.274999999999999,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 0.969618524483667,
+        "pan": 0
+      },
+      {
+        "t": 13.349999999999998,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.2301357876497605,
+        "pan": 0
+      },
+      {
+        "t": 13.424999999999997,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.0443994455497887,
+        "pan": 0
+      },
+      {
+        "t": 13.499999999999996,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 0.8244594091795989,
+        "pan": 0
+      },
+      {
+        "t": 13.574999999999996,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 0.8022719314110873,
+        "pan": 0
+      },
+      {
+        "t": 13.649999999999995,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.152297214743885,
+        "pan": 0
+      },
+      {
+        "t": 13.724999999999994,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 0.9703927059425042,
+        "pan": 0
+      },
+      {
+        "t": 13.799999999999994,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.1897703139700753,
+        "pan": 0
+      },
+      {
+        "t": 13.874999999999993,
+        "type": "tick",
+        "gain": 0.08800000000000001,
+        "pitch": 1.0380952597068245,
+        "pan": 0
+      },
+      {
+        "t": 13,
+        "type": "buzz",
+        "dur": 0.9499999999999993,
+        "hz": 150,
+        "flicker": 0,
+        "gain": 0.028000000000000004,
+        "pan": 0
+      },
+      {
+        "t": 13.649999999999999,
+        "type": "click",
+        "gain": 0.15300000000000002,
+        "pitch": 1.25,
+        "pan": 0
+      },
+      {
+        "t": 13.659999999999998,
+        "type": "paper",
+        "dur": 0.7000000000000011,
+        "density": 0.62,
+        "pitch": 1.7,
+        "gain": 0.09000000000000001,
+        "pan": 0
+      },
+      {
+        "t": 14.35,
+        "type": "click",
+        "gain": 0.09000000000000001,
+        "pitch": 0.85,
+        "pan": 0
+      },
+      {
+        "t": 13.7,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 0.9989670019829646,
+        "pan": 0
+      },
+      {
+        "t": 13.774999999999999,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 0.9603678991014022,
+        "pan": 0
+      },
+      {
+        "t": 13.849999999999998,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.2509141491107585,
+        "pan": 0
+      },
+      {
+        "t": 13.924999999999997,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.0594972072711244,
+        "pan": 0
+      },
+      {
+        "t": 13.999999999999996,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.099460985013866,
+        "pan": 0
+      },
+      {
+        "t": 14.074999999999996,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.0888293623216498,
+        "pan": 0
+      },
+      {
+        "t": 14.149999999999995,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.1919883277740155,
+        "pan": 0
+      },
+      {
+        "t": 14.224999999999994,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.2648918939783471,
+        "pan": 0
+      },
+      {
+        "t": 14.299999999999994,
+        "type": "tick",
+        "gain": 0.0495,
+        "pitch": 1.2445669386768714,
+        "pan": 0
+      },
+      {
+        "t": 14.469999999999999,
+        "type": "clack",
+        "gain": 0.55,
+        "pitch": 0.75
+      },
+      {
+        "t": 14.48,
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 1.6
+      },
+      {
+        "t": 1.3,
+        "type": "fold",
+        "dur": 0.35,
+        "gain": 0.1,
+        "pitch": 1.3
+      },
+      {
+        "t": 3.5,
+        "type": "fold",
+        "dur": 0.35,
+        "gain": 0.1,
+        "pitch": 1.3
+      },
+      {
+        "t": 6.4,
+        "type": "fold",
+        "dur": 0.35,
+        "gain": 0.1,
+        "pitch": 1.3
+      },
+      {
+        "t": 10.45,
+        "type": "fold",
+        "dur": 0.35,
+        "gain": 0.1,
+        "pitch": 1.3
+      },
+      {
+        "t": 12.6,
+        "type": "fold",
+        "dur": 0.35,
+        "gain": 0.16,
+        "pitch": 1.3
+      }
+    ],
+    "duck": [],
+    "notes": "Assembly geometry, plot windows and sheet layout are data here; scene.js builds them with blueprint-build props and drives progress from PLOT."
+  }
+}

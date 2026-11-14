@@ -1,0 +1,29 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 1 old file(s): RUN.txt
+check-frames run: 2026-11-14 00:25:54 UTC
+times: 0.62, 1.9, 3.6, 5.0, 7.6, 9.4, 10.6, 14.8
+newest code edit: 2026-11-13 14:55:49 UTC (neon-sign/style.js)
+mp4: 03-neon-sign.mp4 2026-11-13 14:56:53 UTC
+kit last changed: 2026-11-14 00:14:11 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+0.62      renders/checks/t0.62.png      1e28dc2ead13a929631f4c2f62f2bcb2  SAME
+1.9       renders/checks/t1.9.png       e4873c1cd92a4c4ad354c5af9e9c2b48  SAME
+3.6       renders/checks/t3.6.png       eed5a3191b7f4b0171e7a274f87cc0ba  SAME
+5.0       renders/checks/t5.0.png       7766b998cccec90c56e69a6b9ec66628  SAME
+7.6       renders/checks/t7.6.png       452e7fc4354fb92976ce4c85a9f44ed5  SAME
+9.4       renders/checks/t9.4.png       b1a004d148d0eb76b02e6e91077ff93b  SAME
+10.6      renders/checks/t10.6.png      344e94bb73fe0015e9868840f5d4857e  SAME
+14.8      renders/checks/t14.8.png      0f22cb8ee25b59152d909a767a08c0e0  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.8 dB, frame 444)
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -24.4 dB, max -1.1 dB
+audio 03-neon-sign.mp4: mean -24.4 dB, max -1.1 dB  (9.9 MB)
+deep t=5: hash bfda1fa0 mean 41.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=0.62: hash ea56c1e9 mean 16.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.9: hash b67d3f5b mean 27.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3.6: hash d93d4cf0 mean 41.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.6: hash bd876ee8 mean 35.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.4: hash 74bfeacd mean 38.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.6: hash 9128df52 mean 42.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.8: hash 207b9eb8 mean 43.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

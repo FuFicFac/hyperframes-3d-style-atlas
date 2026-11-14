@@ -1,0 +1,33 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 11 old file(s): RUN.txt t1.6.png t11.3.png t12.4.png t14.6.png t2.6.png t4.2.png t5.4.png t6.6.png t8.3.png t9.5.png
+check-frames run: 2026-11-14 05:15:52 UTC
+times: 1.6, 2.6, 4.2, 5.4, 6.6, 8.3, 9.5, 11.3, 12.4, 14.6
+newest code edit: 2026-11-13 19:00:37 UTC (19-embossed-letterpress/scene.config.js)
+mp4: 19-embossed-letterpress.mp4 2026-11-13 19:02:20 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1.6       renders/checks/t1.6.png       5c03370ea372d11587c8cbeef7d6f408  SAME
+2.6       renders/checks/t2.6.png       e4a78eae338e49d64991327ca88f4c96  SAME
+4.2       renders/checks/t4.2.png       6adcc0eac122b65bc8ed7ded36e795eb  SAME
+5.4       renders/checks/t5.4.png       c5bb0e72c952e41803d680b03ff3c236  SAME
+6.6       renders/checks/t6.6.png       5be5ec85553e180fcf7c8185a5bd11d1  SAME
+8.3       renders/checks/t8.3.png       fc222aae10b358689b4f9e835e91545f  SAME
+9.5       renders/checks/t9.5.png       bf587859e1e0758cc7405d4117bd0c4c  SAME
+11.3      renders/checks/t11.3.png      feef6e09c91aa4ecb34a2ac3ef398a23  SAME
+12.4      renders/checks/t12.4.png      c9a3c3407b5db69fc36def63ad34e653  SAME
+14.6      renders/checks/t14.6.png      cbc44b9e124d3b820f04dce12f2e52e0  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.6 dB, frame 339)
+determinism: OK (10 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -22.3 dB, max -2.3 dB
+audio 19-embossed-letterpress.mp4: mean -22.4 dB, max -2.4 dB  (5.3 MB)
+deep t=1.6: hash 90f75107 mean 129 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.6: hash 3ecffb96 mean 138.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.2: hash b5005790 mean 145.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5.4: hash bd8303b5 mean 161.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=6.6: hash 1dad8023 mean 164.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.3: hash 90446d1b mean 182.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.5: hash 8c5e19af mean 148.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=11.3: hash ce822691 mean 166.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.4: hash a09a985a mean 133.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.6: hash 844b2ac6 mean 136.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

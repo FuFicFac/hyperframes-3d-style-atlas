@@ -1,0 +1,20 @@
+check-frames run: 2026-11-14 05:16:44 UTC
+times: 0.4, 1.0, 2.4, 3.45, 5.2, 8.2, 10.6, 11.6, 12.2, 12.4, 13.75, 13.9, 14.8
+newest code edit: 2026-11-13 19:19:40 UTC (isometric-pastel/iso.js)
+mp4: 20-isometric-pastel.mp4 2026-11-13 19:00:02 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.9 dB, frame 417)
+  frame 12 (t=0.400): 44.6 dB
+  frame 30 (t=1.000): 43.5 dB
+  frame 72 (t=2.400): 40.0 dB
+  frame 156 (t=5.200): 40.7 dB
+  frame 246 (t=8.200): 39.7 dB
+  frame 318 (t=10.600): 39.3 dB
+  frame 348 (t=11.600): 39.0 dB
+  frame 366 (t=12.200): 39.2 dB
+  frame 372 (t=12.400): 39.2 dB
+  frame 417 (t=13.900): 37.9 dB
+  frame 444 (t=14.800): 38.9 dB
+determinism: OK (13 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

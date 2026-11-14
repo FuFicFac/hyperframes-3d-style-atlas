@@ -1,0 +1,17 @@
+check-frames run: 2026-11-14 05:18:40 UTC
+times: 1.2, 2.6, 4.6, 6.0, 8.2, 10.9, 12.0, 14.6
+newest code edit: 2026-11-13 19:19:40 UTC (glass-light/optics.js)
+mp4: 22-glass-light.mp4 2026-11-13 19:10:37 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 40.1 dB, frame 138)
+  frame 36 (t=1.200): 42.6 dB
+  frame 78 (t=2.600): 40.5 dB
+  frame 138 (t=4.600): 40.1 dB
+  frame 180 (t=6.000): 40.6 dB
+  frame 246 (t=8.200): 41.4 dB
+  frame 327 (t=10.900): 40.3 dB
+  frame 360 (t=12.000): 40.4 dB
+  frame 438 (t=14.600): 40.3 dB
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

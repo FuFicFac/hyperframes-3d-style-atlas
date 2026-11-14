@@ -1,0 +1,4074 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "crt-retro",
+    "name": "CRT Retro",
+    "description": "A vintage beige computer terminal on a wood desk in a dark room at night: a chunky yellowed-plastic monitor with a deeply curved CRT whose phosphor text types itself (scanlines, barrel curvature, halation, a block cursor), a clacky two-tone keyboard whose keys press with the typing, floppy drives, a desk lamp, a mug and a pinned note; the screen glow spills colour onto the desk and keys.",
+    "palette": {
+      "bg": "#050506",
+      "wall": "#2a2622",
+      "plastic": "#d6c7a1",
+      "plasticDark": "#b9a982",
+      "keyAlpha": "#d8ccb0",
+      "keyMod": "#6e5a46",
+      "legend": "#2b2118",
+      "tubeOff": "#121513",
+      "paper": "#efe6cf",
+      "ink": "#2a2fa0",
+      "pin": "#c4302b",
+      "mug": "#3d5a4b",
+      "lampMetal": "#1d2420",
+      "caption": "#f1e6c8",
+      "captionPlate": "#0b0a08"
+    },
+    "world": {
+      "background": "#050506",
+      "fog": {
+        "color": "#050506",
+        "near": 3.5,
+        "far": 7
+      },
+      "environment": "room",
+      "environmentIntensity": 0.06,
+      "toneMapping": "aces",
+      "exposure": 1.15,
+      "shadowType": "pcf"
+    },
+    "phosphors": {
+      "green": {
+        "color": "#33ff66",
+        "core": "#c8ffd2",
+        "bg": "#0b1a10",
+        "spill": "#58ff8a"
+      },
+      "amber": {
+        "color": "#ffb000",
+        "core": "#ffe7b0",
+        "bg": "#1c1206",
+        "spill": "#ffb84a"
+      },
+      "white": {
+        "color": "#e6f0ff",
+        "core": "#ffffff",
+        "bg": "#12151a",
+        "spill": "#d8e4ff"
+      }
+    },
+    "crt": {
+      "phosphor": "green",
+      "cols": 32,
+      "rows": 14,
+      "unitPx": 6,
+      "pad": [
+        64,
+        60
+      ],
+      "textLevel": 1.55,
+      "blackLevel": 0.018,
+      "invertLevel": 0.78,
+      "flash": 0.55,
+      "flashTau": 0.09,
+      "cursorGhost": 0.4,
+      "ghostTau": 0.07,
+      "barrel": 0.055,
+      "scanlines": 0.42,
+      "mask": 0.1,
+      "maskTriads": 300,
+      "halation": 0.55,
+      "jitter": 0.00035,
+      "roll": 0.05,
+      "rollSpeed": 0.21,
+      "vignette": 0.22,
+      "cornerSoft": 0.012,
+      "reflect": 0.07,
+      "glassEnv": 0.09,
+      "blinkPeriod": 1.06,
+      "blinkIdle": 0.45,
+      "wipeBand": 0.07,
+      "power": {
+        "lineDur": 0.12,
+        "openDur": 0.3,
+        "bloom": 1.8,
+        "bloomDur": 0.45,
+        "offLine": 0.13,
+        "offDot": 0.12,
+        "dotFade": 0.55
+      }
+    },
+    "hardware": {
+      "unit": {
+        "w": 0.5,
+        "h": 0.12,
+        "d": 0.4,
+        "z": -0.08,
+        "drives": 2
+      },
+      "monitor": {
+        "w": 0.44,
+        "h": 0.38,
+        "bezelDepth": 0.032,
+        "hoodDepth": 0.36,
+        "taper": 0.66,
+        "radius": 0.028,
+        "feet": 0.006,
+        "opening": {
+          "w": 0.3,
+          "h": 0.225,
+          "r": 0.024,
+          "y": 0.018
+        },
+        "tube": {
+          "w": 0.316,
+          "h": 0.238,
+          "R": 0.62,
+          "recess": 0.03
+        }
+      },
+      "keyboard": {
+        "pitch": 0.0215,
+        "keyH": 0.011,
+        "travel": 0.0042,
+        "tilt": 0.1,
+        "z": 0.4,
+        "y": 0,
+        "margin": [
+          0.026,
+          0.022
+        ],
+        "caseH": [
+          0.028,
+          0.05
+        ]
+      },
+      "cable": {
+        "r": 0.0045,
+        "sag": 0.05
+      }
+    },
+    "spill": {
+      "intensity": 0.9,
+      "angle": 1.05,
+      "penumbra": 1,
+      "distance": 2.4,
+      "bounce": 0.07,
+      "bounceDistance": 1.6,
+      "idle": 0.3
+    },
+    "lamp": {
+      "innerShade": "#d9b27a",
+      "innerRim": "#1e160e",
+      "color": "#ffc27a",
+      "intensity": 3.2,
+      "angle": 0.62,
+      "penumbra": 0.65,
+      "distance": 3,
+      "leak": 0.25,
+      "bulb": 2.2
+    },
+    "textures": {
+      "plastic": {
+        "size": 256,
+        "scale": 40,
+        "octaves": 3,
+        "seed": 21,
+        "description": "fine moulded-plastic texture bump"
+      },
+      "yellowing": {
+        "size": 256,
+        "seed": 5,
+        "amount": 0.07,
+        "description": "uneven sun-yellowing blotches in the beige"
+      },
+      "wall": {
+        "size": 512,
+        "scale": 7,
+        "octaves": 5,
+        "seed": 8,
+        "colorA": "#3d3832",
+        "colorB": "#554c42",
+        "description": "painted plaster"
+      },
+      "wood": {
+        "size": 1024,
+        "boards": 4,
+        "seed": 23,
+        "grainFreq": 18,
+        "contrast": 0.5,
+        "dark": "#2f1d12",
+        "mid": "#5a3a24",
+        "light": "#7b5233",
+        "description": "walnut desk planks"
+      },
+      "cork": {
+        "size": 256,
+        "density": 0.5,
+        "base": "#9a7448",
+        "dots": [
+          "#6f5232",
+          "#b88d5c",
+          "#5c4228"
+        ],
+        "radius": [
+          0.6,
+          1.6
+        ],
+        "seed": 3,
+        "description": "cork board speckle"
+      }
+    },
+    "materials": {
+      "plastic": {
+        "type": "physical",
+        "baseColor": "#d6c7a1",
+        "roughness": 0.52,
+        "metalness": 0,
+        "clearcoat": 0.15,
+        "clearcoatRoughness": 0.5
+      },
+      "plasticDark": {
+        "type": "standard",
+        "baseColor": "#b9a982",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "trim": {
+        "type": "standard",
+        "baseColor": "#2a2621",
+        "roughness": 0.55,
+        "metalness": 0.05
+      },
+      "vent": {
+        "type": "standard",
+        "baseColor": "#0d0c0b",
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      "keyAlpha": {
+        "type": "standard",
+        "baseColor": "#d8ccb0",
+        "roughness": 0.45,
+        "metalness": 0
+      },
+      "keyMod": {
+        "type": "standard",
+        "baseColor": "#6e5a46",
+        "roughness": 0.45,
+        "metalness": 0
+      },
+      "wood": {
+        "type": "physical",
+        "baseColor": "#ffffff",
+        "roughness": 0.42,
+        "metalness": 0,
+        "clearcoat": 0.35,
+        "clearcoatRoughness": 0.35
+      },
+      "wall": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "paper": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.85,
+        "metalness": 0
+      },
+      "cork": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "frame": {
+        "type": "standard",
+        "baseColor": "#3a2a1c",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "pin": {
+        "type": "physical",
+        "baseColor": "#c4302b",
+        "roughness": 0.25,
+        "metalness": 0,
+        "clearcoat": 0.8
+      },
+      "mug": {
+        "type": "physical",
+        "baseColor": "#3d5a4b",
+        "roughness": 0.3,
+        "metalness": 0,
+        "clearcoat": 0.9,
+        "clearcoatRoughness": 0.15
+      },
+      "pencil": {
+        "type": "standard",
+        "baseColor": "#e0a92a",
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      "lampMetal": {
+        "type": "physical",
+        "baseColor": "#1d2420",
+        "roughness": 0.38,
+        "metalness": 0.6,
+        "clearcoat": 0.5
+      },
+      "chrome": {
+        "type": "standard",
+        "baseColor": "#9a9a96",
+        "roughness": 0.25,
+        "metalness": 1
+      },
+      "disk": {
+        "type": "standard",
+        "baseColor": "#141414",
+        "roughness": 0.55,
+        "metalness": 0
+      },
+      "cable": {
+        "type": "standard",
+        "baseColor": "#c9b991",
+        "roughness": 0.55,
+        "metalness": 0
+      },
+      "led": {
+        "type": "standard",
+        "baseColor": "#1a0505",
+        "roughness": 0.3,
+        "metalness": 0,
+        "emission": {
+          "color": "#ff3b2a",
+          "strength": 1.6
+        }
+      }
+    },
+    "lights": [
+      {
+        "id": "ambient",
+        "type": "hemisphere",
+        "color": "#6d7c99",
+        "groundColor": "#120c08",
+        "intensity": 0.32
+      },
+      {
+        "id": "moon",
+        "type": "directional",
+        "color": "#8fa6d6",
+        "intensity": 1.1,
+        "position": [
+          -2.6,
+          2.2,
+          1.1
+        ],
+        "target": [
+          0,
+          0.3,
+          -0.3
+        ],
+        "shadow": {
+          "softness": 6,
+          "mapSize": 2048,
+          "extent": 1.4,
+          "near": 1,
+          "far": 8,
+          "bias": -0.0004,
+          "normalBias": 0.02
+        }
+      },
+      {
+        "id": "fill",
+        "type": "directional",
+        "color": "#b39a7e",
+        "intensity": 0.12,
+        "position": [
+          0.8,
+          1.2,
+          3
+        ],
+        "target": [
+          0,
+          0.2,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.42,
+        "radius": 0.5,
+        "threshold": 0.92
+      },
+      "vignette": {
+        "darkness": 0.5,
+        "offset": 1.05
+      },
+      "grain": {
+        "amount": 0.018,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.05,
+      "far": 12,
+      "drift": {
+        "amp": 0.004,
+        "speed": 0.22
+      }
+    },
+    "text": {
+      "font": "mono",
+      "weight": 700,
+      "color": "#f1e6c8",
+      "height": 0.05
+    },
+    "caption": {
+      "x": 0,
+      "y": -0.76,
+      "height": 0.034,
+      "cps": 70,
+      "unitPx": 5,
+      "padUnits": [
+        7,
+        5
+      ],
+      "bar": 3
+    },
+    "typing": {
+      "cps": 17,
+      "jitter": 0.3,
+      "spacePause": 0.04,
+      "wordHesitate": 0.1,
+      "hesitateLen": 0.16,
+      "shiftExtra": 0.05,
+      "minGap": 0.04,
+      "enterGap": 0.14,
+      "printCps": 55,
+      "boxCps": 160,
+      "keyHold": [
+        0.05,
+        0.085
+      ],
+      "keyDown": 0.018,
+      "keyUp": 0.045
+    },
+    "sfx": {
+      "enter": "thud",
+      "exit": "thud",
+      "move": "whoosh",
+      "land": "clack",
+      "emphasis": "blip",
+      "ui": "blip",
+      "bed": "hum"
+    },
+    "motion": [
+      "Power-on: a bright horizontal line opens to a full raster with a brightness bloom; power-off collapses to a line, then a dot that fades.",
+      "Text types at a seeded human cadence (one clack per key, the matching 3D key presses); machine replies print fast after a soft beep.",
+      "Freshly drawn characters flash and settle, and the cursor leaves a short trail — both computed from each character's own reveal time.",
+      "Screens clear with a top-to-bottom beam wipe; the block cursor is solid while moving and blinks when idle.",
+      "Camera: slow push-in from a wide desk shot until the tube fills the frame, an over-the-keys angle for typing, then a pull back out."
+    ]
+  },
+  "scene": {
+    "id": "17-crt-retro",
+    "style": "crt-retro",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "wide",
+        "t": 0,
+        "dur": 1
+      },
+      {
+        "id": "chat1",
+        "t": 1.95,
+        "dur": 3.722073380449621
+      },
+      {
+        "id": "trick",
+        "t": 5.672073380449621,
+        "dur": 3.507539682539683
+      },
+      {
+        "id": "chat2",
+        "t": 9.179613062989304,
+        "dur": 3.253638272508139
+      },
+      {
+        "id": "outro",
+        "t": 12.433251335497443,
+        "dur": 2.5667486645025566
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0.05,
+          0.7,
+          1.62
+        ],
+        "target": [
+          -0.02,
+          0.29,
+          0
+        ],
+        "fov": 30
+      },
+      {
+        "t": 0.95,
+        "pos": [
+          0.05,
+          0.69,
+          1.58
+        ],
+        "target": [
+          -0.02,
+          0.29,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 2.35,
+        "pos": [
+          0.1,
+          0.7,
+          1.13
+        ],
+        "target": [
+          0,
+          0.19,
+          0.2
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 3.9335019518781924,
+        "pos": [
+          0.085,
+          0.69,
+          1.1
+        ],
+        "target": [
+          0,
+          0.195,
+          0.2
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 4.793501951878192,
+        "pos": [
+          0,
+          0.352,
+          0.655
+        ],
+        "target": [
+          0,
+          0.334,
+          0.11
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 9.079613062989305,
+        "pos": [
+          0,
+          0.349,
+          0.64
+        ],
+        "target": [
+          0,
+          0.334,
+          0.11
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 10.279613062989304,
+        "pos": [
+          0.075,
+          0.355,
+          0.66
+        ],
+        "target": [
+          0.01,
+          0.334,
+          0.11
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.033251335497443,
+        "pos": [
+          0.08,
+          0.356,
+          0.665
+        ],
+        "target": [
+          0.01,
+          0.334,
+          0.11
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 13.933251335497443,
+        "pos": [
+          -0.03,
+          0.72,
+          1.52
+        ],
+        "target": [
+          0,
+          0.25,
+          0.04
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          -0.04,
+          0.73,
+          1.6
+        ],
+        "target": [
+          0,
+          0.245,
+          0.04
+        ],
+        "fov": 30,
+        "ease": "outSine"
+      }
+    ],
+    "objects": [
+      {
+        "id": "wall",
+        "primitive": "procedural",
+        "factory": "wall",
+        "procedural": "4.5 x 2.4 m dark painted plaster wall plane at z = -0.42",
+        "dims": {
+          "w": 4.5,
+          "h": 2.4,
+          "z": -0.42
+        }
+      },
+      {
+        "id": "desk",
+        "primitive": "procedural",
+        "factory": "desk",
+        "procedural": "2.8 x 1.1 m walnut-plank desk top, 45 mm thick, top surface at y = 0",
+        "dims": {
+          "w": 2.8,
+          "d": 1.1,
+          "thick": 0.045,
+          "z": 0.1
+        }
+      },
+      {
+        "id": "cork",
+        "primitive": "procedural",
+        "factory": "corkBoard",
+        "position": [
+          -0.6,
+          0.52,
+          -0.408
+        ],
+        "rotation": [
+          0,
+          0,
+          0.012
+        ],
+        "procedural": "0.5 x 0.34 m framed cork board with two pinned handwritten notes",
+        "dims": {
+          "w": 0.46,
+          "h": 0.32,
+          "notes": [
+            {
+              "lines": [
+                {
+                  "text": "ELIZA",
+                  "size": 0.3,
+                  "y": 0.36
+                },
+                {
+                  "text": "doctor script",
+                  "size": 0.17,
+                  "y": 0.6
+                },
+                {
+                  "text": "J.W. — MIT '66",
+                  "size": 0.15,
+                  "y": 0.82
+                }
+              ],
+              "w": 0.15,
+              "h": 0.11,
+              "x": -0.09,
+              "y": 0.04,
+              "rot": 0.04,
+              "underline": true
+            },
+            {
+              "lines": [
+                {
+                  "text": "TODO:",
+                  "size": 0.22,
+                  "y": 0.36
+                },
+                {
+                  "text": "teach it to",
+                  "size": 0.17,
+                  "y": 0.6
+                },
+                {
+                  "text": "understand??",
+                  "size": 0.17,
+                  "y": 0.82
+                }
+              ],
+              "w": 0.12,
+              "h": 0.1,
+              "x": 0.12,
+              "y": -0.05,
+              "rot": -0.06
+            }
+          ]
+        }
+      },
+      {
+        "id": "lamp",
+        "primitive": "procedural",
+        "factory": "deskLamp",
+        "procedural": "black articulated desk lamp (weighted base, twin lower arms, spring, open cone shade) with a warm spotlight aimed at the desk right",
+        "dims": {
+          "base": [
+            0.8,
+            -0.24
+          ],
+          "elbow": [
+            0.77,
+            0.47,
+            -0.19
+          ],
+          "head": [
+            0.57,
+            0.45,
+            0.05
+          ],
+          "aim": [
+            0.44,
+            0,
+            0.33
+          ]
+        }
+      },
+      {
+        "id": "mug",
+        "primitive": "procedural",
+        "factory": "mug",
+        "procedural": "glazed green mug with pencils",
+        "position": [
+          -0.5,
+          0,
+          0.27
+        ],
+        "rotation": [
+          0,
+          0.6,
+          0
+        ],
+        "dims": {}
+      },
+      {
+        "id": "disk1",
+        "primitive": "procedural",
+        "factory": "floppy",
+        "procedural": "5.25-inch floppy disk with handwritten label",
+        "position": [
+          0.42,
+          0,
+          0.36
+        ],
+        "dims": {
+          "label": "ELIZA",
+          "rot": 0.35
+        }
+      },
+      {
+        "id": "disk2",
+        "primitive": "procedural",
+        "factory": "floppy",
+        "procedural": "5.25-inch floppy disk with handwritten label",
+        "position": [
+          0.47,
+          0.0023,
+          0.3
+        ],
+        "dims": {
+          "label": "DOCTOR",
+          "rot": -0.2
+        }
+      },
+      {
+        "id": "workstation",
+        "primitive": "procedural",
+        "factory": "workstation",
+        "procedural": "beige system unit with two 5.25-inch drives, CRT monitor on top (curved tube + CRT shader screen), two-tone keyboard with pressable keys, cable",
+        "dims": {
+          "phosphor": "green"
+        }
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.34,
+        "root": 55,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "attack": 1,
+        "release": 1.2,
+        "brightness": 320
+      },
+      {
+        "t": -1,
+        "type": "rumble",
+        "dur": 5,
+        "gain": 0.2,
+        "pitch": 0.9,
+        "pan": -0.25,
+        "seed": 400
+      },
+      {
+        "t": 1.5,
+        "type": "rumble",
+        "dur": 5,
+        "gain": 0.2,
+        "pitch": 0.9500000000000001,
+        "pan": 0.25,
+        "seed": 401
+      },
+      {
+        "t": 4,
+        "type": "rumble",
+        "dur": 5,
+        "gain": 0.2,
+        "pitch": 1,
+        "pan": -0.25,
+        "seed": 402
+      },
+      {
+        "t": 6.5,
+        "type": "rumble",
+        "dur": 5,
+        "gain": 0.2,
+        "pitch": 0.9,
+        "pan": 0.25,
+        "seed": 403
+      },
+      {
+        "t": 9,
+        "type": "rumble",
+        "dur": 5,
+        "gain": 0.2,
+        "pitch": 0.9500000000000001,
+        "pan": -0.25,
+        "seed": 404
+      },
+      {
+        "t": 11.5,
+        "type": "rumble",
+        "dur": 5,
+        "gain": 0.2,
+        "pitch": 1,
+        "pan": 0.25,
+        "seed": 405
+      },
+      {
+        "t": 14,
+        "type": "rumble",
+        "dur": 5,
+        "gain": 0.2,
+        "pitch": 0.9,
+        "pan": -0.25,
+        "seed": 406
+      },
+      {
+        "t": 0.55,
+        "type": "buzz",
+        "hz": 60,
+        "flicker": 0,
+        "dur": 14.1,
+        "gain": 0.05,
+        "pitch": 1,
+        "seed": 31
+      },
+      {
+        "t": 0.5,
+        "type": "servo",
+        "hz": 70,
+        "hz2": 95,
+        "grit": 0.6,
+        "dur": 0.9,
+        "gain": 0.08,
+        "pan": 0.1,
+        "seed": 32
+      },
+      {
+        "type": "click",
+        "gain": 0.35,
+        "pitch": 0.8,
+        "t": 0.32999999999999996,
+        "pan": 0.05,
+        "seed": 102
+      },
+      {
+        "type": "thud",
+        "gain": 0.55,
+        "pitch": 0.7,
+        "dur": 0.5,
+        "t": 0.35,
+        "pan": 0.05,
+        "seed": 101
+      },
+      {
+        "type": "servo",
+        "gain": 0.1,
+        "hz": 180,
+        "hz2": 1650,
+        "grit": 0.08,
+        "dur": 1.4,
+        "t": 0.38,
+        "pan": 0.05,
+        "seed": 103
+      },
+      {
+        "type": "buzz",
+        "gain": 0.06,
+        "hz": 60,
+        "flicker": 0,
+        "dur": 0.9,
+        "t": 0.39999999999999997,
+        "pan": 0.05,
+        "seed": 104
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 0.9,
+        "pan": 0.05,
+        "seed": 108
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 0.93125,
+        "pan": 0.05,
+        "seed": 115
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 0.9625,
+        "pan": 0.05,
+        "seed": 122
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 0.99375,
+        "pan": 0.05,
+        "seed": 129
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.025,
+        "pan": 0.05,
+        "seed": 136
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.11875,
+        "pan": 0.05,
+        "seed": 143
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.2125,
+        "pan": 0.05,
+        "seed": 150
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.24375,
+        "pan": 0.05,
+        "seed": 157
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.275,
+        "pan": 0.05,
+        "seed": 164
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.30625,
+        "pan": 0.05,
+        "seed": 171
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.40625,
+        "pan": 0.05,
+        "seed": 178
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.4229166666666666,
+        "pan": 0.05,
+        "seed": 185
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.4395833333333334,
+        "pan": 0.05,
+        "seed": 192
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.45625,
+        "pan": 0.05,
+        "seed": 199
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.4729166666666667,
+        "pan": 0.05,
+        "seed": 206
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.4895833333333333,
+        "pan": 0.05,
+        "seed": 213
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.5229166666666667,
+        "pan": 0.05,
+        "seed": 220
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.5395833333333333,
+        "pan": 0.05,
+        "seed": 227
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.55625,
+        "pan": 0.05,
+        "seed": 234
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.5729166666666667,
+        "pan": 0.05,
+        "seed": 241
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.5895833333333333,
+        "pan": 0.05,
+        "seed": 248
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.60625,
+        "pan": 0.05,
+        "seed": 255
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.6395833333333334,
+        "pan": 0.05,
+        "seed": 262
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.65625,
+        "pan": 0.05,
+        "seed": 269
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.6729166666666666,
+        "pan": 0.05,
+        "seed": 276
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.6895833333333332,
+        "pan": 0.05,
+        "seed": 283
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.70625,
+        "pan": 0.05,
+        "seed": 290
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.7229166666666667,
+        "pan": 0.05,
+        "seed": 297
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.7395833333333333,
+        "pan": 0.05,
+        "seed": 304
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.7895833333333333,
+        "pan": 0.05,
+        "seed": 311
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.7967261904761904,
+        "pan": 0.05,
+        "seed": 318
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.8038690476190475,
+        "pan": 0.05,
+        "seed": 325
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.8110119047619047,
+        "pan": 0.05,
+        "seed": 332
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.8181547619047618,
+        "pan": 0.05,
+        "seed": 339
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.8252976190476191,
+        "pan": 0.05,
+        "seed": 346
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.8324404761904762,
+        "pan": 0.05,
+        "seed": 353
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.8395833333333333,
+        "pan": 0.05,
+        "seed": 360
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.8467261904761905,
+        "pan": 0.05,
+        "seed": 367
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.8538690476190476,
+        "pan": 0.05,
+        "seed": 374
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.8610119047619047,
+        "pan": 0.05,
+        "seed": 381
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.8681547619047618,
+        "pan": 0.05,
+        "seed": 388
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.875297619047619,
+        "pan": 0.05,
+        "seed": 395
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.8824404761904763,
+        "pan": 0.05,
+        "seed": 402
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.8895833333333334,
+        "pan": 0.05,
+        "seed": 409
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.8967261904761905,
+        "pan": 0.05,
+        "seed": 416
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.9038690476190476,
+        "pan": 0.05,
+        "seed": 423
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.9110119047619047,
+        "pan": 0.05,
+        "seed": 430
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.9181547619047619,
+        "pan": 0.05,
+        "seed": 437
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.925297619047619,
+        "pan": 0.05,
+        "seed": 444
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.932440476190476,
+        "pan": 0.05,
+        "seed": 451
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.9395833333333332,
+        "pan": 0.05,
+        "seed": 458
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.9467261904761903,
+        "pan": 0.05,
+        "seed": 465
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.9538690476190477,
+        "pan": 0.05,
+        "seed": 472
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.9610119047619048,
+        "pan": 0.05,
+        "seed": 479
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.968154761904762,
+        "pan": 0.05,
+        "seed": 486
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.975297619047619,
+        "pan": 0.05,
+        "seed": 493
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.9824404761904761,
+        "pan": 0.05,
+        "seed": 500
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.9895833333333333,
+        "pan": 0.05,
+        "seed": 507
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 1.9967261904761904,
+        "pan": 0.05,
+        "seed": 514
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 2.0038690476190477,
+        "pan": 0.05,
+        "seed": 521
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 2.011011904761905,
+        "pan": 0.05,
+        "seed": 528
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.06,
+        "dur": 0.09,
+        "t": 2.1,
+        "pan": 0,
+        "seed": 535
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 2.104,
+        "pan": 0,
+        "seed": 536
+      },
+      {
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.62,
+        "dur": 0.12,
+        "t": 2.141734487706879,
+        "pan": 0,
+        "seed": 542
+      },
+      {
+        "type": "thud",
+        "gain": 0.0756,
+        "pitch": 2.4,
+        "dur": 0.08,
+        "t": 2.141734487706879,
+        "pan": 0,
+        "seed": 543
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.025,
+        "dur": 0.09,
+        "t": 2.2591883744506736,
+        "pan": 0,
+        "seed": 549
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 2.2631883744506736,
+        "pan": 0,
+        "seed": 550
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.885,
+        "dur": 0.09,
+        "t": 2.3255994777680162,
+        "pan": 0,
+        "seed": 556
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 2.3295994777680162,
+        "pan": 0,
+        "seed": 557
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.885,
+        "dur": 0.09,
+        "t": 2.381228798479953,
+        "pan": 0,
+        "seed": 563
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 2.385228798479953,
+        "pan": 0,
+        "seed": 564
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.095,
+        "dur": 0.09,
+        "t": 2.48242911093682,
+        "pan": 0,
+        "seed": 570
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 2.48642911093682,
+        "pan": 0,
+        "seed": 571
+      },
+      {
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.62,
+        "dur": 0.12,
+        "t": 2.5297676765115824,
+        "pan": 0,
+        "seed": 577
+      },
+      {
+        "type": "thud",
+        "gain": 0.0756,
+        "pitch": 2.4,
+        "dur": 0.08,
+        "t": 2.5297676765115824,
+        "pan": 0,
+        "seed": 578
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.9199999999999999,
+        "dur": 0.09,
+        "t": 2.6218619319048084,
+        "pan": 0,
+        "seed": 584
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 2.6258619319048084,
+        "pan": 0,
+        "seed": 585
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.06,
+        "dur": 0.09,
+        "t": 2.6887194728397503,
+        "pan": 0,
+        "seed": 591
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 2.6927194728397503,
+        "pan": 0,
+        "seed": 592
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.2,
+        "dur": 0.09,
+        "t": 2.7287194728397504,
+        "pan": 0,
+        "seed": 598
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 2.7327194728397504,
+        "pan": 0,
+        "seed": 599
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.99,
+        "dur": 0.09,
+        "t": 2.7687194728397504,
+        "pan": 0,
+        "seed": 605
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 2.7727194728397504,
+        "pan": 0,
+        "seed": 606
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.955,
+        "dur": 0.09,
+        "t": 2.8421902695944645,
+        "pan": 0,
+        "seed": 612
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 2.8461902695944645,
+        "pan": 0,
+        "seed": 613
+      },
+      {
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.62,
+        "dur": 0.12,
+        "t": 2.9055493073571803,
+        "pan": 0,
+        "seed": 619
+      },
+      {
+        "type": "thud",
+        "gain": 0.0756,
+        "pitch": 2.4,
+        "dur": 0.08,
+        "t": 2.9055493073571803,
+        "pan": 0,
+        "seed": 620
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.13,
+        "dur": 0.09,
+        "t": 2.9951309484497157,
+        "pan": 0,
+        "seed": 626
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 2.9991309484497157,
+        "pan": 0,
+        "seed": 627
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.99,
+        "dur": 0.09,
+        "t": 3.0718024090980007,
+        "pan": 0,
+        "seed": 633
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 3.0758024090980007,
+        "pan": 0,
+        "seed": 634
+      },
+      {
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.62,
+        "dur": 0.12,
+        "t": 3.1223650495985606,
+        "pan": 0,
+        "seed": 640
+      },
+      {
+        "type": "thud",
+        "gain": 0.0756,
+        "pitch": 2.4,
+        "dur": 0.08,
+        "t": 3.1223650495985606,
+        "pan": 0,
+        "seed": 641
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.85,
+        "dur": 0.09,
+        "t": 3.2258799426841427,
+        "pan": 0,
+        "seed": 647
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 3.2298799426841427,
+        "pan": 0,
+        "seed": 648
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.99,
+        "dur": 0.09,
+        "t": 3.2734371406992926,
+        "pan": 0,
+        "seed": 654
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 3.2774371406992926,
+        "pan": 0,
+        "seed": 655
+      },
+      {
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.62,
+        "dur": 0.12,
+        "t": 3.339670907791783,
+        "pan": 0,
+        "seed": 661
+      },
+      {
+        "type": "thud",
+        "gain": 0.0756,
+        "pitch": 2.4,
+        "dur": 0.08,
+        "t": 3.339670907791783,
+        "pan": 0,
+        "seed": 662
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.885,
+        "dur": 0.09,
+        "t": 3.5952171544128326,
+        "pan": 0,
+        "seed": 668
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 3.5992171544128326,
+        "pan": 0,
+        "seed": 669
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.165,
+        "dur": 0.09,
+        "t": 3.6433189600936022,
+        "pan": 0,
+        "seed": 675
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 3.6473189600936022,
+        "pan": 0,
+        "seed": 676
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.13,
+        "dur": 0.09,
+        "t": 3.724710730853838,
+        "pan": 0,
+        "seed": 682
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 3.728710730853838,
+        "pan": 0,
+        "seed": 683
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.2,
+        "dur": 0.09,
+        "t": 3.7759418843810515,
+        "pan": 0,
+        "seed": 689
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 3.7799418843810515,
+        "pan": 0,
+        "seed": 690
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.885,
+        "dur": 0.09,
+        "t": 3.834912461620518,
+        "pan": 0,
+        "seed": 696
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 3.838912461620518,
+        "pan": 0,
+        "seed": 697
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.99,
+        "dur": 0.09,
+        "t": 3.8932575026752545,
+        "pan": 0,
+        "seed": 703
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 3.8972575026752545,
+        "pan": 0,
+        "seed": 704
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.06,
+        "dur": 0.09,
+        "t": 3.943501951878192,
+        "pan": 0,
+        "seed": 710
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 3.947501951878192,
+        "pan": 0,
+        "seed": 711
+      },
+      {
+        "type": "clack",
+        "gain": 0.5,
+        "pitch": 0.7,
+        "dur": 0.13,
+        "t": 4.083501951878192,
+        "pan": 0,
+        "seed": 717
+      },
+      {
+        "type": "clack",
+        "gain": 0.3,
+        "pitch": 0.55,
+        "dur": 0.12,
+        "t": 4.153501951878193,
+        "pan": 0,
+        "seed": 718
+      },
+      {
+        "type": "blip",
+        "gain": 0.12,
+        "pitch": 1,
+        "dur": 0.11,
+        "notes": [
+          0
+        ],
+        "t": 4.203501951878192,
+        "pan": 0.05,
+        "seed": 724
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.2435019518781925,
+        "pan": 0.05,
+        "seed": 731
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.257787666163907,
+        "pan": 0.05,
+        "seed": 738
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.272073380449621,
+        "pan": 0.05,
+        "seed": 745
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.300644809021049,
+        "pan": 0.05,
+        "seed": 752
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.314930523306764,
+        "pan": 0.05,
+        "seed": 759
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.343501951878192,
+        "pan": 0.05,
+        "seed": 766
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.357787666163906,
+        "pan": 0.05,
+        "seed": 773
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.372073380449621,
+        "pan": 0.05,
+        "seed": 780
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.40064480902105,
+        "pan": 0.05,
+        "seed": 787
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.414930523306764,
+        "pan": 0.05,
+        "seed": 794
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.429216237592478,
+        "pan": 0.05,
+        "seed": 801
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.443501951878193,
+        "pan": 0.05,
+        "seed": 808
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.472073380449621,
+        "pan": 0.05,
+        "seed": 815
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.486359094735335,
+        "pan": 0.05,
+        "seed": 822
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.50064480902105,
+        "pan": 0.05,
+        "seed": 829
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.514930523306764,
+        "pan": 0.05,
+        "seed": 836
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.529216237592478,
+        "pan": 0.05,
+        "seed": 843
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.5577876661639065,
+        "pan": 0.05,
+        "seed": 850
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.572073380449621,
+        "pan": 0.05,
+        "seed": 857
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.600644809021049,
+        "pan": 0.05,
+        "seed": 864
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.614930523306764,
+        "pan": 0.05,
+        "seed": 871
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.629216237592479,
+        "pan": 0.05,
+        "seed": 878
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.643501951878193,
+        "pan": 0.05,
+        "seed": 885
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.672073380449621,
+        "pan": 0.05,
+        "seed": 892
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.6863590947353355,
+        "pan": 0.05,
+        "seed": 899
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.70064480902105,
+        "pan": 0.05,
+        "seed": 906
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.714930523306764,
+        "pan": 0.05,
+        "seed": 913
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.729216237592478,
+        "pan": 0.05,
+        "seed": 920
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.7435019518781925,
+        "pan": 0.05,
+        "seed": 927
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.757787666163907,
+        "pan": 0.05,
+        "seed": 934
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 4.772073380449621,
+        "pan": 0.05,
+        "seed": 941
+      },
+      {
+        "type": "whoosh",
+        "gain": 0.12,
+        "dir": "out",
+        "dur": 0.364,
+        "pitch": 2.2,
+        "t": 5.672073380449621,
+        "pan": 0.05,
+        "seed": 948
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.012073380449621,
+        "pan": 0.05,
+        "seed": 955
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.024573380449621,
+        "pan": 0.05,
+        "seed": 962
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.0370733804496215,
+        "pan": 0.05,
+        "seed": 969
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.049573380449621,
+        "pan": 0.05,
+        "seed": 976
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.062073380449621,
+        "pan": 0.05,
+        "seed": 983
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.074573380449621,
+        "pan": 0.05,
+        "seed": 990
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.087073380449621,
+        "pan": 0.05,
+        "seed": 997
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.137073380449621,
+        "pan": 0.05,
+        "seed": 1004
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.1620733804496215,
+        "pan": 0.05,
+        "seed": 1011
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.174573380449621,
+        "pan": 0.05,
+        "seed": 1018
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.187073380449621,
+        "pan": 0.05,
+        "seed": 1025
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.199573380449621,
+        "pan": 0.05,
+        "seed": 1032
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.2245733804496215,
+        "pan": 0.05,
+        "seed": 1039
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.237073380449621,
+        "pan": 0.05,
+        "seed": 1046
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.249573380449621,
+        "pan": 0.05,
+        "seed": 1053
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.309573380449621,
+        "pan": 0.05,
+        "seed": 1060
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.322073380449621,
+        "pan": 0.05,
+        "seed": 1067
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.334573380449621,
+        "pan": 0.05,
+        "seed": 1074
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.34707338044962,
+        "pan": 0.05,
+        "seed": 1081
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.35957338044962,
+        "pan": 0.05,
+        "seed": 1088
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.434573380449621,
+        "pan": 0.05,
+        "seed": 1095
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.447073380449621,
+        "pan": 0.05,
+        "seed": 1102
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.459573380449621,
+        "pan": 0.05,
+        "seed": 1109
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.48457338044962,
+        "pan": 0.05,
+        "seed": 1116
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.497073380449621,
+        "pan": 0.05,
+        "seed": 1123
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.522073380449621,
+        "pan": 0.05,
+        "seed": 1130
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.53457338044962,
+        "pan": 0.05,
+        "seed": 1137
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.54707338044962,
+        "pan": 0.05,
+        "seed": 1144
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.572073380449621,
+        "pan": 0.05,
+        "seed": 1151
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.584573380449621,
+        "pan": 0.05,
+        "seed": 1158
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.59707338044962,
+        "pan": 0.05,
+        "seed": 1165
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.60957338044962,
+        "pan": 0.05,
+        "seed": 1172
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.634573380449621,
+        "pan": 0.05,
+        "seed": 1179
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.647073380449621,
+        "pan": 0.05,
+        "seed": 1186
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.65957338044962,
+        "pan": 0.05,
+        "seed": 1193
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.67207338044962,
+        "pan": 0.05,
+        "seed": 1200
+      },
+      {
+        "type": "tick",
+        "gain": 0.05,
+        "pitch": 2.2,
+        "t": 6.7520733804496205,
+        "pan": 0.05,
+        "seed": 1207
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.81207338044962,
+        "pan": 0.05,
+        "seed": 1214
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.834295602671842,
+        "pan": 0.05,
+        "seed": 1221
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.845406713782953,
+        "pan": 0.05,
+        "seed": 1228
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.856517824894064,
+        "pan": 0.05,
+        "seed": 1235
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.867628936005175,
+        "pan": 0.05,
+        "seed": 1242
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.889851158227398,
+        "pan": 0.05,
+        "seed": 1249
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.900962269338509,
+        "pan": 0.05,
+        "seed": 1256
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.91207338044962,
+        "pan": 0.05,
+        "seed": 1263
+      },
+      {
+        "type": "tick",
+        "gain": 0.034999999999999996,
+        "pitch": 2,
+        "t": 6.9170733804496205,
+        "pan": 0.05,
+        "seed": 1208
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.923184491560731,
+        "pan": 0.05,
+        "seed": 1270
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.934295602671842,
+        "pan": 0.05,
+        "seed": 1277
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.956517824894065,
+        "pan": 0.05,
+        "seed": 1284
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.967628936005176,
+        "pan": 0.05,
+        "seed": 1291
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 6.989851158227398,
+        "pan": 0.05,
+        "seed": 1298
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.000962269338509,
+        "pan": 0.05,
+        "seed": 1305
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.023184491560731,
+        "pan": 0.05,
+        "seed": 1312
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.034295602671842,
+        "pan": 0.05,
+        "seed": 1319
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.0454067137829535,
+        "pan": 0.05,
+        "seed": 1326
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.0565178248940645,
+        "pan": 0.05,
+        "seed": 1333
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.067628936005176,
+        "pan": 0.05,
+        "seed": 1340
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.078740047116287,
+        "pan": 0.05,
+        "seed": 1347
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.089851158227398,
+        "pan": 0.05,
+        "seed": 1354
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.52707338044962,
+        "pan": 0.05,
+        "seed": 1368
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.584216237592477,
+        "pan": 0.05,
+        "seed": 1375
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.598501951878191,
+        "pan": 0.05,
+        "seed": 1382
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.62707338044962,
+        "pan": 0.05,
+        "seed": 1389
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.655644809021048,
+        "pan": 0.05,
+        "seed": 1396
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.669930523306763,
+        "pan": 0.05,
+        "seed": 1403
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.684216237592477,
+        "pan": 0.05,
+        "seed": 1410
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.698501951878192,
+        "pan": 0.05,
+        "seed": 1417
+      },
+      {
+        "type": "tick",
+        "gain": 0.05,
+        "pitch": 2.2,
+        "t": 7.7485019518781915,
+        "pan": 0.05,
+        "seed": 1424
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.818501951878192,
+        "pan": 0.05,
+        "seed": 1431
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.829613062989303,
+        "pan": 0.05,
+        "seed": 1438
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.840724174100414,
+        "pan": 0.05,
+        "seed": 1445
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.862946396322636,
+        "pan": 0.05,
+        "seed": 1452
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.874057507433747,
+        "pan": 0.05,
+        "seed": 1459
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.896279729655969,
+        "pan": 0.05,
+        "seed": 1466
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.90739084076708,
+        "pan": 0.05,
+        "seed": 1473
+      },
+      {
+        "type": "tick",
+        "gain": 0.034999999999999996,
+        "pitch": 2,
+        "t": 7.918501951878191,
+        "pan": 0.05,
+        "seed": 1425
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.918501951878191,
+        "pan": 0.05,
+        "seed": 1480
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.9407241741004135,
+        "pan": 0.05,
+        "seed": 1487
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.9518352852115255,
+        "pan": 0.05,
+        "seed": 1494
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.962946396322637,
+        "pan": 0.05,
+        "seed": 1501
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.974057507433748,
+        "pan": 0.05,
+        "seed": 1508
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 7.99627972965597,
+        "pan": 0.05,
+        "seed": 1515
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.00739084076708,
+        "pan": 0.05,
+        "seed": 1522
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.018501951878191,
+        "pan": 0.05,
+        "seed": 1529
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.029613062989302,
+        "pan": 0.05,
+        "seed": 1536
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.040724174100413,
+        "pan": 0.05,
+        "seed": 1543
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.062946396322635,
+        "pan": 0.05,
+        "seed": 1550
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.074057507433746,
+        "pan": 0.05,
+        "seed": 1557
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.09627972965597,
+        "pan": 0.05,
+        "seed": 1564
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.107390840767081,
+        "pan": 0.05,
+        "seed": 1571
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.118501951878192,
+        "pan": 0.05,
+        "seed": 1578
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.129613062989304,
+        "pan": 0.05,
+        "seed": 1585
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.151835285211526,
+        "pan": 0.05,
+        "seed": 1592
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.162946396322637,
+        "pan": 0.05,
+        "seed": 1599
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.174057507433748,
+        "pan": 0.05,
+        "seed": 1606
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.185168618544859,
+        "pan": 0.05,
+        "seed": 1613
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.19627972965597,
+        "pan": 0.05,
+        "seed": 1620
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.207390840767081,
+        "pan": 0.05,
+        "seed": 1627
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.218501951878192,
+        "pan": 0.05,
+        "seed": 1634
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 8.229613062989303,
+        "pan": 0.05,
+        "seed": 1641
+      },
+      {
+        "type": "whoosh",
+        "gain": 0.12,
+        "dir": "out",
+        "dur": 0.33599999999999997,
+        "pitch": 2.2,
+        "t": 9.179613062989304,
+        "pan": 0.05,
+        "seed": 1655
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.13,
+        "dur": 0.09,
+        "t": 9.599613062989304,
+        "pan": 0,
+        "seed": 1662
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 9.603613062989304,
+        "pan": 0,
+        "seed": 1663
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.13,
+        "dur": 0.09,
+        "t": 9.674439975469998,
+        "pan": 0,
+        "seed": 1669
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 9.678439975469997,
+        "pan": 0,
+        "seed": 1670
+      },
+      {
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.62,
+        "dur": 0.12,
+        "t": 9.739206770819619,
+        "pan": 0,
+        "seed": 1676
+      },
+      {
+        "type": "thud",
+        "gain": 0.0756,
+        "pitch": 2.4,
+        "dur": 0.08,
+        "t": 9.739206770819619,
+        "pan": 0,
+        "seed": 1677
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.99,
+        "dur": 0.09,
+        "t": 9.816614370060714,
+        "pan": 0,
+        "seed": 1683
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 9.820614370060714,
+        "pan": 0,
+        "seed": 1684
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.13,
+        "dur": 0.09,
+        "t": 9.864646570024046,
+        "pan": 0,
+        "seed": 1690
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 9.868646570024046,
+        "pan": 0,
+        "seed": 1691
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.2,
+        "dur": 0.09,
+        "t": 9.951282746791643,
+        "pan": 0,
+        "seed": 1697
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 9.955282746791642,
+        "pan": 0,
+        "seed": 1698
+      },
+      {
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.62,
+        "dur": 0.12,
+        "t": 10.008835670935905,
+        "pan": 0,
+        "seed": 1704
+      },
+      {
+        "type": "thud",
+        "gain": 0.0756,
+        "pitch": 2.4,
+        "dur": 0.08,
+        "t": 10.008835670935905,
+        "pan": 0,
+        "seed": 1705
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.2,
+        "dur": 0.09,
+        "t": 10.093250304136632,
+        "pan": 0,
+        "seed": 1711
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 10.097250304136631,
+        "pan": 0,
+        "seed": 1712
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.99,
+        "dur": 0.09,
+        "t": 10.13325030413663,
+        "pan": 0,
+        "seed": 1718
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 10.13725030413663,
+        "pan": 0,
+        "seed": 1719
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.13,
+        "dur": 0.09,
+        "t": 10.17325030413663,
+        "pan": 0,
+        "seed": 1725
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 10.17725030413663,
+        "pan": 0,
+        "seed": 1726
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.885,
+        "dur": 0.09,
+        "t": 10.24221099149067,
+        "pan": 0,
+        "seed": 1732
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 10.246210991490669,
+        "pan": 0,
+        "seed": 1733
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.165,
+        "dur": 0.09,
+        "t": 10.28921872667682,
+        "pan": 0,
+        "seed": 1739
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 10.29321872667682,
+        "pan": 0,
+        "seed": 1740
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.9199999999999999,
+        "dur": 0.09,
+        "t": 10.342331792980422,
+        "pan": 0,
+        "seed": 1746
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 10.346331792980422,
+        "pan": 0,
+        "seed": 1747
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.06,
+        "dur": 0.09,
+        "t": 10.415589372565156,
+        "pan": 0,
+        "seed": 1753
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 10.419589372565156,
+        "pan": 0,
+        "seed": 1754
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.095,
+        "dur": 0.09,
+        "t": 10.462296973000948,
+        "pan": 0,
+        "seed": 1760
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 10.466296973000947,
+        "pan": 0,
+        "seed": 1761
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.99,
+        "dur": 0.09,
+        "t": 10.502357235251898,
+        "pan": 0,
+        "seed": 1767
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 10.506357235251897,
+        "pan": 0,
+        "seed": 1768
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.13,
+        "dur": 0.09,
+        "t": 10.545802381414854,
+        "pan": 0,
+        "seed": 1774
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 10.549802381414853,
+        "pan": 0,
+        "seed": 1775
+      },
+      {
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.62,
+        "dur": 0.12,
+        "t": 10.634155740080939,
+        "pan": 0,
+        "seed": 1781
+      },
+      {
+        "type": "thud",
+        "gain": 0.0756,
+        "pitch": 2.4,
+        "dur": 0.08,
+        "t": 10.634155740080939,
+        "pan": 0,
+        "seed": 1782
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.85,
+        "dur": 0.09,
+        "t": 10.748574424317232,
+        "pan": 0,
+        "seed": 1788
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 10.752574424317231,
+        "pan": 0,
+        "seed": 1789
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 0.885,
+        "dur": 0.09,
+        "t": 10.802617729226801,
+        "pan": 0,
+        "seed": 1795
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 10.8066177292268,
+        "pan": 0,
+        "seed": 1796
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "pitch": 1.2,
+        "dur": 0.09,
+        "t": 10.911822764068871,
+        "pan": 0,
+        "seed": 1802
+      },
+      {
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.6,
+        "t": 10.91582276406887,
+        "pan": 0,
+        "seed": 1803
+      },
+      {
+        "type": "clack",
+        "gain": 0.5,
+        "pitch": 0.7,
+        "dur": 0.13,
+        "t": 11.051822764068872,
+        "pan": 0,
+        "seed": 1809
+      },
+      {
+        "type": "clack",
+        "gain": 0.3,
+        "pitch": 0.55,
+        "dur": 0.12,
+        "t": 11.121822764068872,
+        "pan": 0,
+        "seed": 1810
+      },
+      {
+        "type": "blip",
+        "gain": 0.12,
+        "pitch": 1,
+        "dur": 0.11,
+        "notes": [
+          0
+        ],
+        "t": 11.171822764068873,
+        "pan": 0.05,
+        "seed": 1816
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.211822764068872,
+        "pan": 0.05,
+        "seed": 1823
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.226108478354586,
+        "pan": 0.05,
+        "seed": 1830
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.254679906926015,
+        "pan": 0.05,
+        "seed": 1837
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.268965621211729,
+        "pan": 0.05,
+        "seed": 1844
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.283251335497443,
+        "pan": 0.05,
+        "seed": 1851
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.297537049783157,
+        "pan": 0.05,
+        "seed": 1858
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.326108478354586,
+        "pan": 0.05,
+        "seed": 1865
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.3403941926403,
+        "pan": 0.05,
+        "seed": 1872
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.354679906926014,
+        "pan": 0.05,
+        "seed": 1879
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.368965621211728,
+        "pan": 0.05,
+        "seed": 1886
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.383251335497443,
+        "pan": 0.05,
+        "seed": 1893
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.397537049783157,
+        "pan": 0.05,
+        "seed": 1900
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.411822764068871,
+        "pan": 0.05,
+        "seed": 1907
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.4403941926403,
+        "pan": 0.05,
+        "seed": 1914
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.454679906926014,
+        "pan": 0.05,
+        "seed": 1921
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.46896562121173,
+        "pan": 0.05,
+        "seed": 1928
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.483251335497444,
+        "pan": 0.05,
+        "seed": 1935
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.497537049783158,
+        "pan": 0.05,
+        "seed": 1942
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.526108478354587,
+        "pan": 0.05,
+        "seed": 1949
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.540394192640301,
+        "pan": 0.05,
+        "seed": 1956
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.554679906926015,
+        "pan": 0.05,
+        "seed": 1963
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.56896562121173,
+        "pan": 0.05,
+        "seed": 1970
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.597537049783158,
+        "pan": 0.05,
+        "seed": 1977
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.611822764068872,
+        "pan": 0.05,
+        "seed": 1984
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.626108478354586,
+        "pan": 0.05,
+        "seed": 1991
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.654679906926015,
+        "pan": 0.05,
+        "seed": 1998
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.66896562121173,
+        "pan": 0.05,
+        "seed": 2005
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 11.683251335497443,
+        "pan": 0.05,
+        "seed": 2012
+      },
+      {
+        "type": "whoosh",
+        "gain": 0.12,
+        "dir": "out",
+        "dur": 0.33599999999999997,
+        "pitch": 2.2,
+        "t": 12.433251335497443,
+        "pan": 0.05,
+        "seed": 2019
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 12.753251335497444,
+        "pan": 0.05,
+        "seed": 2026
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 12.771433153679261,
+        "pan": 0.05,
+        "seed": 2033
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 12.807796790042898,
+        "pan": 0.05,
+        "seed": 2040
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 12.825978608224716,
+        "pan": 0.05,
+        "seed": 2047
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 12.844160426406535,
+        "pan": 0.05,
+        "seed": 2054
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 12.862342244588353,
+        "pan": 0.05,
+        "seed": 2061
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 12.88052406277017,
+        "pan": 0.05,
+        "seed": 2068
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 12.916887699133808,
+        "pan": 0.05,
+        "seed": 2075
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 12.935069517315625,
+        "pan": 0.05,
+        "seed": 2082
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 12.953251335497443,
+        "pan": 0.05,
+        "seed": 2089
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 12.971433153679262,
+        "pan": 0.05,
+        "seed": 2096
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 12.98961497186108,
+        "pan": 0.05,
+        "seed": 2103
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.007796790042898,
+        "pan": 0.05,
+        "seed": 2110
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.044160426406535,
+        "pan": 0.05,
+        "seed": 2117
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.062342244588352,
+        "pan": 0.05,
+        "seed": 2124
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.080524062770172,
+        "pan": 0.05,
+        "seed": 2131
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.09870588095199,
+        "pan": 0.05,
+        "seed": 2138
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.116887699133807,
+        "pan": 0.05,
+        "seed": 2145
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.153251335497444,
+        "pan": 0.05,
+        "seed": 2152
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.171433153679262,
+        "pan": 0.05,
+        "seed": 2159
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.18961497186108,
+        "pan": 0.05,
+        "seed": 2166
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.207796790042899,
+        "pan": 0.05,
+        "seed": 2173
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.225978608224716,
+        "pan": 0.05,
+        "seed": 2180
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.262342244588353,
+        "pan": 0.05,
+        "seed": 2187
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.280524062770171,
+        "pan": 0.05,
+        "seed": 2194
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.298705880951989,
+        "pan": 0.05,
+        "seed": 2201
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.316887699133808,
+        "pan": 0.05,
+        "seed": 2208
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.335069517315626,
+        "pan": 0.05,
+        "seed": 2215
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.353251335497443,
+        "pan": 0.05,
+        "seed": 2222
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.371433153679263,
+        "pan": 0.05,
+        "seed": 2229
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 1.8,
+        "t": 13.38961497186108,
+        "pan": 0.05,
+        "seed": 2236
+      },
+      {
+        "type": "click",
+        "gain": 0.35,
+        "pitch": 0.8,
+        "t": 14.45,
+        "pan": 0.05,
+        "seed": 2243
+      },
+      {
+        "type": "servo",
+        "gain": 0.08,
+        "hz": 1500,
+        "hz2": 140,
+        "grit": 0.06,
+        "dur": 0.9,
+        "t": 14.469999999999999,
+        "pan": 0.05,
+        "seed": 2244
+      },
+      {
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 1.1,
+        "dur": 0.3,
+        "t": 14.479999999999999,
+        "pan": 0.05,
+        "seed": 2245
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "items": [
+        {
+          "id": "power",
+          "type": "power",
+          "start": 0.35,
+          "end": 0.35
+        },
+        {
+          "id": "hdr",
+          "type": "print",
+          "start": 0.9,
+          "end": 1.306
+        },
+        {
+          "id": "sub",
+          "type": "print",
+          "start": 1.406,
+          "end": 1.74
+        },
+        {
+          "id": "rule",
+          "type": "print",
+          "start": 1.79,
+          "end": 2.011
+        },
+        {
+          "id": "p1",
+          "type": "prompt",
+          "start": 1.95,
+          "end": 1.95
+        },
+        {
+          "id": "u1",
+          "type": "type",
+          "start": 2.1,
+          "end": 4.084
+        },
+        {
+          "id": "r1",
+          "type": "print",
+          "start": 4.244,
+          "end": 4.772
+        },
+        {
+          "id": "c1",
+          "type": "clear",
+          "start": 5.672,
+          "end": 5.932
+        },
+        {
+          "id": "d1",
+          "type": "print",
+          "start": 6.012,
+          "end": 6.25
+        },
+        {
+          "id": "d2",
+          "type": "print",
+          "start": 6.31,
+          "end": 6.672
+        },
+        {
+          "id": "b1",
+          "type": "box",
+          "start": 6.752,
+          "end": 7.077
+        },
+        {
+          "id": "t1",
+          "type": "print",
+          "start": 6.812,
+          "end": 7.09
+        },
+        {
+          "id": "i1",
+          "type": "invert",
+          "start": 7.177,
+          "end": 7.477
+        },
+        {
+          "id": "ar",
+          "type": "print",
+          "start": 7.527,
+          "end": 7.699
+        },
+        {
+          "id": "b2",
+          "type": "box",
+          "start": 7.749,
+          "end": 8.084
+        },
+        {
+          "id": "t2",
+          "type": "print",
+          "start": 7.819,
+          "end": 8.23
+        },
+        {
+          "id": "i2",
+          "type": "invert",
+          "start": 8.33,
+          "end": 8.63
+        },
+        {
+          "id": "c2",
+          "type": "clear",
+          "start": 9.18,
+          "end": 9.42
+        },
+        {
+          "id": "p2",
+          "type": "prompt",
+          "start": 9.48,
+          "end": 9.48
+        },
+        {
+          "id": "u2",
+          "type": "type",
+          "start": 9.6,
+          "end": 11.052
+        },
+        {
+          "id": "r2",
+          "type": "print",
+          "start": 11.212,
+          "end": 11.683
+        },
+        {
+          "id": "c3",
+          "type": "clear",
+          "start": 12.433,
+          "end": 12.673
+        },
+        {
+          "id": "end",
+          "type": "print",
+          "start": 12.753,
+          "end": 13.39
+        },
+        {
+          "id": "power",
+          "type": "power",
+          "start": 14.45,
+          "end": 14.45
+        }
+      ],
+      "keystrokes": 49,
+      "mechanism": "Screen content = planScreen(PROGRAM) evaluated per frame (pure). Key clacks, beeps and power sounds are scoreFromEvents(plan.events, typingVoices())."
+    }
+  }
+}

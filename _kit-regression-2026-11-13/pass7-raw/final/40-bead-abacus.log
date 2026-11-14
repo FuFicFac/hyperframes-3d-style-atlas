@@ -1,0 +1,25 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 7 old file(s): RUN.txt t1.5.png t12.4.png t14.5.png t4.4.png t7.9.png t9.6.png
+check-frames run: 2026-11-14 05:31:27 UTC
+times: 1.5, 4.4, 7.9, 9.6, 12.4, 14.5
+newest code edit: 2026-11-14 01:15:25 UTC (bead-abacus/style.js)
+mp4: 40-bead-abacus.mp4 2026-11-14 01:17:25 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1.5       renders/checks/t1.5.png       dca37618ee989f7a627fcfe6656cc69d  SAME
+4.4       renders/checks/t4.4.png       4353e1948d757537fc691d6aa6f6595f  SAME
+7.9       renders/checks/t7.9.png       540db76daa065e0ab236a370e7645a29  SAME
+9.6       renders/checks/t9.6.png       38067c0165641193c3ed82a52760f14b  SAME
+12.4      renders/checks/t12.4.png      2a3391d27e29acad4a3db2af080c636e  SAME
+14.5      renders/checks/t14.5.png      72b1f32cfbb52c4547049904a5a94e14  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.2 dB, frame 435)
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -20.7 dB, max -2.2 dB
+audio 40-bead-abacus.mp4: mean -20.8 dB, max -2.6 dB  (4.7 MB)
+deep t=1.5: hash 6a66fc37 mean 189.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.4: hash 889c78ea mean 186.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.9: hash a995795c mean 193.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.6: hash 7b5ca00f mean 188.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.4: hash fa7660d6 mean 183.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.5: hash c7b26723 mean 182.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

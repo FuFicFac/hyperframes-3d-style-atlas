@@ -1,0 +1,25 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 7 old file(s): RUN.txt t1.png t11.png t13.2.png t14.8.png t4.4.png t8.6.png
+check-frames run: 2026-11-14 04:58:08 UTC
+times: 1, 4.4, 8.6, 11, 13.2, 14.8
+newest code edit: 2026-11-14 03:13:09 UTC (city-lights/style.js)
+mp4: 48-city-lights.mp4 2026-11-14 03:15:05 UTC
+kit last changed: 2026-11-14 04:24:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1         renders/checks/t1.png         e935cfcbaf3ebbd060e596590b44ea2e  SAME
+4.4       renders/checks/t4.4.png       ac68d1177f14c79bbec0956acfdbdcab  SAME
+8.6       renders/checks/t8.6.png       c53a8ef1c3e7c6da371ab67d7ed16eca  SAME
+11        renders/checks/t11.png        dc6d73bfa05955e5940b73146d553f46  SAME
+13.2      renders/checks/t13.2.png      09a5c00c1185f0c4f47a58b61bf6de2f  SAME
+14.8      renders/checks/t14.8.png      6a369650c0c97d0e4139988a59bc2668  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 30.4 dB, frame 396)
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -18.8 dB, max -4.1 dB
+audio 48-city-lights.mp4: mean -18.8 dB, max -4.1 dB  (10.9 MB)
+deep t=1: hash 2441c707 mean 79.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=11: hash c58ef6cb mean 113.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.4: hash c9b67058 mean 90.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.6: hash ed5519a1 mean 105 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=13.2: hash f4382160 mean 98.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.8: hash 822552a8 mean 104.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

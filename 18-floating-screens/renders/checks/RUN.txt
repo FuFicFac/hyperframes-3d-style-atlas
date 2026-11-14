@@ -1,0 +1,22 @@
+check-frames run: 2026-11-14 05:14:59 UTC
+times: 1.2, 1.5, 2.6, 4.6, 5, 5.8, 7.6, 9, 9.6, 10.3, 11.6, 12.8, 14.6
+newest code edit: 2026-11-13 18:38:20 UTC (floating-screens/choreo.js)
+mp4: 18-floating-screens.mp4 2026-11-13 16:08:17 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 38.0 dB, frame 270)
+  frame 36 (t=1.200): 40.9 dB
+  frame 45 (t=1.500): 40.6 dB
+  frame 78 (t=2.600): 40.6 dB
+  frame 138 (t=4.600): 39.9 dB
+  frame 150 (t=5.000): 39.6 dB
+  frame 174 (t=5.800): 39.4 dB
+  frame 228 (t=7.600): 38.2 dB
+  frame 270 (t=9.000): 38.0 dB
+  frame 288 (t=9.600): 38.9 dB
+  frame 309 (t=10.300): 39.2 dB
+  frame 348 (t=11.600): 40.3 dB
+  frame 384 (t=12.800): 39.6 dB
+  frame 438 (t=14.600): 38.8 dB
+determinism: OK (13 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

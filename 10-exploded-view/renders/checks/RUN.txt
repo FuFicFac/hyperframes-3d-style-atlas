@@ -1,0 +1,16 @@
+check-frames run: 2026-11-14 05:08:34 UTC
+times: 1.2, 4.6, 5.6, 6.4, 8.9, 11.5, 13.1, 14.8
+newest code edit: 2026-11-13 21:17:11 UTC (exploded-view/spec.js)
+mp4: 10-exploded-view.mp4 2026-11-13 21:17:39 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 38.1 dB, frame 345)
+  frame 36 (t=1.200): 40.2 dB
+  frame 138 (t=4.600): 39.4 dB
+  frame 168 (t=5.600): 38.9 dB
+  frame 192 (t=6.400): 38.8 dB
+  frame 267 (t=8.900): 38.3 dB
+  frame 345 (t=11.500): 38.1 dB
+  frame 393 (t=13.100): 39.0 dB
+  frame 444 (t=14.800): 40.0 dB
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

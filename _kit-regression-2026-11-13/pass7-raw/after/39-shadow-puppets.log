@@ -1,0 +1,25 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 7 old file(s): RUN.txt t0.5.png t10.9.png t14.5.png t2.5.png t4.5.png t8.8.png
+check-frames run: 2026-11-14 04:52:32 UTC
+times: 0.5, 2.5, 4.5, 8.8, 10.9, 14.5
+newest code edit: 2026-11-14 01:09:43 UTC (39-shadow-puppets/scene.config.js)
+mp4: 39-shadow-puppets.mp4 2026-11-14 01:11:21 UTC
+kit last changed: 2026-11-14 04:24:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+0.5       renders/checks/t0.5.png       d8829413d25a18fc76fd64a90d8913d6  SAME
+2.5       renders/checks/t2.5.png       f3ac2378efe8a64e6eb18055f3139bc4  SAME
+4.5       renders/checks/t4.5.png       436e32c60b97f5ee6c2ee4f933401b74  SAME
+8.8       renders/checks/t8.8.png       b3e690b522daac1475a2c609c41d6cc5  SAME
+10.9      renders/checks/t10.9.png      343c384576a8274b8bdb98a4bfbf5cb1  SAME
+14.5      renders/checks/t14.5.png      68d2709acb4d57190935153e17de79aa  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 38.8 dB, frame 75)
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -21.0 dB, max -6.0 dB
+audio 39-shadow-puppets.mp4: mean -21.0 dB, max -6.0 dB  (3.0 MB)
+deep t=0.5: hash e4b26f59 mean 80.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.5: hash e27e550f mean 81.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.5: hash 87c90e9f mean 78.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.8: hash b4ccad95 mean 69.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.9: hash d03e59e6 mean 77.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.5: hash ae81bba6 mean 80.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

@@ -1,0 +1,24 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 6 old file(s): RUN.txt t1.png t12.5.png t14.8.png t4.6.png t9.6.png
+check-frames run: 2026-11-14 03:54:31 UTC
+times: 1, 4.6, 9.6, 12.5, 14.8
+newest code edit: 2026-11-14 03:19:42 UTC (conveyor-factory/style.js)
+mp4: 47-conveyor-factory.mp4 2026-11-14 03:07:57 UTC
+kit last changed: 2026-11-14 03:19:42 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+1         renders/checks/t1.png         1aeb659563745a32fa7231f823d1aace  SAME
+4.6       renders/checks/t4.6.png       fb0f623738d1e4f667062cde3e406bf1  SAME
+9.6       renders/checks/t9.6.png       62b1ad28b536c8ba8429162a2a9d66cd  SAME
+12.5      renders/checks/t12.5.png      dfbad3d4adff844f1ea09b3f76452aa1  SAME
+14.8      renders/checks/t14.8.png      d6ba806173dd939a0f4f4fd6b0059a2a  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 35.7 dB, frame 444)
+determinism: OK (5 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -21.3 dB, max -2.9 dB
+audio 47-conveyor-factory.mp4: mean -21.4 dB, max -3.3 dB  (7.1 MB)
+deep t=1: hash 1a67c951 mean 185 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.6: hash 262aaf09 mean 172.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.6: hash 5baf9c00 mean 167 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.5: hash e2e900d6 mean 181.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.8: hash 00b1812f mean 189 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

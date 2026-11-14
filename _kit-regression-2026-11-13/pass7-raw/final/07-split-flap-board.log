@@ -1,0 +1,29 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 9 old file(s): RUN.txt t0.3.png t1.2.png t12.6.png t14.5.png t2.6.png t4.1.png t6.6.png t9.9.png
+check-frames run: 2026-11-14 05:06:10 UTC
+times: 0.3, 1.2, 2.6, 4.1, 6.6, 9.9, 12.6, 14.5
+newest code edit: 2026-11-13 14:23:45 UTC (split-flap-board/spec.js)
+mp4: 07-split-flap-board.mp4 2026-11-13 14:24:20 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+0.3       renders/checks/t0.3.png       39a148c1cea795a394f54156aebb096a  SAME
+1.2       renders/checks/t1.2.png       f9d1fd7e4c58642f5872b06369c40695  SAME
+2.6       renders/checks/t2.6.png       0c6912da84e65f246f0824d057e058c6  SAME
+4.1       renders/checks/t4.1.png       c82bae9b6fa051b70e8d58b512b23e00  SAME
+6.6       renders/checks/t6.6.png       e3886a5f34082b48a00610211b2858a8  SAME
+9.9       renders/checks/t9.9.png       cdbddc067c3c712d6f213799302ad168  SAME
+12.6      renders/checks/t12.6.png      e47eed92f97d7f9b503aff583e583c6b  SAME
+14.5      renders/checks/t14.5.png      ca4e57cdbdc4ac236b57beec019903ab  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.4 dB, frame 378)
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -24.6 dB, max -1.1 dB
+audio 07-split-flap-board.mp4: mean -24.7 dB, max -1.1 dB  (7.1 MB)
+deep t=0.3: hash bc8bd6e0 mean 16.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.2: hash ddccee6b mean 17.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.6: hash ecbce42b mean 18.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.1: hash 4a91bbb1 mean 20.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=6.6: hash 9d99d05b mean 24.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.9: hash 56374e1b mean 22.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.6: hash a0709316 mean 25.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.5: hash 2a4379af mean 25.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

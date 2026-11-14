@@ -1,0 +1,16 @@
+check-frames run: 2026-11-14 05:00:40 UTC
+times: 0.2, 0.6, 1.0, 1.5, 2.0, 3.2, 4.8
+newest code edit: 2026-11-13 15:42:32 UTC (neutral/spec.js)
+mp4: 00-smoke.mp4 2026-11-13 10:14:40 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 39.0 dB, frame 60)
+  frame 6 (t=0.200): 39.7 dB
+  frame 18 (t=0.600): 39.5 dB
+  frame 30 (t=1.000): 39.5 dB
+  frame 45 (t=1.500): 39.2 dB
+  frame 60 (t=2.000): 39.0 dB
+  frame 96 (t=3.200): 39.2 dB
+  frame 144 (t=4.800): 39.1 dB
+determinism: OK (7 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

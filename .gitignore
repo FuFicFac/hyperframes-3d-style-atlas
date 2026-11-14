@@ -1,0 +1,9 @@
+.DS_Store
+node_modules/
+.env
+.env.*
+!.env.example
+**/.hyperframes/cache/
+**/.hyperframes/*-lock/
+/_ALL VIDEOS/Master Video.mp4
+/_ALL VIDEOS/Master Video - Numbered.mp4

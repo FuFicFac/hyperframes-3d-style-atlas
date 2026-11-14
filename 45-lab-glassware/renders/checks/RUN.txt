@@ -1,0 +1,14 @@
+check-frames run: 2026-11-14 05:34:39 UTC
+times: 1.5, 5.6, 7.4, 10.9, 12.4, 14.9
+newest code edit: 2026-11-14 03:06:46 UTC (lab-glassware/spec.js)
+mp4: 45-lab-glassware.mp4 2026-11-14 03:07:30 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.8 dB, frame 168)
+  frame 45 (t=1.500): 38.6 dB
+  frame 168 (t=5.600): 37.8 dB
+  frame 222 (t=7.400): 38.5 dB
+  frame 327 (t=10.900): 38.9 dB
+  frame 372 (t=12.400): 38.2 dB
+  frame 447 (t=14.900): 39.0 dB
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

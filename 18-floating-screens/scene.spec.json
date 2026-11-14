@@ -1,0 +1,1568 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "floating-screens",
+    "name": "Floating Screens",
+    "description": "Bright SaaS launch-video look: rounded UI cards with crisp canvas-drawn interfaces float at different depths over a soft colour-blob gradient, with large soft drop shadows from a top-left key, frosted-glass panels, depth of field on the hero card, connector lines with travelling chips, a cursor, and springy fly-in / fan / stack / focus choreography.",
+    "palette": {
+      "bg": "#eef0fb",
+      "ink": "#101828",
+      "ink2": "#475467",
+      "muted": "#98a2b3",
+      "line": "#e4e7ec",
+      "lineSoft": "#f0f2f6",
+      "surface": "#ffffff",
+      "surface2": "#f6f7fb",
+      "accent": "#5b4df5",
+      "accentDark": "#4335d6",
+      "accentSoft": "#ecebff",
+      "accentMid": "#c9c3ff",
+      "success": "#12a26b",
+      "shadow": "#1d1b4f",
+      "primary": "#5b4df5",
+      "secondary": "#ffffff"
+    },
+    "world": {
+      "background": "#eef0fb",
+      "environment": null,
+      "toneMapping": "none",
+      "exposure": 1
+    },
+    "materials": {
+      "cardEdge": {
+        "type": "standard",
+        "baseColor": "#f4f5fb",
+        "roughness": 0.42,
+        "metalness": 0
+      },
+      "cardBack": {
+        "type": "standard",
+        "baseColor": "#f1f2f8",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "chipEdge": {
+        "type": "standard",
+        "baseColor": "#d9d5ff",
+        "roughness": 0.4,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#ffffff",
+        "intensity": 1.15,
+        "position": [
+          -6,
+          8,
+          9
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#f3f2ff",
+        "groundColor": "#c9cde0",
+        "intensity": 1
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.12,
+        "offset": 1.25
+      },
+      "grain": {
+        "amount": 0.022,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.4,
+      "far": 80,
+      "drift": {
+        "amp": 0.035,
+        "speed": 0.35
+      }
+    },
+    "text": {
+      "font": "ui",
+      "weight": 600,
+      "color": "#101828",
+      "height": 0.4
+    },
+    "sfx": {
+      "enter": "whoosh",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "tick",
+      "emphasis": "chime",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "Cards fly in from depth (behind, below, tilted, small) on a spring and settle with ~6-8 % overshoot; nothing moves linearly.",
+      "Layouts are targets: fan, stack, grid, row; cards re-arrange by springing between layout poses, staggered ~60-90 ms.",
+      "Focus: the hero scales up and comes forward while the others recede 1-2 m (depth of field blurs them).",
+      "UI on the faces animates in sync: typing (per-character plan), progress, rows appearing, toggles, caret blink.",
+      "Camera: slow drifting arcs and push-ins (one move per beat), tiny drift during holds; parallax comes from depth.",
+      "Connectors draw on, then small glowing chips travel along them; the cursor glides on an eased arc and clicks (dip + ripple)."
+    ],
+    "ui": {
+      "dpPerMetre": 140,
+      "pxPerDp": 3.4,
+      "maxPx": 4096,
+      "anisotropy": 16,
+      "fonts": {
+        "ui": "system-ui, -apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+        "mono": "\"SF Mono\", Menlo, Monaco, \"Courier New\", monospace"
+      },
+      "radius": 22,
+      "border": "#e7e9f0",
+      "sheen": 0.55,
+      "greek": {
+        "h": 7,
+        "gap": 8.5,
+        "radius": 3.5
+      }
+    },
+    "card": {
+      "thickness": 0.05,
+      "radius": 0.16,
+      "curveSegments": 10,
+      "outline": {
+        "width": 0.035,
+        "gap": 0.025,
+        "glow": 0.12
+      }
+    },
+    "shadow": {
+      "dir": [
+        0.32,
+        -0.5,
+        -1
+      ],
+      "color": "#1d1b4f",
+      "opacity": 0.2,
+      "blur0": 0.03,
+      "blurPerM": 0.24,
+      "spreadPerM": 0.03,
+      "fade": 0.32,
+      "ambient": {
+        "opacity": 0.1,
+        "blur": 0.22,
+        "offset": [
+          0,
+          -0.06
+        ]
+      },
+      "maxGap": 7,
+      "maxCasters": 8
+    },
+    "backdrop": {
+      "z": -3.2,
+      "size": [
+        46,
+        26
+      ],
+      "base": "#eef0fb",
+      "blobs": [
+        {
+          "color": "#c8c0ff",
+          "pos": [
+            -7,
+            4.2
+          ],
+          "r": 7.5,
+          "amp": [
+            1.4,
+            0.8
+          ],
+          "speed": 0.08
+        },
+        {
+          "color": "#b9e2ff",
+          "pos": [
+            7.5,
+            3.4
+          ],
+          "r": 7,
+          "amp": [
+            1.1,
+            1
+          ],
+          "speed": 0.07
+        },
+        {
+          "color": "#ffd8c8",
+          "pos": [
+            6.5,
+            -4.6
+          ],
+          "r": 6.5,
+          "amp": [
+            1.3,
+            0.7
+          ],
+          "speed": 0.09
+        },
+        {
+          "color": "#c9f0e2",
+          "pos": [
+            -6.5,
+            -4.8
+          ],
+          "r": 6,
+          "amp": [
+            1,
+            0.9
+          ],
+          "speed": 0.06
+        },
+        {
+          "color": "#f6d3f0",
+          "pos": [
+            0.5,
+            0.6
+          ],
+          "r": 5,
+          "amp": [
+            1.6,
+            1
+          ],
+          "speed": 0.05
+        }
+      ],
+      "strength": 0.9,
+      "grain": 0.012
+    },
+    "frosted": {
+      "color": "#ffffff",
+      "alphaTop": 0.5,
+      "alphaBottom": 0.28,
+      "rim": 0.85,
+      "rimWidth": 0.05,
+      "tint": "#f4f2ff"
+    },
+    "dof": {
+      "aperture": 0.0016,
+      "maxblur": 0.0075
+    },
+    "connector": {
+      "width": 3.2,
+      "color": "#5b4df5",
+      "level": 0.95,
+      "dash": null,
+      "arrow": 0.12,
+      "chipSize": 0.11
+    },
+    "cursor": {
+      "size": 0.42,
+      "fill": "#101828",
+      "stroke": "#ffffff",
+      "ripple": "#5b4df5"
+    },
+    "step": {
+      "x": -0.86,
+      "y": 0.8,
+      "height": 0.058,
+      "pill": "#ffffff",
+      "pillAlpha": 0.92,
+      "text": "#101828",
+      "badge": "#5b4df5",
+      "badgeText": "#ffffff",
+      "tracking": 0.08,
+      "weight": 700,
+      "inDur": 0.45,
+      "outDur": 0.35,
+      "rise": 0.02
+    }
+  },
+  "scene": {
+    "id": "18-floating-screens",
+    "style": "floating-screens",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "question",
+        "t": 0,
+        "dur": 3.1
+      },
+      {
+        "id": "search",
+        "t": 3.1,
+        "dur": 3
+      },
+      {
+        "id": "pull",
+        "t": 6.1,
+        "dur": 2.8
+      },
+      {
+        "id": "answer",
+        "t": 8.9,
+        "dur": 3
+      },
+      {
+        "id": "grounded",
+        "t": 11.9,
+        "dur": 3.1
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0.9,
+          0.45,
+          9.7
+        ],
+        "target": [
+          0.1,
+          -0.02,
+          0.6
+        ],
+        "fov": 30
+      },
+      {
+        "t": 3,
+        "pos": [
+          0.45,
+          0.3,
+          9
+        ],
+        "target": [
+          0.05,
+          -0.05,
+          0.6
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 4.1,
+        "pos": [
+          -0.35,
+          0.45,
+          13.4
+        ],
+        "target": [
+          0.25,
+          0.15,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 6,
+        "pos": [
+          -0.15,
+          0.35,
+          13
+        ],
+        "target": [
+          0.3,
+          0.1,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 7.05,
+        "pos": [
+          1.95,
+          0.35,
+          9.4
+        ],
+        "target": [
+          1.15,
+          -0.15,
+          0.9
+        ],
+        "fov": 30,
+        "ease": "inOutCubic",
+        "path": "arc"
+      },
+      {
+        "t": 8.85,
+        "pos": [
+          1.75,
+          0.3,
+          9.1
+        ],
+        "target": [
+          1.15,
+          -0.15,
+          0.9
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 9.85,
+        "pos": [
+          0.55,
+          0.4,
+          11
+        ],
+        "target": [
+          0.55,
+          0,
+          0.7
+        ],
+        "fov": 30,
+        "ease": "inOutCubic",
+        "path": "arc"
+      },
+      {
+        "t": 10.65,
+        "pos": [
+          0.75,
+          0.32,
+          10.6
+        ],
+        "target": [
+          0.7,
+          0,
+          0.7
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.850000000000001,
+        "pos": [
+          2.2,
+          0.25,
+          7.9
+        ],
+        "target": [
+          2.3,
+          0,
+          0.6
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 12.9,
+        "pos": [
+          0.05,
+          0.2,
+          9.1
+        ],
+        "target": [
+          -0.15,
+          -0.05,
+          1.1
+        ],
+        "fov": 30,
+        "ease": "inOutCubic",
+        "path": "arc"
+      },
+      {
+        "t": 15,
+        "pos": [
+          -0.05,
+          0.15,
+          8.75
+        ],
+        "target": [
+          -0.18,
+          -0.05,
+          1.1
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [
+      {
+        "id": "backdrop",
+        "primitive": "procedural",
+        "factory": "backdrop",
+        "procedural": "46x26 m plane at z=-3.2: five drifting soft colour blobs (mesh gradient) + dither; receives the fake key-light card shadows",
+        "dims": {}
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "root": 196,
+        "chord": [
+          0,
+          4,
+          7,
+          11,
+          14
+        ],
+        "brightness": 2400,
+        "attack": 1.4,
+        "release": 2.5,
+        "gain": 0.5
+      },
+      {
+        "t": 8.9,
+        "type": "pad",
+        "dur": 6.1,
+        "root": 392,
+        "chord": [
+          0,
+          7,
+          11,
+          16
+        ],
+        "brightness": 3200,
+        "attack": 2,
+        "release": 2.5,
+        "gain": 0.16,
+        "seed": 3
+      },
+      {
+        "t": 0,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "pitch": 1.35,
+        "gain": 0.25,
+        "pan": 0.2,
+        "seed": 4
+      },
+      {
+        "t": 0.08,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.85,
+        "pitch": 1.05,
+        "gain": 0.42,
+        "seed": 5
+      },
+      {
+        "t": 0.68,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.2,
+        "seed": 6
+      },
+      {
+        "t": 0.45,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "gain": 0.12,
+        "pitch": 1.5,
+        "seed": 7
+      },
+      {
+        "t": 1.32,
+        "type": "click",
+        "gain": 0.32,
+        "pitch": 1,
+        "seed": 8
+      },
+      {
+        "t": 1.5,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.08800000000000001,
+        "pitch": 1.71,
+        "pan": -0.15,
+        "seed": 100
+      },
+      {
+        "t": 1.5616209168330226,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.1188,
+        "pitch": 1.824,
+        "pan": -0.12,
+        "seed": 101
+      },
+      {
+        "t": 1.6271719139890353,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.10560000000000001,
+        "pitch": 1.938,
+        "pan": -0.09,
+        "seed": 102
+      },
+      {
+        "t": 1.6665291092125698,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.09240000000000001,
+        "pitch": 2.052,
+        "pan": -0.06,
+        "seed": 103
+      },
+      {
+        "t": 1.7249954744756808,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.12320000000000002,
+        "pitch": 1.786,
+        "pan": -0.03,
+        "seed": 104
+      },
+      {
+        "t": 1.757975657692326,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.11,
+        "pitch": 1.9,
+        "pan": 0,
+        "seed": 105
+      },
+      {
+        "t": 1.85911317669039,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.0968,
+        "pitch": 2.014,
+        "pan": 0.03,
+        "seed": 106
+      },
+      {
+        "t": 1.9097602183368105,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.12760000000000002,
+        "pitch": 1.748,
+        "pan": 0.060000000000000026,
+        "seed": 107
+      },
+      {
+        "t": 1.9816054472946072,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.1144,
+        "pitch": 1.8619999999999999,
+        "pan": 0.09,
+        "seed": 108
+      },
+      {
+        "t": 2.0675422907766494,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.1012,
+        "pitch": 1.976,
+        "pan": 0.11999999999999997,
+        "seed": 109
+      },
+      {
+        "t": 2.131571318740638,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.08800000000000001,
+        "pitch": 1.71,
+        "pan": -0.15,
+        "seed": 110
+      },
+      {
+        "t": 2.1918083739083407,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.1188,
+        "pitch": 1.824,
+        "pan": -0.12,
+        "seed": 111
+      },
+      {
+        "t": 2.2214104411948323,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.10560000000000001,
+        "pitch": 1.938,
+        "pan": -0.09,
+        "seed": 112
+      },
+      {
+        "t": 2.2724031394699242,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.09240000000000001,
+        "pitch": 2.052,
+        "pan": -0.06,
+        "seed": 113
+      },
+      {
+        "t": 2.3155825902250786,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.12320000000000002,
+        "pitch": 1.786,
+        "pan": -0.03,
+        "seed": 114
+      },
+      {
+        "t": 2.4168145801516636,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.11,
+        "pitch": 1.9,
+        "pan": 0,
+        "seed": 115
+      },
+      {
+        "t": 2.481539182942115,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.0968,
+        "pitch": 2.014,
+        "pan": 0.03,
+        "seed": 116
+      },
+      {
+        "t": 2.5447568130115727,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.12760000000000002,
+        "pitch": 1.748,
+        "pan": 0.060000000000000026,
+        "seed": 117
+      },
+      {
+        "t": 2.585715775560636,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.1144,
+        "pitch": 1.8619999999999999,
+        "pan": 0.09,
+        "seed": 118
+      },
+      {
+        "t": 2.615564013917097,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.1012,
+        "pitch": 1.976,
+        "pan": 0.11999999999999997,
+        "seed": 119
+      },
+      {
+        "t": 2.6820986150359536,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.08800000000000001,
+        "pitch": 1.71,
+        "pan": -0.15,
+        "seed": 120
+      },
+      {
+        "t": 2.7209122317401984,
+        "type": "click",
+        "dur": 0.022,
+        "gain": 0.1188,
+        "pitch": 1.824,
+        "pan": -0.12,
+        "seed": 121
+      },
+      {
+        "t": 3.102773146582032,
+        "type": "click",
+        "gain": 0.34,
+        "pitch": 0.9,
+        "seed": 9
+      },
+      {
+        "t": 3.182773146582032,
+        "type": "pop",
+        "gain": 0.28,
+        "pitch": 1.5,
+        "seed": 10
+      },
+      {
+        "t": 3.202773146582032,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.35,
+        "pitch": 1.8,
+        "gain": 0.14,
+        "seed": 11
+      },
+      {
+        "t": 3.1,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1,
+        "pitch": 0.85,
+        "gain": 0.3,
+        "seed": 12
+      },
+      {
+        "t": 3.3000000000000003,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.6,
+        "pitch": 1.3,
+        "gain": 0.32,
+        "pan": 0.3,
+        "seed": 13
+      },
+      {
+        "t": 3.35,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.6,
+        "seed": 14
+      },
+      {
+        "t": 4.05,
+        "type": "blip",
+        "notes": [
+          0,
+          7,
+          12
+        ],
+        "dur": 0.06,
+        "gain": 0.14,
+        "pitch": 1.4,
+        "seed": 15
+      },
+      {
+        "t": 3.45,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "gain": 0.12,
+        "pitch": 1.5,
+        "seed": 16
+      },
+      {
+        "t": 3.95,
+        "type": "paper",
+        "dur": 0.22,
+        "gain": 0.1,
+        "pitch": 1.3,
+        "pan": -0.3,
+        "seed": 20
+      },
+      {
+        "t": 4.025,
+        "type": "paper",
+        "dur": 0.22,
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": -0.19999999999999998,
+        "seed": 21
+      },
+      {
+        "t": 4.1,
+        "type": "paper",
+        "dur": 0.22,
+        "gain": 0.1,
+        "pitch": 1.4000000000000001,
+        "pan": -0.09999999999999998,
+        "seed": 22
+      },
+      {
+        "t": 4.175,
+        "type": "paper",
+        "dur": 0.22,
+        "gain": 0.1,
+        "pitch": 1.4500000000000002,
+        "pan": 5.551115123125783e-17,
+        "seed": 23
+      },
+      {
+        "t": 4.25,
+        "type": "paper",
+        "dur": 0.22,
+        "gain": 0.1,
+        "pitch": 1.5,
+        "pan": 0.10000000000000003,
+        "seed": 24
+      },
+      {
+        "t": 4.325,
+        "type": "paper",
+        "dur": 0.22,
+        "gain": 0.1,
+        "pitch": 1.55,
+        "pan": 0.2,
+        "seed": 25
+      },
+      {
+        "t": 4.4,
+        "type": "paper",
+        "dur": 0.22,
+        "gain": 0.1,
+        "pitch": 1.6,
+        "pan": 0.3000000000000001,
+        "seed": 26
+      },
+      {
+        "t": 3.95,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.6,
+        "pitch": 1.1,
+        "gain": 0.2,
+        "pan": 0.2,
+        "seed": 29
+      },
+      {
+        "t": 4.65,
+        "type": "tick",
+        "gain": 0.07,
+        "pitch": 2.4,
+        "pan": -0.3,
+        "seed": 30
+      },
+      {
+        "t": 4.8100000000000005,
+        "type": "tick",
+        "gain": 0.07,
+        "pitch": 2.48,
+        "pan": -0.19999999999999998,
+        "seed": 31
+      },
+      {
+        "t": 4.970000000000001,
+        "type": "tick",
+        "gain": 0.07,
+        "pitch": 2.56,
+        "pan": -0.09999999999999998,
+        "seed": 32
+      },
+      {
+        "t": 5.130000000000001,
+        "type": "tick",
+        "gain": 0.07,
+        "pitch": 2.6399999999999997,
+        "pan": 5.551115123125783e-17,
+        "seed": 33
+      },
+      {
+        "t": 5.29,
+        "type": "tick",
+        "gain": 0.07,
+        "pitch": 2.7199999999999998,
+        "pan": 0.10000000000000003,
+        "seed": 34
+      },
+      {
+        "t": 5.45,
+        "type": "tick",
+        "gain": 0.07,
+        "pitch": 2.8,
+        "pan": 0.2,
+        "seed": 35
+      },
+      {
+        "t": 5.609999999999999,
+        "type": "tick",
+        "gain": 0.07,
+        "pitch": 2.88,
+        "pan": 0.3000000000000001,
+        "seed": 36
+      },
+      {
+        "t": 5.800000000000001,
+        "type": "blip",
+        "notes": [
+          0,
+          4,
+          7
+        ],
+        "dur": 0.07,
+        "gain": 0.13,
+        "pitch": 1.3,
+        "seed": 38
+      },
+      {
+        "t": 6.1,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1,
+        "pitch": 0.95,
+        "gain": 0.22,
+        "seed": 39
+      },
+      {
+        "t": 6.25,
+        "type": "chime",
+        "dur": 1.6,
+        "pitch": 1,
+        "gain": 0.2,
+        "pan": -0.2,
+        "seed": 40
+      },
+      {
+        "t": 6.35,
+        "type": "chime",
+        "dur": 1.6,
+        "pitch": 1.26,
+        "gain": 0.2,
+        "pan": 0.3,
+        "seed": 41
+      },
+      {
+        "t": 6.35,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.55,
+        "pitch": 1.5,
+        "gain": 0.25,
+        "seed": 42
+      },
+      {
+        "t": 6.3999999999999995,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "gain": 0.12,
+        "pitch": 1.5,
+        "seed": 43
+      },
+      {
+        "t": 6.6499999999999995,
+        "type": "sparkle",
+        "dur": 0.8,
+        "gain": 0.08,
+        "pitch": 1.3,
+        "seed": 44
+      },
+      {
+        "t": 7.199999999999999,
+        "type": "pop",
+        "gain": 0.24,
+        "pitch": 1.7,
+        "pan": -0.2,
+        "seed": 45
+      },
+      {
+        "t": 7.3999999999999995,
+        "type": "pop",
+        "gain": 0.24,
+        "pitch": 1.9,
+        "pan": 0.3,
+        "seed": 46
+      },
+      {
+        "t": 8.950000000000001,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "pitch": 1.15,
+        "gain": 0.32,
+        "pan": -0.25,
+        "seed": 50
+      },
+      {
+        "t": 9.1,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "pitch": 1.3,
+        "gain": 0.26,
+        "pan": 0.3,
+        "seed": 51
+      },
+      {
+        "t": 9.15,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "gain": 0.12,
+        "pitch": 1.5,
+        "seed": 52
+      },
+      {
+        "t": 9.35,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.75,
+        "pitch": 1.7,
+        "gain": 0.16,
+        "pan": -0.1,
+        "seed": 53
+      },
+      {
+        "t": 9.55,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.75,
+        "pitch": 1.8499999999999999,
+        "gain": 0.16,
+        "pan": 0.2,
+        "seed": 54
+      },
+      {
+        "t": 10.1,
+        "type": "tick",
+        "gain": 0.2,
+        "pitch": 1.3,
+        "seed": 55
+      },
+      {
+        "t": 10.3,
+        "type": "tick",
+        "gain": 0.2,
+        "pitch": 1.3,
+        "seed": 56
+      },
+      {
+        "t": 10.55,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.6,
+        "pitch": 1.2,
+        "gain": 0.3,
+        "seed": 57
+      },
+      {
+        "t": 10.85,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.4,
+        "pitch": 1.6,
+        "gain": 0.18,
+        "seed": 58
+      },
+      {
+        "t": 9.7,
+        "type": "riser",
+        "dur": 1.3,
+        "pitch": 1.2,
+        "gain": 0.08,
+        "seed": 59
+      },
+      {
+        "t": 11,
+        "type": "chime",
+        "dur": 2.2,
+        "pitch": 0.75,
+        "gain": 0.26,
+        "seed": 60
+      },
+      {
+        "t": 11.02,
+        "type": "sparkle",
+        "dur": 1.1,
+        "gain": 0.1,
+        "pitch": 1.1,
+        "seed": 61
+      },
+      {
+        "t": 11.9,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.8,
+        "pitch": 1,
+        "gain": 0.34,
+        "pan": -0.15,
+        "seed": 62
+      },
+      {
+        "t": 12.5,
+        "type": "blip",
+        "notes": [
+          0,
+          7,
+          12
+        ],
+        "dur": 0.06,
+        "gain": 0.13,
+        "pitch": 1.4,
+        "seed": 63
+      },
+      {
+        "t": 12.3,
+        "type": "blip",
+        "notes": [
+          0,
+          4,
+          7
+        ],
+        "gain": 0.13,
+        "pitch": 1.5,
+        "seed": 64
+      },
+      {
+        "t": 12.4,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.05600000000000001,
+        "pitch": 2.3400000000000003,
+        "pan": -0.15,
+        "seed": 300
+      },
+      {
+        "t": 12.426626043124125,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.07560000000000001,
+        "pitch": 2.4960000000000004,
+        "pan": -0.12,
+        "seed": 301
+      },
+      {
+        "t": 12.459136885597836,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.06720000000000001,
+        "pitch": 2.652,
+        "pan": -0.09,
+        "seed": 302
+      },
+      {
+        "t": 12.488186765233985,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.05880000000000001,
+        "pitch": 2.8080000000000003,
+        "pan": -0.06,
+        "seed": 303
+      },
+      {
+        "t": 12.51372004713933,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.07840000000000001,
+        "pitch": 2.4440000000000004,
+        "pan": -0.03,
+        "seed": 304
+      },
+      {
+        "t": 12.539222852329956,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.07,
+        "pitch": 2.6,
+        "pan": 0,
+        "seed": 305
+      },
+      {
+        "t": 12.570990811223862,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.06160000000000001,
+        "pitch": 2.7560000000000002,
+        "pan": 0.03,
+        "seed": 306
+      },
+      {
+        "t": 12.624896480797092,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.08120000000000002,
+        "pitch": 2.3920000000000003,
+        "pan": 0.060000000000000026,
+        "seed": 307
+      },
+      {
+        "t": 12.65560805031308,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.0728,
+        "pitch": 2.548,
+        "pan": 0.09,
+        "seed": 308
+      },
+      {
+        "t": 12.688524315513906,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.06440000000000001,
+        "pitch": 2.704,
+        "pan": 0.11999999999999997,
+        "seed": 309
+      },
+      {
+        "t": 12.710005109003747,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.05600000000000001,
+        "pitch": 2.3400000000000003,
+        "pan": -0.15,
+        "seed": 310
+      },
+      {
+        "t": 12.800606393089753,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.07560000000000001,
+        "pitch": 2.4960000000000004,
+        "pan": -0.12,
+        "seed": 311
+      },
+      {
+        "t": 12.839173513604097,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.06720000000000001,
+        "pitch": 2.652,
+        "pan": -0.09,
+        "seed": 312
+      },
+      {
+        "t": 12.860761723087403,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.05880000000000001,
+        "pitch": 2.8080000000000003,
+        "pan": -0.06,
+        "seed": 313
+      },
+      {
+        "t": 12.954266966556665,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.07840000000000001,
+        "pitch": 2.4440000000000004,
+        "pan": -0.03,
+        "seed": 314
+      },
+      {
+        "t": 12.98206458646897,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.07,
+        "pitch": 2.6,
+        "pan": 0,
+        "seed": 315
+      },
+      {
+        "t": 13.008397467740577,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.06160000000000001,
+        "pitch": 2.7560000000000002,
+        "pan": 0.03,
+        "seed": 316
+      },
+      {
+        "t": 13.086377468646042,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.08120000000000002,
+        "pitch": 2.3920000000000003,
+        "pan": 0.060000000000000026,
+        "seed": 317
+      },
+      {
+        "t": 13.116095787881877,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.0728,
+        "pitch": 2.548,
+        "pan": 0.09,
+        "seed": 318
+      },
+      {
+        "t": 13.205869590221907,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.06440000000000001,
+        "pitch": 2.704,
+        "pan": 0.11999999999999997,
+        "seed": 319
+      },
+      {
+        "t": 13.2630659217129,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.05600000000000001,
+        "pitch": 2.3400000000000003,
+        "pan": -0.15,
+        "seed": 320
+      },
+      {
+        "t": 13.28996587452991,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.07560000000000001,
+        "pitch": 2.4960000000000004,
+        "pan": -0.12,
+        "seed": 321
+      },
+      {
+        "t": 13.316127008214128,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.06720000000000001,
+        "pitch": 2.652,
+        "pan": -0.09,
+        "seed": 322
+      },
+      {
+        "t": 13.34314880772005,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.05880000000000001,
+        "pitch": 2.8080000000000003,
+        "pan": -0.06,
+        "seed": 323
+      },
+      {
+        "t": 13.398027161945357,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.07840000000000001,
+        "pitch": 2.4440000000000004,
+        "pan": -0.03,
+        "seed": 324
+      },
+      {
+        "t": 13.432200460487048,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.07,
+        "pitch": 2.6,
+        "pan": 0,
+        "seed": 325
+      },
+      {
+        "t": 13.455594530113743,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.06160000000000001,
+        "pitch": 2.7560000000000002,
+        "pan": 0.03,
+        "seed": 326
+      },
+      {
+        "t": 13.477704891696343,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.08120000000000002,
+        "pitch": 2.3920000000000003,
+        "pan": 0.060000000000000026,
+        "seed": 327
+      },
+      {
+        "t": 13.505473120894285,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.0728,
+        "pitch": 2.548,
+        "pan": 0.09,
+        "seed": 328
+      },
+      {
+        "t": 13.536298383457588,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.06440000000000001,
+        "pitch": 2.704,
+        "pan": 0.11999999999999997,
+        "seed": 329
+      },
+      {
+        "t": 13.566344754718711,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.05600000000000001,
+        "pitch": 2.3400000000000003,
+        "pan": -0.15,
+        "seed": 330
+      },
+      {
+        "t": 13.592661904967159,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.07560000000000001,
+        "pitch": 2.4960000000000004,
+        "pan": -0.12,
+        "seed": 331
+      },
+      {
+        "t": 13.626529766856462,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.06720000000000001,
+        "pitch": 2.652,
+        "pan": -0.09,
+        "seed": 332
+      },
+      {
+        "t": 13.692595303198326,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.05880000000000001,
+        "pitch": 2.8080000000000003,
+        "pan": -0.06,
+        "seed": 333
+      },
+      {
+        "t": 13.720803209112496,
+        "type": "tick",
+        "dur": 0.018,
+        "gain": 0.07840000000000001,
+        "pitch": 2.4440000000000004,
+        "pan": -0.03,
+        "seed": 334
+      },
+      {
+        "t": 13.92519625127316,
+        "type": "pop",
+        "gain": 0.2,
+        "pitch": 1.8,
+        "pan": -0.1,
+        "seed": 70
+      },
+      {
+        "t": 14.08519625127316,
+        "type": "pop",
+        "gain": 0.2,
+        "pitch": 2.05,
+        "pan": 0.1,
+        "seed": 71
+      },
+      {
+        "t": 14.18519625127316,
+        "type": "chime",
+        "dur": 2.4,
+        "pitch": 1,
+        "gain": 0.22,
+        "seed": 72
+      },
+      {
+        "t": 14.20519625127316,
+        "type": "sparkle",
+        "dur": 1.2,
+        "gain": 0.1,
+        "pitch": 1.2,
+        "seed": 73
+      }
+    ],
+    "duck": [],
+    "notes": "Cards, UI faces and choreography are built in scene.js from floating-screens props (card, frosted, chip, connector, cursor, pulseRings, stepLabel) and choreo.js poses/typing plans. Generic UI, no real products or logos."
+  }
+}

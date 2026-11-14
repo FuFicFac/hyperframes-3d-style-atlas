@@ -1,0 +1,5 @@
+deleted 2026-11-13 (kit pass 7):
+- 41-sticky-notes/renders/checks/RUN (Ekello Harrid's conflicted copy 2026-11-13).txt — removed by the new check-frames at the start of its 'after' run (see after/41-sticky-notes.log)
+- 27-circuit-board/_atlas/kit/overlay (Ekello Harrid's conflicted copy 2026-11-13).js — generated _atlas junk, removed by hand
+- 27-circuit-board/_atlas/kit/studio (Ekello Harrid's conflicted copy 2026-11-13).js — generated _atlas junk, removed by hand
+find after the runs: 0 '*conflicted copy*' files left under the pilot folder

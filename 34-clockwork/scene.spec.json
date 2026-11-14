@@ -1,0 +1,1153 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "clockwork",
+    "name": "Clockwork",
+    "description": "The inside of a fine mechanical movement shot macro: brushed brass wheels with involute teeth and spoked hubs on a dark perlaged plate, Geneva-striped brass bridges with engraved lettering, blued screws, ruby jewels, a mainspring barrel, a balance wheel with a breathing hairspring and an anchor escapement that ticks the whole gear train forward in discrete steps; a cam drops a lever and a hammer strikes a bell. Captions on a small enamel plaque.",
+    "palette": {
+      "bg": "#0b0a09",
+      "plate": "#4a4642",
+      "plateDeep": "#1e1d1b",
+      "brass": "#d6ab55",
+      "brassDeep": "#9c7430",
+      "gilt": "#e3bd6d",
+      "gold": "#e8c27a",
+      "steel": "#c4c7cc",
+      "blued": "#2b4fb0",
+      "bluedDeep": "#1a2c6e",
+      "ruby": "#b3122c",
+      "enamel": "#f3eee2",
+      "ink": "#1b1a17",
+      "bezel": "#c99b45",
+      "primary": "#d6ab55",
+      "secondary": "#2b4fb0",
+      "accent": "#b3122c"
+    },
+    "world": {
+      "background": "#0b0a09",
+      "environment": null,
+      "toneMapping": "neutral",
+      "exposure": 1.12,
+      "shadowType": "pcf"
+    },
+    "materials": {
+      "brass": {
+        "type": "physical",
+        "baseColor": "#d6ab55",
+        "roughness": 0.3,
+        "metalness": 1
+      },
+      "brassPolished": {
+        "type": "physical",
+        "baseColor": "#e0b765",
+        "roughness": 0.14,
+        "metalness": 1
+      },
+      "gilt": {
+        "type": "physical",
+        "baseColor": "#e3bd6d",
+        "roughness": 0.32,
+        "metalness": 1
+      },
+      "plate": {
+        "type": "physical",
+        "baseColor": "#4a4642",
+        "roughness": 0.4,
+        "metalness": 1
+      },
+      "gold": {
+        "type": "physical",
+        "baseColor": "#e8c27a",
+        "roughness": 0.18,
+        "metalness": 1
+      },
+      "steel": {
+        "type": "physical",
+        "baseColor": "#d2d5da",
+        "roughness": 0.27,
+        "metalness": 1
+      },
+      "blued": {
+        "type": "physical",
+        "baseColor": "#3d6ad8",
+        "roughness": 0.3,
+        "metalness": 0.75,
+        "clearcoat": 0.6,
+        "clearcoatRoughness": 0.12,
+        "emission": {
+          "color": "#2a55c8",
+          "strength": 0.18
+        }
+      },
+      "ruby": {
+        "type": "physical",
+        "baseColor": "#b3122c",
+        "roughness": 0.08,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.03,
+        "emission": {
+          "color": "#d01838",
+          "strength": 0.35
+        }
+      },
+      "spring": {
+        "type": "physical",
+        "baseColor": "#5f6a7c",
+        "roughness": 0.3,
+        "metalness": 1
+      }
+    },
+    "finish": {
+      "grain": {
+        "size": 512,
+        "rings": 260,
+        "contrast": 0.22,
+        "seed": 9,
+        "roughness": [
+          0.22,
+          0.4
+        ]
+      },
+      "anisotropy": 0.6,
+      "side": {
+        "roughness": 0.48,
+        "env": 0.45
+      },
+      "perlage": {
+        "pitch": 0.22,
+        "radius": 0.15,
+        "ppm": 190,
+        "contrast": 0.24,
+        "seed": 4
+      },
+      "stripes": {
+        "pitch": 0.16,
+        "ppm": 520,
+        "contrast": 0.2,
+        "angleDeg": -28
+      },
+      "engraving": {
+        "font": "\"Copperplate\", \"Didot\", \"Baskerville\", Georgia, serif",
+        "fill": "#2a1f12",
+        "glint": "rgba(255,236,190,0.75)"
+      }
+    },
+    "studio": {
+      "size": 256,
+      "sigma": 0.02,
+      "room": {
+        "w": 30,
+        "h": 20,
+        "d": 30,
+        "color": "#060504"
+      },
+      "panels": [
+        {
+          "id": "front",
+          "kind": "card",
+          "size": [
+            16,
+            9
+          ],
+          "pos": [
+            0,
+            -2.5,
+            13
+          ],
+          "intensity": 0.7,
+          "gradient": [
+            [
+              0,
+              "#000000"
+            ],
+            [
+              0.55,
+              "#6b5236"
+            ],
+            [
+              1,
+              "#ffdcae"
+            ]
+          ]
+        },
+        {
+          "id": "key",
+          "kind": "softbox",
+          "size": [
+            6,
+            4
+          ],
+          "pos": [
+            -8,
+            7,
+            8
+          ],
+          "intensity": 1.6,
+          "color": "#ffd9a8",
+          "soft": 0.3
+        },
+        {
+          "id": "top",
+          "kind": "softbox",
+          "size": [
+            10,
+            2.2
+          ],
+          "pos": [
+            1,
+            9,
+            3
+          ],
+          "intensity": 1.1,
+          "color": "#fff0dc",
+          "soft": 0.35
+        },
+        {
+          "id": "rim",
+          "kind": "strip",
+          "size": [
+            0.7,
+            8
+          ],
+          "pos": [
+            9,
+            1,
+            6
+          ],
+          "intensity": 2.2,
+          "color": "#cfe0ff",
+          "soft": 0.3
+        },
+        {
+          "id": "low",
+          "kind": "strip",
+          "size": [
+            14,
+            0.6
+          ],
+          "pos": [
+            0,
+            -8,
+            7
+          ],
+          "intensity": 0.9,
+          "color": "#ffcf9a",
+          "soft": 0.35
+        }
+      ],
+      "sweep": {
+        "size": [
+          12,
+          0.5
+        ],
+        "radius": 10,
+        "from": 0.4,
+        "to": 2.4,
+        "intensity": 0,
+        "color": "#ffffff",
+        "soft": 0.35
+      },
+      "quantum": 0.002
+    },
+    "envIntensity": 1,
+    "steelEnv": 1.6,
+    "lights": [
+      {
+        "id": "ambient",
+        "type": "hemisphere",
+        "color": "#fff0dd",
+        "groundColor": "#2a2018",
+        "intensity": 0.38
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#ffd8a6",
+        "intensity": 2.6,
+        "position": [
+          -6,
+          7,
+          9
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 5,
+          "mapSize": 4096,
+          "extent": 6,
+          "near": 2,
+          "far": 30,
+          "bias": -0.0003,
+          "normalBias": 0.012
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#d4e2ff",
+        "intensity": 0.7,
+        "position": [
+          8,
+          1.5,
+          5
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.16,
+        "radius": 0.3,
+        "threshold": 4
+      },
+      "vignette": {
+        "darkness": 0.5,
+        "offset": 1.05
+      },
+      "grain": {
+        "amount": 0.01,
+        "fps": 30
+      }
+    },
+    "dof": {
+      "aperture": 0.0005,
+      "maxblur": 0.0035
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.2,
+      "far": 60,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "\"Didot\", \"Bodoni 72\", \"Baskerville\", Georgia, serif",
+      "weight": 700,
+      "color": "#1b1a17",
+      "height": 0.3
+    },
+    "plaque": {
+      "font": "\"Baskerville\", \"Didot\", Georgia, serif",
+      "weight": 600,
+      "tracking": 0.14,
+      "heightFrac": 0.082,
+      "x": 0,
+      "y": -0.79,
+      "inDur": 0.45,
+      "outDur": 0.35,
+      "rise": 0.03
+    },
+    "geometry": {
+      "module": 0.05,
+      "wheelThickness": 0.06,
+      "rimWidth": 1.6,
+      "hubRadius": 2.4,
+      "spokeWidth": 1.5,
+      "arborRadius": 0.035,
+      "jewel": {
+        "r": 0.075,
+        "chaton": 0.12
+      },
+      "screw": {
+        "r": 0.09
+      },
+      "bevel": 0.006
+    },
+    "sfx": {
+      "tick": "tick (pitch 1.7 tick / 1.45 tock) + very soft clack body, one per escapement beat (from the planner)",
+      "strike": "clack (hammer) + chime pitch .9, 2.6 s + chime pitch .45 (body), at the planner's strike time",
+      "caption": "click (pitch .8) as each plaque lands",
+      "bedNote": "pad A2 (0,7,12,16) brightness 650 Hz, gain ~.2",
+      "bed": "pad",
+      "enter": "click",
+      "exit": "click",
+      "move": "whoosh",
+      "land": "clack",
+      "emphasis": "chime",
+      "ui": "tick"
+    },
+    "motion": [
+      "One oscillator paces everything: the balance swings as a sine; every pass through centre is a beat.",
+      "At each beat the anchor flips and the escape wheel steps half a tooth (with a tiny recoil); every other arbor's angle is the escape wheel's times its tooth ratio — the whole train ticks together, directions alternating.",
+      "Cams turn with their arbor; the follower climbs the ramp step by step, drops off the edge, and the hammer strikes the bell — the drop can only happen on an escapement step.",
+      "Camera: slow macro dollies with shallow depth of field, locked during the beats that matter; one wide pull-back at the end.",
+      "Captions: one enamel plaque at a time, rising in from the bottom with a soft click."
+    ]
+  },
+  "scene": {
+    "id": "34-clockwork",
+    "style": "clockwork",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "pace",
+        "t": 0.2,
+        "dur": 3.4
+      },
+      {
+        "id": "ratio",
+        "t": 3.8,
+        "dur": 3.6
+      },
+      {
+        "id": "strike",
+        "t": 7.6,
+        "dur": 3.6
+      },
+      {
+        "id": "whole",
+        "t": 11.4,
+        "dur": 3.6
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          2.3200000000000003,
+          0.8,
+          4.8999999999999995
+        ],
+        "target": [
+          2.62,
+          0.3,
+          0.6
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 3.5,
+        "pos": [
+          2.35,
+          0.72,
+          4.55
+        ],
+        "target": [
+          2.6,
+          0.3,
+          0.6
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 4.8,
+        "pos": [
+          1.55,
+          0.54,
+          3.4
+        ],
+        "target": [
+          1.25,
+          0.12,
+          0.5
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 7.199999999999999,
+        "pos": [
+          1.46,
+          0.53,
+          3.22
+        ],
+        "target": [
+          1.19,
+          0.15,
+          0.5
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 8.7,
+        "pos": [
+          1.02,
+          -0.24,
+          6.6
+        ],
+        "target": [
+          0.72,
+          -0.62,
+          0.8
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.1,
+        "pos": [
+          0.99,
+          -0.35,
+          6.3999999999999995
+        ],
+        "target": [
+          0.72,
+          -0.7,
+          0.8
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 12.9,
+        "pos": [
+          -0.1,
+          0.4,
+          7.6
+        ],
+        "target": [
+          -0.1,
+          -0.1,
+          0.3
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          -0.1,
+          0.38,
+          7.95
+        ],
+        "target": [
+          -0.1,
+          -0.1,
+          0.3
+        ],
+        "fov": 30,
+        "ease": "linear"
+      }
+    ],
+    "objects": [
+      {
+        "id": "plate",
+        "primitive": "procedural",
+        "factory": "plate",
+        "procedural": "anthracite main plate 10.2 × 5.9 m (top at z = 0), perlage graining, engraved gilt border",
+        "dims": {
+          "w": 10.2,
+          "h": 5.9
+        },
+        "position": [
+          0,
+          -0.15,
+          0
+        ]
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.85,
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "attack": 1.6,
+        "release": 2.2,
+        "brightness": 650
+      },
+      {
+        "t": 0.25,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.7,
+        "pan": 0.2816666666666667,
+        "seed": 100
+      },
+      {
+        "t": 0.254,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": 0.2816666666666667,
+        "seed": 200
+      },
+      {
+        "t": 0.75,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.45,
+        "pan": 0.2816666666666667,
+        "seed": 101
+      },
+      {
+        "t": 0.754,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.2,
+        "pan": 0.2816666666666667,
+        "seed": 201
+      },
+      {
+        "t": 1.25,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.7,
+        "pan": 0.2816666666666667,
+        "seed": 102
+      },
+      {
+        "t": 1.254,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": 0.2816666666666667,
+        "seed": 202
+      },
+      {
+        "t": 1.75,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.45,
+        "pan": 0.2816666666666667,
+        "seed": 103
+      },
+      {
+        "t": 1.754,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.2,
+        "pan": 0.2816666666666667,
+        "seed": 203
+      },
+      {
+        "t": 2.25,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.7,
+        "pan": 0.2816666666666667,
+        "seed": 104
+      },
+      {
+        "t": 2.254,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": 0.2816666666666667,
+        "seed": 204
+      },
+      {
+        "t": 2.75,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.45,
+        "pan": 0.2816666666666667,
+        "seed": 105
+      },
+      {
+        "t": 2.754,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.2,
+        "pan": 0.2816666666666667,
+        "seed": 205
+      },
+      {
+        "t": 3.25,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.7,
+        "pan": 0.2816666666666667,
+        "seed": 106
+      },
+      {
+        "t": 3.254,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": 0.2816666666666667,
+        "seed": 206
+      },
+      {
+        "t": 3.75,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.45,
+        "pan": 0.2816666666666667,
+        "seed": 107
+      },
+      {
+        "t": 3.754,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.2,
+        "pan": 0.2816666666666667,
+        "seed": 207
+      },
+      {
+        "t": 4.25,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.7,
+        "pan": 0.2816666666666667,
+        "seed": 108
+      },
+      {
+        "t": 4.254,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": 0.2816666666666667,
+        "seed": 208
+      },
+      {
+        "t": 4.75,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.45,
+        "pan": 0.2816666666666667,
+        "seed": 109
+      },
+      {
+        "t": 4.754,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.2,
+        "pan": 0.2816666666666667,
+        "seed": 209
+      },
+      {
+        "t": 5.25,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.7,
+        "pan": 0.2816666666666667,
+        "seed": 110
+      },
+      {
+        "t": 5.254,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": 0.2816666666666667,
+        "seed": 210
+      },
+      {
+        "t": 5.75,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.45,
+        "pan": 0.2816666666666667,
+        "seed": 111
+      },
+      {
+        "t": 5.754,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.2,
+        "pan": 0.2816666666666667,
+        "seed": 211
+      },
+      {
+        "t": 6.25,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.7,
+        "pan": 0.2816666666666667,
+        "seed": 112
+      },
+      {
+        "t": 6.254,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": 0.2816666666666667,
+        "seed": 212
+      },
+      {
+        "t": 6.75,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.45,
+        "pan": 0.2816666666666667,
+        "seed": 113
+      },
+      {
+        "t": 6.754,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.2,
+        "pan": 0.2816666666666667,
+        "seed": 213
+      },
+      {
+        "t": 7.25,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.7,
+        "pan": 0.2816666666666667,
+        "seed": 114
+      },
+      {
+        "t": 7.254,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": 0.2816666666666667,
+        "seed": 214
+      },
+      {
+        "t": 7.75,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.45,
+        "pan": 0.2816666666666667,
+        "seed": 115
+      },
+      {
+        "t": 7.754,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.2,
+        "pan": 0.2816666666666667,
+        "seed": 215
+      },
+      {
+        "t": 8.25,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.7,
+        "pan": 0.2816666666666667,
+        "seed": 116
+      },
+      {
+        "t": 8.254,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": 0.2816666666666667,
+        "seed": 216
+      },
+      {
+        "t": 8.75,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.45,
+        "pan": 0.2816666666666667,
+        "seed": 117
+      },
+      {
+        "t": 8.754,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.2,
+        "pan": 0.2816666666666667,
+        "seed": 217
+      },
+      {
+        "t": 9.25,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.7,
+        "pan": 0.2816666666666667,
+        "seed": 118
+      },
+      {
+        "t": 9.254,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": 0.2816666666666667,
+        "seed": 218
+      },
+      {
+        "t": 9.75,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.45,
+        "pan": 0.2816666666666667,
+        "seed": 119
+      },
+      {
+        "t": 9.754,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.2,
+        "pan": 0.2816666666666667,
+        "seed": 219
+      },
+      {
+        "t": 10.25,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.7,
+        "pan": 0.2816666666666667,
+        "seed": 120
+      },
+      {
+        "t": 10.254,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": 0.2816666666666667,
+        "seed": 220
+      },
+      {
+        "t": 10.75,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.45,
+        "pan": 0.2816666666666667,
+        "seed": 121
+      },
+      {
+        "t": 10.754,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.2,
+        "pan": 0.2816666666666667,
+        "seed": 221
+      },
+      {
+        "t": 11.25,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.7,
+        "pan": 0.2816666666666667,
+        "seed": 122
+      },
+      {
+        "t": 11.254,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": 0.2816666666666667,
+        "seed": 222
+      },
+      {
+        "t": 11.75,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.45,
+        "pan": 0.2816666666666667,
+        "seed": 123
+      },
+      {
+        "t": 11.754,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.2,
+        "pan": 0.2816666666666667,
+        "seed": 223
+      },
+      {
+        "t": 12.25,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.7,
+        "pan": 0.2816666666666667,
+        "seed": 124
+      },
+      {
+        "t": 12.254,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": 0.2816666666666667,
+        "seed": 224
+      },
+      {
+        "t": 12.75,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.45,
+        "pan": 0.2816666666666667,
+        "seed": 125
+      },
+      {
+        "t": 12.754,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.2,
+        "pan": 0.2816666666666667,
+        "seed": 225
+      },
+      {
+        "t": 13.25,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.7,
+        "pan": 0.2816666666666667,
+        "seed": 126
+      },
+      {
+        "t": 13.254,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": 0.2816666666666667,
+        "seed": 226
+      },
+      {
+        "t": 13.75,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.45,
+        "pan": 0.2816666666666667,
+        "seed": 127
+      },
+      {
+        "t": 13.754,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.2,
+        "pan": 0.2816666666666667,
+        "seed": 227
+      },
+      {
+        "t": 14.25,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.7,
+        "pan": 0.2816666666666667,
+        "seed": 128
+      },
+      {
+        "t": 14.254,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.35,
+        "pan": 0.2816666666666667,
+        "seed": 228
+      },
+      {
+        "t": 14.75,
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 1.45,
+        "pan": 0.2816666666666667,
+        "seed": 129
+      },
+      {
+        "t": 14.754,
+        "type": "clack",
+        "gain": 0.1,
+        "pitch": 1.2,
+        "pan": 0.2816666666666667,
+        "seed": 229
+      },
+      {
+        "t": 9.844120935098175,
+        "type": "clack",
+        "gain": 0.32,
+        "pitch": 1.7,
+        "pan": 0.1225126246652285,
+        "seed": 300
+      },
+      {
+        "t": 9.844120935098175,
+        "type": "chime",
+        "dur": 2.8,
+        "gain": 0.34,
+        "pitch": 0.9,
+        "pan": 0.1225126246652285,
+        "seed": 310
+      },
+      {
+        "t": 9.844120935098175,
+        "type": "chime",
+        "dur": 2.4,
+        "gain": 0.16,
+        "pitch": 0.45,
+        "pan": 0.1225126246652285,
+        "seed": 320
+      },
+      {
+        "t": 9.769120935098176,
+        "type": "click",
+        "gain": 0.16,
+        "pitch": 0.75,
+        "pan": 0.12505122986901526,
+        "seed": 330
+      },
+      {
+        "t": 0.62,
+        "type": "click",
+        "gain": 0.2,
+        "pitch": 0.8,
+        "seed": 400
+      },
+      {
+        "t": 4.37,
+        "type": "click",
+        "gain": 0.2,
+        "pitch": 0.8,
+        "seed": 401
+      },
+      {
+        "t": 8.069999999999999,
+        "type": "click",
+        "gain": 0.2,
+        "pitch": 0.8,
+        "seed": 402
+      },
+      {
+        "t": 12.12,
+        "type": "click",
+        "gain": 0.2,
+        "pitch": 0.8,
+        "seed": 403
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "escapement(): balance = A·sin(2π(t − t0)/T); each centre crossing is a beat — the anchor flips and the escape wheel steps half a tooth (+recoil). planTrain(): every arbor angle = c + k·(escape wheel angle), k from tooth counts (directions alternate). camFollower(): the fourth-arbor cam's drop edge passes the follower only on a step -> strike event. SCORE: ticks from escapement.tickTimes, bell from FOLLOW.strikes.",
+      "ratios": {
+        "escape": 1,
+        "fourth": -0.25,
+        "third": 0.05555555555555555,
+        "second": -0.009259259259259259,
+        "barrel": 0.0015432098765432098
+      },
+      "ticks": 30,
+      "drops": [
+        {
+          "t": 9.769120935098176,
+          "n": 19
+        }
+      ],
+      "strikes": [
+        {
+          "t": 9.844120935098175,
+          "kind": "strike",
+          "n": 19
+        }
+      ]
+    }
+  }
+}

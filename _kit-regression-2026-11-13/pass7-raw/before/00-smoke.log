@@ -1,0 +1,28 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 8 old file(s): RUN.txt t0.2.png t0.6.png t1.0.png t1.5.png t2.0.png t3.2.png t4.8.png
+check-frames run: 2026-11-14 03:19:47 UTC
+times: 0.2, 0.6, 1.0, 1.5, 2.0, 3.2, 4.8
+newest code edit: 2026-11-14 03:19:42 UTC (neutral/style.js)
+mp4: 00-smoke.mp4 2026-11-13 10:14:40 UTC
+kit last changed: 2026-11-14 03:19:42 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+0.2       renders/checks/t0.2.png       f480fd2a324a3dcfb05a7de5c825fab3  SAME
+0.6       renders/checks/t0.6.png       5bb4f7a54e31e5cc387c0a1c466d6ee6  SAME
+1.0       renders/checks/t1.0.png       0239e355b3accefb3e2c151aff9fe598  SAME
+1.5       renders/checks/t1.5.png       4ad519fae5bfd273d2855d8003b19411  SAME
+2.0       renders/checks/t2.0.png       2330a2a04acf89a40dbf81f75f0c5531  SAME
+3.2       renders/checks/t3.2.png       73f2e2dcfb650ca41f37ca2cb976a7e9  SAME
+4.8       renders/checks/t4.8.png       a3052e66f1cd2b57d2064f7bf2ff5423  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 39.0 dB, frame 60)
+determinism: OK (7 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -19.9 dB, max -2.2 dB
+audio 00-smoke.mp4: mean -20.0 dB, max -2.2 dB  (0.8 MB)
+deep t=1: hash 4d94ea4c mean 192.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2: hash 01065399 mean 190.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=0.2: hash 409c4781 mean 194 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=0.6: hash b0428922 mean 193.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.5: hash 7d0c4daf mean 191.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3.2: hash e27708a3 mean 185.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.8: hash b0177575 mean 182.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

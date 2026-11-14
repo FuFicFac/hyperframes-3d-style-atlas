@@ -1,0 +1,3575 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "film-projector",
+    "name": "Film Projector",
+    "description": "A dark screening room: a vintage reel-to-reel projector (turning reels, threaded film, a glowing lens) throws a dusty volumetric light cone onto a pull-down screen showing a sepia silent-film picture with gate weave, flicker, scratches and dust; the camera rides a sprocketed film strip frame by frame and cuts to the screen for each intertitle card, between a 3-2-1 countdown leader and a tail-out.",
+    "palette": {
+      "void": "#060508",
+      "wall": "#16131a",
+      "floor": "#1b1512",
+      "enamel": "#3d443c",
+      "enamelLight": "#5b6458",
+      "chrome": "#cfccc4",
+      "reel": "#a7abb0",
+      "film": "#2a1a10",
+      "lamp": "#ffd9a0",
+      "lens": "#fff2da",
+      "sepiaDark": "#22160b",
+      "sepiaLight": "#f4dcae",
+      "screen": "#d8d3c6",
+      "masking": "#0a090b",
+      "seat": "#2a1e24",
+      "cabinet": "#2b1c14",
+      "cardInk": "#efe4c8",
+      "cardGround": "#0d0b0a",
+      "leaderGrey": "#8f8b84",
+      "edgeCode": "#e8c77a"
+    },
+    "world": {
+      "background": "#060508",
+      "environment": "room",
+      "environmentIntensity": 0.22,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "pcf"
+    },
+    "materials": {
+      "enamel": {
+        "type": "physical",
+        "baseColor": "#3d443c",
+        "roughness": 0.42,
+        "metalness": 0.45,
+        "clearcoat": 0.35,
+        "clearcoatRoughness": 0.35,
+        "bump": {
+          "source": "bumpNoise",
+          "scale": 90,
+          "octaves": 2,
+          "seed": 17,
+          "strength": 0.18,
+          "description": "hammertone enamel dimples"
+        }
+      },
+      "enamelLight": {
+        "type": "physical",
+        "baseColor": "#5b6458",
+        "roughness": 0.4,
+        "metalness": 0.4,
+        "clearcoat": 0.3,
+        "clearcoatRoughness": 0.35
+      },
+      "chrome": {
+        "type": "standard",
+        "baseColor": "#d8d5ce",
+        "roughness": 0.22,
+        "metalness": 1
+      },
+      "reel": {
+        "type": "standard",
+        "baseColor": "#a7abb0",
+        "roughness": 0.34,
+        "metalness": 0.9,
+        "side": "double"
+      },
+      "dark": {
+        "type": "standard",
+        "baseColor": "#141416",
+        "roughness": 0.55,
+        "metalness": 0.35
+      },
+      "film": {
+        "type": "standard",
+        "baseColor": "#2a1a10",
+        "roughness": 0.32,
+        "metalness": 0.05,
+        "side": "double"
+      },
+      "filmPack": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.4,
+        "metalness": 0.05
+      },
+      "cabinet": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.72,
+        "metalness": 0
+      },
+      "wall": {
+        "type": "standard",
+        "baseColor": "#16131a",
+        "roughness": 0.95,
+        "metalness": 0,
+        "bump": {
+          "source": "bumpNoise",
+          "scale": 40,
+          "octaves": 3,
+          "seed": 5,
+          "strength": 0.4,
+          "description": "acoustic cloth weave"
+        }
+      },
+      "floor": {
+        "type": "standard",
+        "baseColor": "#1b1512",
+        "roughness": 0.95,
+        "metalness": 0,
+        "bump": {
+          "source": "bumpNoise",
+          "scale": 140,
+          "octaves": 2,
+          "seed": 9,
+          "strength": 0.35,
+          "description": "carpet pile"
+        }
+      },
+      "masking": {
+        "type": "standard",
+        "baseColor": "#0a090b",
+        "roughness": 1,
+        "metalness": 0
+      },
+      "seat": {
+        "type": "physical",
+        "baseColor": "#2a1e24",
+        "roughness": 0.8,
+        "metalness": 0,
+        "sheen": 0.6
+      },
+      "case": {
+        "type": "standard",
+        "baseColor": "#24221f",
+        "roughness": 0.5,
+        "metalness": 0.6
+      },
+      "vent": {
+        "type": "lambert",
+        "baseColor": "#1a120a",
+        "emission": {
+          "color": "#ffb766",
+          "strength": 3.2
+        }
+      },
+      "lensGlass": {
+        "type": "lambert",
+        "baseColor": "#000000",
+        "emission": {
+          "color": "#fff2da",
+          "strength": 6
+        }
+      }
+    },
+    "lights": [
+      {
+        "id": "ambient",
+        "type": "hemisphere",
+        "color": "#3b3644",
+        "groundColor": "#0b0809",
+        "intensity": 0.42
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#aebbd4",
+        "intensity": 0.55,
+        "position": [
+          3.5,
+          7,
+          -3
+        ],
+        "target": [
+          0,
+          2.2,
+          5
+        ]
+      },
+      {
+        "id": "booth",
+        "type": "directional",
+        "color": "#ffe2bd",
+        "intensity": 0.35,
+        "position": [
+          -5,
+          6,
+          10
+        ],
+        "target": [
+          0,
+          2,
+          4.5
+        ],
+        "shadow": {
+          "softness": 4,
+          "mapSize": 1024,
+          "extent": 3.5,
+          "near": 2,
+          "far": 25,
+          "bias": -0.0005,
+          "normalBias": 0.02
+        }
+      }
+    ],
+    "room": {
+      "lensY": 2.2,
+      "lensZ": 4.4,
+      "screenZ": -8.2,
+      "wallZ": -8.5,
+      "sideX": 7,
+      "floorDepth": [
+        -9,
+        12
+      ],
+      "seats": {
+        "rows": [
+          -3.4,
+          -1.9,
+          -0.4,
+          1.1,
+          2.6
+        ],
+        "perRow": 8,
+        "spacing": 0.62,
+        "aisle": 0.9,
+        "back": [
+          0.52,
+          0.62,
+          0.08
+        ],
+        "seatH": 0.48
+      },
+      "bounce": {
+        "color": "#f4e3c4",
+        "intensity": 9,
+        "distance": 18,
+        "offset": 1
+      }
+    },
+    "screen": {
+      "width": 4,
+      "height": 3,
+      "fabric": [
+        4.5,
+        3.4
+      ],
+      "border": 0.14,
+      "caseR": 0.11,
+      "caseOver": 0.35,
+      "pull": {
+        "ring": 0.07,
+        "drop": 0.28
+      },
+      "base": "#16140f",
+      "gain": 1,
+      "vignette": 0.42,
+      "hotspot": 0.1,
+      "soft": 0.008,
+      "sepia": 0.88
+    },
+    "wear": {
+      "fps": 18,
+      "weave": [
+        0.0016,
+        0.0045
+      ],
+      "flicker": 0.028,
+      "scratch": {
+        "slots": 2,
+        "run": 9,
+        "chance": 0.42,
+        "alpha": [
+          0.07,
+          0.18
+        ],
+        "width": [
+          0.0011,
+          0.0024
+        ],
+        "wander": 0.0018
+      },
+      "specks": {
+        "slots": 8,
+        "density": 0.3,
+        "r": [
+          0.0028,
+          0.0095
+        ],
+        "bright": 0.3,
+        "alpha": 0.75
+      },
+      "runout": {
+        "density": 0.85,
+        "rScale": 1.7,
+        "flicker": 0.05
+      }
+    },
+    "reel": {
+      "speed": 0.72,
+      "hubR": 0.085,
+      "packR0": 0.36,
+      "flangeR": 0.43,
+      "flangeGap": 0.05,
+      "holes": 4,
+      "holeR": 0.085,
+      "spindle": 7.5,
+      "flaps": 4,
+      "coastDecay": 2.4,
+      "stopDur": 0.8,
+      "lampRamp": 0.15,
+      "lampOffDur": 0.25
+    },
+    "projector": {
+      "body": [
+        0.44,
+        0.6,
+        1
+      ],
+      "base": [
+        0.52,
+        0.05,
+        1.16
+      ],
+      "lens": {
+        "y": 0.38,
+        "r": 0.085,
+        "len": 0.3,
+        "ringR": 0.097
+      },
+      "lampHouse": {
+        "x": 0.25,
+        "z": 0.08,
+        "r": 0.13,
+        "h": 0.52,
+        "vents": 6
+      },
+      "reelX": -0.27,
+      "feed": [
+        1.25,
+        -0.42
+      ],
+      "takeup": [
+        1.2,
+        0.5
+      ],
+      "drums": [
+        [
+          0.57,
+          -0.3
+        ],
+        [
+          0.13,
+          -0.12
+        ]
+      ],
+      "drumR": 0.05,
+      "gate": [
+        0.45,
+        0.2,
+        -0.47
+      ],
+      "leak": {
+        "color": "#ffbf73",
+        "intensity": 1.6,
+        "distance": 3.5
+      },
+      "cabinet": [
+        0.78,
+        1.16
+      ]
+    },
+    "beam": {
+      "color": "#fff0d4",
+      "density": 0.06,
+      "edge": 0.06,
+      "dust": 0.5,
+      "dustScale": 2.6,
+      "dustDrift": [
+        0,
+        0.035,
+        0.02
+      ],
+      "streaks": 0.4,
+      "streakFreq": 11,
+      "image": 0.55,
+      "steps": 22,
+      "lumGrid": [
+        12,
+        9
+      ],
+      "near": 0.12,
+      "apexBoost": 1.5
+    },
+    "motes": {
+      "count": 260,
+      "size": 0.018,
+      "level": 1.25,
+      "drift": 0.07,
+      "seed": 41
+    },
+    "strip": {
+      "height": 1,
+      "pitch": 0.8,
+      "image": [
+        0.72,
+        0.54
+      ],
+      "sprocket": {
+        "w": 0.07,
+        "h": 0.085,
+        "r": 0.016,
+        "y": 0.405,
+        "step": 0.2
+      },
+      "arcR": 3.4,
+      "segs": 240,
+      "pxPerMetre": 900,
+      "base": "#140c07",
+      "hole": "#ffe9c2",
+      "frameLine": "#050302",
+      "glow": {
+        "color": "#ffdcae",
+        "level": 1.15,
+        "sigma": 1.3,
+        "floor": 0.18
+      },
+      "table": {
+        "color": "#ffcf96",
+        "level": 0.55,
+        "sigma": 1.6,
+        "back": 1.2
+      },
+      "camDist": 1.55,
+      "camLift": 0.05
+    },
+    "programme": {
+      "w": 1024,
+      "h": 768
+    },
+    "intertitle": {
+      "font": "Didot, \"Bodoni 72\", Baskerville, Georgia, serif",
+      "panel": [
+        0.08,
+        0.745,
+        0.92,
+        0.95
+      ],
+      "lift": 0.15,
+      "textSize": 0.08,
+      "tracking": 0.08,
+      "fadeFrames": 4,
+      "ink": "#efe4c8",
+      "ground": "#0d0b0a",
+      "border": 0.006
+    },
+    "leader": {
+      "per": 0.6,
+      "ground": "#9a968f",
+      "dark": "#2b2925",
+      "ring": "#f1ece2",
+      "font": "\"Helvetica Neue\", Helvetica, Arial, sans-serif"
+    },
+    "post": {
+      "bloom": {
+        "strength": 0.5,
+        "radius": 0.5,
+        "threshold": 1.05
+      },
+      "vignette": {
+        "darkness": 0.55,
+        "offset": 1.05
+      }
+    },
+    "camera": {
+      "fov": 32,
+      "near": 0.05,
+      "far": 90,
+      "drift": {
+        "amp": 0.018,
+        "speed": 0.3
+      }
+    },
+    "text": {
+      "font": "Didot, \"Bodoni 72\", Baskerville, Georgia, serif",
+      "weight": 400,
+      "color": "#efe4c8",
+      "height": 0.4
+    },
+    "sfx": {
+      "enter": "whoosh",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "thud",
+      "emphasis": "pad",
+      "ui": "click",
+      "bed": "hum"
+    },
+    "sound": {
+      "clatter": {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "accent": 1.25
+      },
+      "hum": {
+        "hz": 60,
+        "gain": 0.17
+      },
+      "whir": {
+        "hz": 92,
+        "gain": 0.3
+      },
+      "rumble": {
+        "gain": 0.3
+      },
+      "sting": {
+        "root": 196,
+        "attack": 0.008,
+        "release": 1.4,
+        "dur": 1.7,
+        "brightness": 2400,
+        "gain": 0.3,
+        "chime": 0.07
+      },
+      "chords": [
+        [
+          0,
+          4,
+          7,
+          12
+        ],
+        [
+          5,
+          9,
+          12,
+          17
+        ],
+        [
+          -3,
+          4,
+          9,
+          12
+        ],
+        [
+          7,
+          11,
+          14,
+          19
+        ],
+        [
+          0,
+          7,
+          12,
+          16
+        ]
+      ],
+      "twoPop": {
+        "hz": 1000,
+        "dur": 0.042,
+        "gain": 0.22
+      }
+    },
+    "motion": [
+      "The projector runs the whole clip: reels turn at v/r with the film pack radius shrinking (feed) and growing (take-up) — closed form from film metres run.",
+      "Everything worn (weave, flicker, scratches, dust) changes per simulated 18 fps film frame and is a hash of the frame index, never state.",
+      "Camera rides the backlit film strip frame to frame (inOutCubic), then cuts to the screen where that frame is projected large with its intertitle card.",
+      "Opens on a 3-2-1 sweep-clock leader with a 2-pop; ends on an end card, clear runout, white tail-out, the lamp dying and the motor running down."
+    ]
+  },
+  "scene": {
+    "id": "30-film-projector",
+    "style": "film-projector",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "leader",
+        "t": 0,
+        "dur": 2
+      },
+      {
+        "id": "write",
+        "t": 2,
+        "dur": 2.7,
+        "title": "A LETTER IS WRITTEN",
+        "picture": "writingDesk"
+      },
+      {
+        "id": "train",
+        "t": 4.7,
+        "dur": 2.7,
+        "title": "IT TAKES THE TRAIN",
+        "picture": "steamTrain"
+      },
+      {
+        "id": "sea",
+        "t": 7.4,
+        "dur": 2.7,
+        "title": "IT CROSSES THE SEA",
+        "picture": "steamship"
+      },
+      {
+        "id": "home",
+        "t": 10.100000000000001,
+        "dur": 2.7,
+        "title": "AND ARRIVES HOME",
+        "picture": "cottage"
+      },
+      {
+        "id": "tail",
+        "t": 12.8,
+        "dur": 2.1999999999999993
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -2.7,
+          3.05,
+          8.7
+        ],
+        "target": [
+          0.45,
+          2.15,
+          -2.5
+        ],
+        "fov": 36
+      },
+      {
+        "t": 2,
+        "pos": [
+          -2.3,
+          2.95,
+          7.9
+        ],
+        "target": [
+          0.4,
+          2.15,
+          -2.5
+        ],
+        "fov": 36,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 2,
+        "pos": [
+          63.31109265752532,
+          2.05,
+          0.36714533098830426
+        ],
+        "target": [
+          62.245598997088095,
+          2,
+          -0.8124658332605587
+        ],
+        "fov": 30
+      },
+      {
+        "t": 2.75,
+        "pos": [
+          64.1008444777483,
+          2.05,
+          -0.4852541337415198
+        ],
+        "target": [
+          62.788054792796814,
+          2,
+          -1.3979523342871045
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 2.75,
+        "pos": [
+          1.65,
+          1.45,
+          -1.3
+        ],
+        "target": [
+          0.12,
+          2.25,
+          -8.2
+        ],
+        "fov": 31
+      },
+      {
+        "t": 4.7,
+        "pos": [
+          1.32,
+          1.45,
+          -1.85
+        ],
+        "target": [
+          0.096,
+          2.25,
+          -8.2
+        ],
+        "fov": 31,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 4.7,
+        "pos": [
+          64.1008444777483,
+          2.05,
+          -0.4852541337415198
+        ],
+        "target": [
+          62.788054792796814,
+          2,
+          -1.3979523342871045
+        ],
+        "fov": 30
+      },
+      {
+        "t": 5.45,
+        "pos": [
+          64.67011628849146,
+          2.05,
+          -1.4982804860692442
+        ],
+        "target": [
+          63.17906977391333,
+          2,
+          -2.0937684146738245
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 5.45,
+        "pos": [
+          -1.65,
+          1.45,
+          -1.3
+        ],
+        "target": [
+          -0.12,
+          2.25,
+          -8.2
+        ],
+        "fov": 31
+      },
+      {
+        "t": 7.4,
+        "pos": [
+          -1.32,
+          1.45,
+          -1.85
+        ],
+        "target": [
+          -0.096,
+          2.25,
+          -8.2
+        ],
+        "fov": 31,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 7.4,
+        "pos": [
+          64.67011628849146,
+          2.05,
+          -1.4982804860692442
+        ],
+        "target": [
+          63.17906977391333,
+          2,
+          -2.0937684146738245
+        ],
+        "fov": 30
+      },
+      {
+        "t": 8.15,
+        "pos": [
+          64.98753644936053,
+          2.05,
+          -2.6161074970557654
+        ],
+        "target": [
+          63.39709574299512,
+          2,
+          -2.8615687858564853
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 8.15,
+        "pos": [
+          1.65,
+          1.45,
+          -1.3
+        ],
+        "target": [
+          0.12,
+          2.25,
+          -8.2
+        ],
+        "fov": 31
+      },
+      {
+        "t": 10.100000000000001,
+        "pos": [
+          1.32,
+          1.45,
+          -1.85
+        ],
+        "target": [
+          0.096,
+          2.25,
+          -8.2
+        ],
+        "fov": 31,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 10.100000000000001,
+        "pos": [
+          64.98753644936053,
+          2.05,
+          -2.6161074970557654
+        ],
+        "target": [
+          63.39709574299512,
+          2,
+          -2.8615687858564853
+        ],
+        "fov": 30
+      },
+      {
+        "t": 10.850000000000001,
+        "pos": [
+          65.03561245334438,
+          2.05,
+          -3.777133544506102
+        ],
+        "target": [
+          63.4301176447214,
+          2,
+          -3.65904122248904
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 10.850000000000001,
+        "pos": [
+          -1.65,
+          1.45,
+          -1.3
+        ],
+        "target": [
+          -0.12,
+          2.25,
+          -8.2
+        ],
+        "fov": 31
+      },
+      {
+        "t": 12.8,
+        "pos": [
+          -1.32,
+          1.45,
+          -1.85
+        ],
+        "target": [
+          -0.096,
+          2.25,
+          -8.2
+        ],
+        "fov": 31,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.8,
+        "pos": [
+          2.5,
+          2.9,
+          8.1
+        ],
+        "target": [
+          -0.35,
+          2.2,
+          -2.5
+        ],
+        "fov": 36
+      },
+      {
+        "t": 15,
+        "pos": [
+          1.85,
+          2.75,
+          7.1
+        ],
+        "target": [
+          -0.3,
+          2.3,
+          -1.5
+        ],
+        "fov": 36,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [
+      {
+        "id": "room",
+        "primitive": "procedural",
+        "factory": "room",
+        "procedural": "screening room: carpet floor, dark acoustic-cloth back and side walls, five rows of upholstered seats with a centre aisle"
+      },
+      {
+        "id": "projector",
+        "primitive": "procedural",
+        "factory": "projector",
+        "procedural": "wooden stand + vintage reel-to-reel projector: enamel body, lamp house with glowing vents, chrome lens, two holed-flange reels on arms, sprocket drums, threaded film loops",
+        "dims": {
+          "standHeight": 1.8200000000000003
+        },
+        "position": [
+          0,
+          0,
+          5.204
+        ]
+      },
+      {
+        "id": "screen",
+        "primitive": "procedural",
+        "factory": "screen",
+        "procedural": "pull-down projection screen: matte fabric (projected-picture shader), black masking border, roller case, bottom bar with pull ring",
+        "position": [
+          0,
+          2.2,
+          -8.2
+        ]
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "hum",
+        "dur": 14.75,
+        "hz": 60,
+        "gain": 0.17
+      },
+      {
+        "t": 0,
+        "type": "whir",
+        "dur": 14.75,
+        "hz": 92,
+        "hz2": 92,
+        "gain": 0.3,
+        "seed": 3
+      },
+      {
+        "t": 0,
+        "type": "rumble",
+        "dur": 15,
+        "gain": 0.3,
+        "pitch": 0.8,
+        "seed": 4
+      },
+      {
+        "type": "thud",
+        "pitch": 0.7,
+        "gain": 0.32,
+        "t": 0,
+        "pan": 0,
+        "seed": 11
+      },
+      {
+        "type": "click",
+        "pitch": 0.6,
+        "gain": 0.25,
+        "t": 0,
+        "pan": 0,
+        "seed": 12
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 0.05555555555555556,
+        "seed": 18
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 0.11111111111111112,
+        "seed": 25
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 0.16666666666666666,
+        "seed": 32
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 0.22222222222222224,
+        "seed": 39
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 0.2777777777777778,
+        "seed": 46
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 0.3333333333333333,
+        "seed": 53
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 0.38888888888888895,
+        "seed": 60
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 0.4444444444444445,
+        "seed": 67
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 0.5,
+        "seed": 74
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 0.5555555555555556,
+        "seed": 81
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 0.6111111111111112,
+        "seed": 88
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 0.6666666666666666,
+        "seed": 95
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 0.7222222222222223,
+        "seed": 102
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 0.7777777777777779,
+        "seed": 109
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 0.8333333333333334,
+        "seed": 116
+      },
+      {
+        "type": "blip",
+        "pitch": 1.1363636363636365,
+        "dur": 0.042,
+        "gain": 0.22,
+        "t": 0.8333333333333334,
+        "pan": 0,
+        "seed": 123
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 0.888888888888889,
+        "seed": 130
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 0.9444444444444445,
+        "seed": 137
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 1,
+        "seed": 144
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 1.0555555555555556,
+        "seed": 151
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 1.1111111111111112,
+        "seed": 158
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 1.1666666666666667,
+        "seed": 165
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 1.2222222222222223,
+        "seed": 172
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 1.277777777777778,
+        "seed": 179
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 1.3333333333333333,
+        "seed": 186
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 1.3888888888888888,
+        "seed": 193
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 1.4444444444444446,
+        "seed": 200
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 1.5000000000000002,
+        "seed": 207
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 1.5555555555555558,
+        "seed": 214
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 1.6111111111111112,
+        "seed": 221
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 1.6666666666666667,
+        "seed": 228
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 1.7222222222222223,
+        "seed": 235
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 1.777777777777778,
+        "seed": 242
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 1.8333333333333335,
+        "seed": 249
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 1.888888888888889,
+        "seed": 256
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 1.9444444444444446,
+        "seed": 263
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 2,
+        "seed": 270
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.75,
+        "q": 0.8,
+        "pitch": 0.55,
+        "gain": 0.13,
+        "t": 2,
+        "pan": 0,
+        "seed": 277
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 2.055555555555556,
+        "seed": 284
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 2.111111111111111,
+        "seed": 291
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 2.166666666666667,
+        "seed": 298
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 2.2222222222222223,
+        "seed": 305
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 2.277777777777778,
+        "seed": 312
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 2.3333333333333335,
+        "seed": 319
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 2.388888888888889,
+        "seed": 326
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 2.4444444444444446,
+        "seed": 333
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 2.5,
+        "seed": 340
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 2.555555555555556,
+        "seed": 347
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 2.611111111111111,
+        "seed": 354
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 2.6666666666666665,
+        "seed": 361
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 2.7222222222222223,
+        "seed": 368
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 2.7777777777777777,
+        "seed": 375
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 2.8333333333333335,
+        "seed": 382
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 2.8888888888888893,
+        "seed": 389
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 2.9444444444444446,
+        "seed": 396
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 3.0000000000000004,
+        "seed": 403
+      },
+      {
+        "type": "pad",
+        "root": 196,
+        "chord": [
+          0,
+          4,
+          7,
+          12
+        ],
+        "attack": 0.008,
+        "release": 1.4,
+        "dur": 1.7,
+        "brightness": 2400,
+        "gain": 0.3,
+        "bus": "sfx",
+        "t": 3.0000000000000004,
+        "pan": 0,
+        "seed": 410
+      },
+      {
+        "type": "chime",
+        "pitch": 0.44545454545454544,
+        "dur": 1.2,
+        "gain": 0.07,
+        "t": 3.0000000000000004,
+        "pan": 0,
+        "seed": 411
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 3.055555555555556,
+        "seed": 417
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 3.1111111111111116,
+        "seed": 424
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 3.166666666666667,
+        "seed": 431
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 3.2222222222222223,
+        "seed": 438
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 3.2777777777777777,
+        "seed": 445
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 3.3333333333333335,
+        "seed": 452
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 3.388888888888889,
+        "seed": 459
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 3.4444444444444446,
+        "seed": 466
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 3.5,
+        "seed": 473
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 3.555555555555556,
+        "seed": 480
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 3.611111111111111,
+        "seed": 487
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 3.666666666666667,
+        "seed": 494
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 3.7222222222222228,
+        "seed": 501
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 3.777777777777778,
+        "seed": 508
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 3.833333333333334,
+        "seed": 515
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 3.8888888888888893,
+        "seed": 522
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 3.944444444444444,
+        "seed": 529
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 4,
+        "seed": 536
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 4.055555555555555,
+        "seed": 543
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 4.111111111111112,
+        "seed": 550
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 4.166666666666667,
+        "seed": 557
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 4.222222222222222,
+        "seed": 564
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 4.277777777777778,
+        "seed": 571
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 4.333333333333334,
+        "seed": 578
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 4.388888888888889,
+        "seed": 585
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 4.444444444444445,
+        "seed": 592
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 4.500000000000001,
+        "seed": 599
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 4.555555555555556,
+        "seed": 606
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 4.611111111111112,
+        "seed": 613
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 4.666666666666667,
+        "seed": 620
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.75,
+        "q": 0.8,
+        "pitch": 0.55,
+        "gain": 0.13,
+        "t": 4.7,
+        "pan": 0,
+        "seed": 627
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 4.722222222222222,
+        "seed": 634
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 4.777777777777778,
+        "seed": 641
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 4.833333333333334,
+        "seed": 648
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 4.888888888888889,
+        "seed": 655
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 4.944444444444445,
+        "seed": 662
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 5,
+        "seed": 669
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 5.055555555555556,
+        "seed": 676
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 5.111111111111112,
+        "seed": 683
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 5.166666666666667,
+        "seed": 690
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 5.222222222222222,
+        "seed": 697
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 5.277777777777779,
+        "seed": 704
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 5.333333333333333,
+        "seed": 711
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 5.388888888888889,
+        "seed": 718
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 5.444444444444445,
+        "seed": 725
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 5.5,
+        "seed": 732
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 5.555555555555555,
+        "seed": 739
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 5.611111111111112,
+        "seed": 746
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 5.666666666666667,
+        "seed": 753
+      },
+      {
+        "type": "pad",
+        "root": 196,
+        "chord": [
+          5,
+          9,
+          12,
+          17
+        ],
+        "attack": 0.008,
+        "release": 1.4,
+        "dur": 1.7,
+        "brightness": 2400,
+        "gain": 0.3,
+        "bus": "sfx",
+        "t": 5.666666666666667,
+        "pan": 0,
+        "seed": 760
+      },
+      {
+        "type": "chime",
+        "pitch": 0.5946104804939244,
+        "dur": 1.2,
+        "gain": 0.07,
+        "t": 5.666666666666667,
+        "pan": 0,
+        "seed": 761
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 5.722222222222222,
+        "seed": 767
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 5.777777777777779,
+        "seed": 774
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 5.833333333333334,
+        "seed": 781
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 5.888888888888889,
+        "seed": 788
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 5.944444444444445,
+        "seed": 795
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 6.000000000000001,
+        "seed": 802
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 6.055555555555556,
+        "seed": 809
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 6.111111111111112,
+        "seed": 816
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 6.166666666666668,
+        "seed": 823
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 6.222222222222223,
+        "seed": 830
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 6.277777777777779,
+        "seed": 837
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 6.333333333333334,
+        "seed": 844
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 6.38888888888889,
+        "seed": 851
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 6.444444444444445,
+        "seed": 858
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 6.5,
+        "seed": 865
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 6.555555555555555,
+        "seed": 872
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 6.611111111111111,
+        "seed": 879
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 6.666666666666667,
+        "seed": 886
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 6.722222222222222,
+        "seed": 893
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 6.777777777777778,
+        "seed": 900
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 6.833333333333334,
+        "seed": 907
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 6.888888888888889,
+        "seed": 914
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 6.944444444444445,
+        "seed": 921
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 7,
+        "seed": 928
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 7.055555555555556,
+        "seed": 935
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 7.111111111111112,
+        "seed": 942
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 7.166666666666667,
+        "seed": 949
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 7.222222222222222,
+        "seed": 956
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 7.277777777777779,
+        "seed": 963
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 7.333333333333334,
+        "seed": 970
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 7.388888888888889,
+        "seed": 977
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.75,
+        "q": 0.8,
+        "pitch": 0.55,
+        "gain": 0.13,
+        "t": 7.4,
+        "pan": 0,
+        "seed": 984
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 7.4444444444444455,
+        "seed": 991
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 7.500000000000001,
+        "seed": 998
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 7.555555555555556,
+        "seed": 1005
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 7.611111111111112,
+        "seed": 1012
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 7.666666666666668,
+        "seed": 1019
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 7.722222222222223,
+        "seed": 1026
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 7.777777777777779,
+        "seed": 1033
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 7.833333333333333,
+        "seed": 1040
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 7.888888888888888,
+        "seed": 1047
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 7.944444444444445,
+        "seed": 1054
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 8,
+        "seed": 1061
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 8.055555555555555,
+        "seed": 1068
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 8.11111111111111,
+        "seed": 1075
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 8.166666666666666,
+        "seed": 1082
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 8.222222222222223,
+        "seed": 1089
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 8.277777777777779,
+        "seed": 1096
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 8.333333333333334,
+        "seed": 1103
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 8.38888888888889,
+        "seed": 1110
+      },
+      {
+        "type": "pad",
+        "root": 196,
+        "chord": [
+          -3,
+          4,
+          9,
+          12
+        ],
+        "attack": 0.008,
+        "release": 1.4,
+        "dur": 1.7,
+        "brightness": 2400,
+        "gain": 0.3,
+        "bus": "sfx",
+        "t": 8.38888888888889,
+        "pan": 0,
+        "seed": 1117
+      },
+      {
+        "type": "chime",
+        "pitch": 0.3745811304312001,
+        "dur": 1.2,
+        "gain": 0.07,
+        "t": 8.38888888888889,
+        "pan": 0,
+        "seed": 1118
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 8.444444444444445,
+        "seed": 1124
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 8.5,
+        "seed": 1131
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 8.555555555555555,
+        "seed": 1138
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 8.611111111111112,
+        "seed": 1145
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 8.666666666666668,
+        "seed": 1152
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 8.722222222222223,
+        "seed": 1159
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 8.777777777777779,
+        "seed": 1166
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 8.833333333333334,
+        "seed": 1173
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 8.88888888888889,
+        "seed": 1180
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 8.944444444444445,
+        "seed": 1187
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 9.000000000000002,
+        "seed": 1194
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 9.055555555555557,
+        "seed": 1201
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 9.111111111111112,
+        "seed": 1208
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 9.166666666666668,
+        "seed": 1215
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 9.222222222222223,
+        "seed": 1222
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 9.277777777777779,
+        "seed": 1229
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 9.333333333333334,
+        "seed": 1236
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 9.38888888888889,
+        "seed": 1243
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 9.444444444444445,
+        "seed": 1250
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 9.5,
+        "seed": 1257
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 9.555555555555555,
+        "seed": 1264
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 9.61111111111111,
+        "seed": 1271
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 9.666666666666668,
+        "seed": 1278
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 9.722222222222223,
+        "seed": 1285
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 9.777777777777779,
+        "seed": 1292
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 9.833333333333334,
+        "seed": 1299
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 9.88888888888889,
+        "seed": 1306
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 9.944444444444445,
+        "seed": 1313
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 10,
+        "seed": 1320
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 10.055555555555555,
+        "seed": 1327
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.75,
+        "q": 0.8,
+        "pitch": 0.55,
+        "gain": 0.13,
+        "t": 10.100000000000001,
+        "pan": 0,
+        "seed": 1334
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 10.111111111111112,
+        "seed": 1341
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 10.166666666666668,
+        "seed": 1348
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 10.222222222222223,
+        "seed": 1355
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 10.277777777777779,
+        "seed": 1362
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 10.333333333333334,
+        "seed": 1369
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 10.38888888888889,
+        "seed": 1376
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 10.444444444444445,
+        "seed": 1383
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 10.500000000000002,
+        "seed": 1390
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 10.555555555555557,
+        "seed": 1397
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 10.611111111111112,
+        "seed": 1404
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 10.666666666666666,
+        "seed": 1411
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 10.722222222222221,
+        "seed": 1418
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 10.777777777777779,
+        "seed": 1425
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 10.833333333333334,
+        "seed": 1432
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 10.88888888888889,
+        "seed": 1439
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 10.944444444444445,
+        "seed": 1446
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 11,
+        "seed": 1453
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 11.055555555555555,
+        "seed": 1460
+      },
+      {
+        "type": "pad",
+        "root": 196,
+        "chord": [
+          7,
+          11,
+          14,
+          19
+        ],
+        "attack": 0.008,
+        "release": 1.4,
+        "dur": 1.7,
+        "brightness": 2400,
+        "gain": 0.3,
+        "bus": "sfx",
+        "t": 11.055555555555555,
+        "pan": 0,
+        "seed": 1467
+      },
+      {
+        "type": "chime",
+        "pitch": 0.6674276978814309,
+        "dur": 1.2,
+        "gain": 0.07,
+        "t": 11.055555555555555,
+        "pan": 0,
+        "seed": 1468
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 11.11111111111111,
+        "seed": 1474
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 11.166666666666668,
+        "seed": 1481
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 11.222222222222223,
+        "seed": 1488
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 11.27777777777778,
+        "seed": 1495
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 11.333333333333334,
+        "seed": 1502
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 11.388888888888888,
+        "seed": 1509
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 11.444444444444445,
+        "seed": 1516
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 11.5,
+        "seed": 1523
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 11.555555555555557,
+        "seed": 1530
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 11.61111111111111,
+        "seed": 1537
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 11.666666666666668,
+        "seed": 1544
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 11.722222222222221,
+        "seed": 1551
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 11.777777777777779,
+        "seed": 1558
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 11.833333333333334,
+        "seed": 1565
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 11.88888888888889,
+        "seed": 1572
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 11.944444444444445,
+        "seed": 1579
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 12.000000000000002,
+        "seed": 1586
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 12.055555555555555,
+        "seed": 1593
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 12.111111111111112,
+        "seed": 1600
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 12.166666666666666,
+        "seed": 1607
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 12.222222222222223,
+        "seed": 1614
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 12.277777777777779,
+        "seed": 1621
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 12.333333333333336,
+        "seed": 1628
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 12.38888888888889,
+        "seed": 1635
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 12.444444444444446,
+        "seed": 1642
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 12.5,
+        "seed": 1649
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 12.555555555555557,
+        "seed": 1656
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 12.611111111111112,
+        "seed": 1663
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 12.666666666666668,
+        "seed": 1670
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 12.722222222222223,
+        "seed": 1677
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 12.77777777777778,
+        "seed": 1684
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 12.833333333333334,
+        "seed": 1691
+      },
+      {
+        "type": "pad",
+        "root": 196,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "attack": 0.008,
+        "release": 1.9599999999999997,
+        "dur": 2.55,
+        "brightness": 2400,
+        "gain": 0.3,
+        "bus": "sfx",
+        "t": 12.833333333333334,
+        "pan": 0,
+        "seed": 1698
+      },
+      {
+        "type": "chime",
+        "pitch": 0.44545454545454544,
+        "dur": 1.2,
+        "gain": 0.07,
+        "t": 12.833333333333334,
+        "pan": 0,
+        "seed": 1699
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 12.88888888888889,
+        "seed": 1705
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 12.944444444444445,
+        "seed": 1712
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 13,
+        "seed": 1719
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 13.055555555555557,
+        "seed": 1726
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 13.11111111111111,
+        "seed": 1733
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 13.166666666666668,
+        "seed": 1740
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 13.222222222222221,
+        "seed": 1747
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 13.277777777777779,
+        "seed": 1754
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 13.333333333333334,
+        "seed": 1761
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 13.388888888888891,
+        "seed": 1768
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 13.444444444444445,
+        "seed": 1775
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 13.500000000000002,
+        "seed": 1782
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 13.555555555555555,
+        "seed": 1789
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 13.611111111111112,
+        "seed": 1796
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 13.666666666666668,
+        "seed": 1803
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 13.722222222222223,
+        "seed": 1810
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 13.777777777777779,
+        "seed": 1817
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 13.833333333333336,
+        "seed": 1824
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 13.88888888888889,
+        "seed": 1831
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 13.944444444444446,
+        "seed": 1838
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 14,
+        "seed": 1845
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 14.055555555555557,
+        "seed": 1852
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 14.111111111111112,
+        "seed": 1859
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 14.166666666666668,
+        "seed": 1866
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 14.222222222222223,
+        "seed": 1873
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 14.277777777777777,
+        "seed": 1880
+      },
+      {
+        "type": "rustle",
+        "dur": 0.25,
+        "density": 0.8,
+        "pitch": 1.4,
+        "gain": 0.08,
+        "t": 14.3,
+        "pan": 0,
+        "seed": 1887
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 14.333333333333334,
+        "seed": 1894
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 14.38888888888889,
+        "seed": 1901
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 14.444444444444445,
+        "seed": 1908
+      },
+      {
+        "type": "clack",
+        "pitch": 0.8,
+        "gain": 0.3,
+        "t": 14.450000000000001,
+        "pan": 0,
+        "seed": 1915
+      },
+      {
+        "type": "paper",
+        "dur": 0.08,
+        "density": 0.9,
+        "pitch": 1.2,
+        "gain": 0.25,
+        "t": 14.450000000000001,
+        "pan": 0,
+        "seed": 1916
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 14.5,
+        "seed": 1922
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 14.555555555555557,
+        "seed": 1929
+      },
+      {
+        "type": "click",
+        "pitch": 0.45,
+        "gain": 0.12,
+        "pan": 0.18,
+        "t": 14.61111111111111,
+        "seed": 1936
+      },
+      {
+        "type": "paper",
+        "dur": 0.07,
+        "density": 0.95,
+        "pitch": 1.1,
+        "gain": 0.3,
+        "pan": 0.15,
+        "t": 14.659439510239416,
+        "seed": 1943
+      },
+      {
+        "type": "click",
+        "pitch": 0.55,
+        "gain": 0.12,
+        "pan": 0.15,
+        "t": 14.659439510239416,
+        "seed": 1944
+      },
+      {
+        "type": "click",
+        "pitch": 0.531,
+        "gain": 0.15,
+        "pan": 0.18,
+        "t": 14.666666666666668,
+        "seed": 1950
+      },
+      {
+        "type": "click",
+        "pitch": 0.5,
+        "gain": 0.3,
+        "t": 14.7,
+        "pan": 0,
+        "seed": 1957
+      },
+      {
+        "type": "thud",
+        "pitch": 1.1,
+        "gain": 0.18,
+        "t": 14.7,
+        "pan": 0,
+        "seed": 1958
+      },
+      {
+        "type": "servo",
+        "hz": 92,
+        "hz2": 28,
+        "dur": 0.9500000000000001,
+        "grit": 0.25,
+        "gain": 0.48,
+        "t": 14.7,
+        "pan": 0,
+        "seed": 1964
+      },
+      {
+        "type": "click",
+        "pitch": 0.44683034802834937,
+        "gain": 0.11797142273814358,
+        "pan": 0.18,
+        "t": 14.72253974735396,
+        "seed": 1971
+      },
+      {
+        "type": "click",
+        "pitch": 0.5173967713578507,
+        "gain": 0.11262197768561392,
+        "pan": 0.18,
+        "t": 14.7819780257154,
+        "seed": 1978
+      },
+      {
+        "type": "click",
+        "pitch": 0.42935586535436904,
+        "gain": 0.10678775382679619,
+        "pan": 0.18,
+        "t": 14.84680273525782,
+        "seed": 1985
+      },
+      {
+        "type": "paper",
+        "dur": 0.07,
+        "density": 0.95,
+        "pitch": 1.1,
+        "gain": 0.25682397209997543,
+        "pan": 0.15,
+        "t": 14.891893457333442,
+        "seed": 1992
+      },
+      {
+        "type": "click",
+        "pitch": 0.55,
+        "gain": 0.10272958883999017,
+        "pan": 0.15,
+        "t": 14.891893457333442,
+        "seed": 1993
+      },
+      {
+        "type": "click",
+        "pitch": 0.494690639125837,
+        "gain": 0.1253834841531098,
+        "pan": 0.18,
+        "t": 14.918813474194579,
+        "seed": 1999
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "set": {
+        "lens": [
+          0,
+          2.2,
+          4.4
+        ],
+        "screen": [
+          0,
+          2.2,
+          -8.2
+        ],
+        "standHeight": 1.8200000000000003,
+        "projectorZ": 5.204,
+        "strip": {
+          "origin": [
+            60,
+            2,
+            0
+          ],
+          "camDist": 1.55,
+          "lift": 0.05,
+          "side": 0.1
+        }
+      },
+      "story": [
+        {
+          "id": "write",
+          "title": "A LETTER IS WRITTEN",
+          "picture": "writingDesk"
+        },
+        {
+          "id": "train",
+          "title": "IT TAKES THE TRAIN",
+          "picture": "steamTrain"
+        },
+        {
+          "id": "sea",
+          "title": "IT CROSSES THE SEA",
+          "picture": "steamship"
+        },
+        {
+          "id": "home",
+          "title": "AND ARRIVES HOME",
+          "picture": "cottage"
+        }
+      ],
+      "shots": [
+        {
+          "kind": "wide",
+          "id": "open",
+          "t": 0,
+          "dur": 2
+        },
+        {
+          "kind": "strip",
+          "id": "write-strip",
+          "t": 2,
+          "dur": 0.75,
+          "beat": 0,
+          "from": 3,
+          "to": 4
+        },
+        {
+          "kind": "screen",
+          "id": "write-screen",
+          "t": 2.75,
+          "dur": 1.9500000000000002,
+          "beat": 0,
+          "side": 1
+        },
+        {
+          "kind": "strip",
+          "id": "train-strip",
+          "t": 4.7,
+          "dur": 0.75,
+          "beat": 1,
+          "from": 4,
+          "to": 5
+        },
+        {
+          "kind": "screen",
+          "id": "train-screen",
+          "t": 5.45,
+          "dur": 1.9500000000000002,
+          "beat": 1,
+          "side": -1
+        },
+        {
+          "kind": "strip",
+          "id": "sea-strip",
+          "t": 7.4,
+          "dur": 0.75,
+          "beat": 2,
+          "from": 5,
+          "to": 6
+        },
+        {
+          "kind": "screen",
+          "id": "sea-screen",
+          "t": 8.15,
+          "dur": 1.9500000000000002,
+          "beat": 2,
+          "side": 1
+        },
+        {
+          "kind": "strip",
+          "id": "home-strip",
+          "t": 10.100000000000001,
+          "dur": 0.75,
+          "beat": 3,
+          "from": 6,
+          "to": 7
+        },
+        {
+          "kind": "screen",
+          "id": "home-screen",
+          "t": 10.850000000000001,
+          "dur": 1.9500000000000002,
+          "beat": 3,
+          "side": -1
+        },
+        {
+          "kind": "wide",
+          "id": "tail",
+          "t": 12.8,
+          "dur": 2.1999999999999993
+        }
+      ],
+      "times": {
+        "tEnd": 12.8,
+        "tRunout": 14.3,
+        "tEmpty": 14.450000000000001,
+        "tLampOff": 14.7,
+        "tStop": 14.7,
+        "stopDur": 0.8,
+        "sEmpty": 10.404
+      },
+      "frame": "lens at (0, lensY, lensZ) looking down -Z; strip set far off at +X"
+    }
+  }
+}

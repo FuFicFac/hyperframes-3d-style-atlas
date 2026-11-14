@@ -1,0 +1,14 @@
+check-frames run: 2026-11-14 05:04:46 UTC
+times: 0.75, 2.9, 4.3, 5.9, 6.95, 9.3, 11.9, 14.6
+newest code edit: 2026-11-13 15:01:22 UTC (05-tiny-diorama/scene.config.js)
+mp4: 05-tiny-diorama.mp4 2026-11-13 15:01:54 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.7 dB, frame 357)
+  frame 87 (t=2.900): 38.1 dB
+  frame 129 (t=4.300): 38.0 dB
+  frame 177 (t=5.900): 38.0 dB
+  frame 279 (t=9.300): 37.9 dB
+  frame 357 (t=11.900): 37.7 dB
+  frame 438 (t=14.600): 38.1 dB
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

@@ -1,0 +1,14 @@
+check-frames run: 2026-11-14 05:36:35 UTC
+times: 1, 4.4, 8.6, 11, 13.2, 14.8
+newest code edit: 2026-11-14 03:13:09 UTC (city-lights/style.js)
+mp4: 48-city-lights.mp4 2026-11-14 03:15:05 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 30.4 dB, frame 396)
+  frame 30 (t=1.000): 32.4 dB
+  frame 132 (t=4.400): 30.7 dB
+  frame 258 (t=8.600): 32.7 dB
+  frame 330 (t=11.000): 32.0 dB
+  frame 396 (t=13.200): 30.4 dB
+  frame 444 (t=14.800): 31.6 dB
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

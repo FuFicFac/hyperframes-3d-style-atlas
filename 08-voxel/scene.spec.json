@@ -1,0 +1,920 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "voxel",
+    "name": "Voxel Studio",
+    "description": "Voxel-art models on a pale studio sweep: thousands of bevelled same-size cubes on a strict grid, flat limited palette, thin dark gaps, neighbour-occupancy AO in the crevices, 5x7 voxel lettering, warm key + cool fill, narrow-FOV three-quarter camera; everything moves in whole-cube steps or assembles cube by cube.",
+    "palette": {
+      "bg": "#e8e2d7",
+      "floor": "#e6dfd3",
+      "ink": "#2b2d42",
+      "accent": "#ff5d3a",
+      "accentDark": "#c9412a",
+      "wood": "#6b4a35",
+      "woodDark": "#4b3326",
+      "gap": "#1c1a26",
+      "card": "#fff7ea",
+      "cardEdge": "#e9dcc6",
+      "skyDeep": "#4f98dc",
+      "sky": "#76b9ec",
+      "skyLight": "#a6d8f4",
+      "cloud": "#ffffff",
+      "sunCore": "#fff3a6",
+      "sun": "#ffd23f",
+      "sunRay": "#ffa62b",
+      "grass": "#6cc24a",
+      "grassDark": "#4f9e3a",
+      "cat": "#f28c28",
+      "catDark": "#c55f17",
+      "catLight": "#fff1dc",
+      "catPink": "#ff8fa8"
+    },
+    "world": {
+      "background": "#e8e2d7",
+      "environment": null,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "pcf"
+    },
+    "materials": {
+      "voxel": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.78,
+        "metalness": 0
+      },
+      "floor": {
+        "type": "standard",
+        "baseColor": "#e6dfd3",
+        "roughness": 0.96,
+        "metalness": 0
+      },
+      "gap": {
+        "type": "standard",
+        "baseColor": "#1c1a26",
+        "roughness": 1,
+        "metalness": 0
+      }
+    },
+    "voxel": {
+      "size": 0.12,
+      "fill": 0.93,
+      "bevel": 0.1,
+      "bevelSegments": 2,
+      "ao": {
+        "strength": 0.55,
+        "radius": 0.55,
+        "corner": 0.8
+      },
+      "snapTolerance": 0.15,
+      "assemble": {
+        "dur": 0.45,
+        "spread": 0.8,
+        "radius": 9,
+        "overshoot": 1.25,
+        "spin": 2.2
+      },
+      "textSize": 0.45
+    },
+    "lights": [
+      {
+        "id": "ambient",
+        "type": "hemisphere",
+        "color": "#e4ecff",
+        "groundColor": "#cbb89c",
+        "intensity": 1.35
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#ffe2c2",
+        "intensity": 2.5,
+        "position": [
+          -6,
+          9,
+          8
+        ],
+        "target": [
+          0,
+          1.6,
+          0
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 4096,
+          "extent": 7,
+          "near": 2,
+          "far": 30,
+          "bias": -0.0004,
+          "normalBias": 0.012
+        }
+      },
+      {
+        "id": "fill",
+        "type": "directional",
+        "color": "#bcd3ff",
+        "intensity": 0.55,
+        "position": [
+          8,
+          3,
+          7
+        ],
+        "target": [
+          0,
+          1.6,
+          0
+        ]
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#fff1dc",
+        "intensity": 0.45,
+        "position": [
+          3,
+          6,
+          -8
+        ],
+        "target": [
+          0,
+          1.6,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.22,
+        "offset": 1.2
+      },
+      "grain": {
+        "amount": 0,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 18,
+      "near": 4,
+      "far": 60,
+      "drift": {
+        "amp": 0.03,
+        "speed": 0.3,
+        "orbit": 0
+      }
+    },
+    "text": {
+      "font": "voxel5x7",
+      "weight": 400,
+      "color": "#2b2d42",
+      "height": 0.378
+    },
+    "sfx": {
+      "enter": "click",
+      "exit": "tick",
+      "move": "clack",
+      "land": "click",
+      "emphasis": "blip",
+      "ui": "blip",
+      "bed": "pad"
+    },
+    "motion": [
+      "Everything moves in whole-cube steps: positions snap to integer cells; pushes and extrusions advance one cube at a time with a tiny outBack overshoot.",
+      "Models assemble cube by cube: each cube flies from a seeded scattered start to its home cell with a per-cube seeded delay, a decaying spin and a small overshoot (closed-form, no state).",
+      "Builds can also rise layer by layer (order 'y') or sweep left-to-right (order 'x', used for text so it types on).",
+      "State changes (recolours) ripple across a model as a fast diagonal wave of split-flap flips or scale dips.",
+      "Camera: narrow FOV three-quarter view, slow orbit of a few degrees per beat, small push-ins; never cut."
+    ]
+  },
+  "scene": {
+    "id": "08-voxel",
+    "style": "voxel",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "build",
+        "t": 0,
+        "dur": 1.4
+      },
+      {
+        "id": "noise",
+        "t": 0.9,
+        "dur": 2.7
+      },
+      {
+        "id": "remove",
+        "t": 3.7,
+        "dur": 2.8
+      },
+      {
+        "id": "repeat",
+        "t": 6.6,
+        "dur": 3.6
+      },
+      {
+        "id": "resolve",
+        "t": 10.25,
+        "dur": 2.2
+      },
+      {
+        "id": "caption",
+        "t": 12.55,
+        "dur": 2.45
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -4.346,
+          6.814,
+          17.433
+        ],
+        "target": [
+          0,
+          2,
+          0
+        ],
+        "fov": 18
+      },
+      {
+        "t": 1.6,
+        "pos": [
+          -2.671,
+          6.258,
+          16.867
+        ],
+        "target": [
+          0,
+          2,
+          0
+        ],
+        "fov": 18,
+        "ease": "outCubic"
+      },
+      {
+        "t": 3.7,
+        "pos": [
+          -1.461,
+          5.869,
+          16.695
+        ],
+        "target": [
+          0,
+          2,
+          0
+        ],
+        "fov": 18,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 6.6,
+        "pos": [
+          0.289,
+          5.824,
+          16.562
+        ],
+        "target": [
+          0,
+          2,
+          0
+        ],
+        "fov": 18,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 10.2,
+        "pos": [
+          1.427,
+          5.779,
+          16.307
+        ],
+        "target": [
+          0,
+          2,
+          0
+        ],
+        "fov": 18,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.2,
+        "pos": [
+          -6.209,
+          5.41,
+          14.874
+        ],
+        "target": [
+          -0.2,
+          2,
+          0
+        ],
+        "fov": 18,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          -4.338,
+          5.869,
+          16.188
+        ],
+        "target": [
+          0,
+          2,
+          0
+        ],
+        "fov": 18,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [
+      {
+        "id": "studio",
+        "primitive": "procedural",
+        "factory": "studio",
+        "procedural": "seamless cyclorama sweep (floor curving into a back wall), pale warm grey",
+        "params": {
+          "width": 40,
+          "depth": 22,
+          "height": 14,
+          "radius": 4
+        },
+        "position": [
+          0,
+          0,
+          6.8
+        ]
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 10.6,
+        "gain": 0.16,
+        "root": 196,
+        "chord": [
+          0,
+          7,
+          12,
+          14
+        ],
+        "attack": 1,
+        "release": 1.4,
+        "brightness": 900
+      },
+      {
+        "t": 10.15,
+        "type": "pad",
+        "dur": 4.85,
+        "gain": 0.17,
+        "root": 196,
+        "chord": [
+          0,
+          4,
+          7,
+          12,
+          16
+        ],
+        "attack": 0.5,
+        "release": 1.4,
+        "brightness": 1500
+      },
+      {
+        "t": 0.12,
+        "type": "clack",
+        "gain": 0.588,
+        "pitch": 0.8,
+        "pan": -0.3
+      },
+      {
+        "t": 0.25,
+        "type": "clack",
+        "gain": 0.588,
+        "pitch": 0.92,
+        "pan": -0.3
+      },
+      {
+        "t": 0.38,
+        "type": "clack",
+        "gain": 0.588,
+        "pitch": 1.04,
+        "pan": -0.3
+      },
+      {
+        "t": 0.55,
+        "type": "click",
+        "gain": 0.42,
+        "pitch": 0.8,
+        "pan": -0.5
+      },
+      {
+        "t": 0.635,
+        "type": "click",
+        "gain": 0.49,
+        "pitch": 1.04,
+        "pan": -0.07142857142857145
+      },
+      {
+        "t": 0.72,
+        "type": "click",
+        "gain": 0.56,
+        "pitch": 1.28,
+        "pan": 0.3571428571428571
+      },
+      {
+        "t": 0.805,
+        "type": "click",
+        "gain": 0.42,
+        "pitch": 0.92,
+        "pan": -0.2142857142857143
+      },
+      {
+        "t": 0.89,
+        "type": "click",
+        "gain": 0.49,
+        "pitch": 1.1600000000000001,
+        "pan": 0.2142857142857143
+      },
+      {
+        "t": 0.975,
+        "type": "click",
+        "gain": 0.56,
+        "pitch": 0.8,
+        "pan": -0.35714285714285715
+      },
+      {
+        "t": 1.06,
+        "type": "click",
+        "gain": 0.42,
+        "pitch": 1.04,
+        "pan": 0.0714285714285714
+      },
+      {
+        "t": 1.145,
+        "type": "click",
+        "gain": 0.49,
+        "pitch": 1.28,
+        "pan": -0.5
+      },
+      {
+        "t": 1.23,
+        "type": "click",
+        "gain": 0.56,
+        "pitch": 0.92,
+        "pan": -0.07142857142857145
+      },
+      {
+        "t": 1.32,
+        "type": "clack",
+        "gain": 0.56,
+        "pitch": 1.3,
+        "pan": -0.2
+      },
+      {
+        "t": 0.81,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.035,
+        "gain": 0.224,
+        "pitch": 1.5,
+        "pan": 0.45
+      },
+      {
+        "t": 0.91,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.035,
+        "gain": 0.224,
+        "pitch": 1.62,
+        "pan": 0.45
+      },
+      {
+        "t": 1.01,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.035,
+        "gain": 0.224,
+        "pitch": 1.5,
+        "pan": 0.45
+      },
+      {
+        "t": 1.11,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.035,
+        "gain": 0.224,
+        "pitch": 1.62,
+        "pan": 0.45
+      },
+      {
+        "t": 1.21,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.035,
+        "gain": 0.224,
+        "pitch": 1.5,
+        "pan": 0.45
+      },
+      {
+        "t": 1.31,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.035,
+        "gain": 0.224,
+        "pitch": 1.62,
+        "pan": 0.45
+      },
+      {
+        "t": 1.32,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.06,
+        "gain": 0.42,
+        "pitch": 0.75
+      },
+      {
+        "t": 3.35,
+        "type": "tick",
+        "gain": 0.35,
+        "pitch": 0.9
+      },
+      {
+        "t": 4.02,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.06,
+        "gain": 0.42,
+        "pitch": 0.75
+      },
+      {
+        "t": 6.2,
+        "type": "tick",
+        "gain": 0.35,
+        "pitch": 0.9
+      },
+      {
+        "t": 6.92,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.06,
+        "gain": 0.42,
+        "pitch": 0.75
+      },
+      {
+        "t": 9.95,
+        "type": "tick",
+        "gain": 0.35,
+        "pitch": 0.9
+      },
+      {
+        "t": 10.57,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.06,
+        "gain": 0.42,
+        "pitch": 0.75
+      },
+      {
+        "t": 12.2,
+        "type": "tick",
+        "gain": 0.35,
+        "pitch": 0.9
+      },
+      {
+        "t": 4.2,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.07,
+        "gain": 0.448,
+        "pitch": 0.7,
+        "pan": 0.4
+      },
+      {
+        "t": 4.32,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 1.1,
+        "pan": -0.35
+      },
+      {
+        "t": 4.9,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.07,
+        "gain": 0.448,
+        "pitch": 0.7260085311123343,
+        "pan": 0.4
+      },
+      {
+        "t": 5.02,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 1.1,
+        "pan": -0.35
+      },
+      {
+        "t": 5.6,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.07,
+        "gain": 0.448,
+        "pitch": 0.7529834103541276,
+        "pan": 0.4
+      },
+      {
+        "t": 5.72,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 1.1,
+        "pan": -0.35
+      },
+      {
+        "t": 6.9,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 0.7809605424330806,
+        "pan": 0.4
+      },
+      {
+        "t": 7.17,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 0.8099771660979038,
+        "pan": 0.4
+      },
+      {
+        "t": 7.431,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 0.8400719037046721,
+        "pan": 0.4
+      },
+      {
+        "t": 7.682,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 0.8712848126248163,
+        "pan": 0.4
+      },
+      {
+        "t": 7.924,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 0.9036574385631834,
+        "pan": 0.4
+      },
+      {
+        "t": 8.156,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 0.9372328708571305,
+        "pan": 0.4
+      },
+      {
+        "t": 8.379,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 0.9720557998302592,
+        "pan": 0.4
+      },
+      {
+        "t": 8.593,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 1.0081725762771312,
+        "pan": 0.4
+      },
+      {
+        "t": 8.797,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 1.0456312731581399,
+        "pan": 0.4
+      },
+      {
+        "t": 8.992,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 1.0844817495866588,
+        "pan": 0.4
+      },
+      {
+        "t": 9.178,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 1.1247757171936354,
+        "pan": 0.4
+      },
+      {
+        "t": 9.354,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 1.1665668089579622,
+        "pan": 0.4
+      },
+      {
+        "t": 9.521,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 1.2099106505942476,
+        "pan": 0.4
+      },
+      {
+        "t": 9.679,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 1.254864934592998,
+        "pan": 0.4
+      },
+      {
+        "t": 9.827,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 1.3014894970117687,
+        "pan": 0.4
+      },
+      {
+        "t": 9.966,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 1.349846397119493,
+        "pan": 0.4
+      },
+      {
+        "t": 10.095,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.045,
+        "gain": 0.28,
+        "pitch": 1.4,
+        "pan": 0.4
+      },
+      {
+        "t": 10.25,
+        "type": "blip",
+        "notes": [
+          0,
+          4,
+          7,
+          12
+        ],
+        "dur": 0.075,
+        "gain": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "t": 10.61,
+        "type": "clack",
+        "gain": 0.63,
+        "pitch": 0.75,
+        "pan": -0.25
+      },
+      {
+        "t": 10.74,
+        "type": "clack",
+        "gain": 0.63,
+        "pitch": 0.67,
+        "pan": -0.25
+      },
+      {
+        "t": 10.88,
+        "type": "thud",
+        "gain": 0.56,
+        "pitch": 1.3
+      },
+      {
+        "t": 12.850000000000001,
+        "type": "blip",
+        "notes": [
+          0,
+          7,
+          12
+        ],
+        "dur": 0.07,
+        "gain": 0.448,
+        "pitch": 0.75
+      },
+      {
+        "t": 13.100000000000001,
+        "type": "chime",
+        "sparkle": true,
+        "dur": 2,
+        "gain": 0.42
+      }
+    ],
+    "duck": [],
+    "notes": "Canvas = one InstancedMesh: 32x24 picture pixels extruded per RELIEF (extra cubes start coincident at z=0 and step out in whole cubes) + a 2-deep wood frame ring. Colour at step k = lerp(noise_k, blockAverage_k(target), 1-(1-k/20)^5); per-pixel step switches along a diagonal wave with a split-flap flip (steps 1-3) or a scale dip (4-20). All AO is recomputed from snapped cube positions each frame."
+  }
+}

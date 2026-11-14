@@ -1,0 +1,25 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 7 old file(s): RUN.txt t1.2.png t10.4.png t12.6.png t14.6.png t4.4.png t7.2.png
+check-frames run: 2026-11-14 05:23:16 UTC
+times: 1.2, 4.4, 7.2, 10.4, 12.6, 14.6
+newest code edit: 2026-11-13 23:09:30 UTC (cardboard-stop-motion/spec.js)
+mp4: 28-cardboard-stop-motion.mp4 2026-11-13 23:10:52 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1.2       renders/checks/t1.2.png       5ccaf7d18bb0ba4095c83e057d3ca1f2  SAME
+4.4       renders/checks/t4.4.png       2134ea7097d851150dadb66755bb6cec  SAME
+7.2       renders/checks/t7.2.png       a2a5801a63d60624de0551c08cc663b4  SAME
+10.4      renders/checks/t10.4.png      be00d9c94bae7c14f9242629177ac0de  SAME
+12.6      renders/checks/t12.6.png      d62b4dab01aa92c44f1f58c9226fa9dd  SAME
+14.6      renders/checks/t14.6.png      7b79c7264bc9c9d6cd3824c14c26e5cd  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 38.3 dB, frame 438)
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -21.4 dB, max -4.8 dB
+audio 28-cardboard-stop-motion.mp4: mean -21.5 dB, max -5.0 dB  (5.4 MB)
+deep t=1.2: hash 95ba75fb mean 57.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.4: hash f8b87a8b mean 57.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.2: hash a308e5b5 mean 57.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.4: hash 1d9dfe80 mean 57.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.6: hash 5652950a mean 58.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.6: hash d31f75d2 mean 58.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

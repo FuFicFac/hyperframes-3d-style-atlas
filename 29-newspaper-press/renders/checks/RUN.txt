@@ -1,0 +1,14 @@
+check-frames run: 2026-11-14 05:24:01 UTC
+times: 1.2, 3.2, 4.3, 6.2, 10.3, 14
+newest code edit: 2026-11-14 00:53:09 UTC (newspaper-press/style.js)
+mp4: 29-newspaper-press.mp4 2026-11-14 01:06:34 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.3 dB, frame 420)
+  frame 36 (t=1.200): 37.7 dB
+  frame 96 (t=3.200): 38.0 dB
+  frame 129 (t=4.300): 40.6 dB
+  frame 186 (t=6.200): 40.6 dB
+  frame 309 (t=10.300): 38.3 dB
+  frame 420 (t=14.000): 37.3 dB
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

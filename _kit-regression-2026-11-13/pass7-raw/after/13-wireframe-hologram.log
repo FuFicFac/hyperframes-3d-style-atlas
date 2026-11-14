@@ -1,0 +1,38 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 13 old file(s): RUN.txt t0.9.png t1.5.png t10.9.png t12.55.png t14.2.png t2.6.png t4.05.png t5.6.png t5.png t7.7.png t8.3.png t9.png
+check-frames run: 2026-11-14 04:34:06 UTC
+times: 0.9, 1.5, 2.6, 4.05, 5, 5.6, 7.7, 8.3, 9, 10.9, 12.55, 14.2
+newest code edit: 2026-11-13 18:38:42 UTC (wireframe-hologram/style.js)
+mp4: 13-wireframe-hologram.mp4 2026-11-13 16:03:10 UTC
+kit last changed: 2026-11-14 04:24:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+0.9       renders/checks/t0.9.png       01d6b2bcc66d547bf0f2c8984e519e0d  SAME
+1.5       renders/checks/t1.5.png       b44d19490358347abdad2d1e95df67a2  SAME
+2.6       renders/checks/t2.6.png       7e7281156c8709860479b49138589cbe  SAME
+4.05      renders/checks/t4.05.png      99f71f4014445637c332dba207db4404  SAME
+5         renders/checks/t5.png         ced8d68652c5e73692c76c874ef73c12  SAME
+5.6       renders/checks/t5.6.png       b9df9fabe20749b32e0f6c4052812398  SAME
+7.7       renders/checks/t7.7.png       76ecc09729a916e51966ba1a8c64da00  SAME
+8.3       renders/checks/t8.3.png       f4308a0bc6046fef481abd4a2cbc25f4  SAME
+9         renders/checks/t9.png         b073221d45780bd14571d54a07b937a1  SAME
+10.9      renders/checks/t10.9.png      eba5564577cd81430fef0cb3603be823  SAME
+12.55     renders/checks/t12.55.png     bb7534f65a0622ce2d362f5d28842a70  SAME
+14.2      renders/checks/t14.2.png      6fd9e474c0dc31cf5e9d0c257ea9d54c  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 32.5 dB, frame 327)
+determinism: OK (12 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -21.4 dB, max -5.5 dB
+audio 13-wireframe-hologram.mp4: mean -21.5 dB, max -5.5 dB  (9.6 MB)
+deep t=5: hash 4527f439 mean 23.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9: hash 19a98f94 mean 33.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=0.9: hash 8e3e3e6c mean 23.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.5: hash 1eea1508 mean 21.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.6: hash 51889012 mean 20.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.05: hash 15422c9a mean 20.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5.6: hash c7da8c1a mean 29.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.7: hash e0fac7b0 mean 33.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.3: hash 281a92c8 mean 33.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.9: hash 09d4ec68 mean 31.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.55: hash de648116 mean 31.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.2: hash 0cfd99a9 mean 31.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

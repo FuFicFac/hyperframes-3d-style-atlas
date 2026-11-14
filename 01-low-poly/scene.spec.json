@@ -1,0 +1,1179 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "low-poly",
+    "name": "Low-Poly Miniature",
+    "description": "A faceted miniature world: noise-displaced flat-shaded terrain with height colour bands and per-face jitter, cone trees, chipped rocks, puffy faceted clouds, a sea of tilted facets, warm key light and soft haze.",
+    "palette": {
+      "skyTop": "#a9cfd0",
+      "skyHorizon": "#e3e9d9",
+      "bg": "#e3e9d9",
+      "ink": "#2a2833",
+      "paper": "#fff6e6",
+      "paperShade": "#efe0c6",
+      "sand": "#e9cf98",
+      "meadow": "#8fb069",
+      "grass": "#6f9d5c",
+      "moss": "#a6ae63",
+      "ochre": "#d6a65f",
+      "clay": "#c98552",
+      "rock": "#8d8078",
+      "snow": "#fbf4ea",
+      "water": "#4aa3a8",
+      "waterDeep": "#2f7f8e",
+      "foliage": "#3e7d57",
+      "foliageLight": "#5d9a58",
+      "trunk": "#7b5238",
+      "cloud": "#fffaf3",
+      "primary": "#e0344e",
+      "secondary": "#2f7f8e",
+      "accent": "#f5bf3c"
+    },
+    "world": {
+      "background": "#e3e9d9",
+      "sky": {
+        "top": "#a3cbcf",
+        "horizon": "#e3e9d9",
+        "horizonAt": 0.5,
+        "bottom": "#e3e9d9"
+      },
+      "fog": {
+        "color": "#e3e9d9",
+        "near": 36,
+        "far": 115
+      },
+      "environment": null,
+      "toneMapping": "neutral",
+      "exposure": 1.05,
+      "shadowType": "pcf"
+    },
+    "materials": {
+      "terrain": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.95,
+        "metalness": 0,
+        "flatShading": true
+      },
+      "facet": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "flatShading": true
+      },
+      "water": {
+        "type": "standard",
+        "baseColor": "#4aa3a8",
+        "roughness": 0.3,
+        "metalness": 0,
+        "flatShading": true
+      },
+      "cloud": {
+        "type": "standard",
+        "baseColor": "#fffaf3",
+        "roughness": 1,
+        "metalness": 0,
+        "flatShading": true,
+        "emission": {
+          "color": "#fff3e0",
+          "strength": 0.18
+        }
+      },
+      "hero": {
+        "type": "standard",
+        "baseColor": "#e0344e",
+        "roughness": 0.6,
+        "metalness": 0,
+        "flatShading": true
+      },
+      "marker": {
+        "type": "standard",
+        "baseColor": "#f5bf3c",
+        "roughness": 0.7,
+        "metalness": 0,
+        "flatShading": true
+      },
+      "pole": {
+        "type": "standard",
+        "baseColor": "#5a4a40",
+        "roughness": 0.9,
+        "metalness": 0,
+        "flatShading": true
+      },
+      "glow": {
+        "type": "standard",
+        "baseColor": "#ffd25e",
+        "roughness": 0.4,
+        "metalness": 0,
+        "flatShading": true,
+        "emission": {
+          "color": "#ffb92e",
+          "strength": 6
+        }
+      }
+    },
+    "terrainColors": {
+      "bands": [
+        [
+          0,
+          "#e9cf98"
+        ],
+        [
+          0.12,
+          "#8fb069"
+        ],
+        [
+          0.32,
+          "#6f9d5c"
+        ],
+        [
+          0.52,
+          "#a6ae63"
+        ],
+        [
+          0.68,
+          "#d6a65f"
+        ],
+        [
+          0.84,
+          "#c98552"
+        ]
+      ],
+      "steepColor": "#8d8078",
+      "steepAt": 0.72,
+      "jitter": {
+        "lightness": 0.045,
+        "hue": 0.012
+      }
+    },
+    "lights": [
+      {
+        "id": "ambient",
+        "type": "hemisphere",
+        "color": "#dfeef0",
+        "groundColor": "#8a6a4e",
+        "intensity": 1.15
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#ffe2b8",
+        "intensity": 3.1,
+        "position": [
+          -12,
+          18,
+          10
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 2.5,
+          "mapSize": 4096,
+          "extent": 18,
+          "near": 1,
+          "far": 70,
+          "bias": -0.0006,
+          "normalBias": 0.04
+        }
+      },
+      {
+        "id": "fill",
+        "type": "directional",
+        "color": "#bcd7ff",
+        "intensity": 0.45,
+        "position": [
+          10,
+          6,
+          8
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#ffd1a3",
+        "intensity": 0.8,
+        "position": [
+          4,
+          7,
+          -14
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.55,
+        "radius": 0.45,
+        "threshold": 2.6
+      },
+      "tiltShift": {
+        "focus": 0.42,
+        "range": 0.32,
+        "blur": 2.5
+      },
+      "vignette": {
+        "darkness": 0.28,
+        "offset": 1.15
+      },
+      "grain": {
+        "amount": 0.015,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 32,
+      "near": 0.3,
+      "far": 160,
+      "drift": {
+        "amp": 0.12,
+        "speed": 0.35,
+        "orbit": 0.012
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 800,
+      "color": "#2a2833",
+      "height": 0.5
+    },
+    "banner": {
+      "paper": "#fff6e6",
+      "paperShade": "#efe0c6",
+      "fold": "#d9c6a4",
+      "chip": "#e0344e",
+      "chipShade": "#b92a3c",
+      "chipText": "#fff6e6",
+      "ink": "#2a2833",
+      "letterSpacing": 4
+    },
+    "sfx": {
+      "enter": "pop",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "thud",
+      "emphasis": "chime",
+      "ui": "paper",
+      "bed": "pad"
+    },
+    "motion": [
+      "Props grow up out of the ground with a slight overshoot (spring / outBack, ~0.5 s), staggered by a seeded delay.",
+      "Water facets bob and clouds drift slowly and continuously; nothing is ever fully still.",
+      "Labels are flat paper banners with a numbered octagon chip; they unfold left-to-right (outBack) and fold away upward.",
+      "Movement across terrain is a sequence of discrete hops (parabolic arcs) that leave small flags or a dotted trail.",
+      "Camera: establish wide and high, follow the hero at a three-quarter angle, settle wide; a slow constant orbit adds life."
+    ]
+  },
+  "scene": {
+    "id": "01-low-poly",
+    "style": "low-poly",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "intro",
+        "t": 0,
+        "dur": 1.5
+      },
+      {
+        "id": "start",
+        "t": 1.4,
+        "dur": 2.5
+      },
+      {
+        "id": "measure",
+        "t": 3.9,
+        "dur": 2.1
+      },
+      {
+        "id": "step",
+        "t": 6,
+        "dur": 2.7
+      },
+      {
+        "id": "repeat",
+        "t": 8.7,
+        "dur": 3
+      },
+      {
+        "id": "trained",
+        "t": 11.7,
+        "dur": 3.3
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          12.5,
+          10.5,
+          16.5
+        ],
+        "target": [
+          1.2,
+          1.8,
+          -0.8
+        ],
+        "fov": 32
+      },
+      {
+        "t": 1.6,
+        "pos": [
+          12.5,
+          10.2,
+          15
+        ],
+        "target": [
+          2.2,
+          2.6,
+          -1
+        ],
+        "fov": 32,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 4.2,
+        "pos": [
+          12.5,
+          9.5,
+          11.5
+        ],
+        "target": [
+          3.4,
+          4,
+          -1.2
+        ],
+        "fov": 32,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 6.2,
+        "pos": [
+          11,
+          9,
+          12
+        ],
+        "target": [
+          3,
+          3.6,
+          -0.8
+        ],
+        "fov": 32,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 8.8,
+        "pos": [
+          4.5,
+          8.5,
+          15
+        ],
+        "target": [
+          0,
+          1.8,
+          1.5
+        ],
+        "fov": 32,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 11.6,
+        "pos": [
+          -1,
+          8.6,
+          15.5
+        ],
+        "target": [
+          -3,
+          2.3,
+          1.6
+        ],
+        "fov": 32,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          -0.4,
+          8.4,
+          14.6
+        ],
+        "target": [
+          -2.6,
+          1.7,
+          0.9
+        ],
+        "fov": 32,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [
+      {
+        "id": "terrain",
+        "primitive": "procedural",
+        "factory": "terrain",
+        "procedural": "flat-shaded displaced grid (heightField spec in LANDSCAPE), per-face colour bands",
+        "params": {
+          "width": 34,
+          "depth": 26,
+          "segX": 58,
+          "segZ": 44,
+          "seed": 3,
+          "jitter": 0.32,
+          "waterLevel": 0,
+          "field": {
+            "offset": 0.7,
+            "terms": [
+              {
+                "type": "bowl",
+                "c": [
+                  -3.5,
+                  2
+                ],
+                "k": [
+                  0.05,
+                  0.085
+                ],
+                "max": 2.4
+              },
+              {
+                "type": "gauss",
+                "c": [
+                  6.5,
+                  -3.5
+                ],
+                "amp": 2.6,
+                "sigma": [
+                  3.2,
+                  2.6
+                ]
+              },
+              {
+                "type": "ridge",
+                "a": [
+                  -12,
+                  -8.5
+                ],
+                "b": [
+                  9,
+                  -9
+                ],
+                "amp": 2.4,
+                "width": 2.2
+              },
+              {
+                "type": "gauss",
+                "c": [
+                  -10.5,
+                  -4
+                ],
+                "amp": 1.6,
+                "sigma": [
+                  2.5,
+                  2.5
+                ]
+              },
+              {
+                "type": "gauss",
+                "c": [
+                  10,
+                  5.5
+                ],
+                "amp": 1,
+                "sigma": [
+                  2.2,
+                  2
+                ]
+              }
+            ],
+            "noise": {
+              "amp": 0.28,
+              "scale": 2.6,
+              "octaves": 3,
+              "seed": 7
+            },
+            "island": {
+              "rx": 15.5,
+              "rz": 11.5,
+              "edge": 0.5,
+              "drop": 4
+            }
+          }
+        }
+      },
+      {
+        "id": "sea",
+        "primitive": "procedural",
+        "factory": "water",
+        "procedural": "faceted bobbing sea plane",
+        "params": {
+          "size": 96,
+          "segments": 48,
+          "level": 0,
+          "amp": 0.07,
+          "seed": 5
+        }
+      },
+      {
+        "id": "seaFar",
+        "primitive": "procedural",
+        "factory": "water",
+        "procedural": "coarse outer sea ring (under the near sea) reaching past the fog",
+        "params": {
+          "size": 260,
+          "segments": 44,
+          "level": -0.06,
+          "amp": 0.1,
+          "seed": 6
+        }
+      },
+      {
+        "id": "ball",
+        "primitive": "procedural",
+        "factory": "hero",
+        "procedural": "faceted icosphere (detail 1), coral",
+        "params": {
+          "r": 0.42,
+          "seed": 12
+        }
+      },
+      {
+        "id": "arrow",
+        "primitive": "procedural",
+        "factory": "arrow",
+        "procedural": "flat extruded arrow lying on the slope",
+        "params": {
+          "length": 2.2,
+          "width": 0.75,
+          "color": "#fff6e6"
+        },
+        "anim": [
+          {
+            "prop": "scale",
+            "beat": "measure",
+            "offset": 0.55,
+            "dur": 0.6,
+            "from": [
+              0.001,
+              1,
+              1
+            ],
+            "to": [
+              1,
+              1,
+              1
+            ],
+            "ease": "outBack"
+          },
+          {
+            "prop": "scale",
+            "beat": "step",
+            "offset": 0,
+            "dur": 0.3,
+            "from": [
+              1,
+              1,
+              1
+            ],
+            "to": [
+              0.001,
+              1,
+              1
+            ],
+            "ease": "inCubic"
+          }
+        ]
+      },
+      {
+        "id": "ringA",
+        "primitive": "procedural",
+        "factory": "ring",
+        "procedural": "flat 10-sided ring",
+        "params": {
+          "r": 1,
+          "width": 0.12,
+          "color": "#fff6e6"
+        }
+      },
+      {
+        "id": "ringB",
+        "primitive": "procedural",
+        "factory": "ring",
+        "procedural": "flat 10-sided ring",
+        "params": {
+          "r": 1,
+          "width": 0.12,
+          "color": "#fff6e6"
+        }
+      },
+      {
+        "id": "beacon",
+        "primitive": "procedural",
+        "factory": "beacon",
+        "procedural": "rock cairn + pole + flag + glowing octahedron",
+        "params": {
+          "seed": 8,
+          "height": 2.8
+        },
+        "anim": [
+          {
+            "prop": "scale",
+            "beat": "trained",
+            "offset": 0.35,
+            "dur": 0.7,
+            "from": 0,
+            "to": 1,
+            "ease": "outBack"
+          }
+        ]
+      },
+      {
+        "id": "cloud1",
+        "primitive": "procedural",
+        "factory": "cloud",
+        "procedural": "3-5 faceted icosphere puffs",
+        "params": {
+          "seed": 1,
+          "size": 1.6,
+          "drift": [
+            0.22,
+            0,
+            0
+          ]
+        },
+        "position": [
+          -13,
+          6.5,
+          -12
+        ]
+      },
+      {
+        "id": "cloud2",
+        "primitive": "procedural",
+        "factory": "cloud",
+        "procedural": "3-5 faceted icosphere puffs",
+        "params": {
+          "seed": 2,
+          "size": 1.2,
+          "drift": [
+            0.18,
+            0,
+            0
+          ]
+        },
+        "position": [
+          1,
+          7,
+          -15
+        ]
+      },
+      {
+        "id": "cloud3",
+        "primitive": "procedural",
+        "factory": "cloud",
+        "procedural": "3-5 faceted icosphere puffs",
+        "params": {
+          "seed": 3,
+          "size": 1.4,
+          "drift": [
+            0.25,
+            0,
+            0
+          ]
+        },
+        "position": [
+          12,
+          5.5,
+          -9
+        ]
+      },
+      {
+        "id": "cloud4",
+        "primitive": "procedural",
+        "factory": "cloud",
+        "procedural": "3-5 faceted icosphere puffs",
+        "params": {
+          "seed": 4,
+          "size": 1.1,
+          "drift": [
+            0.2,
+            0,
+            0
+          ]
+        },
+        "position": [
+          -17,
+          5.5,
+          2
+        ]
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 12.2,
+        "gain": 0.2,
+        "root": 174.6,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "attack": 1.2,
+        "release": 1.5,
+        "brightness": 650
+      },
+      {
+        "t": 11.5,
+        "type": "pad",
+        "dur": 3.6,
+        "gain": 0.2,
+        "root": 196,
+        "chord": [
+          0,
+          4,
+          7,
+          12,
+          19
+        ],
+        "attack": 0.6,
+        "release": 1.4,
+        "brightness": 900
+      },
+      {
+        "t": 0,
+        "type": "rumble",
+        "dur": 1.5,
+        "gain": 0.45
+      },
+      {
+        "t": 0.05,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.2,
+        "gain": 0.35
+      },
+      {
+        "t": 0.45,
+        "type": "pop",
+        "gain": 0.28,
+        "pitch": 1.1,
+        "pan": -0.5
+      },
+      {
+        "t": 0.7,
+        "type": "pop",
+        "gain": 0.28,
+        "pitch": 1.2200000000000002,
+        "pan": 0.3
+      },
+      {
+        "t": 0.95,
+        "type": "pop",
+        "gain": 0.28,
+        "pitch": 1.34,
+        "pan": -0.2
+      },
+      {
+        "t": 1.25,
+        "type": "pop",
+        "gain": 0.28,
+        "pitch": 1.46,
+        "pan": 0.55
+      },
+      {
+        "t": 1.55,
+        "type": "pop",
+        "gain": 0.28,
+        "pitch": 1.58,
+        "pan": 0
+      },
+      {
+        "t": 1.4,
+        "type": "paper",
+        "fold": true,
+        "dur": 0.45,
+        "gain": 0.55,
+        "pan": -0.45
+      },
+      {
+        "t": 3.9,
+        "type": "paper",
+        "fold": true,
+        "dur": 0.45,
+        "gain": 0.55,
+        "pan": -0.45
+      },
+      {
+        "t": 6,
+        "type": "paper",
+        "fold": true,
+        "dur": 0.45,
+        "gain": 0.55,
+        "pan": -0.45
+      },
+      {
+        "t": 8.7,
+        "type": "paper",
+        "fold": true,
+        "dur": 0.45,
+        "gain": 0.55,
+        "pan": -0.45
+      },
+      {
+        "t": 12.649999999999999,
+        "type": "paper",
+        "fold": true,
+        "dur": 0.45,
+        "gain": 0.55,
+        "pan": -0.45
+      },
+      {
+        "t": 1.7999999999999998,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.4,
+        "gain": 0.3,
+        "pan": 0.3
+      },
+      {
+        "t": 2.10452,
+        "type": "thud",
+        "gain": 0.85,
+        "pan": 0.3
+      },
+      {
+        "t": 2.3609999999999998,
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 1.35,
+        "pan": 0.3
+      },
+      {
+        "t": 4.1,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.07,
+        "gain": 0.35
+      },
+      {
+        "t": 4.4,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.07,
+        "gain": 0.3,
+        "pitch": 1.12
+      },
+      {
+        "t": 4.45,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.5,
+        "gain": 0.3
+      },
+      {
+        "t": 4.9,
+        "type": "click",
+        "gain": 0.35
+      },
+      {
+        "t": 6.3,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 1.4
+      },
+      {
+        "t": 7.1499999999999995,
+        "type": "thud",
+        "gain": 0.6,
+        "pitch": 1.2,
+        "pan": -0.15
+      },
+      {
+        "t": 7.209999999999999,
+        "type": "pop",
+        "gain": 0.45,
+        "pitch": 1.5,
+        "pan": -0.15
+      },
+      {
+        "t": 7.45,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 1.3499999999999999
+      },
+      {
+        "t": 8.25,
+        "type": "thud",
+        "gain": 0.6,
+        "pitch": 1.24,
+        "pan": -0.15
+      },
+      {
+        "t": 8.31,
+        "type": "pop",
+        "gain": 0.45,
+        "pitch": 1.43,
+        "pan": -0.15
+      },
+      {
+        "t": 8.85,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 1.2999999999999998
+      },
+      {
+        "t": 9.35,
+        "type": "thud",
+        "gain": 0.4,
+        "pitch": 1.28,
+        "pan": -0.15
+      },
+      {
+        "t": 9.41,
+        "type": "pop",
+        "gain": 0.3,
+        "pitch": 1.3599999999999999,
+        "pan": -0.15
+      },
+      {
+        "t": 9.4,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 1.25
+      },
+      {
+        "t": 9.860000000000001,
+        "type": "thud",
+        "gain": 0.4,
+        "pitch": 1.3199999999999998,
+        "pan": -0.15
+      },
+      {
+        "t": 9.920000000000002,
+        "type": "pop",
+        "gain": 0.3,
+        "pitch": 1.29,
+        "pan": -0.15
+      },
+      {
+        "t": 9.91,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 1.2
+      },
+      {
+        "t": 10.33,
+        "type": "thud",
+        "gain": 0.4,
+        "pitch": 1.3599999999999999,
+        "pan": -0.15
+      },
+      {
+        "t": 10.39,
+        "type": "pop",
+        "gain": 0.3,
+        "pitch": 1.22,
+        "pan": -0.15
+      },
+      {
+        "t": 10.379999999999999,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 1.15
+      },
+      {
+        "t": 10.76,
+        "type": "thud",
+        "gain": 0.4,
+        "pitch": 1.4,
+        "pan": -0.15
+      },
+      {
+        "t": 10.82,
+        "type": "pop",
+        "gain": 0.3,
+        "pitch": 1.15,
+        "pan": -0.15
+      },
+      {
+        "t": 10.81,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 1.0999999999999999
+      },
+      {
+        "t": 11.17,
+        "type": "thud",
+        "gain": 0.4,
+        "pitch": 1.44,
+        "pan": -0.15
+      },
+      {
+        "t": 11.23,
+        "type": "pop",
+        "gain": 0.3,
+        "pitch": 1.08,
+        "pan": -0.15
+      },
+      {
+        "t": 11.219999999999999,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 1.0499999999999998
+      },
+      {
+        "t": 11.559999999999999,
+        "type": "thud",
+        "gain": 0.4,
+        "pitch": 1.48,
+        "pan": -0.15
+      },
+      {
+        "t": 11.62,
+        "type": "pop",
+        "gain": 0.3,
+        "pitch": 1.01,
+        "pan": -0.15
+      },
+      {
+        "t": 9.4,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.45,
+        "gain": 0.25,
+        "pan": -0.4
+      },
+      {
+        "t": 10.85,
+        "type": "riser",
+        "dur": 1.2,
+        "gain": 0.3
+      },
+      {
+        "t": 12.049999999999999,
+        "type": "pop",
+        "gain": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "t": 12.08,
+        "type": "thud",
+        "gain": 0.6,
+        "pitch": 0.85
+      },
+      {
+        "t": 12.2,
+        "type": "chime",
+        "sparkle": true,
+        "dur": 2.2,
+        "gain": 0.4,
+        "pitch": 1
+      },
+      {
+        "t": 12.2,
+        "type": "pop",
+        "gain": 0.3,
+        "pitch": 1.6,
+        "pan": -0.3,
+        "seed": 90
+      },
+      {
+        "t": 12.27,
+        "type": "pop",
+        "gain": 0.3,
+        "pitch": 1.8,
+        "pan": 0.3,
+        "seed": 91
+      },
+      {
+        "t": 12.35,
+        "type": "pop",
+        "gain": 0.3,
+        "pitch": 2,
+        "pan": -0.1,
+        "seed": 92
+      },
+      {
+        "t": 12.44,
+        "type": "pop",
+        "gain": 0.3,
+        "pitch": 2.2,
+        "pan": 0.2,
+        "seed": 93
+      },
+      {
+        "t": 12.299999999999999,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.9,
+        "gain": 0.22,
+        "pitch": 0.75,
+        "seed": 80
+      },
+      {
+        "t": 13,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.9,
+        "gain": 0.22,
+        "pitch": 0.83,
+        "seed": 81
+      },
+      {
+        "t": 13.7,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.9,
+        "gain": 0.22,
+        "pitch": 0.91,
+        "seed": 82
+      },
+      {
+        "t": 14.399999999999999,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.9,
+        "gain": 0.22,
+        "pitch": 0.99,
+        "seed": 83
+      }
+    ],
+    "duck": [],
+    "notes": "Ball path = momentum gradient descent on LANDSCAPE.field without noise (DESCENT), hops per HOPS with parabolic arcs; ball y uses the faceted surface height. Labels are screen-pinned banners (LABELS/LABEL_LAYOUT)."
+  }
+}

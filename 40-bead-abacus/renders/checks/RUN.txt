@@ -1,0 +1,14 @@
+check-frames run: 2026-11-14 05:31:27 UTC
+times: 1.5, 4.4, 7.9, 9.6, 12.4, 14.5
+newest code edit: 2026-11-14 01:15:25 UTC (bead-abacus/style.js)
+mp4: 40-bead-abacus.mp4 2026-11-14 01:17:25 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.2 dB, frame 435)
+  frame 45 (t=1.500): 38.5 dB
+  frame 132 (t=4.400): 38.8 dB
+  frame 237 (t=7.900): 38.5 dB
+  frame 288 (t=9.600): 38.4 dB
+  frame 372 (t=12.400): 37.2 dB
+  frame 435 (t=14.500): 37.2 dB
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

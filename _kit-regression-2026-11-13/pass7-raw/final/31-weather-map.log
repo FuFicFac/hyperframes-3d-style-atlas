@@ -1,0 +1,23 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 6 old file(s): RUN.txt t1.5.png t10.8.png t14.8.png t4.5.png t7.5.png
+check-frames run: 2026-11-14 05:25:28 UTC
+times: 1.5, 4.5, 7.5, 10.8, 14.8
+newest code edit: 2026-11-13 23:40:35 UTC (weather-map/weather.js)
+mp4: 31-weather-map.mp4 2026-11-13 23:42:45 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1.5       renders/checks/t1.5.png       7bfbfa094c0869ff24ceb6944cac0734  SAME
+4.5       renders/checks/t4.5.png       d492f84f3f6e4b0bfc35c4f54b6ce01c  SAME
+7.5       renders/checks/t7.5.png       4c7f54e2fdefda24ea9e9c1d9bf7870d  SAME
+10.8      renders/checks/t10.8.png      3563e0b60e9bec1c2bb5b72f509cd39f  SAME
+14.8      renders/checks/t14.8.png      3463763c5947898b281552757aa9ef83  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.7 dB, frame 225)
+determinism: OK (5 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -19.7 dB, max -5.6 dB
+audio 31-weather-map.mp4: mean -19.7 dB, max -5.6 dB  (9.6 MB)
+deep t=1.5: hash f1bb4ebd mean 100.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.5: hash 909f9d4e mean 107.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.5: hash 728f7061 mean 110.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.8: hash 5d2be8b8 mean 112.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.8: hash 2beab638 mean 109.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

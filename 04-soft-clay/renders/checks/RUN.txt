@@ -1,0 +1,17 @@
+check-frames run: 2026-11-14 05:03:59 UTC
+times: 1.6, 3.5, 5, 7.3, 9.25, 10.4, 11.1, 12.6, 14
+newest code edit: 2026-11-13 14:43:28 UTC (soft-clay/style.js)
+mp4: 04-soft-clay.mp4 2026-11-13 14:19:50 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.4 dB, frame 48)
+  frame 48 (t=1.600): 37.4 dB
+  frame 105 (t=3.500): 38.6 dB
+  frame 150 (t=5.000): 38.5 dB
+  frame 219 (t=7.300): 38.8 dB
+  frame 312 (t=10.400): 38.8 dB
+  frame 333 (t=11.100): 38.7 dB
+  frame 378 (t=12.600): 38.8 dB
+  frame 420 (t=14.000): 37.9 dB
+determinism: OK (9 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

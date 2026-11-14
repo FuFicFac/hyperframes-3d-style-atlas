@@ -1,0 +1,17 @@
+check-frames run: 2026-11-14 05:14:07 UTC
+times: 0.2, 0.55, 1.6, 3.3, 4.9, 8.8, 10.6, 11.9, 14.0, 14.62
+newest code edit: 2026-11-13 18:38:53 UTC (crt-retro/screen.js)
+mp4: 17-crt-retro.mp4 2026-11-13 16:07:47 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.9 dB, frame 264)
+  frame 6 (t=0.200): 40.9 dB
+  frame 48 (t=1.600): 39.9 dB
+  frame 99 (t=3.300): 39.9 dB
+  frame 147 (t=4.900): 39.0 dB
+  frame 264 (t=8.800): 36.9 dB
+  frame 318 (t=10.600): 41.1 dB
+  frame 357 (t=11.900): 39.8 dB
+  frame 420 (t=14.000): 39.1 dB
+determinism: OK (10 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

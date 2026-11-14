@@ -1,0 +1,17 @@
+check-frames run: 2026-11-14 05:29:15 UTC
+times: 0.7, 1.6, 3.9, 6.2, 8.9, 9.3, 11.4, 12.7, 14.5
+newest code edit: 2026-11-14 01:14:41 UTC (domino-run/spec.js)
+mp4: 37-domino-run.mp4 2026-11-14 01:15:55 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.9 dB, frame 381)
+  frame 21 (t=0.700): 38.9 dB
+  frame 48 (t=1.600): 38.9 dB
+  frame 117 (t=3.900): 37.2 dB
+  frame 186 (t=6.200): 36.6 dB
+  frame 267 (t=8.900): 35.9 dB
+  frame 279 (t=9.300): 35.8 dB
+  frame 342 (t=11.400): 35.5 dB
+  frame 381 (t=12.700): 34.9 dB
+  frame 435 (t=14.500): 35.0 dB
+determinism: OK (9 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

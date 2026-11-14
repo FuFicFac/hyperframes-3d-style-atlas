@@ -1,0 +1,7807 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "circuit-board",
+    "name": "Circuit Board",
+    "description": "A macro photograph of a real printed circuit board: deep matte-satin solder mask over copper pours, glossy gold traces and pads, white silkscreen lettering, black chips with gull-wing pin rows, tiny resistors, capacitors and LEDs, shallow depth of field and one low raking light. Signals travel as bright pulses along octilinear traces through vias; each part powers up when a pulse reaches it (LED lights, chip label glows, a silkscreen caption prints itself) while the camera tracks the pulse at macro scale.",
+    "palettes": {
+      "green": {
+        "maskBare": "#0a3d22",
+        "maskCopper": "#16603a",
+        "maskTrace": "#1c7044",
+        "silk": "#efeee6",
+        "edge": "#a7a26a",
+        "metal": "#e7bf6a",
+        "pulse": "#8ff3ff",
+        "led": "#ff3b2e",
+        "glow": "#9ff6ff"
+      },
+      "blue": {
+        "maskBare": "#0c2350",
+        "maskCopper": "#173a7c",
+        "maskTrace": "#1d4590",
+        "silk": "#f2f2ec",
+        "edge": "#a7a26a",
+        "metal": "#e7bf6a",
+        "pulse": "#ffd27a",
+        "led": "#ffb12e",
+        "glow": "#ffe2a6"
+      },
+      "black": {
+        "maskBare": "#0b0c0d",
+        "maskCopper": "#17191b",
+        "maskTrace": "#1d2023",
+        "silk": "#f0efe8",
+        "edge": "#8f8a5c",
+        "metal": "#e7bf6a",
+        "pulse": "#9fffc2",
+        "led": "#36ff7a",
+        "glow": "#b9ffd4"
+      },
+      "red": {
+        "maskBare": "#4a0d0b",
+        "maskCopper": "#7a1714",
+        "maskTrace": "#8a1d19",
+        "silk": "#f3f1ea",
+        "edge": "#a7a26a",
+        "metal": "#d9d9dc",
+        "pulse": "#9fe9ff",
+        "led": "#ffffff",
+        "glow": "#c9f2ff"
+      },
+      "purple": {
+        "maskBare": "#24123f",
+        "maskCopper": "#3c1f6a",
+        "maskTrace": "#47267b",
+        "silk": "#f3f1ea",
+        "edge": "#a7a26a",
+        "metal": "#e7bf6a",
+        "pulse": "#a8ffd8",
+        "led": "#46ffb0",
+        "glow": "#c8ffe6"
+      },
+      "copper": {
+        "maskBare": "#0a3d22",
+        "maskCopper": "#16603a",
+        "maskTrace": "#1c7044",
+        "silk": "#efeee6",
+        "edge": "#a7a26a",
+        "metal": "#d98a5c",
+        "pulse": "#ffe08a",
+        "led": "#ffcf3a",
+        "glow": "#fff0b8"
+      }
+    },
+    "palette": {
+      "maskBare": "#0a3d22",
+      "maskCopper": "#16603a",
+      "maskTrace": "#1c7044",
+      "silk": "#efeee6",
+      "edge": "#a7a26a",
+      "metal": "#e7bf6a",
+      "pulse": "#8ff3ff",
+      "led": "#ff3b2e",
+      "glow": "#9ff6ff",
+      "bg": "#0b0c0d",
+      "bench": "#141517",
+      "epoxy": "#161718",
+      "chipInk": "#8d9096",
+      "tin": "#c9ccd1",
+      "ceramic": "#b98f5f",
+      "resistor": "#1b1b1c",
+      "ledBody": "#ece8dc",
+      "ledLens": "#f6efd9",
+      "ink": "#efeee6",
+      "primary": "#16603a",
+      "secondary": "#e7bf6a",
+      "accent": "#8ff3ff"
+    },
+    "world": {
+      "background": "#0b0c0d",
+      "environment": "room",
+      "environmentIntensity": 0.32,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "pcf"
+    },
+    "materials": {
+      "mask": {
+        "type": "physical",
+        "baseColor": "#ffffff",
+        "roughness": 1,
+        "metalness": 0,
+        "clearcoat": 0.45,
+        "clearcoatRoughness": 0.32
+      },
+      "edge": {
+        "type": "standard",
+        "baseColor": "#a7a26a",
+        "roughness": 0.8,
+        "metalness": 0
+      },
+      "metal": {
+        "type": "physical",
+        "baseColor": "#e7bf6a",
+        "roughness": 0.3,
+        "metalness": 1
+      },
+      "tin": {
+        "type": "standard",
+        "baseColor": "#a4a8ae",
+        "roughness": 0.36,
+        "metalness": 1
+      },
+      "epoxy": {
+        "type": "physical",
+        "baseColor": "#0f1011",
+        "roughness": 0.7,
+        "metalness": 0,
+        "clearcoat": 0.08,
+        "clearcoatRoughness": 0.6
+      },
+      "ceramic": {
+        "type": "standard",
+        "baseColor": "#b98f5f",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "resistor": {
+        "type": "standard",
+        "baseColor": "#1b1b1c",
+        "roughness": 0.55,
+        "metalness": 0
+      },
+      "plastic": {
+        "type": "standard",
+        "baseColor": "#111214",
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      "ledBody": {
+        "type": "standard",
+        "baseColor": "#ece8dc",
+        "roughness": 0.45,
+        "metalness": 0
+      },
+      "ledLens": {
+        "type": "physical",
+        "baseColor": "#d8c9b4",
+        "roughness": 0.15,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.05
+      },
+      "bench": {
+        "type": "standard",
+        "baseColor": "#141517",
+        "roughness": 0.85,
+        "metalness": 0
+      },
+      "hole": {
+        "type": "basic",
+        "baseColor": "#050505"
+      }
+    },
+    "lights": [
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#ffeedb",
+        "intensity": 2.6,
+        "position": [
+          -7,
+          1.7,
+          3.2
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 2.5,
+          "mapSize": 4096,
+          "extent": 4,
+          "bias": -0.0003,
+          "normalBias": 0.01
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#cfe0ff",
+        "intensity": 0.55,
+        "position": [
+          6,
+          2.4,
+          -5
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#a9b8c9",
+        "groundColor": "#120f0c",
+        "intensity": 0.45
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.55,
+        "radius": 0.45,
+        "threshold": 2
+      },
+      "vignette": {
+        "darkness": 0.55,
+        "offset": 1.05
+      },
+      "grain": {
+        "amount": 0.01,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 24,
+      "near": 0.05,
+      "far": 60,
+      "drift": {
+        "amp": 0.004,
+        "speed": 0.22
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 600,
+      "color": "#efeee6",
+      "height": 0.12
+    },
+    "sfx": {
+      "enter": "blip",
+      "exit": "whooshOut",
+      "move": "whir",
+      "land": "click",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "A signal is a bright pulse with a short comet tail running along an exposed trace at constant speed; behind it the trace keeps a faint powered glow.",
+      "Traces are octilinear (0/45/90°) with 45° chamfered corners; a via flashes as the pulse dives through it.",
+      "When a pulse reaches a part it powers up: an LED lights and spills colour on the mask, a chip's silkscreen-style label glows, and a small silkscreen caption prints itself left to right.",
+      "The camera is a macro lens: shallow depth of field, low angle, tracking the pulse across the board and settling on each part as it powers up; a final pull-back shows the whole lit path."
+    ],
+    "board": {
+      "w": 6.4,
+      "d": 3.6,
+      "thickness": 0.16,
+      "corner": 0.18,
+      "pxPerMetre": 900,
+      "bumpPerMetre": 420,
+      "bumpScale": 1.6,
+      "pourInset": 0.14,
+      "clearance": 0.035,
+      "decoTraces": 46,
+      "decoWidth": [
+        0.022,
+        0.05
+      ],
+      "mottle": 0.05,
+      "roughness": {
+        "bare": 0.42,
+        "pour": 0.5,
+        "trace": 0.56,
+        "silk": 0.95
+      },
+      "height": {
+        "bare": 0.3,
+        "pour": 0.42,
+        "trace": 0.55,
+        "silk": 0.85
+      },
+      "holes": {
+        "r": 0.11,
+        "ring": 0.2,
+        "inset": 0.3
+      },
+      "fiducial": {
+        "r": 0.05,
+        "clear": 0.11
+      }
+    },
+    "trace": {
+      "width": 0.045,
+      "height": 0.008,
+      "topInset": 0.16,
+      "chamfer": 0.1
+    },
+    "via": {
+      "drill": 0.022,
+      "ring": 0.05
+    },
+    "pad": {
+      "height": 0.006
+    },
+    "pulse": {
+      "tail": 0.42,
+      "intensity": 4.5,
+      "halo": 2.4,
+      "afterglow": 0.16,
+      "speed": 1.7,
+      "light": {
+        "intensity": 0.22,
+        "distance": 0.7,
+        "height": 0.09,
+        "pool": 5
+      },
+      "viaFlash": {
+        "radius": 0.14,
+        "intensity": 3,
+        "dur": 0.35
+      }
+    },
+    "chip": {
+      "pinThickness": 0.01,
+      "pinReach": 0.15,
+      "padOut": 0.11,
+      "padLen": 0.15,
+      "padWidthFrac": 0.55,
+      "corner": 0.015,
+      "labelCap": 0.085,
+      "labelStroke": 0.13,
+      "glow": {
+        "strength": 3.2,
+        "idle": 0
+      }
+    },
+    "passive": {
+      "length": 0.2,
+      "width": 0.125,
+      "height": {
+        "resistor": 0.05,
+        "capacitor": 0.08
+      },
+      "cap": 0.04,
+      "padLen": 0.1,
+      "padWidth": 0.15
+    },
+    "led": {
+      "length": 0.2,
+      "width": 0.125,
+      "body": 0.03,
+      "lens": 0.05,
+      "strength": 1,
+      "light": 0.1
+    },
+    "header": {
+      "pitch": 0.254,
+      "pin": 0.064,
+      "pinHeight": 0.62,
+      "base": 0.25,
+      "pad": 0.17,
+      "drill": 0.1
+    },
+    "silk": {
+      "cap": 0.12,
+      "stroke": 0.15,
+      "color": "#efeee6",
+      "pxPerMetre": 1400,
+      "wipe": 0.55,
+      "edgeGlow": 0.6
+    },
+    "dof": {
+      "aperture": 0.0042,
+      "maxblur": 0.008
+    }
+  },
+  "scene": {
+    "id": "27-circuit-board",
+    "style": "circuit-board",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "input",
+        "t": 0,
+        "dur": 2.15
+      },
+      {
+        "id": "process",
+        "t": 2.15,
+        "dur": 3.2941098814514
+      },
+      {
+        "id": "memory",
+        "t": 5.4441098814514,
+        "dur": 2.8595713749905993
+      },
+      {
+        "id": "output",
+        "t": 8.303681256442,
+        "dur": 3.096318743558001
+      },
+      {
+        "id": "whole",
+        "t": 11.4,
+        "dur": 3.5999999999999996
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.03333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.06667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.1,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.13333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.16667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.2,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.23333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.26667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.3,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.33333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.36667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.4,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.43333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.46667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.5,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.53333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.56667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.6,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.63333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.66667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.7,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.73333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.76667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.8,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.83333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.86667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.9,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.93333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 0.96667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.03333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.06667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.1,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.13333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.16667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.2,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.23333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.26667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.3,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.33333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.36667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.4,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.43333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.46667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.5,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.53333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.56667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.6,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.63333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.66667,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.7,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.73333,
+        "pos": [
+          -1.85331,
+          1.75458,
+          2.85526
+        ],
+        "target": [
+          -2.5,
+          0.05,
+          0.6
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.76667,
+        "pos": [
+          -1.85334,
+          1.75455,
+          2.85525
+        ],
+        "target": [
+          -2.50001,
+          0.05,
+          0.59998
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.8,
+        "pos": [
+          -1.85411,
+          1.75399,
+          2.8548
+        ],
+        "target": [
+          -2.50029,
+          0.04997,
+          0.59957
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.83333,
+        "pos": [
+          -1.85679,
+          1.75198,
+          2.85323
+        ],
+        "target": [
+          -2.50127,
+          0.04985,
+          0.5981
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.86667,
+        "pos": [
+          -1.86236,
+          1.74782,
+          2.84996
+        ],
+        "target": [
+          -2.50331,
+          0.0496,
+          0.59507
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.9,
+        "pos": [
+          -1.8715,
+          1.741,
+          2.84457
+        ],
+        "target": [
+          -2.50665,
+          0.0492,
+          0.59007
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.93333,
+        "pos": [
+          -1.88469,
+          1.73117,
+          2.83675
+        ],
+        "target": [
+          -2.51148,
+          0.04862,
+          0.58287
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 1.96667,
+        "pos": [
+          -1.90218,
+          1.71817,
+          2.82629
+        ],
+        "target": [
+          -2.51788,
+          0.04785,
+          0.57332
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2,
+        "pos": [
+          -1.92402,
+          1.70197,
+          2.81307
+        ],
+        "target": [
+          -2.52588,
+          0.04689,
+          0.56139
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.03333,
+        "pos": [
+          -1.9501,
+          1.68267,
+          2.79707
+        ],
+        "target": [
+          -2.53544,
+          0.04575,
+          0.54713
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.06667,
+        "pos": [
+          -1.98014,
+          1.66052,
+          2.77835
+        ],
+        "target": [
+          -2.54645,
+          0.04443,
+          0.53069
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.1,
+        "pos": [
+          -2.00609,
+          1.63583,
+          2.75702
+        ],
+        "target": [
+          -2.55115,
+          0.04294,
+          0.51228
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.13333,
+        "pos": [
+          -2.02795,
+          1.60902,
+          2.73332
+        ],
+        "target": [
+          -2.54986,
+          0.04133,
+          0.49218
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.16667,
+        "pos": [
+          -2.04692,
+          1.58054,
+          2.70751
+        ],
+        "target": [
+          -2.54419,
+          0.0396,
+          0.47071
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.2,
+        "pos": [
+          -2.062,
+          1.55092,
+          2.67996
+        ],
+        "target": [
+          -2.53357,
+          0.03779,
+          0.44824
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.23333,
+        "pos": [
+          -2.0723,
+          1.5207,
+          2.65109
+        ],
+        "target": [
+          -2.51758,
+          0.03594,
+          0.42515
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.26667,
+        "pos": [
+          -2.07712,
+          1.49041,
+          2.62138
+        ],
+        "target": [
+          -2.49602,
+          0.03406,
+          0.40185
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.3,
+        "pos": [
+          -2.07598,
+          1.4606,
+          2.59136
+        ],
+        "target": [
+          -2.46886,
+          0.03221,
+          0.37876
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.33333,
+        "pos": [
+          -2.06859,
+          1.43178,
+          2.5616
+        ],
+        "target": [
+          -2.4363,
+          0.0304,
+          0.35629
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.36667,
+        "pos": [
+          -2.05489,
+          1.40444,
+          2.53267
+        ],
+        "target": [
+          -2.39869,
+          0.02867,
+          0.33482
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.4,
+        "pos": [
+          -2.03503,
+          1.37902,
+          2.50515
+        ],
+        "target": [
+          -2.35659,
+          0.02706,
+          0.31472
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.43333,
+        "pos": [
+          -2.00937,
+          1.35587,
+          2.47958
+        ],
+        "target": [
+          -2.3107,
+          0.02557,
+          0.29631
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.46667,
+        "pos": [
+          -1.97847,
+          1.33532,
+          2.45645
+        ],
+        "target": [
+          -2.26183,
+          0.02425,
+          0.27987
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.5,
+        "pos": [
+          -1.94302,
+          1.31759,
+          2.43616
+        ],
+        "target": [
+          -2.21088,
+          0.02311,
+          0.26561
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.53333,
+        "pos": [
+          -1.90383,
+          1.30282,
+          2.41903
+        ],
+        "target": [
+          -2.15878,
+          0.02215,
+          0.25368
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.56667,
+        "pos": [
+          -1.86178,
+          1.29103,
+          2.40521
+        ],
+        "target": [
+          -2.10644,
+          0.02138,
+          0.24413
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.6,
+        "pos": [
+          -1.81774,
+          1.28218,
+          2.39473
+        ],
+        "target": [
+          -2.05467,
+          0.0208,
+          0.23693
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.63333,
+        "pos": [
+          -1.77256,
+          1.27605,
+          2.38744
+        ],
+        "target": [
+          -2.00415,
+          0.0204,
+          0.23193
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.66667,
+        "pos": [
+          -1.72695,
+          1.27232,
+          2.38299
+        ],
+        "target": [
+          -1.95529,
+          0.02015,
+          0.2289
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.7,
+        "pos": [
+          -1.68141,
+          1.27053,
+          2.38084
+        ],
+        "target": [
+          -1.90819,
+          0.02003,
+          0.22743
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.73333,
+        "pos": [
+          -1.6362,
+          1.27002,
+          2.38023
+        ],
+        "target": [
+          -1.86253,
+          0.02,
+          0.22702
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.76667,
+        "pos": [
+          -1.59192,
+          1.27,
+          2.37844
+        ],
+        "target": [
+          -1.81823,
+          0.02,
+          0.22523
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.8,
+        "pos": [
+          -1.5601,
+          1.27,
+          2.34662
+        ],
+        "target": [
+          -1.78641,
+          0.02,
+          0.19341
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.83333,
+        "pos": [
+          -1.52828,
+          1.27,
+          2.3148
+        ],
+        "target": [
+          -1.75459,
+          0.02,
+          0.16159
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.86667,
+        "pos": [
+          -1.49646,
+          1.27,
+          2.28298
+        ],
+        "target": [
+          -1.72277,
+          0.02,
+          0.12977
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.9,
+        "pos": [
+          -1.49369,
+          1.27,
+          2.23912
+        ],
+        "target": [
+          -1.72,
+          0.02,
+          0.08592
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.93333,
+        "pos": [
+          -1.49369,
+          1.27,
+          2.19412
+        ],
+        "target": [
+          -1.72,
+          0.02,
+          0.04092
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 2.96667,
+        "pos": [
+          -1.49365,
+          1.27008,
+          2.14922
+        ],
+        "target": [
+          -1.71989,
+          0.02,
+          -0.00401
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3,
+        "pos": [
+          -1.4796,
+          1.27118,
+          2.11115
+        ],
+        "target": [
+          -1.70498,
+          0.02005,
+          -0.04243
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.03333,
+        "pos": [
+          -1.44627,
+          1.27454,
+          2.08363
+        ],
+        "target": [
+          -1.66897,
+          0.02019,
+          -0.07101
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.06667,
+        "pos": [
+          -1.41187,
+          1.28116,
+          2.06062
+        ],
+        "target": [
+          -1.62931,
+          0.02046,
+          -0.09609
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.1,
+        "pos": [
+          -1.37658,
+          1.29175,
+          2.04345
+        ],
+        "target": [
+          -1.58558,
+          0.02089,
+          -0.1165
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.13333,
+        "pos": [
+          -1.3408,
+          1.30681,
+          2.03317
+        ],
+        "target": [
+          -1.53779,
+          0.0215,
+          -0.13125
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.16667,
+        "pos": [
+          -1.30506,
+          1.32663,
+          2.03057
+        ],
+        "target": [
+          -1.48624,
+          0.0223,
+          -0.13949
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.2,
+        "pos": [
+          -1.27003,
+          1.3513,
+          2.0361
+        ],
+        "target": [
+          -1.43151,
+          0.02329,
+          -0.14057
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.23333,
+        "pos": [
+          -1.23069,
+          1.38075,
+          2.06373
+        ],
+        "target": [
+          -1.36863,
+          0.02447,
+          -0.12027
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.26667,
+        "pos": [
+          -1.18885,
+          1.41474,
+          2.11062
+        ],
+        "target": [
+          -1.29961,
+          0.02583,
+          -0.08107
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.3,
+        "pos": [
+          -1.15111,
+          1.45289,
+          2.16198
+        ],
+        "target": [
+          -1.23136,
+          0.02733,
+          -0.03738
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.33333,
+        "pos": [
+          -1.13077,
+          1.49471,
+          2.21676
+        ],
+        "target": [
+          -1.17762,
+          0.02897,
+          0.01012
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.36667,
+        "pos": [
+          -1.13111,
+          1.53957,
+          2.27378
+        ],
+        "target": [
+          -1.14217,
+          0.03071,
+          0.06068
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.4,
+        "pos": [
+          -1.13166,
+          1.58676,
+          2.33189
+        ],
+        "target": [
+          -1.10519,
+          0.03253,
+          0.11342
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.43333,
+        "pos": [
+          -1.13238,
+          1.63547,
+          2.38989
+        ],
+        "target": [
+          -1.06732,
+          0.03439,
+          0.16743
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.46667,
+        "pos": [
+          -1.13322,
+          1.68486,
+          2.4467
+        ],
+        "target": [
+          -1.02924,
+          0.03627,
+          0.22175
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.5,
+        "pos": [
+          -1.1341,
+          1.73402,
+          2.50131
+        ],
+        "target": [
+          -0.99161,
+          0.03812,
+          0.27541
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.53333,
+        "pos": [
+          -1.13494,
+          1.78205,
+          2.55284
+        ],
+        "target": [
+          -0.9551,
+          0.03991,
+          0.32749
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.56667,
+        "pos": [
+          -1.1357,
+          1.82807,
+          2.60057
+        ],
+        "target": [
+          -0.92034,
+          0.04162,
+          0.37706
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.6,
+        "pos": [
+          -1.13631,
+          1.87124,
+          2.64391
+        ],
+        "target": [
+          -0.88792,
+          0.04322,
+          0.4233
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.63333,
+        "pos": [
+          -1.13677,
+          1.91082,
+          2.68244
+        ],
+        "target": [
+          -0.85835,
+          0.04467,
+          0.46546
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.66667,
+        "pos": [
+          -1.13707,
+          1.94615,
+          2.71589
+        ],
+        "target": [
+          -0.83207,
+          0.04596,
+          0.50294
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.7,
+        "pos": [
+          -1.13723,
+          1.97673,
+          2.74414
+        ],
+        "target": [
+          -0.80941,
+          0.04708,
+          0.53526
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.73333,
+        "pos": [
+          -1.13729,
+          2.00222,
+          2.76719
+        ],
+        "target": [
+          -0.79058,
+          0.048,
+          0.56212
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.76667,
+        "pos": [
+          -1.13728,
+          2.02248,
+          2.78519
+        ],
+        "target": [
+          -0.77565,
+          0.04874,
+          0.58341
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.8,
+        "pos": [
+          -1.13724,
+          2.0376,
+          2.79844
+        ],
+        "target": [
+          -0.76454,
+          0.04929,
+          0.59927
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.83333,
+        "pos": [
+          -1.13719,
+          2.04789,
+          2.80738
+        ],
+        "target": [
+          -0.75698,
+          0.04966,
+          0.61005
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.86667,
+        "pos": [
+          -1.13716,
+          2.05397,
+          2.81262
+        ],
+        "target": [
+          -0.75251,
+          0.04988,
+          0.61641
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.9,
+        "pos": [
+          -1.13714,
+          2.05672,
+          2.81499
+        ],
+        "target": [
+          -0.75049,
+          0.04998,
+          0.6193
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.93333,
+        "pos": [
+          -1.13714,
+          2.05738,
+          2.81556
+        ],
+        "target": [
+          -0.75001,
+          0.05,
+          0.61999
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 3.96667,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.03333,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.06667,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.1,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.13333,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.16667,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.2,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.23333,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.26667,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.3,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.33333,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.36667,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.4,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.43333,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.46667,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.5,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.53333,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.56667,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.6,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.63333,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.66667,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.7,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.73333,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.76667,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.8,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.83333,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.86667,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.9,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.93333,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 4.96667,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.03333,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.06667,
+        "pos": [
+          -1.13714,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.1,
+        "pos": [
+          -1.13713,
+          2.05739,
+          2.81556
+        ],
+        "target": [
+          -0.75,
+          0.05,
+          0.62
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.13333,
+        "pos": [
+          -1.13631,
+          2.05692,
+          2.81502
+        ],
+        "target": [
+          -0.74953,
+          0.04998,
+          0.6194
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.16667,
+        "pos": [
+          -1.13217,
+          2.05458,
+          2.8123
+        ],
+        "target": [
+          -0.74718,
+          0.04986,
+          0.61644
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.2,
+        "pos": [
+          -1.1226,
+          2.04915,
+          2.80598
+        ],
+        "target": [
+          -0.74174,
+          0.04959,
+          0.60957
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.23333,
+        "pos": [
+          -1.10606,
+          2.03978,
+          2.79504
+        ],
+        "target": [
+          -0.73233,
+          0.04913,
+          0.5977
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.26667,
+        "pos": [
+          -1.08157,
+          2.02593,
+          2.77875
+        ],
+        "target": [
+          -0.71842,
+          0.04845,
+          0.58014
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.3,
+        "pos": [
+          -1.04865,
+          2.00737,
+          2.75669
+        ],
+        "target": [
+          -0.69974,
+          0.04753,
+          0.55655
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.33333,
+        "pos": [
+          -1.00726,
+          1.98411,
+          2.7287
+        ],
+        "target": [
+          -0.67626,
+          0.04637,
+          0.52692
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.36667,
+        "pos": [
+          -0.95778,
+          1.95641,
+          2.69484
+        ],
+        "target": [
+          -0.64822,
+          0.04499,
+          0.49152
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.4,
+        "pos": [
+          -0.89203,
+          1.92472,
+          2.6554
+        ],
+        "target": [
+          -0.60712,
+          0.04341,
+          0.45086
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.43333,
+        "pos": [
+          -0.81388,
+          1.88966,
+          2.61085
+        ],
+        "target": [
+          -0.55641,
+          0.04165,
+          0.40566
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.46667,
+        "pos": [
+          -0.7247,
+          1.85195,
+          2.56187
+        ],
+        "target": [
+          -0.4969,
+          0.03975,
+          0.3568
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.5,
+        "pos": [
+          -0.62553,
+          1.81243,
+          2.50933
+        ],
+        "target": [
+          -0.42899,
+          0.03774,
+          0.30531
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.53333,
+        "pos": [
+          -0.51779,
+          1.77198,
+          2.45423
+        ],
+        "target": [
+          -0.35341,
+          0.03567,
+          0.25228
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.56667,
+        "pos": [
+          -0.40326,
+          1.7315,
+          2.39773
+        ],
+        "target": [
+          -0.2712,
+          0.03359,
+          0.19888
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.6,
+        "pos": [
+          -0.28402,
+          1.69188,
+          2.34107
+        ],
+        "target": [
+          -0.1837,
+          0.03154,
+          0.14626
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.63333,
+        "pos": [
+          -0.16233,
+          1.65396,
+          2.28558
+        ],
+        "target": [
+          -0.09246,
+          0.02957,
+          0.09558
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.66667,
+        "pos": [
+          -0.0406,
+          1.61852,
+          2.23257
+        ],
+        "target": [
+          0.00075,
+          0.02771,
+          0.0479
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.7,
+        "pos": [
+          0.07873,
+          1.58625,
+          2.1833
+        ],
+        "target": [
+          0.09407,
+          0.02601,
+          0.00421
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.73333,
+        "pos": [
+          0.1933,
+          1.55769,
+          2.13891
+        ],
+        "target": [
+          0.18562,
+          0.02449,
+          -0.03466
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.76667,
+        "pos": [
+          0.30095,
+          1.53328,
+          2.10034
+        ],
+        "target": [
+          0.27358,
+          0.02319,
+          -0.06807
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.8,
+        "pos": [
+          0.39984,
+          1.51326,
+          2.0683
+        ],
+        "target": [
+          0.35632,
+          0.02212,
+          -0.09558
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.83333,
+        "pos": [
+          0.48859,
+          1.49771,
+          2.04316
+        ],
+        "target": [
+          0.43254,
+          0.02128,
+          -0.11703
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.86667,
+        "pos": [
+          0.56645,
+          1.48651,
+          2.02489
+        ],
+        "target": [
+          0.50138,
+          0.02068,
+          -0.13252
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.9,
+        "pos": [
+          0.63346,
+          1.47929,
+          2.01306
+        ],
+        "target": [
+          0.56257,
+          0.02029,
+          -0.14252
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.93333,
+        "pos": [
+          0.69063,
+          1.47544,
+          2.00672
+        ],
+        "target": [
+          0.61665,
+          0.02008,
+          -0.14786
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 5.96667,
+        "pos": [
+          0.74017,
+          1.47405,
+          2.00443
+        ],
+        "target": [
+          0.66507,
+          0.02001,
+          -0.14979
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6,
+        "pos": [
+          0.78568,
+          1.4739,
+          2.00418
+        ],
+        "target": [
+          0.71045,
+          0.02,
+          -0.15
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.03333,
+        "pos": [
+          0.83103,
+          1.4741,
+          2.00388
+        ],
+        "target": [
+          0.75565,
+          0.02001,
+          -0.1503
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.06667,
+        "pos": [
+          0.87876,
+          1.47567,
+          2.00144
+        ],
+        "target": [
+          0.80214,
+          0.02009,
+          -0.15268
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.1,
+        "pos": [
+          0.93059,
+          1.47986,
+          1.99493
+        ],
+        "target": [
+          0.85069,
+          0.02031,
+          -0.15903
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.13333,
+        "pos": [
+          0.98122,
+          1.48758,
+          1.96811
+        ],
+        "target": [
+          0.89526,
+          0.02071,
+          -0.18552
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.16667,
+        "pos": [
+          1.03052,
+          1.49944,
+          1.91949
+        ],
+        "target": [
+          0.93527,
+          0.02133,
+          -0.23355
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.2,
+        "pos": [
+          1.08511,
+          1.51579,
+          1.86569
+        ],
+        "target": [
+          0.97709,
+          0.02218,
+          -0.2864
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.23333,
+        "pos": [
+          1.13487,
+          1.53673,
+          1.80326
+        ],
+        "target": [
+          1.01055,
+          0.02327,
+          -0.34735
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.26667,
+        "pos": [
+          1.17128,
+          1.56215,
+          1.72984
+        ],
+        "target": [
+          1.02726,
+          0.02459,
+          -0.4186
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.3,
+        "pos": [
+          1.21349,
+          1.59175,
+          1.6548
+        ],
+        "target": [
+          1.04667,
+          0.02612,
+          -0.49059
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.33333,
+        "pos": [
+          1.26073,
+          1.62506,
+          1.58318
+        ],
+        "target": [
+          1.06843,
+          0.02783,
+          -0.55811
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.36667,
+        "pos": [
+          1.31205,
+          1.66147,
+          1.53902
+        ],
+        "target": [
+          1.09213,
+          0.0297,
+          -0.59699
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.4,
+        "pos": [
+          1.36634,
+          1.70025,
+          1.49121
+        ],
+        "target": [
+          1.11729,
+          0.03168,
+          -0.63826
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.43333,
+        "pos": [
+          1.42239,
+          1.7406,
+          1.44064
+        ],
+        "target": [
+          1.14337,
+          0.03373,
+          -0.68104
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.46667,
+        "pos": [
+          1.47894,
+          1.78164,
+          1.38834
+        ],
+        "target": [
+          1.1698,
+          0.03581,
+          -0.7244
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.5,
+        "pos": [
+          1.5347,
+          1.82246,
+          1.33546
+        ],
+        "target": [
+          1.19601,
+          0.03787,
+          -0.76739
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.53333,
+        "pos": [
+          1.58846,
+          1.86216,
+          1.2832
+        ],
+        "target": [
+          1.22142,
+          0.03988,
+          -0.80907
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.56667,
+        "pos": [
+          1.63907,
+          1.89986,
+          1.2328
+        ],
+        "target": [
+          1.24548,
+          0.04177,
+          -0.84855
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.6,
+        "pos": [
+          1.68552,
+          1.93476,
+          1.1855
+        ],
+        "target": [
+          1.26771,
+          0.04352,
+          -0.88502
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.63333,
+        "pos": [
+          1.72696,
+          1.96616,
+          1.14241
+        ],
+        "target": [
+          1.28767,
+          0.04509,
+          -0.91776
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.66667,
+        "pos": [
+          1.76275,
+          1.99347,
+          1.10452
+        ],
+        "target": [
+          1.30501,
+          0.04646,
+          -0.94619
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.7,
+        "pos": [
+          1.79246,
+          2.01628,
+          1.07256
+        ],
+        "target": [
+          1.31947,
+          0.0476,
+          -0.96992
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.73333,
+        "pos": [
+          1.81592,
+          2.03439,
+          1.047
+        ],
+        "target": [
+          1.33094,
+          0.0485,
+          -0.98874
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.76667,
+        "pos": [
+          1.83323,
+          2.04782,
+          1.02794
+        ],
+        "target": [
+          1.33944,
+          0.04917,
+          -1.00268
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.8,
+        "pos": [
+          1.8448,
+          2.05682,
+          1.01512
+        ],
+        "target": [
+          1.34514,
+          0.04962,
+          -1.01202
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.83333,
+        "pos": [
+          1.8514,
+          2.06196,
+          1.00777
+        ],
+        "target": [
+          1.34839,
+          0.04987,
+          -1.01735
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.86667,
+        "pos": [
+          1.85417,
+          2.06412,
+          1.00468
+        ],
+        "target": [
+          1.34975,
+          0.04998,
+          -1.01959
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.9,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.93333,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 6.96667,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.03333,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.06667,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.1,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.13333,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.16667,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.2,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.23333,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.26667,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.3,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.33333,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.36667,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.4,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.43333,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.46667,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.5,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.53333,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.56667,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.6,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.63333,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.66667,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.7,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.73333,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.76667,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.8,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.83333,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.86667,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.9,
+        "pos": [
+          1.85467,
+          2.06451,
+          1.00412
+        ],
+        "target": [
+          1.35,
+          0.05,
+          -1.02
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.93333,
+        "pos": [
+          1.85469,
+          2.06439,
+          1.00432
+        ],
+        "target": [
+          1.35006,
+          0.04999,
+          -1.01984
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 7.96667,
+        "pos": [
+          1.85484,
+          2.06347,
+          1.00596
+        ],
+        "target": [
+          1.35058,
+          0.04993,
+          -1.01858
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8,
+        "pos": [
+          1.85525,
+          2.06097,
+          1.01036
+        ],
+        "target": [
+          1.35195,
+          0.04977,
+          -1.01519
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.03333,
+        "pos": [
+          1.856,
+          2.05633,
+          1.01852
+        ],
+        "target": [
+          1.35451,
+          0.04947,
+          -1.00889
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.06667,
+        "pos": [
+          1.85715,
+          2.04914,
+          1.03116
+        ],
+        "target": [
+          1.35848,
+          0.049,
+          -0.99912
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.1,
+        "pos": [
+          1.85874,
+          2.03914,
+          1.0487
+        ],
+        "target": [
+          1.364,
+          0.04835,
+          -0.98554
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.13333,
+        "pos": [
+          1.86076,
+          2.02621,
+          1.07131
+        ],
+        "target": [
+          1.37114,
+          0.0475,
+          -0.96798
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.16667,
+        "pos": [
+          1.86317,
+          2.01036,
+          1.09894
+        ],
+        "target": [
+          1.37989,
+          0.04647,
+          -0.94645
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.2,
+        "pos": [
+          1.86594,
+          1.99171,
+          1.13132
+        ],
+        "target": [
+          1.39019,
+          0.04525,
+          -0.9211
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.23333,
+        "pos": [
+          1.869,
+          1.97046,
+          1.16906
+        ],
+        "target": [
+          1.40193,
+          0.04387,
+          -0.89119
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.26667,
+        "pos": [
+          1.87227,
+          1.94692,
+          1.22126
+        ],
+        "target": [
+          1.41494,
+          0.04233,
+          -0.84742
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.3,
+        "pos": [
+          1.87567,
+          1.92145,
+          1.28153
+        ],
+        "target": [
+          1.42902,
+          0.04067,
+          -0.796
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.33333,
+        "pos": [
+          1.87913,
+          1.89449,
+          1.34953
+        ],
+        "target": [
+          1.44394,
+          0.03891,
+          -0.73707
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.36667,
+        "pos": [
+          1.89171,
+          1.8665,
+          1.42088
+        ],
+        "target": [
+          1.46859,
+          0.03707,
+          -0.67479
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.4,
+        "pos": [
+          1.91207,
+          1.83797,
+          1.49533
+        ],
+        "target": [
+          1.50141,
+          0.03521,
+          -0.60922
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.43333,
+        "pos": [
+          1.93625,
+          1.80941,
+          1.5735
+        ],
+        "target": [
+          1.53823,
+          0.03334,
+          -0.53959
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.46667,
+        "pos": [
+          1.96409,
+          1.78134,
+          1.65425
+        ],
+        "target": [
+          1.57866,
+          0.03149,
+          -0.46687
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.5,
+        "pos": [
+          1.99531,
+          1.75424,
+          1.73639
+        ],
+        "target": [
+          1.62217,
+          0.02971,
+          -0.39216
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.53333,
+        "pos": [
+          2.02948,
+          1.72858,
+          1.81864
+        ],
+        "target": [
+          1.66811,
+          0.02803,
+          -0.31663
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.56667,
+        "pos": [
+          2.0661,
+          1.70479,
+          1.89972
+        ],
+        "target": [
+          1.71576,
+          0.02646,
+          -0.24152
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.6,
+        "pos": [
+          2.10459,
+          1.68323,
+          1.97839
+        ],
+        "target": [
+          1.76432,
+          0.02504,
+          -0.16804
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.63333,
+        "pos": [
+          2.14428,
+          1.66421,
+          2.05346
+        ],
+        "target": [
+          1.81297,
+          0.02378,
+          -0.09737
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.66667,
+        "pos": [
+          2.1845,
+          1.64794,
+          2.12388
+        ],
+        "target": [
+          1.8609,
+          0.02271,
+          -0.0306
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.7,
+        "pos": [
+          2.22458,
+          1.63455,
+          2.18876
+        ],
+        "target": [
+          1.90736,
+          0.02182,
+          0.03139
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.73333,
+        "pos": [
+          2.26391,
+          1.62407,
+          2.24748
+        ],
+        "target": [
+          1.9517,
+          0.02113,
+          0.08789
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.76667,
+        "pos": [
+          2.30197,
+          1.6164,
+          2.29973
+        ],
+        "target": [
+          1.99345,
+          0.02062,
+          0.13855
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.8,
+        "pos": [
+          2.33843,
+          1.61131,
+          2.34559
+        ],
+        "target": [
+          2.03236,
+          0.02028,
+          0.18337
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.83333,
+        "pos": [
+          2.37314,
+          1.60843,
+          2.38562
+        ],
+        "target": [
+          2.06846,
+          0.02009,
+          0.22282
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.86667,
+        "pos": [
+          2.40628,
+          1.60724,
+          2.42096
+        ],
+        "target": [
+          2.10217,
+          0.02001,
+          0.25792
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.9,
+        "pos": [
+          2.43835,
+          1.60702,
+          2.45344
+        ],
+        "target": [
+          2.13435,
+          0.02,
+          0.29035
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.93333,
+        "pos": [
+          2.47017,
+          1.60702,
+          2.48526
+        ],
+        "target": [
+          2.16617,
+          0.02,
+          0.32217
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 8.96667,
+        "pos": [
+          2.50199,
+          1.60702,
+          2.51708
+        ],
+        "target": [
+          2.19799,
+          0.02,
+          0.35399
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9,
+        "pos": [
+          2.53381,
+          1.60702,
+          2.5489
+        ],
+        "target": [
+          2.22981,
+          0.02,
+          0.38581
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.03333,
+        "pos": [
+          2.554,
+          1.60702,
+          2.58554
+        ],
+        "target": [
+          2.25,
+          0.02,
+          0.42245
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.06667,
+        "pos": [
+          2.554,
+          1.60702,
+          2.63054
+        ],
+        "target": [
+          2.25,
+          0.02,
+          0.46745
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.1,
+        "pos": [
+          2.554,
+          1.60702,
+          2.67554
+        ],
+        "target": [
+          2.25,
+          0.02,
+          0.51245
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.13333,
+        "pos": [
+          2.554,
+          1.60702,
+          2.72054
+        ],
+        "target": [
+          2.25,
+          0.02,
+          0.55745
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.16667,
+        "pos": [
+          2.554,
+          1.60702,
+          2.76554
+        ],
+        "target": [
+          2.25,
+          0.02,
+          0.60245
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.2,
+        "pos": [
+          2.554,
+          1.60702,
+          2.81054
+        ],
+        "target": [
+          2.25,
+          0.02,
+          0.64745
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.23333,
+        "pos": [
+          2.55392,
+          1.60705,
+          2.85559
+        ],
+        "target": [
+          2.24998,
+          0.02,
+          0.6925
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.26667,
+        "pos": [
+          2.55258,
+          1.60747,
+          2.90146
+        ],
+        "target": [
+          2.24967,
+          0.02004,
+          0.73834
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.3,
+        "pos": [
+          2.54825,
+          1.60885,
+          2.94899
+        ],
+        "target": [
+          2.24867,
+          0.02017,
+          0.78578
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.33333,
+        "pos": [
+          2.53959,
+          1.61161,
+          2.99852
+        ],
+        "target": [
+          2.24667,
+          0.02043,
+          0.83515
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.36667,
+        "pos": [
+          2.52561,
+          1.61606,
+          3.04992
+        ],
+        "target": [
+          2.24345,
+          0.02085,
+          0.88634
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.4,
+        "pos": [
+          2.50569,
+          1.62242,
+          3.10268
+        ],
+        "target": [
+          2.23885,
+          0.02145,
+          0.93891
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.43333,
+        "pos": [
+          2.47948,
+          1.63077,
+          3.15604
+        ],
+        "target": [
+          2.23279,
+          0.02224,
+          0.99219
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.46667,
+        "pos": [
+          2.44693,
+          1.64116,
+          3.209
+        ],
+        "target": [
+          2.22527,
+          0.02323,
+          1.04536
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.5,
+        "pos": [
+          2.40827,
+          1.65351,
+          3.26045
+        ],
+        "target": [
+          2.21632,
+          0.02439,
+          1.09748
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.53333,
+        "pos": [
+          2.36392,
+          1.6677,
+          3.29514
+        ],
+        "target": [
+          2.20604,
+          0.02573,
+          1.13352
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.56667,
+        "pos": [
+          2.3145,
+          1.68353,
+          3.30689
+        ],
+        "target": [
+          2.19456,
+          0.02723,
+          1.14749
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.6,
+        "pos": [
+          2.26083,
+          1.70077,
+          3.31884
+        ],
+        "target": [
+          2.18206,
+          0.02886,
+          1.16271
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.63333,
+        "pos": [
+          2.20382,
+          1.71914,
+          3.33058
+        ],
+        "target": [
+          2.16874,
+          0.0306,
+          1.17893
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.66667,
+        "pos": [
+          2.14449,
+          1.73832,
+          3.34178
+        ],
+        "target": [
+          2.15483,
+          0.03241,
+          1.19586
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.7,
+        "pos": [
+          2.08395,
+          1.75797,
+          3.35212
+        ],
+        "target": [
+          2.14056,
+          0.03427,
+          1.21323
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.73333,
+        "pos": [
+          2.02329,
+          1.77775,
+          3.36139
+        ],
+        "target": [
+          2.1262,
+          0.03615,
+          1.23071
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.76667,
+        "pos": [
+          1.96363,
+          1.7973,
+          3.36944
+        ],
+        "target": [
+          2.11199,
+          0.038,
+          1.24801
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.8,
+        "pos": [
+          1.90602,
+          1.81628,
+          3.3762
+        ],
+        "target": [
+          2.09819,
+          0.0398,
+          1.26481
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.83333,
+        "pos": [
+          1.85145,
+          1.83436,
+          3.38168
+        ],
+        "target": [
+          2.08504,
+          0.04152,
+          1.28082
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.86667,
+        "pos": [
+          1.80081,
+          1.85124,
+          3.38596
+        ],
+        "target": [
+          2.07275,
+          0.04312,
+          1.29578
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.9,
+        "pos": [
+          1.75484,
+          1.86664,
+          3.38916
+        ],
+        "target": [
+          2.06153,
+          0.04458,
+          1.30944
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.93333,
+        "pos": [
+          1.71416,
+          1.88035,
+          3.39146
+        ],
+        "target": [
+          2.05154,
+          0.04589,
+          1.3216
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 9.96667,
+        "pos": [
+          1.6792,
+          1.89219,
+          3.39303
+        ],
+        "target": [
+          2.04291,
+          0.04701,
+          1.33212
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10,
+        "pos": [
+          1.65022,
+          1.90205,
+          3.39404
+        ],
+        "target": [
+          2.03571,
+          0.04795,
+          1.34087
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.03333,
+        "pos": [
+          1.62725,
+          1.90989,
+          3.39466
+        ],
+        "target": [
+          2.02999,
+          0.0487,
+          1.34784
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.06667,
+        "pos": [
+          1.61013,
+          1.91575,
+          3.39501
+        ],
+        "target": [
+          2.02571,
+          0.04926,
+          1.35305
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.1,
+        "pos": [
+          1.59843,
+          1.91977,
+          3.3952
+        ],
+        "target": [
+          2.02277,
+          0.04964,
+          1.35662
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.13333,
+        "pos": [
+          1.59146,
+          1.92216,
+          3.39529
+        ],
+        "target": [
+          2.02102,
+          0.04987,
+          1.35875
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.16667,
+        "pos": [
+          1.58822,
+          1.92328,
+          3.39533
+        ],
+        "target": [
+          2.02021,
+          0.04997,
+          1.35974
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.2,
+        "pos": [
+          1.5874,
+          1.92356,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.35999
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.23333,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.26667,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.3,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.33333,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.36667,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.4,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.43333,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.46667,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.5,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.53333,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.56667,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.6,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.63333,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.66667,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.7,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.73333,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.76667,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.8,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.83333,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.86667,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.9,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.93333,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 10.96667,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.03333,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.06667,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.1,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.13333,
+        "pos": [
+          1.58738,
+          1.92357,
+          3.39533
+        ],
+        "target": [
+          2.02,
+          0.05,
+          1.36
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.16667,
+        "pos": [
+          1.58735,
+          1.92361,
+          3.39537
+        ],
+        "target": [
+          2.01998,
+          0.05,
+          1.35999
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.2,
+        "pos": [
+          1.58668,
+          1.92483,
+          3.39618
+        ],
+        "target": [
+          2.01943,
+          0.04999,
+          1.35964
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.23333,
+        "pos": [
+          1.58424,
+          1.92921,
+          3.39911
+        ],
+        "target": [
+          2.01743,
+          0.04993,
+          1.35838
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.26667,
+        "pos": [
+          1.57906,
+          1.93857,
+          3.40535
+        ],
+        "target": [
+          2.01317,
+          0.04983,
+          1.3557
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.3,
+        "pos": [
+          1.57031,
+          1.95444,
+          3.41591
+        ],
+        "target": [
+          2.00596,
+          0.04964,
+          1.35117
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.33333,
+        "pos": [
+          1.55732,
+          1.97812,
+          3.43162
+        ],
+        "target": [
+          1.99522,
+          0.04937,
+          1.3444
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.36667,
+        "pos": [
+          1.53958,
+          2.01069,
+          3.45312
+        ],
+        "target": [
+          1.98048,
+          0.049,
+          1.33512
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.4,
+        "pos": [
+          1.51675,
+          2.05305,
+          3.4809
+        ],
+        "target": [
+          1.96136,
+          0.04851,
+          1.32309
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.43333,
+        "pos": [
+          1.48863,
+          2.10589,
+          3.51527
+        ],
+        "target": [
+          1.9376,
+          0.04791,
+          1.30814
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.46667,
+        "pos": [
+          1.4552,
+          2.16974,
+          3.55638
+        ],
+        "target": [
+          1.90902,
+          0.04718,
+          1.29015
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.5,
+        "pos": [
+          1.41654,
+          2.24496,
+          3.60423
+        ],
+        "target": [
+          1.87553,
+          0.04633,
+          1.26907
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.53333,
+        "pos": [
+          1.3729,
+          2.33177,
+          3.65868
+        ],
+        "target": [
+          1.83711,
+          0.04536,
+          1.24488
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.56667,
+        "pos": [
+          1.32463,
+          2.43022,
+          3.71944
+        ],
+        "target": [
+          1.79383,
+          0.04426,
+          1.21764
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.6,
+        "pos": [
+          1.27216,
+          2.54026,
+          3.78611
+        ],
+        "target": [
+          1.74582,
+          0.04304,
+          1.18742
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.63333,
+        "pos": [
+          1.21605,
+          2.66167,
+          3.85818
+        ],
+        "target": [
+          1.69328,
+          0.04171,
+          1.15435
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.66667,
+        "pos": [
+          1.15687,
+          2.79412,
+          3.93504
+        ],
+        "target": [
+          1.63646,
+          0.04027,
+          1.11859
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.7,
+        "pos": [
+          1.09528,
+          2.93712,
+          4.016
+        ],
+        "target": [
+          1.57567,
+          0.03872,
+          1.08032
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.73333,
+        "pos": [
+          1.03194,
+          3.09009,
+          4.10032
+        ],
+        "target": [
+          1.51127,
+          0.03709,
+          1.03979
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.76667,
+        "pos": [
+          0.96752,
+          3.25231,
+          4.18719
+        ],
+        "target": [
+          1.44366,
+          0.03537,
+          0.99723
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.8,
+        "pos": [
+          0.90268,
+          3.42294,
+          4.2758
+        ],
+        "target": [
+          1.37326,
+          0.03359,
+          0.95291
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.83333,
+        "pos": [
+          0.83805,
+          3.60102,
+          4.3653
+        ],
+        "target": [
+          1.30054,
+          0.03174,
+          0.90714
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.86667,
+        "pos": [
+          0.77422,
+          3.7855,
+          4.45487
+        ],
+        "target": [
+          1.226,
+          0.02985,
+          0.86022
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.9,
+        "pos": [
+          0.71172,
+          3.97521,
+          4.54371
+        ],
+        "target": [
+          1.15013,
+          0.02792,
+          0.81247
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.93333,
+        "pos": [
+          0.65105,
+          4.16892,
+          4.63104
+        ],
+        "target": [
+          1.07347,
+          0.02598,
+          0.76421
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 11.96667,
+        "pos": [
+          0.59261,
+          4.36528,
+          4.71617
+        ],
+        "target": [
+          0.99653,
+          0.02402,
+          0.71579
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12,
+        "pos": [
+          0.53675,
+          4.56293,
+          4.79844
+        ],
+        "target": [
+          0.91987,
+          0.02208,
+          0.66753
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.03333,
+        "pos": [
+          0.48375,
+          4.76042,
+          4.87729
+        ],
+        "target": [
+          0.844,
+          0.02015,
+          0.61978
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.06667,
+        "pos": [
+          0.43383,
+          4.95629,
+          4.95223
+        ],
+        "target": [
+          0.76946,
+          0.01826,
+          0.57286
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.1,
+        "pos": [
+          0.38713,
+          5.14906,
+          5.02287
+        ],
+        "target": [
+          0.69674,
+          0.01641,
+          0.52709
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.13333,
+        "pos": [
+          0.34375,
+          5.33728,
+          5.08891
+        ],
+        "target": [
+          0.62634,
+          0.01463,
+          0.48277
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.16667,
+        "pos": [
+          0.30374,
+          5.51952,
+          5.15011
+        ],
+        "target": [
+          0.55873,
+          0.01291,
+          0.44021
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.2,
+        "pos": [
+          0.2671,
+          5.6944,
+          5.20636
+        ],
+        "target": [
+          0.49433,
+          0.01128,
+          0.39968
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.23333,
+        "pos": [
+          0.23378,
+          5.86063,
+          5.25759
+        ],
+        "target": [
+          0.43354,
+          0.00973,
+          0.36141
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.26667,
+        "pos": [
+          0.20373,
+          6.017,
+          5.30382
+        ],
+        "target": [
+          0.37672,
+          0.00829,
+          0.32565
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.3,
+        "pos": [
+          0.17686,
+          6.16247,
+          5.34514
+        ],
+        "target": [
+          0.32418,
+          0.00696,
+          0.29258
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.33333,
+        "pos": [
+          0.15305,
+          6.29609,
+          5.38167
+        ],
+        "target": [
+          0.27617,
+          0.00574,
+          0.26236
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.36667,
+        "pos": [
+          0.13219,
+          6.41713,
+          5.4136
+        ],
+        "target": [
+          0.23289,
+          0.00464,
+          0.23512
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.4,
+        "pos": [
+          0.11413,
+          6.52502,
+          5.44114
+        ],
+        "target": [
+          0.19447,
+          0.00367,
+          0.21093
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.43333,
+        "pos": [
+          0.09874,
+          6.61942,
+          5.46452
+        ],
+        "target": [
+          0.16098,
+          0.00282,
+          0.18985
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.46667,
+        "pos": [
+          0.08586,
+          6.70023,
+          5.48402
+        ],
+        "target": [
+          0.1324,
+          0.00209,
+          0.17186
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.5,
+        "pos": [
+          0.07533,
+          6.76759,
+          5.4999
+        ],
+        "target": [
+          0.10864,
+          0.00149,
+          0.15691
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.53333,
+        "pos": [
+          0.06697,
+          6.82189,
+          5.51246
+        ],
+        "target": [
+          0.08952,
+          0.001,
+          0.14488
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.56667,
+        "pos": [
+          0.06059,
+          6.86385,
+          5.52202
+        ],
+        "target": [
+          0.07478,
+          0.00063,
+          0.1356
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.6,
+        "pos": [
+          0.05598,
+          6.89446,
+          5.52891
+        ],
+        "target": [
+          0.06404,
+          0.00036,
+          0.12883
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.63333,
+        "pos": [
+          0.0529,
+          6.91501,
+          5.5335
+        ],
+        "target": [
+          0.05683,
+          0.00017,
+          0.1243
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.66667,
+        "pos": [
+          0.05109,
+          6.92716,
+          5.5362
+        ],
+        "target": [
+          0.05257,
+          0.00007,
+          0.12162
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.7,
+        "pos": [
+          0.05024,
+          6.93286,
+          5.53746
+        ],
+        "target": [
+          0.05057,
+          0.00001,
+          0.12036
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.73333,
+        "pos": [
+          0.05001,
+          6.93443,
+          5.53781
+        ],
+        "target": [
+          0.05002,
+          0,
+          0.12001
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.76667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.8,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.83333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.86667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.9,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.93333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 12.96667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.03333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.06667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.1,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.13333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.16667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.2,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.23333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.26667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.3,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.33333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.36667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.4,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.43333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.46667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.5,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.53333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.56667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.6,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.63333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.66667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.7,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.73333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.76667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.8,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.83333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.86667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.9,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.93333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 13.96667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.03333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.06667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.1,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.13333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.16667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.2,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.23333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.26667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.3,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.33333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.36667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.4,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.43333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.46667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.5,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.53333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.56667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.6,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.63333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.66667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.7,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.73333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.76667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.8,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.83333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.86667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.9,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.93333,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 14.96667,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0.05,
+          6.93449,
+          5.53782
+        ],
+        "target": [
+          0.05,
+          0,
+          0.12
+        ],
+        "fov": 24,
+        "ease": "linear"
+      }
+    ],
+    "objects": [
+      {
+        "id": "bench",
+        "primitive": "procedural",
+        "factory": "bench",
+        "procedural": "dark matte work surface 0.51 m below the board top (out of focus)",
+        "dims": {}
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "root": 55,
+        "chord": [
+          0,
+          7,
+          12,
+          15,
+          19
+        ],
+        "brightness": 650,
+        "attack": 2,
+        "release": 2.5,
+        "gain": 0.85
+      },
+      {
+        "t": 3.3941098814514,
+        "type": "hum",
+        "dur": 11.6058901185486,
+        "gain": 0.05,
+        "seed": 3
+      },
+      {
+        "t": 0.4,
+        "type": "blip",
+        "notes": [
+          0,
+          12
+        ],
+        "dur": 0.06,
+        "pitch": 1.3,
+        "gain": 0.22,
+        "pan": -0.55
+      },
+      {
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "pitch": 1.6,
+        "gain": 0.16,
+        "t": 2.15,
+        "pan": -0.6,
+        "seed": 31
+      },
+      {
+        "type": "whir",
+        "dur": 1.2441098814514002,
+        "hz": 420,
+        "hz2": 760,
+        "grit": 0.08,
+        "gain": 0.07,
+        "t": 2.15,
+        "pan": -0.6,
+        "seed": 32
+      },
+      {
+        "type": "tick",
+        "pitch": 1.4,
+        "gain": 0.2,
+        "t": 2.891267168976781,
+        "pan": -0.43,
+        "seed": 38
+      },
+      {
+        "type": "click",
+        "pitch": 0.9,
+        "gain": 0.3,
+        "t": 3.3941098814514,
+        "pan": -0.33999999999999997,
+        "seed": 45
+      },
+      {
+        "type": "chime",
+        "dur": 1.8,
+        "pitch": 0.6,
+        "gain": 0.16,
+        "t": 3.3941098814514,
+        "pan": -0.33999999999999997,
+        "seed": 46
+      },
+      {
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "pitch": 1.6,
+        "gain": 0.16,
+        "t": 5.4441098814514,
+        "pan": -0.035,
+        "seed": 52
+      },
+      {
+        "type": "whir",
+        "dur": 0.959571374990599,
+        "hz": 420,
+        "hz2": 760,
+        "grit": 0.08,
+        "gain": 0.07,
+        "t": 5.4441098814514,
+        "pan": -0.035,
+        "seed": 53
+      },
+      {
+        "type": "tick",
+        "pitch": 1.4,
+        "gain": 0.2,
+        "t": 5.8441098814514,
+        "pan": 0.1,
+        "seed": 59
+      },
+      {
+        "type": "click",
+        "pitch": 0.9,
+        "gain": 0.3,
+        "t": 6.403681256441999,
+        "pan": 0.24225000000000002,
+        "seed": 66
+      },
+      {
+        "type": "chime",
+        "dur": 1.8,
+        "pitch": 0.75,
+        "gain": 0.16,
+        "t": 6.403681256441999,
+        "pan": 0.24225000000000002,
+        "seed": 67
+      },
+      {
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "pitch": 1.6,
+        "gain": 0.16,
+        "t": 8.303681256442,
+        "pan": 0.36925,
+        "seed": 73
+      },
+      {
+        "type": "whir",
+        "dur": 1.2223795088028293,
+        "hz": 420,
+        "hz2": 760,
+        "grit": 0.08,
+        "gain": 0.07,
+        "t": 8.303681256442,
+        "pan": 0.36925,
+        "seed": 74
+      },
+      {
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "pitch": 1.6,
+        "gain": 0.16,
+        "t": 8.303681256442,
+        "pan": 0.401,
+        "seed": 80
+      },
+      {
+        "type": "whir",
+        "dur": 1.290801452809644,
+        "hz": 420,
+        "hz2": 760,
+        "grit": 0.08,
+        "gain": 0.07,
+        "t": 8.303681256442,
+        "pan": 0.401,
+        "seed": 81
+      },
+      {
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "pitch": 1.6,
+        "gain": 0.16,
+        "t": 8.303681256442,
+        "pan": 0.43275,
+        "seed": 87
+      },
+      {
+        "type": "whir",
+        "dur": 1.3592233968164589,
+        "hz": 420,
+        "hz2": 760,
+        "grit": 0.08,
+        "gain": 0.07,
+        "t": 8.303681256442,
+        "pan": 0.43275,
+        "seed": 88
+      },
+      {
+        "type": "pop",
+        "pitch": 1.3,
+        "gain": 0.32,
+        "t": 9.526060765244829,
+        "pan": 0.475,
+        "seed": 94
+      },
+      {
+        "type": "sparkle",
+        "dur": 0.9,
+        "pitch": 1.2,
+        "gain": 0.07,
+        "t": 9.526060765244829,
+        "pan": 0.475,
+        "seed": 95
+      },
+      {
+        "type": "pop",
+        "pitch": 1.3,
+        "gain": 0.32,
+        "t": 9.594482709251643,
+        "pan": 0.5625,
+        "seed": 101
+      },
+      {
+        "type": "sparkle",
+        "dur": 0.9,
+        "pitch": 1.2,
+        "gain": 0.07,
+        "t": 9.594482709251643,
+        "pan": 0.5625,
+        "seed": 102
+      },
+      {
+        "type": "pop",
+        "pitch": 1.3,
+        "gain": 0.32,
+        "t": 9.662904653258458,
+        "pan": 0.6,
+        "seed": 108
+      },
+      {
+        "type": "sparkle",
+        "dur": 0.9,
+        "pitch": 1.2,
+        "gain": 0.07,
+        "t": 9.662904653258458,
+        "pan": 0.6,
+        "seed": 109
+      },
+      {
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "pitch": 1.6,
+        "gain": 0.07200000000000001,
+        "t": 12,
+        "pan": -0.6,
+        "seed": 115
+      },
+      {
+        "type": "whir",
+        "dur": 0.4939848058704097,
+        "hz": 420,
+        "hz2": 760,
+        "grit": 0.08,
+        "gain": 0.03150000000000001,
+        "t": 12,
+        "pan": -0.6,
+        "seed": 116
+      },
+      {
+        "type": "tick",
+        "pitch": 1.4,
+        "gain": 0.09000000000000001,
+        "t": 12.294326670034899,
+        "pan": -0.43,
+        "seed": 122
+      },
+      {
+        "type": "click",
+        "pitch": 0.9,
+        "gain": 0.135,
+        "t": 12.49398480587041,
+        "pan": -0.33999999999999997,
+        "seed": 129
+      },
+      {
+        "type": "chime",
+        "dur": 1.8,
+        "pitch": 0.6,
+        "gain": 0.07200000000000001,
+        "t": 12.49398480587041,
+        "pan": -0.33999999999999997,
+        "seed": 130
+      },
+      {
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "pitch": 1.6,
+        "gain": 0.07200000000000001,
+        "t": 12.74398480587041,
+        "pan": -0.035,
+        "seed": 136
+      },
+      {
+        "type": "whir",
+        "dur": 0.38100628124626823,
+        "hz": 420,
+        "hz2": 760,
+        "grit": 0.08,
+        "gain": 0.03150000000000001,
+        "t": 12.74398480587041,
+        "pan": -0.035,
+        "seed": 137
+      },
+      {
+        "type": "tick",
+        "pitch": 1.4,
+        "gain": 0.09000000000000001,
+        "t": 12.902808335282174,
+        "pan": 0.1,
+        "seed": 143
+      },
+      {
+        "type": "click",
+        "pitch": 0.9,
+        "gain": 0.135,
+        "t": 13.124991087116678,
+        "pan": 0.24225000000000002,
+        "seed": 150
+      },
+      {
+        "type": "chime",
+        "dur": 1.8,
+        "pitch": 0.75,
+        "gain": 0.07200000000000001,
+        "t": 13.124991087116678,
+        "pan": 0.24225000000000002,
+        "seed": 151
+      },
+      {
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "pitch": 1.6,
+        "gain": 0.064,
+        "t": 13.324991087116677,
+        "pan": 0.36925,
+        "seed": 157
+      },
+      {
+        "type": "whir",
+        "dur": 0.4853565696717119,
+        "hz": 420,
+        "hz2": 760,
+        "grit": 0.08,
+        "gain": 0.028000000000000004,
+        "t": 13.324991087116677,
+        "pan": 0.36925,
+        "seed": 158
+      },
+      {
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "pitch": 1.6,
+        "gain": 0.064,
+        "t": 13.324991087116677,
+        "pan": 0.401,
+        "seed": 164
+      },
+      {
+        "type": "whir",
+        "dur": 0.5125241062626529,
+        "hz": 420,
+        "hz2": 760,
+        "grit": 0.08,
+        "gain": 0.028000000000000004,
+        "t": 13.324991087116677,
+        "pan": 0.401,
+        "seed": 165
+      },
+      {
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "pitch": 1.6,
+        "gain": 0.064,
+        "t": 13.324991087116677,
+        "pan": 0.43275,
+        "seed": 171
+      },
+      {
+        "type": "whir",
+        "dur": 0.5396916428535938,
+        "hz": 420,
+        "hz2": 760,
+        "grit": 0.08,
+        "gain": 0.028000000000000004,
+        "t": 13.324991087116677,
+        "pan": 0.43275,
+        "seed": 172
+      },
+      {
+        "type": "pop",
+        "pitch": 1.3,
+        "gain": 0.128,
+        "t": 13.81034765678839,
+        "pan": 0.475,
+        "seed": 178
+      },
+      {
+        "type": "sparkle",
+        "dur": 0.9,
+        "pitch": 1.2,
+        "gain": 0.028000000000000004,
+        "t": 13.81034765678839,
+        "pan": 0.475,
+        "seed": 179
+      },
+      {
+        "type": "pop",
+        "pitch": 1.3,
+        "gain": 0.128,
+        "t": 13.83751519337933,
+        "pan": 0.5625,
+        "seed": 185
+      },
+      {
+        "type": "sparkle",
+        "dur": 0.9,
+        "pitch": 1.2,
+        "gain": 0.028000000000000004,
+        "t": 13.83751519337933,
+        "pan": 0.5625,
+        "seed": 186
+      },
+      {
+        "type": "pop",
+        "pitch": 1.3,
+        "gain": 0.128,
+        "t": 13.864682729970271,
+        "pan": 0.6,
+        "seed": 192
+      },
+      {
+        "type": "sparkle",
+        "dur": 0.9,
+        "pitch": 1.2,
+        "gain": 0.028000000000000004,
+        "t": 13.864682729970271,
+        "pan": 0.6,
+        "seed": 193
+      },
+      {
+        "t": 3.8441098814514003,
+        "type": "tick",
+        "pitch": 1.8,
+        "gain": 0.08,
+        "pan": -0.2,
+        "seed": 60
+      },
+      {
+        "t": 4.0141098814514,
+        "type": "tick",
+        "pitch": 1.92,
+        "gain": 0.08,
+        "pan": -0.2,
+        "seed": 61
+      },
+      {
+        "t": 4.1841098814514,
+        "type": "tick",
+        "pitch": 2.04,
+        "gain": 0.08,
+        "pan": -0.2,
+        "seed": 62
+      },
+      {
+        "t": 4.3541098814514,
+        "type": "tick",
+        "pitch": 2.16,
+        "gain": 0.08,
+        "pan": -0.2,
+        "seed": 63
+      },
+      {
+        "t": 4.5241098814514,
+        "type": "tick",
+        "pitch": 2.2800000000000002,
+        "gain": 0.08,
+        "pan": -0.2,
+        "seed": 64
+      },
+      {
+        "t": 4.6941098814514,
+        "type": "tick",
+        "pitch": 2.4,
+        "gain": 0.08,
+        "pan": -0.2,
+        "seed": 65
+      },
+      {
+        "t": 0.55,
+        "type": "tick",
+        "pitch": 0.8,
+        "gain": 0.1,
+        "seed": 80
+      },
+      {
+        "t": 3.5441098814514,
+        "type": "tick",
+        "pitch": 0.8,
+        "gain": 0.1,
+        "seed": 81
+      },
+      {
+        "t": 6.553681256441999,
+        "type": "tick",
+        "pitch": 0.8,
+        "gain": 0.1,
+        "seed": 82
+      },
+      {
+        "t": 9.862904653258457,
+        "type": "tick",
+        "pitch": 0.8,
+        "gain": 0.1,
+        "seed": 83
+      },
+      {
+        "t": 12.4,
+        "type": "chime",
+        "dur": 2.8,
+        "pitch": 0.5,
+        "gain": 0.2,
+        "seed": 90
+      },
+      {
+        "t": 12.4,
+        "type": "thud",
+        "dur": 1.4,
+        "pitch": 0.45,
+        "gain": 0.45,
+        "seed": 91
+      },
+      {
+        "t": 11.4,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1.6,
+        "pitch": 0.45,
+        "gain": 0.3,
+        "seed": 92
+      }
+    ],
+    "duck": [],
+    "notes": "Board, parts, traces, pulses and captions are built in scene.js from circuit-board props; layout, routes, pulse plan, camera keys and SCORE come from signals.js. Neutral idea, no numbers, no brands."
+  }
+}

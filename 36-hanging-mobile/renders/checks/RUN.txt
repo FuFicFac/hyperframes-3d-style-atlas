@@ -1,0 +1,13 @@
+check-frames run: 2026-11-14 05:28:45 UTC
+times: 1.5, 4.6, 7.5, 10.8, 14.5
+newest code edit: 2026-11-13 23:45:39 UTC (36-hanging-mobile/scene.config.js)
+mp4: 36-hanging-mobile.mp4 2026-11-13 23:46:33 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 41.1 dB, frame 435)
+  frame 45 (t=1.500): 41.2 dB
+  frame 138 (t=4.600): 41.1 dB
+  frame 225 (t=7.500): 41.3 dB
+  frame 324 (t=10.800): 41.2 dB
+  frame 435 (t=14.500): 41.1 dB
+determinism: OK (5 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

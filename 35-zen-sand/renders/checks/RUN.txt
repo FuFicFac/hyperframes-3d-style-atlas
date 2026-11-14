@@ -1,0 +1,14 @@
+check-frames run: 2026-11-14 05:28:01 UTC
+times: 0.5, 2, 5, 9.6, 12.5, 14.8
+newest code edit: 2026-11-13 23:41:43 UTC (zen-sand/spec.js)
+mp4: 35-zen-sand.mp4 2026-11-13 23:43:27 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.5 dB, frame 15)
+  frame 15 (t=0.500): 36.5 dB
+  frame 60 (t=2.000): 37.7 dB
+  frame 150 (t=5.000): 39.9 dB
+  frame 288 (t=9.600): 39.4 dB
+  frame 375 (t=12.500): 38.6 dB
+  frame 444 (t=14.800): 38.2 dB
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

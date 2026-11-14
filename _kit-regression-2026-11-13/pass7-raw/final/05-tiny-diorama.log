@@ -1,0 +1,29 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 9 old file(s): RUN.txt t0.75.png t11.9.png t14.6.png t2.9.png t4.3.png t5.9.png t6.95.png t9.3.png
+check-frames run: 2026-11-14 05:04:46 UTC
+times: 0.75, 2.9, 4.3, 5.9, 6.95, 9.3, 11.9, 14.6
+newest code edit: 2026-11-13 15:01:22 UTC (05-tiny-diorama/scene.config.js)
+mp4: 05-tiny-diorama.mp4 2026-11-13 15:01:54 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+0.75      renders/checks/t0.75.png      cb8c9211bbda44028a77304c1ff6fa62  SAME
+2.9       renders/checks/t2.9.png       7ebfd4ab66f4c32c2e57c03ad1282c4a  SAME
+4.3       renders/checks/t4.3.png       e9e6656882d63f4e1f3c57bb66169c66  SAME
+5.9       renders/checks/t5.9.png       05ef54f07850617e4d22fa854a448401  SAME
+6.95      renders/checks/t6.95.png      82136f124702ef6b24c3850ed31527ca  SAME
+9.3       renders/checks/t9.3.png       9c28c03ec50779c19e1e4aefec7d42a7  SAME
+11.9      renders/checks/t11.9.png      10c862235a19784cc8cb50eb7e585713  SAME
+14.6      renders/checks/t14.6.png      072feaf3e1a6fcf3c4ad659e5f7767c4  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.7 dB, frame 357)
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -22.1 dB, max -1.1 dB
+audio 05-tiny-diorama.mp4: mean -22.1 dB, max -1.0 dB  (5.3 MB)
+deep t=0.75: hash 51a59c21 mean 196.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.9: hash 26074cd5 mean 191.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.3: hash bc8d75b8 mean 190.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5.9: hash 23341b85 mean 193.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=6.95: hash a3e53861 mean 192 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.3: hash 4d7d9126 mean 190.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=11.9: hash ef99d894 mean 189.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.6: hash 179c407f mean 192.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

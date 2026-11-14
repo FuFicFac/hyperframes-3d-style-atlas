@@ -1,0 +1,14 @@
+check-frames run: 2026-11-14 05:01:20 UTC
+times: 0.7, 2.65, 4.95, 7.35, 10.2, 12.4, 13.3, 14.6
+newest code edit: 2026-11-13 15:37:17 UTC (low-poly/style.js)
+mp4: 01-low-poly.mp4 2026-11-13 14:57:32 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.4 dB, frame 399)
+  frame 21 (t=0.700): 39.2 dB
+  frame 306 (t=10.200): 37.8 dB
+  frame 372 (t=12.400): 37.6 dB
+  frame 399 (t=13.300): 36.4 dB
+  frame 438 (t=14.600): 37.1 dB
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

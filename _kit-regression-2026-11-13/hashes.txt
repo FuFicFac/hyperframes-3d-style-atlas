@@ -1,0 +1,53 @@
+# baseline md5 (decoded pixels), before kit changes
+frame-00-at-0.6s.png 1fc9db98786161b8de9b9b92037c7a05
+frame-01-at-1.5s.png 8ef3af9f4dc6db5401271924d84b8f62
+frame-02-at-3.2s.png b2e45282978fefb08c9bcc16cf35c8eb
+frame-03-at-4.8s.png 073a7fff5580d63d72cdbf799605f7fd
+frame-03-at-13.5s.png 4da392af984a1b4122ef99b8da340e63
+frame-00-at-2.6s.png 700d7b5ae0c248ca81e6743dc2700b25
+frame-01-at-5s.png 9400396939284a3b28bac84a1e5c7d7e
+frame-02-at-8s.png f3516474796777f585a163a31dcb6223
+frame-03-at-14s.png 7c75cb8293c98e11874e89294c64ecb1
+frame-00-at-2.5s.png 7765eafc7fd724a23bdb64295125c365
+frame-01-at-4.5s.png ee9deef7c9f9bc75b5059f6aece73ed3
+frame-02-at-9s.png 25baccd829a844f3469148f0b8771a9d
+frame-00-at-1.5s.png cdbd00cc95c8a3669ac0306f36bc2577
+frame-03-at-14s.png 5f9fac709faa524939b7f6f6fe785293
+frame-01-at-4s.png b2618a65ee14c407167946f667259cc2
+frame-02-at-9.5s.png 2f3887056f7cf288a961e2470c7471fb
+
+# final vs baseline
+00-smoke         0.6s     DIFF 5bb4f7a54e31e5cc387c0a1c466d6ee6
+00-smoke         1.5s     DIFF 4ad519fae5bfd273d2855d8003b19411
+00-smoke         3.2s     DIFF 73f2e2dcfb650ca41f37ca2cb976a7e9
+00-smoke         4.8s     DIFF a3052e66f1cd2b57d2064f7bf2ff5423
+01-low-poly      2.6s     DIFF 97ad2a48983ae600dae00afc330d9edb
+01-low-poly      5s       DIFF eb395f2cf35d7cc49374e91daf1abd8a
+01-low-poly      8s       DIFF 42f46028c5ab2dc87458732ab74e8146
+01-low-poly      13.5s    DIFF 6d529b174f198f1d6b65b4c08f920640
+02-paper-pop-up  2.5s     SAME 7765eafc7fd724a23bdb64295125c365
+02-paper-pop-up  4.5s     SAME ee9deef7c9f9bc75b5059f6aece73ed3
+02-paper-pop-up  9s       SAME 25baccd829a844f3469148f0b8771a9d
+02-paper-pop-up  14s      SAME 7c75cb8293c98e11874e89294c64ecb1
+03-neon-sign     1.5s     DIFF b7f3292da49f95395c8433918d5d183b
+03-neon-sign     4s       DIFF 51081a3346174148b19f6e6e759165be
+03-neon-sign     9.5s     DIFF 268cb4b9802854af862638e46d0f5599
+03-neon-sign     14s      DIFF e0bb06e76e95f80cd2e7a58426f5566b
+
+# pixel diff stats
+00-smoke t=0.6s   diffpx=   1571 (0.076%) max=  9 mean_on_diff=2.92 bbox=(np.int64(654), np.int64(538), np.int64(832), np.int64(615))
+00-smoke t=1.5s   diffpx=   3103 (0.150%) max= 13 mean_on_diff=2.85 bbox=(np.int64(634), np.int64(628), np.int64(1015), np.int64(719))
+00-smoke t=3.2s   diffpx=   9271 (0.447%) max= 14 mean_on_diff=2.67 bbox=(np.int64(281), np.int64(669), np.int64(1258), np.int64(884))
+00-smoke t=4.8s   diffpx=  11468 (0.553%) max= 14 mean_on_diff=2.60 bbox=(np.int64(202), np.int64(629), np.int64(1286), np.int64(946))
+01-low-poly t=2.6s   diffpx=   1499 (0.072%) max= 87 mean_on_diff=2.46 bbox=(np.int64(71), np.int64(23), np.int64(1896), np.int64(1079))
+01-low-poly t=5s     diffpx=     84 (0.004%) max= 85 mean_on_diff=2.56 bbox=(np.int64(37), np.int64(86), np.int64(1423), np.int64(793))
+01-low-poly t=8s     diffpx=     61 (0.003%) max= 63 mean_on_diff=5.18 bbox=(np.int64(89), np.int64(67), np.int64(1748), np.int64(576))
+01-low-poly t=13.5s  diffpx=    945 (0.046%) max= 70 mean_on_diff=1.66 bbox=(np.int64(2), np.int64(88), np.int64(1554), np.int64(1079))
+02-paper-pop-up t=2.5s   diffpx=      0 (0.000%) max=  0 mean_on_diff=0.00 bbox=None
+02-paper-pop-up t=4.5s   diffpx=      0 (0.000%) max=  0 mean_on_diff=0.00 bbox=None
+02-paper-pop-up t=9s     diffpx=      0 (0.000%) max=  0 mean_on_diff=0.00 bbox=None
+02-paper-pop-up t=14s    diffpx=      0 (0.000%) max=  0 mean_on_diff=0.00 bbox=None
+03-neon-sign t=1.5s   diffpx=   1740 (0.084%) max= 71 mean_on_diff=1.10 bbox=(np.int64(189), np.int64(0), np.int64(1668), np.int64(977))
+03-neon-sign t=4s     diffpx=   2368 (0.114%) max= 18 mean_on_diff=1.04 bbox=(np.int64(20), np.int64(0), np.int64(1914), np.int64(1039))
+03-neon-sign t=9.5s   diffpx=    545 (0.026%) max=113 mean_on_diff=1.61 bbox=(np.int64(108), np.int64(112), np.int64(1711), np.int64(1011))
+03-neon-sign t=14s    diffpx=    889 (0.043%) max=142 mean_on_diff=2.00 bbox=(np.int64(18), np.int64(20), np.int64(1770), np.int64(1030))

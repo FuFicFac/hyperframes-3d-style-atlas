@@ -1,0 +1,16 @@
+check-frames run: 2026-11-14 05:24:48 UTC
+times: 0.8, 2.4, 3.6, 6.4, 9.2, 12.2, 13.6, 14.6
+newest code edit: 2026-11-13 23:22:07 UTC (film-projector/style.js)
+mp4: 30-film-projector.mp4 2026-11-13 23:22:37 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 40.1 dB, frame 72)
+  frame 24 (t=0.800): 42.7 dB
+  frame 72 (t=2.400): 40.1 dB
+  frame 108 (t=3.600): 42.5 dB
+  frame 192 (t=6.400): 42.8 dB
+  frame 276 (t=9.200): 42.5 dB
+  frame 366 (t=12.200): 42.6 dB
+  frame 408 (t=13.600): 43.7 dB
+  frame 438 (t=14.600): 43.5 dB
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

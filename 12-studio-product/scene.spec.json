@@ -1,0 +1,957 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "studio-product",
+    "name": "Studio Product",
+    "description": "High-end product commercial: one hero object on a black seamless sweep, procedural softbox/strip-light environment, glossy glass, brushed aluminium and satin ceramic, blurred mirror floor, crisp rim light, slow turntable and light sweeps, ultra-thin callouts.",
+    "palette": {
+      "bg": "#020203",
+      "sweep": "#0c0d10",
+      "floor": "#050506",
+      "glass": "#040507",
+      "aluminium": "#c3c7cd",
+      "ceramic": "#1c1e22",
+      "ceramicLight": "#e8e5df",
+      "gold": "#e0ae5c",
+      "accent": "#2f74ff",
+      "ink": "#f1f1ee",
+      "inkDim": "#8d939c",
+      "line": "#d6d9de",
+      "primary": "#c3c7cd",
+      "secondary": "#1c1e22"
+    },
+    "world": {
+      "background": "#020203",
+      "fog": {
+        "color": "#020203",
+        "near": 9,
+        "far": 26
+      },
+      "environment": null,
+      "toneMapping": "aces",
+      "exposure": 1,
+      "shadowType": "pcf"
+    },
+    "materials": {
+      "glass": {
+        "type": "physical",
+        "baseColor": "#040507",
+        "roughness": 0.18,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.03
+      },
+      "brushedMetal": {
+        "type": "physical",
+        "baseColor": "#c3c7cd",
+        "roughness": 0.32,
+        "metalness": 1
+      },
+      "ceramic": {
+        "type": "physical",
+        "baseColor": "#1c1e22",
+        "roughness": 0.42,
+        "metalness": 0,
+        "clearcoat": 0.35,
+        "clearcoatRoughness": 0.22
+      },
+      "ceramicLight": {
+        "type": "physical",
+        "baseColor": "#e8e5df",
+        "roughness": 0.4,
+        "metalness": 0,
+        "clearcoat": 0.3,
+        "clearcoatRoughness": 0.2
+      },
+      "accent": {
+        "type": "physical",
+        "baseColor": "#2f74ff",
+        "roughness": 0.28,
+        "metalness": 0.6,
+        "clearcoat": 0.6,
+        "clearcoatRoughness": 0.08,
+        "emission": {
+          "color": "#2f74ff",
+          "strength": 0.08
+        }
+      },
+      "gold": {
+        "type": "standard",
+        "baseColor": "#e0ae5c",
+        "roughness": 0.2,
+        "metalness": 1
+      },
+      "floor": {
+        "type": "physical",
+        "baseColor": "#050506",
+        "roughness": 0.5,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff3e6",
+        "intensity": 1.1,
+        "position": [
+          -6.5,
+          4.5,
+          3.5
+        ],
+        "target": [
+          0,
+          0.3,
+          0
+        ],
+        "shadow": {
+          "softness": 8,
+          "mapSize": 2048,
+          "extent": 3.2,
+          "bias": -0.0004,
+          "normalBias": 0.02
+        }
+      },
+      {
+        "id": "top",
+        "type": "directional",
+        "color": "#fff8f0",
+        "intensity": 0.4,
+        "position": [
+          0,
+          9,
+          -1
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rimL",
+        "type": "spot",
+        "color": "#e6eeff",
+        "intensity": 70,
+        "position": [
+          -4.2,
+          3.2,
+          -5.2
+        ],
+        "target": [
+          0,
+          0.4,
+          0
+        ],
+        "angle": 0.42,
+        "penumbra": 0.9,
+        "distance": 30,
+        "decay": 2
+      },
+      {
+        "id": "rimR",
+        "type": "spot",
+        "color": "#e6eeff",
+        "intensity": 90,
+        "position": [
+          5.4,
+          2.6,
+          -5
+        ],
+        "target": [
+          0,
+          0.4,
+          0
+        ],
+        "angle": 0.42,
+        "penumbra": 0.9,
+        "distance": 30,
+        "decay": 2
+      },
+      {
+        "id": "backdrop",
+        "type": "spot",
+        "color": "#cfd6e2",
+        "intensity": 45,
+        "position": [
+          0,
+          7.5,
+          -3
+        ],
+        "target": [
+          0,
+          2.6,
+          -14
+        ],
+        "angle": 0.32,
+        "penumbra": 1,
+        "distance": 40,
+        "decay": 2
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.4,
+        "radius": 0.5,
+        "threshold": 2
+      },
+      "vignette": {
+        "darkness": 0.55,
+        "offset": 1.08
+      },
+      "grain": {
+        "amount": 0.022,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.2,
+      "far": 80,
+      "drift": {
+        "amp": 0.012,
+        "speed": 0.3
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 300,
+      "color": "#f1f1ee",
+      "height": 0.4
+    },
+    "sfx": {
+      "enter": "whoosh",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "thud",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "The hero sits on an invisible turntable: slow constant rotation (≈0.1 rad/s), eased to rest on the final hero angle.",
+      "Light sweeps: a long strip light travels over the top of the set (back horizon → overhead → front) in ~1.3 s; its reflection slides across every glossy face.",
+      "Reveal from black: a thin rim light traces the hero's edge, then the first sweep brings the whole studio up.",
+      "Camera: slow macro arcs (arc keys) and one pull-back reveal; hard cuts between angles on beats; no handheld shake.",
+      "Type: ultra-thin rule + small caps label that draws on (0.45 s), holds, fades; titles are light-weight, widely tracked caps."
+    ],
+    "studio": {
+      "size": 256,
+      "sigma": 0.006,
+      "room": {
+        "w": 26,
+        "h": 14,
+        "d": 26,
+        "color": "#010102"
+      },
+      "panels": [
+        {
+          "id": "top",
+          "kind": "softbox",
+          "size": [
+            6,
+            2.6
+          ],
+          "pos": [
+            0,
+            6.2,
+            -1.6
+          ],
+          "intensity": 1.5,
+          "color": "#fff8f0",
+          "soft": 0.22
+        },
+        {
+          "id": "keyStrip",
+          "kind": "strip",
+          "size": [
+            0.6,
+            6
+          ],
+          "pos": [
+            -7,
+            2.6,
+            3.2
+          ],
+          "intensity": 9,
+          "color": "#fff3e6",
+          "soft": 0.3
+        },
+        {
+          "id": "rimStripR",
+          "kind": "strip",
+          "size": [
+            0.5,
+            6.5
+          ],
+          "pos": [
+            6.5,
+            2.8,
+            -6.5
+          ],
+          "intensity": 12,
+          "color": "#e8f0ff",
+          "soft": 0.3
+        },
+        {
+          "id": "rimStripL",
+          "kind": "strip",
+          "size": [
+            0.4,
+            5.5
+          ],
+          "pos": [
+            -6,
+            2.6,
+            -7.5
+          ],
+          "intensity": 7,
+          "color": "#e8f0ff",
+          "soft": 0.3
+        },
+        {
+          "id": "horizon",
+          "kind": "strip",
+          "size": [
+            18,
+            0.32
+          ],
+          "pos": [
+            0,
+            0.7,
+            -12.5
+          ],
+          "intensity": 5,
+          "color": "#ffffff",
+          "soft": 0.4
+        },
+        {
+          "id": "fill",
+          "kind": "card",
+          "size": [
+            12,
+            3.5
+          ],
+          "pos": [
+            0,
+            1.4,
+            12.5
+          ],
+          "intensity": 0.32,
+          "gradient": [
+            [
+              0,
+              "#000000"
+            ],
+            [
+              0.6,
+              "#7a7d84"
+            ],
+            [
+              1,
+              "#ffffff"
+            ]
+          ]
+        },
+        {
+          "id": "floorBounce",
+          "kind": "card",
+          "size": [
+            16,
+            16
+          ],
+          "pos": [
+            0,
+            -6.8,
+            0
+          ],
+          "intensity": 0.06,
+          "gradient": [
+            [
+              0,
+              "#ffffff"
+            ],
+            [
+              1,
+              "#000000"
+            ]
+          ],
+          "radial": true
+        }
+      ],
+      "sweep": {
+        "size": [
+          20,
+          0.55
+        ],
+        "radius": 9,
+        "from": 0.12,
+        "to": 2.7,
+        "intensity": 16,
+        "color": "#ffffff",
+        "soft": 0.35,
+        "edgeFade": 0.16
+      },
+      "sweepLight": {
+        "intensity": 1.4,
+        "color": "#ffffff"
+      },
+      "quantum": 0.0015
+    },
+    "floor": {
+      "resolution": 0.5,
+      "strength": 0.5,
+      "facing": 0.22,
+      "blur": 4.5,
+      "fade": [
+        1.4,
+        5.5
+      ],
+      "envIntensity": 0.12,
+      "specular": 0.25,
+      "sweep": {
+        "width": 60,
+        "depth": 44,
+        "height": 18,
+        "radius": 9
+      }
+    },
+    "brushed": {
+      "size": 512,
+      "seed": 21,
+      "streaks": 0.32,
+      "fine": 0.35,
+      "perMetre": 1.1,
+      "roughness": [
+        0.22,
+        0.42
+      ],
+      "bump": 0.3,
+      "anisotropy": 0.75
+    },
+    "dof": {
+      "aperture": 0.0011,
+      "maxblur": 0.0045
+    },
+    "glow": {
+      "color": "#2f74ff",
+      "strength": 2.3,
+      "idle": 0
+    },
+    "trace": {
+      "radius": 0.009,
+      "color": "#eef3ff",
+      "intensity": 9,
+      "tail": 0.32
+    },
+    "overlay": {
+      "font": "sans",
+      "titleWeight": 300,
+      "titleTracking": 0.32,
+      "labelWeight": 500,
+      "labelTracking": 0.3,
+      "titleHeight": 0.078,
+      "subHeight": 0.034,
+      "labelHeight": 0.036,
+      "lineWidthPx": 1.6,
+      "dotPx": 4.5,
+      "ringPx": 11,
+      "lineColor": "#d6d9de",
+      "labelColor": "#f1f1ee",
+      "subColor": "#8d939c",
+      "dotColor": "#2f74ff",
+      "drawDur": 0.45,
+      "fadeDur": 0.4,
+      "outDur": 0.45,
+      "rise": 0.012
+    },
+    "turntable": {
+      "speed": 0.1
+    }
+  },
+  "scene": {
+    "id": "12-studio-product",
+    "style": "studio-product",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "reveal",
+        "t": 0,
+        "dur": 3.8
+      },
+      {
+        "id": "neural",
+        "t": 3.8,
+        "dur": 2.8
+      },
+      {
+        "id": "wave",
+        "t": 6.6,
+        "dur": 2.8
+      },
+      {
+        "id": "private",
+        "t": 9.4,
+        "dur": 2.8
+      },
+      {
+        "id": "hero",
+        "t": 12.2,
+        "dur": 2.8
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          3.3,
+          1.5,
+          5.8
+        ],
+        "target": [
+          0,
+          0.18,
+          0
+        ],
+        "fov": 28
+      },
+      {
+        "t": 3.8,
+        "pos": [
+          2.8,
+          1.3,
+          5
+        ],
+        "target": [
+          0,
+          0.2,
+          0
+        ],
+        "fov": 28,
+        "ease": "inOutSine",
+        "path": "linear"
+      },
+      {
+        "t": 3.8,
+        "pos": [
+          1.55,
+          1.3,
+          1.45
+        ],
+        "target": [
+          -0.25,
+          0.42,
+          -0.2
+        ],
+        "fov": 30
+      },
+      {
+        "t": 6.6,
+        "pos": [
+          -0.55,
+          1.22,
+          2
+        ],
+        "target": [
+          -0.2,
+          0.42,
+          -0.2
+        ],
+        "fov": 30,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 6.6,
+        "pos": [
+          0.6,
+          5.9,
+          3.9
+        ],
+        "target": [
+          0,
+          0.1,
+          0.75
+        ],
+        "fov": 30
+      },
+      {
+        "t": 9.399999999999999,
+        "pos": [
+          0.35,
+          5.3,
+          3.4
+        ],
+        "target": [
+          0,
+          0.12,
+          0.7
+        ],
+        "fov": 30,
+        "ease": "inOutSine",
+        "path": "linear"
+      },
+      {
+        "t": 9.4,
+        "pos": [
+          1.3,
+          0.72,
+          3.1
+        ],
+        "target": [
+          0,
+          0.36,
+          0
+        ],
+        "fov": 28
+      },
+      {
+        "t": 12.2,
+        "pos": [
+          3.1,
+          1.25,
+          8.6
+        ],
+        "target": [
+          0,
+          0.3,
+          0
+        ],
+        "fov": 28,
+        "ease": "inOutSine",
+        "path": "linear"
+      },
+      {
+        "t": 12.2,
+        "pos": [
+          4.25,
+          1.8,
+          5.25
+        ],
+        "target": [
+          0,
+          0.15,
+          0
+        ],
+        "fov": 28
+      },
+      {
+        "t": 15,
+        "pos": [
+          3.85,
+          1.62,
+          4.75
+        ],
+        "target": [
+          0,
+          0.17,
+          0
+        ],
+        "fov": 28,
+        "ease": "inOutSine",
+        "path": "linear"
+      }
+    ],
+    "objects": [
+      {
+        "id": "set",
+        "primitive": "procedural",
+        "factory": "sweep",
+        "procedural": "black seamless cyclorama (60x44 m, 9 m cove) whose floor is a blurred planar mirror (half-res mirrored render, 12-tap blur, Fresnel, radial fade 1.4-5.5 m)",
+        "dims": {}
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "root": 55,
+        "chord": [
+          0,
+          7,
+          12,
+          15,
+          19
+        ],
+        "brightness": 420,
+        "attack": 2.5,
+        "release": 3,
+        "gain": 0.6
+      },
+      {
+        "t": 1.75,
+        "type": "pad",
+        "dur": 13.25,
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          10,
+          15
+        ],
+        "brightness": 900,
+        "attack": 3,
+        "release": 3,
+        "gain": 0.2,
+        "seed": 3
+      },
+      {
+        "t": 0.35,
+        "type": "riser",
+        "dur": 1.9,
+        "pitch": 0.55,
+        "gain": 0.22
+      },
+      {
+        "t": 0.35,
+        "type": "sparkle",
+        "dur": 0.9,
+        "gain": 0.08,
+        "pitch": 0.7
+      },
+      {
+        "t": 0.8400000000000001,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.8,
+        "pitch": 0.45,
+        "q": 0.9,
+        "gain": 0.9,
+        "pan": 0
+      },
+      {
+        "t": 2.1,
+        "type": "thud",
+        "dur": 1.5,
+        "pitch": 0.42,
+        "gain": 1
+      },
+      {
+        "t": 2.1,
+        "type": "rumble",
+        "dur": 2.8,
+        "pitch": 0.7,
+        "gain": 0.45
+      },
+      {
+        "t": 2.05,
+        "type": "chime",
+        "dur": 2.4,
+        "pitch": 0.5,
+        "gain": 0.12
+      },
+      {
+        "t": 3.8,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.6,
+        "pitch": 0.6,
+        "gain": 0.35,
+        "seed": 5
+      },
+      {
+        "t": 3.7999999999999994,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 2,
+        "pitch": 0.55,
+        "q": 0.9,
+        "gain": 0.45,
+        "pan": 0.3,
+        "seed": 6
+      },
+      {
+        "t": 4.35,
+        "type": "chime",
+        "dur": 2.6,
+        "pitch": 0.75,
+        "gain": 0.3
+      },
+      {
+        "t": 4.3999999999999995,
+        "type": "sparkle",
+        "dur": 1.1,
+        "gain": 0.14,
+        "pitch": 0.9,
+        "seed": 7
+      },
+      {
+        "t": 4.6,
+        "type": "tick",
+        "gain": 0.22
+      },
+      {
+        "t": 6.6,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.6,
+        "pitch": 0.55,
+        "gain": 0.32,
+        "seed": 8
+      },
+      {
+        "t": 7.119999999999999,
+        "type": "chime",
+        "dur": 1.6,
+        "pitch": 0.8418465362320298,
+        "gain": 0.15,
+        "pan": -0.22000000000000003,
+        "seed": 21
+      },
+      {
+        "t": 6.949999999999999,
+        "type": "chime",
+        "dur": 1.6,
+        "pitch": 0.75,
+        "gain": 0.15,
+        "pan": -0.4,
+        "seed": 20
+      },
+      {
+        "t": 7.289999999999999,
+        "type": "chime",
+        "dur": 1.6,
+        "pitch": 0.9449407874211548,
+        "gain": 0.15,
+        "pan": -0.040000000000000036,
+        "seed": 22
+      },
+      {
+        "t": 7.459999999999999,
+        "type": "chime",
+        "dur": 1.6,
+        "pitch": 1.0606601717798214,
+        "gain": 0.15,
+        "pan": 0.14,
+        "seed": 23
+      },
+      {
+        "t": 7.629999999999999,
+        "type": "chime",
+        "dur": 1.6,
+        "pitch": 1.1905507889761495,
+        "gain": 0.15,
+        "pan": 0.31999999999999995,
+        "seed": 24
+      },
+      {
+        "t": 7.799999999999999,
+        "type": "chime",
+        "dur": 1.6,
+        "pitch": 1.3363480772105092,
+        "gain": 0.15,
+        "pan": 0.4999999999999999,
+        "seed": 25
+      },
+      {
+        "t": 7.119999999999999,
+        "type": "sparkle",
+        "dur": 1.2,
+        "gain": 0.1,
+        "pitch": 1.1,
+        "seed": 9
+      },
+      {
+        "t": 7.199999999999999,
+        "type": "tick",
+        "gain": 0.2,
+        "seed": 10
+      },
+      {
+        "t": 9.4,
+        "type": "thud",
+        "dur": 0.9,
+        "pitch": 0.5,
+        "gain": 0.5
+      },
+      {
+        "t": 9.4,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 2.6,
+        "pitch": 0.42,
+        "gain": 0.55,
+        "seed": 11
+      },
+      {
+        "t": 9.540000000000001,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.8,
+        "pitch": 0.5,
+        "q": 0.9,
+        "gain": 0.45,
+        "pan": -0.3,
+        "seed": 12
+      },
+      {
+        "t": 10,
+        "type": "tick",
+        "gain": 0.2,
+        "seed": 13
+      },
+      {
+        "t": 12.2,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.6,
+        "pitch": 0.5,
+        "gain": 0.3,
+        "seed": 14
+      },
+      {
+        "t": 12.06,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.7,
+        "pitch": 0.45,
+        "q": 0.9,
+        "gain": 0.85,
+        "pan": 0,
+        "seed": 15
+      },
+      {
+        "t": 12.95,
+        "type": "thud",
+        "dur": 1.6,
+        "pitch": 0.4,
+        "gain": 0.75,
+        "seed": 16
+      },
+      {
+        "t": 12.95,
+        "type": "rumble",
+        "dur": 2.2,
+        "pitch": 0.6,
+        "gain": 0.3,
+        "seed": 17
+      },
+      {
+        "t": 13,
+        "type": "chime",
+        "dur": 2.8,
+        "pitch": 0.5,
+        "gain": 0.2,
+        "seed": 18
+      }
+    ],
+    "duck": [],
+    "notes": "Chip assembled in scene.js from studio-product helpers (bevelSlab, contactPads, etchedPanel, lathedBody, edgeTrace, turntable). Unbranded, no performance figures."
+  }
+}

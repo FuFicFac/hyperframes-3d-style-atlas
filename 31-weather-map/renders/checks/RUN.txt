@@ -1,0 +1,13 @@
+check-frames run: 2026-11-14 05:25:28 UTC
+times: 1.5, 4.5, 7.5, 10.8, 14.8
+newest code edit: 2026-11-13 23:40:35 UTC (weather-map/weather.js)
+mp4: 31-weather-map.mp4 2026-11-13 23:42:45 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.7 dB, frame 225)
+  frame 45 (t=1.500): 36.8 dB
+  frame 135 (t=4.500): 34.8 dB
+  frame 225 (t=7.500): 34.7 dB
+  frame 324 (t=10.800): 34.9 dB
+  frame 444 (t=14.800): 35.1 dB
+determinism: OK (5 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

@@ -1,0 +1,14 @@
+check-frames run: 2026-11-14 05:37:13 UTC
+times: 1.5, 4.6, 8.0, 10.6, 12.4, 14.8
+newest code edit: 2026-11-14 03:07:57 UTC (49-ink-wash/scene.config.js)
+mp4: 49-ink-wash.mp4 2026-11-14 03:09:15 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 41.4 dB, frame 444)
+  frame 45 (t=1.500): 42.3 dB
+  frame 138 (t=4.600): 42.1 dB
+  frame 240 (t=8.000): 42.0 dB
+  frame 318 (t=10.600): 41.9 dB
+  frame 372 (t=12.400): 42.4 dB
+  frame 444 (t=14.800): 41.4 dB
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

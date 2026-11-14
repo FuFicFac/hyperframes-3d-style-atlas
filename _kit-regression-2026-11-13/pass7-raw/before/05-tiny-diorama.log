@@ -1,0 +1,30 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 9 old file(s): RUN.txt t0.75.png t11.9.png t14.6.png t2.9.png t4.3.png t5.9.png t6.95.png t9.3.png
+check-frames run: 2026-11-14 03:23:50 UTC
+times: 0.75, 2.9, 4.3, 5.9, 6.95, 9.3, 11.9, 14.6
+newest code edit: 2026-11-14 03:19:42 UTC (tiny-diorama/style.js)
+mp4: 05-tiny-diorama.mp4 2026-11-13 15:01:54 UTC
+kit last changed: 2026-11-14 03:19:42 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+0.75      renders/checks/t0.75.png      4b1ec83b252df785a5d506f20a652ef8  SAME
+2.9       renders/checks/t2.9.png       9f972ed7036ba1061f88dc5bb4f15498  SAME
+4.3       renders/checks/t4.3.png       26be33a0e60ed29a9e0b66ef0548c9e2  SAME
+5.9       renders/checks/t5.9.png       60c54cfafd4f9effc8d308d13d235f90  SAME
+6.95      renders/checks/t6.95.png      2feb0a3c90fc1380e7f8ef3ac2c27c40  SAME
+9.3       renders/checks/t9.3.png       e0ff36bb71d21a943027b202baeb879b  SAME
+11.9      renders/checks/t11.9.png      b1178d1210a372d1771c8b3215a21452  SAME
+14.6      renders/checks/t14.6.png      2deb8e2f9391c6fc19b25baa397f21bf  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.7 dB, frame 357)
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -22.1 dB, max -1.1 dB
+audio 05-tiny-diorama.mp4: mean -22.1 dB, max -1.0 dB  (5.3 MB)
+deep t=0.75: hash 88de480b mean 196.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.9: hash 67d89242 mean 191.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.3: hash 83ef3915 mean 190.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5.9: hash 45109f75 mean 193.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=6.95: hash a3ab81f0 mean 192 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.3: hash 6f73910c mean 190.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=11.9: hash 2000f5f1 mean 189.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.6: hash c941206f mean 192.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

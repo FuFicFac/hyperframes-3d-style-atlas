@@ -1,0 +1,55 @@
+| project | determinism | mp4-vs-code | worst PSNR dB before → after | deep | NaN+Inf | in-page hash = old kit | snapshot md5 = old kit |
+|---|---|---|---|---|---|---|---|
+| 00-smoke | OK | OK | 39.0 → 39.0 | OK | 0 | 5/7 | 5/7 |
+| 01-low-poly | OK | OK | 36.4 → 36.4 | OK | 0 | 2/8 | 2/8 |
+| 02-paper-pop-up | OK | OK | 34.9 → 34.9 | OK | 0 | 0/17 | 0/17 |
+| 03-neon-sign | OK | OK | 34.8 → 34.9 | OK | 0 | 0/8 | 0/8 |
+| 04-soft-clay | OK | OK | 37.4 → 37.4 | OK | 0 | 9/9 | 9/9 |
+| 05-tiny-diorama | OK | OK | 37.7 → 37.7 | OK | 0 | 0/8 | 0/8 |
+| 06-blueprint-build | OK | OK | 36.1 → 36.0 | OK | 0 | 0/10 | 0/10 |
+| 07-split-flap-board | OK | OK | 37.6 → 37.4 | OK | 0 | 0/8 | 0/8 |
+| 08-voxel | OK | OK | 31.1 → 31.1 | OK | 0 | 8/8 | 8/8 |
+| 09-spotlight-stage | OK | OK | 35.6 → 35.6 | OK | 0 | 1/11 | 1/11 |
+| 10-exploded-view | OK | OK | 38.2 → 38.1 | OK | 0 | 0/8 | 0/8 |
+| 11-marble-run | OK | OK | 35.8 → 33.2 | OK | 0 | 0/11 | 0/11 |
+| 12-studio-product | OK | OK | 34.8 → 34.8 | OK | 0 | 0/8 | 0/8 |
+| 13-wireframe-hologram | OK | OK | 32.5 → 32.5 | OK | 0 | 0/12 | 0/12 |
+| 14-origami | OK | OK | 40.3 → 40.3 | OK | 0 | 0/8 | 0/8 |
+| 15-felt-stitch | OK | OK | 34.5 → 34.5 | OK | 0 | 0/8 | 0/8 |
+| 16-toy-brick | OK | OK | 39.2 → 39.2 | OK | 0 | 0/8 | 0/8 |
+| 17-crt-retro | OK | OK | 36.9 → 36.9 | OK | 0 | 0/10 | 0/10 |
+| 18-floating-screens | OK | OK | 38.0 → 38.0 | OK | 0 | 0/13 | 0/13 |
+| 19-embossed-letterpress | OK | OK | 39.0 → 37.6 | OK | 0 | 0/10 | 0/10 |
+| 20-isometric-pastel | OK | OK | 37.9 → 37.9 | OK | 0 | 0/13 | 0/13 |
+| 21-chalkboard | OK | OK | 37.8 → 37.7 | OK | 0 | 0/16 | 0/16 |
+| 22-glass-light | OK | OK | 40.1 → 40.1 | OK | 0 | 0/8 | 0/8 |
+| 23-liquid-chrome | OK | OK | 32.5 → 32.5 | OK | 0 | 10/10 | 10/10 |
+| 24-wam-house | OK | OK | 36.6 → 34.2 | OK | 0 | 0/13 | 0/13 |
+| 25-stained-glass | OK | OK | 36.1 → 36.1 | OK | 0 | 6/6 | 6/6 |
+| 26-subway-map | OK | OK | 39.4 → 39.4 | OK | 0 | 0/7 | 0/7 |
+| 27-circuit-board | OK | OK | 39.6 → 39.6 | OK | 0 | 0/5 | 0/5 |
+| 28-cardboard-stop-motion | OK | OK | 38.3 → 38.3 | OK | 0 | 0/6 | 0/6 |
+| 29-newspaper-press | OK | OK | 37.3 → 37.3 | OK | 0 | 6/6 | 6/6 |
+| 30-film-projector | OK | OK | 40.1 → 40.1 | OK | 0 | 8/8 | 8/8 |
+| 31-weather-map | OK | OK | 34.7 → 34.7 | OK | 0 | 0/5 | 0/5 |
+| 32-terrarium | OK | OK | 38.1 → 38.0 | OK | 0 | 0/6 | 0/6 |
+| 33-card-table | OK | OK | 39.3 → 39.1 | OK | 0 | 0/5 | 0/5 |
+| 34-clockwork | OK | OK | 39.2 → 39.2 | OK | 0 | 0/6 | 0/6 |
+| 35-zen-sand | OK | OK | 36.5 → 36.5 | OK | 0 | 6/6 | 6/6 |
+| 36-hanging-mobile | OK | OK | 41.1 → 41.1 | OK | 0 | 0/5 | 0/5 |
+| 37-domino-run | OK | OK | 34.9 → 34.9 | OK | 0 | 7/9 | 7/9 |
+| 38-evidence-board | OK | OK | 37.6 → 37.6 | OK | 0 | 0/7 | 0/7 |
+| 39-shadow-puppets | OK | OK | 38.8 → 38.8 | OK | 0 | 6/6 | 6/6 |
+| 40-bead-abacus | OK | OK | 37.2 → 37.2 | OK | 0 | 0/6 | 0/6 |
+| 41-sticky-notes | OK | OK | 38.2 → 38.2 | OK | 0 | 0/8 | 0/8 |
+| 42-inflatable | OK | OK | 37.5 → 31.2 | OK | 0 | 0/6 | 0/6 |
+| 43-pinball-table | OK | OK | 34.3 → 34.3 | OK | 0 | 0/6 | 0/6 |
+| 44-star-chart | OK | OK | 34.9 → 34.9 | OK | 0 | 5/5 | 5/5 |
+| 45-lab-glassware | OK | OK | 37.8 → 37.8 | OK | 0 | 0/6 | 0/6 |
+| 46-mixing-console | OK | OK | 35.0 → 34.9 | OK | 0 | 0/6 | 0/6 |
+| 47-conveyor-factory | OK | OK | 35.7 → 35.7 | OK | 0 | 0/5 | 0/5 |
+| 48-city-lights | OK | OK | 30.4 → 30.4 | OK | 0 | 6/6 | 6/6 |
+| 49-ink-wash | OK | OK | 41.4 → 41.4 | OK | 0 | 6/6 | 6/6 |
+| 50-pin-art | OK | OK | 27.7 → 27.7 | OK | 0 | 0/7 | 0/7 |
+
+PASS 51/51; in-page hashes changed: 00-smoke, 01-low-poly, 02-paper-pop-up, 03-neon-sign, 05-tiny-diorama, 06-blueprint-build, 07-split-flap-board, 09-spotlight-stage, 10-exploded-view, 11-marble-run, 12-studio-product, 13-wireframe-hologram, 14-origami, 15-felt-stitch, 16-toy-brick, 17-crt-retro, 18-floating-screens, 19-embossed-letterpress, 20-isometric-pastel, 21-chalkboard, 22-glass-light, 24-wam-house, 26-subway-map, 27-circuit-board, 28-cardboard-stop-motion, 31-weather-map, 32-terrarium, 33-card-table, 34-clockwork, 36-hanging-mobile, 37-domino-run, 38-evidence-board, 40-bead-abacus, 41-sticky-notes, 42-inflatable, 43-pinball-table, 45-lab-glassware, 46-mixing-console, 47-conveyor-factory, 50-pin-art

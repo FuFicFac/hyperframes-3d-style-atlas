@@ -1,0 +1,16 @@
+check-frames run: 2026-11-14 05:06:10 UTC
+times: 0.3, 1.2, 2.6, 4.1, 6.6, 9.9, 12.6, 14.5
+newest code edit: 2026-11-13 14:23:45 UTC (split-flap-board/spec.js)
+mp4: 07-split-flap-board.mp4 2026-11-13 14:24:20 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.4 dB, frame 378)
+  frame 9 (t=0.300): 39.4 dB
+  frame 36 (t=1.200): 39.0 dB
+  frame 78 (t=2.600): 38.6 dB
+  frame 123 (t=4.100): 38.5 dB
+  frame 198 (t=6.600): 37.8 dB
+  frame 297 (t=9.900): 37.5 dB
+  frame 378 (t=12.600): 37.4 dB
+  frame 435 (t=14.500): 37.4 dB
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

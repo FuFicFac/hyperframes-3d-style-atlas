@@ -1,0 +1,13 @@
+check-frames run: 2026-11-14 05:22:29 UTC
+times: 1.2, 4.5, 7.5, 10.6, 14.5
+newest code edit: 2026-11-13 23:10:46 UTC (27-circuit-board/scene.config.js)
+mp4: 27-circuit-board.mp4 2026-11-13 23:11:42 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 39.6 dB, frame 435)
+  frame 36 (t=1.200): 41.2 dB
+  frame 135 (t=4.500): 39.8 dB
+  frame 225 (t=7.500): 40.6 dB
+  frame 318 (t=10.600): 40.0 dB
+  frame 435 (t=14.500): 39.6 dB
+determinism: OK (5 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

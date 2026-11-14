@@ -1,0 +1,1040 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "weather-map",
+    "name": "Weather Map",
+    "description": "A broadcast weather map made physical: a raised relief model of an invented landmass (seeded coastline, hills, depth-shaded sea) on a studio table, soft cloud puffs floating above it casting shadows, and bold broadcast graphics on a glass layer above: white isobars from a pressure field, red warm and blue cold fronts with marching symbols, big H and L centres, flowing wind arrows, temperature bands draped on the land and weather icons that pop up over invented places. Fronts and pressure centres advance as functions of time; clouds and their shadows travel with them, and a place's icon and colour band change the moment its front arrives, while the camera sweeps like a broadcast fly-over.",
+    "palette": {
+      "bg": "#0a1424",
+      "table": "#142236",
+      "frame": "#1c2c44",
+      "frameEdge": "#2c4466",
+      "seaDeep": "#123c66",
+      "seaMid": "#1f6596",
+      "seaShallow": "#4aa3c8",
+      "coast": "#efe6c4",
+      "land": [
+        "#6fa857",
+        "#93b65e",
+        "#c2b56f",
+        "#a8906a",
+        "#8e8278",
+        "#cfc6b4"
+      ],
+      "cloud": "#f5f7fa",
+      "rain": "#cfe3ff",
+      "isobar": "#ffffff",
+      "cold": "#2f6fe8",
+      "warm": "#e5402f",
+      "high": "#2f6fe8",
+      "low": "#e5402f",
+      "arrow": "#ffffff",
+      "temps": [
+        "#3d63d6",
+        "#4b8fe0",
+        "#55b8d8",
+        "#69c79a",
+        "#a5d65f",
+        "#e9d548",
+        "#f4a53a",
+        "#ec6a35",
+        "#d9412f"
+      ],
+      "ink": "#0d1b30",
+      "navy": "#10284a",
+      "white": "#ffffff",
+      "accent": "#e5402f",
+      "tag": "#f2cf3e",
+      "sun": "#ffc93a",
+      "bolt": "#ffd84a",
+      "drop": "#6fb7ff"
+    },
+    "world": {
+      "background": "#0a1424",
+      "environment": "room",
+      "environmentIntensity": 0.18,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "pcf"
+    },
+    "materials": {
+      "table": {
+        "type": "standard",
+        "baseColor": "#142236",
+        "roughness": 0.8,
+        "metalness": 0
+      },
+      "frame": {
+        "type": "physical",
+        "baseColor": "#1c2c44",
+        "roughness": 0.45,
+        "metalness": 0.1,
+        "clearcoat": 0.4,
+        "clearcoatRoughness": 0.3
+      },
+      "relief": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.88,
+        "metalness": 0,
+        "vertexColors": true
+      },
+      "water": {
+        "type": "physical",
+        "baseColor": "#2a74a8",
+        "roughness": 0.22,
+        "metalness": 0,
+        "opacity": 0.32,
+        "clearcoat": 0.25,
+        "clearcoatRoughness": 0.35
+      },
+      "cloud": {
+        "type": "standard",
+        "baseColor": "#f5f7fa",
+        "roughness": 1,
+        "metalness": 0,
+        "emission": {
+          "color": "#9fb4cc",
+          "strength": 0.16
+        }
+      },
+      "pin": {
+        "type": "standard",
+        "baseColor": "#f4f6f8",
+        "roughness": 0.4,
+        "metalness": 0
+      },
+      "pole": {
+        "type": "standard",
+        "baseColor": "#1c2c44",
+        "roughness": 0.5,
+        "metalness": 0.2
+      },
+      "graphic": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.45,
+        "metalness": 0,
+        "emission": {
+          "color": "#ffffff",
+          "strength": 0.25
+        }
+      }
+    },
+    "map": {
+      "w": 24,
+      "d": 13.5,
+      "segX": 300,
+      "segZ": 170,
+      "frame": 0.55,
+      "frameH": 0.16,
+      "plinth": 0.7,
+      "floorY": -0.42
+    },
+    "land": {
+      "seed": 23,
+      "center": [
+        0.6,
+        0.2
+      ],
+      "radius": [
+        9.8,
+        5.3
+      ],
+      "warp": 0.42,
+      "warpScale": 3.6,
+      "height": 1,
+      "coastRamp": 0.16,
+      "floor": -0.4,
+      "seaSlope": 1.4,
+      "hills": [
+        {
+          "c": [
+            -3.8,
+            -1.6
+          ],
+          "amp": 0.55,
+          "sigma": 1.6
+        },
+        {
+          "c": [
+            -2.2,
+            -2.6
+          ],
+          "amp": 0.35,
+          "sigma": 1
+        },
+        {
+          "c": [
+            4.6,
+            -1.2
+          ],
+          "amp": 0.42,
+          "sigma": 1.8
+        },
+        {
+          "c": [
+            1.2,
+            1.8
+          ],
+          "amp": 0.18,
+          "sigma": 2.4
+        }
+      ],
+      "bays": [
+        {
+          "c": [
+            2.8,
+            5.3
+          ],
+          "amp": 0.42,
+          "sigma": 1.5
+        },
+        {
+          "c": [
+            -9.4,
+            -1.4
+          ],
+          "amp": 0.35,
+          "sigma": 1.3
+        }
+      ],
+      "islets": [
+        {
+          "c": [
+            -9.6,
+            4.3
+          ],
+          "r": 1.4,
+          "amp": 0.18
+        },
+        {
+          "c": [
+            10.3,
+            -4.4
+          ],
+          "r": 1,
+          "amp": 0.16
+        }
+      ],
+      "detail": {
+        "amp": 0.22,
+        "scale": 1.6
+      },
+      "peak": 0.95
+    },
+    "layers": {
+      "cloud": [
+        1.25,
+        1.75
+      ],
+      "graphics": 2.2
+    },
+    "isobar": {
+      "step": 4,
+      "px": 1.7,
+      "halo": 2.4,
+      "haloAlpha": 0.32
+    },
+    "front": {
+      "radius": 0.075,
+      "symbol": 0.42,
+      "spacing": 0.95,
+      "march": {
+        "wave": 3.2,
+        "rate": 0.9,
+        "amp": 0.28
+      }
+    },
+    "marker": {
+      "letter": 1.35,
+      "disc": 0.78
+    },
+    "arrows": {
+      "cols": 13,
+      "rows": 7,
+      "length": 0.62,
+      "width": 0.2,
+      "rate": 0.55,
+      "vRef": 4.5,
+      "minLevel": 0.12
+    },
+    "bandsKnob": {
+      "step": 2,
+      "mix": 0.58,
+      "edge": 0.55,
+      "min": 5
+    },
+    "clouds": {
+      "flatten": 0.62,
+      "rainPer": 3,
+      "rainLen": 0.34
+    },
+    "lights": [
+      {
+        "id": "ambient",
+        "type": "hemisphere",
+        "color": "#dfe9ff",
+        "groundColor": "#1d2a3c",
+        "intensity": 1
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff4e4",
+        "intensity": 2.5,
+        "position": [
+          -7,
+          20,
+          8
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 6,
+          "mapSize": 4096,
+          "extent": 15,
+          "near": 4,
+          "far": 50,
+          "bias": -0.0004,
+          "normalBias": 0.02
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#9cc0ff",
+        "intensity": 0.6,
+        "position": [
+          6,
+          8,
+          -14
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.34,
+        "offset": 1.1
+      },
+      "grain": {
+        "amount": 0.006,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 34,
+      "near": 0.3,
+      "far": 160,
+      "drift": {
+        "amp": 0.03,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 800,
+      "color": "#ffffff",
+      "height": 0.42,
+      "stack": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "lowerPx": 60,
+      "cardPx": 27
+    },
+    "sfx": {
+      "weather": "rain = paper hiss + pop; storm = rumble (thunder) + thud; cloud = soft pop; clear = short chime",
+      "centre": "H = pop + chime; L = low pop + thud + rumble swell",
+      "front": "whoosh over each front's grow window",
+      "caption": "two-note blip broadcast sting + tick",
+      "enter": "pop",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "thud",
+      "emphasis": "chime",
+      "ui": "blip",
+      "bed": "pad"
+    },
+    "motion": [
+      "Pressure centres move on keyed tracks (weather.keyed2); the low deepens in, the isobars are drawn by a shader from the same pressure formula, so they re-curve every frame.",
+      "Fronts are rigid curves attached to the low: they grow out of it, then advance with it; symbols ripple in a marching wave along the line.",
+      "Clouds and rain ride in the low's frame along the fronts, so cloud shadows sweep the land with the weather.",
+      "A place's weather is a function of its side of each front (weather.weatherAt); change times are solved once (placeEvents) and drive icon swaps AND the sound.",
+      "Camera: broadcast fly-over — high wide, a low sweep in from the sea following the low, a tracking pass along the cold front, then a rise to a frame-filling wide."
+    ]
+  },
+  "scene": {
+    "id": "31-weather-map",
+    "style": "weather-map",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "calm",
+        "t": 0,
+        "dur": 3
+      },
+      {
+        "id": "low",
+        "t": 3,
+        "dur": 3.6
+      },
+      {
+        "id": "front",
+        "t": 6.6,
+        "dur": 4
+      },
+      {
+        "id": "clear",
+        "t": 10.6,
+        "dur": 4.4
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -1.5,
+          14.6,
+          15.2
+        ],
+        "target": [
+          0,
+          0.2,
+          0.9
+        ],
+        "fov": 34
+      },
+      {
+        "t": 2.7,
+        "pos": [
+          -3.5,
+          12.4,
+          13.4
+        ],
+        "target": [
+          -1.6,
+          0.3,
+          0.4
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 5.6,
+        "pos": [
+          -12.6,
+          7.4,
+          8.6
+        ],
+        "target": [
+          -5.6,
+          0.8,
+          -1.4
+        ],
+        "fov": 34,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 7.2,
+        "pos": [
+          -9.6,
+          7.6,
+          10.4
+        ],
+        "target": [
+          -3.6,
+          0.6,
+          0.2
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 10.4,
+        "pos": [
+          -1.8,
+          8.4,
+          10.6
+        ],
+        "target": [
+          1.8,
+          0.6,
+          -0.5
+        ],
+        "fov": 34,
+        "ease": "linear"
+      },
+      {
+        "t": 13.6,
+        "pos": [
+          0.8,
+          15.4,
+          13
+        ],
+        "target": [
+          0.8,
+          0,
+          0.1
+        ],
+        "fov": 34,
+        "ease": "inOutCubic"
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 11.1,
+        "gain": 1,
+        "root": 146.83,
+        "chord": [
+          0,
+          7,
+          12,
+          14,
+          16
+        ],
+        "attack": 1.2,
+        "release": 1.4,
+        "brightness": 750
+      },
+      {
+        "t": 0,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 2.2,
+        "gain": 0.06,
+        "pitch": 0.55,
+        "seed": 80
+      },
+      {
+        "t": 0.4,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.35,
+        "gain": 0.08,
+        "pitch": 1.6,
+        "seed": 30
+      },
+      {
+        "t": 0.45,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.07,
+        "gain": 0.16,
+        "pitch": 1,
+        "seed": 20
+      },
+      {
+        "t": 0.45,
+        "type": "pop",
+        "gain": 0.24,
+        "pitch": 0.8,
+        "seed": 41
+      },
+      {
+        "t": 0.5,
+        "type": "chime",
+        "dur": 1,
+        "gain": 0.08,
+        "pitch": 1.2,
+        "seed": 42
+      },
+      {
+        "t": 1,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.3,
+        "seed": 60
+      },
+      {
+        "t": 1.16,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.3800000000000001,
+        "seed": 61
+      },
+      {
+        "t": 1.32,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.46,
+        "seed": 62
+      },
+      {
+        "t": 1.48,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.54,
+        "seed": 63
+      },
+      {
+        "t": 1.5,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.2,
+        "gain": 0.07,
+        "pitch": 0.6,
+        "seed": 55
+      },
+      {
+        "t": 1.64,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.62,
+        "seed": 64
+      },
+      {
+        "t": 2.7,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 2.2,
+        "gain": 0.06,
+        "pitch": 0.55,
+        "seed": 81
+      },
+      {
+        "t": 3.05,
+        "type": "pop",
+        "gain": 0.26,
+        "pitch": 0.55,
+        "seed": 43
+      },
+      {
+        "t": 3.05,
+        "type": "thud",
+        "gain": 0.24,
+        "pitch": 0.8,
+        "seed": 44
+      },
+      {
+        "t": 3.05,
+        "type": "rumble",
+        "dur": 2.6,
+        "gain": 0.2,
+        "pitch": 0.7,
+        "seed": 45
+      },
+      {
+        "t": 3.07,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.35,
+        "gain": 0.08,
+        "pitch": 1.6,
+        "seed": 31
+      },
+      {
+        "t": 3.12,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.07,
+        "gain": 0.16,
+        "pitch": 1.06,
+        "seed": 21
+      },
+      {
+        "t": 3.35,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 2.45,
+        "gain": 0.1,
+        "pitch": 0.7,
+        "seed": 50
+      },
+      {
+        "t": 3.6,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 2.4,
+        "gain": 0.1,
+        "pitch": 0.85,
+        "seed": 51
+      },
+      {
+        "type": "paper",
+        "dur": 0.9,
+        "density": 0.85,
+        "gain": 0.1,
+        "pitch": 1.4,
+        "t": 4.6044,
+        "pan": 0,
+        "seed": 101
+      },
+      {
+        "type": "pop",
+        "gain": 0.2,
+        "pitch": 1.1,
+        "t": 4.6044,
+        "pan": 0,
+        "seed": 102
+      },
+      {
+        "type": "paper",
+        "dur": 0.9,
+        "density": 0.85,
+        "gain": 0.1,
+        "pitch": 1.4,
+        "t": 4.8819,
+        "pan": 0,
+        "seed": 108
+      },
+      {
+        "type": "pop",
+        "gain": 0.2,
+        "pitch": 1.1,
+        "t": 4.8819,
+        "pan": 0,
+        "seed": 109
+      },
+      {
+        "t": 5.6,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.6,
+        "gain": 0.06,
+        "pitch": 0.55,
+        "seed": 82
+      },
+      {
+        "type": "paper",
+        "dur": 0.9,
+        "density": 0.85,
+        "gain": 0.1,
+        "pitch": 1.4,
+        "t": 5.8638,
+        "pan": 0,
+        "seed": 115
+      },
+      {
+        "type": "pop",
+        "gain": 0.2,
+        "pitch": 1.1,
+        "t": 5.8638,
+        "pan": 0,
+        "seed": 116
+      },
+      {
+        "type": "rumble",
+        "dur": 1.7,
+        "gain": 0.34,
+        "pitch": 0.9,
+        "t": 6.5447,
+        "pan": 0,
+        "seed": 122
+      },
+      {
+        "type": "thud",
+        "gain": 0.22,
+        "pitch": 0.7,
+        "t": 6.564699999999999,
+        "pan": 0,
+        "seed": 123
+      },
+      {
+        "t": 6.67,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.35,
+        "gain": 0.08,
+        "pitch": 1.6,
+        "seed": 32
+      },
+      {
+        "t": 6.72,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.07,
+        "gain": 0.16,
+        "pitch": 1.12,
+        "seed": 22
+      },
+      {
+        "t": 7.2,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 2.2,
+        "gain": 0.06,
+        "pitch": 0.55,
+        "seed": 83
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "gain": 0.08,
+        "pitch": 1.6,
+        "t": 7.5505,
+        "pan": 0,
+        "seed": 129
+      },
+      {
+        "type": "pop",
+        "gain": 0.14,
+        "pitch": 1.3,
+        "t": 7.5505,
+        "pan": 0,
+        "seed": 130
+      },
+      {
+        "type": "rumble",
+        "dur": 1.7,
+        "gain": 0.34,
+        "pitch": 0.9,
+        "t": 7.5678,
+        "pan": 0,
+        "seed": 136
+      },
+      {
+        "type": "thud",
+        "gain": 0.22,
+        "pitch": 0.7,
+        "t": 7.5878,
+        "pan": 0,
+        "seed": 137
+      },
+      {
+        "type": "paper",
+        "dur": 0.9,
+        "density": 0.85,
+        "gain": 0.1,
+        "pitch": 1.4,
+        "t": 8.1538,
+        "pan": 0,
+        "seed": 143
+      },
+      {
+        "type": "pop",
+        "gain": 0.2,
+        "pitch": 1.1,
+        "t": 8.1538,
+        "pan": 0,
+        "seed": 144
+      },
+      {
+        "type": "paper",
+        "dur": 0.9,
+        "density": 0.85,
+        "gain": 0.1,
+        "pitch": 1.4,
+        "t": 8.4291,
+        "pan": 0,
+        "seed": 150
+      },
+      {
+        "type": "pop",
+        "gain": 0.2,
+        "pitch": 1.1,
+        "t": 8.4291,
+        "pan": 0,
+        "seed": 151
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "gain": 0.08,
+        "pitch": 1.6,
+        "t": 8.5256,
+        "pan": 0,
+        "seed": 157
+      },
+      {
+        "type": "pop",
+        "gain": 0.14,
+        "pitch": 1.3,
+        "t": 8.5256,
+        "pan": 0,
+        "seed": 158
+      },
+      {
+        "t": 10.4,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 2.2,
+        "gain": 0.06,
+        "pitch": 0.55,
+        "seed": 84
+      },
+      {
+        "type": "rumble",
+        "dur": 1.7,
+        "gain": 0.34,
+        "pitch": 0.9,
+        "t": 10.6318,
+        "pan": 0,
+        "seed": 164
+      },
+      {
+        "type": "thud",
+        "gain": 0.22,
+        "pitch": 0.7,
+        "t": 10.6518,
+        "pan": 0,
+        "seed": 165
+      },
+      {
+        "t": 10.67,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.35,
+        "gain": 0.08,
+        "pitch": 1.6,
+        "seed": 33
+      },
+      {
+        "t": 10.72,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.07,
+        "gain": 0.16,
+        "pitch": 1.18,
+        "seed": 23
+      },
+      {
+        "t": 10.8,
+        "type": "pad",
+        "dur": 4.199999999999999,
+        "gain": 1,
+        "root": 164.81,
+        "chord": [
+          0,
+          7,
+          12,
+          16,
+          19
+        ],
+        "attack": 1,
+        "release": 1.6,
+        "brightness": 1100
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "gain": 0.08,
+        "pitch": 1.6,
+        "t": 11.6239,
+        "pan": 0,
+        "seed": 171
+      },
+      {
+        "type": "pop",
+        "gain": 0.14,
+        "pitch": 1.3,
+        "t": 11.6239,
+        "pan": 0,
+        "seed": 172
+      },
+      {
+        "type": "rumble",
+        "dur": 1.7,
+        "gain": 0.34,
+        "pitch": 0.9,
+        "t": 13.2164,
+        "pan": 0,
+        "seed": 178
+      },
+      {
+        "type": "thud",
+        "gain": 0.22,
+        "pitch": 0.7,
+        "t": 13.2364,
+        "pan": 0,
+        "seed": 179
+      },
+      {
+        "type": "rumble",
+        "dur": 1.7,
+        "gain": 0.34,
+        "pitch": 0.9,
+        "t": 13.2698,
+        "pan": 0,
+        "seed": 185
+      },
+      {
+        "type": "thud",
+        "gain": 0.22,
+        "pitch": 0.7,
+        "t": 13.2898,
+        "pan": 0,
+        "seed": 186
+      },
+      {
+        "t": 13.6,
+        "type": "chime",
+        "dur": 1.6,
+        "gain": 0.1,
+        "pitch": 1,
+        "seed": 90
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "gain": 0.08,
+        "pitch": 1.6,
+        "t": 14.1792,
+        "pan": 0,
+        "seed": 192
+      },
+      {
+        "type": "pop",
+        "gain": 0.14,
+        "pitch": 1.3,
+        "t": 14.1792,
+        "pan": 0,
+        "seed": 193
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "gain": 0.08,
+        "pitch": 1.6,
+        "t": 14.2987,
+        "pan": 0,
+        "seed": 199
+      },
+      {
+        "type": "pop",
+        "gain": 0.14,
+        "pitch": 1.3,
+        "t": 14.2987,
+        "pan": 0,
+        "seed": 200
+      }
+    ],
+    "duck": [],
+    "notes": "Invented landmass (style landField, seeded). One weather plan (weather.weatherPlan) drives the low/high tracks, the isobar shader, fronts, clouds, wind arrows, temperature bands and each town's state; WEATHER_EVENTS (solved state changes) drive both the icon swaps and their sounds. All names invented; all numbers SAMPLE DATA."
+  }
+}

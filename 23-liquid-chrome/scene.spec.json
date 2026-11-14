@@ -1,0 +1,1411 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "liquid-chrome",
+    "name": "Liquid Chrome",
+    "description": "Turn-of-the-millennium Y2K chrome: mirror-finish liquid metal that flows, merges, splits and re-forms into icons and puffy chrome lettering, floating in a saturated cyan-violet-magenta void with a neon grid, four-point sparkles and lens flares.",
+    "palette": {
+      "bg": "#2a0f6e",
+      "skyTop": "#04104a",
+      "sky": "#1b4fe0",
+      "skyHorizon": "#8fd8ff",
+      "horizon": "#ffffff",
+      "groundTop": "#1a0700",
+      "ground": "#ff8a2a",
+      "groundDeep": "#ffd27a",
+      "magenta": "#ff2bd6",
+      "cyan": "#25f0ff",
+      "violet": "#7b3cff",
+      "ink": "#ffffff",
+      "inkStroke": "#16084a",
+      "inkShadow": "#ff2bd6"
+    },
+    "world": {
+      "background": null,
+      "environment": null,
+      "toneMapping": "neutral",
+      "exposure": 1
+    },
+    "materials": {},
+    "lights": [],
+    "post": {
+      "bloom": {
+        "strength": 0.55,
+        "radius": 0.55,
+        "threshold": 1.25
+      },
+      "vignette": {
+        "darkness": 0.32,
+        "offset": 1.05
+      },
+      "grain": {
+        "amount": 0.012,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 44,
+      "near": 0.3,
+      "far": 120,
+      "drift": {
+        "amp": 0.05,
+        "speed": 0.3
+      }
+    },
+    "text": {
+      "font": "display",
+      "weight": 800,
+      "color": "#ffffff",
+      "height": 0.5
+    },
+    "sfx": {
+      "enter": "bubble",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "pop",
+      "emphasis": "chime",
+      "ui": "blip",
+      "bed": "pad"
+    },
+    "env": {
+      "skyTop": "#020628",
+      "sky": "#1236b8",
+      "skyHorizon": "#3d86ff",
+      "horizon": "#ffffff",
+      "horizonIntensity": 5,
+      "horizonWidth": 0.016,
+      "darkBand": 0.07,
+      "groundTop": "#2a0c02",
+      "ground": "#ff8a2a",
+      "groundDeep": "#ffd9a0",
+      "groundIntensity": 1.05,
+      "skyBands": [
+        {
+          "y": 0.22,
+          "w": 0.012,
+          "intensity": 0.7
+        },
+        {
+          "y": 0.42,
+          "w": 0.02,
+          "intensity": 0.45
+        }
+      ],
+      "sun": {
+        "az": 0.95,
+        "el": 0.5,
+        "size": 0.06,
+        "intensity": 14,
+        "color": "#ffffff",
+        "halo": 0.6
+      },
+      "panels": [
+        {
+          "rect": [
+            2.25,
+            0.2,
+            0.09,
+            0.5,
+            0.06
+          ],
+          "color": "#ff2bd6",
+          "intensity": 2.6
+        },
+        {
+          "rect": [
+            0.3,
+            0.08,
+            0.08,
+            0.42,
+            0.05
+          ],
+          "color": "#25f0ff",
+          "intensity": 2.4
+        },
+        {
+          "rect": [
+            0,
+            0.62,
+            1.6,
+            0.05,
+            0.03
+          ],
+          "color": "#ffffff",
+          "intensity": 3.2
+        },
+        {
+          "rect": [
+            -0.9,
+            0.3,
+            0.06,
+            0.32,
+            0.02
+          ],
+          "color": "#ffffff",
+          "intensity": 4
+        },
+        {
+          "rect": [
+            3.14,
+            0.1,
+            0.4,
+            0.28,
+            0.08
+          ],
+          "color": "#7b3cff",
+          "intensity": 1.6
+        },
+        {
+          "rect": [
+            -1.6,
+            0.15,
+            0.35,
+            0.5,
+            0.12
+          ],
+          "color": "#25f0ff",
+          "intensity": 1.4
+        }
+      ]
+    },
+    "chrome": {
+      "f0": "#e9eef7",
+      "edgeBoost": 1.15,
+      "iridescence": 0,
+      "filmThickness": 1.6,
+      "occlusion": 0.55,
+      "selfReflect": 0.85
+    },
+    "liquid": {
+      "maxPrims": 40,
+      "steps": 80,
+      "reflectSteps": 22,
+      "epsilon": 0.0012,
+      "relax": 0.9,
+      "wobble": {
+        "amp": 0.018,
+        "freq": 2.6,
+        "speed": 1.1
+      },
+      "ripple": {
+        "freq": 13,
+        "speed": 8,
+        "decay": 2,
+        "falloff": 1.1,
+        "amp": 0.012,
+        "slots": 6
+      },
+      "margin": 0.35
+    },
+    "type": {
+      "cap": 0.95,
+      "radius": 0.2,
+      "letterSpacing": 0.58,
+      "wordSpacing": 0.7,
+      "lineHeight": 1.75,
+      "bend": 0.22,
+      "radial": 20,
+      "depthScale": 0.85,
+      "popDur": 0.75,
+      "stagger": 0.06
+    },
+    "caption": {
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 800,
+      "italic": true,
+      "letterSpacing": 0.12,
+      "fill": [
+        "#ffffff",
+        "#bfefff"
+      ],
+      "stroke": "#16084a",
+      "strokeWidth": 0.16,
+      "shadow": "#ff2bd6",
+      "shadowOffset": [
+        0.06,
+        0.07
+      ],
+      "height": 0.062
+    },
+    "sparkle": {
+      "size": 120,
+      "color": "#ffffff",
+      "level": 3.2,
+      "rays": 46,
+      "core": 18,
+      "diag": 0.35
+    },
+    "flare": {
+      "halo": 340,
+      "haloLevel": 0.18,
+      "streak": 900,
+      "streakLevel": 0.5,
+      "ghosts": [
+        [
+          -0.35,
+          70,
+          "#25f0ff"
+        ],
+        [
+          -0.7,
+          130,
+          "#ff2bd6"
+        ],
+        [
+          -1.1,
+          50,
+          "#7b3cff"
+        ]
+      ],
+      "ghostLevel": 0.22
+    },
+    "backdrop": {
+      "stops": [
+        "#0a9fe0",
+        "#3a1aa8",
+        "#a0129e"
+      ],
+      "angle": 0.5,
+      "glow": {
+        "color": "#b8a8ff",
+        "level": 0.22,
+        "radius": 0.5,
+        "y": 0.05
+      },
+      "orbs": {
+        "count": 7,
+        "seed": 5,
+        "colors": [
+          "#25f0ff",
+          "#ff2bd6",
+          "#ffffff"
+        ],
+        "size": [
+          0.05,
+          0.16
+        ],
+        "level": 0.16,
+        "speed": 0.04
+      },
+      "level": 0.8
+    },
+    "grid": {
+      "y": -2.6,
+      "size": 120,
+      "cell": 1,
+      "line": 0.026,
+      "colorNear": "#25f0ff",
+      "colorFar": "#ff2bd6",
+      "level": 1,
+      "fade": [
+        3,
+        38
+      ],
+      "scroll": 0.35,
+      "horizonGlow": 0.6
+    },
+    "lens": {
+      "barrel": 0.045
+    },
+    "motion": [
+      "Liquid never rests: the blob is several core spheres circling inside one smooth union (sums of sines), plus a surface wobble.",
+      "Splits pinch: cores travel apart on a bowed path while the blend radius swells, so a mercury neck stretches and snaps.",
+      "Shapes re-form through a melt: the old shape collapses to a sphere, the new one grows out of it slot by slot (no pops).",
+      "Droplets accelerate in on curved paths, stretch into teardrops, sink into the surface and leave a ripple.",
+      "Type inflates letter by letter with a springy overshoot; the camera glides on slow arcs through a slight fisheye."
+    ]
+  },
+  "scene": {
+    "id": "23-liquid-chrome",
+    "style": "liquid-chrome",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "one",
+        "t": 0,
+        "dur": 2.8
+      },
+      {
+        "id": "train",
+        "t": 2.8,
+        "dur": 3
+      },
+      {
+        "id": "split",
+        "t": 5.8,
+        "dur": 3.6
+      },
+      {
+        "id": "orbit",
+        "t": 9.4,
+        "dur": 2.8
+      },
+      {
+        "id": "title",
+        "t": 12.2,
+        "dur": 2.8
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          1.2,
+          0.9,
+          7
+        ],
+        "target": [
+          0,
+          0.05,
+          0
+        ],
+        "fov": 44
+      },
+      {
+        "t": 2.8,
+        "pos": [
+          -0.9,
+          0.7,
+          7.5
+        ],
+        "target": [
+          0,
+          0.05,
+          0
+        ],
+        "fov": 44,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 5.7,
+        "pos": [
+          0.4,
+          0.9,
+          8.9
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "fov": 44,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 6.9,
+        "pos": [
+          0,
+          0.55,
+          10.8
+        ],
+        "target": [
+          0,
+          -0.05,
+          0
+        ],
+        "fov": 44,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 9.4,
+        "pos": [
+          0,
+          0.5,
+          10.6
+        ],
+        "target": [
+          0,
+          -0.05,
+          0
+        ],
+        "fov": 44,
+        "ease": "linear"
+      },
+      {
+        "t": 10.7,
+        "pos": [
+          0.3,
+          4.6,
+          9.4
+        ],
+        "target": [
+          0,
+          -0.3,
+          0
+        ],
+        "fov": 44,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 12.1,
+        "pos": [
+          0,
+          0.9,
+          10.4
+        ],
+        "target": [
+          0,
+          -0.05,
+          0
+        ],
+        "fov": 44,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0,
+          0.5,
+          9.7
+        ],
+        "target": [
+          0,
+          -0.1,
+          0
+        ],
+        "fov": 44,
+        "ease": "outSine"
+      }
+    ],
+    "objects": [
+      {
+        "id": "backdrop",
+        "primitive": "procedural",
+        "factory": "backdrop",
+        "procedural": "full-screen gradient void (cyan -> violet -> magenta) with a soft centre glow and drifting bokeh orbs",
+        "dims": {}
+      },
+      {
+        "id": "grid",
+        "primitive": "procedural",
+        "factory": "grid",
+        "procedural": "additive neon grid plane at y = -2.6, 1 m cells, cyan near -> magenta far, fading to the horizon, scrolling toward camera",
+        "dims": {}
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "root": 130.81,
+        "chord": [
+          0,
+          4,
+          7,
+          11,
+          14
+        ],
+        "brightness": 1500,
+        "attack": 1.6,
+        "release": 2.5,
+        "gain": 0.34
+      },
+      {
+        "t": 0.5,
+        "type": "pad",
+        "dur": 14.5,
+        "root": 523.25,
+        "chord": [
+          0,
+          7,
+          11,
+          14
+        ],
+        "brightness": 3200,
+        "attack": 3,
+        "release": 3,
+        "gain": 0.05,
+        "seed": 3
+      },
+      {
+        "t": 0.12,
+        "type": "bubble",
+        "dur": 0.22,
+        "pitch": 0.42,
+        "gain": 0.5
+      },
+      {
+        "t": 0.15,
+        "type": "pop",
+        "dur": 0.16,
+        "pitch": 0.45,
+        "gain": 0.25
+      },
+      {
+        "t": 0.45,
+        "type": "blip",
+        "notes": [
+          0,
+          7,
+          12
+        ],
+        "dur": 0.06,
+        "pitch": 1,
+        "gain": 0.12
+      },
+      {
+        "t": 0.9,
+        "type": "sparkle",
+        "dur": 0.9,
+        "gain": 0.12,
+        "pitch": 1.1,
+        "seed": 4
+      },
+      {
+        "t": 2.1,
+        "type": "sparkle",
+        "dur": 0.8,
+        "gain": 0.09,
+        "pitch": 1.3,
+        "seed": 5
+      },
+      {
+        "t": 3.4124999999999996,
+        "type": "bubble",
+        "dur": 0.14,
+        "pitch": 0.7,
+        "gain": 0.3,
+        "seed": 6
+      },
+      {
+        "t": 2.8,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.1,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "pan": -0.4,
+        "seed": 7
+      },
+      {
+        "t": 3.4,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.2,
+        "pitch": 1.1,
+        "gain": 0.18,
+        "pan": 0.4,
+        "seed": 8
+      },
+      {
+        "type": "bubble",
+        "dur": 0.14909819842036814,
+        "pitch": 0.717214412637055,
+        "gain": 0.32,
+        "t": 3.178246170615312,
+        "pan": 0.6400000000000001,
+        "seed": 101
+      },
+      {
+        "type": "pop",
+        "dur": 0.1,
+        "pitch": 0.55,
+        "gain": 0.12,
+        "t": 3.178246170615312,
+        "pan": 0.6400000000000001,
+        "seed": 102
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1357893081177026,
+        "pitch": 0.8236855350583793,
+        "gain": 0.32,
+        "t": 3.2726858984312273,
+        "pan": 0.6400000000000001,
+        "seed": 108
+      },
+      {
+        "type": "bubble",
+        "dur": 0.15075539501570165,
+        "pitch": 0.7039568398743868,
+        "gain": 0.32,
+        "t": 3.331692775983247,
+        "pan": 0.4336030705585423,
+        "seed": 115
+      },
+      {
+        "type": "bubble",
+        "dur": 0.13202440732903778,
+        "pitch": 0.8538047413676978,
+        "gain": 0.32,
+        "t": 3.4452131446497516,
+        "pan": -0.34759487542030804,
+        "seed": 122
+      },
+      {
+        "type": "pop",
+        "dur": 0.1,
+        "pitch": 0.55,
+        "gain": 0.12,
+        "t": 3.4452131446497516,
+        "pan": -0.34759487542030804,
+        "seed": 123
+      },
+      {
+        "type": "bubble",
+        "dur": 0.15076018626242876,
+        "pitch": 0.70391850990057,
+        "gain": 0.32,
+        "t": 3.5182287402107613,
+        "pan": -0.6400000000000001,
+        "seed": 129
+      },
+      {
+        "type": "bubble",
+        "dur": 0.16028719568345695,
+        "pitch": 0.6277024345323444,
+        "gain": 0.32,
+        "t": 3.5888343659532254,
+        "pan": -0.6400000000000001,
+        "seed": 136
+      },
+      {
+        "type": "bubble",
+        "dur": 0.13162366580590606,
+        "pitch": 0.8570106735527516,
+        "gain": 0.32,
+        "t": 3.679667271017097,
+        "pan": -0.5344391205326849,
+        "seed": 143
+      },
+      {
+        "type": "pop",
+        "dur": 0.1,
+        "pitch": 0.55,
+        "gain": 0.12,
+        "t": 3.679667271017097,
+        "pan": -0.5344391205326849,
+        "seed": 144
+      },
+      {
+        "type": "bubble",
+        "dur": 0.15640261259954424,
+        "pitch": 0.6587790992036462,
+        "gain": 0.32,
+        "t": 3.7810279249417365,
+        "pan": 0.04156845234061223,
+        "seed": 150
+      },
+      {
+        "type": "bubble",
+        "dur": 0.13426875333301724,
+        "pitch": 0.8358499733358622,
+        "gain": 0.32,
+        "t": 3.8942260516551324,
+        "pan": 0.5487684255207057,
+        "seed": 157
+      },
+      {
+        "type": "bubble",
+        "dur": 0.15267619876097888,
+        "pitch": 0.6885904099121691,
+        "gain": 0.32,
+        "t": 3.9867084648477613,
+        "pan": 0.6400000000000001,
+        "seed": 164
+      },
+      {
+        "type": "pop",
+        "dur": 0.1,
+        "pitch": 0.55,
+        "gain": 0.12,
+        "t": 3.9867084648477613,
+        "pan": 0.6400000000000001,
+        "seed": 165
+      },
+      {
+        "type": "bubble",
+        "dur": 0.16170553609263152,
+        "pitch": 0.6163557112589478,
+        "gain": 0.32,
+        "t": 4.052011592715862,
+        "pan": 0.6236973117925432,
+        "seed": 171
+      },
+      {
+        "type": "bubble",
+        "dur": 0.13372105596680195,
+        "pitch": 0.8402315522655845,
+        "gain": 0.32,
+        "t": 4.141087150407256,
+        "pan": 0.45118439115307246,
+        "seed": 178
+      },
+      {
+        "type": "bubble",
+        "dur": 0.14753310361038893,
+        "pitch": 0.7297351711168886,
+        "gain": 0.32,
+        "t": 4.231696528950124,
+        "pan": -0.3923151782702612,
+        "seed": 185
+      },
+      {
+        "type": "pop",
+        "dur": 0.1,
+        "pitch": 0.55,
+        "gain": 0.12,
+        "t": 4.231696528950124,
+        "pan": -0.3923151782702612,
+        "seed": 186
+      },
+      {
+        "type": "bubble",
+        "dur": 0.15328939878102393,
+        "pitch": 0.6836848097518087,
+        "gain": 0.32,
+        "t": 4.294591439095093,
+        "pan": -0.588281444943909,
+        "seed": 192
+      },
+      {
+        "type": "bubble",
+        "dur": 0.14031976383831352,
+        "pitch": 0.7874418892934919,
+        "gain": 0.32,
+        "t": 4.409326045319322,
+        "pan": -0.6400000000000001,
+        "seed": 199
+      },
+      {
+        "type": "bubble",
+        "dur": 0.14994152439665048,
+        "pitch": 0.7104678048267962,
+        "gain": 0.32,
+        "t": 4.479033117417711,
+        "pan": -0.5253445186949175,
+        "seed": 206
+      },
+      {
+        "type": "pop",
+        "dur": 0.1,
+        "pitch": 0.55,
+        "gain": 0.12,
+        "t": 4.479033117417711,
+        "pan": -0.5253445186949175,
+        "seed": 207
+      },
+      {
+        "type": "bubble",
+        "dur": 0.16061413132213057,
+        "pitch": 0.6250869494229555,
+        "gain": 0.32,
+        "t": 4.550264712565113,
+        "pan": -0.12629191025105915,
+        "seed": 213
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1590643482124433,
+        "pitch": 0.6374852143004537,
+        "gain": 0.32,
+        "t": 4.66328825426579,
+        "pan": 0.5672150100623119,
+        "seed": 220
+      },
+      {
+        "type": "bubble",
+        "dur": 0.16536510908138008,
+        "pitch": 0.5870791273489595,
+        "gain": 0.32,
+        "t": 4.768826176438015,
+        "pan": 0.6400000000000001,
+        "seed": 227
+      },
+      {
+        "type": "pop",
+        "dur": 0.1,
+        "pitch": 0.55,
+        "gain": 0.12,
+        "t": 4.768826176438015,
+        "pan": 0.6400000000000001,
+        "seed": 228
+      },
+      {
+        "type": "bubble",
+        "dur": 0.13219264071714132,
+        "pitch": 0.8524588742628694,
+        "gain": 0.32,
+        "t": 4.840479538515792,
+        "pan": 0.6400000000000001,
+        "seed": 234
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1434117970149964,
+        "pitch": 0.7627056238800288,
+        "gain": 0.32,
+        "t": 4.917753223798936,
+        "pan": 0.43471832606056576,
+        "seed": 241
+      },
+      {
+        "type": "bubble",
+        "dur": 0.15316598580125718,
+        "pitch": 0.6846721135899425,
+        "gain": 0.32,
+        "t": 5.0041540138470015,
+        "pan": -0.5572453010922104,
+        "seed": 248
+      },
+      {
+        "type": "pop",
+        "dur": 0.1,
+        "pitch": 0.55,
+        "gain": 0.12,
+        "t": 5.0041540138470015,
+        "pan": -0.5572453010922104,
+        "seed": 249
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1527548671886325,
+        "pitch": 0.6879610624909401,
+        "gain": 0.32,
+        "t": 5.117885032318299,
+        "pan": -0.47539588773721386,
+        "seed": 255
+      },
+      {
+        "type": "bubble",
+        "dur": 0.13406427123956383,
+        "pitch": 0.8374858300834895,
+        "gain": 0.32,
+        "t": 5.201564642242738,
+        "pan": -0.6400000000000001,
+        "seed": 262
+      },
+      {
+        "t": 3.0999999999999996,
+        "type": "blip",
+        "notes": [
+          0,
+          5,
+          9
+        ],
+        "dur": 0.06,
+        "pitch": 1,
+        "gain": 0.11,
+        "seed": 9
+      },
+      {
+        "t": 3.4,
+        "type": "riser",
+        "dur": 2,
+        "pitch": 1.3,
+        "gain": 0.22
+      },
+      {
+        "t": 5.35,
+        "type": "chime",
+        "dur": 1.8,
+        "pitch": 1,
+        "gain": 0.16,
+        "seed": 10
+      },
+      {
+        "t": 5.35,
+        "type": "sparkle",
+        "dur": 1,
+        "pitch": 1.2,
+        "gain": 0.12,
+        "seed": 11
+      },
+      {
+        "t": 5.8999999999999995,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.9,
+        "pitch": 0.7,
+        "gain": 0.2,
+        "seed": 12
+      },
+      {
+        "t": 6.725,
+        "type": "bubble",
+        "dur": 0.16,
+        "pitch": 0.45,
+        "gain": 0.32,
+        "pan": -0.6,
+        "seed": 20
+      },
+      {
+        "t": 6.7749999999999995,
+        "type": "bubble",
+        "dur": 0.16,
+        "pitch": 0.53,
+        "gain": 0.32,
+        "pan": -0.2,
+        "seed": 21
+      },
+      {
+        "t": 6.824999999999999,
+        "type": "bubble",
+        "dur": 0.16,
+        "pitch": 0.61,
+        "gain": 0.32,
+        "pan": 0.2,
+        "seed": 22
+      },
+      {
+        "t": 6.875,
+        "type": "bubble",
+        "dur": 0.16,
+        "pitch": 0.69,
+        "gain": 0.32,
+        "pan": 0.6,
+        "seed": 23
+      },
+      {
+        "t": 6.725,
+        "type": "pop",
+        "dur": 0.18,
+        "pitch": 0.4,
+        "gain": 0.22,
+        "seed": 24
+      },
+      {
+        "t": 8.06,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "pitch": 1,
+        "gain": 0.13,
+        "pan": -0.6,
+        "seed": 30
+      },
+      {
+        "t": 8.16,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "pitch": 1.12,
+        "gain": 0.13,
+        "pan": -0.2,
+        "seed": 31
+      },
+      {
+        "t": 8.26,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "pitch": 1.26,
+        "gain": 0.13,
+        "pan": 0.2,
+        "seed": 32
+      },
+      {
+        "t": 8.36,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "pitch": 1.5,
+        "gain": 0.13,
+        "pan": 0.6,
+        "seed": 33
+      },
+      {
+        "t": 8.1,
+        "type": "bubble",
+        "dur": 0.1,
+        "pitch": 0.9,
+        "gain": 0.18,
+        "pan": -0.6,
+        "seed": 34
+      },
+      {
+        "t": 8.2,
+        "type": "bubble",
+        "dur": 0.1,
+        "pitch": 1,
+        "gain": 0.18,
+        "pan": -0.2,
+        "seed": 35
+      },
+      {
+        "t": 8.3,
+        "type": "bubble",
+        "dur": 0.1,
+        "pitch": 1.1,
+        "gain": 0.18,
+        "pan": 0.2,
+        "seed": 36
+      },
+      {
+        "t": 8.4,
+        "type": "bubble",
+        "dur": 0.1,
+        "pitch": 1.2000000000000002,
+        "gain": 0.18,
+        "pan": 0.6,
+        "seed": 37
+      },
+      {
+        "t": 8.5,
+        "type": "sparkle",
+        "dur": 0.6,
+        "pitch": 1.2,
+        "gain": 0.07,
+        "pan": -0.6,
+        "seed": 40
+      },
+      {
+        "t": 8.64,
+        "type": "sparkle",
+        "dur": 0.6,
+        "pitch": 1.3,
+        "gain": 0.07,
+        "pan": -0.2,
+        "seed": 41
+      },
+      {
+        "t": 8.780000000000001,
+        "type": "sparkle",
+        "dur": 0.6,
+        "pitch": 1.4,
+        "gain": 0.07,
+        "pan": 0.2,
+        "seed": 42
+      },
+      {
+        "t": 8.92,
+        "type": "sparkle",
+        "dur": 0.6,
+        "pitch": 1.5,
+        "gain": 0.07,
+        "pan": 0.6,
+        "seed": 43
+      },
+      {
+        "t": 9.450000000000001,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.4,
+        "pitch": 0.8,
+        "gain": 0.22,
+        "seed": 50
+      },
+      {
+        "t": 9.85,
+        "type": "blip",
+        "notes": [
+          0,
+          4,
+          7
+        ],
+        "dur": 0.06,
+        "pitch": 0.9,
+        "gain": 0.11,
+        "seed": 51
+      },
+      {
+        "t": 10.4,
+        "type": "bubble",
+        "dur": 0.14,
+        "pitch": 0.95,
+        "gain": 0.22,
+        "seed": 52
+      },
+      {
+        "t": 10.52,
+        "type": "bubble",
+        "dur": 0.14,
+        "pitch": 0.83,
+        "gain": 0.22,
+        "seed": 53
+      },
+      {
+        "t": 10.64,
+        "type": "bubble",
+        "dur": 0.14,
+        "pitch": 0.71,
+        "gain": 0.22,
+        "seed": 54
+      },
+      {
+        "t": 10.76,
+        "type": "bubble",
+        "dur": 0.14,
+        "pitch": 0.59,
+        "gain": 0.22,
+        "seed": 55
+      },
+      {
+        "t": 11.88,
+        "type": "bubble",
+        "dur": 0.3,
+        "pitch": 0.36,
+        "gain": 0.5,
+        "seed": 56
+      },
+      {
+        "t": 11.88,
+        "type": "thud",
+        "dur": 0.5,
+        "pitch": 0.8,
+        "gain": 0.3,
+        "seed": 57
+      },
+      {
+        "t": 11.95,
+        "type": "sparkle",
+        "dur": 0.8,
+        "pitch": 1.1,
+        "gain": 0.1,
+        "seed": 58
+      },
+      {
+        "t": 12.2,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.8,
+        "pitch": 0.6,
+        "gain": 0.2,
+        "seed": 60
+      },
+      {
+        "t": 12.709999999999999,
+        "type": "bubble",
+        "dur": 0.25,
+        "pitch": 0.5,
+        "gain": 0.3,
+        "seed": 61
+      },
+      {
+        "t": 12.579999999999998,
+        "type": "pop",
+        "dur": 0.09,
+        "pitch": 0.8,
+        "gain": 0.11,
+        "pan": -0.5,
+        "seed": 70
+      },
+      {
+        "t": 12.649999999999999,
+        "type": "pop",
+        "dur": 0.09,
+        "pitch": 0.8979696386474985,
+        "gain": 0.11,
+        "pan": -0.43333333333333335,
+        "seed": 71
+      },
+      {
+        "t": 12.719999999999999,
+        "type": "pop",
+        "dur": 0.09,
+        "pitch": 1.0079368399158986,
+        "gain": 0.11,
+        "pan": -0.3666666666666667,
+        "seed": 72
+      },
+      {
+        "t": 12.79,
+        "type": "pop",
+        "dur": 0.09,
+        "pitch": 1.1313708498984762,
+        "gain": 0.11,
+        "pan": -0.3,
+        "seed": 73
+      },
+      {
+        "t": 12.859999999999998,
+        "type": "pop",
+        "dur": 0.09,
+        "pitch": 1.2699208415745595,
+        "gain": 0.11,
+        "pan": -0.23333333333333334,
+        "seed": 74
+      },
+      {
+        "t": 12.929999999999998,
+        "type": "pop",
+        "dur": 0.09,
+        "pitch": 1.425437949024543,
+        "gain": 0.11,
+        "pan": -0.16666666666666669,
+        "seed": 75
+      },
+      {
+        "t": 12.999999999999998,
+        "type": "pop",
+        "dur": 0.09,
+        "pitch": 1.6,
+        "gain": 0.11,
+        "pan": -0.09999999999999998,
+        "seed": 76
+      },
+      {
+        "t": 13.069999999999999,
+        "type": "pop",
+        "dur": 0.09,
+        "pitch": 1.795939277294997,
+        "gain": 0.11,
+        "pan": -0.033333333333333326,
+        "seed": 77
+      },
+      {
+        "t": 13.139999999999999,
+        "type": "pop",
+        "dur": 0.09,
+        "pitch": 0.8,
+        "gain": 0.11,
+        "pan": 0.033333333333333326,
+        "seed": 78
+      },
+      {
+        "t": 13.209999999999999,
+        "type": "pop",
+        "dur": 0.09,
+        "pitch": 0.8979696386474985,
+        "gain": 0.11,
+        "pan": 0.09999999999999998,
+        "seed": 79
+      },
+      {
+        "t": 13.279999999999998,
+        "type": "pop",
+        "dur": 0.09,
+        "pitch": 1.0079368399158986,
+        "gain": 0.11,
+        "pan": 0.16666666666666663,
+        "seed": 80
+      },
+      {
+        "t": 13.349999999999998,
+        "type": "pop",
+        "dur": 0.09,
+        "pitch": 1.1313708498984762,
+        "gain": 0.11,
+        "pan": 0.23333333333333328,
+        "seed": 81
+      },
+      {
+        "t": 13.419999999999998,
+        "type": "pop",
+        "dur": 0.09,
+        "pitch": 1.2699208415745595,
+        "gain": 0.11,
+        "pan": 0.30000000000000004,
+        "seed": 82
+      },
+      {
+        "t": 13.489999999999998,
+        "type": "pop",
+        "dur": 0.09,
+        "pitch": 1.425437949024543,
+        "gain": 0.11,
+        "pan": 0.3666666666666667,
+        "seed": 83
+      },
+      {
+        "t": 13.559999999999999,
+        "type": "pop",
+        "dur": 0.09,
+        "pitch": 1.6,
+        "gain": 0.11,
+        "pan": 0.43333333333333335,
+        "seed": 84
+      },
+      {
+        "t": 12.85,
+        "type": "riser",
+        "dur": 0.9,
+        "pitch": 1.5,
+        "gain": 0.12,
+        "seed": 90
+      },
+      {
+        "t": 13.45,
+        "type": "chime",
+        "dur": 2.2,
+        "pitch": 1,
+        "gain": 0.16,
+        "seed": 91
+      },
+      {
+        "t": 13.45,
+        "type": "sparkle",
+        "dur": 0.7,
+        "pitch": 1.1,
+        "gain": 0.08,
+        "pan": -0.5,
+        "seed": 92
+      },
+      {
+        "t": 13.7,
+        "type": "sparkle",
+        "dur": 0.7,
+        "pitch": 1.1800000000000002,
+        "gain": 0.08,
+        "pan": -0.3,
+        "seed": 93
+      },
+      {
+        "t": 13.95,
+        "type": "sparkle",
+        "dur": 0.7,
+        "pitch": 1.26,
+        "gain": 0.08,
+        "pan": -0.09999999999999998,
+        "seed": 94
+      },
+      {
+        "t": 14.25,
+        "type": "sparkle",
+        "dur": 0.7,
+        "pitch": 1.34,
+        "gain": 0.08,
+        "pan": 0.10000000000000009,
+        "seed": 95
+      },
+      {
+        "t": 14.5,
+        "type": "sparkle",
+        "dur": 0.7,
+        "pitch": 1.4200000000000002,
+        "gain": 0.08,
+        "pan": 0.30000000000000004,
+        "seed": 96
+      },
+      {
+        "t": 14.7,
+        "type": "sparkle",
+        "dur": 0.7,
+        "pitch": 1.5,
+        "gain": 0.08,
+        "pan": 0.5,
+        "seed": 97
+      }
+    ],
+    "duck": [],
+    "notes": "Liquid = raymarched SDF of 36 control slots (4 groups x 9) driven by the style's liquid.js plan; type = stroke-font tubes in the same chrome shader; captions on the overlay."
+  }
+}

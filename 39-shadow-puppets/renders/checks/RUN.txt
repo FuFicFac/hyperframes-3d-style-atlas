@@ -1,0 +1,14 @@
+check-frames run: 2026-11-14 05:30:46 UTC
+times: 0.5, 2.5, 4.5, 8.8, 10.9, 14.5
+newest code edit: 2026-11-14 01:09:43 UTC (39-shadow-puppets/scene.config.js)
+mp4: 39-shadow-puppets.mp4 2026-11-14 01:11:21 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 38.8 dB, frame 75)
+  frame 15 (t=0.500): 39.5 dB
+  frame 75 (t=2.500): 38.8 dB
+  frame 135 (t=4.500): 39.3 dB
+  frame 264 (t=8.800): 39.5 dB
+  frame 327 (t=10.900): 38.9 dB
+  frame 435 (t=14.500): 38.9 dB
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

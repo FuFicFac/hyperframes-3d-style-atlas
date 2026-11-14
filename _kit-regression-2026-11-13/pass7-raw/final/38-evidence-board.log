@@ -1,0 +1,27 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 8 old file(s): RUN.txt t0.7.png t10.0.png t12.6.png t14.6.png t2.6.png t5.5.png t8.3.png
+check-frames run: 2026-11-14 05:30:01 UTC
+times: 0.7, 2.6, 5.5, 8.3, 10.0, 12.6, 14.6
+newest code edit: 2026-11-14 01:11:54 UTC (evidence-board/spec.js)
+mp4: 38-evidence-board.mp4 2026-11-14 01:14:27 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+0.7       renders/checks/t0.7.png       79d20d630eb64ee98af21b3b64eb42b6  SAME
+2.6       renders/checks/t2.6.png       5ca36f02f2cd4a42edd2f5793b4b338c  SAME
+5.5       renders/checks/t5.5.png       42b75e585321b0409745d0d1f740f2b0  SAME
+8.3       renders/checks/t8.3.png       23fdb737c0a66f81d0def498fc07bdeb  SAME
+10.0      renders/checks/t10.0.png      374e70a944ace36002ea4efff6cc1e2a  SAME
+12.6      renders/checks/t12.6.png      19eca68a496709e377275da25d35a21d  SAME
+14.6      renders/checks/t14.6.png      09b368da1b8cffd4c4c606477a2cf5d7  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.6 dB, frame 378)
+determinism: OK (7 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -20.6 dB, max -1.1 dB
+audio 38-evidence-board.mp4: mean -20.6 dB, max -1.4 dB  (6.3 MB)
+deep t=10: hash 0faa8c9c mean 51.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=0.7: hash afbff015 mean 59.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.6: hash 52e043d1 mean 53.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5.5: hash 790d8c6d mean 57.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.3: hash 98ace00e mean 54.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.6: hash 1e72cb94 mean 71.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.6: hash cc8b9d3d mean 54.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

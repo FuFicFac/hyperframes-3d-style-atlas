@@ -1,0 +1,2718 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "pinball-table",
+    "name": "Pinball Table",
+    "description": "An electro-mechanical pinball playfield seen from the player's end, glass off: glossy printed wooden playfield with original abstract art, chrome rails and a steel ball, rubber-ringed posts, mushroom pop bumpers with coloured caps, a drop-target bank, rollover lanes, slingshots, two flippers, a plastic ramp and lit inserts under the playfield, plus a backglass with mechanical score reels. The ball follows a planned contact schedule; every contact lights lamps, drops targets and steps the reels.",
+    "palette": {
+      "bg": "#0c0a09",
+      "navy": "#1a2766",
+      "blue": "#2c4fb8",
+      "teal": "#159a94",
+      "orange": "#ef7d22",
+      "yellow": "#ffcb2e",
+      "red": "#d9302a",
+      "magenta": "#c8306e",
+      "cream": "#f5ead0",
+      "ink": "#141016",
+      "wood": "#b98a55",
+      "chrome": "#e8ebef"
+    },
+    "world": {
+      "background": "#0c0a09",
+      "environment": "room",
+      "environmentIntensity": 0.4,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "chrome": {
+        "type": "standard",
+        "baseColor": "#e6e9ee",
+        "roughness": 0.2,
+        "metalness": 1
+      },
+      "steel": {
+        "type": "standard",
+        "baseColor": "#e9ecef",
+        "roughness": 0.06,
+        "metalness": 1
+      },
+      "cabinet": {
+        "type": "standard",
+        "baseColor": "#2a1a12",
+        "roughness": 0.55,
+        "metalness": 0
+      },
+      "wall": {
+        "type": "standard",
+        "baseColor": "#f1ece2",
+        "roughness": 0.4,
+        "metalness": 0
+      },
+      "blackPlastic": {
+        "type": "standard",
+        "baseColor": "#17151a",
+        "roughness": 0.35,
+        "metalness": 0
+      },
+      "whitePlastic": {
+        "type": "physical",
+        "baseColor": "#f4f1ea",
+        "roughness": 0.3,
+        "metalness": 0,
+        "clearcoat": 0.6,
+        "clearcoatRoughness": 0.2
+      },
+      "rubberRed": {
+        "type": "standard",
+        "baseColor": "#c22a22",
+        "roughness": 0.75,
+        "metalness": 0
+      },
+      "rubberWhite": {
+        "type": "standard",
+        "baseColor": "#eeeae0",
+        "roughness": 0.8,
+        "metalness": 0
+      },
+      "rubberBlack": {
+        "type": "standard",
+        "baseColor": "#1b1a1c",
+        "roughness": 0.8,
+        "metalness": 0
+      },
+      "floor": {
+        "type": "standard",
+        "baseColor": "#100c0a",
+        "roughness": 0.95,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#ffe9cc",
+        "groundColor": "#1a120c",
+        "intensity": 0.75
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff1dc",
+        "intensity": 1.55,
+        "position": [
+          -0.9,
+          3.4,
+          1.6
+        ],
+        "target": [
+          0,
+          0,
+          -1
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 2048,
+          "extent": 1.55,
+          "near": 0.5,
+          "far": 7,
+          "bias": -0.0003,
+          "normalBias": 0.006
+        }
+      },
+      {
+        "id": "gi",
+        "type": "directional",
+        "color": "#ffc98a",
+        "intensity": 0.55,
+        "position": [
+          0.6,
+          1.2,
+          2.4
+        ],
+        "target": [
+          0,
+          0,
+          -1
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.75,
+        "radius": 0.35,
+        "threshold": 2.3
+      },
+      "vignette": {
+        "darkness": 0.42,
+        "offset": 1
+      }
+    },
+    "camera": {
+      "fov": 36,
+      "near": 0.05,
+      "far": 30,
+      "drift": {
+        "amp": 0.004,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#141016",
+      "height": 0.05
+    },
+    "table": {
+      "W": 1,
+      "L": 2.1,
+      "tiltDeg": 6.5,
+      "thick": 0.03,
+      "ballR": 0.03,
+      "G": 1.25,
+      "wallH": 0.14,
+      "wallT": 0.05,
+      "art": {
+        "pxPerM": 1500,
+        "woodShow": 0.07,
+        "keyline": 3
+      },
+      "clearcoat": 0.85,
+      "clearcoatRoughness": 0.06,
+      "roughness": 0.42,
+      "envOnField": 0.18
+    },
+    "flipper": {
+      "pivotX": 0.205,
+      "v": 0.3,
+      "len": 0.165,
+      "rp": 0.027,
+      "rt": 0.012,
+      "h": 0.034,
+      "restDeg": -30,
+      "upDeg": 26,
+      "rise": 0.05,
+      "fall": 0.13,
+      "hold": 0.16,
+      "rubber": 0.0055
+    },
+    "bumpers": {
+      "r": 0.058,
+      "skirt": 0.078,
+      "h": 0.07,
+      "ringDrop": 0.016,
+      "kick": 0.09,
+      "list": [
+        {
+          "id": "A",
+          "at": [
+            -0.07,
+            1.56
+          ],
+          "cap": "#e0352b",
+          "word": "TASK"
+        },
+        {
+          "id": "B",
+          "at": [
+            0.22,
+            1.5
+          ],
+          "cap": "#ffc21f",
+          "word": "TASK"
+        },
+        {
+          "id": "C",
+          "at": [
+            0.08,
+            1.26
+          ],
+          "cap": "#2f63d8",
+          "word": "TASK"
+        }
+      ]
+    },
+    "slings": {
+      "h": 0.05,
+      "rubber": 0.007,
+      "kick": 0.012,
+      "kickDur": 0.11,
+      "plastic": "#ef7d22",
+      "L": {
+        "A": [
+          -0.355,
+          0.46
+        ],
+        "B": [
+          -0.355,
+          0.7
+        ],
+        "C": [
+          -0.255,
+          0.42
+        ]
+      }
+    },
+    "orbit": {
+      "c": [
+        0,
+        1.58
+      ],
+      "R": 0.465,
+      "wallH": 0.06,
+      "innerFrom": 18,
+      "innerTo": 162,
+      "innerGap": 0.075
+    },
+    "shooter": {
+      "x": 0.465,
+      "wallX": 0.43,
+      "wallTo": 1.45,
+      "rest": 0.13,
+      "pull": 0.07,
+      "tipLen": 0.1
+    },
+    "leftLane": {
+      "x": -0.465,
+      "wallX": -0.425,
+      "wallFrom": 1.62,
+      "wallTo": 1,
+      "rollovers": [
+        1.46,
+        1.34,
+        1.22,
+        1.1
+      ],
+      "insertX": -0.385
+    },
+    "inlane": {
+      "x": 0.398,
+      "dividerX": 0.448,
+      "top": 0.7,
+      "guideTo": [
+        0.25,
+        0.345
+      ]
+    },
+    "bank": {
+      "c": [
+        0.3,
+        1.02
+      ],
+      "aimAt": [
+        -0.1,
+        0.33
+      ],
+      "pitch": 0.068,
+      "w": 0.058,
+      "hgt": 0.058,
+      "d": 0.012,
+      "face": 0.012,
+      "letters": [
+        "D",
+        "O",
+        "N",
+        "E"
+      ],
+      "insertOff": 0.078,
+      "fall": 0.075
+    },
+    "ramp": {
+      "width": 0.078,
+      "wallH": 0.03,
+      "plastic": "#cfe0f0",
+      "opacity": 0.34,
+      "wireR": 0.0035,
+      "up": [
+        [
+          -0.1,
+          0.93,
+          0
+        ],
+        [
+          -0.135,
+          1.1,
+          0.04
+        ],
+        [
+          -0.17,
+          1.3,
+          0.1
+        ],
+        [
+          -0.175,
+          1.38,
+          0.12
+        ]
+      ],
+      "turn": {
+        "c": [
+          -0.2375,
+          1.4
+        ],
+        "r": 0.0625,
+        "h": 0.13
+      },
+      "down": [
+        [
+          -0.3,
+          1.38,
+          0.125
+        ],
+        [
+          -0.3,
+          1.1,
+          0.095
+        ],
+        [
+          -0.3,
+          0.9,
+          0.07
+        ],
+        [
+          -0.33,
+          0.83,
+          0.055
+        ],
+        [
+          -0.385,
+          0.785,
+          0.04
+        ],
+        [
+          -0.4,
+          0.765,
+          0.03
+        ]
+      ],
+      "wireFrom": 1
+    },
+    "posts": [
+      [
+        -0.452,
+        0.7
+      ],
+      [
+        0.405,
+        1.45
+      ],
+      [
+        -0.25,
+        1.75
+      ],
+      [
+        0.3,
+        1.77
+      ],
+      [
+        0.4,
+        0.48
+      ],
+      [
+        -0.44,
+        0.48
+      ]
+    ],
+    "rollover": {
+      "r": 0.016,
+      "dip": 0.004,
+      "dur": 0.12
+    },
+    "lampGain": 3.6,
+    "lampOff": 0.34,
+    "lamps": [
+      {
+        "id": "G",
+        "shape": "circle",
+        "color": "#ffcb2e",
+        "at": [
+          -0.385,
+          1.46
+        ],
+        "size": 0.05,
+        "letter": "G",
+        "group": "goal"
+      },
+      {
+        "id": "O1",
+        "shape": "circle",
+        "color": "#ffcb2e",
+        "at": [
+          -0.385,
+          1.34
+        ],
+        "size": 0.05,
+        "letter": "O",
+        "group": "goal"
+      },
+      {
+        "id": "A",
+        "shape": "circle",
+        "color": "#ffcb2e",
+        "at": [
+          -0.385,
+          1.22
+        ],
+        "size": 0.05,
+        "letter": "A",
+        "group": "goal"
+      },
+      {
+        "id": "L",
+        "shape": "circle",
+        "color": "#ffcb2e",
+        "at": [
+          -0.385,
+          1.1
+        ],
+        "size": 0.05,
+        "letter": "L",
+        "group": "goal"
+      },
+      {
+        "id": "D",
+        "shape": "circle",
+        "color": "#ff5a3c",
+        "bankIndex": 0,
+        "size": 0.052,
+        "letter": "D",
+        "group": "done"
+      },
+      {
+        "id": "O2",
+        "shape": "circle",
+        "color": "#ff5a3c",
+        "bankIndex": 1,
+        "size": 0.052,
+        "letter": "O",
+        "group": "done"
+      },
+      {
+        "id": "N",
+        "shape": "circle",
+        "color": "#ff5a3c",
+        "bankIndex": 2,
+        "size": 0.052,
+        "letter": "N",
+        "group": "done"
+      },
+      {
+        "id": "E",
+        "shape": "circle",
+        "color": "#ff5a3c",
+        "bankIndex": 3,
+        "size": 0.052,
+        "letter": "E",
+        "group": "done"
+      },
+      {
+        "id": "pGOAL",
+        "shape": "roundRect",
+        "color": "#ffcb2e",
+        "at": [
+          0,
+          0.585
+        ],
+        "size": [
+          0.17,
+          0.064
+        ],
+        "word": "GOAL",
+        "group": "ladder"
+      },
+      {
+        "id": "pTASKS",
+        "shape": "roundRect",
+        "color": "#4fd1c5",
+        "at": [
+          0,
+          0.675
+        ],
+        "size": [
+          0.17,
+          0.064
+        ],
+        "word": "TASKS",
+        "group": "ladder"
+      },
+      {
+        "id": "pDONE",
+        "shape": "roundRect",
+        "color": "#ff5a3c",
+        "at": [
+          0,
+          0.765
+        ],
+        "size": [
+          0.17,
+          0.064
+        ],
+        "word": "DONE",
+        "group": "ladder"
+      },
+      {
+        "id": "pSHIP",
+        "shape": "roundRect",
+        "color": "#7fb2ff",
+        "at": [
+          0,
+          0.855
+        ],
+        "size": [
+          0.17,
+          0.064
+        ],
+        "word": "SHIP",
+        "group": "ladder"
+      },
+      {
+        "id": "r1",
+        "shape": "chevron",
+        "color": "#7fb2ff",
+        "at": [
+          -0.165,
+          0.6
+        ],
+        "size": 0.064,
+        "rot": 12,
+        "group": "rampArrows"
+      },
+      {
+        "id": "r2",
+        "shape": "chevron",
+        "color": "#7fb2ff",
+        "at": [
+          -0.152,
+          0.685
+        ],
+        "size": 0.064,
+        "rot": 12,
+        "group": "rampArrows"
+      },
+      {
+        "id": "r3",
+        "shape": "chevron",
+        "color": "#7fb2ff",
+        "at": [
+          -0.139,
+          0.77
+        ],
+        "size": 0.064,
+        "rot": 12,
+        "group": "rampArrows"
+      },
+      {
+        "id": "b1",
+        "shape": "arrow",
+        "color": "#ff5a3c",
+        "at": [
+          0.165,
+          0.69
+        ],
+        "size": 0.07,
+        "rot": -28,
+        "group": "bankArrows"
+      },
+      {
+        "id": "b2",
+        "shape": "arrow",
+        "color": "#ff5a3c",
+        "at": [
+          0.205,
+          0.79
+        ],
+        "size": 0.07,
+        "rot": -28,
+        "group": "bankArrows"
+      },
+      {
+        "id": "la",
+        "shape": "arrow",
+        "color": "#ffcb2e",
+        "at": [
+          -0.395,
+          0.93
+        ],
+        "size": 0.062,
+        "rot": 0,
+        "group": "laneArrows"
+      },
+      {
+        "id": "x2",
+        "shape": "circle",
+        "color": "#ffffff",
+        "at": [
+          -0.114,
+          0.47
+        ],
+        "size": 0.046,
+        "word": "2X",
+        "group": "mult"
+      },
+      {
+        "id": "x3",
+        "shape": "circle",
+        "color": "#ffffff",
+        "at": [
+          -0.038,
+          0.47
+        ],
+        "size": 0.046,
+        "word": "3X",
+        "group": "mult"
+      },
+      {
+        "id": "x4",
+        "shape": "circle",
+        "color": "#ffffff",
+        "at": [
+          0.038,
+          0.47
+        ],
+        "size": 0.046,
+        "word": "4X",
+        "group": "mult"
+      },
+      {
+        "id": "x5",
+        "shape": "circle",
+        "color": "#ffffff",
+        "at": [
+          0.114,
+          0.47
+        ],
+        "size": 0.046,
+        "word": "5X",
+        "group": "mult"
+      },
+      {
+        "id": "s0",
+        "shape": "star",
+        "color": "#ff7ab6",
+        "ring": 0,
+        "size": 0.04,
+        "group": "ring"
+      },
+      {
+        "id": "s1",
+        "shape": "star",
+        "color": "#ffcb2e",
+        "ring": 1,
+        "size": 0.04,
+        "group": "ring"
+      },
+      {
+        "id": "s2",
+        "shape": "star",
+        "color": "#4fd1c5",
+        "ring": 2,
+        "size": 0.04,
+        "group": "ring"
+      },
+      {
+        "id": "s3",
+        "shape": "star",
+        "color": "#ff7ab6",
+        "ring": 3,
+        "size": 0.04,
+        "group": "ring"
+      },
+      {
+        "id": "s4",
+        "shape": "star",
+        "color": "#ffcb2e",
+        "ring": 4,
+        "size": 0.04,
+        "group": "ring"
+      },
+      {
+        "id": "s5",
+        "shape": "star",
+        "color": "#4fd1c5",
+        "ring": 5,
+        "size": 0.04,
+        "group": "ring"
+      },
+      {
+        "id": "s6",
+        "shape": "star",
+        "color": "#ff7ab6",
+        "ring": 6,
+        "size": 0.04,
+        "group": "ring"
+      },
+      {
+        "id": "sk",
+        "shape": "triangle",
+        "color": "#4fd1c5",
+        "at": [
+          0.465,
+          0.55
+        ],
+        "size": 0.05,
+        "rot": 0,
+        "group": "shooter"
+      }
+    ],
+    "ring": {
+      "c": [
+        0,
+        1.58
+      ],
+      "r": 0.33,
+      "from": 28,
+      "to": 152
+    },
+    "art": {
+      "title": "ALL TARGETS",
+      "words": {
+        "tasks": "TASKS",
+        "goal": "GOAL",
+        "ship": "SHIP IT"
+      },
+      "font": "\"Futura\", \"Avenir Next Condensed\", \"Helvetica Neue\", Arial, sans-serif",
+      "zones": {
+        "low": "#1a2766",
+        "mid": "#f5ead0",
+        "high": "#c8306e",
+        "top": "#1a2766"
+      },
+      "rays": [
+        "#ffcb2e",
+        "#ef7d22"
+      ],
+      "rings": [
+        "#ef7d22",
+        "#f5ead0",
+        "#d9302a",
+        "#f5ead0",
+        "#ffcb2e"
+      ],
+      "stars": "#ffcb2e",
+      "keyline": "#141016",
+      "paintAlpha": 0.94
+    },
+    "score": {
+      "reels": 6,
+      "gap": 0.085,
+      "roll": 0.07,
+      "awards": {
+        "sling": [
+          1,
+          1
+        ],
+        "bumper": [
+          2,
+          1
+        ],
+        "rollover": [
+          3,
+          1
+        ],
+        "target": [
+          3,
+          1
+        ],
+        "goal": [
+          3,
+          5
+        ],
+        "done": [
+          3,
+          5
+        ],
+        "ramp": [
+          4,
+          1
+        ],
+        "bonus": [
+          3,
+          5
+        ]
+      }
+    },
+    "backglass": {
+      "w": 1.3,
+      "h": 0.86,
+      "d": 0.26,
+      "lift": 0.1,
+      "back": 0.06,
+      "px": 1300,
+      "reel": {
+        "r": 0.085,
+        "w": 0.066,
+        "gap": 0.008
+      },
+      "window": {
+        "w": 0.5,
+        "h": 0.075,
+        "y": 0.17
+      },
+      "art": {
+        "ground": "#121a4a",
+        "rays": [
+          "#c8306e",
+          "#ef7d22",
+          "#ffcb2e",
+          "#159a94"
+        ],
+        "title": "#ffcb2e",
+        "titleEdge": "#c8306e"
+      },
+      "glow": 0.85,
+      "sample": "SAMPLE DATA",
+      "reelPhase": 0
+    },
+    "caption": {
+      "x": 92,
+      "y": 70,
+      "h": 88,
+      "cap": 44,
+      "font": "\"Futura\", \"Avenir Next Condensed\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "card": "#f5ead0",
+      "ink": "#141016",
+      "stripe": "#d9302a",
+      "edge": "#1a2766"
+    },
+    "sound": {
+      "bed": {
+        "gain": 0.5,
+        "root": 98,
+        "brightness": 700
+      },
+      "hum": {
+        "gain": 0.035
+      },
+      "flip": {
+        "gain": 0.55
+      },
+      "bumper": {
+        "gain": 0.6
+      },
+      "sling": {
+        "gain": 0.5
+      },
+      "target": {
+        "gain": 0.55
+      },
+      "rollover": {
+        "gain": 0.3
+      },
+      "launch": {
+        "gain": 0.55
+      },
+      "pull": {
+        "gain": 0.12
+      },
+      "ramp": {
+        "gain": 0.3
+      },
+      "wire": {
+        "gain": 0.32
+      },
+      "roll": {
+        "gain": 0.12
+      },
+      "reel": {
+        "gain": 0.22
+      },
+      "chime": {
+        "gain": 0.2,
+        "pitch": [
+          1.6,
+          1.2,
+          0.9,
+          0.68,
+          0.5,
+          0.4
+        ]
+      },
+      "bell": {
+        "gain": 0.32,
+        "pitch": 0.36
+      }
+    },
+    "sfx": {
+      "enter": "clack",
+      "exit": "thud",
+      "move": "whoosh",
+      "land": "thud",
+      "emphasis": "chime",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "Ball: a planned contact schedule, not physics — piecewise ballistic arcs on the tilted field (constant down-table pull), rolls along the orbit rail and the ramp with a quadratic speed profile, and rides on the flipper face for a few frames before each shot.",
+      "Every contact is an event: pop bumpers flash their caps and drop their kick ring, slingshot rubbers bulge, drop targets sink one by one, rollover stars dip, and the lettered insert behind each lights.",
+      "Inserts are lamps with states: latched on with a flash, blinking 'next shot' arrows, chasing chevrons and an attract ring, completion blinks when a word is finished.",
+      "Score reels step one pulse at a time like an EM score motor (queued, ~11 pulses/s) with a small overshoot per step; each pulse sounds a reel click and a chime pitched by its reel.",
+      "Camera: the player's end, one slow move per beat, following the ball's area of play; the final shot pulls back to the whole field with the backglass."
+    ]
+  },
+  "scene": {
+    "id": "43-pinball-table",
+    "style": "pinball-table",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "goal",
+        "t": 0,
+        "dur": 3.45,
+        "label": "Set the goal"
+      },
+      {
+        "id": "tasks",
+        "t": 3.45,
+        "dur": 2.62,
+        "label": "Bump through the tasks"
+      },
+      {
+        "id": "done",
+        "t": 6.07,
+        "dur": 3.2200000000000006,
+        "label": "Finish the list"
+      },
+      {
+        "id": "ship",
+        "t": 9.290000000000001,
+        "dur": 5.709999999999999,
+        "label": "Ship it!"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0.20995,
+          1.07969,
+          1.03263
+        ],
+        "target": [
+          0.05638,
+          0.11527,
+          -0.49797
+        ],
+        "fov": 36,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 1.15,
+        "pos": [
+          0.20995,
+          1.07969,
+          1.03263
+        ],
+        "target": [
+          0.05638,
+          0.11527,
+          -0.49797
+        ],
+        "fov": 36,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 2.05,
+        "pos": [
+          -0.04678,
+          1.4323,
+          0.0977
+        ],
+        "target": [
+          -0.04678,
+          0.25598,
+          -1.55002
+        ],
+        "fov": 36,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 2.48,
+        "pos": [
+          -0.04678,
+          1.4323,
+          0.0977
+        ],
+        "target": [
+          -0.04678,
+          0.25598,
+          -1.55002
+        ],
+        "fov": 36,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 3.371,
+        "pos": [
+          -0.17385,
+          1.60816,
+          1.04928
+        ],
+        "target": [
+          -0.05429,
+          0.18465,
+          -0.94108
+        ],
+        "fov": 36,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 3.55,
+        "pos": [
+          -0.17385,
+          1.60816,
+          1.04928
+        ],
+        "target": [
+          -0.05429,
+          0.18465,
+          -0.94108
+        ],
+        "fov": 36,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 4,
+        "pos": [
+          0.05284,
+          1.19785,
+          -0.00905
+        ],
+        "target": [
+          -0.01514,
+          0.22683,
+          -1.36751
+        ],
+        "fov": 36,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 4.89,
+        "pos": [
+          0.05284,
+          1.19785,
+          -0.00905
+        ],
+        "target": [
+          -0.01514,
+          0.22683,
+          -1.36751
+        ],
+        "fov": 36,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 5.69,
+        "pos": [
+          0.04732,
+          1.14911,
+          0.84574
+        ],
+        "target": [
+          -0.04387,
+          0.1528,
+          -0.67222
+        ],
+        "fov": 36,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 9.29,
+        "pos": [
+          0.04732,
+          1.14911,
+          0.84574
+        ],
+        "target": [
+          -0.04387,
+          0.1528,
+          -0.67222
+        ],
+        "fov": 36,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 9.99,
+        "pos": [
+          -0.29376,
+          1.56381,
+          1.09772
+        ],
+        "target": [
+          -0.05186,
+          0.18138,
+          -0.90843
+        ],
+        "fov": 36,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.47,
+        "pos": [
+          -0.29376,
+          1.56381,
+          1.09772
+        ],
+        "target": [
+          -0.05186,
+          0.18138,
+          -0.90843
+        ],
+        "fov": 36,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 14.6,
+        "pos": [
+          -2.5471,
+          1.68269,
+          1.11602
+        ],
+        "target": [
+          0,
+          0.60505,
+          -1.26064
+        ],
+        "fov": 36,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [
+      {
+        "id": "cabinet",
+        "primitive": "procedural",
+        "factory": "cabinet",
+        "procedural": "pinball cabinet: wooden side walls and back wall around a tilted playfield, chrome side rails, a lockdown bar, legs and a dark floor",
+        "dims": {}
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.5,
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "attack": 1.2,
+        "release": 1.6,
+        "brightness": 700
+      },
+      {
+        "t": 0,
+        "type": "hum",
+        "dur": 15,
+        "gain": 0.035,
+        "seed": 77
+      },
+      {
+        "type": "servo",
+        "dur": 0.7000000000000001,
+        "hz": 160,
+        "hz2": 300,
+        "grit": 0.7,
+        "gain": 0.12,
+        "t": 0.35,
+        "pan": 0,
+        "seed": 101
+      },
+      {
+        "type": "thud",
+        "dur": 0.32,
+        "pitch": 1.25,
+        "gain": 0.55,
+        "t": 1.15,
+        "pan": 0,
+        "seed": 108
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.7,
+        "gain": 0.385,
+        "t": 1.15,
+        "pan": 0,
+        "seed": 109
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.45,
+        "gain": 0.1375,
+        "t": 1.15,
+        "pan": 0,
+        "seed": 110
+      },
+      {
+        "type": "click",
+        "pitch": 1.35,
+        "gain": 0.3,
+        "t": 2.6298999946148047,
+        "pan": 0,
+        "seed": 115
+      },
+      {
+        "type": "click",
+        "pitch": 1.05,
+        "gain": 0.18,
+        "t": 2.6598999946148045,
+        "pan": 0,
+        "seed": 116
+      },
+      {
+        "type": "click",
+        "pitch": 1.35,
+        "gain": 0.3,
+        "t": 2.728102416266098,
+        "pan": 0,
+        "seed": 122
+      },
+      {
+        "type": "click",
+        "pitch": 1.05,
+        "gain": 0.18,
+        "t": 2.7581024162660976,
+        "pan": 0,
+        "seed": 123
+      },
+      {
+        "type": "click",
+        "pitch": 1.35,
+        "gain": 0.3,
+        "t": 2.817698782297548,
+        "pan": 0,
+        "seed": 129
+      },
+      {
+        "type": "click",
+        "pitch": 1.05,
+        "gain": 0.18,
+        "t": 2.847698782297548,
+        "pan": 0,
+        "seed": 130
+      },
+      {
+        "type": "click",
+        "pitch": 1.35,
+        "gain": 0.3,
+        "t": 2.900619625295081,
+        "pan": 0,
+        "seed": 136
+      },
+      {
+        "type": "click",
+        "pitch": 1.05,
+        "gain": 0.18,
+        "t": 2.9306196252950807,
+        "pan": 0,
+        "seed": 137
+      },
+      {
+        "type": "chime",
+        "dur": 2.4,
+        "pitch": 0.36,
+        "gain": 0.32,
+        "t": 3.020619625295081,
+        "pan": 0,
+        "seed": 150
+      },
+      {
+        "type": "chime",
+        "dur": 2.2,
+        "pitch": 0.36161999999999994,
+        "gain": 0.22399999999999998,
+        "t": 3.024619625295081,
+        "pan": 0,
+        "seed": 151
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.6,
+        "gain": 0.55,
+        "t": 3.6,
+        "pan": 0,
+        "seed": 157
+      },
+      {
+        "type": "thud",
+        "dur": 0.14,
+        "pitch": 1.2,
+        "gain": 0.33,
+        "t": 3.6,
+        "pan": 0,
+        "seed": 158
+      },
+      {
+        "type": "thud",
+        "dur": 0.22,
+        "pitch": 1.7,
+        "gain": 0.6,
+        "t": 4.05,
+        "pan": 0,
+        "seed": 164
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.85,
+        "gain": 0.48,
+        "t": 4.05,
+        "pan": 0,
+        "seed": 165
+      },
+      {
+        "type": "pop",
+        "dur": 0.07,
+        "pitch": 0.55,
+        "gain": 0.15,
+        "t": 4.05,
+        "pan": 0,
+        "seed": 166
+      },
+      {
+        "type": "thud",
+        "dur": 0.22,
+        "pitch": 1.7,
+        "gain": 0.6,
+        "t": 4.25,
+        "pan": 0,
+        "seed": 171
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.85,
+        "gain": 0.48,
+        "t": 4.25,
+        "pan": 0,
+        "seed": 172
+      },
+      {
+        "type": "pop",
+        "dur": 0.07,
+        "pitch": 0.55,
+        "gain": 0.15,
+        "t": 4.25,
+        "pan": 0,
+        "seed": 173
+      },
+      {
+        "type": "thud",
+        "dur": 0.22,
+        "pitch": 1.7,
+        "gain": 0.6,
+        "t": 4.45,
+        "pan": 0,
+        "seed": 178
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.85,
+        "gain": 0.48,
+        "t": 4.45,
+        "pan": 0,
+        "seed": 179
+      },
+      {
+        "type": "pop",
+        "dur": 0.07,
+        "pitch": 0.55,
+        "gain": 0.15,
+        "t": 4.45,
+        "pan": 0,
+        "seed": 180
+      },
+      {
+        "type": "thud",
+        "dur": 0.22,
+        "pitch": 1.7,
+        "gain": 0.6,
+        "t": 4.69,
+        "pan": 0,
+        "seed": 185
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.85,
+        "gain": 0.48,
+        "t": 4.69,
+        "pan": 0,
+        "seed": 186
+      },
+      {
+        "type": "pop",
+        "dur": 0.07,
+        "pitch": 0.55,
+        "gain": 0.15,
+        "t": 4.69,
+        "pan": 0,
+        "seed": 187
+      },
+      {
+        "type": "thud",
+        "dur": 0.22,
+        "pitch": 1.7,
+        "gain": 0.6,
+        "t": 4.890000000000001,
+        "pan": 0,
+        "seed": 192
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.85,
+        "gain": 0.48,
+        "t": 4.890000000000001,
+        "pan": 0,
+        "seed": 193
+      },
+      {
+        "type": "pop",
+        "dur": 0.07,
+        "pitch": 0.55,
+        "gain": 0.15,
+        "t": 4.890000000000001,
+        "pan": 0,
+        "seed": 194
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.75,
+        "gain": 0.5,
+        "t": 5.340000000000001,
+        "pan": 0,
+        "seed": 199
+      },
+      {
+        "type": "thud",
+        "dur": 0.18,
+        "pitch": 1.5,
+        "gain": 0.35,
+        "t": 5.340000000000001,
+        "pan": 0,
+        "seed": 200
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.6,
+        "gain": 0.55,
+        "t": 6.220000000000001,
+        "pan": 0,
+        "seed": 206
+      },
+      {
+        "type": "thud",
+        "dur": 0.14,
+        "pitch": 1.2,
+        "gain": 0.33,
+        "t": 6.220000000000001,
+        "pan": 0,
+        "seed": 207
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 1.25,
+        "gain": 0.55,
+        "t": 6.590000000000001,
+        "pan": 0,
+        "seed": 213
+      },
+      {
+        "type": "thud",
+        "dur": 0.15,
+        "pitch": 1.9,
+        "gain": 0.275,
+        "t": 6.61,
+        "pan": 0,
+        "seed": 214
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 1.25,
+        "gain": 0.55,
+        "t": 6.660000000000001,
+        "pan": 0,
+        "seed": 220
+      },
+      {
+        "type": "thud",
+        "dur": 0.15,
+        "pitch": 1.9,
+        "gain": 0.275,
+        "t": 6.680000000000001,
+        "pan": 0,
+        "seed": 221
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.6,
+        "gain": 0.55,
+        "t": 7.390000000000001,
+        "pan": 0,
+        "seed": 227
+      },
+      {
+        "type": "thud",
+        "dur": 0.14,
+        "pitch": 1.2,
+        "gain": 0.33,
+        "t": 7.390000000000001,
+        "pan": 0,
+        "seed": 228
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 1.25,
+        "gain": 0.55,
+        "t": 7.760000000000001,
+        "pan": 0,
+        "seed": 234
+      },
+      {
+        "type": "thud",
+        "dur": 0.15,
+        "pitch": 1.9,
+        "gain": 0.275,
+        "t": 7.78,
+        "pan": 0,
+        "seed": 235
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 1.25,
+        "gain": 0.55,
+        "t": 7.830000000000001,
+        "pan": 0,
+        "seed": 241
+      },
+      {
+        "type": "thud",
+        "dur": 0.15,
+        "pitch": 1.9,
+        "gain": 0.275,
+        "t": 7.8500000000000005,
+        "pan": 0,
+        "seed": 242
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.6,
+        "gain": 0.55,
+        "t": 7.9,
+        "pan": 0,
+        "seed": 248
+      },
+      {
+        "type": "thud",
+        "dur": 0.14,
+        "pitch": 1.2,
+        "gain": 0.33,
+        "t": 7.9,
+        "pan": 0,
+        "seed": 249
+      },
+      {
+        "type": "chime",
+        "dur": 2.4,
+        "pitch": 0.36,
+        "gain": 0.32,
+        "t": 7.950000000000001,
+        "pan": 0,
+        "seed": 262
+      },
+      {
+        "type": "chime",
+        "dur": 2.2,
+        "pitch": 0.36161999999999994,
+        "gain": 0.22399999999999998,
+        "t": 7.954000000000001,
+        "pan": 0,
+        "seed": 263
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.6,
+        "gain": 0.55,
+        "t": 9.440000000000001,
+        "pan": 0,
+        "seed": 269
+      },
+      {
+        "type": "thud",
+        "dur": 0.14,
+        "pitch": 1.2,
+        "gain": 0.33,
+        "t": 9.440000000000001,
+        "pan": 0,
+        "seed": 270
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.5,
+        "gain": 0.18,
+        "t": 9.770000000000001,
+        "pan": 0,
+        "seed": 276
+      },
+      {
+        "type": "click",
+        "pitch": 0.8,
+        "gain": 0.24,
+        "t": 9.770000000000001,
+        "pan": 0,
+        "seed": 277
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 2.1,
+        "gain": 0.32,
+        "t": 10.501483973103351,
+        "pan": 0,
+        "seed": 290
+      },
+      {
+        "type": "click",
+        "pitch": 1.8,
+        "gain": 0.22399999999999998,
+        "t": 10.551483973103352,
+        "pan": 0,
+        "seed": 291
+      },
+      {
+        "type": "chime",
+        "dur": 2.4,
+        "pitch": 0.36,
+        "gain": 0.32,
+        "t": 11.150000000000002,
+        "pan": 0,
+        "seed": 304
+      },
+      {
+        "type": "chime",
+        "dur": 2.2,
+        "pitch": 0.36161999999999994,
+        "gain": 0.22399999999999998,
+        "t": 11.154000000000002,
+        "pan": 0,
+        "seed": 305
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 2.3,
+        "gain": 0.28800000000000003,
+        "t": 11.22,
+        "pan": 0,
+        "seed": 311
+      },
+      {
+        "type": "click",
+        "pitch": 1.2,
+        "gain": 0.16,
+        "t": 11.22,
+        "pan": 0,
+        "seed": 312
+      },
+      {
+        "type": "chime",
+        "dur": 2.4,
+        "pitch": 0.36,
+        "gain": 0.32,
+        "t": 13.820000000000002,
+        "pan": 0,
+        "seed": 346
+      },
+      {
+        "type": "chime",
+        "dur": 2.2,
+        "pitch": 0.36161999999999994,
+        "gain": 0.22399999999999998,
+        "t": 13.824000000000002,
+        "pan": 0,
+        "seed": 347
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 2.6498999946148047,
+        "pan": 0,
+        "seed": 3001
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 2.6498999946148047,
+        "pan": 0,
+        "seed": 3002
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 2.748102416266098,
+        "pan": 0,
+        "seed": 3008
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 2.748102416266098,
+        "pan": 0,
+        "seed": 3009
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 2.837698782297548,
+        "pan": 0,
+        "seed": 3015
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 2.837698782297548,
+        "pan": 0,
+        "seed": 3016
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 2.922698782297548,
+        "pan": 0,
+        "seed": 3022
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 2.922698782297548,
+        "pan": 0,
+        "seed": 3023
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 3.040619625295081,
+        "pan": 0,
+        "seed": 3029
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 3.040619625295081,
+        "pan": 0,
+        "seed": 3030
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 3.125619625295081,
+        "pan": 0,
+        "seed": 3036
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 3.125619625295081,
+        "pan": 0,
+        "seed": 3037
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 3.210619625295081,
+        "pan": 0,
+        "seed": 3043
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 3.210619625295081,
+        "pan": 0,
+        "seed": 3044
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 3.295619625295081,
+        "pan": 0,
+        "seed": 3050
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 3.295619625295081,
+        "pan": 0,
+        "seed": 3051
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 3.380619625295081,
+        "pan": 0,
+        "seed": 3057
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 3.380619625295081,
+        "pan": 0,
+        "seed": 3058
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 4.069999999999999,
+        "pan": 0,
+        "seed": 3064
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.9,
+        "gain": 0.2,
+        "t": 4.069999999999999,
+        "pan": 0,
+        "seed": 3065
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 4.27,
+        "pan": 0,
+        "seed": 3071
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.9,
+        "gain": 0.2,
+        "t": 4.27,
+        "pan": 0,
+        "seed": 3072
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 4.47,
+        "pan": 0,
+        "seed": 3078
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.9,
+        "gain": 0.2,
+        "t": 4.47,
+        "pan": 0,
+        "seed": 3079
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 4.71,
+        "pan": 0,
+        "seed": 3085
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.9,
+        "gain": 0.2,
+        "t": 4.71,
+        "pan": 0,
+        "seed": 3086
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 4.91,
+        "pan": 0,
+        "seed": 3092
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.9,
+        "gain": 0.2,
+        "t": 4.91,
+        "pan": 0,
+        "seed": 3093
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 5.36,
+        "pan": 0,
+        "seed": 3099
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 1.2,
+        "gain": 0.2,
+        "t": 5.36,
+        "pan": 0,
+        "seed": 3100
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 6.61,
+        "pan": 0,
+        "seed": 3106
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 6.61,
+        "pan": 0,
+        "seed": 3107
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 6.695,
+        "pan": 0,
+        "seed": 3113
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 6.695,
+        "pan": 0,
+        "seed": 3114
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 7.78,
+        "pan": 0,
+        "seed": 3120
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 7.78,
+        "pan": 0,
+        "seed": 3121
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 7.865,
+        "pan": 0,
+        "seed": 3127
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 7.865,
+        "pan": 0,
+        "seed": 3128
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 7.970000000000001,
+        "pan": 0,
+        "seed": 3134
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 7.970000000000001,
+        "pan": 0,
+        "seed": 3135
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 8.055000000000001,
+        "pan": 0,
+        "seed": 3141
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 8.055000000000001,
+        "pan": 0,
+        "seed": 3142
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 8.140000000000002,
+        "pan": 0,
+        "seed": 3148
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 8.140000000000002,
+        "pan": 0,
+        "seed": 3149
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 8.225000000000003,
+        "pan": 0,
+        "seed": 3155
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 8.225000000000003,
+        "pan": 0,
+        "seed": 3156
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 8.310000000000004,
+        "pan": 0,
+        "seed": 3162
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 8.310000000000004,
+        "pan": 0,
+        "seed": 3163
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 11.120000000000001,
+        "pan": 0,
+        "seed": 3169
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.5,
+        "gain": 0.2,
+        "t": 11.120000000000001,
+        "pan": 0,
+        "seed": 3170
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 11.790000000000001,
+        "pan": 0,
+        "seed": 3176
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 11.790000000000001,
+        "pan": 0,
+        "seed": 3177
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 11.875000000000002,
+        "pan": 0,
+        "seed": 3183
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 11.875000000000002,
+        "pan": 0,
+        "seed": 3184
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 11.960000000000003,
+        "pan": 0,
+        "seed": 3190
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 11.960000000000003,
+        "pan": 0,
+        "seed": 3191
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 12.045000000000003,
+        "pan": 0,
+        "seed": 3197
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 12.045000000000003,
+        "pan": 0,
+        "seed": 3198
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 12.130000000000004,
+        "pan": 0,
+        "seed": 3204
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 12.130000000000004,
+        "pan": 0,
+        "seed": 3205
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 12.290000000000001,
+        "pan": 0,
+        "seed": 3211
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 12.290000000000001,
+        "pan": 0,
+        "seed": 3212
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 12.375000000000002,
+        "pan": 0,
+        "seed": 3218
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 12.375000000000002,
+        "pan": 0,
+        "seed": 3219
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 12.460000000000003,
+        "pan": 0,
+        "seed": 3225
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 12.460000000000003,
+        "pan": 0,
+        "seed": 3226
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 12.545000000000003,
+        "pan": 0,
+        "seed": 3232
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 12.545000000000003,
+        "pan": 0,
+        "seed": 3233
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 12.630000000000004,
+        "pan": 0,
+        "seed": 3239
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 12.630000000000004,
+        "pan": 0,
+        "seed": 3240
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 12.790000000000001,
+        "pan": 0,
+        "seed": 3246
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 12.790000000000001,
+        "pan": 0,
+        "seed": 3247
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 12.875000000000002,
+        "pan": 0,
+        "seed": 3253
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 12.875000000000002,
+        "pan": 0,
+        "seed": 3254
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 12.960000000000003,
+        "pan": 0,
+        "seed": 3260
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 12.960000000000003,
+        "pan": 0,
+        "seed": 3261
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 13.045000000000003,
+        "pan": 0,
+        "seed": 3267
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 13.045000000000003,
+        "pan": 0,
+        "seed": 3268
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 13.130000000000004,
+        "pan": 0,
+        "seed": 3274
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 13.130000000000004,
+        "pan": 0,
+        "seed": 3275
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 13.290000000000001,
+        "pan": 0,
+        "seed": 3281
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 13.290000000000001,
+        "pan": 0,
+        "seed": 3282
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 13.375000000000002,
+        "pan": 0,
+        "seed": 3288
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 13.375000000000002,
+        "pan": 0,
+        "seed": 3289
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 13.460000000000003,
+        "pan": 0,
+        "seed": 3295
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 13.460000000000003,
+        "pan": 0,
+        "seed": 3296
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 13.545000000000003,
+        "pan": 0,
+        "seed": 3302
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 13.545000000000003,
+        "pan": 0,
+        "seed": 3303
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 13.630000000000004,
+        "pan": 0,
+        "seed": 3309
+      },
+      {
+        "type": "chime",
+        "dur": 0.9,
+        "pitch": 0.68,
+        "gain": 0.2,
+        "t": 13.630000000000004,
+        "pan": 0,
+        "seed": 3310
+      },
+      {
+        "t": 1.15,
+        "type": "rumble",
+        "dur": 0.52,
+        "pitch": 1.6,
+        "gain": 0.12,
+        "seed": 500
+      },
+      {
+        "t": 1.67,
+        "type": "rumble",
+        "dur": 0.8500000000000001,
+        "pitch": 1.6,
+        "gain": 0.12,
+        "seed": 513
+      },
+      {
+        "t": 2.52,
+        "type": "rumble",
+        "dur": 0.41999999999999993,
+        "pitch": 1.6,
+        "gain": 0.12,
+        "seed": 526
+      },
+      {
+        "t": 3.63,
+        "type": "rumble",
+        "dur": 0.41999999999999993,
+        "pitch": 1.6,
+        "gain": 0.12,
+        "seed": 539
+      },
+      {
+        "t": 4.890000000000001,
+        "type": "rumble",
+        "dur": 0.4500000000000002,
+        "pitch": 1.6,
+        "gain": 0.12,
+        "seed": 552
+      },
+      {
+        "t": 5.340000000000001,
+        "type": "rumble",
+        "dur": 0.5999999999999996,
+        "pitch": 1.6,
+        "gain": 0.12,
+        "seed": 565
+      },
+      {
+        "t": 6.250000000000001,
+        "type": "rumble",
+        "dur": 0.33999999999999986,
+        "pitch": 1.6,
+        "gain": 0.12,
+        "seed": 578
+      },
+      {
+        "t": 6.590000000000001,
+        "type": "rumble",
+        "dur": 0.6200000000000001,
+        "pitch": 1.6,
+        "gain": 0.12,
+        "seed": 591
+      },
+      {
+        "t": 7.420000000000001,
+        "type": "rumble",
+        "dur": 0.33999999999999986,
+        "pitch": 1.6,
+        "gain": 0.12,
+        "seed": 604
+      },
+      {
+        "t": 7.760000000000001,
+        "type": "rumble",
+        "dur": 0.6000000000000005,
+        "pitch": 1.6,
+        "gain": 0.12,
+        "seed": 617
+      },
+      {
+        "t": 9.47,
+        "type": "rumble",
+        "dur": 0.3000000000000007,
+        "pitch": 1.6,
+        "gain": 0.12,
+        "seed": 630
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "pinplan.js: contact schedule -> piecewise ballistic arcs on the tilted field, orbit/ramp rolls with quadratic speed profiles, flipper rides; lamps from rules on the events; reels from queued score-motor pulses.",
+      "clearance": "ok",
+      "framing": "ok (worst {\"t\":3.6,\"id\":\"ball\",\"ndc\":0.8476})",
+      "underCaption": "none",
+      "finalScore": "48510 (SAMPLE DATA)",
+      "events": [
+        "0.35 pull",
+        "1.15 launch",
+        "2.63 rollover:G",
+        "2.73 rollover:O1",
+        "2.82 rollover:A",
+        "2.90 rollover:L",
+        "3.02 goal",
+        "3.02 bell",
+        "3.60 flip",
+        "4.05 bumper:A",
+        "4.25 bumper:C",
+        "4.45 bumper:A",
+        "4.69 bumper:C",
+        "4.89 bumper:B",
+        "5.34 sling:R",
+        "6.22 flip",
+        "6.59 target:D",
+        "6.66 target:O2",
+        "7.39 flip",
+        "7.76 target:N",
+        "7.83 target:E",
+        "7.90 flip",
+        "7.95 done",
+        "7.95 bell",
+        "9.44 flip",
+        "9.77 rampEnter",
+        "10.32 rampTop",
+        "10.50 wire",
+        "11.10 ramp",
+        "11.15 bell",
+        "11.22 land",
+        "11.22 flip",
+        "11.77 bonus",
+        "12.27 bonus",
+        "12.77 bonus",
+        "13.27 bonus",
+        "13.82 bell"
+      ]
+    }
+  }
+}

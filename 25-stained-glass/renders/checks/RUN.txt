@@ -1,0 +1,14 @@
+check-frames run: 2026-11-14 05:21:11 UTC
+times: 1.2, 3.9, 5.6, 8.4, 11, 14.5
+newest code edit: 2026-11-13 23:11:43 UTC (stained-glass/spec.js)
+mp4: 25-stained-glass.mp4 2026-11-13 23:13:20 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.1 dB, frame 168)
+  frame 36 (t=1.200): 40.0 dB
+  frame 117 (t=3.900): 36.1 dB
+  frame 168 (t=5.600): 36.1 dB
+  frame 252 (t=8.400): 37.2 dB
+  frame 330 (t=11.000): 36.7 dB
+  frame 435 (t=14.500): 36.2 dB
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

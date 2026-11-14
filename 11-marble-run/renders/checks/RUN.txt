@@ -1,0 +1,17 @@
+check-frames run: 2026-11-14 05:09:14 UTC
+times: 0.5, 1.5, 2.25, 2.6, 4.4, 7.3, 8.75, 8.85, 10.0, 12.1, 14.6
+newest code edit: 2026-11-13 15:37:43 UTC (marble-run/marbles.js)
+mp4: 11-marble-run.mp4 2026-11-13 15:24:12 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 33.2 dB, frame 219)
+  frame 15 (t=0.500): 33.9 dB
+  frame 45 (t=1.500): 33.4 dB
+  frame 78 (t=2.600): 33.7 dB
+  frame 132 (t=4.400): 34.3 dB
+  frame 219 (t=7.300): 33.2 dB
+  frame 300 (t=10.000): 33.9 dB
+  frame 363 (t=12.100): 34.0 dB
+  frame 438 (t=14.600): 33.9 dB
+determinism: OK (11 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

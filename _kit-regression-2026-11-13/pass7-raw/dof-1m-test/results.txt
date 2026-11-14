@@ -1,0 +1,72 @@
+OLD
+{
+ "none": {
+  "near": 15.61,
+  "focusCard": 19.92,
+  "far": 21.07
+ },
+ "ap0": {
+  "near": 15.61,
+  "focusCard": 19.92,
+  "far": 21.06,
+  "focus": 5,
+  "aperture": 0
+ },
+ "nofocus": {
+  "near": 4.13,
+  "focusCard": 4.06,
+  "far": 4.04,
+  "focus": 5,
+  "aperture": 0.0022
+ },
+ "setfocus": {
+  "near": 15.06,
+  "focusCard": 19.93,
+  "far": 12.56,
+  "focus": 1,
+  "aperture": 0.0022
+ },
+ "relative": {
+  "near": 4.49,
+  "focusCard": 4.74,
+  "far": 5.32,
+  "focus": 5,
+  "aperture": 0.0011
+ }
+}
+NEW
+{
+ "none": {
+  "near": 15.61,
+  "focusCard": 19.92,
+  "far": 21.07
+ },
+ "ap0": {
+  "near": 15.61,
+  "focusCard": 19.92,
+  "far": 21.06,
+  "focus": 1,
+  "aperture": 0
+ },
+ "nofocus": {
+  "near": 15.06,
+  "focusCard": 19.93,
+  "far": 12.56,
+  "focus": 1,
+  "aperture": 0.0022
+ },
+ "setfocus": {
+  "near": 15.06,
+  "focusCard": 19.93,
+  "far": 12.56,
+  "focus": 1,
+  "aperture": 0.0022
+ },
+ "relative": {
+  "near": 13.25,
+  "focusCard": 19.85,
+  "far": 5.71,
+  "focus": 1,
+  "aperture": 0.006
+ }
+}

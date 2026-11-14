@@ -1,0 +1,13 @@
+check-frames run: 2026-11-14 05:27:21 UTC
+times: 1, 4.6, 6.6, 9.84, 12.5, 14.5
+newest code edit: 2026-11-13 23:56:16 UTC (clockwork/train.js)
+mp4: 34-clockwork.mp4 2026-11-13 23:57:38 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 39.2 dB, frame 30)
+  frame 30 (t=1.000): 39.2 dB
+  frame 138 (t=4.600): 40.0 dB
+  frame 198 (t=6.600): 40.6 dB
+  frame 375 (t=12.500): 39.6 dB
+  frame 435 (t=14.500): 39.6 dB
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

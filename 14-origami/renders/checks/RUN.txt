@@ -1,0 +1,16 @@
+check-frames run: 2026-11-14 05:11:51 UTC
+times: 0.6, 2.6, 5.0, 6.4, 8.4, 10.5, 12.6, 14.6
+newest code edit: 2026-11-13 21:28:40 UTC (origami/spec.js)
+mp4: 14-origami.mp4 2026-11-13 21:32:08 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 40.3 dB, frame 378)
+  frame 18 (t=0.600): 41.0 dB
+  frame 78 (t=2.600): 40.9 dB
+  frame 150 (t=5.000): 41.1 dB
+  frame 192 (t=6.400): 40.8 dB
+  frame 252 (t=8.400): 40.5 dB
+  frame 315 (t=10.500): 40.6 dB
+  frame 378 (t=12.600): 40.3 dB
+  frame 438 (t=14.600): 40.7 dB
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

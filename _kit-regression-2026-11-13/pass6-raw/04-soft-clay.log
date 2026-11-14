@@ -1,0 +1,32 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 10 old file(s): RUN.txt t1.6.png t10.4.png t11.1.png t12.6.png t14.png t3.5.png t5.png t7.3.png t9.25.png
+check-frames run: 2026-11-14 00:26:23 UTC
+times: 1.6, 3.5, 5, 7.3, 9.25, 10.4, 11.1, 12.6, 14
+newest code edit: 2026-11-13 14:43:28 UTC (soft-clay/style.js)
+mp4: 04-soft-clay.mp4 2026-11-13 14:19:50 UTC
+kit last changed: 2026-11-14 00:14:11 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+1.6       renders/checks/t1.6.png       b7fa99d801dfa43bc801af3e8c5294e6  SAME
+3.5       renders/checks/t3.5.png       40a729b1a5ffd1ecbda5cb96253db197  SAME
+5         renders/checks/t5.png         97626255fe748cfb08817aad9b208397  SAME
+7.3       renders/checks/t7.3.png       a84f4ad4e543354feeb336f586eda4fa  SAME
+9.25      renders/checks/t9.25.png      dadec53549bf27d88423cb2c1900a07e  SAME
+10.4      renders/checks/t10.4.png      fbb6b735ea2cfd23682b5e18aa23dcbd  SAME
+11.1      renders/checks/t11.1.png      1c66f3dc662b38c5e4ee3a95755d3b56  SAME
+12.6      renders/checks/t12.6.png      7b3070f649f00e6428ea5d01d6dd2d40  SAME
+14        renders/checks/t14.png        0a0e1a28286fe61787107aaba9ba3c79  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.4 dB, frame 48)
+determinism: OK (9 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -21.0 dB, max -1.1 dB
+audio 04-soft-clay.mp4: mean -21.0 dB, max -1.1 dB  (4.5 MB)
+deep t=5: hash 6514071d mean 193.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14: hash 36650eac mean 193 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.6: hash 6e689107 mean 182.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3.5: hash 6c775160 mean 192.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.3: hash 12018cbe mean 188.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.25: hash 5f577ea8 mean 193.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.4: hash ad598e32 mean 189.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=11.1: hash e022a121 mean 186.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.6: hash 2cc4dfc9 mean 195.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

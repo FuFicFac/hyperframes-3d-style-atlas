@@ -1,0 +1,19 @@
+check-frames run: 2026-11-14 05:02:01 UTC
+times: 0.7, 0.75, 2.6, 2.8, 3.35, 3.6, 3.95, 4.25, 5.2, 6.5, 6.6, 8.75, 9.9, 11.25, 12.6, 13.5, 14.8
+newest code edit: 2026-11-13 15:02:38 UTC (paper-pop-up/spec.js)
+mp4: 02-paper-pop-up.mp4 2026-11-13 15:04:44 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.9 dB, frame 84)
+  frame 21 (t=0.700): 37.0 dB
+  frame 78 (t=2.600): 34.9 dB
+  frame 84 (t=2.800): 34.9 dB
+  frame 108 (t=3.600): 38.0 dB
+  frame 156 (t=5.200): 35.5 dB
+  frame 195 (t=6.500): 35.3 dB
+  frame 198 (t=6.600): 35.4 dB
+  frame 297 (t=9.900): 35.1 dB
+  frame 378 (t=12.600): 36.2 dB
+  frame 405 (t=13.500): 36.0 dB
+  frame 444 (t=14.800): 35.9 dB
+determinism: OK (17 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

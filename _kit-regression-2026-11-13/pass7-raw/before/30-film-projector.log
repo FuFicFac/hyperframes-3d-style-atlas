@@ -1,0 +1,30 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 9 old file(s): RUN.txt t0.8.png t12.2.png t13.6.png t14.6.png t2.4.png t3.6.png t6.4.png t9.2.png
+check-frames run: 2026-11-14 03:43:30 UTC
+times: 0.8, 2.4, 3.6, 6.4, 9.2, 12.2, 13.6, 14.6
+newest code edit: 2026-11-14 03:19:42 UTC (film-projector/style.js)
+mp4: 30-film-projector.mp4 2026-11-13 23:22:37 UTC
+kit last changed: 2026-11-14 03:19:42 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+0.8       renders/checks/t0.8.png       5670bd79b8787b4b3440a7a5abb7e2d8  SAME
+2.4       renders/checks/t2.4.png       204dca2c68b07892dc601eeaaf523f51  SAME
+3.6       renders/checks/t3.6.png       d1e1977ef95b0139f5783279882fdde8  SAME
+6.4       renders/checks/t6.4.png       b2df62f69035fdabba6a98a068271202  SAME
+9.2       renders/checks/t9.2.png       a2670dd1919e255c28d44fa4154207b7  SAME
+12.2      renders/checks/t12.2.png      5e9ecaec8597bb28d75de14850fdfa81  SAME
+13.6      renders/checks/t13.6.png      8039e2fb22ab57b2a84780f0d46c2847  SAME
+14.6      renders/checks/t14.6.png      e227f5e81c701a2a5beca40595335258  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 40.1 dB, frame 72)
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -21.4 dB, max -6.7 dB
+audio 30-film-projector.mp4: mean -21.4 dB, max -7.1 dB  (4.6 MB)
+deep t=0.8: hash ca239325 mean 17 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.4: hash e51fec10 mean 42.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3.6: hash 4e02a6c2 mean 35.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=6.4: hash 3b62ed2a mean 47.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.2: hash 64d5ea0e mean 44.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.2: hash a83ff20d mean 60.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=13.6: hash aeca12a1 mean 15.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.6: hash 63e803af mean 42 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

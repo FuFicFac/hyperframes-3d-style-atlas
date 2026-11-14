@@ -1,0 +1,19 @@
+check-frames run: 2026-11-14 05:10:59 UTC
+times: 0.9, 1.5, 2.6, 4.05, 5, 5.6, 7.7, 8.3, 9, 10.9, 12.55, 14.2
+newest code edit: 2026-11-13 18:38:42 UTC (wireframe-hologram/style.js)
+mp4: 13-wireframe-hologram.mp4 2026-11-13 16:03:10 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 32.5 dB, frame 327)
+  frame 27 (t=0.900): 40.6 dB
+  frame 45 (t=1.500): 39.8 dB
+  frame 78 (t=2.600): 36.0 dB
+  frame 150 (t=5.000): 35.1 dB
+  frame 168 (t=5.600): 34.8 dB
+  frame 231 (t=7.700): 34.0 dB
+  frame 249 (t=8.300): 33.5 dB
+  frame 270 (t=9.000): 33.4 dB
+  frame 327 (t=10.900): 32.5 dB
+  frame 426 (t=14.200): 33.6 dB
+determinism: OK (12 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

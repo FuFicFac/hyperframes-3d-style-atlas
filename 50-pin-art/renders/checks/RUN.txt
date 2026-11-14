@@ -1,0 +1,15 @@
+check-frames run: 2026-11-14 05:37:50 UTC
+times: 1.6, 4.0, 4.8, 7.1, 8.5, 10.5, 13.5
+newest code edit: 2026-11-14 03:01:44 UTC (50-pin-art/scene.config.js)
+mp4: 50-pin-art.mp4 2026-11-14 03:03:36 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 27.7 dB, frame 213)
+  frame 48 (t=1.600): 31.7 dB
+  frame 120 (t=4.000): 29.2 dB
+  frame 144 (t=4.800): 32.1 dB
+  frame 213 (t=7.100): 27.7 dB
+  frame 255 (t=8.500): 34.1 dB
+  frame 315 (t=10.500): 28.1 dB
+  frame 405 (t=13.500): 31.7 dB
+determinism: OK (7 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

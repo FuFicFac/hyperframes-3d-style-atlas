@@ -1,0 +1,26 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 7 old file(s): RUN.txt t1.5.png t10.6.png t12.4.png t14.8.png t4.6.png t8.0.png
+check-frames run: 2026-11-14 03:55:43 UTC
+times: 1.5, 4.6, 8.0, 10.6, 12.4, 14.8
+newest code edit: 2026-11-14 03:19:42 UTC (ink-wash/inkplan.js)
+mp4: 49-ink-wash.mp4 2026-11-14 03:09:15 UTC
+kit last changed: 2026-11-14 03:19:42 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+1.5       renders/checks/t1.5.png       79f754cb682b24859dc87f8284013aa1  SAME
+4.6       renders/checks/t4.6.png       f420bec0a154317ad2571a24f0549064  SAME
+8.0       renders/checks/t8.0.png       a8a712582482c52f38c0f986ae22b8b0  SAME
+10.6      renders/checks/t10.6.png      b8e115d077e5e616896b8dc6ea923016  SAME
+12.4      renders/checks/t12.4.png      46977f2b88b400f45aba56591b33b326  SAME
+14.8      renders/checks/t14.8.png      eb4c64c722c7e98a6dc1d553284c0dd6  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 41.4 dB, frame 444)
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -19.7 dB, max -3.1 dB
+audio 49-ink-wash.mp4: mean -19.7 dB, max -3.2 dB  (3.3 MB)
+deep t=8: hash e593a4d8 mean 153.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.5: hash ea725fd9 mean 145.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.6: hash 475ed3e6 mean 153.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.6: hash 62ff941b mean 119.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.4: hash 1c8f115c mean 180.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.8: hash 97072e5c mean 152.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

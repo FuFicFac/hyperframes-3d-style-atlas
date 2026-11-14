@@ -1,0 +1,25 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 7 old file(s): RUN.txt t1.2.png t10.3.png t14.png t3.2.png t4.3.png t6.2.png
+check-frames run: 2026-11-14 04:46:05 UTC
+times: 1.2, 3.2, 4.3, 6.2, 10.3, 14
+newest code edit: 2026-11-14 00:53:09 UTC (newspaper-press/style.js)
+mp4: 29-newspaper-press.mp4 2026-11-14 01:06:34 UTC
+kit last changed: 2026-11-14 04:24:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1.2       renders/checks/t1.2.png       cef2ec708edbb872f55806b3a1a73974  SAME
+3.2       renders/checks/t3.2.png       a3cd0d6ac6d90c5cccd441da53285627  SAME
+4.3       renders/checks/t4.3.png       e6de98ef7e92188989c7c5a2844c76e5  SAME
+6.2       renders/checks/t6.2.png       1be3f53223b0ad2b1cfe184920a75abc  SAME
+10.3      renders/checks/t10.3.png      0510381db06d44727ccc89d71710f71f  SAME
+14        renders/checks/t14.png        4d4800cf6663ac0eacbbdaf1632ce005  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.3 dB, frame 420)
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -21.7 dB, max -2.2 dB
+audio 29-newspaper-press.mp4: mean -21.7 dB, max -2.1 dB  (11.1 MB)
+deep t=14: hash a6287dba mean 132 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.2: hash 7e72e8a4 mean 99.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3.2: hash d5943269 mean 137.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.3: hash efc88fb6 mean 123 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=6.2: hash 92c09c11 mean 151.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.3: hash 482e3161 mean 163.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

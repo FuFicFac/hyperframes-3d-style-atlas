@@ -1,0 +1,1119 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "zen-sand",
+    "name": "Zen Sand",
+    "description": "A raked dry garden seen close: a shallow wooden tray of pale fine sand under a low raking morning sun, smooth dark stones and a sprig of moss. Everything is drawn IN the sand — a rake, stylus or rolling ball travels a planned path and the groove (soft ridges either side catching the light) appears exactly as far as the tool has gone; rake lines flow around stones as concentric rings, words and arrows are traced as grooves, and a flat board drags across to erase a region back to calm.",
+    "palette": {
+      "bg": "#1d1a17",
+      "table": "#2a2622",
+      "sand": "#ebe1ce",
+      "sandDeep": "#d8cab2",
+      "wood": "#a27a4f",
+      "woodDark": "#5a3d25",
+      "tool": "#c9a777",
+      "stone": "#2b2a28",
+      "moss": "#5b7a35",
+      "mossLight": "#8aa64c",
+      "ink": "#33241a",
+      "tag": "#d2b080"
+    },
+    "world": {
+      "background": "#1d1a17",
+      "environment": "room",
+      "environmentIntensity": 0.18,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "pcf"
+    },
+    "sun": {
+      "azimuth": 2.35,
+      "elevation": 0.27,
+      "distance": 9,
+      "color": "#ffe6c4",
+      "intensity": 4.2
+    },
+    "tray": {
+      "w": 4.4,
+      "d": 2.5,
+      "rail": 0.13,
+      "railHeight": 0.075,
+      "depth": 0.16
+    },
+    "sand": {
+      "ppm": 200,
+      "roughness": 0.96,
+      "normalScale": 1,
+      "shade": {
+        "steps": 10,
+        "stepCells": 1.6,
+        "soft": 0.004,
+        "strength": 0.62,
+        "grain": 0.035,
+        "grainFine": 0.025,
+        "mottle": 0.045,
+        "ao": 0.42,
+        "aoReach": 0.07,
+        "grooveTone": 0.06,
+        "slopeExag": 1
+      }
+    },
+    "plan": {
+      "tray": {
+        "w": 4.4,
+        "d": 2.5
+      },
+      "speed": {
+        "stylus": 1.8,
+        "ball": 1.9,
+        "rake": 2,
+        "board": 1.9
+      },
+      "rest": {
+        "rake": {
+          "x": -0.7,
+          "y": 1.36,
+          "z": 0.085,
+          "heading": 0
+        },
+        "stylus": {
+          "x": 0.9,
+          "y": 1.355,
+          "z": 0.088,
+          "heading": 0
+        },
+        "ball": {
+          "x": 2.265,
+          "y": -0.95,
+          "z": 0.08,
+          "heading": 0
+        },
+        "board": {
+          "x": -2.36,
+          "y": 0,
+          "z": 0.11,
+          "heading": 0
+        }
+      },
+      "profile": {
+        "ball": {
+          "depth": 0.014,
+          "sigma": 0.026,
+          "ridge": 0.005,
+          "ridgeAt": 0.046,
+          "ridgeSigma": 0.014,
+          "reach": 0.08
+        }
+      }
+    },
+    "stones": {
+      "detail": 5,
+      "lump": 0.09,
+      "seedBase": 3
+    },
+    "tools": {
+      "rake": {
+        "handle": 1.25,
+        "pitch": 0.62,
+        "restPitch": 0.04,
+        "headDepth": 0.05,
+        "tineLen": 0.055
+      },
+      "stylus": {
+        "len": 0.6,
+        "r": 0.013,
+        "lean": 0.38
+      },
+      "ball": {
+        "r": 0.075
+      },
+      "board": {
+        "width": 0.16,
+        "thick": 0.03,
+        "len": 2.42,
+        "handle": 0.42,
+        "lean": 0.8
+      }
+    },
+    "materials": {
+      "table": {
+        "type": "standard",
+        "baseColor": "#2a2622",
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      "rail": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.62,
+        "metalness": 0,
+        "map": {
+          "source": "wood",
+          "size": 512,
+          "boards": 3,
+          "seed": 17,
+          "grainFreq": 26,
+          "contrast": 0.42,
+          "dark": "#5a3d25",
+          "mid": "#8a6440",
+          "light": "#ae8456",
+          "seam": "#4a301d"
+        }
+      },
+      "tool": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.55,
+        "metalness": 0,
+        "map": {
+          "source": "wood",
+          "size": 256,
+          "boards": 1,
+          "seed": 29,
+          "grainFreq": 14,
+          "contrast": 0.3,
+          "dark": "#9c7748",
+          "mid": "#c09a6a",
+          "light": "#d8b886",
+          "seam": "#9c7748"
+        }
+      },
+      "stone": {
+        "type": "physical",
+        "baseColor": "#363431",
+        "roughness": 0.46,
+        "metalness": 0,
+        "clearcoat": 0.12,
+        "clearcoatRoughness": 0.5
+      },
+      "ball": {
+        "type": "physical",
+        "baseColor": "#3a3734",
+        "roughness": 0.22,
+        "metalness": 0,
+        "clearcoat": 0.6,
+        "clearcoatRoughness": 0.15
+      },
+      "moss": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.95,
+        "metalness": 0,
+        "vertexColors": true
+      }
+    },
+    "lights": [
+      {
+        "id": "sun",
+        "type": "directional",
+        "color": "#ffe6c4",
+        "intensity": 4.2,
+        "position": [
+          -6.0953,
+          2.4006,
+          -6.1713
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 2.2,
+          "mapSize": 4096,
+          "extent": 2.9,
+          "near": 2,
+          "far": 18,
+          "bias": -0.0003,
+          "normalBias": 0.015
+        }
+      },
+      {
+        "id": "sky",
+        "type": "hemisphere",
+        "color": "#cdd6de",
+        "groundColor": "#6e5d4a",
+        "intensity": 0.95
+      },
+      {
+        "id": "front",
+        "type": "directional",
+        "color": "#f3ead9",
+        "intensity": 0.32,
+        "position": [
+          1.5,
+          5,
+          7
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.32,
+        "offset": 1.08
+      },
+      "grain": {
+        "amount": 0.01,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.3,
+      "far": 40,
+      "drift": {
+        "amp": 0.018,
+        "speed": 0.3
+      }
+    },
+    "text": {
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "weight": 600,
+      "color": "#33241a",
+      "height": 0.3
+    },
+    "caption": {
+      "w": 820,
+      "h": 132,
+      "x": 96,
+      "y": 72,
+      "size": 52,
+      "tracking": 0.16,
+      "fadeIn": 0.4,
+      "fadeOut": 0.35,
+      "lead": 0.06
+    },
+    "sound": {
+      "hiss": {
+        "rake": {
+          "pitch": 0.42,
+          "density": 0.85,
+          "gain": 0.5
+        },
+        "stylus": {
+          "pitch": 0.62,
+          "density": 0.7,
+          "gain": 0.34
+        },
+        "ball": {
+          "pitch": 0.3,
+          "density": 0.9,
+          "gain": 0.4
+        },
+        "board": {
+          "pitch": 0.24,
+          "density": 0.95,
+          "gain": 0.55
+        }
+      },
+      "knock": {
+        "type": "clack",
+        "pitch": 0.42,
+        "gain": 0.42
+      },
+      "tick": {
+        "type": "clack",
+        "pitch": 0.62,
+        "gain": 0.12
+      },
+      "land": {
+        "type": "thud",
+        "pitch": 1.9,
+        "gain": 0.12
+      },
+      "bowl": {
+        "pitch": 0.25,
+        "gain": 0.3,
+        "dur": 4
+      },
+      "bed": {
+        "root": 55,
+        "chord": [
+          0,
+          7,
+          12,
+          19
+        ],
+        "brightness": 520,
+        "gain": 0.5,
+        "attack": 2,
+        "release": 2
+      }
+    },
+    "sfx": {
+      "enter": "clack",
+      "exit": "clack",
+      "move": "paper",
+      "land": "thud",
+      "emphasis": "chime",
+      "ui": "clack",
+      "bed": "pad"
+    },
+    "motion": [
+      "The sand is a height field rebuilt from t: a groove exists exactly as far as its tool has travelled (trapezoid speed, no accumulation).",
+      "One tool at a time: it lifts off its rest on the rail, arcs to the first contact, hops between contacts and arcs back.",
+      "Rake corrugations follow any path; a rake circling a stone leaves concentric rings that flow out of the straight lines.",
+      "A flat board drags along +x to erase a region back to flat, pushing a soft ridge of sand ahead of it.",
+      "Camera: high three-quarter view, gentle push-ins on what is being drawn, long holds, end on the whole tray."
+    ]
+  },
+  "scene": {
+    "id": "35-zen-sand",
+    "style": "zen-sand",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "clear",
+        "t": 0,
+        "dur": 2.762105263157895,
+        "label": "CLEAR THE NOISE"
+      },
+      {
+        "id": "word",
+        "t": 2.762105263157895,
+        "dur": 5.380419203073579,
+        "label": "NAME WHAT MATTERS"
+      },
+      {
+        "id": "arrow",
+        "t": 8.142524466231475,
+        "dur": 2.6722132646284447,
+        "label": "PICK ONE DIRECTION"
+      },
+      {
+        "id": "rings",
+        "t": 10.81473773085992,
+        "dur": 4.185262269140081,
+        "label": "LET THE REST SETTLE"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0,
+          4.2397,
+          3.0764
+        ],
+        "target": [
+          0,
+          0,
+          -0.02
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 2.342,
+        "pos": [
+          0,
+          4.2397,
+          3.0764
+        ],
+        "target": [
+          0,
+          0,
+          -0.02
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 3.862,
+        "pos": [
+          -0.9151,
+          2.7406,
+          1.3673
+        ],
+        "target": [
+          -0.86,
+          0,
+          -0.47
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 7.823,
+        "pos": [
+          -0.9151,
+          2.7406,
+          1.3673
+        ],
+        "target": [
+          -0.86,
+          0,
+          -0.47
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 8.943,
+        "pos": [
+          -0.7596,
+          2.8871,
+          1.7782
+        ],
+        "target": [
+          -0.72,
+          0,
+          -0.2
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.015,
+        "pos": [
+          -0.7596,
+          2.8871,
+          1.7782
+        ],
+        "target": [
+          -0.72,
+          0,
+          -0.2
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.315,
+        "pos": [
+          0.756,
+          3.1723,
+          2.2845
+        ],
+        "target": [
+          0.62,
+          0,
+          0.02
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 13.761,
+        "pos": [
+          0.756,
+          3.1723,
+          2.2845
+        ],
+        "target": [
+          0.62,
+          0,
+          0.02
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 14.8,
+        "pos": [
+          0.05,
+          4.2355,
+          2.8208
+        ],
+        "target": [
+          0.05,
+          0,
+          -0.02
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [
+      {
+        "id": "garden",
+        "primitive": "procedural",
+        "factory": "garden",
+        "procedural": "4.4 x 2.5 m tray of pale sand in a wooden frame on a dark table: a height field rebuilt from t by the zen-sand planner (rake lines, rings, traced word, arrow, board erase) shaded by a low sun; two smooth dark stones, moss, rake / stylus / rolling ball / smoothing board posed from the same plan",
+        "dims": {
+          "program": [
+            {
+              "id": "pre-lines-0",
+              "type": "rake",
+              "pre": true,
+              "tines": 6,
+              "spacing": 0.07,
+              "path": [
+                [
+                  -2.35,
+                  -1.05
+                ],
+                [
+                  2.35,
+                  -1.05
+                ]
+              ]
+            },
+            {
+              "id": "pre-lines-1",
+              "type": "rake",
+              "pre": true,
+              "tines": 6,
+              "spacing": 0.07,
+              "path": [
+                [
+                  2.35,
+                  -0.6300000000000001
+                ],
+                [
+                  -2.35,
+                  -0.6300000000000001
+                ]
+              ]
+            },
+            {
+              "id": "pre-lines-2",
+              "type": "rake",
+              "pre": true,
+              "tines": 6,
+              "spacing": 0.07,
+              "path": [
+                [
+                  -2.35,
+                  -0.21000000000000008
+                ],
+                [
+                  2.35,
+                  -0.21000000000000008
+                ]
+              ]
+            },
+            {
+              "id": "pre-lines-3",
+              "type": "rake",
+              "pre": true,
+              "tines": 6,
+              "spacing": 0.07,
+              "path": [
+                [
+                  2.35,
+                  0.20999999999999996
+                ],
+                [
+                  -2.35,
+                  0.20999999999999996
+                ]
+              ]
+            },
+            {
+              "id": "pre-lines-4",
+              "type": "rake",
+              "pre": true,
+              "tines": 6,
+              "spacing": 0.07,
+              "path": [
+                [
+                  -2.35,
+                  0.6299999999999999
+                ],
+                [
+                  2.35,
+                  0.6299999999999999
+                ]
+              ]
+            },
+            {
+              "id": "pre-lines-5",
+              "type": "rake",
+              "pre": true,
+              "tines": 6,
+              "spacing": 0.07,
+              "path": [
+                [
+                  2.35,
+                  1.05
+                ],
+                [
+                  -2.35,
+                  1.05
+                ]
+              ]
+            },
+            {
+              "id": "pre-ring",
+              "type": "rings",
+              "pre": true,
+              "c": [
+                1.86,
+                0.88
+              ],
+              "r": 0.3,
+              "tines": 3,
+              "spacing": 0.07,
+              "a0": -90,
+              "sweep": 364
+            },
+            {
+              "id": "pre-noise",
+              "type": "scribble",
+              "pre": true,
+              "rect": [
+                -2,
+                -1.05,
+                0.45,
+                1.05
+              ],
+              "n": 7,
+              "len": 2.2,
+              "seed": 11
+            },
+            {
+              "id": "clear",
+              "type": "smooth",
+              "rect": [
+                -2.25,
+                -1.25,
+                0.56,
+                1.25
+              ],
+              "at": 0.15
+            },
+            {
+              "id": "word",
+              "type": "text",
+              "text": "FOCUS",
+              "cap": 0.48,
+              "x": -0.86,
+              "y": 0.2,
+              "gap": 0.12
+            },
+            {
+              "id": "arrow",
+              "type": "arrow",
+              "a": [
+                -1.72,
+                -0.24
+              ],
+              "b": [
+                0.22,
+                -0.24
+              ],
+              "head": 0.2,
+              "tool": "ball",
+              "gap": 0.12
+            },
+            {
+              "id": "rings",
+              "type": "rings",
+              "c": [
+                1.3,
+                -0.05
+              ],
+              "r": 0.555,
+              "tines": 4,
+              "spacing": 0.075,
+              "a0": -90,
+              "sweep": 366,
+              "enter": [
+                [
+                  -0.35,
+                  -0.6050000000000001
+                ],
+                [
+                  1.3,
+                  -0.6050000000000001
+                ]
+              ],
+              "gap": 0.12
+            }
+          ],
+          "stones": [
+            {
+              "id": "big",
+              "x": 1.3,
+              "y": -0.05,
+              "rx": 0.34,
+              "ry": 0.28,
+              "h": 0.24,
+              "seed": 4,
+              "yaw": 0.3
+            },
+            {
+              "id": "small",
+              "x": 1.86,
+              "y": 0.88,
+              "rx": 0.16,
+              "ry": 0.14,
+              "h": 0.13,
+              "seed": 12,
+              "yaw": -0.5
+            }
+          ],
+          "moss": [
+            {
+              "x": 1.52,
+              "y": 0.18,
+              "r": 0.085,
+              "seed": 21
+            },
+            {
+              "x": 1.7,
+              "y": 0.98,
+              "r": 0.05,
+              "seed": 22,
+              "count": 30
+            }
+          ]
+        }
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.5,
+        "root": 55,
+        "chord": [
+          0,
+          7,
+          12,
+          19
+        ],
+        "attack": 2,
+        "release": 2,
+        "brightness": 520
+      },
+      {
+        "t": 0.05,
+        "type": "chime",
+        "pitch": 0.25,
+        "gain": 0.3,
+        "dur": 4,
+        "seed": 400
+      },
+      {
+        "t": 0.05,
+        "type": "chime",
+        "pitch": 0.2515,
+        "gain": 0.15,
+        "dur": 4,
+        "seed": 401,
+        "pan": 0.2
+      },
+      {
+        "t": 2.762105263157895,
+        "type": "chime",
+        "pitch": 0.2805,
+        "gain": 0.3,
+        "dur": 4,
+        "seed": 410
+      },
+      {
+        "t": 2.762105263157895,
+        "type": "chime",
+        "pitch": 0.282183,
+        "gain": 0.15,
+        "dur": 4,
+        "seed": 411,
+        "pan": 0.2
+      },
+      {
+        "t": 8.142524466231475,
+        "type": "chime",
+        "pitch": 0.315,
+        "gain": 0.3,
+        "dur": 4,
+        "seed": 420
+      },
+      {
+        "t": 8.142524466231475,
+        "type": "chime",
+        "pitch": 0.31689,
+        "gain": 0.15,
+        "dur": 4,
+        "seed": 421,
+        "pan": 0.2
+      },
+      {
+        "t": 10.81473773085992,
+        "type": "chime",
+        "pitch": 0.2225,
+        "gain": 0.3,
+        "dur": 4,
+        "seed": 430
+      },
+      {
+        "t": 10.81473773085992,
+        "type": "chime",
+        "pitch": 0.223835,
+        "gain": 0.15,
+        "dur": 4,
+        "seed": 431,
+        "pan": 0.2
+      },
+      {
+        "type": "thud",
+        "pitch": 1.9,
+        "gain": 0.12,
+        "dur": 0.25,
+        "t": 0.6,
+        "pan": -0.47400000000000003,
+        "seed": 101
+      },
+      {
+        "type": "paper",
+        "dur": 1.642105263157895,
+        "pitch": 0.24,
+        "density": 0.95,
+        "gain": 0.55,
+        "t": 0.6,
+        "pan": -0.47400000000000003,
+        "seed": 108
+      },
+      {
+        "type": "clack",
+        "pitch": 0.42,
+        "gain": 0.42,
+        "t": 2.362105263157895,
+        "pan": 0.11200000000000002,
+        "seed": 115
+      },
+      {
+        "type": "thud",
+        "pitch": 1.9,
+        "gain": 0.12,
+        "dur": 0.25,
+        "t": 3.2121052631578952,
+        "pan": -0.32464000000000004,
+        "seed": 122
+      },
+      {
+        "type": "paper",
+        "dur": 0.40750493047621894,
+        "pitch": 0.62,
+        "density": 0.7,
+        "gain": 0.34,
+        "t": 3.2121052631578952,
+        "pan": -0.32464000000000004,
+        "seed": 129
+      },
+      {
+        "type": "clack",
+        "pitch": 0.62,
+        "gain": 0.12,
+        "t": 3.669610193634114,
+        "pan": -0.37264,
+        "seed": 136
+      },
+      {
+        "type": "paper",
+        "dur": 0.2,
+        "pitch": 0.62,
+        "density": 0.7,
+        "gain": 0.34,
+        "t": 3.899610193634114,
+        "pan": -0.36784,
+        "seed": 150
+      },
+      {
+        "type": "clack",
+        "pitch": 0.62,
+        "gain": 0.12,
+        "t": 4.122653671894984,
+        "pan": -0.3342400000000001,
+        "seed": 157
+      },
+      {
+        "type": "paper",
+        "dur": 0.6404358936280351,
+        "pitch": 0.62,
+        "density": 0.7,
+        "gain": 0.34,
+        "t": 4.3756696395583194,
+        "pan": -0.2669162161922582,
+        "seed": 171
+      },
+      {
+        "type": "clack",
+        "pitch": 0.62,
+        "gain": 0.12,
+        "t": 5.066105533186354,
+        "pan": -0.2575637838077418,
+        "seed": 178
+      },
+      {
+        "type": "paper",
+        "dur": 0.4901348490319637,
+        "pitch": 0.62,
+        "density": 0.7,
+        "gain": 0.34,
+        "t": 5.357142369392913,
+        "pan": -0.1453595770084469,
+        "seed": 192
+      },
+      {
+        "type": "clack",
+        "pitch": 0.62,
+        "gain": 0.12,
+        "t": 5.897277218424876,
+        "pan": -0.1453595770084469,
+        "seed": 199
+      },
+      {
+        "type": "paper",
+        "dur": 0.5851236273819451,
+        "pitch": 0.62,
+        "density": 0.7,
+        "gain": 0.34,
+        "t": 6.160095830569513,
+        "pan": -0.11152000000000001,
+        "seed": 213
+      },
+      {
+        "type": "clack",
+        "pitch": 0.62,
+        "gain": 0.12,
+        "t": 6.7952194579514575,
+        "pan": -0.05584,
+        "seed": 220
+      },
+      {
+        "type": "paper",
+        "dur": 0.5744713140145766,
+        "pitch": 0.62,
+        "density": 0.7,
+        "gain": 0.34,
+        "t": 7.048053152216899,
+        "pan": 0.025251497839990013,
+        "seed": 234
+      },
+      {
+        "type": "clack",
+        "pitch": 0.42,
+        "gain": 0.42,
+        "t": 7.742524466231476,
+        "pan": -0.02347160879110033,
+        "seed": 241
+      },
+      {
+        "type": "thud",
+        "pitch": 1.9,
+        "gain": 0.12,
+        "dur": 0.25,
+        "t": 8.592524466231474,
+        "pan": -0.34400000000000003,
+        "seed": 248
+      },
+      {
+        "type": "paper",
+        "dur": 1.2169501067337083,
+        "pitch": 0.3,
+        "density": 0.9,
+        "gain": 0.4,
+        "t": 8.592524466231474,
+        "pan": -0.34400000000000003,
+        "seed": 255
+      },
+      {
+        "type": "clack",
+        "pitch": 0.62,
+        "gain": 0.12,
+        "t": 9.859474572965183,
+        "pan": 0.00889669752438509,
+        "seed": 262
+      },
+      {
+        "type": "paper",
+        "dur": 0.20526315789473687,
+        "pitch": 0.3,
+        "density": 0.9,
+        "gain": 0.4,
+        "t": 10.089474572965182,
+        "pan": 0.00889669752438509,
+        "seed": 276
+      },
+      {
+        "type": "clack",
+        "pitch": 0.42,
+        "gain": 0.42,
+        "t": 10.414737730859919,
+        "pan": 0.044000000000000004,
+        "seed": 283
+      },
+      {
+        "type": "thud",
+        "pitch": 1.9,
+        "gain": 0.12,
+        "dur": 0.25,
+        "t": 11.264737730859919,
+        "pan": -0.06999999999999999,
+        "seed": 290
+      },
+      {
+        "type": "paper",
+        "dur": 2.6964096256674144,
+        "pitch": 0.42,
+        "density": 0.85,
+        "gain": 0.5,
+        "t": 11.264737730859919,
+        "pan": -0.06999999999999999,
+        "seed": 297
+      },
+      {
+        "type": "clack",
+        "pitch": 0.42,
+        "gain": 0.42,
+        "t": 14.081147356527332,
+        "pan": 0.2716026594227095,
+        "seed": 304
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "items": [
+        {
+          "id": "clear",
+          "type": "smooth",
+          "start": 0.15,
+          "end": 2.642
+        },
+        {
+          "id": "word",
+          "type": "text",
+          "start": 2.762,
+          "end": 8.023
+        },
+        {
+          "id": "arrow",
+          "type": "arrow",
+          "start": 8.143,
+          "end": 10.695
+        },
+        {
+          "id": "rings",
+          "type": "rings",
+          "start": 10.815,
+          "end": 14.361
+        }
+      ],
+      "contacts": 24,
+      "mechanism": "Sand = height field rebuilt per frame from planSand(PROGRAM) (completed-op prefix cache keyed by op count + the in-progress op applied on a copy); hiss/knocks = scoreFromEvents(PLAN.events, sandVoices()); bowl tone per BEATS entry."
+    }
+  }
+}

@@ -1,0 +1,25 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 7 old file(s): RUN.txt t1.2.png t11.png t14.5.png t3.9.png t5.6.png t8.4.png
+check-frames run: 2026-11-14 04:43:40 UTC
+times: 1.2, 3.9, 5.6, 8.4, 11, 14.5
+newest code edit: 2026-11-13 23:11:43 UTC (stained-glass/spec.js)
+mp4: 25-stained-glass.mp4 2026-11-13 23:13:20 UTC
+kit last changed: 2026-11-14 04:24:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1.2       renders/checks/t1.2.png       342ffc495beb2ae36ecd9d56b6e39651  SAME
+3.9       renders/checks/t3.9.png       9386887ce574c3cd2c73c3d9a072164e  SAME
+5.6       renders/checks/t5.6.png       cabf2248205dffb4380b6dabd9e1126f  SAME
+8.4       renders/checks/t8.4.png       4b2ea15aed1f70f5461b80b46b9e6ae8  SAME
+11        renders/checks/t11.png        ae54ec49914c1b8d1531c42306e8be76  SAME
+14.5      renders/checks/t14.5.png      e337a51455eb5a9de484fc40424d26af  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.1 dB, frame 168)
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -21.8 dB, max -3.8 dB
+audio 25-stained-glass.mp4: mean -21.8 dB, max -3.8 dB  (7.1 MB)
+deep t=11: hash b802bcaa mean 13 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.2: hash 62646adb mean 13.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3.9: hash 9973b10e mean 17.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5.6: hash 1bd6de0e mean 14.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.4: hash 0ddc192d mean 14 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.5: hash c463351b mean 13.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

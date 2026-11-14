@@ -1,0 +1,40 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 14 old file(s): RUN.txt t0.4.png t1.0.png t10.6.png t11.6.png t12.2.png t12.4.png t13.75.png t13.9.png t14.8.png t2.4.png t3.45.png t5.2.png t8.2.png
+check-frames run: 2026-11-14 00:35:40 UTC
+times: 0.4, 1.0, 2.4, 3.45, 5.2, 8.2, 10.6, 11.6, 12.2, 12.4, 13.75, 13.9, 14.8
+newest code edit: 2026-11-13 19:19:40 UTC (isometric-pastel/iso.js)
+mp4: 20-isometric-pastel.mp4 2026-11-13 19:00:02 UTC
+kit last changed: 2026-11-14 00:14:11 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+0.4       renders/checks/t0.4.png       37707e20ce33161f5f6f2e75bbf54e21  SAME
+1.0       renders/checks/t1.0.png       7f5f32169199ffa774dd0f62286106fa  SAME
+2.4       renders/checks/t2.4.png       3fdb4585335a576bf76d560452f98b22  SAME
+3.45      renders/checks/t3.45.png      cc29ff24fa32cc7e79e4a8be8e90b2ac  SAME
+5.2       renders/checks/t5.2.png       67d86ed7729e971ae826827cabb8f435  SAME
+8.2       renders/checks/t8.2.png       c0d38239e586882d5d3d50e86c35dd7e  SAME
+10.6      renders/checks/t10.6.png      c8a0cff4f87d451d81e1f1cf635673a9  SAME
+11.6      renders/checks/t11.6.png      ec5701481c37ed433578c591f069cf6b  SAME
+12.2      renders/checks/t12.2.png      a9abb11ad426458b3c2aaa426f3b6cf5  SAME
+12.4      renders/checks/t12.4.png      9785be7fa13bbdd035bc15434e37a982  SAME
+13.75     renders/checks/t13.75.png     2e110df1dd795397694b7a5111fe6ad0  SAME
+13.9      renders/checks/t13.9.png      1ce5dfa308e35e1085119bddfcbec37d  SAME
+14.8      renders/checks/t14.8.png      9e1232dc982ae15cbe9e8884fa14fc77  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.9 dB, frame 417)
+determinism: OK (13 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -23.8 dB, max -6.0 dB
+audio 20-isometric-pastel.mp4: mean -23.9 dB, max -6.1 dB  (4.4 MB)
+deep t=1: hash 7259f1eb mean 238.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=0.4: hash ff1414ec mean 243.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.4: hash 83583ce3 mean 232.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3.45: hash a14f2cd6 mean 232.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5.2: hash 7a763619 mean 233.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.2: hash b877d562 mean 233.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.6: hash 0b67e576 mean 233.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=11.6: hash c52d5b80 mean 234.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.2: hash f78ebfc9 mean 232.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.4: hash 97bd2049 mean 232.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=13.75: hash a2e11876 mean 231.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=13.9: hash 49e473c4 mean 232.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.8: hash 1feb9d17 mean 232.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

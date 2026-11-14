@@ -1,0 +1,100 @@
+# Pass 4 (19 demos). md5 of decoded pixels; before (b4) taken first, run twice.
+## 00-smoke
+0.6s before 5bb4f7a54e31e5cc387c0a1c466d6ee6 after 5bb4f7a54e31e5cc387c0a1c466d6ee6 IDENTICAL
+1.5s before 4ad519fae5bfd273d2855d8003b19411 after 4ad519fae5bfd273d2855d8003b19411 IDENTICAL
+3.2s before 73f2e2dcfb650ca41f37ca2cb976a7e9 after 73f2e2dcfb650ca41f37ca2cb976a7e9 IDENTICAL
+4.8s before a3052e66f1cd2b57d2064f7bf2ff5423 after a3052e66f1cd2b57d2064f7bf2ff5423 IDENTICAL
+## 01-low-poly
+13.5s before 59cbaa3c20922889cae3c4cb34d1190d after 59cbaa3c20922889cae3c4cb34d1190d IDENTICAL
+2.6s before baa8f5fb7ae2d3d59aeec9f7bbe81984 after baa8f5fb7ae2d3d59aeec9f7bbe81984 IDENTICAL
+5s before 075e978570c36ebc232e1f23dd3e1375 after 075e978570c36ebc232e1f23dd3e1375 IDENTICAL
+8s before e989f8a5ea7e07720debf70ffb90da18 after e989f8a5ea7e07720debf70ffb90da18 IDENTICAL
+## 02-paper-pop-up
+14s before fba4ca4871a70c087f4216e32bb307da after fba4ca4871a70c087f4216e32bb307da IDENTICAL
+2.5s before 1896217995b66b1c85b0cb803bfd3e3d after 1896217995b66b1c85b0cb803bfd3e3d IDENTICAL
+4.5s before 815d7afcd44ab061a4e91760c19ef23d after 815d7afcd44ab061a4e91760c19ef23d IDENTICAL
+9s before b7a7bf2d9a8d7a850874f2ac4ff33922 after b7a7bf2d9a8d7a850874f2ac4ff33922 IDENTICAL
+## 03-neon-sign
+1.5s before 01de938bbcc2970dbe2b38573ef87bfe after 2dc7fa70794447ebaa4953a304397df5 DIFF
+14s before b954b27e0d98d3076830ca64cdd56ed0 after cb9f93055d6e3c7f8d277eafd0851788 DIFF
+4s before 5d923a003d0abef214e8f24c7797768d after e72e8b4b8a5684fe07d3752019f1fe4b DIFF
+9.5s before 1701fbda8cb8e0e0441278fa3742fdd8 after cc4bc33375035263e3f96af9fb018908 DIFF
+## 04-soft-clay
+1.5s before eb650f729943dd5b43af20d073642245 after eb650f729943dd5b43af20d073642245 IDENTICAL
+13.5s before 76607334b404faf9c1c9790915c834d8 after 76607334b404faf9c1c9790915c834d8 IDENTICAL
+5s before 97626255fe748cfb08817aad9b208397 after 97626255fe748cfb08817aad9b208397 IDENTICAL
+9s before 997f74c4ea822b5d24097419ec0e409c after 997f74c4ea822b5d24097419ec0e409c IDENTICAL
+## 05-tiny-diorama
+1.5s before 8cf99bbff97eda1a1a755f2990c51203 after 8cf99bbff97eda1a1a755f2990c51203 IDENTICAL
+13.5s before d0500753749b4d710eff9704ec3600fc after d0500753749b4d710eff9704ec3600fc IDENTICAL
+5s before ee3bf5396d9669a2e257eee84430c422 after ee3bf5396d9669a2e257eee84430c422 IDENTICAL
+9s before e47927d2b80a59ea269245caca89e650 after e47927d2b80a59ea269245caca89e650 IDENTICAL
+## 06-blueprint-build
+1.5s before 70a167980f38bb8c765f73316745cb53 after 70a167980f38bb8c765f73316745cb53 IDENTICAL
+13.5s before f4198f72594c0efff6cc4b4f22087398 after f4198f72594c0efff6cc4b4f22087398 IDENTICAL
+5s before a372b508a4383c8cbad759613225e2ca after a372b508a4383c8cbad759613225e2ca IDENTICAL
+9s before cdb977bb65a3c1028804b7139390b025 after cdb977bb65a3c1028804b7139390b025 IDENTICAL
+## 07-split-flap-board
+1.5s before 9cd23c91d7f3f6708a3116b4352e3f27 after 9cd23c91d7f3f6708a3116b4352e3f27 IDENTICAL
+13.5s before 9ba9c8121a136a62df8bb4da84041edd after 9ba9c8121a136a62df8bb4da84041edd IDENTICAL
+5s before d2ef58e786a22f5a9cf8941deda19a35 after d2ef58e786a22f5a9cf8941deda19a35 IDENTICAL
+9s before 867e825b0bf7fd6ec22d74a5600b9770 after 867e825b0bf7fd6ec22d74a5600b9770 IDENTICAL
+## 08-voxel
+1.5s before 6c0ec277f661ac8c0663cd4dbb883c4f after 6c0ec277f661ac8c0663cd4dbb883c4f IDENTICAL
+13.5s before fb59f4b36ae5ccb20b1f1d4f5c2a0b20 after fb59f4b36ae5ccb20b1f1d4f5c2a0b20 IDENTICAL
+5s before 4aa16528491051b3c5d8aea0e61699c6 after 4aa16528491051b3c5d8aea0e61699c6 IDENTICAL
+9s before e849f4459bc4d24be5e3cc8415b2e067 after e849f4459bc4d24be5e3cc8415b2e067 IDENTICAL
+## 09-spotlight-stage
+1.5s before 21f10f68af73a61d008b6ea8ec33a33a after 21f10f68af73a61d008b6ea8ec33a33a IDENTICAL
+13.5s before bae94d12589198f7ba37be18344ee8fd after bae94d12589198f7ba37be18344ee8fd IDENTICAL
+5s before 02d27752853675e2e0dfa0bad7cba029 after 02d27752853675e2e0dfa0bad7cba029 IDENTICAL
+9s before 0f6d49948e191dea30e3e25747d779ae after 0f6d49948e191dea30e3e25747d779ae IDENTICAL
+## 10-exploded-view
+1.5s before ef3c5f39ac35e317e48c62241c7bd7bf after ef3c5f39ac35e317e48c62241c7bd7bf IDENTICAL
+13.5s before cede3fb9a728b42f623e6be73a38e33d after cede3fb9a728b42f623e6be73a38e33d IDENTICAL
+5s before 480b02f566f2c1379d92008af694cc31 after 480b02f566f2c1379d92008af694cc31 IDENTICAL
+9s before 1c22ebf31f00d415930240d8c3c14936 after 1c22ebf31f00d415930240d8c3c14936 IDENTICAL
+## 11-marble-run
+1.5s before 3f36afbd5af280b1130882b7258854ec after 3f36afbd5af280b1130882b7258854ec IDENTICAL
+13.5s before e603100c9a7f25c4f7e5c094b01e7009 after e603100c9a7f25c4f7e5c094b01e7009 IDENTICAL
+5s before 4345fda7c8efb1c8527394181def2a64 after 4345fda7c8efb1c8527394181def2a64 IDENTICAL
+9s before 17159d3db26c05bc143b8c825ff6d03d after 17159d3db26c05bc143b8c825ff6d03d IDENTICAL
+## 12-studio-product
+1.5s before 21b1a0d69aaf3397edcd9de2ddc9d4d7 after 21b1a0d69aaf3397edcd9de2ddc9d4d7 IDENTICAL
+13.5s before 837a597e02a1b812bd83209da17bce7e after 837a597e02a1b812bd83209da17bce7e IDENTICAL
+5s before 7230e7409d31869088a7189a1588d870 after 7230e7409d31869088a7189a1588d870 IDENTICAL
+9s before c2fa3509b0550de022bdb3f001c8efbb after c2fa3509b0550de022bdb3f001c8efbb IDENTICAL
+## 13-wireframe-hologram
+1.5s before c13ecc2d4e6c5608a9bc945df64b05af after c13ecc2d4e6c5608a9bc945df64b05af IDENTICAL
+13.5s before 234ba29352141eb4a3d695c33acd3ecb after 234ba29352141eb4a3d695c33acd3ecb IDENTICAL
+5s before 3223182a3b0563bc2ad404e2f909bf3c after 3223182a3b0563bc2ad404e2f909bf3c IDENTICAL
+9s before 154fc121bd5f411badaca8dd8fad6cf7 after 154fc121bd5f411badaca8dd8fad6cf7 IDENTICAL
+## 14-origami
+1.5s before f00041c0ff5f3e6326225faf22c7ca69 after f00041c0ff5f3e6326225faf22c7ca69 IDENTICAL
+13.5s before 91667281ab01db105679a7f1c0cefe96 after 91667281ab01db105679a7f1c0cefe96 IDENTICAL
+5s before f5d9d2c14a40238d0dfb11c1565d6cec after f5d9d2c14a40238d0dfb11c1565d6cec IDENTICAL
+9s before 1573a11f917277f3d7d083abca9a781b after 1573a11f917277f3d7d083abca9a781b IDENTICAL
+## 15-felt-stitch
+1.5s before da76c11cce091f7ff3e6665e8009f8eb after da76c11cce091f7ff3e6665e8009f8eb IDENTICAL
+13.5s before 982fa029f90775998d6ed8aec986e144 after 982fa029f90775998d6ed8aec986e144 IDENTICAL
+5s before d76b0ba36ec7c398940626db324682eb after d76b0ba36ec7c398940626db324682eb IDENTICAL
+9s before 09336149b192d5f5978ce639ce9363e7 after 09336149b192d5f5978ce639ce9363e7 IDENTICAL
+## 16-toy-brick
+1.5s before 8296f34700221ed05dcede93f2c3d2b5 after 8296f34700221ed05dcede93f2c3d2b5 IDENTICAL
+13.5s before da475f30dd9afe0557f6424b0aab7bab after da475f30dd9afe0557f6424b0aab7bab IDENTICAL
+5s before dcd535b99c002dce394b9e8dc4c1c03b after dcd535b99c002dce394b9e8dc4c1c03b IDENTICAL
+9s before 0d4f2ef32dedb92c93d528d4e6646270 after 0d4f2ef32dedb92c93d528d4e6646270 IDENTICAL
+## 17-crt-retro
+1.5s before 9279110572673d15388e3a7b946c42a2 after 9279110572673d15388e3a7b946c42a2 IDENTICAL
+13.5s before b63584385183f4711978d5f779b71cc8 after b63584385183f4711978d5f779b71cc8 IDENTICAL
+5s before 9949c2f194c1fc528f7e98cc90ae4e7b after 9949c2f194c1fc528f7e98cc90ae4e7b IDENTICAL
+9s before aeb08a23eb2a73eb1ff6421ebf23b2d1 after aeb08a23eb2a73eb1ff6421ebf23b2d1 IDENTICAL
+## 18-floating-screens
+1.5s before e5a7b171ccfed33115afa9358f3e8139 after e5a7b171ccfed33115afa9358f3e8139 IDENTICAL
+13.5s before 61c993504c4faae1c9b8ba7acd462270 after 61c993504c4faae1c9b8ba7acd462270 IDENTICAL
+5s before 2f269542cd4bad2aed4fa4e70d8d1028 after 2f269542cd4bad2aed4fa4e70d8d1028 IDENTICAL
+9s before fa272c706f8d17daec087e9ab6d6d485 after fa272c706f8d17daec087e9ab6d6d485 IDENTICAL
+
+# 03-neon-sign is not bit-stable even with an unchanged kit (b4 vs b4b: 1-3 px at +-1 level). After vs before: <=0.008% px, max 1 level; 3 extra runs: 1-7 px, max 1. Treated as GPU noise.
+# pass4-dof-prepass/: what studio-product and toy-brick would change WITHOUT legacyPrepass (diff x6). They pass legacyPrepass:true and stay identical.
+# sfx.wav regenerated byte-identical for all 19.

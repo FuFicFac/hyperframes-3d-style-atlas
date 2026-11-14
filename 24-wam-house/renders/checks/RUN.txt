@@ -1,0 +1,20 @@
+check-frames run: 2026-11-14 05:20:17 UTC
+times: 0.75, 1.2, 2.6, 3.3, 4.6, 5.75, 6.3, 8.2, 9.7, 10.2, 11.2, 12.7, 14.6
+newest code edit: 2026-11-13 19:19:40 UTC (wam-house/style.js)
+mp4: 24-wam-house.mp4 2026-11-13 19:07:59 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.2 dB, frame 306)
+  frame 36 (t=1.200): 36.6 dB
+  frame 78 (t=2.600): 36.7 dB
+  frame 99 (t=3.300): 41.5 dB
+  frame 138 (t=4.600): 41.0 dB
+  frame 189 (t=6.300): 38.5 dB
+  frame 246 (t=8.200): 38.8 dB
+  frame 291 (t=9.700): 34.5 dB
+  frame 306 (t=10.200): 34.2 dB
+  frame 336 (t=11.200): 36.1 dB
+  frame 381 (t=12.700): 36.2 dB
+  frame 438 (t=14.600): 35.4 dB
+determinism: OK (13 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

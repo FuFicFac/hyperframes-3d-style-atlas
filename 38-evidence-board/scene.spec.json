@@ -1,0 +1,1553 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "evidence-board",
+    "name": "Evidence Board",
+    "description": "An investigator's cork board on a dim office wall under a desk lamp: calm cork in a dark oak frame, pinned index cards with typewriter text, instant-photo prints of code-drawn pictures (objects, places, diagrams), torn notebook scraps, a map fragment of an invented place, sticky flags and coloured map pins. Items fly in and are pinned one at a time (tilt, pin drives home with a bounce); red string is drawn pin to pin, sagging as a catenary, wrapping each pin and pulling taut with a twang, until the web reveals the link; a marker circles the key item and the camera follows the thread.",
+    "palette": {
+      "bg": "#0d0b0a",
+      "wall": "#2a231e",
+      "cork": "#b8946a",
+      "corkDark": "#8a6c4c",
+      "corkLight": "#d4b48a",
+      "frame": "#3b2416",
+      "card": "#f3ecdc",
+      "cardRule": "#8fb2cf",
+      "cardRed": "#c9605a",
+      "photoBorder": "#f4f1ea",
+      "scrap": "#f1ecdf",
+      "scrapRule": "#9fb5d1",
+      "mapPaper": "#ece2c8",
+      "mapInk": "#3c5a78",
+      "ink": "#1f1b17",
+      "pencil": "#3a3a40",
+      "string": "#b3201c",
+      "marker": "#d1271f",
+      "pins": [
+        "#d23b2f",
+        "#2f6db5",
+        "#e2b62f",
+        "#3a9a5b",
+        "#f2efe6",
+        "#1f1f22"
+      ],
+      "flags": [
+        "#ff8a3d",
+        "#f5d33c",
+        "#4fc3e8",
+        "#ff6f9a",
+        "#8bdc5a"
+      ]
+    },
+    "world": {
+      "background": "#0d0b0a",
+      "environment": "room",
+      "environmentIntensity": 0.08,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "frame": {
+        "type": "physical",
+        "baseColor": "#ffffff",
+        "roughness": 0.55,
+        "metalness": 0,
+        "clearcoat": 0.25,
+        "clearcoatRoughness": 0.5
+      },
+      "wall": {
+        "type": "standard",
+        "baseColor": "#2a231e",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "needle": {
+        "type": "standard",
+        "baseColor": "#c9ccd1",
+        "roughness": 0.28,
+        "metalness": 1
+      },
+      "lampShade": {
+        "type": "standard",
+        "baseColor": "#24382c",
+        "roughness": 0.4,
+        "metalness": 0.35
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#efe2cc",
+        "groundColor": "#120d09",
+        "intensity": 0.42
+      },
+      {
+        "id": "lamp",
+        "type": "spot",
+        "color": "#ffe9cc",
+        "intensity": 9,
+        "position": [
+          -0.55,
+          0.95,
+          1.35
+        ],
+        "target": [
+          0.05,
+          -0.05,
+          0
+        ],
+        "angle": 0.78,
+        "penumbra": 0.85,
+        "decay": 2,
+        "distance": 0,
+        "shadow": {
+          "softness": 3,
+          "mapSize": 2048,
+          "near": 0.4,
+          "far": 3.5,
+          "bias": -0.0002,
+          "normalBias": 0.002
+        }
+      },
+      {
+        "id": "spill",
+        "type": "directional",
+        "color": "#9fb4cc",
+        "intensity": 0.28,
+        "position": [
+          1.6,
+          0.3,
+          1.2
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.12,
+        "radius": 0.4,
+        "threshold": 3
+      },
+      "vignette": {
+        "darkness": 0.55,
+        "offset": 1
+      },
+      "grain": {
+        "amount": 0.012,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.05,
+      "far": 10,
+      "drift": {
+        "amp": 0.004,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#1f1b17",
+      "height": 0.03
+    },
+    "board": {
+      "W": 1.8,
+      "H": 1.1,
+      "frame": {
+        "width": 0.06,
+        "depth": 0.035,
+        "bevel": 0.008
+      },
+      "cork": {
+        "px": 2048,
+        "blotch": 0.06,
+        "blotchScale": 5,
+        "grain": 0.07,
+        "grainCells": 260,
+        "pits": 0.05,
+        "bumpScale": 1,
+        "seed": 11,
+        "pinholes": 90
+      },
+      "wall": {
+        "w": 6,
+        "h": 4,
+        "z": -0.04
+      }
+    },
+    "paper": {
+      "px": 900,
+      "pxPerM": 2600,
+      "seg": 14,
+      "curl": 0.005,
+      "roughness": 0.82,
+      "gloss": {
+        "roughness": 0.32,
+        "clearcoat": 0.35
+      },
+      "layer": 0.0016
+    },
+    "card": {
+      "W": 0.32,
+      "H": 0.2,
+      "font": "\"American Typewriter\", \"Courier New\", Courier, monospace",
+      "titleCap": 0.021,
+      "lineCap": 0.016,
+      "line": 0.026,
+      "margin": 0.03
+    },
+    "photo": {
+      "W": 0.25,
+      "H": 0.3,
+      "border": 0.014,
+      "bottom": 0.062,
+      "font": "\"Marker Felt\", \"Noteworthy\", \"Bradley Hand\", sans-serif",
+      "cap": 0.022,
+      "fade": 0.12
+    },
+    "scrap": {
+      "W": 0.25,
+      "H": 0.16,
+      "font": "\"Noteworthy\", \"Bradley Hand\", \"Marker Felt\", sans-serif",
+      "cap": 0.0155,
+      "tear": 0.012
+    },
+    "map": {
+      "W": 0.34,
+      "H": 0.26,
+      "font": "\"American Typewriter\", \"Courier New\", monospace",
+      "cap": 0.013,
+      "tear": 0.01
+    },
+    "flag": {
+      "W": 0.05,
+      "H": 0.018,
+      "alpha": 0.88
+    },
+    "pin": {
+      "head": 0.0085,
+      "neck": 0.0035,
+      "needle": 0.0009,
+      "length": 0.03,
+      "raise": 0.032,
+      "drive": 0.11,
+      "bounce": 0.0035,
+      "bounceDecay": 0.06,
+      "bounceHz": 9
+    },
+    "string": {
+      "radius": 0.0016,
+      "radial": 6,
+      "n": 72,
+      "z": 0.016,
+      "speed": 0.62,
+      "minDraw": 0.55,
+      "maxDraw": 1.1,
+      "slack": 0.075,
+      "taut": 0.0035,
+      "lift": 0.05,
+      "wrapTurns": 1.25,
+      "wrapR": 0.0032,
+      "wrapPts": 9,
+      "wrapDur": 0.16,
+      "tighten": 0.16,
+      "twang": {
+        "amp": 0.0045,
+        "decay": 0.16,
+        "hz": 8.5
+      },
+      "roughness": 0.75
+    },
+    "fly": {
+      "dur": 0.5,
+      "z": 0.42,
+      "hover": 0.012,
+      "from": [
+        0.18,
+        -0.14
+      ],
+      "tilt": [
+        0.55,
+        -0.45,
+        0.5
+      ],
+      "landTilt": 0.12,
+      "swingHz": 2.2,
+      "swingDecay": 0.35,
+      "pinDelay": 0.08
+    },
+    "marker": {
+      "width": 0.007,
+      "dur": 0.75,
+      "turns": 1.08,
+      "wobble": 0.06,
+      "z": 0.003
+    },
+    "flagPop": {
+      "dur": 0.18
+    },
+    "caption": {
+      "x": 92,
+      "y": 60,
+      "h": 86,
+      "cap": 40,
+      "font": "\"American Typewriter\", \"Courier New\", monospace",
+      "weight": 700,
+      "tape": "#e9dcb8",
+      "tapeEdge": "#cdbd93",
+      "ink": "#231c15"
+    },
+    "sound": {
+      "flutter": {
+        "gain": 0.22,
+        "pitch": 1.5
+      },
+      "thunk": {
+        "gain": 0.5,
+        "pitch": 1.7
+      },
+      "prick": {
+        "gain": 0.16,
+        "pitch": 0.7
+      },
+      "draw": {
+        "gain": 0.12,
+        "pitch": 2.2
+      },
+      "wrap": {
+        "gain": 0.12,
+        "pitch": 1.3
+      },
+      "twang": {
+        "gain": 0.3,
+        "hz": 196,
+        "hz2": 182
+      },
+      "flag": {
+        "gain": 0.2,
+        "pitch": 1.9
+      },
+      "marker": {
+        "gain": 0.28,
+        "pitch": 1.15
+      },
+      "bed": {
+        "gain": 0.75,
+        "root": 98,
+        "brightness": 700
+      }
+    },
+    "sfx": {
+      "enter": "paper",
+      "exit": "whooshOut",
+      "move": "rustle",
+      "land": "thud",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Pin-in: an item flies in from in front of the board, tumbling and fluttering, holds just off the cork with a tilt, then the pin drives home with a small bounce and the item swings about the pin into place.",
+      "String: the free end is carried from pin to pin on an arc; the drawn length grows with time and hangs as a true catenary under gravity, wraps the far pin and pulls taut with a short decaying twang.",
+      "Flags and marker: sticky flags pop onto items; a red marker circles the key item stroke by stroke.",
+      "Camera: square-on to the board with a little parallax, following each new string from pin to pin like a train of thought, ending on a wide that fills the frame with the finished web."
+    ]
+  },
+  "scene": {
+    "id": "38-evidence-board",
+    "style": "evidence-board",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "ask",
+        "t": 0,
+        "dur": 3.4,
+        "label": "Why does the fern wilt?"
+      },
+      {
+        "id": "gather",
+        "t": 3.4,
+        "dur": 3.6,
+        "label": "Pin up what we know"
+      },
+      {
+        "id": "follow",
+        "t": 7,
+        "dur": 3.6,
+        "label": "Follow the thread"
+      },
+      {
+        "id": "link",
+        "t": 10.6,
+        "dur": 4.4,
+        "label": "The link: a warm vent"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -0.4886,
+          0.2534,
+          1.0432
+        ],
+        "target": [
+          -0.5581,
+          0.2186,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 0.7,
+        "pos": [
+          -0.4886,
+          0.2534,
+          1.0432
+        ],
+        "target": [
+          -0.5581,
+          0.2186,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 1.55,
+        "pos": [
+          -0.2584,
+          0.1199,
+          1.7855
+        ],
+        "target": [
+          -0.3775,
+          0.0604,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 3.2,
+        "pos": [
+          -0.2584,
+          0.1199,
+          1.7855
+        ],
+        "target": [
+          -0.3775,
+          0.0604,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 4.12,
+        "pos": [
+          0.117,
+          0.3445,
+          1.701
+        ],
+        "target": [
+          0.0036,
+          0.2878,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 5.14,
+        "pos": [
+          0.1664,
+          0.1911,
+          2.1649
+        ],
+        "target": [
+          0.0221,
+          0.119,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 6.9,
+        "pos": [
+          0.1664,
+          0.1911,
+          2.1649
+        ],
+        "target": [
+          0.0221,
+          0.119,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 7.8,
+        "pos": [
+          0.4447,
+          -0.0639,
+          1.6688
+        ],
+        "target": [
+          0.3335,
+          -0.1196,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 8.644,
+        "pos": [
+          0.4447,
+          -0.0639,
+          1.6688
+        ],
+        "target": [
+          0.3335,
+          -0.1196,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 9.2,
+        "pos": [
+          0.1499,
+          0.0997,
+          2.2689
+        ],
+        "target": [
+          -0.0014,
+          0.0241,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.032,
+        "pos": [
+          0.1499,
+          0.0997,
+          2.2689
+        ],
+        "target": [
+          -0.0014,
+          0.0241,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.5,
+        "pos": [
+          0.0346,
+          -0.0566,
+          1.6846
+        ],
+        "target": [
+          -0.0328,
+          -0.1128,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.89,
+        "pos": [
+          0.0346,
+          -0.0566,
+          1.6846
+        ],
+        "target": [
+          -0.0328,
+          -0.1128,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 14.09,
+        "pos": [
+          0.0995,
+          0.114,
+          2.3865
+        ],
+        "target": [
+          0.004,
+          0.0663,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0.0995,
+          0.114,
+          2.3865
+        ],
+        "target": [
+          0.004,
+          0.0663,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [
+      {
+        "id": "board",
+        "primitive": "procedural",
+        "factory": "board",
+        "procedural": "1.8 x 1.1 m cork panel (calm canvas cork: blotches, granules, pits, old pin holes; bump from the same canvas) in a bevelled dark-oak frame, on a dark office wall",
+        "dims": {}
+      },
+      {
+        "id": "lampSet",
+        "primitive": "procedural",
+        "factory": "lampSet",
+        "procedural": "desk-lamp head (enamel cone shade, emissive bulb, arm) at the 'lamp' spot light, aimed at the board; out of shot",
+        "dims": {}
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.75,
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          10,
+          15
+        ],
+        "attack": 1.6,
+        "release": 1.8,
+        "brightness": 700
+      },
+      {
+        "t": 0,
+        "type": "hum",
+        "dur": 15,
+        "gain": 0.03,
+        "seed": 77
+      },
+      {
+        "t": 12.59,
+        "type": "chime",
+        "dur": 1.8,
+        "notes": 3,
+        "gain": 0.14,
+        "pitch": 0.9,
+        "seed": 91
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "pitch": 1.5,
+        "density": 0.55,
+        "gain": 0.22,
+        "t": 0.3,
+        "pan": -0.3917867404080858,
+        "seed": 101
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.45,
+        "pitch": 1.6,
+        "gain": 0.12100000000000001,
+        "t": 0.3,
+        "pan": -0.3917867404080858,
+        "seed": 102
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "pitch": 1.5,
+        "density": 0.55,
+        "gain": 0.22,
+        "t": 0.95,
+        "pan": -0.4040538445246447,
+        "seed": 108
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.45,
+        "pitch": 1.6,
+        "gain": 0.12100000000000001,
+        "t": 0.95,
+        "pan": -0.4040538445246447,
+        "seed": 109
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.7,
+        "gain": 0.16,
+        "t": 0.978,
+        "pan": -0.3917867404080858,
+        "seed": 115
+      },
+      {
+        "type": "thud",
+        "dur": 0.22,
+        "pitch": 1.7,
+        "gain": 0.5,
+        "t": 0.99,
+        "pan": -0.3917867404080858,
+        "seed": 116
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.7,
+        "gain": 0.16,
+        "t": 1.6280000000000001,
+        "pan": -0.4040538445246447,
+        "seed": 122
+      },
+      {
+        "type": "thud",
+        "dur": 0.22,
+        "pitch": 1.7,
+        "gain": 0.5,
+        "t": 1.6400000000000001,
+        "pan": -0.4040538445246447,
+        "seed": 123
+      },
+      {
+        "type": "rustle",
+        "dur": 0.7582892394692756,
+        "pitch": 2.2,
+        "density": 0.2,
+        "gain": 0.12,
+        "t": 1.85,
+        "pan": -0.39792029246636523,
+        "seed": 129
+      },
+      {
+        "type": "tick",
+        "dur": 0.025,
+        "pitch": 1.3,
+        "gain": 0.12,
+        "t": 1.87,
+        "pan": -0.39792029246636523,
+        "seed": 136
+      },
+      {
+        "type": "tick",
+        "dur": 0.025,
+        "pitch": 1.3,
+        "gain": 0.12,
+        "t": 2.6082892394692756,
+        "pan": -0.39792029246636523,
+        "seed": 143
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.6,
+        "gain": 0.15,
+        "t": 2.928289239469276,
+        "pan": -0.39792029246636523,
+        "seed": 150
+      },
+      {
+        "type": "servo",
+        "dur": 0.26,
+        "hz": 187.60396048306717,
+        "hz2": 174.2036775914195,
+        "grit": 0.04,
+        "gain": 0.3,
+        "t": 2.928289239469276,
+        "pan": -0.39792029246636523,
+        "seed": 151
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.9,
+        "gain": 0.2,
+        "t": 3.0580000000000003,
+        "pan": -0.39792029246636523,
+        "seed": 157
+      },
+      {
+        "type": "paper",
+        "dur": 0.12,
+        "pitch": 2.4,
+        "density": 0.3,
+        "gain": 0.12,
+        "t": 3.0580000000000003,
+        "pan": -0.39792029246636523,
+        "seed": 158
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "pitch": 1.5,
+        "density": 0.55,
+        "gain": 0.22,
+        "t": 3.52,
+        "pan": -0.04489740836123904,
+        "seed": 164
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.45,
+        "pitch": 1.6,
+        "gain": 0.12100000000000001,
+        "t": 3.52,
+        "pan": -0.04489740836123904,
+        "seed": 165
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "pitch": 1.5,
+        "density": 0.55,
+        "gain": 0.22,
+        "t": 4.08,
+        "pan": 0.3789968095970007,
+        "seed": 171
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.45,
+        "pitch": 1.6,
+        "gain": 0.12100000000000001,
+        "t": 4.08,
+        "pan": 0.3789968095970007,
+        "seed": 172
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.7,
+        "gain": 0.16,
+        "t": 4.198,
+        "pan": -0.04489740836123904,
+        "seed": 178
+      },
+      {
+        "type": "thud",
+        "dur": 0.22,
+        "pitch": 1.7,
+        "gain": 0.5,
+        "t": 4.21,
+        "pan": -0.04489740836123904,
+        "seed": 179
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "pitch": 1.5,
+        "density": 0.55,
+        "gain": 0.22,
+        "t": 4.64,
+        "pan": 0.38538860424284777,
+        "seed": 185
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.45,
+        "pitch": 1.6,
+        "gain": 0.12100000000000001,
+        "t": 4.64,
+        "pan": 0.38538860424284777,
+        "seed": 186
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.7,
+        "gain": 0.16,
+        "t": 4.758000000000001,
+        "pan": 0.3789968095970007,
+        "seed": 192
+      },
+      {
+        "type": "thud",
+        "dur": 0.22,
+        "pitch": 1.7,
+        "gain": 0.5,
+        "t": 4.7700000000000005,
+        "pan": 0.3789968095970007,
+        "seed": 193
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.7,
+        "gain": 0.16,
+        "t": 5.3180000000000005,
+        "pan": 0.38538860424284777,
+        "seed": 199
+      },
+      {
+        "type": "thud",
+        "dur": 0.22,
+        "pitch": 1.7,
+        "gain": 0.5,
+        "t": 5.33,
+        "pan": 0.38538860424284777,
+        "seed": 200
+      },
+      {
+        "type": "rustle",
+        "dur": 0.9450267563552632,
+        "pitch": 2.2,
+        "density": 0.2,
+        "gain": 0.12,
+        "t": 5.35,
+        "pan": -0.21834207438466244,
+        "seed": 206
+      },
+      {
+        "type": "tick",
+        "dur": 0.025,
+        "pitch": 1.3,
+        "gain": 0.12,
+        "t": 5.369999999999999,
+        "pan": -0.21834207438466244,
+        "seed": 213
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.9,
+        "gain": 0.2,
+        "t": 5.707999999999999,
+        "pan": -0.21834207438466244,
+        "seed": 220
+      },
+      {
+        "type": "paper",
+        "dur": 0.12,
+        "pitch": 2.4,
+        "density": 0.3,
+        "gain": 0.12,
+        "t": 5.707999999999999,
+        "pan": -0.21834207438466244,
+        "seed": 221
+      },
+      {
+        "type": "rustle",
+        "dur": 0.6924177116497184,
+        "pitch": 2.2,
+        "density": 0.2,
+        "gain": 0.12,
+        "t": 5.949999999999999,
+        "pan": 0.3821927069199243,
+        "seed": 227
+      },
+      {
+        "type": "tick",
+        "dur": 0.025,
+        "pitch": 1.3,
+        "gain": 0.12,
+        "t": 5.969999999999999,
+        "pan": 0.3821927069199243,
+        "seed": 234
+      },
+      {
+        "type": "tick",
+        "dur": 0.025,
+        "pitch": 1.3,
+        "gain": 0.12,
+        "t": 6.295026756355263,
+        "pan": -0.21834207438466244,
+        "seed": 241
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.6,
+        "gain": 0.15,
+        "t": 6.615026756355263,
+        "pan": -0.21834207438466244,
+        "seed": 248
+      },
+      {
+        "type": "servo",
+        "dur": 0.26,
+        "hz": 150.53337226639334,
+        "hz2": 139.78098853307952,
+        "grit": 0.04,
+        "gain": 0.3,
+        "t": 6.615026756355263,
+        "pan": -0.21834207438466244,
+        "seed": 249
+      },
+      {
+        "type": "tick",
+        "dur": 0.025,
+        "pitch": 1.3,
+        "gain": 0.12,
+        "t": 6.642417711649718,
+        "pan": 0.3821927069199243,
+        "seed": 255
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.6,
+        "gain": 0.15,
+        "t": 6.962417711649718,
+        "pan": 0.3821927069199243,
+        "seed": 262
+      },
+      {
+        "type": "servo",
+        "dur": 0.26,
+        "hz": 205.45122131147158,
+        "hz2": 190.7761340749379,
+        "grit": 0.04,
+        "gain": 0.3,
+        "t": 6.962417711649718,
+        "pan": 0.3821927069199243,
+        "seed": 263
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "pitch": 1.5,
+        "density": 0.55,
+        "gain": 0.22,
+        "t": 7.05,
+        "pan": 0.07448362741676663,
+        "seed": 269
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.45,
+        "pitch": 1.6,
+        "gain": 0.12100000000000001,
+        "t": 7.05,
+        "pan": 0.07448362741676663,
+        "seed": 270
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.7,
+        "gain": 0.16,
+        "t": 7.728000000000001,
+        "pan": 0.07448362741676663,
+        "seed": 276
+      },
+      {
+        "type": "thud",
+        "dur": 0.22,
+        "pitch": 1.7,
+        "gain": 0.5,
+        "t": 7.74,
+        "pan": 0.07448362741676663,
+        "seed": 277
+      },
+      {
+        "type": "rustle",
+        "dur": 0.8435539711554868,
+        "pitch": 2.2,
+        "density": 0.2,
+        "gain": 0.12,
+        "t": 7.8,
+        "pan": 0.2299361158298072,
+        "seed": 283
+      },
+      {
+        "type": "tick",
+        "dur": 0.025,
+        "pitch": 1.3,
+        "gain": 0.12,
+        "t": 7.819999999999999,
+        "pan": 0.2299361158298072,
+        "seed": 290
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.7,
+        "gain": 0.16,
+        "t": 8.318,
+        "pan": -0.024,
+        "seed": 297
+      },
+      {
+        "type": "thud",
+        "dur": 0.22,
+        "pitch": 2.125,
+        "gain": 0.375,
+        "t": 8.33,
+        "pan": -0.024,
+        "seed": 298
+      },
+      {
+        "type": "tick",
+        "dur": 0.025,
+        "pitch": 1.3,
+        "gain": 0.12,
+        "t": 8.643553971155487,
+        "pan": 0.2299361158298072,
+        "seed": 304
+      },
+      {
+        "type": "rustle",
+        "dur": 0.55,
+        "pitch": 2.2,
+        "density": 0.2,
+        "gain": 0.12,
+        "t": 8.85,
+        "pan": 0.025241813708383316,
+        "seed": 311
+      },
+      {
+        "type": "tick",
+        "dur": 0.025,
+        "pitch": 1.3,
+        "gain": 0.12,
+        "t": 8.87,
+        "pan": 0.025241813708383316,
+        "seed": 318
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.6,
+        "gain": 0.15,
+        "t": 8.963553971155488,
+        "pan": 0.2299361158298072,
+        "seed": 325
+      },
+      {
+        "type": "servo",
+        "dur": 0.26,
+        "hz": 168.64133105942966,
+        "hz2": 156.59552169804184,
+        "grit": 0.04,
+        "gain": 0.3,
+        "t": 8.963553971155488,
+        "pan": 0.2299361158298072,
+        "seed": 326
+      },
+      {
+        "type": "rustle",
+        "dur": 1.1,
+        "pitch": 2.2,
+        "density": 0.2,
+        "gain": 0.12,
+        "t": 9.1,
+        "pan": 0.17749840479850035,
+        "seed": 332
+      },
+      {
+        "type": "tick",
+        "dur": 0.025,
+        "pitch": 1.3,
+        "gain": 0.12,
+        "t": 9.12,
+        "pan": 0.17749840479850035,
+        "seed": 339
+      },
+      {
+        "type": "rustle",
+        "dur": 1.0616507802450075,
+        "pitch": 2.2,
+        "density": 0.2,
+        "gain": 0.12,
+        "t": 9.35,
+        "pan": -0.20789337020404292,
+        "seed": 346
+      },
+      {
+        "type": "tick",
+        "dur": 0.025,
+        "pitch": 1.3,
+        "gain": 0.12,
+        "t": 9.37,
+        "pan": -0.20789337020404292,
+        "seed": 353
+      },
+      {
+        "type": "tick",
+        "dur": 0.025,
+        "pitch": 1.3,
+        "gain": 0.12,
+        "t": 9.4,
+        "pan": 0.025241813708383316,
+        "seed": 360
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.6,
+        "gain": 0.15,
+        "t": 9.72,
+        "pan": 0.025241813708383316,
+        "seed": 367
+      },
+      {
+        "type": "servo",
+        "dur": 0.26,
+        "hz": 290.7893043773248,
+        "hz2": 270.0186397789445,
+        "grit": 0.04,
+        "gain": 0.3,
+        "t": 9.72,
+        "pan": 0.025241813708383316,
+        "seed": 368
+      },
+      {
+        "type": "tick",
+        "dur": 0.025,
+        "pitch": 1.3,
+        "gain": 0.12,
+        "t": 10.2,
+        "pan": 0.17749840479850035,
+        "seed": 374
+      },
+      {
+        "type": "tick",
+        "dur": 0.025,
+        "pitch": 1.3,
+        "gain": 0.12,
+        "t": 10.411650780245008,
+        "pan": -0.20789337020404292,
+        "seed": 381
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.6,
+        "gain": 0.15,
+        "t": 10.52,
+        "pan": 0.17749840479850035,
+        "seed": 388
+      },
+      {
+        "type": "servo",
+        "dur": 0.26,
+        "hz": 137.2,
+        "hz2": 127.39999999999999,
+        "grit": 0.04,
+        "gain": 0.3,
+        "t": 10.52,
+        "pan": 0.17749840479850035,
+        "seed": 389
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.6,
+        "gain": 0.15,
+        "t": 10.731650780245008,
+        "pan": -0.20789337020404292,
+        "seed": 395
+      },
+      {
+        "type": "servo",
+        "dur": 0.26,
+        "hz": 137.2,
+        "hz2": 127.39999999999999,
+        "grit": 0.04,
+        "gain": 0.3,
+        "t": 10.731650780245008,
+        "pan": -0.20789337020404292,
+        "seed": 396
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.75,
+        "pitch": 1.15,
+        "speed": 1.4,
+        "gain": 0.28,
+        "t": 10.95,
+        "pan": 0,
+        "seed": 402
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "pitch": 1.5,
+        "density": 0.55,
+        "gain": 0.22,
+        "t": 11.85,
+        "pan": -0.024000000000000004,
+        "seed": 409
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.45,
+        "pitch": 1.6,
+        "gain": 0.12100000000000001,
+        "t": 11.85,
+        "pan": -0.024000000000000004,
+        "seed": 410
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 0.7,
+        "gain": 0.16,
+        "t": 12.527999999999999,
+        "pan": -0.024000000000000004,
+        "seed": 416
+      },
+      {
+        "type": "thud",
+        "dur": 0.22,
+        "pitch": 1.7,
+        "gain": 0.5,
+        "t": 12.54,
+        "pan": -0.024000000000000004,
+        "seed": 417
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "threads.js plans every item (fly-in, hover, pin drive + bounce, swing about the pin) and every string (free end carried pin to pin, drawn length grows, exact catenary sag, wraps, pulls taut, twangs). style.js only reads poses/points; strings are kit liveTubes rewritten from t.",
+      "framing": "ok (worst margin -0.0405 at 14.566667s, board)",
+      "fill": {
+        "ask": 0.18,
+        "gather2": 0.54,
+        "follow": 0.26,
+        "link": 0.29,
+        "wide": 0.69
+      },
+      "events": [
+        {
+          "t": 0.3,
+          "kind": "flutter"
+        },
+        {
+          "t": 0.95,
+          "kind": "flutter"
+        },
+        {
+          "t": 0.99,
+          "kind": "thunk"
+        },
+        {
+          "t": 1.64,
+          "kind": "thunk"
+        },
+        {
+          "t": 1.85,
+          "kind": "draw"
+        },
+        {
+          "t": 1.87,
+          "kind": "wrap"
+        },
+        {
+          "t": 2.608,
+          "kind": "wrap"
+        },
+        {
+          "t": 2.928,
+          "kind": "twang"
+        },
+        {
+          "t": 3.058,
+          "kind": "flag"
+        },
+        {
+          "t": 3.52,
+          "kind": "flutter"
+        },
+        {
+          "t": 4.08,
+          "kind": "flutter"
+        },
+        {
+          "t": 4.21,
+          "kind": "thunk"
+        },
+        {
+          "t": 4.64,
+          "kind": "flutter"
+        },
+        {
+          "t": 4.77,
+          "kind": "thunk"
+        },
+        {
+          "t": 5.33,
+          "kind": "thunk"
+        },
+        {
+          "t": 5.35,
+          "kind": "draw"
+        },
+        {
+          "t": 5.37,
+          "kind": "wrap"
+        },
+        {
+          "t": 5.708,
+          "kind": "flag"
+        },
+        {
+          "t": 5.95,
+          "kind": "draw"
+        },
+        {
+          "t": 5.97,
+          "kind": "wrap"
+        },
+        {
+          "t": 6.295,
+          "kind": "wrap"
+        },
+        {
+          "t": 6.615,
+          "kind": "twang"
+        },
+        {
+          "t": 6.642,
+          "kind": "wrap"
+        },
+        {
+          "t": 6.962,
+          "kind": "twang"
+        },
+        {
+          "t": 7.05,
+          "kind": "flutter"
+        },
+        {
+          "t": 7.74,
+          "kind": "thunk"
+        },
+        {
+          "t": 7.8,
+          "kind": "draw"
+        },
+        {
+          "t": 7.82,
+          "kind": "wrap"
+        },
+        {
+          "t": 8.33,
+          "kind": "thunk"
+        },
+        {
+          "t": 8.644,
+          "kind": "wrap"
+        },
+        {
+          "t": 8.85,
+          "kind": "draw"
+        },
+        {
+          "t": 8.87,
+          "kind": "wrap"
+        },
+        {
+          "t": 8.964,
+          "kind": "twang"
+        },
+        {
+          "t": 9.1,
+          "kind": "draw"
+        },
+        {
+          "t": 9.12,
+          "kind": "wrap"
+        },
+        {
+          "t": 9.35,
+          "kind": "draw"
+        },
+        {
+          "t": 9.37,
+          "kind": "wrap"
+        },
+        {
+          "t": 9.4,
+          "kind": "wrap"
+        },
+        {
+          "t": 9.72,
+          "kind": "twang"
+        },
+        {
+          "t": 10.2,
+          "kind": "wrap"
+        },
+        {
+          "t": 10.412,
+          "kind": "wrap"
+        },
+        {
+          "t": 10.52,
+          "kind": "twang"
+        },
+        {
+          "t": 10.732,
+          "kind": "twang"
+        },
+        {
+          "t": 10.95,
+          "kind": "marker"
+        },
+        {
+          "t": 11.85,
+          "kind": "flutter"
+        },
+        {
+          "t": 12.54,
+          "kind": "thunk"
+        }
+      ]
+    }
+  }
+}

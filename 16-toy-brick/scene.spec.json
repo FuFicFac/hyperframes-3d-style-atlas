@@ -1,0 +1,1737 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "toy-brick",
+    "name": "Toy Brick",
+    "description": "Generic interlocking plastic construction bricks shot as toy-photography macro: glossy moulded ABS bricks, plates, slopes, arches, rounds and tiles on a stud grid with hairline seams and tiny bevels, crisp soft-box reflections, tinted transparent pieces, a studded baseplate on a pale studio table, shallow depth of field; everything is BUILT — bricks drop in bottom-up and snap down with a squash and a click.",
+    "palette": {
+      "bg": "#e9e4dc",
+      "table": "#ece7df",
+      "baseplate": "#b4bac1",
+      "ink": "#1d1e22",
+      "red": "#c8170e",
+      "yellow": "#f6c218",
+      "blue": "#0b5bb5",
+      "green": "#1d8c3c",
+      "orange": "#f57d12",
+      "white": "#f3f1ec",
+      "black": "#1c1d21",
+      "lightGrey": "#a3a8ad",
+      "darkGrey": "#5d6168",
+      "lavender": "#b8a3ec",
+      "mint": "#8fdcc0",
+      "pink": "#f4a3c4",
+      "sky": "#86c6ef",
+      "transClear": "#e8f2f6",
+      "transYellow": "#ffd23a",
+      "transBlue": "#4fb0ff",
+      "transOrange": "#ff8a2a",
+      "sticker": "#fbfaf7",
+      "stickerShadow": "#1d1e22",
+      "primary": "#c8170e",
+      "secondary": "#0b5bb5",
+      "accent": "#f6c218"
+    },
+    "world": {
+      "background": "#e9e4dc",
+      "fog": {
+        "color": "#e9e4dc",
+        "near": 6,
+        "far": 16
+      },
+      "environment": null,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "pcf"
+    },
+    "materials": {
+      "plastic": {
+        "type": "physical",
+        "baseColor": "#ffffff",
+        "roughness": 0.16,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.035
+      },
+      "baseplate": {
+        "type": "physical",
+        "baseColor": "#b4bac1",
+        "roughness": 0.26,
+        "metalness": 0,
+        "clearcoat": 0.6,
+        "clearcoatRoughness": 0.08
+      },
+      "table": {
+        "type": "physical",
+        "baseColor": "#ece7df",
+        "roughness": 0.62,
+        "metalness": 0,
+        "clearcoat": 0.12,
+        "clearcoatRoughness": 0.4
+      },
+      "eye": {
+        "type": "physical",
+        "baseColor": "#141416",
+        "roughness": 0.12,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.03
+      }
+    },
+    "brick": {
+      "pitch": 0.1,
+      "plate": 0.4,
+      "studR": 0.3,
+      "studH": 0.2,
+      "studBevel": 0.035,
+      "studSegments": 28,
+      "gap": 0.014,
+      "topGap": 0.012,
+      "bevel": 0.06,
+      "bevelSegments": 3,
+      "roundR": 0.47,
+      "slopeLip": 0.34,
+      "arch": {
+        "pillar": 0.5,
+        "rise": 0.78,
+        "segments": 18
+      },
+      "pegStud": true
+    },
+    "plastic": {
+      "roughVar": [
+        0.75,
+        1.4
+      ],
+      "roughFreq": 6,
+      "scratchFreq": 260,
+      "scratchAmount": 0.55,
+      "scratchCover": 0.06,
+      "bumpFreq": 140,
+      "bumpStrength": 0.00005,
+      "sheen": 0.55,
+      "sheenRoughness": 0.45,
+      "sheenColor": "#ffd9b0",
+      "lightLum": 0.6,
+      "warmEmissive": 0.025,
+      "envIntensity": 1
+    },
+    "trans": {
+      "transmission": 0.95,
+      "roughness": 0.05,
+      "thickness": 0.06,
+      "ior": 1.52,
+      "attenuationDistance": 0.35,
+      "clearcoat": 1,
+      "glow": 1.7
+    },
+    "studio": {
+      "size": 256,
+      "sigma": 0.004,
+      "room": {
+        "w": 24,
+        "h": 12,
+        "d": 24,
+        "color": "#1e1d1b"
+      },
+      "panels": [
+        {
+          "id": "top",
+          "kind": "softbox",
+          "size": [
+            5,
+            3
+          ],
+          "pos": [
+            -0.5,
+            6,
+            0.5
+          ],
+          "intensity": 1.7,
+          "color": "#fff8ee",
+          "soft": 0.14
+        },
+        {
+          "id": "frontKey",
+          "kind": "softbox",
+          "size": [
+            5,
+            3.2
+          ],
+          "pos": [
+            -2.5,
+            3,
+            7
+          ],
+          "intensity": 1.8,
+          "color": "#fff6ea",
+          "soft": 0.12
+        },
+        {
+          "id": "frontFill",
+          "kind": "softbox",
+          "size": [
+            3,
+            2
+          ],
+          "pos": [
+            4,
+            1.8,
+            7
+          ],
+          "intensity": 1.3,
+          "color": "#f2f6ff",
+          "soft": 0.15
+        },
+        {
+          "id": "key",
+          "kind": "softbox",
+          "size": [
+            3.2,
+            4
+          ],
+          "pos": [
+            -6.5,
+            3.2,
+            4.5
+          ],
+          "intensity": 3,
+          "color": "#fff4e6",
+          "soft": 0.16
+        },
+        {
+          "id": "fill",
+          "kind": "softbox",
+          "size": [
+            3,
+            3
+          ],
+          "pos": [
+            7,
+            2.6,
+            5
+          ],
+          "intensity": 1.1,
+          "color": "#eef4ff",
+          "soft": 0.22
+        },
+        {
+          "id": "rim",
+          "kind": "strip",
+          "size": [
+            0.6,
+            5
+          ],
+          "pos": [
+            5,
+            3,
+            -7
+          ],
+          "intensity": 4.5,
+          "color": "#ffffff",
+          "soft": 0.25
+        },
+        {
+          "id": "rim2",
+          "kind": "strip",
+          "size": [
+            0.5,
+            4.5
+          ],
+          "pos": [
+            -6,
+            3,
+            -6.5
+          ],
+          "intensity": 3,
+          "color": "#ffffff",
+          "soft": 0.25
+        },
+        {
+          "id": "floor",
+          "kind": "card",
+          "size": [
+            20,
+            20
+          ],
+          "pos": [
+            0,
+            -5.5,
+            0
+          ],
+          "intensity": 0.35,
+          "gradient": [
+            [
+              0,
+              "#e6dfd3"
+            ],
+            [
+              1,
+              "#6f6a62"
+            ]
+          ],
+          "radial": true
+        },
+        {
+          "id": "front",
+          "kind": "card",
+          "size": [
+            14,
+            5
+          ],
+          "pos": [
+            0,
+            1.5,
+            11.5
+          ],
+          "intensity": 0.35,
+          "gradient": [
+            [
+              0,
+              "#8a857c"
+            ],
+            [
+              1,
+              "#f2ede4"
+            ]
+          ]
+        }
+      ],
+      "sweep": {
+        "size": [
+          10,
+          0.5
+        ],
+        "radius": 8,
+        "from": 0.3,
+        "to": 2.6,
+        "intensity": 0,
+        "color": "#ffffff",
+        "soft": 0.3
+      },
+      "sweepLight": {
+        "intensity": 0,
+        "color": "#ffffff"
+      },
+      "quantum": 0.002
+    },
+    "lights": [
+      {
+        "id": "hemi",
+        "type": "hemisphere",
+        "color": "#fbf6ef",
+        "groundColor": "#c9c0b3",
+        "intensity": 0.45
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff1e0",
+        "intensity": 4.6,
+        "position": [
+          -6,
+          5.5,
+          2.6
+        ],
+        "target": [
+          0,
+          0.5,
+          0
+        ],
+        "shadow": {
+          "softness": 5,
+          "mapSize": 4096,
+          "extent": 2,
+          "near": 2,
+          "far": 18,
+          "bias": -0.0003,
+          "normalBias": 0.008
+        }
+      },
+      {
+        "id": "fill",
+        "type": "directional",
+        "color": "#e4ecff",
+        "intensity": 0.55,
+        "position": [
+          5,
+          2.5,
+          5
+        ],
+        "target": [
+          0,
+          0.4,
+          0
+        ]
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#ffffff",
+        "intensity": 1.1,
+        "position": [
+          3,
+          4,
+          -6
+        ],
+        "target": [
+          0,
+          0.5,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.55,
+        "radius": 0.5,
+        "threshold": 2.6
+      },
+      "tiltShift": {
+        "focus": 0.5,
+        "range": 0.34,
+        "blur": 2.6
+      },
+      "vignette": {
+        "darkness": 0.28,
+        "offset": 1.15
+      },
+      "grain": {
+        "amount": 0
+      }
+    },
+    "dof": {
+      "aperture": 0.006,
+      "maxblur": 0.011
+    },
+    "camera": {
+      "fov": 26,
+      "near": 0.15,
+      "far": 40,
+      "drift": {
+        "amp": 0.006,
+        "speed": 0.35,
+        "orbit": 0
+      }
+    },
+    "text": {
+      "font": "rounded",
+      "weight": 800,
+      "color": "#1d1e22",
+      "height": 0.08
+    },
+    "ui": {
+      "font": "rounded",
+      "weight": 800,
+      "ink": "#1d1e22",
+      "card": "#fbfaf7",
+      "shadow": "#1d1e22",
+      "shadowOpacity": 0.22,
+      "radius": 0.32,
+      "pad": 0.5,
+      "badge": 0.62,
+      "popDur": 0.42,
+      "outDur": 0.3,
+      "tilt": 0.06
+    },
+    "sfx": {
+      "enter": "clack",
+      "exit": "tick",
+      "move": "tick",
+      "land": "clack",
+      "emphasis": "chime",
+      "ui": "pop",
+      "bed": "pad"
+    },
+    "motion": [
+      "Things are BUILT: bricks drop in one at a time from above, slow like a hand placing them, hover, then PRESS down onto the studs with a ~6 % squash wobble and a plastic click (closed-form from a build schedule).",
+      "Build order is bottom-up, back-to-front, left-to-right; layers can go fast (0.08–0.15 s apart) once the idea is clear.",
+      "Pieces can fly in from a loose pile on an arc, turning upright, then snap; a build can un-build top-down (pop off the studs, rise, shrink).",
+      "Brickfilm option: part poses quantised to 15 fps (on twos) while the camera stays smooth.",
+      "Sub-assemblies slide along the grid in whole-stud steps (studSteps).",
+      "Camera: low macro three-quarter, slow arc, focus racks to the active part (DoF + tilt-shift aimed at it); final pull-back reveal."
+    ]
+  },
+  "scene": {
+    "id": "16-toy-brick",
+    "style": "toy-brick",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "tokens",
+        "t": 0,
+        "dur": 2.75
+      },
+      {
+        "id": "embed",
+        "t": 2.75,
+        "dur": 2
+      },
+      {
+        "id": "layers",
+        "t": 4.75,
+        "dur": 4.85
+      },
+      {
+        "id": "out",
+        "t": 9.6,
+        "dur": 2.75
+      },
+      {
+        "id": "final",
+        "t": 12.35,
+        "dur": 2.65
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -0.05,
+          0.3,
+          1.15
+        ],
+        "target": [
+          -0.6,
+          0.07,
+          -0.05
+        ],
+        "fov": 26
+      },
+      {
+        "t": 2,
+        "pos": [
+          0.64,
+          0.24,
+          1.08
+        ],
+        "target": [
+          0,
+          0.12,
+          0
+        ],
+        "fov": 26,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 2.75,
+        "pos": [
+          0.74,
+          0.31,
+          1.3
+        ],
+        "target": [
+          0,
+          0.17,
+          -0.06
+        ],
+        "fov": 26,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 4.75,
+        "pos": [
+          0.78,
+          0.5,
+          1.62
+        ],
+        "target": [
+          0,
+          0.3,
+          -0.08
+        ],
+        "fov": 26,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 8.65,
+        "pos": [
+          0.85,
+          0.98,
+          2.1
+        ],
+        "target": [
+          0,
+          0.78,
+          -0.1
+        ],
+        "fov": 26,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 10.5,
+        "pos": [
+          0.85,
+          1.34,
+          2.2
+        ],
+        "target": [
+          0,
+          1.18,
+          -0.1
+        ],
+        "fov": 26,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.35,
+        "pos": [
+          0.75,
+          1.38,
+          2.3
+        ],
+        "target": [
+          0,
+          1.2,
+          -0.1
+        ],
+        "fov": 26,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          -0.95,
+          0.8,
+          3.75
+        ],
+        "target": [
+          -0.36,
+          0.71,
+          0.05
+        ],
+        "fov": 26,
+        "ease": "inOutCubic"
+      }
+    ],
+    "objects": [
+      {
+        "id": "table",
+        "primitive": "procedural",
+        "factory": "table",
+        "procedural": "pale satin studio sweep (floor curving into a back wall) = the studio table",
+        "params": {
+          "width": 16,
+          "depth": 11,
+          "height": 7,
+          "radius": 3
+        },
+        "position": [
+          0,
+          0,
+          -1.6
+        ]
+      },
+      {
+        "id": "baseplate",
+        "primitive": "procedural",
+        "factory": "baseplate",
+        "procedural": "24x16 stud light-grey baseplate: thin rounded slab + instanced plain studs (no logos)",
+        "params": {
+          "w": 24,
+          "d": 16,
+          "thickness": 0.3,
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "color": "baseplate"
+        }
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 10.4,
+        "gain": 0.55,
+        "root": 261.6,
+        "chord": [
+          0,
+          4,
+          7,
+          9,
+          12
+        ],
+        "attack": 0.8,
+        "release": 1.4,
+        "brightness": 1300
+      },
+      {
+        "t": 10.2,
+        "type": "pad",
+        "dur": 5.2,
+        "gain": 0.55,
+        "root": 261.6,
+        "chord": [
+          0,
+          5,
+          9,
+          12,
+          16
+        ],
+        "attack": 0.6,
+        "release": 1.6,
+        "brightness": 1700
+      },
+      {
+        "t": 0.08,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.1,
+        "pan": -0.4,
+        "seed": 300
+      },
+      {
+        "t": 0.13,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.23,
+        "pan": -0.4,
+        "seed": 301
+      },
+      {
+        "t": 0.18,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.36,
+        "pan": -0.4,
+        "seed": 302
+      },
+      {
+        "t": 0.23,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.4900000000000002,
+        "pan": -0.4,
+        "seed": 303
+      },
+      {
+        "t": 0.28,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.62,
+        "pan": -0.4,
+        "seed": 304
+      },
+      {
+        "type": "tick",
+        "gain": 0.16,
+        "pitch": 1.3,
+        "t": 0.37,
+        "pan": -0.2857142857142857,
+        "seed": 21
+      },
+      {
+        "type": "tick",
+        "gain": 0.13,
+        "pitch": 1.75,
+        "t": 0.40499999999999997,
+        "pan": -0.2857142857142857,
+        "seed": 22
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.57,
+        "t": 0.44,
+        "pan": -0.2857142857142857,
+        "seed": 23
+      },
+      {
+        "type": "tick",
+        "gain": 0.16,
+        "pitch": 1.57,
+        "t": 0.535,
+        "pan": -0.21428571428571427,
+        "seed": 26
+      },
+      {
+        "type": "tick",
+        "gain": 0.13,
+        "pitch": 1.3900000000000001,
+        "t": 0.5700000000000001,
+        "pan": -0.21428571428571427,
+        "seed": 27
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.84,
+        "t": 0.605,
+        "pan": -0.21428571428571427,
+        "seed": 28
+      },
+      {
+        "type": "tick",
+        "gain": 0.16,
+        "pitch": 1.84,
+        "t": 0.7000000000000001,
+        "pan": -0.14285714285714285,
+        "seed": 31
+      },
+      {
+        "type": "tick",
+        "gain": 0.13,
+        "pitch": 1.6600000000000001,
+        "t": 0.7350000000000001,
+        "pan": -0.14285714285714285,
+        "seed": 32
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.48,
+        "t": 0.77,
+        "pan": -0.14285714285714285,
+        "seed": 33
+      },
+      {
+        "type": "tick",
+        "gain": 0.16,
+        "pitch": 1.48,
+        "t": 0.865,
+        "pan": -0.07142857142857142,
+        "seed": 36
+      },
+      {
+        "type": "tick",
+        "gain": 0.13,
+        "pitch": 1.3,
+        "t": 0.9,
+        "pan": -0.07142857142857142,
+        "seed": 37
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.75,
+        "t": 0.9349999999999999,
+        "pan": -0.07142857142857142,
+        "seed": 38
+      },
+      {
+        "type": "click",
+        "gain": 0.640625,
+        "pitch": 1.221875,
+        "t": 0.97,
+        "pan": -0.2857142857142857,
+        "seed": 41
+      },
+      {
+        "type": "clack",
+        "gain": 0.35375,
+        "pitch": 1.84375,
+        "t": 0.974,
+        "pan": -0.2857142857142857,
+        "seed": 42
+      },
+      {
+        "type": "tick",
+        "gain": 0.16,
+        "pitch": 1.75,
+        "t": 1.03,
+        "pan": 0,
+        "seed": 46
+      },
+      {
+        "type": "tick",
+        "gain": 0.13,
+        "pitch": 1.57,
+        "t": 1.065,
+        "pan": 0,
+        "seed": 47
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.3900000000000001,
+        "t": 1.1,
+        "pan": 0,
+        "seed": 48
+      },
+      {
+        "type": "click",
+        "gain": 0.640625,
+        "pitch": 1.281875,
+        "t": 1.135,
+        "pan": -0.21428571428571427,
+        "seed": 51
+      },
+      {
+        "type": "clack",
+        "gain": 0.35375,
+        "pitch": 1.99375,
+        "t": 1.139,
+        "pan": -0.21428571428571427,
+        "seed": 52
+      },
+      {
+        "type": "tick",
+        "gain": 0.16,
+        "pitch": 1.3900000000000001,
+        "t": 1.195,
+        "pan": 0.07142857142857142,
+        "seed": 56
+      },
+      {
+        "type": "tick",
+        "gain": 0.13,
+        "pitch": 1.84,
+        "t": 1.23,
+        "pan": 0.07142857142857142,
+        "seed": 57
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.6600000000000001,
+        "t": 1.2650000000000001,
+        "pan": 0.07142857142857142,
+        "seed": 58
+      },
+      {
+        "type": "click",
+        "gain": 0.640625,
+        "pitch": 1.341875,
+        "t": 1.3,
+        "pan": -0.14285714285714285,
+        "seed": 61
+      },
+      {
+        "type": "clack",
+        "gain": 0.35375,
+        "pitch": 1.94375,
+        "t": 1.304,
+        "pan": -0.14285714285714285,
+        "seed": 62
+      },
+      {
+        "type": "tick",
+        "gain": 0.16,
+        "pitch": 1.6600000000000001,
+        "t": 1.36,
+        "pan": 0.14285714285714285,
+        "seed": 66
+      },
+      {
+        "type": "tick",
+        "gain": 0.13,
+        "pitch": 1.48,
+        "t": 1.395,
+        "pan": 0.14285714285714285,
+        "seed": 67
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.3,
+        "t": 1.4300000000000002,
+        "pan": 0.14285714285714285,
+        "seed": 68
+      },
+      {
+        "type": "click",
+        "gain": 0.640625,
+        "pitch": 1.251875,
+        "t": 1.4649999999999999,
+        "pan": -0.07142857142857142,
+        "seed": 71
+      },
+      {
+        "type": "clack",
+        "gain": 0.35375,
+        "pitch": 1.89375,
+        "t": 1.4689999999999999,
+        "pan": -0.07142857142857142,
+        "seed": 72
+      },
+      {
+        "type": "tick",
+        "gain": 0.16,
+        "pitch": 1.3,
+        "t": 1.525,
+        "pan": 0.21428571428571427,
+        "seed": 76
+      },
+      {
+        "type": "tick",
+        "gain": 0.13,
+        "pitch": 1.75,
+        "t": 1.5599999999999998,
+        "pan": 0.21428571428571427,
+        "seed": 77
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.57,
+        "t": 1.595,
+        "pan": 0.21428571428571427,
+        "seed": 78
+      },
+      {
+        "type": "click",
+        "gain": 0.640625,
+        "pitch": 1.3118750000000001,
+        "t": 1.63,
+        "pan": 0,
+        "seed": 81
+      },
+      {
+        "type": "clack",
+        "gain": 0.35375,
+        "pitch": 1.84375,
+        "t": 1.634,
+        "pan": 0,
+        "seed": 82
+      },
+      {
+        "type": "click",
+        "gain": 0.640625,
+        "pitch": 1.221875,
+        "t": 1.795,
+        "pan": 0.07142857142857142,
+        "seed": 86
+      },
+      {
+        "type": "chime",
+        "sparkle": true,
+        "gain": 0.08,
+        "dur": 0.5,
+        "pitch": 1.6,
+        "t": 1.795,
+        "pan": 0.07142857142857142,
+        "seed": 88
+      },
+      {
+        "type": "clack",
+        "gain": 0.35375,
+        "pitch": 1.99375,
+        "t": 1.799,
+        "pan": 0.07142857142857142,
+        "seed": 87
+      },
+      {
+        "type": "click",
+        "gain": 0.640625,
+        "pitch": 1.281875,
+        "t": 1.96,
+        "pan": 0.14285714285714285,
+        "seed": 91
+      },
+      {
+        "type": "clack",
+        "gain": 0.35375,
+        "pitch": 1.94375,
+        "t": 1.964,
+        "pan": 0.14285714285714285,
+        "seed": 92
+      },
+      {
+        "type": "click",
+        "gain": 0.640625,
+        "pitch": 1.341875,
+        "t": 2.125,
+        "pan": 0.21428571428571427,
+        "seed": 96
+      },
+      {
+        "type": "clack",
+        "gain": 0.35375,
+        "pitch": 1.89375,
+        "t": 2.129,
+        "pan": 0.21428571428571427,
+        "seed": 97
+      },
+      {
+        "type": "click",
+        "gain": 0.63125,
+        "pitch": 1.2237500000000001,
+        "t": 3.29,
+        "pan": -0.2857142857142857,
+        "seed": 101
+      },
+      {
+        "type": "clack",
+        "gain": 0.36750000000000005,
+        "pitch": 1.7874999999999999,
+        "t": 3.294,
+        "pan": -0.2857142857142857,
+        "seed": 102
+      },
+      {
+        "type": "click",
+        "gain": 0.63125,
+        "pitch": 1.2837500000000002,
+        "t": 3.375,
+        "pan": -0.21428571428571427,
+        "seed": 106
+      },
+      {
+        "type": "clack",
+        "gain": 0.36750000000000005,
+        "pitch": 1.9375,
+        "t": 3.379,
+        "pan": -0.21428571428571427,
+        "seed": 107
+      },
+      {
+        "type": "click",
+        "gain": 0.63125,
+        "pitch": 1.19375,
+        "t": 3.46,
+        "pan": -0.14285714285714285,
+        "seed": 111
+      },
+      {
+        "type": "clack",
+        "gain": 0.36750000000000005,
+        "pitch": 1.8875,
+        "t": 3.464,
+        "pan": -0.14285714285714285,
+        "seed": 112
+      },
+      {
+        "type": "click",
+        "gain": 0.63125,
+        "pitch": 1.2537500000000001,
+        "t": 3.545,
+        "pan": -0.07142857142857142,
+        "seed": 116
+      },
+      {
+        "type": "clack",
+        "gain": 0.36750000000000005,
+        "pitch": 1.8375,
+        "t": 3.549,
+        "pan": -0.07142857142857142,
+        "seed": 117
+      },
+      {
+        "type": "click",
+        "gain": 0.63125,
+        "pitch": 1.3137500000000002,
+        "t": 3.63,
+        "pan": 0,
+        "seed": 121
+      },
+      {
+        "type": "clack",
+        "gain": 0.36750000000000005,
+        "pitch": 1.7874999999999999,
+        "t": 3.634,
+        "pan": 0,
+        "seed": 122
+      },
+      {
+        "type": "click",
+        "gain": 0.63125,
+        "pitch": 1.2237500000000001,
+        "t": 3.715,
+        "pan": 0.07142857142857142,
+        "seed": 126
+      },
+      {
+        "type": "clack",
+        "gain": 0.36750000000000005,
+        "pitch": 1.9375,
+        "t": 3.719,
+        "pan": 0.07142857142857142,
+        "seed": 127
+      },
+      {
+        "type": "click",
+        "gain": 0.63125,
+        "pitch": 1.2837500000000002,
+        "t": 3.8,
+        "pan": 0.14285714285714285,
+        "seed": 131
+      },
+      {
+        "type": "clack",
+        "gain": 0.36750000000000005,
+        "pitch": 1.8875,
+        "t": 3.804,
+        "pan": 0.14285714285714285,
+        "seed": 132
+      },
+      {
+        "type": "click",
+        "gain": 0.63125,
+        "pitch": 1.19375,
+        "t": 3.885,
+        "pan": 0.21428571428571427,
+        "seed": 136
+      },
+      {
+        "type": "clack",
+        "gain": 0.36750000000000005,
+        "pitch": 1.8375,
+        "t": 3.889,
+        "pan": 0.21428571428571427,
+        "seed": 137
+      },
+      {
+        "type": "click",
+        "gain": 0.575,
+        "pitch": 1.085,
+        "t": 5.33,
+        "pan": -0.2857142857142857,
+        "seed": 141
+      },
+      {
+        "type": "thud",
+        "gain": 0.21000000000000002,
+        "pitch": 2.4,
+        "dur": 0.18,
+        "t": 5.332,
+        "pan": -0.2857142857142857,
+        "seed": 143
+      },
+      {
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1.45,
+        "t": 5.334,
+        "pan": -0.2857142857142857,
+        "seed": 142
+      },
+      {
+        "type": "click",
+        "gain": 0.575,
+        "pitch": 1.145,
+        "t": 5.470000000000001,
+        "pan": -0.2857142857142857,
+        "seed": 146
+      },
+      {
+        "type": "thud",
+        "gain": 0.21000000000000002,
+        "pitch": 2.4,
+        "dur": 0.18,
+        "t": 5.472,
+        "pan": -0.2857142857142857,
+        "seed": 148
+      },
+      {
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1.6,
+        "t": 5.474,
+        "pan": -0.2857142857142857,
+        "seed": 147
+      },
+      {
+        "type": "click",
+        "gain": 0.5,
+        "pitch": 0.8300000000000001,
+        "t": 5.83,
+        "pan": -0.2857142857142857,
+        "seed": 151
+      },
+      {
+        "type": "thud",
+        "gain": 0.26,
+        "pitch": 2.4,
+        "dur": 0.18,
+        "t": 5.832,
+        "pan": -0.2857142857142857,
+        "seed": 153
+      },
+      {
+        "type": "clack",
+        "gain": 0.56,
+        "pitch": 1.0999999999999999,
+        "t": 5.834,
+        "pan": -0.2857142857142857,
+        "seed": 152
+      },
+      {
+        "type": "click",
+        "gain": 0.575,
+        "pitch": 1.115,
+        "t": 6.425,
+        "pan": -0.2857142857142857,
+        "seed": 156
+      },
+      {
+        "type": "thud",
+        "gain": 0.21000000000000002,
+        "pitch": 2.4,
+        "dur": 0.18,
+        "t": 6.427,
+        "pan": -0.2857142857142857,
+        "seed": 158
+      },
+      {
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1.5,
+        "t": 6.428999999999999,
+        "pan": -0.2857142857142857,
+        "seed": 157
+      },
+      {
+        "type": "click",
+        "gain": 0.575,
+        "pitch": 1.025,
+        "t": 6.53,
+        "pan": -0.2857142857142857,
+        "seed": 161
+      },
+      {
+        "type": "thud",
+        "gain": 0.21000000000000002,
+        "pitch": 2.4,
+        "dur": 0.18,
+        "t": 6.532,
+        "pan": -0.2857142857142857,
+        "seed": 163
+      },
+      {
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1.45,
+        "t": 6.534,
+        "pan": -0.2857142857142857,
+        "seed": 162
+      },
+      {
+        "type": "click",
+        "gain": 0.5,
+        "pitch": 0.8600000000000001,
+        "t": 6.8,
+        "pan": -0.2857142857142857,
+        "seed": 166
+      },
+      {
+        "type": "thud",
+        "gain": 0.26,
+        "pitch": 2.4,
+        "dur": 0.18,
+        "t": 6.802,
+        "pan": -0.2857142857142857,
+        "seed": 168
+      },
+      {
+        "type": "clack",
+        "gain": 0.56,
+        "pitch": 1.15,
+        "t": 6.803999999999999,
+        "pan": -0.2857142857142857,
+        "seed": 167
+      },
+      {
+        "type": "click",
+        "gain": 0.575,
+        "pitch": 1.145,
+        "t": 7.425,
+        "pan": -0.2857142857142857,
+        "seed": 171
+      },
+      {
+        "type": "thud",
+        "gain": 0.21000000000000002,
+        "pitch": 2.4,
+        "dur": 0.18,
+        "t": 7.427,
+        "pan": -0.2857142857142857,
+        "seed": 173
+      },
+      {
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1.55,
+        "t": 7.428999999999999,
+        "pan": -0.2857142857142857,
+        "seed": 172
+      },
+      {
+        "type": "click",
+        "gain": 0.575,
+        "pitch": 1.055,
+        "t": 7.53,
+        "pan": -0.2857142857142857,
+        "seed": 176
+      },
+      {
+        "type": "thud",
+        "gain": 0.21000000000000002,
+        "pitch": 2.4,
+        "dur": 0.18,
+        "t": 7.532,
+        "pan": -0.2857142857142857,
+        "seed": 178
+      },
+      {
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1.5,
+        "t": 7.534,
+        "pan": -0.2857142857142857,
+        "seed": 177
+      },
+      {
+        "type": "click",
+        "gain": 0.5,
+        "pitch": 0.89,
+        "t": 7.8,
+        "pan": -0.2857142857142857,
+        "seed": 181
+      },
+      {
+        "type": "thud",
+        "gain": 0.26,
+        "pitch": 2.4,
+        "dur": 0.18,
+        "t": 7.802,
+        "pan": -0.2857142857142857,
+        "seed": 183
+      },
+      {
+        "type": "clack",
+        "gain": 0.56,
+        "pitch": 0.9999999999999999,
+        "t": 7.803999999999999,
+        "pan": -0.2857142857142857,
+        "seed": 182
+      },
+      {
+        "type": "click",
+        "gain": 0.575,
+        "pitch": 1.025,
+        "t": 8.225,
+        "pan": -0.2857142857142857,
+        "seed": 186
+      },
+      {
+        "type": "thud",
+        "gain": 0.21000000000000002,
+        "pitch": 2.4,
+        "dur": 0.18,
+        "t": 8.227,
+        "pan": -0.2857142857142857,
+        "seed": 188
+      },
+      {
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1.6,
+        "t": 8.229,
+        "pan": -0.2857142857142857,
+        "seed": 187
+      },
+      {
+        "type": "click",
+        "gain": 0.575,
+        "pitch": 1.085,
+        "t": 8.33,
+        "pan": -0.2857142857142857,
+        "seed": 191
+      },
+      {
+        "type": "thud",
+        "gain": 0.21000000000000002,
+        "pitch": 2.4,
+        "dur": 0.18,
+        "t": 8.332,
+        "pan": -0.2857142857142857,
+        "seed": 193
+      },
+      {
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1.55,
+        "t": 8.334,
+        "pan": -0.2857142857142857,
+        "seed": 192
+      },
+      {
+        "type": "click",
+        "gain": 0.5,
+        "pitch": 0.92,
+        "t": 8.6,
+        "pan": -0.2857142857142857,
+        "seed": 196
+      },
+      {
+        "type": "thud",
+        "gain": 0.26,
+        "pitch": 2.4,
+        "dur": 0.18,
+        "t": 8.602,
+        "pan": -0.2857142857142857,
+        "seed": 198
+      },
+      {
+        "type": "clack",
+        "gain": 0.56,
+        "pitch": 1.0499999999999998,
+        "t": 8.604,
+        "pan": -0.2857142857142857,
+        "seed": 197
+      },
+      {
+        "type": "click",
+        "gain": 0.59375,
+        "pitch": 1.11125,
+        "t": 10.07,
+        "pan": -0.2857142857142857,
+        "seed": 201
+      },
+      {
+        "type": "clack",
+        "gain": 0.42250000000000004,
+        "pitch": 1.5625,
+        "t": 10.074,
+        "pan": -0.2857142857142857,
+        "seed": 202
+      },
+      {
+        "type": "click",
+        "gain": 0.6125,
+        "pitch": 1.2275,
+        "t": 10.22,
+        "pan": -0.07142857142857142,
+        "seed": 206
+      },
+      {
+        "type": "clack",
+        "gain": 0.395,
+        "pitch": 1.8249999999999997,
+        "t": 10.224,
+        "pan": -0.07142857142857142,
+        "seed": 207
+      },
+      {
+        "type": "click",
+        "gain": 0.59375,
+        "pitch": 1.08125,
+        "t": 10.37,
+        "pan": 0.07142857142857142,
+        "seed": 211
+      },
+      {
+        "type": "clack",
+        "gain": 0.42250000000000004,
+        "pitch": 1.6625,
+        "t": 10.373999999999999,
+        "pan": 0.07142857142857142,
+        "seed": 212
+      },
+      {
+        "type": "click",
+        "gain": 0.6125,
+        "pitch": 1.1975,
+        "t": 10.95,
+        "pan": -0.07142857142857142,
+        "seed": 216
+      },
+      {
+        "type": "chime",
+        "sparkle": true,
+        "gain": 0.08,
+        "dur": 0.5,
+        "pitch": 1.6,
+        "t": 10.95,
+        "pan": -0.07142857142857142,
+        "seed": 218
+      },
+      {
+        "type": "clack",
+        "gain": 0.395,
+        "pitch": 1.7249999999999999,
+        "t": 10.953999999999999,
+        "pan": -0.07142857142857142,
+        "seed": 217
+      },
+      {
+        "type": "click",
+        "gain": 0.575,
+        "pitch": 1.145,
+        "t": 13.07,
+        "pan": 0,
+        "seed": 221
+      },
+      {
+        "type": "thud",
+        "gain": 0.21000000000000002,
+        "pitch": 2.4,
+        "dur": 0.18,
+        "t": 13.072000000000001,
+        "pan": 0,
+        "seed": 223
+      },
+      {
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1.45,
+        "t": 13.074,
+        "pan": 0,
+        "seed": 222
+      },
+      {
+        "t": 0.45,
+        "type": "pop",
+        "gain": 0.22,
+        "pitch": 1.15,
+        "pan": -0.45,
+        "seed": 400
+      },
+      {
+        "t": 3,
+        "type": "pop",
+        "gain": 0.22,
+        "pitch": 1.15,
+        "pan": -0.45,
+        "seed": 401
+      },
+      {
+        "t": 10.95,
+        "type": "pop",
+        "gain": 0.22,
+        "pitch": 1.15,
+        "pan": -0.45,
+        "seed": 402
+      },
+      {
+        "t": 12.75,
+        "type": "pop",
+        "gain": 0.22,
+        "pitch": 1.15,
+        "pan": -0.45,
+        "seed": 403
+      },
+      {
+        "t": 5.42,
+        "type": "pop",
+        "gain": 0.18,
+        "pitch": 1.3,
+        "pan": -0.3,
+        "seed": 410
+      },
+      {
+        "t": 5.78,
+        "type": "pop",
+        "gain": 0.18,
+        "pitch": 1.3,
+        "pan": -0.3,
+        "seed": 411
+      },
+      {
+        "t": 5.81,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "gain": 0.16,
+        "pitch": 1,
+        "pan": 0.4,
+        "seed": 420
+      },
+      {
+        "t": 6.78,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "gain": 0.16,
+        "pitch": 1.12,
+        "pan": 0.4,
+        "seed": 421
+      },
+      {
+        "t": 7.78,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "gain": 0.16,
+        "pitch": 1.24,
+        "pan": 0.4,
+        "seed": 422
+      },
+      {
+        "t": 8.58,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "gain": 0.16,
+        "pitch": 1.3599999999999999,
+        "pan": 0.4,
+        "seed": 423
+      },
+      {
+        "t": 11,
+        "type": "chime",
+        "gain": 0.3,
+        "dur": 1.6,
+        "pitch": 1.2
+      },
+      {
+        "t": 10.98,
+        "type": "pop",
+        "gain": 0.25,
+        "pitch": 0.9
+      },
+      {
+        "t": 12.35,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1.4,
+        "gain": 0.14
+      },
+      {
+        "t": 12.76,
+        "type": "clack",
+        "gain": 0.35,
+        "pitch": 1.5,
+        "pan": 0.35,
+        "seed": 430
+      },
+      {
+        "t": 13.1,
+        "type": "blip",
+        "notes": [
+          0,
+          4,
+          7,
+          12
+        ],
+        "dur": 0.06,
+        "gain": 0.14,
+        "pitch": 1.4,
+        "pan": 0.35,
+        "seed": 431
+      }
+    ],
+    "duck": [],
+    "notes": "Build = one planBuild() over ALL_PARTS (tokens fly from the pile, everything else drops bottom-up and presses onto the studs). Every part's pose is brickPose(part, t) (closed form). SCORE snaps come from the same plan via kit scoreFromEvents. validateLayout() asserts no overlapping cells and no floating parts."
+  }
+}

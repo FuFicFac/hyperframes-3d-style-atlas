@@ -1,0 +1,23 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 6 old file(s): RUN.txt t1.png t12.2.png t14.5.png t4.6.png t8.png
+check-frames run: 2026-11-14 05:34:07 UTC
+times: 1, 4.6, 8, 12.2, 14.5
+newest code edit: 2026-11-14 03:01:20 UTC (star-chart/spec.js)
+mp4: 44-star-chart.mp4 2026-11-14 03:02:46 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1         renders/checks/t1.png         816ebea569332ed05baa222a250ed5df  SAME
+4.6       renders/checks/t4.6.png       21ee195f9f2087e2256e068ed93cf618  SAME
+8         renders/checks/t8.png         5f50bff5d50f581ed30fcb4f36254c28  SAME
+12.2      renders/checks/t12.2.png      f2f8c664c352b7888da761e85cb681d3  SAME
+14.5      renders/checks/t14.5.png      9120188ca3f97c3dd274d0a941f309bd  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.9 dB, frame 435)
+determinism: OK (5 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -19.4 dB, max -5.5 dB
+audio 44-star-chart.mp4: mean -19.5 dB, max -5.5 dB  (7.2 MB)
+deep t=1: hash 23654a97 mean 42.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8: hash c658aa7b mean 50.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.6: hash c8f9c5c7 mean 49.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.2: hash 53c9f718 mean 52.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.5: hash 89370ab7 mean 52.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

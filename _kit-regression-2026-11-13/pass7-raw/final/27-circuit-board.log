@@ -1,0 +1,23 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 6 old file(s): RUN.txt t1.2.png t10.6.png t14.5.png t4.5.png t7.5.png
+check-frames run: 2026-11-14 05:22:29 UTC
+times: 1.2, 4.5, 7.5, 10.6, 14.5
+newest code edit: 2026-11-13 23:10:46 UTC (27-circuit-board/scene.config.js)
+mp4: 27-circuit-board.mp4 2026-11-13 23:11:42 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1.2       renders/checks/t1.2.png       cee144082b68e27fd8ace515b6e04e37  SAME
+4.5       renders/checks/t4.5.png       ac5cb3c299988a76a570fae689b7c310  SAME
+7.5       renders/checks/t7.5.png       ec8345e8f5d7fb1408a2ac1b84a62999  SAME
+10.6      renders/checks/t10.6.png      43c9ea773dd56638f16c046b2eb9bee9  SAME
+14.5      renders/checks/t14.5.png      18444bf02ac7232dff94645cc09a5cdd  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 39.6 dB, frame 435)
+determinism: OK (5 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -21.3 dB, max -3.9 dB
+audio 27-circuit-board.mp4: mean -21.3 dB, max -3.9 dB  (5.4 MB)
+deep t=1.2: hash 085bdc5a mean 34.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.5: hash 04edf816 mean 50.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.5: hash 14a3761f mean 38.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.6: hash 100a009b mean 59.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.5: hash f7cf3f01 mean 34.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

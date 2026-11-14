@@ -1,0 +1,40 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 14 old file(s): RUN.txt t0.75.png t1.2.png t10.2.png t11.2.png t12.7.png t14.6.png t2.6.png t3.3.png t4.6.png t5.75.png t6.3.png t8.2.png t9.7.png
+check-frames run: 2026-11-14 04:42:49 UTC
+times: 0.75, 1.2, 2.6, 3.3, 4.6, 5.75, 6.3, 8.2, 9.7, 10.2, 11.2, 12.7, 14.6
+newest code edit: 2026-11-13 19:19:40 UTC (wam-house/style.js)
+mp4: 24-wam-house.mp4 2026-11-13 19:07:59 UTC
+kit last changed: 2026-11-14 04:24:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+0.75      renders/checks/t0.75.png      287aaa91720559962f2fae567f48ed55  SAME
+1.2       renders/checks/t1.2.png       695614ce901ef1db537e23e6c511dbcd  SAME
+2.6       renders/checks/t2.6.png       1f529993c13b2cfde533607bc5ae6cfd  SAME
+3.3       renders/checks/t3.3.png       04438f11a084d689a4f9fb6455bab252  SAME
+4.6       renders/checks/t4.6.png       7fc88f2ee685f19ffe2353bf659de0a7  SAME
+5.75      renders/checks/t5.75.png      c3038f415a314a92eaf4f69b3ac0bcf1  SAME
+6.3       renders/checks/t6.3.png       50f9c457f4cb98e0e2874ad8dd8f4bc1  SAME
+8.2       renders/checks/t8.2.png       f47335dd981643fe61bf14f13d531af0  SAME
+9.7       renders/checks/t9.7.png       071dae2e6e12fbb9bf8e5083f853b3e3  SAME
+10.2      renders/checks/t10.2.png      870b56652162609b8ffb736749935f62  SAME
+11.2      renders/checks/t11.2.png      9168ebaf6facd278a9d8c9bab27ab9b0  SAME
+12.7      renders/checks/t12.7.png      a070422abc0f2c4aad9e82a4d90e33ee  SAME
+14.6      renders/checks/t14.6.png      44a6427d1753781c917bf86b5fbb19fe  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.2 dB, frame 306)
+determinism: OK (13 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -22.3 dB, max -3.3 dB
+audio 24-wam-house.mp4: mean -22.3 dB, max -3.3 dB  (2.9 MB)
+deep t=0.75: hash cbc02680 mean 34.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.2: hash 394e8fe2 mean 42 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.6: hash 9cffffd4 mean 42.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3.3: hash d70b5a8a mean 24.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.6: hash c04d8685 mean 32.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5.75: hash cd9e26fe mean 25.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=6.3: hash 896d0bf6 mean 102.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.2: hash eb1c9ff4 mean 103.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.7: hash 11cadfac mean 35.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.2: hash e5a66236 mean 35.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=11.2: hash 26a34d53 mean 34.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.7: hash 4e941749 mean 36 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.6: hash e95ba917 mean 45.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

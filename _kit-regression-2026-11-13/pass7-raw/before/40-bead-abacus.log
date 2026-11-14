@@ -1,0 +1,26 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 7 old file(s): RUN.txt t1.5.png t12.4.png t14.5.png t4.4.png t7.9.png t9.6.png
+check-frames run: 2026-11-14 03:50:10 UTC
+times: 1.5, 4.4, 7.9, 9.6, 12.4, 14.5
+newest code edit: 2026-11-14 03:19:42 UTC (bead-abacus/beads.js)
+mp4: 40-bead-abacus.mp4 2026-11-14 01:17:25 UTC
+kit last changed: 2026-11-14 03:19:42 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+1.5       renders/checks/t1.5.png       c4e36a010382a0dae1966381b9dde6e3  SAME
+4.4       renders/checks/t4.4.png       b5b6921c73d24cae2e332e2196fb5c0b  SAME
+7.9       renders/checks/t7.9.png       dce8f22d2eb8ce93a9d695fa57052fed  SAME
+9.6       renders/checks/t9.6.png       381be8b13d63dab7e550dd657d312ecf  SAME
+12.4      renders/checks/t12.4.png      ebd510cc7b7cd28e29777b94c51455a1  SAME
+14.5      renders/checks/t14.5.png      fd389f3f2db9e5fc5611f0d49c347ce6  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.2 dB, frame 435)
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -20.7 dB, max -2.2 dB
+audio 40-bead-abacus.mp4: mean -20.8 dB, max -2.6 dB  (4.7 MB)
+deep t=1.5: hash 29056830 mean 189.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.4: hash d81bf58b mean 186.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.9: hash b5740160 mean 193.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.6: hash ae28ee54 mean 188.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.4: hash b2ee4f88 mean 183.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.5: hash c9d2da68 mean 182.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

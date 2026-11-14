@@ -1,0 +1,16 @@
+check-frames run: 2026-11-14 05:10:17 UTC
+times: 1.1, 2.1, 3, 5.4, 8, 10.9, 12.9, 14.5
+newest code edit: 2026-11-13 19:23:55 UTC (studio-product/style.js)
+mp4: 12-studio-product.mp4 2026-11-13 19:25:00 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.8 dB, frame 240)
+  frame 33 (t=1.100): 46.5 dB
+  frame 63 (t=2.100): 41.4 dB
+  frame 90 (t=3.000): 40.8 dB
+  frame 162 (t=5.400): 36.9 dB
+  frame 240 (t=8.000): 34.8 dB
+  frame 327 (t=10.900): 41.2 dB
+  frame 387 (t=12.900): 40.4 dB
+  frame 435 (t=14.500): 40.7 dB
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

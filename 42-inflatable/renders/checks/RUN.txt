@@ -1,0 +1,14 @@
+check-frames run: 2026-11-14 05:32:42 UTC
+times: 1.2, 2.4, 5.4, 7.0, 9.5, 14.5
+newest code edit: 2026-11-14 01:17:57 UTC (inflatable/spec.js)
+mp4: 42-inflatable.mp4 2026-11-14 01:19:10 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 31.2 dB, frame 210)
+  frame 36 (t=1.200): 38.9 dB
+  frame 72 (t=2.400): 34.0 dB
+  frame 162 (t=5.400): 32.5 dB
+  frame 210 (t=7.000): 31.2 dB
+  frame 285 (t=9.500): 37.5 dB
+  frame 435 (t=14.500): 31.8 dB
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

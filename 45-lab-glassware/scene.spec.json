@@ -1,0 +1,2744 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "lab-glassware",
+    "name": "Lab Glassware",
+    "description": "A bright clean laboratory bench in soft daylight: white worktop, pale tiled wall, clear glassware (beakers, conical flasks, measuring cylinders, test tubes in a rack, a burette on a stand, a funnel) holding saturated coloured liquids with a visible meniscus, printed graduations, bubbles and small enamel labels. Liquids are quantities: levels rise and fall to exact graduations from each vessel's volume curve, a vessel tilts and pours a parabolic stream with volume conserved into a differently shaped vessel, colours swirl and settle to a dye blend, a burette drips until the planned drop flips the colour, bubbles fizz and a foam head rises, and layers stack by density.",
+    "palette": {
+      "bg": "#eef2f2",
+      "bench": "#f5f4f0",
+      "benchEdge": "#e3e1db",
+      "tile": "#edf3f2",
+      "tileAlt": "#e6eeee",
+      "grout": "#cdd6d6",
+      "ink": "#1d2a44",
+      "enamel": "#fbfaf6",
+      "steel": "#c9ced4",
+      "standBase": "#f1f0ec",
+      "rack": "#8fb7d9",
+      "stopcock": "#2f6fd6",
+      "A": "#1f6fe8",
+      "B": "#ffc81e",
+      "C": "#e0257f",
+      "D": "#ff7a1a",
+      "E": "#19b39a",
+      "F": "#9be22d",
+      "react": "#8b2fd6",
+      "foam": "#fbf8ff",
+      "stamp": "#d23b2f",
+      "primary": "#1f6fe8",
+      "secondary": "#ffc81e",
+      "accent": "#e0257f"
+    },
+    "world": {
+      "background": "#eef2f2",
+      "environment": null,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "bench": {
+        "type": "standard",
+        "baseColor": "#f5f4f0",
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      "benchEdge": {
+        "type": "standard",
+        "baseColor": "#e3e1db",
+        "roughness": 0.55,
+        "metalness": 0
+      },
+      "steel": {
+        "type": "standard",
+        "baseColor": "#d3d8de",
+        "roughness": 0.28,
+        "metalness": 0.85
+      },
+      "standBase": {
+        "type": "standard",
+        "baseColor": "#f1f0ec",
+        "roughness": 0.45,
+        "metalness": 0
+      },
+      "rack": {
+        "type": "standard",
+        "baseColor": "#8fb7d9",
+        "roughness": 0.4,
+        "metalness": 0
+      },
+      "stopcock": {
+        "type": "standard",
+        "baseColor": "#2f6fd6",
+        "roughness": 0.35,
+        "metalness": 0
+      },
+      "ptfe": {
+        "type": "standard",
+        "baseColor": "#f4f4f2",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "clampPad": {
+        "type": "standard",
+        "baseColor": "#3a3f47",
+        "roughness": 0.8,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "sky",
+        "type": "hemisphere",
+        "color": "#f7fafc",
+        "groundColor": "#e6e2da",
+        "intensity": 1.15
+      },
+      {
+        "id": "sun",
+        "type": "directional",
+        "color": "#fff6ea",
+        "intensity": 2,
+        "position": [
+          -3.6,
+          5.2,
+          2.6
+        ],
+        "target": [
+          0,
+          0.4,
+          -0.2
+        ],
+        "shadow": {
+          "softness": 6,
+          "mapSize": 2048,
+          "extent": 2.6,
+          "near": 1,
+          "far": 16,
+          "bias": -0.0003,
+          "normalBias": 0.02
+        }
+      },
+      {
+        "id": "fill",
+        "type": "directional",
+        "color": "#eef4ff",
+        "intensity": 0.45,
+        "position": [
+          3.5,
+          2.5,
+          4
+        ],
+        "target": [
+          0,
+          0.5,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.1,
+        "radius": 0.35,
+        "threshold": 2.6
+      },
+      "vignette": {
+        "darkness": 0.16,
+        "offset": 1.15
+      },
+      "grain": {
+        "amount": 0.005,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.2,
+      "far": 40,
+      "drift": {
+        "amp": 0.004,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "color": "#1d2a44",
+      "height": 0.08
+    },
+    "glass": {
+      "prepass": 1,
+      "samples": 4,
+      "ior": 1.47,
+      "dispersion": 0.012,
+      "refract": 0.06,
+      "cap": 0.03,
+      "tint": "#fbfdfd",
+      "edgeTint": "#8ea7b4",
+      "edgeDark": 0.42,
+      "edgeK": 2.4,
+      "fresnelPow": 4.2,
+      "fresnelMin": 0.03,
+      "rimLine": 0.7,
+      "rimAt": 0.2,
+      "rimWidth": 0.06,
+      "rimColor": "#ffffff",
+      "env": 1,
+      "room": "#e9edee",
+      "floor": "#f2f0ea",
+      "panels": [
+        {
+          "dir": [
+            -0.8,
+            0.3,
+            0.55
+          ],
+          "size": [
+            0.22,
+            0.9
+          ],
+          "intensity": 1.8,
+          "color": "#ffffff"
+        },
+        {
+          "dir": [
+            0,
+            1,
+            0.15
+          ],
+          "size": [
+            0.9,
+            0.12
+          ],
+          "intensity": 1.2,
+          "color": "#fffdf8"
+        },
+        {
+          "dir": [
+            0.75,
+            0.2,
+            0.6
+          ],
+          "size": [
+            0.06,
+            0.7
+          ],
+          "intensity": 0.9,
+          "color": "#f4f8ff"
+        },
+        {
+          "dir": [
+            0,
+            0.25,
+            -1
+          ],
+          "size": [
+            1.2,
+            0.5
+          ],
+          "intensity": 0.35,
+          "color": "#e8efef"
+        }
+      ],
+      "panelSoft": 0.45,
+      "seam": 0.25
+    },
+    "liquid": {
+      "meniscus": 0.012,
+      "menDark": 0.55,
+      "menWidth": 0.016,
+      "edge": 0.62,
+      "centre": 0.5,
+      "glow": 0.32,
+      "caustic": 0.35,
+      "capFresnel": 0.5,
+      "capSpec": 1.4,
+      "sun": [
+        -0.55,
+        0.72,
+        0.42
+      ],
+      "sky": "#f4f8fb",
+      "ground": "#ece7df",
+      "swirl": {
+        "arms": 2,
+        "twist": 7,
+        "wind": 22,
+        "omega": 7,
+        "tau": 0.9,
+        "settle": 0.95
+      },
+      "bubble": {
+        "tint": 0.65,
+        "rim": 0.7,
+        "spec": 2
+      },
+      "foam": {
+        "cell": 120,
+        "edge": 0.2,
+        "tint": 0.12
+      },
+      "pool": {
+        "opacity": 0.32,
+        "size": 1.9,
+        "offset": 0.55
+      }
+    },
+    "vessels": {
+      "beaker": {
+        "R": 0.19,
+        "H": 0.58,
+        "wall": 0.012,
+        "base": 0.04,
+        "corner": 0.03,
+        "lip": 0.012,
+        "spout": 0.02
+      },
+      "cylinder": {
+        "R": 0.125,
+        "H": 0.98,
+        "wall": 0.012,
+        "base": 0.05,
+        "foot": 0.035,
+        "footR": 0.2,
+        "corner": 0.012,
+        "lip": 0.011
+      },
+      "flask": {
+        "R": 0.2,
+        "H": 0.5,
+        "wall": 0.011,
+        "base": 0.03,
+        "corner": 0.035,
+        "neckR": 0.06,
+        "neckH": 0.13,
+        "lip": 0.013
+      },
+      "tube": {
+        "R": 0.042,
+        "H": 0.4,
+        "wall": 0.006,
+        "lip": 0.007
+      },
+      "burette": {
+        "R": 0.032,
+        "H": 0.66,
+        "wall": 0.008,
+        "tipH": 0.13,
+        "tipR": 0.006,
+        "lip": 0.006
+      },
+      "funnel": {
+        "R": 0.15,
+        "H": 0.34,
+        "stemR": 0.018,
+        "stemH": 0.18,
+        "wall": 0.008,
+        "lip": 0.008
+      }
+    },
+    "units": {
+      "per": 0.000289,
+      "name": "units"
+    },
+    "gradu": {
+      "ink": "#1d2a44",
+      "font": "\"Avenir Next Condensed\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "span": 1.25,
+      "px": 1024
+    },
+    "enamel": {
+      "patch": "#fbfaf6",
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 800
+    },
+    "bench": {
+      "w": 9,
+      "d": 1.5,
+      "h": 0.06,
+      "z": -0.25,
+      "wallZ": -1,
+      "tile": 0.15,
+      "grout": 0.004
+    },
+    "stand": {
+      "baseW": 0.62,
+      "baseD": 0.72,
+      "baseH": 0.03,
+      "rodR": 0.014,
+      "rodH": 1.9,
+      "rodX": 0.22,
+      "rodZ": -0.44
+    },
+    "rack": {
+      "w": 0.72,
+      "d": 0.16,
+      "h": 0.26,
+      "holes": 6
+    },
+    "caption": {
+      "x": 96,
+      "y": 62,
+      "h": 92,
+      "cap": 46,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "card": "#fbfaf6",
+      "ink": "#1d2a44",
+      "band": "#1f6fe8",
+      "inDur": 0.35,
+      "outDur": 0.35
+    },
+    "stamp": {
+      "text": "SAMPLE DATA",
+      "x": 1824,
+      "y": 74,
+      "cap": 26,
+      "color": "#d23b2f",
+      "font": "\"Avenir Next Condensed\", \"Helvetica Neue\", Arial, sans-serif"
+    },
+    "readout": {
+      "font": "\"Avenir Next Condensed\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "cap": 0.07,
+      "card": "#fbfaf6",
+      "ink": "#1d2a44"
+    },
+    "sound": {
+      "bed": {
+        "gain": 0.85,
+        "root": 196,
+        "chord": [
+          0,
+          4,
+          7,
+          11,
+          14
+        ],
+        "brightness": 1500
+      },
+      "trickle": {
+        "gain": 0.11,
+        "every": 0.042,
+        "lo": 0.55,
+        "hi": 1.7
+      },
+      "clink": {
+        "gain": 0.2,
+        "pitch": 2.6
+      },
+      "set": {
+        "gain": 0.24,
+        "pitch": 1.6
+      },
+      "drip": {
+        "gain": 0.3,
+        "pitch": 1.35
+      },
+      "fizz": {
+        "gain": 0.07
+      },
+      "mallet": {
+        "gain": 0.2,
+        "scale": [
+          0,
+          2,
+          4,
+          7,
+          9,
+          12
+        ],
+        "base": 0.6
+      }
+    },
+    "sfx": {
+      "enter": "bubble",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "clack",
+      "emphasis": "chime",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "Measure: a level rises from the floor of a vessel to an exact graduation (computed from the vessel's volume curve) and settles with a small damped wobble; a reading tag points at the meniscus.",
+      "Pour: the source lifts, pivots about its lip and tilts exactly as far as its remaining volume needs to reach the lip; a parabolic stream arcs out and the target rises by the same volume in its own shape.",
+      "Mix: the incoming colours swirl through the target in spiral arms and settle to a dye (Beer-Lambert) blend.",
+      "Threshold: a burette drips counted drops; each makes a brief bloom that fades until the planned drop spreads its colour through the whole vessel.",
+      "Fizz: bubbles stream up the wall and a foam head rises and settles; layered liquids stack by density.",
+      "Camera: eye level to read the scales, a little higher to see into the vessels, one slow move per beat, ending on a wide bench that fills the frame."
+    ]
+  },
+  "scene": {
+    "id": "45-lab-glassware",
+    "style": "lab-glassware",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "measure",
+        "t": 0,
+        "dur": 3.7
+      },
+      {
+        "id": "pour",
+        "t": 3.7,
+        "dur": 3.9
+      },
+      {
+        "id": "drop",
+        "t": 7.6,
+        "dur": 3.7
+      },
+      {
+        "id": "result",
+        "t": 11.3,
+        "dur": 3.7
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0,
+          0.6,
+          3.25
+        ],
+        "target": [
+          0,
+          0.5,
+          0
+        ],
+        "fov": 30
+      },
+      {
+        "t": 3.5,
+        "pos": [
+          0,
+          0.57,
+          2.95
+        ],
+        "target": [
+          0,
+          0.49,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 4.6000000000000005,
+        "pos": [
+          0,
+          1,
+          3.45
+        ],
+        "target": [
+          0,
+          0.64,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 7.300000000000001,
+        "pos": [
+          0.08,
+          1.06,
+          3.15
+        ],
+        "target": [
+          0,
+          0.62,
+          0
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 8.299999999999999,
+        "pos": [
+          0.16,
+          0.9,
+          2.62
+        ],
+        "target": [
+          0,
+          0.62,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11,
+        "pos": [
+          0.14,
+          0.9,
+          2.55
+        ],
+        "target": [
+          0,
+          0.62,
+          0
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0,
+          1.1,
+          4.45
+        ],
+        "target": [
+          0,
+          0.88,
+          -0.22
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [
+      {
+        "id": "bench",
+        "primitive": "procedural",
+        "factory": "bench",
+        "procedural": "white lab worktop with a rounded nosing and a pale square-tiled wall behind",
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "stand",
+        "primitive": "procedural",
+        "factory": "stand",
+        "procedural": "retort stand: enamel base plate, steel rod, boss head, clamp arm and jaws",
+        "dims": {
+          "clampY": 1.58
+        },
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rack",
+        "primitive": "procedural",
+        "factory": "rack",
+        "procedural": "enamel-painted test-tube rack with six slots",
+        "position": [
+          -1.42,
+          0,
+          -0.56
+        ]
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.85,
+        "root": 196,
+        "chord": [
+          0,
+          4,
+          7,
+          11,
+          14
+        ],
+        "attack": 1.4,
+        "release": 2,
+        "brightness": 1500
+      },
+      {
+        "t": 0.06,
+        "type": "chime",
+        "dur": 1.3,
+        "gain": 0.18000000000000002,
+        "pitch": 0.6,
+        "seed": 900
+      },
+      {
+        "t": 0.22,
+        "type": "chime",
+        "dur": 1.3,
+        "gain": 0.13999999999999999,
+        "pitch": 0.7559526299369239,
+        "seed": 901
+      },
+      {
+        "t": 3.7600000000000002,
+        "type": "chime",
+        "dur": 1.3,
+        "gain": 0.18000000000000002,
+        "pitch": 0.6734772289856238,
+        "seed": 910
+      },
+      {
+        "t": 3.9200000000000004,
+        "type": "chime",
+        "dur": 1.3,
+        "gain": 0.13999999999999999,
+        "pitch": 0.8989842461260089,
+        "seed": 911
+      },
+      {
+        "t": 7.659999999999999,
+        "type": "chime",
+        "dur": 1.3,
+        "gain": 0.18000000000000002,
+        "pitch": 0.7559526299369239,
+        "seed": 920
+      },
+      {
+        "t": 7.819999999999999,
+        "type": "chime",
+        "dur": 1.3,
+        "gain": 0.13999999999999999,
+        "pitch": 1.0090756983044575,
+        "seed": 921
+      },
+      {
+        "t": 11.360000000000001,
+        "type": "chime",
+        "dur": 1.3,
+        "gain": 0.18000000000000002,
+        "pitch": 0.6,
+        "seed": 930
+      },
+      {
+        "t": 11.520000000000001,
+        "type": "chime",
+        "dur": 1.3,
+        "gain": 0.13999999999999999,
+        "pitch": 0.7559526299369239,
+        "seed": 931
+      },
+      {
+        "t": 11.680000000000001,
+        "type": "chime",
+        "dur": 1.3,
+        "gain": 0.13999999999999999,
+        "pitch": 1.0090756983044575,
+        "seed": 932
+      },
+      {
+        "t": 11.840000000000002,
+        "type": "chime",
+        "dur": 1.3,
+        "gain": 0.13999999999999999,
+        "pitch": 1.2,
+        "seed": 933
+      },
+      {
+        "type": "bubble",
+        "dur": 0.035,
+        "gain": 0.04452569150169071,
+        "pitch": 0.48450216112613864,
+        "t": 0.38999999999999996,
+        "pan": 0,
+        "seed": 101
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05097938144329897,
+        "gain": 0.06816784131976383,
+        "pitch": 0.5708467302972698,
+        "t": 0.43199999999999994,
+        "pan": 0,
+        "seed": 108
+      },
+      {
+        "type": "bubble",
+        "dur": 0.041958762886597945,
+        "gain": 0.058809988367188974,
+        "pitch": 0.5259196874079787,
+        "t": 0.4739999999999999,
+        "pan": 0,
+        "seed": 115
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05793814432989691,
+        "gain": 0.08489266749015861,
+        "pitch": 0.6158113966329483,
+        "t": 0.5159999999999999,
+        "pan": 0,
+        "seed": 122
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04891752577319588,
+        "gain": 0.07473297581700883,
+        "pitch": 0.5727525998957863,
+        "t": 0.5579999999999999,
+        "pan": 0,
+        "seed": 129
+      },
+      {
+        "type": "bubble",
+        "dur": 0.039896907216494845,
+        "gain": 0.06339046427237494,
+        "pitch": 0.5298370257134069,
+        "t": 0.6,
+        "pan": 0,
+        "seed": 136
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05587628865979382,
+        "gain": 0.07195047232841724,
+        "pitch": 0.5948688977480268,
+        "t": 0.64,
+        "pan": 0,
+        "seed": 143
+      },
+      {
+        "type": "bubble",
+        "dur": 0.046855670103092786,
+        "gain": 0.0772336370976401,
+        "pitch": 0.5755875051219369,
+        "t": 0.642,
+        "pan": 0,
+        "seed": 150
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03783505154639176,
+        "gain": 0.05178516697804905,
+        "pitch": 0.5012311749478819,
+        "t": 0.682,
+        "pan": 0,
+        "seed": 157
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05381443298969073,
+        "gain": 0.09180190988184617,
+        "pitch": 0.6235122853856697,
+        "t": 0.684,
+        "pan": 0,
+        "seed": 164
+      },
+      {
+        "type": "bubble",
+        "dur": 0.044793814432989694,
+        "gain": 0.0648912002879006,
+        "pitch": 0.5412496488346701,
+        "t": 0.7240000000000001,
+        "pan": 0,
+        "seed": 171
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03577319587628866,
+        "gain": 0.06300757531259661,
+        "pitch": 0.5303548518614524,
+        "t": 0.7260000000000001,
+        "pan": 0,
+        "seed": 178
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05175257731958763,
+        "gain": 0.07902606472531357,
+        "pitch": 0.5829514103792947,
+        "t": 0.7660000000000001,
+        "pan": 0,
+        "seed": 185
+      },
+      {
+        "type": "bubble",
+        "dur": 0.0427319587628866,
+        "gain": 0.07752933935790625,
+        "pitch": 0.5805556690124444,
+        "t": 0.7680000000000001,
+        "pan": 0,
+        "seed": 192
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05871134020618557,
+        "gain": 0.09412463571951986,
+        "pitch": 0.6264774007217457,
+        "t": 0.8080000000000002,
+        "pan": 0,
+        "seed": 199
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04969072164948454,
+        "gain": 0.0926582263809423,
+        "pitch": 0.6331791246114673,
+        "t": 0.8100000000000002,
+        "pan": 0,
+        "seed": 206
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04067010309278351,
+        "gain": 0.06819086108773996,
+        "pitch": 0.5347584011011361,
+        "t": 0.8500000000000002,
+        "pan": 0,
+        "seed": 213
+      },
+      {
+        "type": "bubble",
+        "dur": 0.056649484536082484,
+        "gain": 0.10832692778463555,
+        "pitch": 0.6883627858333674,
+        "t": 0.8520000000000002,
+        "pan": 0,
+        "seed": 220
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04762886597938144,
+        "gain": 0.08320844433391521,
+        "pitch": 0.5807949567845504,
+        "t": 0.8920000000000002,
+        "pan": 0,
+        "seed": 227
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03860824742268042,
+        "gain": 0.07554510006853754,
+        "pitch": 0.5911175916811662,
+        "t": 0.8940000000000002,
+        "pan": 0,
+        "seed": 234
+      },
+      {
+        "type": "bubble",
+        "dur": 0.054587628865979385,
+        "gain": 0.09900565945454678,
+        "pitch": 0.6290098428404245,
+        "t": 0.9340000000000003,
+        "pan": 0,
+        "seed": 241
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04556701030927836,
+        "gain": 0.09104003333821434,
+        "pitch": 0.6483280986958054,
+        "t": 0.9360000000000003,
+        "pan": 0,
+        "seed": 248
+      },
+      {
+        "type": "bubble",
+        "dur": 0.036546391752577324,
+        "gain": 0.06857135120400233,
+        "pitch": 0.5358354584756022,
+        "t": 0.9760000000000003,
+        "pan": 0,
+        "seed": 255
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05252577319587629,
+        "gain": 0.10692869405223213,
+        "pitch": 0.7082213924259348,
+        "t": 0.9780000000000003,
+        "pan": 0,
+        "seed": 262
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04350515463917526,
+        "gain": 0.08415353015226847,
+        "pitch": 0.5862251988800923,
+        "t": 1.0180000000000002,
+        "pan": 0,
+        "seed": 269
+      },
+      {
+        "type": "bubble",
+        "dur": 0.059484536082474226,
+        "gain": 0.12312972989613694,
+        "pitch": 0.7708721145040568,
+        "t": 1.0200000000000002,
+        "pan": 0,
+        "seed": 276
+      },
+      {
+        "type": "bubble",
+        "dur": 0.0504639175257732,
+        "gain": 0.10029520734942923,
+        "pitch": 0.6389462775840932,
+        "t": 1.0600000000000003,
+        "pan": 0,
+        "seed": 283
+      },
+      {
+        "type": "bubble",
+        "dur": 0.041443298969072166,
+        "gain": 0.08704796928024582,
+        "pitch": 0.6664992299168603,
+        "t": 1.0620000000000003,
+        "pan": 0,
+        "seed": 290
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05742268041237114,
+        "gain": 0.11687286756107539,
+        "pitch": 0.6940849298736187,
+        "t": 1.1020000000000003,
+        "pan": 0,
+        "seed": 297
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04840206185567011,
+        "gain": 0.10295133529921828,
+        "pitch": 0.7307619964922515,
+        "t": 1.1040000000000003,
+        "pan": 0,
+        "seed": 304
+      },
+      {
+        "type": "bubble",
+        "dur": 0.039381443298969074,
+        "gain": 0.08181666600608128,
+        "pitch": 0.5964518173122236,
+        "t": 1.1440000000000003,
+        "pan": 0,
+        "seed": 311
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05536082474226804,
+        "gain": 0.11900391583105056,
+        "pitch": 0.7977682044294999,
+        "t": 1.1460000000000004,
+        "pan": 0,
+        "seed": 318
+      },
+      {
+        "type": "bubble",
+        "dur": 0.046340206185567015,
+        "gain": 0.09795773401222457,
+        "pitch": 0.6532714602212344,
+        "t": 1.1860000000000004,
+        "pan": 0,
+        "seed": 325
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03731958762886598,
+        "gain": 0.08091331183668649,
+        "pitch": 0.6852498008701048,
+        "t": 1.1880000000000004,
+        "pan": 0,
+        "seed": 332
+      },
+      {
+        "type": "bubble",
+        "dur": 0.053298969072164956,
+        "gain": 0.11427709597057223,
+        "pitch": 0.7124750397159523,
+        "t": 1.2280000000000004,
+        "pan": 0,
+        "seed": 339
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04427835051546392,
+        "gain": 0.09663592272640126,
+        "pitch": 0.7534205540324012,
+        "t": 1.2300000000000004,
+        "pan": 0,
+        "seed": 346
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03525773195876289,
+        "gain": 0.07643605161766359,
+        "pitch": 0.6085534267136157,
+        "t": 1.2700000000000005,
+        "pan": 0,
+        "seed": 353
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05123711340206186,
+        "gain": 0.11234139402824327,
+        "pitch": 0.8242311860350224,
+        "t": 1.2720000000000005,
+        "pan": 0,
+        "seed": 360
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04221649484536083,
+        "gain": 0.0922539429247192,
+        "pitch": 0.6688757126917799,
+        "t": 1.3120000000000005,
+        "pan": 0,
+        "seed": 367
+      },
+      {
+        "type": "bubble",
+        "dur": 0.0581958762886598,
+        "gain": 0.12793883487486096,
+        "pitch": 0.8976399692307848,
+        "t": 1.3140000000000005,
+        "pan": 0,
+        "seed": 374
+      },
+      {
+        "type": "bubble",
+        "dur": 0.049175257731958764,
+        "gain": 0.10798712572796458,
+        "pitch": 0.7314255536942093,
+        "t": 1.3540000000000005,
+        "pan": 0,
+        "seed": 381
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04015463917525774,
+        "gain": 0.0883384406357883,
+        "pitch": 0.7737858310865333,
+        "t": 1.3560000000000005,
+        "pan": 0,
+        "seed": 388
+      },
+      {
+        "type": "bubble",
+        "dur": 0.056134020618556706,
+        "gain": 0.12349313136847549,
+        "pitch": 0.7961344773944966,
+        "t": 1.3960000000000006,
+        "pan": 0,
+        "seed": 395
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04711340206185567,
+        "gain": 0.10351696920050613,
+        "pitch": 0.8477561867251896,
+        "t": 1.3980000000000006,
+        "pan": 0,
+        "seed": 402
+      },
+      {
+        "type": "bubble",
+        "dur": 0.038092783505154645,
+        "gain": 0.08369920006081515,
+        "pitch": 0.6827723900957625,
+        "t": 1.4380000000000006,
+        "pan": 0,
+        "seed": 409
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05407216494845361,
+        "gain": 0.11842471488532072,
+        "pitch": 0.9240908663820887,
+        "t": 1.4400000000000006,
+        "pan": 0,
+        "seed": 416
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04505154639175258,
+        "gain": 0.09856428935996642,
+        "pitch": 0.7478171945511891,
+        "t": 1.4800000000000006,
+        "pan": 0,
+        "seed": 423
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03603092783505155,
+        "gain": 0.07850400884547783,
+        "pitch": 0.7897030704205187,
+        "t": 1.4820000000000007,
+        "pan": 0,
+        "seed": 430
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05201030927835052,
+        "gain": 0.11295241296809186,
+        "pitch": 0.8146945590534198,
+        "t": 1.5220000000000007,
+        "pan": 0,
+        "seed": 437
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04298969072164949,
+        "gain": 0.09299751819548263,
+        "pitch": 0.8661217190226037,
+        "t": 1.5240000000000007,
+        "pan": 0,
+        "seed": 444
+      },
+      {
+        "type": "bubble",
+        "dur": 0.058969072164948455,
+        "gain": 0.12673126991881759,
+        "pitch": 0.883251094024388,
+        "t": 1.5640000000000007,
+        "pan": 0,
+        "seed": 451
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04994845360824743,
+        "gain": 0.10706753871068987,
+        "pitch": 0.9445974340375919,
+        "t": 1.5660000000000007,
+        "pan": 0,
+        "seed": 458
+      },
+      {
+        "type": "bubble",
+        "dur": 0.040927835051546395,
+        "gain": 0.08677167894438541,
+        "pitch": 0.7589056773080813,
+        "t": 1.6060000000000008,
+        "pan": 0,
+        "seed": 465
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05690721649484537,
+        "gain": 0.12063236105364666,
+        "pitch": 1.0249809978503652,
+        "t": 1.6080000000000008,
+        "pan": 0,
+        "seed": 472
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04788659793814433,
+        "gain": 0.09984010761076657,
+        "pitch": 0.8269344382559568,
+        "t": 1.6480000000000008,
+        "pan": 0,
+        "seed": 479
+      },
+      {
+        "type": "bubble",
+        "dur": 0.0388659793814433,
+        "gain": 0.08131137783740457,
+        "pitch": 0.8774772091580783,
+        "t": 1.6500000000000008,
+        "pan": 0,
+        "seed": 486
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05484536082474227,
+        "gain": 0.11209267759316427,
+        "pitch": 0.8961810985920371,
+        "t": 1.6900000000000008,
+        "pan": 0,
+        "seed": 493
+      },
+      {
+        "type": "bubble",
+        "dur": 0.045824742268041244,
+        "gain": 0.09442404416315975,
+        "pitch": 0.9572810181708862,
+        "t": 1.6920000000000008,
+        "pan": 0,
+        "seed": 500
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03680412371134021,
+        "gain": 0.07349764771316984,
+        "pitch": 0.7624870112808102,
+        "t": 1.7320000000000009,
+        "pan": 0,
+        "seed": 507
+      },
+      {
+        "type": "bubble",
+        "dur": 0.052783505154639185,
+        "gain": 0.10690228897792754,
+        "pitch": 1.0385880598769701,
+        "t": 1.7340000000000009,
+        "pan": 0,
+        "seed": 514
+      },
+      {
+        "type": "bubble",
+        "dur": 0.043762886597938144,
+        "gain": 0.08511205814969708,
+        "pitch": 0.8306497523437291,
+        "t": 1.774000000000001,
+        "pan": 0,
+        "seed": 521
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05974226804123712,
+        "gain": 0.1186780188700677,
+        "pitch": 1.1211980951748124,
+        "t": 1.776000000000001,
+        "pan": 0,
+        "seed": 528
+      },
+      {
+        "type": "bubble",
+        "dur": 0.050721649484536085,
+        "gain": 0.09574734065523145,
+        "pitch": 0.8995166650877808,
+        "t": 1.816000000000001,
+        "pan": 0,
+        "seed": 535
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04170103092783506,
+        "gain": 0.08108033006207128,
+        "pitch": 0.9607286690377657,
+        "t": 1.818000000000001,
+        "pan": 0,
+        "seed": 542
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05768041237113403,
+        "gain": 0.10532162794281907,
+        "pitch": 0.968835750625056,
+        "t": 1.858000000000001,
+        "pan": 0,
+        "seed": 549
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04865979381443299,
+        "gain": 0.09240269397852124,
+        "pitch": 1.0421041047634019,
+        "t": 1.860000000000001,
+        "pan": 0,
+        "seed": 556
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03963917525773196,
+        "gain": 0.06976552443815218,
+        "pitch": 0.8243497320459126,
+        "t": 1.900000000000001,
+        "pan": 0,
+        "seed": 563
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05561855670103093,
+        "gain": 0.1029268891086647,
+        "pitch": 1.1243100220125457,
+        "t": 1.902000000000001,
+        "pan": 0,
+        "seed": 570
+      },
+      {
+        "type": "bubble",
+        "dur": 0.0465979381443299,
+        "gain": 0.0787663255354974,
+        "pitch": 0.8918485948629243,
+        "t": 1.942000000000001,
+        "pan": 0,
+        "seed": 577
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03757731958762887,
+        "gain": 0.06761775623484102,
+        "pitch": 0.9540340591148357,
+        "t": 1.944000000000001,
+        "pan": 0,
+        "seed": 584
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05355670103092784,
+        "gain": 0.08662256620643292,
+        "pitch": 0.9592445872302409,
+        "t": 1.984000000000001,
+        "pan": 0,
+        "seed": 591
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04453608247422681,
+        "gain": 0.07774708629996101,
+        "pitch": 1.0346646312027972,
+        "t": 1.986000000000001,
+        "pan": 0,
+        "seed": 598
+      },
+      {
+        "type": "bubble",
+        "dur": 0.035515463917525775,
+        "gain": 0.054753838509327586,
+        "pitch": 0.8073168437869529,
+        "t": 2.026000000000001,
+        "pan": 0,
+        "seed": 605
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05149484536082474,
+        "gain": 0.08700874168494932,
+        "pitch": 1.1156339258723125,
+        "t": 2.028000000000001,
+        "pan": 0,
+        "seed": 612
+      },
+      {
+        "type": "bubble",
+        "dur": 0.042474226804123716,
+        "gain": 0.06217065046530783,
+        "pitch": 0.8725884055910216,
+        "t": 2.068000000000001,
+        "pan": 0,
+        "seed": 619
+      },
+      {
+        "type": "bubble",
+        "dur": 0.058453608247422684,
+        "gain": 0.09536831852930121,
+        "pitch": 1.1966914316728825,
+        "t": 2.0700000000000007,
+        "pan": 0,
+        "seed": 626
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04943298969072165,
+        "gain": 0.06841715186249868,
+        "pitch": 0.9372202357515254,
+        "t": 2.1100000000000008,
+        "pan": 0,
+        "seed": 633
+      },
+      {
+        "type": "bubble",
+        "dur": 0.040412371134020623,
+        "gain": 0.0635100515211224,
+        "pitch": 1.0159511612581789,
+        "t": 2.1120000000000005,
+        "pan": 0,
+        "seed": 640
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05639175257731959,
+        "gain": 0.08515182366641608,
+        "pitch": 1.1898698102309162,
+        "t": 2.1540000000000004,
+        "pan": 0,
+        "seed": 647
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04737113402061856,
+        "gain": 0.06855336365164438,
+        "pitch": 1.0999329952298023,
+        "t": 2.196,
+        "pan": 0,
+        "seed": 654
+      },
+      {
+        "type": "chime",
+        "dur": 1.2,
+        "gain": 0.16000000000000003,
+        "pitch": 0.8989842461260089,
+        "t": 2.2,
+        "pan": 0,
+        "seed": 661
+      },
+      {
+        "type": "bubble",
+        "dur": 0.0543298969072165,
+        "gain": 0.07515307016073927,
+        "pitch": 1.17757963099772,
+        "t": 2.238,
+        "pan": 0,
+        "seed": 668
+      },
+      {
+        "type": "bubble",
+        "dur": 0.045309278350515465,
+        "gain": 0.05974648942549168,
+        "pitch": 1.084450370489527,
+        "t": 2.28,
+        "pan": 0,
+        "seed": 675
+      },
+      {
+        "type": "chime",
+        "dur": 1.2,
+        "gain": 0.16000000000000003,
+        "pitch": 1.0090756983044575,
+        "t": 2.35,
+        "pan": 0,
+        "seed": 682
+      },
+      {
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.1,
+        "pitch": 2.8600000000000003,
+        "t": 3.9000000000000004,
+        "pan": -0.39,
+        "seed": 689
+      },
+      {
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.1,
+        "pitch": 2.8600000000000003,
+        "t": 4.05,
+        "pan": 0.39,
+        "seed": 696
+      },
+      {
+        "type": "whoosh",
+        "dur": 0.5,
+        "gain": 0.05,
+        "pitch": 1.6,
+        "dir": "in",
+        "t": 4.5,
+        "pan": -0.06,
+        "seed": 703
+      },
+      {
+        "type": "whoosh",
+        "dur": 0.5,
+        "gain": 0.05,
+        "pitch": 1.6,
+        "dir": "in",
+        "t": 4.6499999999999995,
+        "pan": 0.06,
+        "seed": 710
+      },
+      {
+        "type": "whoosh",
+        "dur": 2.2,
+        "gain": 0.045,
+        "pitch": 0.7,
+        "dir": "out",
+        "t": 4.855307508212205,
+        "pan": 0,
+        "seed": 717
+      },
+      {
+        "type": "bubble",
+        "dur": 0.057164948453608255,
+        "gain": 0.05101119245632803,
+        "pitch": 0.601936199114399,
+        "t": 4.981307508212204,
+        "pan": -0.06,
+        "seed": 724
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04814432989690722,
+        "gain": 0.0474254847836984,
+        "pitch": 0.5553668216337913,
+        "t": 5.023307508212204,
+        "pan": -0.06,
+        "seed": 731
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03912371134020619,
+        "gain": 0.043082499294293246,
+        "pitch": 0.5093230076788878,
+        "t": 5.065307508212204,
+        "pan": -0.06,
+        "seed": 738
+      },
+      {
+        "type": "bubble",
+        "dur": 0.055103092783505156,
+        "gain": 0.06824335370238198,
+        "pitch": 0.5975119175182857,
+        "t": 5.1073075082122035,
+        "pan": -0.06,
+        "seed": 745
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04608247422680413,
+        "gain": 0.04250099399263083,
+        "pitch": 0.5515190076418428,
+        "t": 5.1313075082122035,
+        "pan": 0.06,
+        "seed": 752
+      },
+      {
+        "type": "bubble",
+        "dur": 0.037061855670103096,
+        "gain": 0.05167409522209043,
+        "pitch": 0.5048424879573997,
+        "t": 5.149307508212203,
+        "pan": -0.06,
+        "seed": 759
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05304123711340207,
+        "gain": 0.0549997400748819,
+        "pitch": 0.5941026864082736,
+        "t": 5.173307508212203,
+        "pan": 0.06,
+        "seed": 766
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04402061855670104,
+        "gain": 0.068917975963296,
+        "pitch": 0.5477862516034618,
+        "t": 5.191307508212203,
+        "pan": -0.06,
+        "seed": 773
+      },
+      {
+        "type": "bubble",
+        "dur": 0.035,
+        "gain": 0.04128381177169167,
+        "pitch": 0.5021112014722716,
+        "t": 5.215307508212203,
+        "pan": 0.06,
+        "seed": 780
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05097938144329897,
+        "gain": 0.08916908020173692,
+        "pitch": 0.5930347563602631,
+        "t": 5.233307508212203,
+        "pan": -0.06,
+        "seed": 787
+      },
+      {
+        "type": "bubble",
+        "dur": 0.041958762886597945,
+        "gain": 0.056505505402627006,
+        "pitch": 0.5479121087526528,
+        "t": 5.257307508212203,
+        "pan": 0.06,
+        "seed": 794
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05793814432989691,
+        "gain": 0.1124776855441909,
+        "pitch": 0.6411084150814949,
+        "t": 5.275307508212203,
+        "pan": -0.06,
+        "seed": 801
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04891752577319588,
+        "gain": 0.07505739497157378,
+        "pitch": 0.5965860560453649,
+        "t": 5.299307508212203,
+        "pan": 0.06,
+        "seed": 808
+      },
+      {
+        "type": "bubble",
+        "dur": 0.039896907216494845,
+        "gain": 0.0853212487236216,
+        "pitch": 0.5500729373032707,
+        "t": 5.3173075082122025,
+        "pan": -0.06,
+        "seed": 815
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05587628865979382,
+        "gain": 0.0971156923215474,
+        "pitch": 0.6486265553481786,
+        "t": 5.341307508212203,
+        "pan": 0.06,
+        "seed": 822
+      },
+      {
+        "type": "bubble",
+        "dur": 0.046855670103092786,
+        "gain": 0.10308247422680412,
+        "pitch": 0.6022680330584008,
+        "t": 5.359307508212202,
+        "pan": -0.06,
+        "seed": 829
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03783505154639176,
+        "gain": 0.07388579639144899,
+        "pitch": 0.5571789056759555,
+        "t": 5.383307508212202,
+        "pan": 0.06,
+        "seed": 836
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05381443298969073,
+        "gain": 0.11839175257731958,
+        "pitch": 0.6583453482535951,
+        "t": 5.401307508212202,
+        "pan": -0.06,
+        "seed": 843
+      },
+      {
+        "type": "bubble",
+        "dur": 0.044793814432989694,
+        "gain": 0.09736272263785718,
+        "pitch": 0.6136822040664012,
+        "t": 5.425307508212202,
+        "pan": 0.06,
+        "seed": 850
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03577319587628866,
+        "gain": 0.07870103092783504,
+        "pitch": 0.5657232699406697,
+        "t": 5.443307508212202,
+        "pan": -0.06,
+        "seed": 857
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05175257731958763,
+        "gain": 0.11385567010309278,
+        "pitch": 0.6744427105791063,
+        "t": 5.467307508212202,
+        "pan": 0.06,
+        "seed": 864
+      },
+      {
+        "type": "bubble",
+        "dur": 0.0427319587628866,
+        "gain": 0.09401030927835051,
+        "pitch": 0.6262484535346777,
+        "t": 5.485307508212202,
+        "pan": -0.06,
+        "seed": 871
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05871134020618557,
+        "gain": 0.12916494845360824,
+        "pitch": 0.7397955530106168,
+        "t": 5.509307508212202,
+        "pan": 0.06,
+        "seed": 878
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04969072164948454,
+        "gain": 0.10931958762886598,
+        "pitch": 0.691265833177385,
+        "t": 5.527307508212202,
+        "pan": -0.06,
+        "seed": 885
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04067010309278351,
+        "gain": 0.08947422680412372,
+        "pitch": 0.6444791881946415,
+        "t": 5.551307508212202,
+        "pan": 0.06,
+        "seed": 892
+      },
+      {
+        "type": "bubble",
+        "dur": 0.056649484536082484,
+        "gain": 0.12462886597938144,
+        "pitch": 0.761023953605003,
+        "t": 5.569307508212201,
+        "pan": -0.06,
+        "seed": 899
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04762886597938144,
+        "gain": 0.10478350515463918,
+        "pitch": 0.7140941184485685,
+        "t": 5.5933075082122015,
+        "pan": 0.06,
+        "seed": 906
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03860824742268042,
+        "gain": 0.0849381443298969,
+        "pitch": 0.6619872056043952,
+        "t": 5.611307508212201,
+        "pan": -0.06,
+        "seed": 913
+      },
+      {
+        "type": "bubble",
+        "dur": 0.054587628865979385,
+        "gain": 0.12009278350515463,
+        "pitch": 0.7884849667415352,
+        "t": 5.635307508212201,
+        "pan": 0.06,
+        "seed": 920
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04556701030927836,
+        "gain": 0.10024742268041237,
+        "pitch": 0.7354935222186063,
+        "t": 5.653307508212201,
+        "pan": -0.06,
+        "seed": 927
+      },
+      {
+        "type": "bubble",
+        "dur": 0.036546391752577324,
+        "gain": 0.0804020618556701,
+        "pitch": 0.684201597414138,
+        "t": 5.677307508212201,
+        "pan": 0.06,
+        "seed": 934
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05252577319587629,
+        "gain": 0.11555670103092781,
+        "pitch": 0.8136865992988577,
+        "t": 5.695307508212201,
+        "pan": -0.06,
+        "seed": 941
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04350515463917526,
+        "gain": 0.09571134020618557,
+        "pitch": 0.7616366985618769,
+        "t": 5.719307508212201,
+        "pan": 0.06,
+        "seed": 948
+      },
+      {
+        "type": "bubble",
+        "dur": 0.059484536082474226,
+        "gain": 0.1308659793814433,
+        "pitch": 0.8965163920055523,
+        "t": 5.737307508212201,
+        "pan": -0.06,
+        "seed": 955
+      },
+      {
+        "type": "bubble",
+        "dur": 0.0504639175257732,
+        "gain": 0.11102061855670103,
+        "pitch": 0.8435398023756129,
+        "t": 5.761307508212201,
+        "pan": 0.06,
+        "seed": 962
+      },
+      {
+        "type": "bubble",
+        "dur": 0.041443298969072166,
+        "gain": 0.09117525773195875,
+        "pitch": 0.7840499819239318,
+        "t": 5.7793075082122005,
+        "pan": -0.06,
+        "seed": 969
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05742268041237114,
+        "gain": 0.1263298969072165,
+        "pitch": 0.9297491007358833,
+        "t": 5.8033075082122005,
+        "pan": 0.06,
+        "seed": 976
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04840206185567011,
+        "gain": 0.10648453608247421,
+        "pitch": 0.8687137455425233,
+        "t": 5.8213075082122,
+        "pan": -0.06,
+        "seed": 983
+      },
+      {
+        "type": "bubble",
+        "dur": 0.039381443298969074,
+        "gain": 0.08663917525773196,
+        "pitch": 0.8093495920633446,
+        "t": 5.8453075082122,
+        "pan": 0.06,
+        "seed": 990
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05536082474226804,
+        "gain": 0.1217938144329897,
+        "pitch": 0.9572894623957566,
+        "t": 5.8633075082122,
+        "pan": -0.06,
+        "seed": 997
+      },
+      {
+        "type": "bubble",
+        "dur": 0.046340206185567015,
+        "gain": 0.10194845360824742,
+        "pitch": 0.8964256202716705,
+        "t": 5.8873075082122,
+        "pan": 0.06,
+        "seed": 1004
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03731958762886598,
+        "gain": 0.08210309278350515,
+        "pitch": 0.8289428998607494,
+        "t": 5.9053075082122,
+        "pan": -0.06,
+        "seed": 1011
+      },
+      {
+        "type": "bubble",
+        "dur": 0.053298969072164956,
+        "gain": 0.11725773195876289,
+        "pitch": 0.9868995600189633,
+        "t": 5.9293075082122,
+        "pan": 0.06,
+        "seed": 1018
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04427835051546392,
+        "gain": 0.09741237113402061,
+        "pitch": 0.9175154417308073,
+        "t": 5.9473075082122,
+        "pan": -0.06,
+        "seed": 1025
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03525773195876289,
+        "gain": 0.07756701030927834,
+        "pitch": 0.8493604571195081,
+        "t": 5.9713075082122,
+        "pan": 0.06,
+        "seed": 1032
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05123711340206186,
+        "gain": 0.11272164948453607,
+        "pitch": 1.0089679857246734,
+        "t": 5.9893075082122,
+        "pan": -0.06,
+        "seed": 1039
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04221649484536083,
+        "gain": 0.0928762886597938,
+        "pitch": 0.9389297013634731,
+        "t": 6.0133075082122,
+        "pan": 0.06,
+        "seed": 1046
+      },
+      {
+        "type": "bubble",
+        "dur": 0.0581958762886598,
+        "gain": 0.12803092783505154,
+        "pitch": 1.1028316066925832,
+        "t": 6.031307508212199,
+        "pan": -0.06,
+        "seed": 1053
+      },
+      {
+        "type": "bubble",
+        "dur": 0.049175257731958764,
+        "gain": 0.10818556701030928,
+        "pitch": 1.0307777944088183,
+        "t": 6.055307508212199,
+        "pan": 0.06,
+        "seed": 1060
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04015463917525774,
+        "gain": 0.088340206185567,
+        "pitch": 0.9526187046132841,
+        "t": 6.073307508212199,
+        "pan": -0.06,
+        "seed": 1067
+      },
+      {
+        "type": "bubble",
+        "dur": 0.056134020618556706,
+        "gain": 0.12349484536082474,
+        "pitch": 1.124400217124662,
+        "t": 6.097307508212199,
+        "pan": 0.06,
+        "seed": 1074
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04711340206185567,
+        "gain": 0.10364948453608247,
+        "pitch": 1.0441702589638309,
+        "t": 6.115307508212199,
+        "pan": -0.06,
+        "seed": 1081
+      },
+      {
+        "type": "bubble",
+        "dur": 0.038092783505154645,
+        "gain": 0.0838041237113402,
+        "pitch": 0.9647426099178641,
+        "t": 6.139307508212199,
+        "pan": 0.06,
+        "seed": 1088
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05407216494845361,
+        "gain": 0.11895876288659793,
+        "pitch": 1.1369383822943544,
+        "t": 6.157307508212199,
+        "pan": -0.06,
+        "seed": 1095
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04505154639175258,
+        "gain": 0.09911340206185566,
+        "pitch": 1.0554354862275954,
+        "t": 6.181307508212199,
+        "pan": 0.06,
+        "seed": 1102
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03603092783505155,
+        "gain": 0.0792680412371134,
+        "pitch": 0.9690530727280613,
+        "t": 6.199307508212199,
+        "pan": -0.06,
+        "seed": 1109
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05201030927835052,
+        "gain": 0.11442268041237112,
+        "pitch": 1.1467751269736066,
+        "t": 6.223307508212199,
+        "pan": 0.06,
+        "seed": 1116
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04298969072164949,
+        "gain": 0.09457731958762886,
+        "pitch": 1.0585064482184336,
+        "t": 6.2413075082121985,
+        "pan": -0.06,
+        "seed": 1123
+      },
+      {
+        "type": "bubble",
+        "dur": 0.058969072164948455,
+        "gain": 0.1297319587628866,
+        "pitch": 1.2382721102866883,
+        "t": 6.2653075082121985,
+        "pan": 0.06,
+        "seed": 1130
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04994845360824743,
+        "gain": 0.10917800228699594,
+        "pitch": 1.1481562104506318,
+        "t": 6.283307508212198,
+        "pan": -0.06,
+        "seed": 1137
+      },
+      {
+        "type": "bubble",
+        "dur": 0.040927835051546395,
+        "gain": 0.08421043276637416,
+        "pitch": 1.0583563160747347,
+        "t": 6.307307508212198,
+        "pan": 0.06,
+        "seed": 1144
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05690721649484537,
+        "gain": 0.11313057804558731,
+        "pitch": 1.2375628341182172,
+        "t": 6.325307508212198,
+        "pan": -0.06,
+        "seed": 1151
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04788659793814433,
+        "gain": 0.08807574517657901,
+        "pitch": 1.1459378201895931,
+        "t": 6.349307508212198,
+        "pan": 0.06,
+        "seed": 1158
+      },
+      {
+        "type": "bubble",
+        "dur": 0.0388659793814433,
+        "gain": 0.06973473632150581,
+        "pitch": 1.051235408192868,
+        "t": 6.367307508212198,
+        "pan": -0.06,
+        "seed": 1165
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05484536082474227,
+        "gain": 0.08937897251493954,
+        "pitch": 1.2329415820354643,
+        "t": 6.391307508212198,
+        "pan": 0.06,
+        "seed": 1172
+      },
+      {
+        "type": "bubble",
+        "dur": 0.045824742268041244,
+        "gain": 0.07370010772191359,
+        "pitch": 1.13683768431213,
+        "t": 6.409307508212198,
+        "pan": -0.06,
+        "seed": 1179
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03680412371134021,
+        "gain": 0.052768563185080684,
+        "pitch": 1.040713280118737,
+        "t": 6.433307508212198,
+        "pan": 0.06,
+        "seed": 1186
+      },
+      {
+        "type": "bubble",
+        "dur": 0.052783505154639185,
+        "gain": 0.07567928389568995,
+        "pitch": 1.2216722923839891,
+        "t": 6.451307508212198,
+        "pan": -0.06,
+        "seed": 1193
+      },
+      {
+        "type": "bubble",
+        "dur": 0.043762886597938144,
+        "gain": 0.054979660821639735,
+        "pitch": 1.1242293242293342,
+        "t": 6.475307508212198,
+        "pan": 0.06,
+        "seed": 1200
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05974226804123712,
+        "gain": 0.07611099655508546,
+        "pitch": 1.3055311831766825,
+        "t": 6.493307508212197,
+        "pan": -0.06,
+        "seed": 1207
+      },
+      {
+        "type": "bubble",
+        "dur": 0.050721649484536085,
+        "gain": 0.055872054467113054,
+        "pitch": 1.2068929622787872,
+        "t": 6.517307508212197,
+        "pan": 0.06,
+        "seed": 1214
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04170103092783506,
+        "gain": 0.04720745556295674,
+        "pitch": 1.1069595538783183,
+        "t": 6.535307508212197,
+        "pan": -0.06,
+        "seed": 1221
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05768041237113403,
+        "gain": 0.05613419816271041,
+        "pitch": 1.288607338718154,
+        "t": 6.559307508212197,
+        "pan": 0.06,
+        "seed": 1228
+      },
+      {
+        "type": "bubble",
+        "dur": 0.04865979381443299,
+        "gain": 0.049179001105952296,
+        "pitch": 1.1879539963891952,
+        "t": 6.577307508212197,
+        "pan": -0.06,
+        "seed": 1235
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03963917525773196,
+        "gain": 0.03465840143001171,
+        "pitch": 1.0871535626755473,
+        "t": 6.601307508212197,
+        "pan": 0.06,
+        "seed": 1242
+      },
+      {
+        "type": "bubble",
+        "dur": 0.05561855670103093,
+        "gain": 0.050735321025564946,
+        "pitch": 1.2681448749517132,
+        "t": 6.619307508212197,
+        "pan": -0.06,
+        "seed": 1249
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "gain": 0.24,
+        "pitch": 1.6,
+        "t": 7.299999999999999,
+        "pan": 0.39,
+        "seed": 1256
+      },
+      {
+        "type": "chime",
+        "dur": 0.4,
+        "gain": 0.2,
+        "pitch": 2.6,
+        "t": 7.304999999999999,
+        "pan": 0.39,
+        "seed": 1257
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "gain": 0.24,
+        "pitch": 1.6,
+        "t": 7.35,
+        "pan": -0.39,
+        "seed": 1263
+      },
+      {
+        "type": "chime",
+        "dur": 0.4,
+        "gain": 0.2,
+        "pitch": 2.6,
+        "t": 7.3549999999999995,
+        "pan": -0.39,
+        "seed": 1264
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 2.2,
+        "t": 8.15,
+        "pan": 0,
+        "seed": 1270
+      },
+      {
+        "type": "bubble",
+        "dur": 0.07,
+        "gain": 0.3,
+        "pitch": 1.35,
+        "t": 8.543465187740154,
+        "pan": 0,
+        "seed": 1277
+      },
+      {
+        "type": "click",
+        "gain": 0.06,
+        "pitch": 1.8,
+        "t": 8.545465187740154,
+        "pan": 0,
+        "seed": 1278
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 2.2,
+        "t": 8.57,
+        "pan": 0,
+        "seed": 1284
+      },
+      {
+        "type": "bubble",
+        "dur": 0.07,
+        "gain": 0.3,
+        "pitch": 1.35,
+        "t": 8.963465187740153,
+        "pan": 0,
+        "seed": 1291
+      },
+      {
+        "type": "click",
+        "gain": 0.06,
+        "pitch": 1.8,
+        "t": 8.965465187740154,
+        "pan": 0,
+        "seed": 1292
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 2.2,
+        "t": 8.99,
+        "pan": 0,
+        "seed": 1298
+      },
+      {
+        "type": "bubble",
+        "dur": 0.07,
+        "gain": 0.3,
+        "pitch": 1.35,
+        "t": 9.383465187740153,
+        "pan": 0,
+        "seed": 1305
+      },
+      {
+        "type": "click",
+        "gain": 0.06,
+        "pitch": 1.8,
+        "t": 9.385465187740154,
+        "pan": 0,
+        "seed": 1306
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 2.2,
+        "t": 9.41,
+        "pan": 0,
+        "seed": 1312
+      },
+      {
+        "type": "bubble",
+        "dur": 0.07,
+        "gain": 0.3,
+        "pitch": 1.35,
+        "t": 9.803465187740153,
+        "pan": 0,
+        "seed": 1319
+      },
+      {
+        "type": "click",
+        "gain": 0.06,
+        "pitch": 1.8,
+        "t": 9.805465187740154,
+        "pan": 0,
+        "seed": 1320
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 2.2,
+        "t": 9.83,
+        "pan": 0,
+        "seed": 1326
+      },
+      {
+        "type": "bubble",
+        "dur": 0.07,
+        "gain": 0.3,
+        "pitch": 1.35,
+        "t": 10.223465187740153,
+        "pan": 0,
+        "seed": 1333
+      },
+      {
+        "type": "click",
+        "gain": 0.06,
+        "pitch": 1.8,
+        "t": 10.225465187740154,
+        "pan": 0,
+        "seed": 1334
+      },
+      {
+        "type": "tick",
+        "gain": 0.03,
+        "pitch": 2.2,
+        "t": 10.25,
+        "pan": 0,
+        "seed": 1340
+      },
+      {
+        "type": "bubble",
+        "dur": 0.07,
+        "gain": 0.36,
+        "pitch": 1.35,
+        "t": 10.643465187740153,
+        "pan": 0,
+        "seed": 1347
+      },
+      {
+        "type": "click",
+        "gain": 0.06,
+        "pitch": 1.8,
+        "t": 10.645465187740154,
+        "pan": 0,
+        "seed": 1348
+      },
+      {
+        "type": "chime",
+        "dur": 1.6,
+        "gain": 0.2,
+        "pitch": 1.2,
+        "t": 10.663465187740153,
+        "pan": 0,
+        "seed": 1354
+      },
+      {
+        "type": "chime",
+        "dur": 1.6,
+        "gain": 0.16000000000000003,
+        "pitch": 1.3469544579712476,
+        "t": 10.783465187740152,
+        "pan": 0,
+        "seed": 1355
+      },
+      {
+        "type": "chime",
+        "dur": 1.4,
+        "gain": 0.08,
+        "pitch": 1.4,
+        "sparkle": true,
+        "notes": 7,
+        "t": 10.863465187740152,
+        "pan": 0,
+        "seed": 1356
+      },
+      {
+        "type": "paper",
+        "dur": 3.806534812259847,
+        "gain": 0.07,
+        "pitch": 2.4,
+        "density": 0.85,
+        "t": 10.893465187740153,
+        "pan": 0,
+        "seed": 1361
+      },
+      {
+        "type": "riser",
+        "dur": 1.7,
+        "gain": 0.05,
+        "pitch": 1.2,
+        "t": 11.093465187740152,
+        "pan": 0,
+        "seed": 1368
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 2.4,
+        "t": 11.452586346766592,
+        "pan": 0,
+        "seed": 1375
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 3,
+        "t": 11.529141935803604,
+        "pan": 0,
+        "seed": 1382
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 2.8499999999999996,
+        "t": 11.649090463719986,
+        "pan": 0,
+        "seed": 1389
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 2.6999999999999997,
+        "t": 11.790223790315048,
+        "pan": 0,
+        "seed": 1396
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 2.55,
+        "t": 11.93033448049901,
+        "pan": 0,
+        "seed": 1403
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 2.4,
+        "t": 12.073503251506413,
+        "pan": 0,
+        "seed": 1410
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 3,
+        "t": 12.273461801015902,
+        "pan": 0,
+        "seed": 1417
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 2.8499999999999996,
+        "t": 12.428688946319477,
+        "pan": 0,
+        "seed": 1424
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 2.6999999999999997,
+        "t": 12.596384902051852,
+        "pan": 0,
+        "seed": 1431
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 2.55,
+        "t": 12.775346070405996,
+        "pan": 0,
+        "seed": 1438
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 2.4,
+        "t": 12.961926811476657,
+        "pan": 0,
+        "seed": 1445
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 3,
+        "t": 13.141460156039471,
+        "pan": 0,
+        "seed": 1452
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 2.8499999999999996,
+        "t": 13.327585264138255,
+        "pan": 0,
+        "seed": 1459
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 2.6999999999999997,
+        "t": 13.565634343993514,
+        "pan": 0,
+        "seed": 1466
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 2.55,
+        "t": 13.764289053211755,
+        "pan": 0,
+        "seed": 1473
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 2.4,
+        "t": 13.963935963849254,
+        "pan": 0,
+        "seed": 1480
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 3,
+        "t": 14.154926175989065,
+        "pan": 0,
+        "seed": 1487
+      },
+      {
+        "type": "bubble",
+        "dur": 0.03,
+        "gain": 0.04,
+        "pitch": 2.8499999999999996,
+        "t": 14.355496604183497,
+        "pan": 0,
+        "seed": 1494
+      },
+      {
+        "t": 0.35,
+        "type": "click",
+        "gain": 0.08,
+        "pitch": 0.9,
+        "seed": 950
+      },
+      {
+        "t": 4.05,
+        "type": "click",
+        "gain": 0.08,
+        "pitch": 0.9,
+        "seed": 951
+      },
+      {
+        "t": 7.949999999999999,
+        "type": "click",
+        "gain": 0.08,
+        "pitch": 0.9,
+        "seed": 952
+      },
+      {
+        "t": 11.700000000000001,
+        "type": "click",
+        "gain": 0.08,
+        "pitch": 0.9,
+        "seed": 953
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "liquids.js: levels from each vessel's volume-vs-height table; pours tilt the source exactly as far as its remaining volume needs to reach the lip (tiltForLip) and the beaker receives the same volume a fall-time later; mixDyes blends colours (Beer-Lambert); planDrops counts drops, drop 6 flips the colour; SCORE = scoreFromEvents(events(plan)).",
+      "sample": "All quantities on screen are SAMPLE DATA.",
+      "volumes": {
+        "A": 60,
+        "B": 40,
+        "beakerUnits": 100,
+        "dropUnits": 0.125
+      },
+      "pours": [
+        {
+          "id": "A",
+          "tLift": 3.9000000000000004,
+          "tFlow": 4.5,
+          "tEnd": 6.4,
+          "tDown": 7.35,
+          "thStartDeg": 76.1,
+          "fall": 0.355
+        },
+        {
+          "id": "B",
+          "tLift": 4.05,
+          "tFlow": 4.6499999999999995,
+          "tEnd": 6.35,
+          "tDown": 7.299999999999999,
+          "thStartDeg": 80.1,
+          "fall": 0.355
+        }
+      ],
+      "drops": [
+        {
+          "i": 1,
+          "tRel": 8.15,
+          "tHit": 8.543,
+          "flip": false
+        },
+        {
+          "i": 2,
+          "tRel": 8.57,
+          "tHit": 8.963,
+          "flip": false
+        },
+        {
+          "i": 3,
+          "tRel": 8.99,
+          "tHit": 9.383,
+          "flip": false
+        },
+        {
+          "i": 4,
+          "tRel": 9.41,
+          "tHit": 9.803,
+          "flip": false
+        },
+        {
+          "i": 5,
+          "tRel": 9.83,
+          "tHit": 10.223,
+          "flip": false
+        },
+        {
+          "i": 6,
+          "tRel": 10.25,
+          "tHit": 10.643,
+          "flip": true
+        }
+      ],
+      "framingWorst": {
+        "t": 7.3,
+        "id": "pour",
+        "ndc": 0.8877
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 7 old file(s): RUN.txt t1.6.png t12.6.png t14.9.png t4.6.png t7.45.png t9.6.png
+check-frames run: 2026-11-14 00:42:21 UTC
+times: 1.6, 4.6, 7.45, 9.6, 12.6, 14.9
+newest code edit: 2026-11-13 23:44:13 UTC (32-terrarium/scene.config.js)
+mp4: 32-terrarium.mp4 2026-11-13 23:45:31 UTC
+kit last changed: 2026-11-14 00:14:11 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1.6       renders/checks/t1.6.png       112cd46f30cc13f51323727e31407af8  SAME
+4.6       renders/checks/t4.6.png       343fe70dafec8e65d6a4063fa6301197  SAME
+7.45      renders/checks/t7.45.png      7ce61b9489ad7d6b3497b8ad0d9521fb  SAME
+9.6       renders/checks/t9.6.png       897029ce584583c1665c2ff9c7cb51bc  SAME
+12.6      renders/checks/t12.6.png      1978ec6dd1800767c8d2da88bf2772f8  SAME
+14.9      renders/checks/t14.9.png      77477b0003833b6cbdb1c9a7a42b4fc0  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 38.1 dB, frame 447)
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -21.7 dB, max -5.6 dB
+audio 32-terrarium.mp4: mean -21.8 dB, max -5.6 dB  (6.4 MB)
+deep t=1.6: hash c00a3232 mean 148.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.6: hash e086f6a4 mean 137.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.45: hash 23f67b58 mean 139.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.6: hash 6cf843e7 mean 140.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.6: hash 531b052a mean 53.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.9: hash 4829dd5a mean 134.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

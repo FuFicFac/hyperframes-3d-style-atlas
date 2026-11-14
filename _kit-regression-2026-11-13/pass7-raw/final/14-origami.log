@@ -1,0 +1,29 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 9 old file(s): RUN.txt t0.6.png t10.5.png t12.6.png t14.6.png t2.6.png t5.0.png t6.4.png t8.4.png
+check-frames run: 2026-11-14 05:11:51 UTC
+times: 0.6, 2.6, 5.0, 6.4, 8.4, 10.5, 12.6, 14.6
+newest code edit: 2026-11-13 21:28:40 UTC (origami/spec.js)
+mp4: 14-origami.mp4 2026-11-13 21:32:08 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+0.6       renders/checks/t0.6.png       4e6f8c3407001a016870546598bfebb1  SAME
+2.6       renders/checks/t2.6.png       98b790db82c571c03b03e1708052dc5a  SAME
+5.0       renders/checks/t5.0.png       d23fecfa788d564620c54e3f08a6b340  SAME
+6.4       renders/checks/t6.4.png       841b1df4379b7fd1a27272befb0d2538  SAME
+8.4       renders/checks/t8.4.png       48b3368a3b60281c8df8c59d34cfa955  SAME
+10.5      renders/checks/t10.5.png      7ad534c526a2b4a84ebdc83c5642ee32  SAME
+12.6      renders/checks/t12.6.png      b9e9f1ae94e45000b2122bc0fe69500c  SAME
+14.6      renders/checks/t14.6.png      69513f59a7f64ae440a98a8a2a044813  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 40.3 dB, frame 378)
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -22.2 dB, max -1.1 dB
+audio 14-origami.mp4: mean -23.1 dB, max -2.0 dB  (7.3 MB)
+deep t=5: hash 06acfa1b mean 135.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=0.6: hash c543102d mean 142 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.6: hash 8993a710 mean 138.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=6.4: hash 35201546 mean 135.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.4: hash 812670e1 mean 131.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.5: hash 83817902 mean 132.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.6: hash 5a028302 mean 132.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.6: hash b66ee6cc mean 136.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

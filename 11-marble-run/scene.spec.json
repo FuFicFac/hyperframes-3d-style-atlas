@@ -1,0 +1,3537 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "marble-run",
+    "name": "Marble Run",
+    "description": "A handmade wooden marble machine on a workshop pegboard: glass marbles roll down grooved maple rails and brass wire tracks, spiral through glass funnels, trip flags and brass counters, and collect in jars. Warm upper-left light casts the machine's shadows onto the wall.",
+    "palette": {
+      "bg": "#24170f",
+      "pegboard": "#a6825a",
+      "pegboardDark": "#9c7149",
+      "hole": "#3a2717",
+      "maple": "#d7ab72",
+      "mapleDark": "#a8763f",
+      "mapleLight": "#ecc994",
+      "walnut": "#6b4428",
+      "walnutDark": "#3f2716",
+      "walnutLight": "#8d5e38",
+      "ply": "#e3c99b",
+      "brass": "#c9a14a",
+      "brassDark": "#6f5220",
+      "ink": "#2b1a10",
+      "paint": "#c8452f",
+      "paintCream": "#f1e6cc",
+      "string": "#d9c7a0",
+      "glassTint": "#e8f4f2",
+      "marbles": [
+        "#e63946",
+        "#f4a12a",
+        "#f2d02b",
+        "#7cc242",
+        "#18a999",
+        "#36b4e5",
+        "#3f5fe0",
+        "#8338ec",
+        "#e754b5",
+        "#ff7a33",
+        "#14c98b"
+      ]
+    },
+    "world": {
+      "background": "#24170f",
+      "environment": "room",
+      "environmentIntensity": 0.55,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "pcf"
+    },
+    "materials": {
+      "pegboard": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.86,
+        "metalness": 0
+      },
+      "maple": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.52,
+        "metalness": 0
+      },
+      "walnut": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "ply": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.8,
+        "metalness": 0
+      },
+      "brass": {
+        "type": "physical",
+        "baseColor": "#c9a14a",
+        "roughness": 0.3,
+        "metalness": 1,
+        "clearcoat": 0.25,
+        "clearcoatRoughness": 0.35
+      },
+      "brassDark": {
+        "type": "physical",
+        "baseColor": "#8a6a2c",
+        "roughness": 0.42,
+        "metalness": 1
+      },
+      "steel": {
+        "type": "standard",
+        "baseColor": "#9aa1a6",
+        "roughness": 0.35,
+        "metalness": 1
+      },
+      "string": {
+        "type": "standard",
+        "baseColor": "#d9c7a0",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "paint": {
+        "type": "standard",
+        "baseColor": "#c8452f",
+        "roughness": 0.55,
+        "metalness": 0
+      },
+      "ribbon": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.35,
+        "metalness": 0,
+        "side": "double"
+      }
+    },
+    "glass": {
+      "marble": {
+        "alphaFace": 0.22,
+        "alphaRim": 0.95,
+        "fresnelPower": 2,
+        "rim": "#ffffff",
+        "rimStrength": 0.1,
+        "roughness": 0.04,
+        "clearcoat": 1,
+        "envIntensity": 1.4,
+        "tintMix": 0.8,
+        "innerGlow": 0.55
+      },
+      "vessel": {
+        "alphaFace": 0.05,
+        "alphaRim": 0.55,
+        "fresnelPower": 2.6,
+        "rim": "#eaf6f4",
+        "rimStrength": 0.18,
+        "roughness": 0.06,
+        "clearcoat": 1,
+        "envIntensity": 1.2
+      },
+      "caustic": {
+        "opacity": 0.5,
+        "size": 0.45,
+        "boost": 1.1
+      }
+    },
+    "marble": {
+      "r": 0.18,
+      "ribbon": {
+        "vanes": 3,
+        "width": 0.62,
+        "length": 1.76,
+        "twist": 1.25,
+        "emissive": 0.22
+      },
+      "coreAlpha": 0.12
+    },
+    "rail": {
+      "grooveHalfWidth": 0.62,
+      "height": 1.3,
+      "wall": 0.55,
+      "standoff": 0.42
+    },
+    "wire": {
+      "radius": 0.022,
+      "halfGap": 0.55,
+      "standoffEvery": 1.1
+    },
+    "physics": {
+      "g": 30,
+      "rollK": 0.7142857,
+      "mu": 0.02,
+      "restitution": {
+        "glass": 0.35,
+        "wood": 0.3,
+        "brass": 0.4
+      }
+    },
+    "plaque": {
+      "metalness": 0.55,
+      "env": 0.8
+    },
+    "wall": {
+      "holePitch": 0.3,
+      "holeRadius": 0.03,
+      "pxPerMetre": 110,
+      "screwRadius": 0.05
+    },
+    "lights": [
+      {
+        "id": "ambient",
+        "type": "hemisphere",
+        "color": "#ffe9cf",
+        "groundColor": "#4a3020",
+        "intensity": 0.5
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#ffd6a0",
+        "intensity": 3.8,
+        "position": [
+          -7,
+          9.5,
+          10
+        ],
+        "target": [
+          0.3,
+          2.4,
+          0
+        ],
+        "shadow": {
+          "softness": 4,
+          "mapSize": 4096,
+          "extent": 7.5,
+          "near": 2,
+          "far": 40,
+          "bias": -0.0004,
+          "normalBias": 0.02
+        }
+      },
+      {
+        "id": "fill",
+        "type": "directional",
+        "color": "#cfdcff",
+        "intensity": 0.35,
+        "position": [
+          9,
+          3,
+          8
+        ],
+        "target": [
+          0,
+          2.5,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.28,
+        "radius": 0.35,
+        "threshold": 1.9
+      },
+      "vignette": {
+        "darkness": 0.42,
+        "offset": 1.05
+      },
+      "grain": {
+        "amount": 0.014,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.5,
+      "far": 60,
+      "drift": {
+        "amp": 0.02,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "engraved": "\"Copperplate\", \"Copperplate Gothic Bold\", \"Didot\", Georgia, serif",
+      "stamped": "\"Rockwell\", \"American Typewriter\", \"Courier New\", Georgia, serif",
+      "font": "serif",
+      "weight": 700,
+      "color": "#2b1a10",
+      "height": 0.4
+    },
+    "sfx": {
+      "glass": "clack (pitch ~2.1) + chime (pitch ~2.4, 0.22 s)",
+      "wood": "clack (pitch ~0.6) + thud (pitch 2.6, 0.16 s)",
+      "brass": "clack (pitch 1.45) + chime (pitch 1.25, 0.35 s)",
+      "roll": "rumble (pitch 3–5 by speed) + faint paper grit",
+      "counter": "tick + small clack",
+      "bed": "pad",
+      "enter": "clack",
+      "exit": "clack",
+      "move": "rumble",
+      "land": "thud",
+      "emphasis": "chime",
+      "ui": "tick"
+    },
+    "motion": [
+      "Marbles are the only actors. Each marble's position is a closed-form function of time along pre-authored segments (marbles.js): constant-acceleration rolls, ballistic falls, damped bounces, rebounds, holds.",
+      "Rolling rotation is exact: angle = distance / r about up × direction, so the inner swirl visibly rolls.",
+      "Every impact in the schedule becomes a sound: glass clacks, wooden knocks, brass tonks; rolls become rumble.",
+      "Mechanisms react only to marble events: gates drop, flags trip, counters roll their drums, tags swing on their hooks (damped pendulum).",
+      "Camera: frontal, slow tracking pans that follow the lead marble, slight parallax; no orbits."
+    ]
+  },
+  "scene": {
+    "id": "11-marble-run",
+    "style": "marble-run",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "tokens",
+        "t": 0.35,
+        "dur": 6.4
+      },
+      {
+        "id": "full",
+        "t": 6.75,
+        "dur": 2
+      },
+      {
+        "id": "push",
+        "t": 8.75,
+        "dur": 3
+      },
+      {
+        "id": "settle",
+        "t": 12.2,
+        "dur": 2.8
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -1.55,
+          4.92,
+          7.2
+        ],
+        "target": [
+          -1.55,
+          4.72,
+          0
+        ],
+        "fov": 30
+      },
+      {
+        "t": 0.9,
+        "pos": [
+          -1.45,
+          4.91,
+          7.2
+        ],
+        "target": [
+          -1.45,
+          4.71,
+          0
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 1.65,
+        "pos": [
+          0.6,
+          4.72,
+          7.2
+        ],
+        "target": [
+          0.6,
+          4.52,
+          0
+        ],
+        "fov": 30,
+        "ease": "inSine"
+      },
+      {
+        "t": 2.4,
+        "pos": [
+          2.3,
+          4.05,
+          7.4
+        ],
+        "target": [
+          2.3,
+          3.85,
+          0
+        ],
+        "fov": 30,
+        "ease": "outSine"
+      },
+      {
+        "t": 3.9,
+        "pos": [
+          1.05,
+          2.55,
+          7.6
+        ],
+        "target": [
+          1.05,
+          2.3,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 5.3,
+        "pos": [
+          0.95,
+          2.55,
+          7.75
+        ],
+        "target": [
+          0.95,
+          2.3,
+          0
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 7.1,
+        "pos": [
+          -0.55,
+          3,
+          12.1
+        ],
+        "target": [
+          -0.55,
+          2.75,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 8.7,
+        "pos": [
+          -0.9,
+          2.15,
+          9.3
+        ],
+        "target": [
+          -0.9,
+          1.9,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12,
+        "pos": [
+          -0.95,
+          2.15,
+          9.45
+        ],
+        "target": [
+          -0.95,
+          1.9,
+          0
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 15,
+        "pos": [
+          -0.97,
+          2.02,
+          9.6
+        ],
+        "target": [
+          -0.97,
+          1.82,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [
+      {
+        "id": "wall",
+        "primitive": "procedural",
+        "factory": "wall",
+        "procedural": "tempered-hardboard pegboard 20 × 12 m at z = 0: hole grid 0.3 m, hand-painted red arrows",
+        "dims": {
+          "w": 20,
+          "h": 12
+        },
+        "position": [
+          -0.3,
+          5,
+          0
+        ]
+      },
+      {
+        "id": "bench",
+        "primitive": "procedural",
+        "factory": "bench",
+        "procedural": "walnut workbench top (planks) at y = 0, 1.7 m deep, with a front apron",
+        "dims": {
+          "w": 20,
+          "d": 1.7
+        },
+        "position": [
+          -0.3,
+          0,
+          0
+        ]
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.1,
+        "root": 130.81,
+        "chord": [
+          0,
+          7,
+          12,
+          16,
+          19
+        ],
+        "attack": 2,
+        "release": 2.5,
+        "brightness": 700
+      },
+      {
+        "t": 0,
+        "type": "rumble",
+        "dur": 15,
+        "gain": 0.05,
+        "pitch": 0.9,
+        "seed": 900
+      },
+      {
+        "t": 0.35,
+        "type": "rumble",
+        "dur": 0.488011838528655,
+        "gain": 0.0778981546122152,
+        "pitch": 3.119059888728141,
+        "pan": -0.238,
+        "seed": 18
+      },
+      {
+        "t": 0.35,
+        "type": "paper",
+        "dur": 0.46801183852865497,
+        "gain": 0.020972580087904095,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": -0.238,
+        "seed": 19
+      },
+      {
+        "t": 0.778011838528655,
+        "type": "rumble",
+        "dur": 1.127921803067917,
+        "gain": 0.13,
+        "pitch": 3.6000000000000005,
+        "pan": 0.162,
+        "seed": 25
+      },
+      {
+        "t": 0.778011838528655,
+        "type": "paper",
+        "dur": 1.107921803067917,
+        "gain": 0.035,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": 0.162,
+        "seed": 26
+      },
+      {
+        "t": 1.9973922146195457,
+        "type": "clack",
+        "gain": 0.336,
+        "pitch": 2.1,
+        "pan": 0.6599999999999999,
+        "seed": 32
+      },
+      {
+        "t": 1.9973922146195457,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08800000000000001,
+        "pitch": 2.4,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 33
+      },
+      {
+        "t": 1.9973922146195457,
+        "type": "rumble",
+        "dur": 0.5213364724086489,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.6599999999999999,
+        "seed": 39
+      },
+      {
+        "t": 2.5379102991006834,
+        "type": "clack",
+        "gain": 0.30000000000000004,
+        "pitch": 1.45,
+        "pan": 0.6599999999999999,
+        "seed": 46
+      },
+      {
+        "t": 2.5379102991006834,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.06,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 47
+      },
+      {
+        "t": 2.596798584051703,
+        "type": "clack",
+        "gain": 0.1783246305857679,
+        "pitch": 1.45,
+        "pan": 0.6478307589443444,
+        "seed": 53
+      },
+      {
+        "t": 2.596798584051703,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.03566492611715358,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6478307589443444,
+        "seed": 54
+      },
+      {
+        "t": 2.614465069537009,
+        "type": "clack",
+        "gain": 0.09767242273060076,
+        "pitch": 1.45,
+        "pan": 0.6439383129054097,
+        "seed": 60
+      },
+      {
+        "t": 2.614465069537009,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.019534484546120154,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6439383129054097,
+        "seed": 61
+      },
+      {
+        "t": 2.5379102991006834,
+        "type": "rumble",
+        "dur": 1.0577851096979827,
+        "gain": 0.13,
+        "pitch": 5.040000000000001,
+        "pan": 0.473,
+        "seed": 67
+      },
+      {
+        "t": 2.5379102991006834,
+        "type": "paper",
+        "dur": 1.0377851096979827,
+        "gain": 0.035,
+        "pitch": 1.6,
+        "density": 0.9,
+        "pan": 0.473,
+        "seed": 68
+      },
+      {
+        "t": 3.535695408798666,
+        "type": "rumble",
+        "dur": 1.665656438659866,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": -0.03914542882862291,
+        "seed": 74
+      },
+      {
+        "t": 5.141351847458532,
+        "type": "clack",
+        "gain": 0.1849324200890693,
+        "pitch": 1.45,
+        "pan": -0.3642908576572458,
+        "seed": 81
+      },
+      {
+        "t": 5.141351847458532,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.03698648401781386,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": -0.3642908576572458,
+        "seed": 82
+      },
+      {
+        "t": 5.381351847458532,
+        "type": "clack",
+        "gain": 0.06472694722713941,
+        "pitch": 2.1,
+        "pan": -0.3642908576572458,
+        "seed": 88
+      },
+      {
+        "t": 5.381351847458532,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.016952295702346038,
+        "pitch": 2.4,
+        "notes": 4,
+        "pan": -0.3642908576572458,
+        "seed": 89
+      },
+      {
+        "t": 8.807167352461214,
+        "type": "clack",
+        "gain": 0.14696938456699069,
+        "pitch": 1.45,
+        "pan": -0.38999999999998697,
+        "seed": 95
+      },
+      {
+        "t": 8.807167352461214,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.029393876913398134,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": -0.38999999999998697,
+        "seed": 96
+      },
+      {
+        "t": 8.979885462128955,
+        "type": "clack",
+        "gain": 0.306,
+        "pitch": 0.62,
+        "pan": -0.46399999999999997,
+        "seed": 102
+      },
+      {
+        "t": 8.979885462128955,
+        "type": "thud",
+        "dur": 0.16,
+        "gain": 0.255,
+        "pitch": 2.6,
+        "pan": -0.46399999999999997,
+        "seed": 103
+      },
+      {
+        "t": 9.02499867246494,
+        "type": "clack",
+        "gain": 0.15920214627360596,
+        "pitch": 0.62,
+        "pan": -0.4701650503377168,
+        "seed": 109
+      },
+      {
+        "t": 9.02499867246494,
+        "type": "thud",
+        "dur": 0.16,
+        "gain": 0.13266845522800497,
+        "pitch": 2.6,
+        "pan": -0.4701650503377168,
+        "seed": 110
+      },
+      {
+        "t": 8.979885462128955,
+        "type": "rumble",
+        "dur": 0.7046288214036625,
+        "gain": 0.13,
+        "pitch": 3.6000000000000005,
+        "pan": -0.59,
+        "seed": 116
+      },
+      {
+        "t": 8.979885462128955,
+        "type": "paper",
+        "dur": 0.6846288214036624,
+        "gain": 0.035,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": -0.59,
+        "seed": 117
+      },
+      {
+        "t": 9.781366100496639,
+        "type": "clack",
+        "gain": 0.30000000000000004,
+        "pitch": 1.45,
+        "pan": -0.7,
+        "seed": 123
+      },
+      {
+        "t": 9.781366100496639,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.06,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": -0.7,
+        "seed": 124
+      },
+      {
+        "t": 9.968951169560908,
+        "type": "clack",
+        "gain": 0.336,
+        "pitch": 2.1,
+        "pan": -0.7,
+        "seed": 130
+      },
+      {
+        "t": 9.968951169560908,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08800000000000001,
+        "pitch": 2.4,
+        "notes": 4,
+        "pan": -0.7,
+        "seed": 131
+      },
+      {
+        "t": 10.146509244210854,
+        "type": "clack",
+        "gain": 0.336,
+        "pitch": 2.1,
+        "pan": -0.7,
+        "seed": 137
+      },
+      {
+        "t": 10.146509244210854,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08800000000000001,
+        "pitch": 2.4,
+        "notes": 4,
+        "pan": -0.7,
+        "seed": 138
+      },
+      {
+        "t": 10.203327828098837,
+        "type": "clack",
+        "gain": 0.19618242806048206,
+        "pitch": 2.1,
+        "pan": -0.7,
+        "seed": 144
+      },
+      {
+        "t": 10.203327828098837,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.05138111211107863,
+        "pitch": 2.4,
+        "notes": 4,
+        "pan": -0.7,
+        "seed": 145
+      },
+      {
+        "t": 0.77,
+        "type": "rumble",
+        "dur": 0.4880118385286549,
+        "gain": 0.0778981546122152,
+        "pitch": 3.119059888728141,
+        "pan": -0.238,
+        "seed": 151
+      },
+      {
+        "t": 0.77,
+        "type": "paper",
+        "dur": 0.46801183852865486,
+        "gain": 0.020972580087904095,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": -0.238,
+        "seed": 152
+      },
+      {
+        "t": 1.198011838528655,
+        "type": "rumble",
+        "dur": 1.127921803067917,
+        "gain": 0.13,
+        "pitch": 3.6000000000000005,
+        "pan": 0.162,
+        "seed": 158
+      },
+      {
+        "t": 1.198011838528655,
+        "type": "paper",
+        "dur": 1.107921803067917,
+        "gain": 0.035,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": 0.162,
+        "seed": 159
+      },
+      {
+        "t": 2.4173922146195457,
+        "type": "clack",
+        "gain": 0.336,
+        "pitch": 2.55,
+        "pan": 0.6599999999999999,
+        "seed": 165
+      },
+      {
+        "t": 2.4173922146195457,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08800000000000001,
+        "pitch": 2.52,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 166
+      },
+      {
+        "t": 2.4173922146195457,
+        "type": "rumble",
+        "dur": 0.5213364724086489,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.6599999999999999,
+        "seed": 172
+      },
+      {
+        "t": 2.9579102991006834,
+        "type": "clack",
+        "gain": 0.30000000000000004,
+        "pitch": 1.45,
+        "pan": 0.6599999999999999,
+        "seed": 179
+      },
+      {
+        "t": 2.9579102991006834,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.06,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 180
+      },
+      {
+        "t": 3.016798584051703,
+        "type": "clack",
+        "gain": 0.1783246305857679,
+        "pitch": 1.45,
+        "pan": 0.6478307589443444,
+        "seed": 186
+      },
+      {
+        "t": 3.016798584051703,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.03566492611715358,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6478307589443444,
+        "seed": 187
+      },
+      {
+        "t": 3.034465069537009,
+        "type": "clack",
+        "gain": 0.09767242273060076,
+        "pitch": 1.45,
+        "pan": 0.6439383129054097,
+        "seed": 193
+      },
+      {
+        "t": 3.034465069537009,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.019534484546120154,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6439383129054097,
+        "seed": 194
+      },
+      {
+        "t": 2.9579102991006834,
+        "type": "rumble",
+        "dur": 1.0577851096979827,
+        "gain": 0.13,
+        "pitch": 5.040000000000001,
+        "pan": 0.473,
+        "seed": 200
+      },
+      {
+        "t": 2.9579102991006834,
+        "type": "paper",
+        "dur": 1.0377851096979827,
+        "gain": 0.035,
+        "pitch": 1.6,
+        "density": 0.9,
+        "pan": 0.473,
+        "seed": 201
+      },
+      {
+        "t": 3.955695408798666,
+        "type": "rumble",
+        "dur": 1.4878786608820889,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": -0.003145428828622898,
+        "seed": 207
+      },
+      {
+        "t": 5.383574069680755,
+        "type": "clack",
+        "gain": 0.2071243104997576,
+        "pitch": 2.55,
+        "pan": -0.2922908576572458,
+        "seed": 214
+      },
+      {
+        "t": 5.383574069680755,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.054246843226126995,
+        "pitch": 2.52,
+        "notes": 4,
+        "pan": -0.2922908576572458,
+        "seed": 215
+      },
+      {
+        "t": 5.623574069680755,
+        "type": "clack",
+        "gain": 0.06472694722713941,
+        "pitch": 2.55,
+        "pan": -0.2922908576572458,
+        "seed": 221
+      },
+      {
+        "t": 5.623574069680755,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.016952295702346038,
+        "pitch": 2.52,
+        "notes": 4,
+        "pan": -0.2922908576572458,
+        "seed": 222
+      },
+      {
+        "t": 9.907167352461215,
+        "type": "clack",
+        "gain": 0.14696938456699069,
+        "pitch": 1.45,
+        "pan": -0.38999999999998697,
+        "seed": 228
+      },
+      {
+        "t": 9.907167352461215,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.029393876913398134,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": -0.38999999999998697,
+        "seed": 229
+      },
+      {
+        "t": 10.079885462128956,
+        "type": "clack",
+        "gain": 0.306,
+        "pitch": 0.62,
+        "pan": -0.46399999999999997,
+        "seed": 235
+      },
+      {
+        "t": 10.079885462128956,
+        "type": "thud",
+        "dur": 0.16,
+        "gain": 0.255,
+        "pitch": 2.6,
+        "pan": -0.46399999999999997,
+        "seed": 236
+      },
+      {
+        "t": 10.124998672464942,
+        "type": "clack",
+        "gain": 0.15920214627360596,
+        "pitch": 0.62,
+        "pan": -0.4701650503377168,
+        "seed": 242
+      },
+      {
+        "t": 10.124998672464942,
+        "type": "thud",
+        "dur": 0.16,
+        "gain": 0.13266845522800497,
+        "pitch": 2.6,
+        "pan": -0.4701650503377168,
+        "seed": 243
+      },
+      {
+        "t": 10.079885462128956,
+        "type": "rumble",
+        "dur": 0.7046288214036625,
+        "gain": 0.13,
+        "pitch": 3.6000000000000005,
+        "pan": -0.59,
+        "seed": 249
+      },
+      {
+        "t": 10.079885462128956,
+        "type": "paper",
+        "dur": 0.6846288214036624,
+        "gain": 0.035,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": -0.59,
+        "seed": 250
+      },
+      {
+        "t": 10.88136610049664,
+        "type": "clack",
+        "gain": 0.30000000000000004,
+        "pitch": 1.45,
+        "pan": -0.7,
+        "seed": 256
+      },
+      {
+        "t": 10.88136610049664,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.06,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": -0.7,
+        "seed": 257
+      },
+      {
+        "t": 11.021668578090333,
+        "type": "clack",
+        "gain": 0.336,
+        "pitch": 2.55,
+        "pan": -0.7,
+        "seed": 263
+      },
+      {
+        "t": 11.021668578090333,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08800000000000001,
+        "pitch": 2.52,
+        "notes": 4,
+        "pan": -0.7,
+        "seed": 264
+      },
+      {
+        "t": 11.16896579419911,
+        "type": "clack",
+        "gain": 0.3158727577030015,
+        "pitch": 2.55,
+        "pan": -0.7,
+        "seed": 270
+      },
+      {
+        "t": 11.16896579419911,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08272857939840517,
+        "pitch": 2.52,
+        "notes": 4,
+        "pan": -0.7,
+        "seed": 271
+      },
+      {
+        "t": 11.216100903353919,
+        "type": "clack",
+        "gain": 0.17868461517111012,
+        "pitch": 2.55,
+        "pan": -0.7,
+        "seed": 277
+      },
+      {
+        "t": 11.216100903353919,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.046798351592433604,
+        "pitch": 2.52,
+        "notes": 4,
+        "pan": -0.7,
+        "seed": 278
+      },
+      {
+        "t": 1.19,
+        "type": "rumble",
+        "dur": 0.4880118385286549,
+        "gain": 0.0778981546122152,
+        "pitch": 3.119059888728141,
+        "pan": -0.238,
+        "seed": 284
+      },
+      {
+        "t": 1.19,
+        "type": "paper",
+        "dur": 0.46801183852865486,
+        "gain": 0.020972580087904095,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": -0.238,
+        "seed": 285
+      },
+      {
+        "t": 1.6180118385286548,
+        "type": "rumble",
+        "dur": 1.127921803067917,
+        "gain": 0.13,
+        "pitch": 3.6000000000000005,
+        "pan": 0.162,
+        "seed": 291
+      },
+      {
+        "t": 1.6180118385286548,
+        "type": "paper",
+        "dur": 1.107921803067917,
+        "gain": 0.035,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": 0.162,
+        "seed": 292
+      },
+      {
+        "t": 2.8373922146195456,
+        "type": "clack",
+        "gain": 0.336,
+        "pitch": 2.4,
+        "pan": 0.6599999999999999,
+        "seed": 298
+      },
+      {
+        "t": 2.8373922146195456,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08800000000000001,
+        "pitch": 2.6399999999999997,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 299
+      },
+      {
+        "t": 2.8373922146195456,
+        "type": "rumble",
+        "dur": 0.5213364724086489,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.6599999999999999,
+        "seed": 305
+      },
+      {
+        "t": 3.3779102991006833,
+        "type": "clack",
+        "gain": 0.30000000000000004,
+        "pitch": 1.45,
+        "pan": 0.6599999999999999,
+        "seed": 312
+      },
+      {
+        "t": 3.3779102991006833,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.06,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 313
+      },
+      {
+        "t": 3.436798584051703,
+        "type": "clack",
+        "gain": 0.1783246305857679,
+        "pitch": 1.45,
+        "pan": 0.6478307589443444,
+        "seed": 319
+      },
+      {
+        "t": 3.436798584051703,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.03566492611715358,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6478307589443444,
+        "seed": 320
+      },
+      {
+        "t": 3.454465069537009,
+        "type": "clack",
+        "gain": 0.09767242273060076,
+        "pitch": 1.45,
+        "pan": 0.6439383129054097,
+        "seed": 326
+      },
+      {
+        "t": 3.454465069537009,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.019534484546120154,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6439383129054097,
+        "seed": 327
+      },
+      {
+        "t": 3.3779102991006833,
+        "type": "rumble",
+        "dur": 1.0577851096979822,
+        "gain": 0.13,
+        "pitch": 5.040000000000001,
+        "pan": 0.473,
+        "seed": 333
+      },
+      {
+        "t": 3.3779102991006833,
+        "type": "paper",
+        "dur": 1.0377851096979822,
+        "gain": 0.035,
+        "pitch": 1.6,
+        "density": 0.9,
+        "pan": 0.473,
+        "seed": 334
+      },
+      {
+        "t": 4.3756954087986655,
+        "type": "rumble",
+        "dur": 1.3101008831043104,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.03285457117137709,
+        "seed": 340
+      },
+      {
+        "t": 5.625796291902976,
+        "type": "clack",
+        "gain": 0.2071243104997576,
+        "pitch": 2.4,
+        "pan": -0.22029085765724582,
+        "seed": 347
+      },
+      {
+        "t": 5.625796291902976,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.054246843226126995,
+        "pitch": 2.6399999999999997,
+        "notes": 4,
+        "pan": -0.22029085765724582,
+        "seed": 348
+      },
+      {
+        "t": 5.865796291902976,
+        "type": "clack",
+        "gain": 0.06472694722713941,
+        "pitch": 2.4,
+        "pan": -0.22029085765724582,
+        "seed": 354
+      },
+      {
+        "t": 5.865796291902976,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.016952295702346038,
+        "pitch": 2.6399999999999997,
+        "notes": 4,
+        "pan": -0.22029085765724582,
+        "seed": 355
+      },
+      {
+        "t": 11.007167352461215,
+        "type": "clack",
+        "gain": 0.14696938456699069,
+        "pitch": 1.45,
+        "pan": -0.38999999999998697,
+        "seed": 361
+      },
+      {
+        "t": 11.007167352461215,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.029393876913398134,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": -0.38999999999998697,
+        "seed": 362
+      },
+      {
+        "t": 11.179885462128956,
+        "type": "clack",
+        "gain": 0.306,
+        "pitch": 0.62,
+        "pan": -0.46399999999999997,
+        "seed": 368
+      },
+      {
+        "t": 11.179885462128956,
+        "type": "thud",
+        "dur": 0.16,
+        "gain": 0.255,
+        "pitch": 2.6,
+        "pan": -0.46399999999999997,
+        "seed": 369
+      },
+      {
+        "t": 11.224998672464942,
+        "type": "clack",
+        "gain": 0.15920214627360596,
+        "pitch": 0.62,
+        "pan": -0.4701650503377168,
+        "seed": 375
+      },
+      {
+        "t": 11.224998672464942,
+        "type": "thud",
+        "dur": 0.16,
+        "gain": 0.13266845522800497,
+        "pitch": 2.6,
+        "pan": -0.4701650503377168,
+        "seed": 376
+      },
+      {
+        "t": 11.179885462128956,
+        "type": "rumble",
+        "dur": 0.7046288214036625,
+        "gain": 0.13,
+        "pitch": 3.6000000000000005,
+        "pan": -0.59,
+        "seed": 382
+      },
+      {
+        "t": 11.179885462128956,
+        "type": "paper",
+        "dur": 0.6846288214036624,
+        "gain": 0.035,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": -0.59,
+        "seed": 383
+      },
+      {
+        "t": 11.98136610049664,
+        "type": "clack",
+        "gain": 0.30000000000000004,
+        "pitch": 1.45,
+        "pan": -0.7,
+        "seed": 389
+      },
+      {
+        "t": 11.98136610049664,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.06,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": -0.7,
+        "seed": 390
+      },
+      {
+        "t": 12.061722133625658,
+        "type": "clack",
+        "gain": 0.336,
+        "pitch": 2.4,
+        "pan": -0.7,
+        "seed": 396
+      },
+      {
+        "t": 12.061722133625658,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08800000000000001,
+        "pitch": 2.6399999999999997,
+        "notes": 4,
+        "pan": -0.7,
+        "seed": 397
+      },
+      {
+        "t": 12.170653625277042,
+        "type": "clack",
+        "gain": 0.2716386903385613,
+        "pitch": 2.4,
+        "pan": -0.7,
+        "seed": 403
+      },
+      {
+        "t": 12.170653625277042,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.07114346651724225,
+        "pitch": 2.6399999999999997,
+        "notes": 4,
+        "pan": -0.7,
+        "seed": 404
+      },
+      {
+        "t": 12.205511702605486,
+        "type": "clack",
+        "gain": 0.15366204797682353,
+        "pitch": 2.4,
+        "pan": -0.7,
+        "seed": 410
+      },
+      {
+        "t": 12.205511702605486,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.04024482208916807,
+        "pitch": 2.6399999999999997,
+        "notes": 4,
+        "pan": -0.7,
+        "seed": 411
+      },
+      {
+        "t": 1.61,
+        "type": "rumble",
+        "dur": 0.4880118385286549,
+        "gain": 0.0778981546122152,
+        "pitch": 3.119059888728141,
+        "pan": -0.238,
+        "seed": 417
+      },
+      {
+        "t": 1.61,
+        "type": "paper",
+        "dur": 0.46801183852865486,
+        "gain": 0.020972580087904095,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": -0.238,
+        "seed": 418
+      },
+      {
+        "t": 2.038011838528655,
+        "type": "rumble",
+        "dur": 1.1279218030679168,
+        "gain": 0.13,
+        "pitch": 3.6000000000000005,
+        "pan": 0.162,
+        "seed": 424
+      },
+      {
+        "t": 2.038011838528655,
+        "type": "paper",
+        "dur": 1.1079218030679168,
+        "gain": 0.035,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": 0.162,
+        "seed": 425
+      },
+      {
+        "t": 3.2573922146195455,
+        "type": "clack",
+        "gain": 0.336,
+        "pitch": 2.25,
+        "pan": 0.6599999999999999,
+        "seed": 431
+      },
+      {
+        "t": 3.2573922146195455,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08800000000000001,
+        "pitch": 2.76,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 432
+      },
+      {
+        "t": 3.2573922146195455,
+        "type": "rumble",
+        "dur": 0.5213364724086489,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.6599999999999999,
+        "seed": 438
+      },
+      {
+        "t": 3.7979102991006832,
+        "type": "clack",
+        "gain": 0.30000000000000004,
+        "pitch": 1.45,
+        "pan": 0.6599999999999999,
+        "seed": 445
+      },
+      {
+        "t": 3.7979102991006832,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.06,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 446
+      },
+      {
+        "t": 3.856798584051703,
+        "type": "clack",
+        "gain": 0.1783246305857679,
+        "pitch": 1.45,
+        "pan": 0.6478307589443444,
+        "seed": 452
+      },
+      {
+        "t": 3.856798584051703,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.03566492611715358,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6478307589443444,
+        "seed": 453
+      },
+      {
+        "t": 3.874465069537009,
+        "type": "clack",
+        "gain": 0.09767242273060076,
+        "pitch": 1.45,
+        "pan": 0.6439383129054097,
+        "seed": 459
+      },
+      {
+        "t": 3.874465069537009,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.019534484546120154,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6439383129054097,
+        "seed": 460
+      },
+      {
+        "t": 3.7979102991006832,
+        "type": "rumble",
+        "dur": 1.0577851096979822,
+        "gain": 0.13,
+        "pitch": 5.040000000000001,
+        "pan": 0.473,
+        "seed": 466
+      },
+      {
+        "t": 3.7979102991006832,
+        "type": "paper",
+        "dur": 1.0377851096979822,
+        "gain": 0.035,
+        "pitch": 1.6,
+        "density": 0.9,
+        "pan": 0.473,
+        "seed": 467
+      },
+      {
+        "t": 4.795695408798665,
+        "type": "rumble",
+        "dur": 1.1323231053265332,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.0688545711713771,
+        "seed": 473
+      },
+      {
+        "t": 5.868018514125199,
+        "type": "clack",
+        "gain": 0.2071243104997576,
+        "pitch": 2.25,
+        "pan": -0.14829085765724578,
+        "seed": 480
+      },
+      {
+        "t": 5.868018514125199,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.054246843226126995,
+        "pitch": 2.76,
+        "notes": 4,
+        "pan": -0.14829085765724578,
+        "seed": 481
+      },
+      {
+        "t": 6.108018514125199,
+        "type": "clack",
+        "gain": 0.06472694722713941,
+        "pitch": 2.25,
+        "pan": -0.14829085765724578,
+        "seed": 487
+      },
+      {
+        "t": 6.108018514125199,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.016952295702346038,
+        "pitch": 2.76,
+        "notes": 4,
+        "pan": -0.14829085765724578,
+        "seed": 488
+      },
+      {
+        "t": 2.03,
+        "type": "rumble",
+        "dur": 0.4880118385286551,
+        "gain": 0.0778981546122152,
+        "pitch": 3.119059888728141,
+        "pan": -0.238,
+        "seed": 494
+      },
+      {
+        "t": 2.03,
+        "type": "paper",
+        "dur": 0.4680118385286551,
+        "gain": 0.020972580087904095,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": -0.238,
+        "seed": 495
+      },
+      {
+        "t": 2.458011838528655,
+        "type": "rumble",
+        "dur": 1.1279218030679168,
+        "gain": 0.13,
+        "pitch": 3.6000000000000005,
+        "pan": 0.162,
+        "seed": 501
+      },
+      {
+        "t": 2.458011838528655,
+        "type": "paper",
+        "dur": 1.1079218030679168,
+        "gain": 0.035,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": 0.162,
+        "seed": 502
+      },
+      {
+        "t": 3.6773922146195455,
+        "type": "clack",
+        "gain": 0.336,
+        "pitch": 2.1,
+        "pan": 0.6599999999999999,
+        "seed": 508
+      },
+      {
+        "t": 3.6773922146195455,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08800000000000001,
+        "pitch": 2.88,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 509
+      },
+      {
+        "t": 3.6773922146195455,
+        "type": "rumble",
+        "dur": 0.5213364724086484,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.6599999999999999,
+        "seed": 515
+      },
+      {
+        "t": 4.217910299100683,
+        "type": "clack",
+        "gain": 0.30000000000000004,
+        "pitch": 1.45,
+        "pan": 0.6599999999999999,
+        "seed": 522
+      },
+      {
+        "t": 4.217910299100683,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.06,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 523
+      },
+      {
+        "t": 4.276798584051702,
+        "type": "clack",
+        "gain": 0.1783246305857679,
+        "pitch": 1.45,
+        "pan": 0.6478307589443444,
+        "seed": 529
+      },
+      {
+        "t": 4.276798584051702,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.03566492611715358,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6478307589443444,
+        "seed": 530
+      },
+      {
+        "t": 4.294465069537008,
+        "type": "clack",
+        "gain": 0.09767242273060076,
+        "pitch": 1.45,
+        "pan": 0.6439383129054097,
+        "seed": 536
+      },
+      {
+        "t": 4.294465069537008,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.019534484546120154,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6439383129054097,
+        "seed": 537
+      },
+      {
+        "t": 4.217910299100683,
+        "type": "rumble",
+        "dur": 1.0577851096979827,
+        "gain": 0.13,
+        "pitch": 5.040000000000001,
+        "pan": 0.473,
+        "seed": 543
+      },
+      {
+        "t": 4.217910299100683,
+        "type": "paper",
+        "dur": 1.0377851096979827,
+        "gain": 0.035,
+        "pitch": 1.6,
+        "density": 0.9,
+        "pan": 0.473,
+        "seed": 544
+      },
+      {
+        "t": 5.215695408798665,
+        "type": "rumble",
+        "dur": 0.9545453275487552,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.10485457117137709,
+        "seed": 550
+      },
+      {
+        "t": 6.1102407363474205,
+        "type": "clack",
+        "gain": 0.2071243104997576,
+        "pitch": 2.1,
+        "pan": -0.07629085765724582,
+        "seed": 557
+      },
+      {
+        "t": 6.1102407363474205,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.054246843226126995,
+        "pitch": 2.88,
+        "notes": 4,
+        "pan": -0.07629085765724582,
+        "seed": 558
+      },
+      {
+        "t": 6.350240736347421,
+        "type": "clack",
+        "gain": 0.06472694722713941,
+        "pitch": 2.1,
+        "pan": -0.07629085765724582,
+        "seed": 564
+      },
+      {
+        "t": 6.350240736347421,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.016952295702346038,
+        "pitch": 2.88,
+        "notes": 4,
+        "pan": -0.07629085765724582,
+        "seed": 565
+      },
+      {
+        "t": 2.45,
+        "type": "rumble",
+        "dur": 0.4880118385286551,
+        "gain": 0.0778981546122152,
+        "pitch": 3.119059888728141,
+        "pan": -0.238,
+        "seed": 571
+      },
+      {
+        "t": 2.45,
+        "type": "paper",
+        "dur": 0.4680118385286551,
+        "gain": 0.020972580087904095,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": -0.238,
+        "seed": 572
+      },
+      {
+        "t": 2.8780118385286553,
+        "type": "rumble",
+        "dur": 1.1279218030679172,
+        "gain": 0.13,
+        "pitch": 3.6000000000000005,
+        "pan": 0.162,
+        "seed": 578
+      },
+      {
+        "t": 2.8780118385286553,
+        "type": "paper",
+        "dur": 1.1079218030679172,
+        "gain": 0.035,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": 0.162,
+        "seed": 579
+      },
+      {
+        "t": 4.097392214619546,
+        "type": "clack",
+        "gain": 0.336,
+        "pitch": 2.55,
+        "pan": 0.6599999999999999,
+        "seed": 585
+      },
+      {
+        "t": 4.097392214619546,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08800000000000001,
+        "pitch": 2.4,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 586
+      },
+      {
+        "t": 4.097392214619546,
+        "type": "rumble",
+        "dur": 0.5213364724086484,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.6599999999999999,
+        "seed": 592
+      },
+      {
+        "t": 4.6379102991006835,
+        "type": "clack",
+        "gain": 0.30000000000000004,
+        "pitch": 1.45,
+        "pan": 0.6599999999999999,
+        "seed": 599
+      },
+      {
+        "t": 4.6379102991006835,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.06,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 600
+      },
+      {
+        "t": 4.696798584051703,
+        "type": "clack",
+        "gain": 0.1783246305857679,
+        "pitch": 1.45,
+        "pan": 0.6478307589443444,
+        "seed": 606
+      },
+      {
+        "t": 4.696798584051703,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.03566492611715358,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6478307589443444,
+        "seed": 607
+      },
+      {
+        "t": 4.714465069537009,
+        "type": "clack",
+        "gain": 0.09767242273060076,
+        "pitch": 1.45,
+        "pan": 0.6439383129054097,
+        "seed": 613
+      },
+      {
+        "t": 4.714465069537009,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.019534484546120154,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6439383129054097,
+        "seed": 614
+      },
+      {
+        "t": 4.6379102991006835,
+        "type": "rumble",
+        "dur": 1.0577851096979827,
+        "gain": 0.13,
+        "pitch": 5.040000000000001,
+        "pan": 0.473,
+        "seed": 620
+      },
+      {
+        "t": 4.6379102991006835,
+        "type": "paper",
+        "dur": 1.0377851096979827,
+        "gain": 0.035,
+        "pitch": 1.6,
+        "density": 0.9,
+        "pan": 0.473,
+        "seed": 621
+      },
+      {
+        "t": 5.635695408798666,
+        "type": "rumble",
+        "dur": 0.7767675497709772,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.14085457117137706,
+        "seed": 627
+      },
+      {
+        "t": 6.352462958569643,
+        "type": "clack",
+        "gain": 0.2071243104997576,
+        "pitch": 2.55,
+        "pan": -0.004290857657245839,
+        "seed": 634
+      },
+      {
+        "t": 6.352462958569643,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.054246843226126995,
+        "pitch": 2.4,
+        "notes": 4,
+        "pan": -0.004290857657245839,
+        "seed": 635
+      },
+      {
+        "t": 6.5924629585696435,
+        "type": "clack",
+        "gain": 0.06472694722713941,
+        "pitch": 2.55,
+        "pan": -0.004290857657245839,
+        "seed": 641
+      },
+      {
+        "t": 6.5924629585696435,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.016952295702346038,
+        "pitch": 2.4,
+        "notes": 4,
+        "pan": -0.004290857657245839,
+        "seed": 642
+      },
+      {
+        "t": 2.87,
+        "type": "rumble",
+        "dur": 0.4880118385286551,
+        "gain": 0.0778981546122152,
+        "pitch": 3.119059888728141,
+        "pan": -0.238,
+        "seed": 648
+      },
+      {
+        "t": 2.87,
+        "type": "paper",
+        "dur": 0.4680118385286551,
+        "gain": 0.020972580087904095,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": -0.238,
+        "seed": 649
+      },
+      {
+        "t": 3.298011838528655,
+        "type": "rumble",
+        "dur": 1.1279218030679172,
+        "gain": 0.13,
+        "pitch": 3.6000000000000005,
+        "pan": 0.162,
+        "seed": 655
+      },
+      {
+        "t": 3.298011838528655,
+        "type": "paper",
+        "dur": 1.1079218030679172,
+        "gain": 0.035,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": 0.162,
+        "seed": 656
+      },
+      {
+        "t": 4.517392214619546,
+        "type": "clack",
+        "gain": 0.336,
+        "pitch": 2.4,
+        "pan": 0.6599999999999999,
+        "seed": 662
+      },
+      {
+        "t": 4.517392214619546,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08800000000000001,
+        "pitch": 2.52,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 663
+      },
+      {
+        "t": 4.517392214619546,
+        "type": "rumble",
+        "dur": 0.5213364724086484,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.6599999999999999,
+        "seed": 669
+      },
+      {
+        "t": 5.0579102991006835,
+        "type": "clack",
+        "gain": 0.30000000000000004,
+        "pitch": 1.45,
+        "pan": 0.6599999999999999,
+        "seed": 676
+      },
+      {
+        "t": 5.0579102991006835,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.06,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 677
+      },
+      {
+        "t": 5.116798584051703,
+        "type": "clack",
+        "gain": 0.1783246305857679,
+        "pitch": 1.45,
+        "pan": 0.6478307589443444,
+        "seed": 683
+      },
+      {
+        "t": 5.116798584051703,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.03566492611715358,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6478307589443444,
+        "seed": 684
+      },
+      {
+        "t": 5.134465069537009,
+        "type": "clack",
+        "gain": 0.09767242273060076,
+        "pitch": 1.45,
+        "pan": 0.6439383129054097,
+        "seed": 690
+      },
+      {
+        "t": 5.134465069537009,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.019534484546120154,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6439383129054097,
+        "seed": 691
+      },
+      {
+        "t": 5.0579102991006835,
+        "type": "rumble",
+        "dur": 1.0577851096979827,
+        "gain": 0.13,
+        "pitch": 5.040000000000001,
+        "pan": 0.473,
+        "seed": 697
+      },
+      {
+        "t": 5.0579102991006835,
+        "type": "paper",
+        "dur": 1.0377851096979827,
+        "gain": 0.035,
+        "pitch": 1.6,
+        "density": 0.9,
+        "pan": 0.473,
+        "seed": 698
+      },
+      {
+        "t": 6.055695408798666,
+        "type": "rumble",
+        "dur": 0.5989897719931991,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.1768545711713771,
+        "seed": 704
+      },
+      {
+        "t": 6.594685180791865,
+        "type": "clack",
+        "gain": 0.2071243104997576,
+        "pitch": 2.4,
+        "pan": 0.06770914234275423,
+        "seed": 711
+      },
+      {
+        "t": 6.594685180791865,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.054246843226126995,
+        "pitch": 2.52,
+        "notes": 4,
+        "pan": 0.06770914234275423,
+        "seed": 712
+      },
+      {
+        "t": 6.834685180791865,
+        "type": "clack",
+        "gain": 0.06472694722713941,
+        "pitch": 2.4,
+        "pan": 0.06770914234275423,
+        "seed": 718
+      },
+      {
+        "t": 6.834685180791865,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.016952295702346038,
+        "pitch": 2.52,
+        "notes": 4,
+        "pan": 0.06770914234275423,
+        "seed": 719
+      },
+      {
+        "t": 3.29,
+        "type": "rumble",
+        "dur": 0.4880118385286551,
+        "gain": 0.0778981546122152,
+        "pitch": 3.119059888728141,
+        "pan": -0.238,
+        "seed": 725
+      },
+      {
+        "t": 3.29,
+        "type": "paper",
+        "dur": 0.4680118385286551,
+        "gain": 0.020972580087904095,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": -0.238,
+        "seed": 726
+      },
+      {
+        "t": 3.718011838528655,
+        "type": "rumble",
+        "dur": 1.1279218030679172,
+        "gain": 0.13,
+        "pitch": 3.6000000000000005,
+        "pan": 0.162,
+        "seed": 732
+      },
+      {
+        "t": 3.718011838528655,
+        "type": "paper",
+        "dur": 1.1079218030679172,
+        "gain": 0.035,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": 0.162,
+        "seed": 733
+      },
+      {
+        "t": 4.937392214619546,
+        "type": "clack",
+        "gain": 0.336,
+        "pitch": 2.25,
+        "pan": 0.6599999999999999,
+        "seed": 739
+      },
+      {
+        "t": 4.937392214619546,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08800000000000001,
+        "pitch": 2.6399999999999997,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 740
+      },
+      {
+        "t": 4.937392214619546,
+        "type": "rumble",
+        "dur": 0.5213364724086484,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.6599999999999999,
+        "seed": 746
+      },
+      {
+        "t": 5.477910299100683,
+        "type": "clack",
+        "gain": 0.30000000000000004,
+        "pitch": 1.45,
+        "pan": 0.6599999999999999,
+        "seed": 753
+      },
+      {
+        "t": 5.477910299100683,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.06,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 754
+      },
+      {
+        "t": 5.536798584051703,
+        "type": "clack",
+        "gain": 0.1783246305857679,
+        "pitch": 1.45,
+        "pan": 0.6478307589443444,
+        "seed": 760
+      },
+      {
+        "t": 5.536798584051703,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.03566492611715358,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6478307589443444,
+        "seed": 761
+      },
+      {
+        "t": 5.554465069537009,
+        "type": "clack",
+        "gain": 0.09767242273060076,
+        "pitch": 1.45,
+        "pan": 0.6439383129054097,
+        "seed": 767
+      },
+      {
+        "t": 5.554465069537009,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.019534484546120154,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6439383129054097,
+        "seed": 768
+      },
+      {
+        "t": 5.477910299100683,
+        "type": "rumble",
+        "dur": 1.0577851096979827,
+        "gain": 0.13,
+        "pitch": 5.040000000000001,
+        "pan": 0.473,
+        "seed": 774
+      },
+      {
+        "t": 5.477910299100683,
+        "type": "paper",
+        "dur": 1.0377851096979827,
+        "gain": 0.035,
+        "pitch": 1.6,
+        "density": 0.9,
+        "pan": 0.473,
+        "seed": 775
+      },
+      {
+        "t": 6.475695408798666,
+        "type": "rumble",
+        "dur": 0.42121199421542194,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.2128545711713771,
+        "seed": 781
+      },
+      {
+        "t": 6.836907403014088,
+        "type": "clack",
+        "gain": 0.2071243104997576,
+        "pitch": 2.25,
+        "pan": 0.1397091423427542,
+        "seed": 788
+      },
+      {
+        "t": 6.836907403014088,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.054246843226126995,
+        "pitch": 2.6399999999999997,
+        "notes": 4,
+        "pan": 0.1397091423427542,
+        "seed": 789
+      },
+      {
+        "t": 7.076907403014088,
+        "type": "clack",
+        "gain": 0.06472694722713941,
+        "pitch": 2.25,
+        "pan": 0.1397091423427542,
+        "seed": 795
+      },
+      {
+        "t": 7.076907403014088,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.016952295702346038,
+        "pitch": 2.6399999999999997,
+        "notes": 4,
+        "pan": 0.1397091423427542,
+        "seed": 796
+      },
+      {
+        "t": 5.35,
+        "type": "rumble",
+        "dur": 0.4880118385286551,
+        "gain": 0.0778981546122152,
+        "pitch": 3.119059888728141,
+        "pan": -0.238,
+        "seed": 802
+      },
+      {
+        "t": 5.35,
+        "type": "paper",
+        "dur": 0.4680118385286551,
+        "gain": 0.020972580087904095,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": -0.238,
+        "seed": 803
+      },
+      {
+        "t": 5.778011838528655,
+        "type": "rumble",
+        "dur": 1.1279218030679172,
+        "gain": 0.13,
+        "pitch": 3.6000000000000005,
+        "pan": 0.162,
+        "seed": 809
+      },
+      {
+        "t": 5.778011838528655,
+        "type": "paper",
+        "dur": 1.1079218030679172,
+        "gain": 0.035,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": 0.162,
+        "seed": 810
+      },
+      {
+        "t": 6.997392214619546,
+        "type": "clack",
+        "gain": 0.336,
+        "pitch": 2.1,
+        "pan": 0.6599999999999999,
+        "seed": 816
+      },
+      {
+        "t": 6.997392214619546,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08800000000000001,
+        "pitch": 2.76,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 817
+      },
+      {
+        "t": 6.997392214619546,
+        "type": "rumble",
+        "dur": 0.5213364724086484,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.6599999999999999,
+        "seed": 823
+      },
+      {
+        "t": 7.537910299100683,
+        "type": "clack",
+        "gain": 0.30000000000000004,
+        "pitch": 1.45,
+        "pan": 0.6599999999999999,
+        "seed": 830
+      },
+      {
+        "t": 7.537910299100683,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.06,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 831
+      },
+      {
+        "t": 7.596798584051703,
+        "type": "clack",
+        "gain": 0.1783246305857679,
+        "pitch": 1.45,
+        "pan": 0.6478307589443444,
+        "seed": 837
+      },
+      {
+        "t": 7.596798584051703,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.03566492611715358,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6478307589443444,
+        "seed": 838
+      },
+      {
+        "t": 7.614465069537008,
+        "type": "clack",
+        "gain": 0.09767242273060076,
+        "pitch": 1.45,
+        "pan": 0.6439383129054097,
+        "seed": 844
+      },
+      {
+        "t": 7.614465069537008,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.019534484546120154,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6439383129054097,
+        "seed": 845
+      },
+      {
+        "t": 7.537910299100683,
+        "type": "rumble",
+        "dur": 1.0577851096979818,
+        "gain": 0.13,
+        "pitch": 5.040000000000001,
+        "pan": 0.473,
+        "seed": 851
+      },
+      {
+        "t": 7.537910299100683,
+        "type": "paper",
+        "dur": 1.0377851096979818,
+        "gain": 0.035,
+        "pitch": 1.6,
+        "density": 0.9,
+        "pan": 0.473,
+        "seed": 852
+      },
+      {
+        "t": 8.535695408798665,
+        "type": "rumble",
+        "dur": 0.22884285831192258,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.24885457117137708,
+        "seed": 858
+      },
+      {
+        "t": 8.704538267110587,
+        "type": "clack",
+        "gain": 0.2422930457111801,
+        "pitch": 2.1,
+        "pan": 0.21170914234275418,
+        "seed": 865
+      },
+      {
+        "t": 8.704538267110587,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.06345770244816622,
+        "pitch": 2.76,
+        "notes": 4,
+        "pan": 0.21170914234275418,
+        "seed": 866
+      },
+      {
+        "t": 9.204538267110587,
+        "type": "clack",
+        "gain": 0.13440000000000002,
+        "pitch": 2.1,
+        "pan": 0.13970914234275417,
+        "seed": 872
+      },
+      {
+        "t": 9.204538267110587,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.0352,
+        "pitch": 2.76,
+        "notes": 4,
+        "pan": 0.13970914234275417,
+        "seed": 873
+      },
+      {
+        "t": 6.45,
+        "type": "rumble",
+        "dur": 0.4880118385286551,
+        "gain": 0.0778981546122152,
+        "pitch": 3.119059888728141,
+        "pan": -0.238,
+        "seed": 879
+      },
+      {
+        "t": 6.45,
+        "type": "paper",
+        "dur": 0.4680118385286551,
+        "gain": 0.020972580087904095,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": -0.238,
+        "seed": 880
+      },
+      {
+        "t": 6.878011838528655,
+        "type": "rumble",
+        "dur": 1.1279218030679172,
+        "gain": 0.13,
+        "pitch": 3.6000000000000005,
+        "pan": 0.162,
+        "seed": 886
+      },
+      {
+        "t": 6.878011838528655,
+        "type": "paper",
+        "dur": 1.1079218030679172,
+        "gain": 0.035,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": 0.162,
+        "seed": 887
+      },
+      {
+        "t": 8.097392214619546,
+        "type": "clack",
+        "gain": 0.336,
+        "pitch": 2.55,
+        "pan": 0.6599999999999999,
+        "seed": 893
+      },
+      {
+        "t": 8.097392214619546,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08800000000000001,
+        "pitch": 2.88,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 894
+      },
+      {
+        "t": 8.097392214619546,
+        "type": "rumble",
+        "dur": 0.5213364724086484,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.6599999999999999,
+        "seed": 900
+      },
+      {
+        "t": 8.637910299100684,
+        "type": "clack",
+        "gain": 0.30000000000000004,
+        "pitch": 1.45,
+        "pan": 0.6599999999999999,
+        "seed": 907
+      },
+      {
+        "t": 8.637910299100684,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.06,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 908
+      },
+      {
+        "t": 8.696798584051702,
+        "type": "clack",
+        "gain": 0.1783246305857679,
+        "pitch": 1.45,
+        "pan": 0.6478307589443444,
+        "seed": 914
+      },
+      {
+        "t": 8.696798584051702,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.03566492611715358,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6478307589443444,
+        "seed": 915
+      },
+      {
+        "t": 8.714465069537008,
+        "type": "clack",
+        "gain": 0.09767242273060076,
+        "pitch": 1.45,
+        "pan": 0.6439383129054097,
+        "seed": 921
+      },
+      {
+        "t": 8.714465069537008,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.019534484546120154,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6439383129054097,
+        "seed": 922
+      },
+      {
+        "t": 8.637910299100684,
+        "type": "rumble",
+        "dur": 1.0577851096979827,
+        "gain": 0.13,
+        "pitch": 5.040000000000001,
+        "pan": 0.473,
+        "seed": 928
+      },
+      {
+        "t": 8.637910299100684,
+        "type": "paper",
+        "dur": 1.0377851096979827,
+        "gain": 0.035,
+        "pitch": 1.6,
+        "density": 0.9,
+        "pan": 0.473,
+        "seed": 929
+      },
+      {
+        "t": 9.635695408798666,
+        "type": "rumble",
+        "dur": 0.22884285831192258,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.24885457117137708,
+        "seed": 935
+      },
+      {
+        "t": 9.804538267110589,
+        "type": "clack",
+        "gain": 0.2422930457111801,
+        "pitch": 2.55,
+        "pan": 0.21170914234275418,
+        "seed": 942
+      },
+      {
+        "t": 9.804538267110589,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.06345770244816622,
+        "pitch": 2.88,
+        "notes": 4,
+        "pan": 0.21170914234275418,
+        "seed": 943
+      },
+      {
+        "t": 10.304538267110589,
+        "type": "clack",
+        "gain": 0.13440000000000002,
+        "pitch": 2.55,
+        "pan": 0.13970914234275417,
+        "seed": 949
+      },
+      {
+        "t": 10.304538267110589,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.0352,
+        "pitch": 2.88,
+        "notes": 4,
+        "pan": 0.13970914234275417,
+        "seed": 950
+      },
+      {
+        "t": 7.55,
+        "type": "rumble",
+        "dur": 0.4880118385286551,
+        "gain": 0.0778981546122152,
+        "pitch": 3.119059888728141,
+        "pan": -0.238,
+        "seed": 956
+      },
+      {
+        "t": 7.55,
+        "type": "paper",
+        "dur": 0.4680118385286551,
+        "gain": 0.020972580087904095,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": -0.238,
+        "seed": 957
+      },
+      {
+        "t": 7.978011838528655,
+        "type": "rumble",
+        "dur": 1.1279218030679163,
+        "gain": 0.13,
+        "pitch": 3.6000000000000005,
+        "pan": 0.162,
+        "seed": 963
+      },
+      {
+        "t": 7.978011838528655,
+        "type": "paper",
+        "dur": 1.1079218030679163,
+        "gain": 0.035,
+        "pitch": 0.5,
+        "density": 0.9,
+        "pan": 0.162,
+        "seed": 964
+      },
+      {
+        "t": 9.197392214619546,
+        "type": "clack",
+        "gain": 0.336,
+        "pitch": 2.4,
+        "pan": 0.6599999999999999,
+        "seed": 970
+      },
+      {
+        "t": 9.197392214619546,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.08800000000000001,
+        "pitch": 2.4,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 971
+      },
+      {
+        "t": 9.197392214619546,
+        "type": "rumble",
+        "dur": 0.5213364724086484,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.6599999999999999,
+        "seed": 977
+      },
+      {
+        "t": 9.737910299100683,
+        "type": "clack",
+        "gain": 0.30000000000000004,
+        "pitch": 1.45,
+        "pan": 0.6599999999999999,
+        "seed": 984
+      },
+      {
+        "t": 9.737910299100683,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.06,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6599999999999999,
+        "seed": 985
+      },
+      {
+        "t": 9.796798584051702,
+        "type": "clack",
+        "gain": 0.1783246305857679,
+        "pitch": 1.45,
+        "pan": 0.6478307589443444,
+        "seed": 991
+      },
+      {
+        "t": 9.796798584051702,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.03566492611715358,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6478307589443444,
+        "seed": 992
+      },
+      {
+        "t": 9.814465069537007,
+        "type": "clack",
+        "gain": 0.09767242273060076,
+        "pitch": 1.45,
+        "pan": 0.6439383129054097,
+        "seed": 998
+      },
+      {
+        "t": 9.814465069537007,
+        "type": "chime",
+        "dur": 0.35,
+        "gain": 0.019534484546120154,
+        "pitch": 1.25,
+        "notes": 4,
+        "pan": 0.6439383129054097,
+        "seed": 999
+      },
+      {
+        "t": 9.737910299100683,
+        "type": "rumble",
+        "dur": 1.0577851096979827,
+        "gain": 0.13,
+        "pitch": 5.040000000000001,
+        "pan": 0.473,
+        "seed": 1005
+      },
+      {
+        "t": 9.737910299100683,
+        "type": "paper",
+        "dur": 1.0377851096979827,
+        "gain": 0.035,
+        "pitch": 1.6,
+        "density": 0.9,
+        "pan": 0.473,
+        "seed": 1006
+      },
+      {
+        "t": 10.735695408798666,
+        "type": "rumble",
+        "dur": 0.22884285831192258,
+        "gain": 0.13,
+        "pitch": 6.000000000000001,
+        "pan": 0.24885457117137708,
+        "seed": 1012
+      },
+      {
+        "t": 10.904538267110588,
+        "type": "clack",
+        "gain": 0.2422930457111801,
+        "pitch": 2.4,
+        "pan": 0.21170914234275418,
+        "seed": 1019
+      },
+      {
+        "t": 10.904538267110588,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.06345770244816622,
+        "pitch": 2.4,
+        "notes": 4,
+        "pan": 0.21170914234275418,
+        "seed": 1020
+      },
+      {
+        "t": 11.404538267110588,
+        "type": "clack",
+        "gain": 0.13440000000000002,
+        "pitch": 2.4,
+        "pan": 0.13970914234275417,
+        "seed": 1026
+      },
+      {
+        "t": 11.404538267110588,
+        "type": "chime",
+        "dur": 0.22,
+        "gain": 0.0352,
+        "pitch": 2.4,
+        "notes": 4,
+        "pan": 0.13970914234275417,
+        "seed": 1027
+      },
+      {
+        "t": 0.35,
+        "type": "click",
+        "gain": 0.22,
+        "pitch": 0.8,
+        "pan": -0.2,
+        "seed": 400
+      },
+      {
+        "t": 0.77,
+        "type": "click",
+        "gain": 0.22,
+        "pitch": 0.8,
+        "pan": -0.2,
+        "seed": 401
+      },
+      {
+        "t": 1.19,
+        "type": "click",
+        "gain": 0.22,
+        "pitch": 0.8,
+        "pan": -0.2,
+        "seed": 402
+      },
+      {
+        "t": 1.61,
+        "type": "click",
+        "gain": 0.22,
+        "pitch": 0.8,
+        "pan": -0.2,
+        "seed": 403
+      },
+      {
+        "t": 2.03,
+        "type": "click",
+        "gain": 0.22,
+        "pitch": 0.8,
+        "pan": -0.2,
+        "seed": 404
+      },
+      {
+        "t": 2.45,
+        "type": "click",
+        "gain": 0.22,
+        "pitch": 0.8,
+        "pan": -0.2,
+        "seed": 405
+      },
+      {
+        "t": 2.87,
+        "type": "click",
+        "gain": 0.22,
+        "pitch": 0.8,
+        "pan": -0.2,
+        "seed": 406
+      },
+      {
+        "t": 3.29,
+        "type": "click",
+        "gain": 0.22,
+        "pitch": 0.8,
+        "pan": -0.2,
+        "seed": 407
+      },
+      {
+        "t": 5.35,
+        "type": "click",
+        "gain": 0.22,
+        "pitch": 0.8,
+        "pan": -0.2,
+        "seed": 408
+      },
+      {
+        "t": 6.45,
+        "type": "click",
+        "gain": 0.22,
+        "pitch": 0.8,
+        "pan": -0.2,
+        "seed": 409
+      },
+      {
+        "t": 7.55,
+        "type": "click",
+        "gain": 0.22,
+        "pitch": 0.8,
+        "pan": -0.2,
+        "seed": 410
+      },
+      {
+        "t": 3.535695408798666,
+        "type": "tick",
+        "gain": 0.34,
+        "pitch": 1.6,
+        "pan": 0.286,
+        "seed": 500
+      },
+      {
+        "t": 3.625695408798666,
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.9,
+        "pan": 0.51,
+        "seed": 520
+      },
+      {
+        "t": 3.955695408798666,
+        "type": "tick",
+        "gain": 0.34,
+        "pitch": 1.6,
+        "pan": 0.286,
+        "seed": 501
+      },
+      {
+        "t": 4.045695408798666,
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.9,
+        "pan": 0.51,
+        "seed": 521
+      },
+      {
+        "t": 4.3756954087986655,
+        "type": "tick",
+        "gain": 0.34,
+        "pitch": 1.6,
+        "pan": 0.286,
+        "seed": 502
+      },
+      {
+        "t": 4.465695408798665,
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.9,
+        "pan": 0.51,
+        "seed": 522
+      },
+      {
+        "t": 4.795695408798665,
+        "type": "tick",
+        "gain": 0.34,
+        "pitch": 1.6,
+        "pan": 0.286,
+        "seed": 503
+      },
+      {
+        "t": 4.885695408798665,
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.9,
+        "pan": 0.51,
+        "seed": 523
+      },
+      {
+        "t": 5.215695408798665,
+        "type": "tick",
+        "gain": 0.34,
+        "pitch": 1.6,
+        "pan": 0.286,
+        "seed": 504
+      },
+      {
+        "t": 5.305695408798665,
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.9,
+        "pan": 0.51,
+        "seed": 524
+      },
+      {
+        "t": 5.635695408798666,
+        "type": "tick",
+        "gain": 0.34,
+        "pitch": 1.6,
+        "pan": 0.286,
+        "seed": 505
+      },
+      {
+        "t": 5.725695408798666,
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.9,
+        "pan": 0.51,
+        "seed": 525
+      },
+      {
+        "t": 6.055695408798666,
+        "type": "tick",
+        "gain": 0.34,
+        "pitch": 1.6,
+        "pan": 0.286,
+        "seed": 506
+      },
+      {
+        "t": 6.145695408798666,
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.9,
+        "pan": 0.51,
+        "seed": 526
+      },
+      {
+        "t": 6.475695408798666,
+        "type": "tick",
+        "gain": 0.34,
+        "pitch": 1.6,
+        "pan": 0.286,
+        "seed": 507
+      },
+      {
+        "t": 6.565695408798666,
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.9,
+        "pan": 0.51,
+        "seed": 527
+      },
+      {
+        "t": 8.535695408798665,
+        "type": "tick",
+        "gain": 0.34,
+        "pitch": 1.6,
+        "pan": 0.286,
+        "seed": 508
+      },
+      {
+        "t": 8.625695408798665,
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.9,
+        "pan": 0.51,
+        "seed": 528
+      },
+      {
+        "t": 9.635695408798666,
+        "type": "tick",
+        "gain": 0.34,
+        "pitch": 1.6,
+        "pan": 0.286,
+        "seed": 509
+      },
+      {
+        "t": 9.725695408798666,
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.9,
+        "pan": 0.51,
+        "seed": 529
+      },
+      {
+        "t": 10.735695408798666,
+        "type": "tick",
+        "gain": 0.34,
+        "pitch": 1.6,
+        "pan": 0.286,
+        "seed": 510
+      },
+      {
+        "t": 10.825695408798666,
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.9,
+        "pan": 0.51,
+        "seed": 530
+      },
+      {
+        "t": 3.6475,
+        "type": "clack",
+        "gain": 0.3,
+        "pitch": 0.55,
+        "pan": -0.064,
+        "seed": 300
+      },
+      {
+        "t": 3.6475,
+        "type": "thud",
+        "dur": 0.2,
+        "gain": 0.25,
+        "pitch": 2.2,
+        "pan": -0.064,
+        "seed": 310
+      },
+      {
+        "t": 6.5,
+        "type": "click",
+        "gain": 0.18,
+        "pitch": 0.7,
+        "pan": -0.064,
+        "seed": 320
+      },
+      {
+        "t": 7.1975,
+        "type": "clack",
+        "gain": 0.3,
+        "pitch": 0.55,
+        "pan": -0.064,
+        "seed": 301
+      },
+      {
+        "t": 7.1975,
+        "type": "thud",
+        "dur": 0.2,
+        "gain": 0.25,
+        "pitch": 2.2,
+        "pan": -0.064,
+        "seed": 311
+      },
+      {
+        "t": 8.9,
+        "type": "click",
+        "gain": 0.18,
+        "pitch": 0.7,
+        "pan": -0.064,
+        "seed": 321
+      },
+      {
+        "t": 9.7475,
+        "type": "clack",
+        "gain": 0.3,
+        "pitch": 0.55,
+        "pan": -0.064,
+        "seed": 302
+      },
+      {
+        "t": 9.7475,
+        "type": "thud",
+        "dur": 0.2,
+        "gain": 0.25,
+        "pitch": 2.2,
+        "pan": -0.064,
+        "seed": 312
+      },
+      {
+        "t": 11.75,
+        "type": "click",
+        "gain": 0.18,
+        "pitch": 0.7,
+        "pan": -0.064,
+        "seed": 322
+      },
+      {
+        "t": 12.6975,
+        "type": "clack",
+        "gain": 0.36,
+        "pitch": 1.2,
+        "seed": 600
+      },
+      {
+        "t": 12.6975,
+        "type": "chime",
+        "dur": 2.2,
+        "gain": 0.16,
+        "pitch": 0.75,
+        "notes": 4,
+        "seed": 601
+      },
+      {
+        "t": 13.35,
+        "type": "chime",
+        "dur": 2.4,
+        "gain": 0.12,
+        "pitch": 1,
+        "notes": 4,
+        "seed": 602
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "Every marble's position/rotation is MarblePlan.at(t) from marbles.js: closed-form segments (constant-acceleration rolls, ballistic falls, damped bounces, rebounds, coupled push). SCORE = scoreFromEvents(plan events) + counter ticks at the flag crossings.",
+      "releases": [
+        0.35,
+        0.77,
+        1.19,
+        1.61,
+        2.03,
+        2.45,
+        2.87,
+        3.29,
+        5.35,
+        6.45,
+        7.55
+      ],
+      "counts": [
+        3.535695408798666,
+        3.955695408798666,
+        4.3756954087986655,
+        4.795695408798665,
+        5.215695408798665,
+        5.635695408798666,
+        6.055695408798666,
+        6.475695408798666,
+        8.535695408798665,
+        9.635695408798666,
+        10.735695408798666
+      ],
+      "pushes": [
+        {
+          "t": 8.704538267110587,
+          "id": 8,
+          "out": 0
+        },
+        {
+          "t": 9.804538267110589,
+          "id": 9,
+          "out": 1
+        },
+        {
+          "t": 10.904538267110588,
+          "id": 10,
+          "out": 2
+        }
+      ],
+      "jar": [
+        {
+          "t": 10.203327828098837,
+          "id": 0,
+          "n": 1
+        },
+        {
+          "t": 11.216100903353919,
+          "id": 1,
+          "n": 2
+        },
+        {
+          "t": 12.205511702605486,
+          "id": 2,
+          "n": 3
+        }
+      ],
+      "layout": {
+        "HOPPER": {
+          "x0": -3.75,
+          "x1": -1,
+          "y0": 4.42,
+          "y1": 5.32,
+          "depth": 0.85,
+          "outlet": [
+            -1,
+            4.74,
+            0.45
+          ],
+          "start": [
+            -1.38,
+            4.8,
+            0.45
+          ],
+          "label": "YOUR\nCONVERSATION",
+          "cap": 0.19,
+          "pile": 15,
+          "seed": 5
+        },
+        "FUNNEL": {
+          "center": [
+            3.3,
+            3.7,
+            0.87
+          ],
+          "rMouth": 0.62,
+          "rNeck": 0.215,
+          "height": 0.34,
+          "neck": 0.14,
+          "turns": 1.6,
+          "rho0": 0.42,
+          "rho1": 0
+        },
+        "RAIL1": {
+          "pts": [
+            [
+              -1,
+              4.74,
+              0.45
+            ],
+            [
+              2.62,
+              4.22,
+              0.45
+            ]
+          ]
+        },
+        "RAIL2": {
+          "pts": [
+            [
+              3.3,
+              3.12,
+              0.87
+            ],
+            [
+              2.2,
+              2.62,
+              0.62
+            ],
+            [
+              1.62,
+              2.32,
+              0.45
+            ],
+            [
+              1.32,
+              2.31,
+              0.45
+            ]
+          ],
+          "bend": 0.35
+        },
+        "TUBE": {
+          "xL": -1.95,
+          "xR": 1.3,
+          "y": 2.35,
+          "z": 0.45,
+          "rIn": 0.22,
+          "wall": 0.026,
+          "sill": 0.054
+        },
+        "FLAG": {
+          "x": 1.43,
+          "pivot": [
+            1.43,
+            2.7700000000000005,
+            0.45
+          ],
+          "len": 0.3
+        },
+        "COUNTER": {
+          "pos": [
+            2.55,
+            1.6,
+            0.32
+          ],
+          "digits": 2,
+          "label": "TOKENS"
+        },
+        "CHUTE": {
+          "pts": [
+            [
+              -2.32,
+              2.02,
+              0.45
+            ],
+            [
+              -3.5799999999999996,
+              1.76,
+              0.45
+            ]
+          ]
+        },
+        "JAR": {
+          "pos": [
+            -4.02,
+            0,
+            0.45
+          ],
+          "rIn": 0.261,
+          "h": 1.3,
+          "glass": 0.03
+        }
+      }
+    }
+  }
+}

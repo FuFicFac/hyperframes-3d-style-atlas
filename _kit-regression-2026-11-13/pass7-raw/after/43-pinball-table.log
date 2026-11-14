@@ -1,0 +1,25 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 7 old file(s): RUN.txt t1.png t10.4.png t14.5.png t3.2.png t4.4.png t7.0.png
+check-frames run: 2026-11-14 04:55:08 UTC
+times: 1, 3.2, 4.4, 7.0, 10.4, 14.5
+newest code edit: 2026-11-14 03:12:23 UTC (43-pinball-table/scene.config.js)
+mp4: 43-pinball-table.mp4 2026-11-14 03:14:13 UTC
+kit last changed: 2026-11-14 04:24:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1         renders/checks/t1.png         7e83b6f3bb0ec01ff8a304830dc4f062  SAME
+3.2       renders/checks/t3.2.png       a7f6b48b7a90e7f21c41656ffc4b6617  SAME
+4.4       renders/checks/t4.4.png       a343f4f1ae0711b5e8f7a6770865c02e  SAME
+7.0       renders/checks/t7.0.png       ae12dde801b596c29577e9d8e40fec3a  SAME
+10.4      renders/checks/t10.4.png      f348b915681ad2adf4486f825851b655  SAME
+14.5      renders/checks/t14.5.png      b3cee62646d688fc59200a3bfdf7fad4  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.3 dB, frame 96)
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -19.8 dB, max -1.1 dB
+audio 43-pinball-table.mp4: mean -19.9 dB, max -1.0 dB  (8.1 MB)
+deep t=1: hash 396d3407 mean 64.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7: hash 0a6ffe7e mean 75.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3.2: hash 65eaf64e mean 57.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.4: hash ee0f90a7 mean 80.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.4: hash e3f807e0 mean 61.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.5: hash 5f762152 mean 37.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

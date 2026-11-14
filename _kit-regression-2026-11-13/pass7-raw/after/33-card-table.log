@@ -1,0 +1,23 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 6 old file(s): RUN.txt t1.5.png t14.5.png t3.75.png t5.85.png t9.05.png
+check-frames run: 2026-11-14 04:48:41 UTC
+times: 1.5, 3.75, 5.85, 9.05, 14.5
+newest code edit: 2026-11-13 23:42:43 UTC (card-table/spec.js)
+mp4: 33-card-table.mp4 2026-11-13 23:44:01 UTC
+kit last changed: 2026-11-14 04:24:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1.5       renders/checks/t1.5.png       9f70c4604bd5096593a20af1f703c983  SAME
+3.75      renders/checks/t3.75.png      873c10421e8221e4a7a109b9bd592f56  SAME
+5.85      renders/checks/t5.85.png      1cd961decf6136bbcc3adcdd69482060  SAME
+9.05      renders/checks/t9.05.png      ec7ea1e3294e4b9a5d0824413c22f9b2  SAME
+14.5      renders/checks/t14.5.png      e0c8dd470bd19078aa44d0b5c050d3b3  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 39.1 dB, frame 45)
+determinism: OK (5 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -20.5 dB, max -1.1 dB
+audio 33-card-table.mp4: mean -20.5 dB, max -1.1 dB  (4.9 MB)
+deep t=1.5: hash a9f493f3 mean 39.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3.75: hash b297400e mean 28.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5.85: hash df1bd8d4 mean 34.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.05: hash 9aebb6a1 mean 38.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.5: hash 39800c05 mean 63.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

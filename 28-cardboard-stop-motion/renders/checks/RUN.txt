@@ -1,0 +1,14 @@
+check-frames run: 2026-11-14 05:23:16 UTC
+times: 1.2, 4.4, 7.2, 10.4, 12.6, 14.6
+newest code edit: 2026-11-13 23:09:30 UTC (cardboard-stop-motion/spec.js)
+mp4: 28-cardboard-stop-motion.mp4 2026-11-13 23:10:52 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 38.3 dB, frame 438)
+  frame 36 (t=1.200): 38.8 dB
+  frame 132 (t=4.400): 38.8 dB
+  frame 216 (t=7.200): 38.7 dB
+  frame 312 (t=10.400): 38.7 dB
+  frame 378 (t=12.600): 38.5 dB
+  frame 438 (t=14.600): 38.3 dB
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

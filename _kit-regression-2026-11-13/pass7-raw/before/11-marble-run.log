@@ -1,0 +1,36 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 12 old file(s): RUN.txt t0.5.png t1.5.png t10.0.png t12.1.png t14.6.png t2.25.png t2.6.png t4.4.png t7.3.png t8.75.png t8.85.png
+check-frames run: 2026-11-14 03:28:18 UTC
+times: 0.5, 1.5, 2.25, 2.6, 4.4, 7.3, 8.75, 8.85, 10.0, 12.1, 14.6
+newest code edit: 2026-11-14 03:19:42 UTC (marble-run/marbles.js)
+mp4: 11-marble-run.mp4 2026-11-13 15:24:12 UTC
+kit last changed: 2026-11-14 03:19:42 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+0.5       renders/checks/t0.5.png       6a8af520a1c4a98e3400f54ad7ca9dae  SAME
+1.5       renders/checks/t1.5.png       3f36afbd5af280b1130882b7258854ec  SAME
+2.25      renders/checks/t2.25.png      812f1966d7120da364d460e9d72301b1  SAME
+2.6       renders/checks/t2.6.png       6d250480c41b82cd567cc6b4dffc29b3  SAME
+4.4       renders/checks/t4.4.png       7bd0ba34de2246f67c6320cc701f9c75  SAME
+7.3       renders/checks/t7.3.png       a6f8df54fc403d748d397ee51f432c01  SAME
+8.75      renders/checks/t8.75.png      26225f89e16cbc4b30f462e602f6cdff  SAME
+8.85      renders/checks/t8.85.png      c2d7ac7d22b930e7ba1afff0a0b1f711  SAME
+10.0      renders/checks/t10.0.png      9ad51b69b1256fab5cd901e7d18d81fb  SAME
+12.1      renders/checks/t12.1.png      efbf33a3d1dac51f881452c8e65160ee  SAME
+14.6      renders/checks/t14.6.png      9305549ec6dc4518ac4512ca0dfea9b4  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 35.8 dB, frame 219)
+determinism: OK (11 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -22.5 dB, max -1.1 dB
+audio 11-marble-run.mp4: mean -22.6 dB, max -1.1 dB  (8.6 MB)
+deep t=10: hash 4b237951 mean 109.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=0.5: hash 8a16853b mean 122.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.5: hash 98236b19 mean 123.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.25: hash e830421a mean 126.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.6: hash 5ee29179 mean 125 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.4: hash ba2a6a8d mean 116.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.3: hash 25d54acd mean 115.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.75: hash 83446d8d mean 109.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.85: hash 5016279d mean 109.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.1: hash 53452d0b mean 111.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.6: hash 9144d365 mean 106.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

@@ -1,0 +1,19 @@
+check-frames run: 2026-11-14 05:05:28 UTC
+times: 0.6, 2.0, 3.2, 5.9, 7.2, 8.2, 9.4, 11.2, 12.3, 14.8
+newest code edit: 2026-11-13 14:42:32 UTC (blueprint-build/style.js)
+mp4: 06-blueprint-build.mp4 2026-11-13 14:31:45 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.0 dB, frame 282)
+  frame 18 (t=0.600): 37.7 dB
+  frame 60 (t=2.000): 37.7 dB
+  frame 96 (t=3.200): 37.6 dB
+  frame 177 (t=5.900): 36.2 dB
+  frame 216 (t=7.200): 36.8 dB
+  frame 246 (t=8.200): 36.7 dB
+  frame 282 (t=9.400): 36.0 dB
+  frame 336 (t=11.200): 36.6 dB
+  frame 369 (t=12.300): 36.5 dB
+  frame 444 (t=14.800): 36.3 dB
+determinism: OK (10 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

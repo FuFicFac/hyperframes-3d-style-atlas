@@ -1,0 +1,131 @@
+# pass 5 regression — baseline b5 (before) vs final5 (after), md5 of decoded pixels, 4 times/project
+00-smoke: 4/4 identical
+01-low-poly: 4/4 identical
+02-paper-pop-up: 4/4 identical
+03-neon-sign: within GPU noise (worst 0% px, max 1 levels)
+04-soft-clay: 4/4 identical
+05-tiny-diorama: 4/4 identical
+06-blueprint-build: 4/4 identical
+07-split-flap-board: 4/4 identical
+08-voxel: 4/4 identical
+09-spotlight-stage: 4/4 identical
+10-exploded-view: 4/4 identical
+11-marble-run: 4/4 identical
+12-studio-product: REAL DIFF (worst 0.815% px, max 29 levels)
+13-wireframe-hologram: 4/4 identical
+14-origami: 4/4 identical
+15-felt-stitch: 4/4 identical
+16-toy-brick: REAL DIFF (worst 1.528% px, max 53 levels)
+17-crt-retro: 4/4 identical
+18-floating-screens: 4/4 identical
+19-embossed-letterpress: 4/4 identical
+20-isometric-pastel: 4/4 identical
+21-chalkboard: 4/4 identical
+22-glass-light: 4/4 identical
+23-liquid-chrome: 4/4 identical
+24-wam-house: 4/4 identical
+
+# deep check summary
+== 00-smoke (0.2,0.6,1.0,1.5,2.0,3.2,4.8)
+determinism: OK (7 times identical in both seek orders)
+deep self-check: OK
+== 01-low-poly (0.7,2.65,4.95,7.35,10.2,12.4,13.3,14.6)
+determinism: OK (8 times identical in both seek orders)
+deep self-check: OK
+== 02-paper-pop-up (0.7,0.75,2.6,2.8,3.35,3.6,3.95,4.25,5.2,6.5,6.6,8.75,9.9,11.25,12.6,13.5,14.8)
+determinism: OK (17 times identical in both seek orders)
+deep self-check: OK
+== 03-neon-sign (0.62,1.9,3.6,5.0,7.6,9.4,10.6,14.8)
+determinism: OK (8 times identical in both seek orders)
+deep self-check: OK
+== 04-soft-clay (1.6,3.5,5,7.3,9.25,10.4,11.1,12.6,14)
+determinism: OK (9 times identical in both seek orders)
+deep self-check: OK
+== 05-tiny-diorama (0.75,2.9,4.3,5.9,6.95,9.3,11.9,14.6)
+determinism: OK (8 times identical in both seek orders)
+deep self-check: OK
+== 06-blueprint-build (0.6,2.0,3.2,5.9,7.2,8.2,9.4,11.2,12.3,14.8)
+determinism: OK (10 times identical in both seek orders)
+deep self-check: OK
+== 07-split-flap-board (0.3,1.2,2.6,4.1,6.6,9.9,12.6,14.5)
+determinism: OK (8 times identical in both seek orders)
+deep self-check: OK
+== 08-voxel (1.2,2.6,4.7,6.0,8.2,10.1,11.8,14.2)
+determinism: OK (8 times identical in both seek orders)
+deep self-check: OK
+== 09-spotlight-stage (0.3,1.2,2.6,3.6,4.8,6.4,8.3,9.6,11.0,12.8,14.8)
+determinism: OK (11 times identical in both seek orders)
+deep self-check: OK
+== 10-exploded-view (1.2,2.4,3.6,5.6,6.4,8.9,11.5,13.1,14.8)
+determinism: OK (9 times identical in both seek orders)
+deep self-check: OK
+== 11-marble-run (0.5,1.5,2.25,2.6,4.4,7.3,8.75,8.85,10.0,12.1,14.6)
+determinism: OK (11 times identical in both seek orders)
+deep self-check: OK
+== 12-studio-product (1.1,2.1,3,5.4,8,10.9,12.9,14.5)
+determinism: OK (8 times identical in both seek orders)
+deep self-check: OK
+== 13-wireframe-hologram (0.9,1.5,2.6,4.05,5,5.6,7.7,8.3,9,10.9,12.55,14.2)
+determinism: OK (12 times identical in both seek orders)
+deep self-check: OK
+== 14-origami (1,2.45,3.85,4.55,5.45,6.15,6.95,8.4,10.2,11.5,13.1,14.6)
+determinism: OK (12 times identical in both seek orders)
+deep self-check: OK
+== 15-felt-stitch (1.5,2.6,4.6,6.9,8.2,10.2,11.9,14.5)
+determinism: OK (8 times identical in both seek orders)
+deep self-check: OK
+== 16-toy-brick (0.3,1.6,3.4,5.9,7.3,8.6,11.6,14.6)
+determinism: OK (8 times identical in both seek orders)
+deep self-check: OK
+== 17-crt-retro (0.2,0.55,1.6,3.3,4.9,8.8,10.6,11.9,14.0,14.62)
+determinism: OK (10 times identical in both seek orders)
+deep self-check: OK
+== 18-floating-screens (1.2,1.5,2.6,4.6,5,5.8,7.6,9,9.6,10.3,11.6,12.8,14.6)
+determinism: OK (13 times identical in both seek orders)
+deep self-check: OK
+== 19-embossed-letterpress (1.6,2.6,4.2,5.4,6.6,8.3,9.5,11.3,12.4,14.6)
+determinism: OK (10 times identical in both seek orders)
+deep self-check: OK
+== 20-isometric-pastel (0.4,1.0,2.4,3.45,5.2,8.2,10.6,11.6,12.2,12.4,13.75,13.9,14.8)
+determinism: OK (13 times identical in both seek orders)
+deep self-check: OK
+== 21-chalkboard (1.0,1.2,2.4,4.3,4.4,5.0,6.2,8.0,9.3,9.8,11.0,12.75,14.8,14.9)
+determinism: OK (14 times identical in both seek orders)
+deep self-check: OK
+== 22-glass-light (1.2,2.6,4.6,6.0,8.2,10.9,12.0,14.6)
+determinism: OK (8 times identical in both seek orders)
+deep self-check: OK
+== 23-liquid-chrome (1.5,4.4,6.7,7.85,8.9,10.4,10.8,11.7,13.0,14.5)
+determinism: OK (10 times identical in both seek orders)
+deep self-check: OK
+== 24-wam-house (0.75,1.2,2.6,3.3,4.6,5.75,6.3,8.2,9.7,10.2,11.2,12.7,14.6)
+determinism: OK (13 times identical in both seek orders)
+deep self-check: OK
+
+# check-frames refresh (neon rerun after GPU-noise tolerance: determinism OK)
+00-smoke exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 39.0 dB, frame 60) determinism: OK (7 times identical in both seek orders) 
+01-low-poly exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.4 dB, frame 399) determinism: OK (8 times identical in both seek orders) 
+02-paper-pop-up exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.9 dB, frame 84) determinism: OK (17 times identical in both seek orders) 
+03-neon-sign exit=1 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.8 dB, frame 444) determinism: FAIL (2 time(s) differ when seeking out of order) 
+04-soft-clay exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.4 dB, frame 48) determinism: OK (9 times identical in both seek orders) 
+05-tiny-diorama exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.7 dB, frame 357) determinism: OK (8 times identical in both seek orders) 
+06-blueprint-build exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.1 dB, frame 282) determinism: OK (10 times identical in both seek orders) 
+07-split-flap-board exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.6 dB, frame 378) determinism: OK (8 times identical in both seek orders) 
+08-voxel exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 31.1 dB, frame 78) determinism: OK (8 times identical in both seek orders) 
+09-spotlight-stage exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 35.6 dB, frame 288) determinism: OK (11 times identical in both seek orders) 
+10-exploded-view exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 38.4 dB, frame 345) determinism: OK (9 times identical in both seek orders) 
+11-marble-run exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 35.8 dB, frame 219) determinism: OK (11 times identical in both seek orders) 
+12-studio-product exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.8 dB, frame 240) determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px) 
+13-wireframe-hologram exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 32.5 dB, frame 327) determinism: OK (12 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px) 
+14-origami exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.1 dB, frame 345) determinism: OK (12 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px) 
+15-felt-stitch exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.5 dB, frame 435) determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px) 
+16-toy-brick exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 39.2 dB, frame 438) determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px) 
+17-crt-retro exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.9 dB, frame 264) determinism: OK (10 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px) 
+18-floating-screens exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 38.0 dB, frame 270) determinism: OK (13 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px) 
+19-embossed-letterpress exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 39.0 dB, frame 372) determinism: OK (10 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px) 
+20-isometric-pastel exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.9 dB, frame 417) determinism: OK (13 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px) 
+21-chalkboard exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.5 dB, frame 447) determinism: OK (14 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px) 
+22-glass-light exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 40.1 dB, frame 138) determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px) 
+23-liquid-chrome exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 32.5 dB, frame 312) determinism: OK (10 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px) 
+24-wam-house exit=0 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.6 dB, frame 306) determinism: OK (13 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px) 
+ALL-DONE

@@ -1,0 +1,27 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 8 old file(s): RUN.txt t1.6.png t10.5.png t13.5.png t4.0.png t4.8.png t7.1.png t8.5.png
+check-frames run: 2026-11-14 04:59:24 UTC
+times: 1.6, 4.0, 4.8, 7.1, 8.5, 10.5, 13.5
+newest code edit: 2026-11-14 03:01:44 UTC (50-pin-art/scene.config.js)
+mp4: 50-pin-art.mp4 2026-11-14 03:03:36 UTC
+kit last changed: 2026-11-14 04:24:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1.6       renders/checks/t1.6.png       a30890f93bfbb5e25a27e1ee1fa40714  SAME
+4.0       renders/checks/t4.0.png       624ad7130857923af7ea9d6276887907  SAME
+4.8       renders/checks/t4.8.png       23ab8404a9f6eb9abc0cecf2378909c1  SAME
+7.1       renders/checks/t7.1.png       bfcd43645f4fe23543c98ec2038ee8d9  SAME
+8.5       renders/checks/t8.5.png       1e1941fa26bc194355414a88cadc6ff8  SAME
+10.5      renders/checks/t10.5.png      1c7e4123692d4aa58a8ecc0821fdb4d8  SAME
+13.5      renders/checks/t13.5.png      3e5abef67b013f375fc97cfc63524b61  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 27.7 dB, frame 213)
+determinism: OK (7 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -21.5 dB, max -4.0 dB
+audio 50-pin-art.mp4: mean -21.5 dB, max -4.0 dB  (9.5 MB)
+deep t=4: hash c8a7b795 mean 38.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.6: hash ff1976fa mean 39.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.8: hash 15640dca mean 37.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.1: hash 24fc4ef8 mean 36.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.5: hash 1a2b6c7d mean 31 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.5: hash 5aed00a7 mean 30.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=13.5: hash 7e5c8409 mean 27.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

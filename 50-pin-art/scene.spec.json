@@ -1,0 +1,4052 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "pin-art",
+    "name": "Pin Art",
+    "description": "A giant pin-impression toy (pinscreen): a clear acrylic frame holding a dense grid of thousands of slim polished metal pins with domed heads, on a dark matte desk under a strong low raking key light and a soft coloured rim light, so any relief pushed into the pins reads as a field of bright pin heads and long shadows. Polished steel by default, brass and anodised colour finishes. Shapes are pressed through the field as a pure function of time: every pin's extension is sampled from a target height field built from text and icons (distance fields with a rounded bevel), a hand, a ball rolling underneath, ripples from a tap, bars rising as columns of pins, terrain or a bitmap; transitions morph between fields with a wave that travels across the grid (per-pin delay from position, eased, tiny overshoot, metallic settle) and pins drop back in a cascade. The camera orbits low so relief and shadows read.",
+    "palette": {
+      "bg": "#0d0d10",
+      "desk": "#17161a",
+      "plate": "#0b0b0e",
+      "steel": "#c9ccd2",
+      "brass": "#d6b266",
+      "ink": "#e9ebef",
+      "rim": "#8fb1ff",
+      "key": "#fff1dd",
+      "amber": "#f2b24a",
+      "anodised": [
+        "#3f7be0",
+        "#e0503f",
+        "#2fb39a",
+        "#e4a63a",
+        "#9a5fd6",
+        "#d94f8a"
+      ]
+    },
+    "world": {
+      "background": "#0d0d10",
+      "sky": null,
+      "fog": {
+        "color": "#0d0d10",
+        "near": 14,
+        "far": 30
+      },
+      "environment": null,
+      "toneMapping": "neutral",
+      "exposure": 1.2,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "desk": {
+        "type": "standard",
+        "baseColor": "#17161a",
+        "roughness": 0.9,
+        "metalness": 0,
+        "bump": {
+          "source": "bumpNoise",
+          "scale": 48,
+          "octaves": 3,
+          "seed": 50,
+          "strength": 0.25,
+          "description": "fine fbm noise: matte painted desk top"
+        }
+      },
+      "plate": {
+        "type": "standard",
+        "baseColor": "#0b0b0e",
+        "roughness": 0.55,
+        "metalness": 0
+      },
+      "acrylicEdge": {
+        "type": "standard",
+        "baseColor": "#8a96a8",
+        "roughness": 0.45,
+        "metalness": 0
+      },
+      "screw": {
+        "type": "standard",
+        "baseColor": "#9da2aa",
+        "roughness": 0.3,
+        "metalness": 1
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#c9d3e6",
+        "groundColor": "#0d0c10",
+        "intensity": 0.12
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff1dd",
+        "intensity": 3.4,
+        "position": [
+          -7.2,
+          3.1,
+          6.6
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 1.4,
+          "mapSize": 4096,
+          "extent": 6.4,
+          "near": 0.5,
+          "far": 30,
+          "bias": -0.0003,
+          "normalBias": 0.006
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#8fb1ff",
+        "intensity": 0.8,
+        "position": [
+          5.5,
+          2.4,
+          -8.5
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "studio": {
+      "size": 256,
+      "sigma": 0.01,
+      "room": {
+        "w": 30,
+        "h": 14,
+        "d": 30,
+        "color": "#020203"
+      },
+      "panels": [
+        {
+          "id": "top",
+          "kind": "softbox",
+          "size": [
+            14,
+            9
+          ],
+          "pos": [
+            0,
+            7,
+            2.5
+          ],
+          "intensity": 2.2,
+          "color": "#f4f1ec",
+          "soft": 0.3
+        },
+        {
+          "id": "keyStrip",
+          "kind": "strip",
+          "size": [
+            1.2,
+            5
+          ],
+          "pos": [
+            -8,
+            2.6,
+            7.5
+          ],
+          "intensity": 7,
+          "color": "#fff1dd",
+          "soft": 0.35
+        },
+        {
+          "id": "rimStrip",
+          "kind": "strip",
+          "size": [
+            0.8,
+            5
+          ],
+          "pos": [
+            6,
+            2.2,
+            -9.5
+          ],
+          "intensity": 3.5,
+          "color": "#8fb1ff",
+          "soft": 0.35
+        },
+        {
+          "id": "front",
+          "kind": "card",
+          "size": [
+            18,
+            6
+          ],
+          "pos": [
+            0,
+            3,
+            12
+          ],
+          "intensity": 0.7,
+          "gradient": [
+            [
+              0,
+              "#000000"
+            ],
+            [
+              0.7,
+              "#5a5d66"
+            ],
+            [
+              1,
+              "#a0a4ad"
+            ]
+          ]
+        }
+      ],
+      "sweep": {
+        "size": [
+          16,
+          0.4
+        ],
+        "radius": 9,
+        "from": 0.2,
+        "to": 2.6,
+        "intensity": 0,
+        "color": "#ffffff",
+        "soft": 0.35,
+        "edgeFade": 0.16
+      },
+      "sweepLight": {
+        "intensity": 0,
+        "color": "#ffffff"
+      },
+      "quantum": 0.002
+    },
+    "post": {
+      "bloom": {
+        "strength": 0.12,
+        "radius": 0.3,
+        "threshold": 3.2
+      },
+      "vignette": {
+        "darkness": 0.5,
+        "offset": 1
+      }
+    },
+    "camera": {
+      "fov": 34,
+      "near": 0.2,
+      "far": 60,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#e9ebef",
+      "height": 0.3
+    },
+    "field": {
+      "cols": 100,
+      "rows": 84,
+      "pitch": 0.08,
+      "headR": 0.036,
+      "headH": 0.03,
+      "shaftR": 0.011,
+      "length": 1.7,
+      "rest": 0,
+      "maxExt": 1.35,
+      "radial": 10,
+      "domeRings": 4,
+      "ao": {
+        "strength": 1.8,
+        "max": 0.75,
+        "depthTone": 0.62,
+        "depthRange": 0.22
+      }
+    },
+    "finishes": {
+      "steel": {
+        "color": "#d2d5db",
+        "roughness": 0.2,
+        "metalness": 1,
+        "envIntensity": 1
+      },
+      "brass": {
+        "color": "#d6b266",
+        "roughness": 0.2,
+        "metalness": 1,
+        "envIntensity": 1
+      },
+      "blackChrome": {
+        "color": "#6b6e75",
+        "roughness": 0.12,
+        "metalness": 1,
+        "envIntensity": 1.1
+      },
+      "anodised": {
+        "color": "#c9ccd2",
+        "roughness": 0.26,
+        "metalness": 0.85,
+        "envIntensity": 0.9
+      }
+    },
+    "frame": {
+      "margin": 0.2,
+      "height": 0.24,
+      "base": 0.16,
+      "radius": 0.03,
+      "alphaFace": 0.07,
+      "alphaRim": 0.62
+    },
+    "desk": {
+      "size": 60,
+      "y": -0.16
+    },
+    "morph": {
+      "spring": {
+        "stiffness": 210,
+        "damping": 20
+      },
+      "settle": 0.62,
+      "spread": 1.1,
+      "jitter": 0.025,
+      "drop": {
+        "fall": 0.24,
+        "bounce": 0.05,
+        "bounceT": 0.12
+      },
+      "bevel": 0.1
+    },
+    "caption": {
+      "x": 96,
+      "y": 70,
+      "h": 88,
+      "cap": 38,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#16171b",
+      "edge": "#3a3d45",
+      "ink": "#eef0f4",
+      "dot": "#c9ccd2",
+      "dotHi": "#ffffff"
+    },
+    "sampleTag": {
+      "text": "SAMPLE DATA",
+      "x": 1824,
+      "y": 70,
+      "h": 60,
+      "cap": 26,
+      "ink": "#16171b",
+      "plate": "#f2b24a"
+    },
+    "sound": {
+      "bin": 0.06666666666666667,
+      "eps": 0.004,
+      "lone": 36,
+      "shimmer": {
+        "gain": 0.16,
+        "pitch": [
+          2.2,
+          3.6
+        ],
+        "maxPerBin": 4
+      },
+      "tick": {
+        "gain": 0.14,
+        "pitch": 2.8
+      },
+      "thud": {
+        "gain": 0.5,
+        "pitch": 0.8
+      },
+      "bell": {
+        "gain": 0.16,
+        "notes": [
+          1,
+          1.335,
+          1.498,
+          2
+        ]
+      },
+      "bed": {
+        "gain": 0.7,
+        "root": 110,
+        "brightness": 700
+      }
+    },
+    "sfx": {
+      "enter": "tick",
+      "exit": "whooshOut",
+      "move": "sparkle",
+      "land": "thud",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Every pin's extension = a height sampled from the current target height field; nothing else moves the pins.",
+      "Morph: per-pin delay from its position (directional, radial or seeded random wave), then a closed-form spring with ~5 % overshoot and a metallic settle; held exactly once settled.",
+      "Cascade: pins drop back with a gravity fall and one tiny bounce, in a seeded or swept order.",
+      "Layers: a ball rolling under the field (a travelling spherical bump, max with the field) and ripples spreading from a tap (added, then gone).",
+      "Camera: orbits low so relief and long shadows read; holds still between morphs (thousands of glints compress badly in motion)."
+    ]
+  },
+  "scene": {
+    "id": "50-pin-art",
+    "style": "pin-art",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "roll",
+        "t": 0,
+        "dur": 3.2,
+        "label": "A field of steel pins"
+      },
+      {
+        "id": "hand",
+        "t": 3.2,
+        "dur": 3.2,
+        "label": "Press a shape in"
+      },
+      {
+        "id": "word",
+        "t": 6.4,
+        "dur": 3.1,
+        "label": "This becomes that"
+      },
+      {
+        "id": "data",
+        "t": 9.5,
+        "dur": 5.5,
+        "label": "Data rises from flat"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -3,
+          2.7,
+          7
+        ],
+        "target": [
+          0.3,
+          0,
+          1.2
+        ],
+        "fov": 34
+      },
+      {
+        "t": 3.35,
+        "pos": [
+          -3,
+          2.7,
+          7
+        ],
+        "target": [
+          0.3,
+          0,
+          1.2
+        ],
+        "fov": 34
+      },
+      {
+        "t": 4.315219151973724,
+        "pos": [
+          -1.7,
+          3.2,
+          7.45
+        ],
+        "target": [
+          0.2,
+          0.05,
+          1.15
+        ],
+        "fov": 34,
+        "path": "arc",
+        "ease": "inOutSine"
+      },
+      {
+        "t": 6.450000000000001,
+        "pos": [
+          -1.7,
+          3.2,
+          7.45
+        ],
+        "target": [
+          0.2,
+          0.05,
+          1.15
+        ],
+        "fov": 34
+      },
+      {
+        "t": 7.772679233551026,
+        "pos": [
+          0,
+          6,
+          6.6
+        ],
+        "target": [
+          0,
+          0,
+          0.55
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 9.6,
+        "pos": [
+          0,
+          6,
+          6.6
+        ],
+        "target": [
+          0,
+          0,
+          0.55
+        ],
+        "fov": 34
+      },
+      {
+        "t": 11,
+        "pos": [
+          2,
+          4.8,
+          7.9
+        ],
+        "target": [
+          0.15,
+          0.35,
+          0.55
+        ],
+        "fov": 34,
+        "path": "arc",
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          2,
+          4.8,
+          7.9
+        ],
+        "target": [
+          0.15,
+          0.35,
+          0.55
+        ],
+        "fov": 34
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.7,
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "attack": 2,
+        "release": 2,
+        "brightness": 700
+      },
+      {
+        "type": "tick",
+        "gain": 0.14,
+        "pitch": 2.7887678065896035,
+        "dur": 0.014,
+        "t": 0.8,
+        "pan": 0,
+        "seed": 101
+      },
+      {
+        "type": "tick",
+        "gain": 0.07889987239895123,
+        "pitch": 2.854802522622049,
+        "dur": 0.012,
+        "t": 0.8673855620102646,
+        "pan": 0,
+        "seed": 108
+      },
+      {
+        "type": "tick",
+        "gain": 0.11857779986813666,
+        "pitch": 3.5497859001159666,
+        "dur": 0.012,
+        "t": 0.9086237647733652,
+        "pan": 0,
+        "seed": 109
+      },
+      {
+        "type": "tick",
+        "gain": 0.09923445822216216,
+        "pitch": 2.4961778086144477,
+        "dur": 0.012,
+        "t": 0.9373527881254753,
+        "pan": 0,
+        "seed": 115
+      },
+      {
+        "type": "tick",
+        "gain": 0.09229595103161677,
+        "pitch": 2.894791866466403,
+        "dur": 0.012,
+        "t": 0.9693562746878404,
+        "pan": 0,
+        "seed": 116
+      },
+      {
+        "type": "tick",
+        "gain": 0.12874302605191867,
+        "pitch": 2.6588755554053933,
+        "dur": 0.012,
+        "t": 1.0088396193133666,
+        "pan": 0,
+        "seed": 122
+      },
+      {
+        "type": "tick",
+        "gain": 0.10585317105693476,
+        "pitch": 3.0056503500323744,
+        "dur": 0.012,
+        "t": 1.0268232785162723,
+        "pan": 0,
+        "seed": 123
+      },
+      {
+        "type": "tick",
+        "gain": 0.13265852190616584,
+        "pitch": 3.5397812423761934,
+        "dur": 0.012,
+        "t": 1.0540091044334177,
+        "pan": 0,
+        "seed": 124
+      },
+      {
+        "type": "tick",
+        "gain": 0.13382584227935188,
+        "pitch": 3.532213531853631,
+        "dur": 0.012,
+        "t": 1.075415506308588,
+        "pan": 0,
+        "seed": 129
+      },
+      {
+        "type": "tick",
+        "gain": 0.09923273095148659,
+        "pitch": 3.278241232130677,
+        "dur": 0.012,
+        "t": 1.0914988076792926,
+        "pan": 0,
+        "seed": 130
+      },
+      {
+        "type": "tick",
+        "gain": 0.11157657364960227,
+        "pitch": 3.1321844214573504,
+        "dur": 0.012,
+        "t": 1.1159115779736182,
+        "pan": 0,
+        "seed": 131
+      },
+      {
+        "type": "tick",
+        "gain": 0.14103792234435678,
+        "pitch": 2.7462184787727892,
+        "dur": 0.012,
+        "t": 1.1423489370018554,
+        "pan": 0,
+        "seed": 136
+      },
+      {
+        "type": "tick",
+        "gain": 0.1326322180078782,
+        "pitch": 3.119914334267378,
+        "dur": 0.012,
+        "t": 1.157584300225135,
+        "pan": 0,
+        "seed": 137
+      },
+      {
+        "type": "tick",
+        "gain": 0.11551045116752387,
+        "pitch": 3.1578853331040593,
+        "dur": 0.012,
+        "t": 1.171335512950706,
+        "pan": 0,
+        "seed": 138
+      },
+      {
+        "type": "tick",
+        "gain": 0.13327238514657533,
+        "pitch": 2.775910834828392,
+        "dur": 0.012,
+        "t": 1.1910266397039717,
+        "pan": 0,
+        "seed": 139
+      },
+      {
+        "type": "tick",
+        "gain": 0.09792567709296943,
+        "pitch": 2.8206814344506714,
+        "dur": 0.012,
+        "t": 1.2014525667158886,
+        "pan": 0,
+        "seed": 143
+      },
+      {
+        "type": "tick",
+        "gain": 0.14384110557451846,
+        "pitch": 2.9138457797933373,
+        "dur": 0.012,
+        "t": 1.2258335190817402,
+        "pan": 0,
+        "seed": 144
+      },
+      {
+        "type": "tick",
+        "gain": 0.10636361903205514,
+        "pitch": 3.1497924679890277,
+        "dur": 0.012,
+        "t": 1.236203565025547,
+        "pan": 0,
+        "seed": 145
+      },
+      {
+        "type": "tick",
+        "gain": 0.08960850279092789,
+        "pitch": 2.7657233490608633,
+        "dur": 0.012,
+        "t": 1.250055192001164,
+        "pan": 0,
+        "seed": 146
+      },
+      {
+        "type": "tick",
+        "gain": 0.11238874244494806,
+        "pitch": 3.5381229592487218,
+        "dur": 0.012,
+        "t": 1.2705298667253615,
+        "pan": 0,
+        "seed": 150
+      },
+      {
+        "type": "tick",
+        "gain": 0.12180810407020506,
+        "pitch": 2.7867262959480286,
+        "dur": 0.012,
+        "t": 1.2887774684474183,
+        "pan": 0,
+        "seed": 151
+      },
+      {
+        "type": "tick",
+        "gain": 0.11202313914593487,
+        "pitch": 2.956478327792138,
+        "dur": 0.012,
+        "t": 1.3038018376124092,
+        "pan": 0,
+        "seed": 152
+      },
+      {
+        "type": "tick",
+        "gain": 0.10252949991343277,
+        "pitch": 2.3298696292564274,
+        "dur": 0.012,
+        "t": 1.3188751025536718,
+        "pan": 0,
+        "seed": 153
+      },
+      {
+        "type": "tick",
+        "gain": 0.12892936582047315,
+        "pitch": 3.492023360636085,
+        "dur": 0.012,
+        "t": 1.339972693005887,
+        "pan": 0,
+        "seed": 157
+      },
+      {
+        "type": "tick",
+        "gain": 0.11465894540392217,
+        "pitch": 2.8872491511050615,
+        "dur": 0.012,
+        "t": 1.354244228368625,
+        "pan": 0,
+        "seed": 158
+      },
+      {
+        "type": "tick",
+        "gain": 0.0904442976329653,
+        "pitch": 3.0905247918795795,
+        "dur": 0.012,
+        "t": 1.3668467358026342,
+        "pan": 0,
+        "seed": 159
+      },
+      {
+        "type": "tick",
+        "gain": 0.12496547140482636,
+        "pitch": 2.523463239287958,
+        "dur": 0.012,
+        "t": 1.3893073974278134,
+        "pan": 0,
+        "seed": 160
+      },
+      {
+        "type": "tick",
+        "gain": 0.10902274920267718,
+        "pitch": 2.8989340507891033,
+        "dur": 0.012,
+        "t": 1.4032422690372912,
+        "pan": 0,
+        "seed": 164
+      },
+      {
+        "type": "tick",
+        "gain": 0.09743123087436671,
+        "pitch": 2.5694113688077778,
+        "dur": 0.012,
+        "t": 1.4179693809097322,
+        "pan": 0,
+        "seed": 165
+      },
+      {
+        "type": "tick",
+        "gain": 0.11768481476274274,
+        "pitch": 2.8816075677517805,
+        "dur": 0.012,
+        "t": 1.4380249854720508,
+        "pan": 0,
+        "seed": 166
+      },
+      {
+        "type": "tick",
+        "gain": 0.09861168632148277,
+        "pitch": 3.2141426622867586,
+        "dur": 0.012,
+        "t": 1.4515002343570813,
+        "pan": 0,
+        "seed": 167
+      },
+      {
+        "type": "tick",
+        "gain": 0.1475565435985724,
+        "pitch": 2.763016987638548,
+        "dur": 0.012,
+        "t": 1.4763692130280348,
+        "pan": 0,
+        "seed": 171
+      },
+      {
+        "type": "tick",
+        "gain": 0.11715431271592774,
+        "pitch": 3.5512543975375594,
+        "dur": 0.012,
+        "t": 1.4879462205067586,
+        "pan": 0,
+        "seed": 172
+      },
+      {
+        "type": "tick",
+        "gain": 0.12159516651233036,
+        "pitch": 3.5533676818478854,
+        "dur": 0.012,
+        "t": 1.5053563336795195,
+        "pan": 0,
+        "seed": 173
+      },
+      {
+        "type": "tick",
+        "gain": 0.1184921009560426,
+        "pitch": 3.0822038241196426,
+        "dur": 0.012,
+        "t": 1.5215035139249327,
+        "pan": 0,
+        "seed": 174
+      },
+      {
+        "type": "tick",
+        "gain": 0.14853401247453124,
+        "pitch": 3.3844253408722578,
+        "dur": 0.012,
+        "t": 1.5431615161368002,
+        "pan": 0,
+        "seed": 178
+      },
+      {
+        "type": "tick",
+        "gain": 0.1217710565628892,
+        "pitch": 2.99975956347771,
+        "dur": 0.012,
+        "t": 1.555354624520987,
+        "pan": 0,
+        "seed": 179
+      },
+      {
+        "type": "tick",
+        "gain": 0.09373726364389062,
+        "pitch": 3.165492699947208,
+        "dur": 0.012,
+        "t": 1.5673353063167692,
+        "pan": 0,
+        "seed": 180
+      },
+      {
+        "type": "tick",
+        "gain": 0.11445072670517933,
+        "pitch": 3.397977080615237,
+        "dur": 0.012,
+        "t": 1.5874643291051809,
+        "pan": 0,
+        "seed": 181
+      },
+      {
+        "type": "tick",
+        "gain": 0.11069009154244548,
+        "pitch": 2.613668990833685,
+        "dur": 0.012,
+        "t": 1.603474153757561,
+        "pan": 0,
+        "seed": 185
+      },
+      {
+        "type": "tick",
+        "gain": 0.09375157037936506,
+        "pitch": 2.2447366140782834,
+        "dur": 0.012,
+        "t": 1.6173137846884007,
+        "pan": 0,
+        "seed": 186
+      },
+      {
+        "type": "tick",
+        "gain": 0.12107833085237514,
+        "pitch": 3.4754563789814714,
+        "dur": 0.012,
+        "t": 1.6385412821181427,
+        "pan": 0,
+        "seed": 187
+      },
+      {
+        "type": "tick",
+        "gain": 0.10602532801166886,
+        "pitch": 3.5128124018665403,
+        "dur": 0.012,
+        "t": 1.6526956056733615,
+        "pan": 0,
+        "seed": 188
+      },
+      {
+        "type": "tick",
+        "gain": 0.11907905022853187,
+        "pitch": 3.1337659311946484,
+        "dur": 0.012,
+        "t": 1.6715510500540645,
+        "pan": 0,
+        "seed": 192
+      },
+      {
+        "type": "tick",
+        "gain": 0.11476209642663598,
+        "pitch": 3.096796365361661,
+        "dur": 0.012,
+        "t": 1.6874968513435062,
+        "pan": 0,
+        "seed": 193
+      },
+      {
+        "type": "tick",
+        "gain": 0.11561840441131166,
+        "pitch": 3.575207609543577,
+        "dur": 0.012,
+        "t": 1.7043065083702094,
+        "pan": 0,
+        "seed": 194
+      },
+      {
+        "type": "tick",
+        "gain": 0.12594917647157397,
+        "pitch": 3.5593794602900743,
+        "dur": 0.012,
+        "t": 1.722698256249229,
+        "pan": 0,
+        "seed": 195
+      },
+      {
+        "type": "tick",
+        "gain": 0.14765755195211797,
+        "pitch": 2.561156419944018,
+        "dur": 0.012,
+        "t": 1.743002444450588,
+        "pan": 0,
+        "seed": 199
+      },
+      {
+        "type": "tick",
+        "gain": 0.14288461988840784,
+        "pitch": 2.5187781565822664,
+        "dur": 0.012,
+        "t": 1.7588716985238715,
+        "pan": 0,
+        "seed": 200
+      },
+      {
+        "type": "tick",
+        "gain": 0.0982228334072658,
+        "pitch": 2.5253478159662337,
+        "dur": 0.012,
+        "t": 1.768076731438438,
+        "pan": 0,
+        "seed": 201
+      },
+      {
+        "type": "tick",
+        "gain": 0.12378768809031872,
+        "pitch": 3.178972255531699,
+        "dur": 0.012,
+        "t": 1.7890145121289727,
+        "pan": 0,
+        "seed": 202
+      },
+      {
+        "type": "tick",
+        "gain": 0.09686459117151443,
+        "pitch": 2.20062108123675,
+        "dur": 0.012,
+        "t": 1.8011913876608012,
+        "pan": 0,
+        "seed": 206
+      },
+      {
+        "type": "tick",
+        "gain": 0.09311746443195003,
+        "pitch": 2.638681495888159,
+        "dur": 0.012,
+        "t": 1.8172317038631687,
+        "pan": 0,
+        "seed": 207
+      },
+      {
+        "type": "tick",
+        "gain": 0.1491870073415481,
+        "pitch": 2.3295433077961207,
+        "dur": 0.012,
+        "t": 1.8432706674056436,
+        "pan": 0,
+        "seed": 208
+      },
+      {
+        "type": "tick",
+        "gain": 0.13785182051331515,
+        "pitch": 2.2500708450563254,
+        "dur": 0.012,
+        "t": 1.8580426024482584,
+        "pan": 0,
+        "seed": 209
+      },
+      {
+        "type": "tick",
+        "gain": 0.09983106641892876,
+        "pitch": 3.547456804243848,
+        "dur": 0.012,
+        "t": 1.8683879880902046,
+        "pan": 0,
+        "seed": 213
+      },
+      {
+        "type": "tick",
+        "gain": 0.1288339265104064,
+        "pitch": 2.6775868504308167,
+        "dur": 0.012,
+        "t": 1.8899125227852103,
+        "pan": 0,
+        "seed": 214
+      },
+      {
+        "type": "tick",
+        "gain": 0.09194190590345433,
+        "pitch": 2.990764898201451,
+        "dur": 0.012,
+        "t": 1.90039991724072,
+        "pan": 0,
+        "seed": 215
+      },
+      {
+        "type": "tick",
+        "gain": 0.13244611553030355,
+        "pitch": 3.207021782360971,
+        "dur": 0.012,
+        "t": 1.9238508839501687,
+        "pan": 0,
+        "seed": 216
+      },
+      {
+        "type": "tick",
+        "gain": 0.11846035225433964,
+        "pitch": 2.4069325149059297,
+        "dur": 0.012,
+        "t": 1.9381446498896304,
+        "pan": 0,
+        "seed": 220
+      },
+      {
+        "type": "tick",
+        "gain": 0.1309703061283912,
+        "pitch": 3.534888152964413,
+        "dur": 0.012,
+        "t": 1.956903482007328,
+        "pan": 0,
+        "seed": 221
+      },
+      {
+        "type": "tick",
+        "gain": 0.11543614162100213,
+        "pitch": 3.5270434499252588,
+        "dur": 0.012,
+        "t": 1.9709722140516774,
+        "pan": 0,
+        "seed": 222
+      },
+      {
+        "type": "tick",
+        "gain": 0.11652985070943833,
+        "pitch": 2.498866808274761,
+        "dur": 0.012,
+        "t": 1.9878217926931876,
+        "pan": 0,
+        "seed": 223
+      },
+      {
+        "type": "tick",
+        "gain": 0.1041303444142001,
+        "pitch": 2.3063678703270853,
+        "dur": 0.012,
+        "t": 2.0024681846937162,
+        "pan": 0,
+        "seed": 227
+      },
+      {
+        "type": "tick",
+        "gain": 0.1181357542430503,
+        "pitch": 3.1448905837722125,
+        "dur": 0.012,
+        "t": 2.021484301820552,
+        "pan": 0,
+        "seed": 228
+      },
+      {
+        "type": "tick",
+        "gain": 0.1347466550959008,
+        "pitch": 3.4582043504342437,
+        "dur": 0.012,
+        "t": 2.0409374980589683,
+        "pan": 0,
+        "seed": 229
+      },
+      {
+        "type": "tick",
+        "gain": 0.09506330652594566,
+        "pitch": 2.8066640462726355,
+        "dur": 0.012,
+        "t": 2.050947161274962,
+        "pan": 0,
+        "seed": 230
+      },
+      {
+        "type": "tick",
+        "gain": 0.12528683850647437,
+        "pitch": 3.3333857516758147,
+        "dur": 0.012,
+        "t": 2.072662450060404,
+        "pan": 0,
+        "seed": 234
+      },
+      {
+        "type": "tick",
+        "gain": 0.1439541384193301,
+        "pitch": 2.2695946368388835,
+        "dur": 0.012,
+        "t": 2.09245741488024,
+        "pan": 0,
+        "seed": 235
+      },
+      {
+        "type": "tick",
+        "gain": 0.13297809958111673,
+        "pitch": 3.114344752859324,
+        "dur": 0.012,
+        "t": 2.1072846981231126,
+        "pan": 0,
+        "seed": 236
+      },
+      {
+        "type": "tick",
+        "gain": 0.11893899893422921,
+        "pitch": 3.1629742010496558,
+        "dur": 0.012,
+        "t": 2.1215986682117607,
+        "pan": 0,
+        "seed": 237
+      },
+      {
+        "type": "tick",
+        "gain": 0.10269977633521671,
+        "pitch": 2.758122747577727,
+        "dur": 0.012,
+        "t": 2.1355968395372233,
+        "pan": 0,
+        "seed": 241
+      },
+      {
+        "type": "tick",
+        "gain": 0.09480845987615132,
+        "pitch": 3.505989795923233,
+        "dur": 0.012,
+        "t": 2.150937000971753,
+        "pan": 0,
+        "seed": 242
+      },
+      {
+        "type": "tick",
+        "gain": 0.0967065728385108,
+        "pitch": 3.1606745852623135,
+        "dur": 0.012,
+        "t": 2.16792273439855,
+        "pan": 0,
+        "seed": 243
+      },
+      {
+        "type": "tick",
+        "gain": 0.08963119004113333,
+        "pitch": 2.600211859866977,
+        "dur": 0.012,
+        "t": 2.183400051690017,
+        "pan": 0,
+        "seed": 244
+      },
+      {
+        "type": "tick",
+        "gain": 0.09437435286523331,
+        "pitch": 2.3901455128565434,
+        "dur": 0.012,
+        "t": 2.200872160191648,
+        "pan": 0,
+        "seed": 248
+      },
+      {
+        "type": "tick",
+        "gain": 0.14119539603772618,
+        "pitch": 3.306920487014577,
+        "dur": 0.012,
+        "t": 2.225413329570244,
+        "pan": 0,
+        "seed": 249
+      },
+      {
+        "type": "tick",
+        "gain": 0.11885989780196123,
+        "pitch": 3.3583554913755505,
+        "dur": 0.012,
+        "t": 2.2383235455149166,
+        "pan": 0,
+        "seed": 250
+      },
+      {
+        "type": "tick",
+        "gain": 0.10734463543991248,
+        "pitch": 2.611146382847801,
+        "dur": 0.012,
+        "t": 2.2530535410065204,
+        "pan": 0,
+        "seed": 251
+      },
+      {
+        "type": "tick",
+        "gain": 0.12247065673877797,
+        "pitch": 2.948248154716566,
+        "dur": 0.012,
+        "t": 2.272750446437082,
+        "pan": 0,
+        "seed": 255
+      },
+      {
+        "type": "tick",
+        "gain": 0.10898423656145732,
+        "pitch": 3.4827877439092845,
+        "dur": 0.012,
+        "t": 2.287095375632246,
+        "pan": 0,
+        "seed": 256
+      },
+      {
+        "type": "tick",
+        "gain": 0.12258520122938214,
+        "pitch": 3.008332745684311,
+        "dur": 0.012,
+        "t": 2.3061034990311597,
+        "pan": 0,
+        "seed": 257
+      },
+      {
+        "type": "tick",
+        "gain": 0.09721549505963213,
+        "pitch": 2.4096976594999435,
+        "dur": 0.012,
+        "t": 2.318402676276552,
+        "pan": 0,
+        "seed": 258
+      },
+      {
+        "type": "tick",
+        "gain": 0.12775830493718388,
+        "pitch": 2.633297532424331,
+        "dur": 0.012,
+        "t": 2.3411908544933735,
+        "pan": 0,
+        "seed": 262
+      },
+      {
+        "type": "tick",
+        "gain": 0.11387491569757462,
+        "pitch": 3.1793048390652987,
+        "dur": 0.012,
+        "t": 2.360929168812517,
+        "pan": 0,
+        "seed": 263
+      },
+      {
+        "type": "tick",
+        "gain": 0.11938760795633,
+        "pitch": 3.086408927105367,
+        "dur": 0.012,
+        "t": 2.384137679010423,
+        "pan": 0,
+        "seed": 264
+      },
+      {
+        "type": "tick",
+        "gain": 0.12867968056687287,
+        "pitch": 2.3177178001031282,
+        "dur": 0.012,
+        "t": 2.4090039910096674,
+        "pan": 0,
+        "seed": 269
+      },
+      {
+        "type": "tick",
+        "gain": 0.13190450354805305,
+        "pitch": 3.04597673593089,
+        "dur": 0.012,
+        "t": 2.4318277738007925,
+        "pan": 0,
+        "seed": 270
+      },
+      {
+        "type": "tick",
+        "gain": 0.11152094133198262,
+        "pitch": 3.2624851826112717,
+        "dur": 0.012,
+        "t": 2.4502476331167338,
+        "pan": 0,
+        "seed": 271
+      },
+      {
+        "type": "tick",
+        "gain": 0.09560712121963501,
+        "pitch": 2.5547333483584227,
+        "dur": 0.012,
+        "t": 2.470163769644375,
+        "pan": 0,
+        "seed": 276
+      },
+      {
+        "type": "tick",
+        "gain": 0.11021798014845166,
+        "pitch": 3.1698020396754147,
+        "dur": 0.012,
+        "t": 2.506323864820879,
+        "pan": 0,
+        "seed": 277
+      },
+      {
+        "type": "tick",
+        "gain": 0.12148757913442595,
+        "pitch": 2.93932913239114,
+        "dur": 0.012,
+        "t": 2.542714441531183,
+        "pan": 0,
+        "seed": 283
+      },
+      {
+        "type": "tick",
+        "gain": 0.14,
+        "pitch": 3.0515580963715907,
+        "dur": 0.014,
+        "t": 2.6,
+        "pan": 0,
+        "seed": 290
+      },
+      {
+        "type": "tick",
+        "gain": 0.14,
+        "pitch": 3.0402073445171114,
+        "dur": 0.014,
+        "t": 3.3333333333333335,
+        "pan": 0,
+        "seed": 297
+      },
+      {
+        "type": "sparkle",
+        "gain": 0.21407625895488885,
+        "dur": 0.9005399119108916,
+        "notes": 10,
+        "pitch": 1.6,
+        "t": 3.364679240062833,
+        "pan": 0,
+        "seed": 304
+      },
+      {
+        "type": "tick",
+        "gain": 0.08949560690611601,
+        "pitch": 2.6072782837785784,
+        "dur": 0.012,
+        "t": 3.401260102998931,
+        "pan": 0,
+        "seed": 311
+      },
+      {
+        "type": "tick",
+        "gain": 0.11993998336464166,
+        "pitch": 2.8252312604803596,
+        "dur": 0.012,
+        "t": 3.4290136436184144,
+        "pan": 0,
+        "seed": 312
+      },
+      {
+        "type": "tick",
+        "gain": 0.12631064602851869,
+        "pitch": 2.497751534357667,
+        "dur": 0.012,
+        "t": 3.4523933263536954,
+        "pan": 0,
+        "seed": 313
+      },
+      {
+        "type": "tick",
+        "gain": 0.12102591910339536,
+        "pitch": 2.2097629728727046,
+        "dur": 0.012,
+        "t": 3.4696846474769214,
+        "pan": 0,
+        "seed": 318
+      },
+      {
+        "type": "tick",
+        "gain": 0.12927534295868304,
+        "pitch": 3.074927397305146,
+        "dur": 0.012,
+        "t": 3.487579463963242,
+        "pan": 0,
+        "seed": 319
+      },
+      {
+        "type": "tick",
+        "gain": 0.13102738767325878,
+        "pitch": 2.2451206704135984,
+        "dur": 0.012,
+        "t": 3.5045069698640146,
+        "pan": 0,
+        "seed": 320
+      },
+      {
+        "type": "tick",
+        "gain": 0.11275762908535343,
+        "pitch": 2.269237223407254,
+        "dur": 0.012,
+        "t": 3.5184536889187683,
+        "pan": 0,
+        "seed": 321
+      },
+      {
+        "type": "tick",
+        "gain": 0.16198466857895255,
+        "pitch": 2.5078291954007,
+        "dur": 0.012,
+        "t": 3.5385814169057026,
+        "pan": 0,
+        "seed": 325
+      },
+      {
+        "type": "tick",
+        "gain": 0.16889811174944044,
+        "pitch": 3.586709565808997,
+        "dur": 0.012,
+        "t": 3.5561122639686804,
+        "pan": 0,
+        "seed": 326
+      },
+      {
+        "type": "tick",
+        "gain": 0.19758078325539827,
+        "pitch": 3.21872272756882,
+        "dur": 0.012,
+        "t": 3.576364264573592,
+        "pan": 0,
+        "seed": 327
+      },
+      {
+        "type": "tick",
+        "gain": 0.15332073211669922,
+        "pitch": 3.5667880846187474,
+        "dur": 0.012,
+        "t": 3.587498424847921,
+        "pan": 0,
+        "seed": 328
+      },
+      {
+        "type": "tick",
+        "gain": 0.13414831737056374,
+        "pitch": 3.5261252456810324,
+        "dur": 0.012,
+        "t": 3.6017685396713204,
+        "pan": 0,
+        "seed": 332
+      },
+      {
+        "type": "tick",
+        "gain": 0.1292366060614586,
+        "pitch": 2.6129981865640732,
+        "dur": 0.012,
+        "t": 3.617821242424349,
+        "pan": 0,
+        "seed": 333
+      },
+      {
+        "type": "tick",
+        "gain": 0.13186395436525344,
+        "pitch": 3.59432508694008,
+        "dur": 0.012,
+        "t": 3.63481632762899,
+        "pan": 0,
+        "seed": 334
+      },
+      {
+        "type": "tick",
+        "gain": 0.16714438419789077,
+        "pitch": 3.291182610904798,
+        "dur": 0.012,
+        "t": 3.6558930480247365,
+        "pan": 0,
+        "seed": 335
+      },
+      {
+        "type": "tick",
+        "gain": 0.16065121289342643,
+        "pitch": 2.2053700184449556,
+        "dur": 0.012,
+        "t": 3.671748068278345,
+        "pan": 0,
+        "seed": 339
+      },
+      {
+        "type": "tick",
+        "gain": 0.16751028541475535,
+        "pitch": 3.2925320259295408,
+        "dur": 0.012,
+        "t": 3.689272119010178,
+        "pan": 0,
+        "seed": 340
+      },
+      {
+        "type": "tick",
+        "gain": 0.1928044018894434,
+        "pitch": 2.747575233830139,
+        "dur": 0.012,
+        "t": 3.709100550236181,
+        "pan": 0,
+        "seed": 341
+      },
+      {
+        "type": "tick",
+        "gain": 0.14115154094994067,
+        "pitch": 2.652777594327927,
+        "dur": 0.012,
+        "t": 3.7193106092854094,
+        "pan": 0,
+        "seed": 342
+      },
+      {
+        "type": "tick",
+        "gain": 0.19384850502014161,
+        "pitch": 2.245010183984414,
+        "dur": 0.012,
+        "t": 3.742564396460851,
+        "pan": 0,
+        "seed": 346
+      },
+      {
+        "type": "tick",
+        "gain": 0.13421246133744716,
+        "pitch": 2.772514914534986,
+        "dur": 0.012,
+        "t": 3.751776557667181,
+        "pan": 0,
+        "seed": 347
+      },
+      {
+        "type": "tick",
+        "gain": 0.16842047372832894,
+        "pitch": 2.503750774962828,
+        "dur": 0.012,
+        "t": 3.772719225882708,
+        "pan": 0,
+        "seed": 348
+      },
+      {
+        "type": "tick",
+        "gain": 0.16577401913702489,
+        "pitch": 3.3410885757766664,
+        "dur": 0.012,
+        "t": 3.7890550857254617,
+        "pan": 0,
+        "seed": 349
+      },
+      {
+        "type": "tick",
+        "gain": 0.13341771192848684,
+        "pitch": 2.6980847471393647,
+        "dur": 0.012,
+        "t": 3.801677213991061,
+        "pan": 0,
+        "seed": 353
+      },
+      {
+        "type": "tick",
+        "gain": 0.1628706276230514,
+        "pitch": 2.203214946668595,
+        "dur": 0.012,
+        "t": 3.8220254951195485,
+        "pan": 0,
+        "seed": 354
+      },
+      {
+        "type": "tick",
+        "gain": 0.1866977122798562,
+        "pitch": 3.489133914979175,
+        "dur": 0.012,
+        "t": 3.8416705473683157,
+        "pan": 0,
+        "seed": 355
+      },
+      {
+        "type": "tick",
+        "gain": 0.18211031710729003,
+        "pitch": 2.238757286872715,
+        "dur": 0.012,
+        "t": 3.8577637896384114,
+        "pan": 0,
+        "seed": 356
+      },
+      {
+        "type": "tick",
+        "gain": 0.1161228773799042,
+        "pitch": 2.5495957518927757,
+        "dur": 0.012,
+        "t": 3.8670866663187433,
+        "pan": 0,
+        "seed": 360
+      },
+      {
+        "type": "tick",
+        "gain": 0.123770726642857,
+        "pitch": 3.2889806187245996,
+        "dur": 0.012,
+        "t": 3.884768893705526,
+        "pan": 0,
+        "seed": 361
+      },
+      {
+        "type": "tick",
+        "gain": 0.17660039047742884,
+        "pitch": 2.430748462956399,
+        "dur": 0.012,
+        "t": 3.908450830888469,
+        "pan": 0,
+        "seed": 362
+      },
+      {
+        "type": "tick",
+        "gain": 0.11361517028858266,
+        "pitch": 3.4691105811391028,
+        "dur": 0.012,
+        "t": 3.9167536669705685,
+        "pan": 0,
+        "seed": 363
+      },
+      {
+        "type": "tick",
+        "gain": 0.1292423525772492,
+        "pitch": 2.283705534972251,
+        "dur": 0.012,
+        "t": 3.939505398704981,
+        "pan": 0,
+        "seed": 367
+      },
+      {
+        "type": "tick",
+        "gain": 0.11549436060539313,
+        "pitch": 2.5184176425915212,
+        "dur": 0.012,
+        "t": 3.953919913666323,
+        "pan": 0,
+        "seed": 368
+      },
+      {
+        "type": "tick",
+        "gain": 0.09635091683492064,
+        "pitch": 2.284832567675039,
+        "dur": 0.012,
+        "t": 3.9674505631152233,
+        "pan": 0,
+        "seed": 369
+      },
+      {
+        "type": "tick",
+        "gain": 0.10350987380398881,
+        "pitch": 3.3719018625095485,
+        "dur": 0.012,
+        "t": 3.985289987023765,
+        "pan": 0,
+        "seed": 370
+      },
+      {
+        "type": "tick",
+        "gain": 0.10866078793823718,
+        "pitch": 2.712321260618046,
+        "dur": 0.012,
+        "t": 4.005212200137321,
+        "pan": 0,
+        "seed": 374
+      },
+      {
+        "type": "thud",
+        "gain": 0.4781525179097777,
+        "pitch": 0.8,
+        "dur": 0.5,
+        "t": 4.01051779935467,
+        "pan": 0,
+        "seed": 381
+      },
+      {
+        "type": "tick",
+        "gain": 0.11301248768448828,
+        "pitch": 3.1796435158234093,
+        "dur": 0.012,
+        "t": 4.028243890318295,
+        "pan": 0,
+        "seed": 375
+      },
+      {
+        "type": "chime",
+        "gain": 0.16,
+        "pitch": 1,
+        "dur": 1.8,
+        "notes": 4,
+        "t": 4.030517799354669,
+        "pan": 0,
+        "seed": 388
+      },
+      {
+        "type": "tick",
+        "gain": 0.08536961199223994,
+        "pitch": 2.8122283461038027,
+        "dur": 0.012,
+        "t": 4.045324208579906,
+        "pan": 0,
+        "seed": 376
+      },
+      {
+        "type": "tick",
+        "gain": 0.10307338286227415,
+        "pitch": 2.7816754965577277,
+        "dur": 0.012,
+        "t": 4.072326992721452,
+        "pan": 0,
+        "seed": 395
+      },
+      {
+        "type": "tick",
+        "gain": 0.14,
+        "pitch": 2.901865831501782,
+        "dur": 0.014,
+        "t": 4.133333333333334,
+        "pan": 0,
+        "seed": 402
+      },
+      {
+        "type": "tick",
+        "gain": 0.07700000000000001,
+        "pitch": 3.044692641887814,
+        "dur": 0.014,
+        "t": 4.2,
+        "pan": 0,
+        "seed": 409
+      },
+      {
+        "type": "tick",
+        "gain": 0.14,
+        "pitch": 2.7958290333487095,
+        "dur": 0.014,
+        "t": 6.666666666666667,
+        "pan": 0,
+        "seed": 416
+      },
+      {
+        "type": "sparkle",
+        "gain": 0.22837700246502393,
+        "dur": 1.3701434224843978,
+        "notes": 10,
+        "pitch": 1.6,
+        "t": 6.702535811066628,
+        "pan": 0,
+        "seed": 423
+      },
+      {
+        "type": "tick",
+        "gain": 0.1259757492438952,
+        "pitch": 3.080400056252256,
+        "dur": 0.012,
+        "t": 6.743040920135876,
+        "pan": 0,
+        "seed": 430
+      },
+      {
+        "type": "tick",
+        "gain": 0.09125960872540871,
+        "pitch": 2.713523387676105,
+        "dur": 0.012,
+        "t": 6.769565386997225,
+        "pan": 0,
+        "seed": 431
+      },
+      {
+        "type": "tick",
+        "gain": 0.13097876755952834,
+        "pitch": 2.977995503973216,
+        "dur": 0.012,
+        "t": 6.809900004696101,
+        "pan": 0,
+        "seed": 437
+      },
+      {
+        "type": "tick",
+        "gain": 0.1314520408003103,
+        "pitch": 3.317454367037863,
+        "dur": 0.012,
+        "t": 6.832212199561504,
+        "pan": 0,
+        "seed": 438
+      },
+      {
+        "type": "tick",
+        "gain": 0.11056397642399583,
+        "pitch": 2.862216905737296,
+        "dur": 0.012,
+        "t": 6.850463450680901,
+        "pan": 0,
+        "seed": 439
+      },
+      {
+        "type": "tick",
+        "gain": 0.1210000270779076,
+        "pitch": 3.0901712032966318,
+        "dur": 0.012,
+        "t": 6.873374230299766,
+        "pan": 0,
+        "seed": 444
+      },
+      {
+        "type": "tick",
+        "gain": 0.09825701307330811,
+        "pitch": 2.5315344585105777,
+        "dur": 0.012,
+        "t": 6.891516325966352,
+        "pan": 0,
+        "seed": 445
+      },
+      {
+        "type": "tick",
+        "gain": 0.09056290294363385,
+        "pitch": 3.3364524073898796,
+        "dur": 0.012,
+        "t": 6.912358214735157,
+        "pan": 0,
+        "seed": 446
+      },
+      {
+        "type": "tick",
+        "gain": 0.11256384291455149,
+        "pitch": 3.243713845219463,
+        "dur": 0.012,
+        "t": 6.937303549541006,
+        "pan": 0,
+        "seed": 451
+      },
+      {
+        "type": "tick",
+        "gain": 0.12223211059836403,
+        "pitch": 3.460194687731564,
+        "dur": 0.012,
+        "t": 6.955599594910164,
+        "pan": 0,
+        "seed": 452
+      },
+      {
+        "type": "tick",
+        "gain": 0.1093308581764996,
+        "pitch": 2.4900572834070775,
+        "dur": 0.012,
+        "t": 6.970092032788477,
+        "pan": 0,
+        "seed": 453
+      },
+      {
+        "type": "tick",
+        "gain": 0.11898734703691942,
+        "pitch": 3.010594014870003,
+        "dur": 0.012,
+        "t": 6.988386093090133,
+        "pan": 0,
+        "seed": 454
+      },
+      {
+        "type": "tick",
+        "gain": 0.09573239077657461,
+        "pitch": 3.031370293023065,
+        "dur": 0.012,
+        "t": 7.000535208072979,
+        "pan": 0,
+        "seed": 458
+      },
+      {
+        "type": "tick",
+        "gain": 0.1529688774386474,
+        "pitch": 3.4578619518317284,
+        "dur": 0.012,
+        "t": 7.026490065731729,
+        "pan": 0,
+        "seed": 459
+      },
+      {
+        "type": "tick",
+        "gain": 0.14092452075042894,
+        "pitch": 2.613162239128724,
+        "dur": 0.012,
+        "t": 7.0412022049313725,
+        "pan": 0,
+        "seed": 460
+      },
+      {
+        "type": "tick",
+        "gain": 0.10633406956693955,
+        "pitch": 2.7062350742984567,
+        "dur": 0.012,
+        "t": 7.05225562145235,
+        "pan": 0,
+        "seed": 461
+      },
+      {
+        "type": "tick",
+        "gain": 0.11904940774611063,
+        "pitch": 2.956249979371205,
+        "dur": 0.012,
+        "t": 7.068739694165221,
+        "pan": 0,
+        "seed": 465
+      },
+      {
+        "type": "tick",
+        "gain": 0.13203525206384203,
+        "pitch": 2.858683301974088,
+        "dur": 0.012,
+        "t": 7.087268677338336,
+        "pan": 0,
+        "seed": 466
+      },
+      {
+        "type": "tick",
+        "gain": 0.14070547986484708,
+        "pitch": 2.2761240283958615,
+        "dur": 0.012,
+        "t": 7.105178752439096,
+        "pan": 0,
+        "seed": 467
+      },
+      {
+        "type": "tick",
+        "gain": 0.13566606560695738,
+        "pitch": 2.5768123786430808,
+        "dur": 0.012,
+        "t": 7.1211227102756185,
+        "pan": 0,
+        "seed": 468
+      },
+      {
+        "type": "tick",
+        "gain": 0.11885978417643478,
+        "pitch": 2.3459860640112313,
+        "dur": 0.012,
+        "t": 7.134502846883455,
+        "pan": 0,
+        "seed": 472
+      },
+      {
+        "type": "tick",
+        "gain": 0.14330795491857187,
+        "pitch": 2.412937331432477,
+        "dur": 0.012,
+        "t": 7.154495407424402,
+        "pan": 0,
+        "seed": 473
+      },
+      {
+        "type": "tick",
+        "gain": 0.18015528253504207,
+        "pitch": 2.695716112945229,
+        "dur": 0.012,
+        "t": 7.176174731377202,
+        "pan": 0,
+        "seed": 474
+      },
+      {
+        "type": "tick",
+        "gain": 0.11364553425933632,
+        "pitch": 3.5324230011552573,
+        "dur": 0.012,
+        "t": 7.18379350784778,
+        "pan": 0,
+        "seed": 475
+      },
+      {
+        "type": "tick",
+        "gain": 0.14757459378336157,
+        "pitch": 3.3634584060404453,
+        "dur": 0.012,
+        "t": 7.20394480187213,
+        "pan": 0,
+        "seed": 479
+      },
+      {
+        "type": "tick",
+        "gain": 0.1255455910221168,
+        "pitch": 2.4243518771603707,
+        "dur": 0.012,
+        "t": 7.217783508237141,
+        "pan": 0,
+        "seed": 480
+      },
+      {
+        "type": "tick",
+        "gain": 0.17005706347857202,
+        "pitch": 2.381470783427358,
+        "dur": 0.012,
+        "t": 7.240164309058649,
+        "pan": 0,
+        "seed": 481
+      },
+      {
+        "type": "tick",
+        "gain": 0.16014575254670213,
+        "pitch": 2.7435165012255314,
+        "dur": 0.012,
+        "t": 7.255558617000934,
+        "pan": 0,
+        "seed": 482
+      },
+      {
+        "type": "tick",
+        "gain": 0.14453537082538717,
+        "pitch": 2.8522606098093095,
+        "dur": 0.012,
+        "t": 7.270041586679096,
+        "pan": 0,
+        "seed": 486
+      },
+      {
+        "type": "tick",
+        "gain": 0.14091104517739442,
+        "pitch": 2.9899856864940375,
+        "dur": 0.012,
+        "t": 7.286247489357677,
+        "pan": 0,
+        "seed": 487
+      },
+      {
+        "type": "tick",
+        "gain": 0.16151284806111738,
+        "pitch": 3.5820082563441247,
+        "dur": 0.012,
+        "t": 7.305533282940742,
+        "pan": 0,
+        "seed": 488
+      },
+      {
+        "type": "tick",
+        "gain": 0.16474349750705417,
+        "pitch": 2.707072641188279,
+        "dur": 0.012,
+        "t": 7.322610665163181,
+        "pan": 0,
+        "seed": 489
+      },
+      {
+        "type": "tick",
+        "gain": 0.13993836392398393,
+        "pitch": 2.7153572086710485,
+        "dur": 0.012,
+        "t": 7.336425246517949,
+        "pan": 0,
+        "seed": 493
+      },
+      {
+        "type": "tick",
+        "gain": 0.1260409961708103,
+        "pitch": 2.710073184780777,
+        "dur": 0.012,
+        "t": 7.351295193801634,
+        "pan": 0,
+        "seed": 494
+      },
+      {
+        "type": "tick",
+        "gain": 0.17823980593864408,
+        "pitch": 3.2485520398709924,
+        "dur": 0.012,
+        "t": 7.374710376802056,
+        "pan": 0,
+        "seed": 495
+      },
+      {
+        "type": "tick",
+        "gain": 0.1635655779219951,
+        "pitch": 2.5651350745465606,
+        "dur": 0.012,
+        "t": 7.389479887807586,
+        "pan": 0,
+        "seed": 496
+      },
+      {
+        "type": "tick",
+        "gain": 0.18728158263768468,
+        "pitch": 2.4768340474460278,
+        "dur": 0.012,
+        "t": 7.409719134876505,
+        "pan": 0,
+        "seed": 500
+      },
+      {
+        "type": "tick",
+        "gain": 0.11731830905654601,
+        "pitch": 2.812750170007348,
+        "dur": 0.012,
+        "t": 7.417151409289024,
+        "pan": 0,
+        "seed": 501
+      },
+      {
+        "type": "tick",
+        "gain": 0.12899965241848005,
+        "pitch": 2.577992567094043,
+        "dur": 0.012,
+        "t": 7.435359886410491,
+        "pan": 0,
+        "seed": 502
+      },
+      {
+        "type": "tick",
+        "gain": 0.17075127571418172,
+        "pitch": 3.208623389992863,
+        "dur": 0.012,
+        "t": 7.4575373138953,
+        "pan": 0,
+        "seed": 503
+      },
+      {
+        "type": "tick",
+        "gain": 0.11709173280236267,
+        "pitch": 3.50624153544195,
+        "dur": 0.012,
+        "t": 7.468849459522559,
+        "pan": 0,
+        "seed": 507
+      },
+      {
+        "type": "tick",
+        "gain": 0.1172971534432116,
+        "pitch": 2.7477633818984035,
+        "dur": 0.012,
+        "t": 7.4855462709333125,
+        "pan": 0,
+        "seed": 508
+      },
+      {
+        "type": "tick",
+        "gain": 0.13467458784671058,
+        "pitch": 2.7457485083956272,
+        "dur": 0.012,
+        "t": 7.504763013925404,
+        "pan": 0,
+        "seed": 509
+      },
+      {
+        "type": "tick",
+        "gain": 0.16564382607303915,
+        "pitch": 2.788709322875366,
+        "dur": 0.012,
+        "t": 7.5259743054995,
+        "pan": 0,
+        "seed": 510
+      },
+      {
+        "type": "tick",
+        "gain": 0.1527652824151942,
+        "pitch": 2.7213998544961218,
+        "dur": 0.012,
+        "t": 7.542929068511197,
+        "pan": 0,
+        "seed": 514
+      },
+      {
+        "type": "tick",
+        "gain": 0.10719238603669974,
+        "pitch": 2.6719451246317476,
+        "dur": 0.012,
+        "t": 7.552258342329878,
+        "pan": 0,
+        "seed": 515
+      },
+      {
+        "type": "tick",
+        "gain": 0.1033180175671833,
+        "pitch": 3.2954289035405964,
+        "dur": 0.012,
+        "t": 7.568301222365505,
+        "pan": 0,
+        "seed": 516
+      },
+      {
+        "type": "tick",
+        "gain": 0.11272068590060587,
+        "pitch": 2.347135673230514,
+        "dur": 0.012,
+        "t": 7.586481750929573,
+        "pan": 0,
+        "seed": 517
+      },
+      {
+        "type": "tick",
+        "gain": 0.14172614100945138,
+        "pitch": 2.570979318814352,
+        "dur": 0.012,
+        "t": 7.609462856401224,
+        "pan": 0,
+        "seed": 521
+      },
+      {
+        "type": "tick",
+        "gain": 0.10337533568649065,
+        "pitch": 2.4631735648494217,
+        "dur": 0.012,
+        "t": 7.619509923911344,
+        "pan": 0,
+        "seed": 522
+      },
+      {
+        "type": "tick",
+        "gain": 0.11222392916185515,
+        "pitch": 3.0944042458664627,
+        "dur": 0.012,
+        "t": 7.637703915530196,
+        "pan": 0,
+        "seed": 523
+      },
+      {
+        "type": "tick",
+        "gain": 0.12042322194050466,
+        "pitch": 2.3778619536198677,
+        "dur": 0.012,
+        "t": 7.655785833613482,
+        "pan": 0,
+        "seed": 524
+      },
+      {
+        "type": "tick",
+        "gain": 0.11504800706273743,
+        "pitch": 2.6492388377431784,
+        "dur": 0.012,
+        "t": 7.67272083694969,
+        "pan": 0,
+        "seed": 528
+      },
+      {
+        "type": "thud",
+        "gain": 0.5067540049300479,
+        "pitch": 0.8,
+        "dur": 0.5,
+        "t": 7.695547586179851,
+        "pan": 0,
+        "seed": 535
+      },
+      {
+        "type": "tick",
+        "gain": 0.12103655413469389,
+        "pitch": 3.0287127784453336,
+        "dur": 0.012,
+        "t": 7.6960389833258365,
+        "pan": 0,
+        "seed": 529
+      },
+      {
+        "type": "tick",
+        "gain": 0.0824518666198424,
+        "pitch": 2.9283058519940823,
+        "dur": 0.012,
+        "t": 7.711200078615091,
+        "pan": 0,
+        "seed": 530
+      },
+      {
+        "type": "chime",
+        "gain": 0.16,
+        "pitch": 1.335,
+        "dur": 1.8,
+        "notes": 4,
+        "t": 7.71554758617985,
+        "pan": 0,
+        "seed": 542
+      },
+      {
+        "type": "tick",
+        "gain": 0.13178549071584428,
+        "pitch": 3.213413792615756,
+        "dur": 0.012,
+        "t": 7.742667668809493,
+        "pan": 0,
+        "seed": 549
+      },
+      {
+        "type": "tick",
+        "gain": 0.1250083616674727,
+        "pitch": 3.035442174319178,
+        "dur": 0.012,
+        "t": 7.763638486716017,
+        "pan": 0,
+        "seed": 550
+      },
+      {
+        "type": "tick",
+        "gain": 0.09975731400999995,
+        "pitch": 2.2704240005463365,
+        "dur": 0.012,
+        "t": 7.781198075278921,
+        "pan": 0,
+        "seed": 551
+      },
+      {
+        "type": "tick",
+        "gain": 0.12106167240649461,
+        "pitch": 3.536997143691406,
+        "dur": 0.012,
+        "t": 7.807974760704673,
+        "pan": 0,
+        "seed": 556
+      },
+      {
+        "type": "tick",
+        "gain": 0.11383350924621025,
+        "pitch": 3.117999432608485,
+        "dur": 0.012,
+        "t": 7.828825241436458,
+        "pan": 0,
+        "seed": 557
+      },
+      {
+        "type": "tick",
+        "gain": 0.0994852923114101,
+        "pitch": 2.3264676310587675,
+        "dur": 0.012,
+        "t": 7.848324497388158,
+        "pan": 0,
+        "seed": 558
+      },
+      {
+        "type": "tick",
+        "gain": 0.10567837507903576,
+        "pitch": 2.7331213516648862,
+        "dur": 0.012,
+        "t": 7.871838695068534,
+        "pan": 0,
+        "seed": 563
+      },
+      {
+        "type": "tick",
+        "gain": 0.1288518171215696,
+        "pitch": 3.277283963514492,
+        "dur": 0.012,
+        "t": 7.898484294643988,
+        "pan": 0,
+        "seed": 564
+      },
+      {
+        "type": "tick",
+        "gain": 0.0818854435740837,
+        "pitch": 3.5798588944599032,
+        "dur": 0.012,
+        "t": 7.911741513189498,
+        "pan": 0,
+        "seed": 565
+      },
+      {
+        "type": "tick",
+        "gain": 0.11152004270482631,
+        "pitch": 3.3079468913841996,
+        "dur": 0.012,
+        "t": 7.940377016473406,
+        "pan": 0,
+        "seed": 570
+      },
+      {
+        "type": "tick",
+        "gain": 0.08545043703232492,
+        "pitch": 2.519071072386578,
+        "dur": 0.012,
+        "t": 7.968557283926445,
+        "pan": 0,
+        "seed": 571
+      },
+      {
+        "type": "tick",
+        "gain": 0.09193021297653516,
+        "pitch": 2.8371315088588744,
+        "dur": 0.012,
+        "t": 8.003259443785064,
+        "pan": 0,
+        "seed": 577
+      },
+      {
+        "type": "tick",
+        "gain": 0.08751166350622971,
+        "pitch": 2.361123208096251,
+        "dur": 0.012,
+        "t": 8.035715152091191,
+        "pan": 0,
+        "seed": 578
+      },
+      {
+        "type": "tick",
+        "gain": 0.12833333333333335,
+        "pitch": 2.7680867539346217,
+        "dur": 0.014,
+        "t": 8.066666666666666,
+        "pan": 0,
+        "seed": 584
+      },
+      {
+        "type": "sparkle",
+        "gain": 0.18164965809277261,
+        "dur": 1.0228687121765687,
+        "notes": 10,
+        "pitch": 1.6,
+        "t": 9.601558666001074,
+        "pan": 0,
+        "seed": 598
+      },
+      {
+        "type": "tick",
+        "gain": 0.09107010678675204,
+        "pitch": 2.27671857168898,
+        "dur": 0.012,
+        "t": 9.60336655119201,
+        "pan": 0,
+        "seed": 591
+      },
+      {
+        "type": "tick",
+        "gain": 0.07920766909678777,
+        "pitch": 2.7261425426695496,
+        "dur": 0.012,
+        "t": 9.666750831740597,
+        "pan": 0,
+        "seed": 605
+      },
+      {
+        "type": "tick",
+        "gain": 0.09551588147860908,
+        "pitch": 2.208149476721883,
+        "dur": 0.012,
+        "t": 9.692078760397981,
+        "pan": 0,
+        "seed": 606
+      },
+      {
+        "type": "tick",
+        "gain": 0.12538781144214528,
+        "pitch": 2.81261918572709,
+        "dur": 0.012,
+        "t": 9.719989738870515,
+        "pan": 0,
+        "seed": 607
+      },
+      {
+        "type": "tick",
+        "gain": 0.08502191349103337,
+        "pitch": 2.3111053414642813,
+        "dur": 0.012,
+        "t": 9.733712503875918,
+        "pan": 0,
+        "seed": 612
+      },
+      {
+        "type": "tick",
+        "gain": 0.08420389067583141,
+        "pitch": 2.38456826643087,
+        "dur": 0.012,
+        "t": 9.755786758217083,
+        "pan": 0,
+        "seed": 613
+      },
+      {
+        "type": "tick",
+        "gain": 0.12011064597071636,
+        "pitch": 3.007361105689779,
+        "dur": 0.012,
+        "t": 9.784503966151066,
+        "pan": 0,
+        "seed": 614
+      },
+      {
+        "type": "tick",
+        "gain": 0.13952684251367337,
+        "pitch": 3.4630230352282525,
+        "dur": 0.012,
+        "t": 9.808932172085624,
+        "pan": 0,
+        "seed": 619
+      },
+      {
+        "type": "tick",
+        "gain": 0.12663989767816805,
+        "pitch": 2.8185758096165956,
+        "dur": 0.012,
+        "t": 9.823388421201768,
+        "pan": 0,
+        "seed": 620
+      },
+      {
+        "type": "tick",
+        "gain": 0.13533697292222863,
+        "pitch": 3.1716867001261564,
+        "dur": 0.012,
+        "t": 9.841546843129521,
+        "pan": 0,
+        "seed": 621
+      },
+      {
+        "type": "tick",
+        "gain": 0.11150629429634837,
+        "pitch": 2.683895556954667,
+        "dur": 0.012,
+        "t": 9.854125981607941,
+        "pan": 0,
+        "seed": 622
+      },
+      {
+        "type": "tick",
+        "gain": 0.09943441644276892,
+        "pitch": 3.5814866879954934,
+        "dur": 0.012,
+        "t": 9.868045641513698,
+        "pan": 0,
+        "seed": 626
+      },
+      {
+        "type": "tick",
+        "gain": 0.11379268700429372,
+        "pitch": 3.5963374599814415,
+        "dur": 0.012,
+        "t": 9.887077422401248,
+        "pan": 0,
+        "seed": 627
+      },
+      {
+        "type": "tick",
+        "gain": 0.1069460515178953,
+        "pitch": 2.7286201589740813,
+        "dur": 0.012,
+        "t": 9.902616301784292,
+        "pan": 0,
+        "seed": 628
+      },
+      {
+        "type": "tick",
+        "gain": 0.1062677227130958,
+        "pitch": 3.4366995008662347,
+        "dur": 0.012,
+        "t": 9.91917123319038,
+        "pan": 0,
+        "seed": 629
+      },
+      {
+        "type": "tick",
+        "gain": 0.12424046761106877,
+        "pitch": 2.2313844705466184,
+        "dur": 0.012,
+        "t": 9.937951429307772,
+        "pan": 0,
+        "seed": 633
+      },
+      {
+        "type": "tick",
+        "gain": 0.10568707271028133,
+        "pitch": 2.9564594154246153,
+        "dur": 0.012,
+        "t": 9.951688436348922,
+        "pan": 0,
+        "seed": 634
+      },
+      {
+        "type": "tick",
+        "gain": 0.11205940982882465,
+        "pitch": 2.6259112688247117,
+        "dur": 0.012,
+        "t": 9.969361322032443,
+        "pan": 0,
+        "seed": 635
+      },
+      {
+        "type": "tick",
+        "gain": 0.15544944891808998,
+        "pitch": 2.6964834103826436,
+        "dur": 0.012,
+        "t": 9.99287945962123,
+        "pan": 0,
+        "seed": 636
+      },
+      {
+        "type": "tick",
+        "gain": 0.12627637436930622,
+        "pitch": 3.404854825139046,
+        "dur": 0.012,
+        "t": 10.004949174453504,
+        "pan": 0,
+        "seed": 640
+      },
+      {
+        "type": "tick",
+        "gain": 0.12758807864378605,
+        "pitch": 2.9755566071718933,
+        "dur": 0.012,
+        "t": 10.021823064502485,
+        "pan": 0,
+        "seed": 641
+      },
+      {
+        "type": "tick",
+        "gain": 0.10187076532615792,
+        "pitch": 3.4648364923428745,
+        "dur": 0.012,
+        "t": 10.034426903324977,
+        "pan": 0,
+        "seed": 642
+      },
+      {
+        "type": "tick",
+        "gain": 0.10365884446968635,
+        "pitch": 3.469357394380495,
+        "dur": 0.012,
+        "t": 10.051376051199622,
+        "pan": 0,
+        "seed": 643
+      },
+      {
+        "type": "tick",
+        "gain": 0.09923213675703321,
+        "pitch": 3.149400331033394,
+        "dur": 0.012,
+        "t": 10.067320774778878,
+        "pan": 0,
+        "seed": 647
+      },
+      {
+        "type": "tick",
+        "gain": 0.10827218489419846,
+        "pitch": 3.06058220746927,
+        "dur": 0.012,
+        "t": 10.085413530770069,
+        "pan": 0,
+        "seed": 648
+      },
+      {
+        "type": "tick",
+        "gain": 0.11241592606816973,
+        "pitch": 3.020893547777087,
+        "dur": 0.012,
+        "t": 10.102733882567845,
+        "pan": 0,
+        "seed": 649
+      },
+      {
+        "type": "tick",
+        "gain": 0.1256544902006785,
+        "pitch": 2.9322288924362514,
+        "dur": 0.012,
+        "t": 10.121488964549886,
+        "pan": 0,
+        "seed": 650
+      },
+      {
+        "type": "tick",
+        "gain": 0.10306889070192972,
+        "pitch": 3.1414823303464803,
+        "dur": 0.012,
+        "t": 10.134545931493243,
+        "pan": 0,
+        "seed": 654
+      },
+      {
+        "type": "tick",
+        "gain": 0.1461853838593761,
+        "pitch": 3.397354045882821,
+        "dur": 0.012,
+        "t": 10.157994764659088,
+        "pan": 0,
+        "seed": 655
+      },
+      {
+        "type": "tick",
+        "gain": 0.13757726633280515,
+        "pitch": 3.5244262292515485,
+        "dur": 0.012,
+        "t": 10.173307385993345,
+        "pan": 0,
+        "seed": 656
+      },
+      {
+        "type": "tick",
+        "gain": 0.10339311403274536,
+        "pitch": 2.985889884084463,
+        "dur": 0.012,
+        "t": 10.184596931387981,
+        "pan": 0,
+        "seed": 657
+      },
+      {
+        "type": "tick",
+        "gain": 0.1399721145710491,
+        "pitch": 3.465717116650194,
+        "dur": 0.012,
+        "t": 10.20695427824743,
+        "pan": 0,
+        "seed": 661
+      },
+      {
+        "type": "tick",
+        "gain": 0.13304391000912305,
+        "pitch": 2.5344171498902144,
+        "dur": 0.012,
+        "t": 10.222534273249718,
+        "pan": 0,
+        "seed": 662
+      },
+      {
+        "type": "tick",
+        "gain": 0.1424538515842245,
+        "pitch": 2.364852251391858,
+        "dur": 0.012,
+        "t": 10.240676865862527,
+        "pan": 0,
+        "seed": 663
+      },
+      {
+        "type": "tick",
+        "gain": 0.09621773738072033,
+        "pitch": 2.7037164489272985,
+        "dur": 0.012,
+        "t": 10.250091512943618,
+        "pan": 0,
+        "seed": 664
+      },
+      {
+        "type": "tick",
+        "gain": 0.14018590995196786,
+        "pitch": 2.8921241469681265,
+        "dur": 0.012,
+        "t": 10.273974378452792,
+        "pan": 0,
+        "seed": 668
+      },
+      {
+        "type": "tick",
+        "gain": 0.10290233881585656,
+        "pitch": 3.066567478934303,
+        "dur": 0.012,
+        "t": 10.284708129610712,
+        "pan": 0,
+        "seed": 669
+      },
+      {
+        "type": "tick",
+        "gain": 0.1002682598356264,
+        "pitch": 3.3575342001393436,
+        "dur": 0.012,
+        "t": 10.300955636643339,
+        "pan": 0,
+        "seed": 670
+      },
+      {
+        "type": "tick",
+        "gain": 0.09666761058605854,
+        "pitch": 2.529044201690704,
+        "dur": 0.012,
+        "t": 10.317049333845887,
+        "pan": 0,
+        "seed": 671
+      },
+      {
+        "type": "tick",
+        "gain": 0.15053026168584824,
+        "pitch": 2.2304113004822286,
+        "dur": 0.012,
+        "t": 10.342652753380438,
+        "pan": 0,
+        "seed": 675
+      },
+      {
+        "type": "tick",
+        "gain": 0.09767852050766349,
+        "pitch": 2.913662822684273,
+        "dur": 0.012,
+        "t": 10.35078078017803,
+        "pan": 0,
+        "seed": 676
+      },
+      {
+        "type": "thud",
+        "gain": 0.28930952132988164,
+        "pitch": 0.96,
+        "dur": 0.5,
+        "t": 10.367317225933075,
+        "pan": 0,
+        "seed": 682
+      },
+      {
+        "type": "tick",
+        "gain": 0.15195921095456397,
+        "pitch": 3.28205352993682,
+        "dur": 0.012,
+        "t": 10.376216945393633,
+        "pan": 0,
+        "seed": 677
+      },
+      {
+        "type": "tick",
+        "gain": 0.14130548328627435,
+        "pitch": 2.6630368848331276,
+        "dur": 0.012,
+        "t": 10.391162413443285,
+        "pan": 0,
+        "seed": 678
+      },
+      {
+        "type": "tick",
+        "gain": 0.09938779112679616,
+        "pitch": 3.394054553238675,
+        "dur": 0.012,
+        "t": 10.400877127051354,
+        "pan": 0,
+        "seed": 689
+      },
+      {
+        "type": "tick",
+        "gain": 0.11119750490913786,
+        "pitch": 3.5958126010373235,
+        "dur": 0.012,
+        "t": 10.419430386870324,
+        "pan": 0,
+        "seed": 690
+      },
+      {
+        "type": "tick",
+        "gain": 0.12995808392394156,
+        "pitch": 3.0752196380402896,
+        "dur": 0.012,
+        "t": 10.439094042334085,
+        "pan": 0,
+        "seed": 691
+      },
+      {
+        "type": "tick",
+        "gain": 0.1408633522750366,
+        "pitch": 2.7905702532269063,
+        "dur": 0.012,
+        "t": 10.457502817655914,
+        "pan": 0,
+        "seed": 692
+      },
+      {
+        "type": "tick",
+        "gain": 0.15299451336165268,
+        "pitch": 2.857830778602511,
+        "dur": 0.012,
+        "t": 10.474951140088185,
+        "pan": 0,
+        "seed": 696
+      },
+      {
+        "type": "tick",
+        "gain": 0.11047762007951736,
+        "pitch": 3.472814926551655,
+        "dur": 0.012,
+        "t": 10.48514709450615,
+        "pan": 0,
+        "seed": 697
+      },
+      {
+        "type": "tick",
+        "gain": 0.10512632787326971,
+        "pitch": 2.7636648056562994,
+        "dur": 0.012,
+        "t": 10.500999339672271,
+        "pan": 0,
+        "seed": 698
+      },
+      {
+        "type": "tick",
+        "gain": 0.13562660315473873,
+        "pitch": 3.512642618548125,
+        "dur": 0.012,
+        "t": 10.522307890766921,
+        "pan": 0,
+        "seed": 699
+      },
+      {
+        "type": "tick",
+        "gain": 0.1695323798010747,
+        "pitch": 2.526327250059694,
+        "dur": 0.012,
+        "t": 10.5427208002874,
+        "pan": 0,
+        "seed": 703
+      },
+      {
+        "type": "tick",
+        "gain": 0.1710802349408042,
+        "pitch": 2.5079317159485073,
+        "dur": 0.012,
+        "t": 10.559610128053464,
+        "pan": 0,
+        "seed": 704
+      },
+      {
+        "type": "tick",
+        "gain": 0.1403444492980554,
+        "pitch": 2.605927902599797,
+        "dur": 0.012,
+        "t": 10.571855409510123,
+        "pan": 0,
+        "seed": 705
+      },
+      {
+        "type": "tick",
+        "gain": 0.1297931752319776,
+        "pitch": 3.1607528036460284,
+        "dur": 0.012,
+        "t": 10.587004260831357,
+        "pan": 0,
+        "seed": 706
+      },
+      {
+        "type": "tick",
+        "gain": 0.13284522876953087,
+        "pitch": 3.300687603047118,
+        "dur": 0.012,
+        "t": 10.602640566851477,
+        "pan": 0,
+        "seed": 710
+      },
+      {
+        "type": "tick",
+        "gain": 0.12101031350945435,
+        "pitch": 2.2039529697038236,
+        "dur": 0.012,
+        "t": 10.617735670762292,
+        "pan": 0,
+        "seed": 711
+      },
+      {
+        "type": "tick",
+        "gain": 0.1150928385561208,
+        "pitch": 3.5626152728218585,
+        "dur": 0.012,
+        "t": 10.633616553750665,
+        "pan": 0,
+        "seed": 712
+      },
+      {
+        "type": "tick",
+        "gain": 0.18289478639071188,
+        "pitch": 2.933893653424457,
+        "dur": 0.012,
+        "t": 10.659286666039844,
+        "pan": 0,
+        "seed": 713
+      },
+      {
+        "type": "tick",
+        "gain": 0.12976917129009963,
+        "pitch": 3.136881288699806,
+        "dur": 0.012,
+        "t": 10.667887813077929,
+        "pan": 0,
+        "seed": 717
+      },
+      {
+        "type": "tick",
+        "gain": 0.16811616400256754,
+        "pitch": 3.4871692263986915,
+        "dur": 0.012,
+        "t": 10.689347853833654,
+        "pan": 0,
+        "seed": 718
+      },
+      {
+        "type": "tick",
+        "gain": 0.1540488342754543,
+        "pitch": 3.466374700842425,
+        "dur": 0.012,
+        "t": 10.70425610428443,
+        "pan": 0,
+        "seed": 719
+      },
+      {
+        "type": "tick",
+        "gain": 0.18599339885637164,
+        "pitch": 3.4028393955435607,
+        "dur": 0.012,
+        "t": 10.724915841523712,
+        "pan": 0,
+        "seed": 720
+      },
+      {
+        "type": "tick",
+        "gain": 0.18303083710372448,
+        "pitch": 3.5935558347031478,
+        "dur": 0.012,
+        "t": 10.7412121879713,
+        "pan": 0,
+        "seed": 724
+      },
+      {
+        "type": "tick",
+        "gain": 0.14725161047652363,
+        "pitch": 2.591294885892421,
+        "dur": 0.012,
+        "t": 10.753406451309566,
+        "pan": 0,
+        "seed": 725
+      },
+      {
+        "type": "tick",
+        "gain": 0.15416376288980246,
+        "pitch": 3.515233713295311,
+        "dur": 0.012,
+        "t": 10.770937137027893,
+        "pan": 0,
+        "seed": 726
+      },
+      {
+        "type": "tick",
+        "gain": 0.16831145996227861,
+        "pitch": 2.2843490473460406,
+        "dur": 0.012,
+        "t": 10.78937226582862,
+        "pan": 0,
+        "seed": 727
+      },
+      {
+        "type": "tick",
+        "gain": 0.14069467302411795,
+        "pitch": 3.5861713717225943,
+        "dur": 0.012,
+        "t": 10.802586834128016,
+        "pan": 0,
+        "seed": 731
+      },
+      {
+        "type": "tick",
+        "gain": 0.12575199833139777,
+        "pitch": 2.3816312895156444,
+        "dur": 0.012,
+        "t": 10.817385666458092,
+        "pan": 0,
+        "seed": 732
+      },
+      {
+        "type": "tick",
+        "gain": 0.1957326838001609,
+        "pitch": 2.5637751491740346,
+        "dur": 0.012,
+        "t": 10.842799918808355,
+        "pan": 0,
+        "seed": 733
+      },
+      {
+        "type": "tick",
+        "gain": 0.12504913860931993,
+        "pitch": 3.088545462023467,
+        "dur": 0.012,
+        "t": 10.850631142326165,
+        "pan": 0,
+        "seed": 734
+      },
+      {
+        "type": "tick",
+        "gain": 0.1720549335703254,
+        "pitch": 3.273701089806855,
+        "dur": 0.012,
+        "t": 10.873173533362959,
+        "pan": 0,
+        "seed": 738
+      },
+      {
+        "type": "tick",
+        "gain": 0.17304796263575553,
+        "pitch": 3.5579523803666238,
+        "dur": 0.012,
+        "t": 10.889964328662803,
+        "pan": 0,
+        "seed": 739
+      },
+      {
+        "type": "tick",
+        "gain": 0.14552106656134128,
+        "pitch": 2.39522735956125,
+        "dur": 0.012,
+        "t": 10.903190133320168,
+        "pan": 0,
+        "seed": 740
+      },
+      {
+        "type": "tick",
+        "gain": 0.18823796078562738,
+        "pitch": 3.204018968436867,
+        "dur": 0.012,
+        "t": 10.92519641176487,
+        "pan": 0,
+        "seed": 741
+      },
+      {
+        "type": "tick",
+        "gain": 0.17684586955234408,
+        "pitch": 2.45353241506964,
+        "dur": 0.012,
+        "t": 10.940439067027377,
+        "pan": 0,
+        "seed": 745
+      },
+      {
+        "type": "tick",
+        "gain": 0.18314168019220234,
+        "pitch": 3.2825886417180303,
+        "dur": 0.012,
+        "t": 10.957892710024025,
+        "pan": 0,
+        "seed": 746
+      },
+      {
+        "type": "tick",
+        "gain": 0.18122629998251796,
+        "pitch": 3.0452930166851733,
+        "dur": 0.012,
+        "t": 10.974319954164482,
+        "pan": 0,
+        "seed": 747
+      },
+      {
+        "type": "tick",
+        "gain": 0.14356473950669169,
+        "pitch": 3.5859564712271093,
+        "dur": 0.012,
+        "t": 10.98627892577167,
+        "pan": 0,
+        "seed": 748
+      },
+      {
+        "type": "tick",
+        "gain": 0.1774479637481272,
+        "pitch": 2.412935596657917,
+        "dur": 0.012,
+        "t": 11.007180995468516,
+        "pan": 0,
+        "seed": 752
+      },
+      {
+        "type": "tick",
+        "gain": 0.14623592427000404,
+        "pitch": 3.557117052190006,
+        "dur": 0.012,
+        "t": 11.019946157200417,
+        "pan": 0,
+        "seed": 753
+      },
+      {
+        "type": "tick",
+        "gain": 0.19268175730481743,
+        "pitch": 2.6932643634267155,
+        "dur": 0.012,
+        "t": 11.042418552996436,
+        "pan": 0,
+        "seed": 754
+      },
+      {
+        "type": "tick",
+        "gain": 0.171014698818326,
+        "pitch": 2.859940617484972,
+        "dur": 0.012,
+        "t": 11.05637683735229,
+        "pan": 0,
+        "seed": 755
+      },
+      {
+        "type": "tick",
+        "gain": 0.19414547931402923,
+        "pitch": 3.562957674032077,
+        "dur": 0.012,
+        "t": 11.07593485158092,
+        "pan": 0,
+        "seed": 759
+      },
+      {
+        "type": "tick",
+        "gain": 0.19172629544511438,
+        "pitch": 2.518837489001453,
+        "dur": 0.012,
+        "t": 11.092299120263972,
+        "pan": 0,
+        "seed": 760
+      },
+      {
+        "type": "tick",
+        "gain": 0.17669230118393897,
+        "pitch": 2.419580321386457,
+        "dur": 0.012,
+        "t": 11.107086537647993,
+        "pan": 0,
+        "seed": 761
+      },
+      {
+        "type": "sparkle",
+        "gain": 0.2319496657279369,
+        "dur": 1.1996404618024825,
+        "notes": 10,
+        "pitch": 1.6,
+        "t": 11.112273648381233,
+        "pan": 0,
+        "seed": 766
+      },
+      {
+        "type": "tick",
+        "gain": 0.19493639430031182,
+        "pitch": 2.6342218507546935,
+        "dur": 0.012,
+        "t": 11.126033715954206,
+        "pan": 0,
+        "seed": 762
+      },
+      {
+        "type": "tick",
+        "gain": 0.19148139936849476,
+        "pitch": 3.3315842785872523,
+        "dur": 0.012,
+        "t": 11.142268508254395,
+        "pan": 0,
+        "seed": 773
+      },
+      {
+        "type": "tick",
+        "gain": 0.17837945669889452,
+        "pitch": 3.0771270956844092,
+        "dur": 0.012,
+        "t": 11.157297432087361,
+        "pan": 0,
+        "seed": 774
+      },
+      {
+        "type": "tick",
+        "gain": 0.18465204177424313,
+        "pitch": 3.1114669254980982,
+        "dur": 0.012,
+        "t": 11.174748171888446,
+        "pan": 0,
+        "seed": 775
+      },
+      {
+        "type": "tick",
+        "gain": 0.16216210439801215,
+        "pitch": 2.785895212786272,
+        "dur": 0.012,
+        "t": 11.188603596383084,
+        "pan": 0,
+        "seed": 776
+      },
+      {
+        "type": "tick",
+        "gain": 0.1431708186864853,
+        "pitch": 3.487196884350851,
+        "dur": 0.012,
+        "t": 11.20289635233581,
+        "pan": 0,
+        "seed": 780
+      },
+      {
+        "type": "tick",
+        "gain": 0.19305978437885643,
+        "pitch": 2.5778788295108828,
+        "dur": 0.012,
+        "t": 11.225799139714024,
+        "pan": 0,
+        "seed": 781
+      },
+      {
+        "type": "tick",
+        "gain": 0.12403244560584427,
+        "pitch": 2.8823181812185794,
+        "dur": 0.012,
+        "t": 11.233837389034063,
+        "pan": 0,
+        "seed": 782
+      },
+      {
+        "type": "tick",
+        "gain": 0.15288394587114454,
+        "pitch": 2.306328749889508,
+        "dur": 0.012,
+        "t": 11.254110493233892,
+        "pan": 0,
+        "seed": 783
+      },
+      {
+        "type": "tick",
+        "gain": 0.15728921886533498,
+        "pitch": 2.3919867651537063,
+        "dur": 0.012,
+        "t": 11.271327819024835,
+        "pan": 0,
+        "seed": 787
+      },
+      {
+        "type": "tick",
+        "gain": 0.14712262583896518,
+        "pitch": 3.0032469623256475,
+        "dur": 0.012,
+        "t": 11.286723661563205,
+        "pan": 0,
+        "seed": 788
+      },
+      {
+        "type": "tick",
+        "gain": 0.16807954240590334,
+        "pitch": 2.4730373394675556,
+        "dur": 0.012,
+        "t": 11.306009942800738,
+        "pan": 0,
+        "seed": 789
+      },
+      {
+        "type": "tick",
+        "gain": 0.1601335842348635,
+        "pitch": 2.5793645208235834,
+        "dur": 0.012,
+        "t": 11.321683364696025,
+        "pan": 0,
+        "seed": 790
+      },
+      {
+        "type": "tick",
+        "gain": 0.12292044268921018,
+        "pitch": 2.628282049484551,
+        "dur": 0.012,
+        "t": 11.333698388669486,
+        "pan": 0,
+        "seed": 794
+      },
+      {
+        "type": "tick",
+        "gain": 0.1902970980294049,
+        "pitch": 3.398461712151766,
+        "dur": 0.012,
+        "t": 11.358787137253676,
+        "pan": 0,
+        "seed": 795
+      },
+      {
+        "type": "tick",
+        "gain": 0.17879104102030396,
+        "pitch": 3.3499410345219074,
+        "dur": 0.012,
+        "t": 11.374015546794205,
+        "pan": 0,
+        "seed": 796
+      },
+      {
+        "type": "tick",
+        "gain": 0.1886255243420601,
+        "pitch": 3.32659685225226,
+        "dur": 0.012,
+        "t": 11.391911523876091,
+        "pan": 0,
+        "seed": 797
+      },
+      {
+        "type": "tick",
+        "gain": 0.124849665556103,
+        "pitch": 3.1960141442716123,
+        "dur": 0.012,
+        "t": 11.400606208194514,
+        "pan": 0,
+        "seed": 801
+      },
+      {
+        "type": "tick",
+        "gain": 0.14519376983866095,
+        "pitch": 2.200503435684368,
+        "dur": 0.012,
+        "t": 11.4198158878965,
+        "pan": 0,
+        "seed": 802
+      },
+      {
+        "type": "tick",
+        "gain": 0.13707868741825224,
+        "pitch": 2.3348539869766682,
+        "dur": 0.012,
+        "t": 11.435468169260615,
+        "pan": 0,
+        "seed": 803
+      },
+      {
+        "type": "tick",
+        "gain": 0.18337069941684603,
+        "pitch": 2.588036509882659,
+        "dur": 0.012,
+        "t": 11.457921337427106,
+        "pan": 0,
+        "seed": 804
+      },
+      {
+        "type": "tick",
+        "gain": 0.19803378051146867,
+        "pitch": 2.771342113707215,
+        "dur": 0.012,
+        "t": 11.476420889230601,
+        "pan": 0,
+        "seed": 808
+      },
+      {
+        "type": "tick",
+        "gain": 0.1771810464002192,
+        "pitch": 3.5148768520448357,
+        "dur": 0.012,
+        "t": 11.490480964133361,
+        "pan": 0,
+        "seed": 809
+      },
+      {
+        "type": "tick",
+        "gain": 0.1654495831206441,
+        "pitch": 3.579465240146965,
+        "dur": 0.012,
+        "t": 11.50568119789008,
+        "pan": 0,
+        "seed": 810
+      },
+      {
+        "type": "tick",
+        "gain": 0.13334383519366383,
+        "pitch": 2.4209135725628586,
+        "dur": 0.012,
+        "t": 11.518334646065874,
+        "pan": 0,
+        "seed": 811
+      },
+      {
+        "type": "tick",
+        "gain": 0.18281165197491647,
+        "pitch": 3.4477664462756366,
+        "dur": 0.012,
+        "t": 11.541184789830197,
+        "pan": 0,
+        "seed": 815
+      },
+      {
+        "type": "tick",
+        "gain": 0.13086844494566321,
+        "pitch": 2.8109481906984004,
+        "dur": 0.012,
+        "t": 11.551358555618208,
+        "pan": 0,
+        "seed": 816
+      },
+      {
+        "type": "tick",
+        "gain": 0.19046742862090468,
+        "pitch": 2.5082545681856576,
+        "dur": 0.012,
+        "t": 11.575475095244279,
+        "pan": 0,
+        "seed": 817
+      },
+      {
+        "type": "tick",
+        "gain": 0.1962478497438133,
+        "pitch": 2.4565870587248355,
+        "dur": 0.012,
+        "t": 11.59286431455131,
+        "pan": 0,
+        "seed": 818
+      },
+      {
+        "type": "tick",
+        "gain": 0.15351409247145056,
+        "pitch": 3.1201632760465148,
+        "dur": 0.012,
+        "t": 11.60418926155893,
+        "pan": 0,
+        "seed": 822
+      },
+      {
+        "type": "tick",
+        "gain": 0.1411095017567277,
+        "pitch": 3.42527688886039,
+        "dur": 0.012,
+        "t": 11.619305354386258,
+        "pan": 0,
+        "seed": 823
+      },
+      {
+        "type": "tick",
+        "gain": 0.1641524498909712,
+        "pitch": 3.4734438413288444,
+        "dur": 0.012,
+        "t": 11.638852389569704,
+        "pan": 0,
+        "seed": 824
+      },
+      {
+        "type": "tick",
+        "gain": 0.1570076439715922,
+        "pitch": 2.8388359251897786,
+        "dur": 0.012,
+        "t": 11.65462595549645,
+        "pan": 0,
+        "seed": 825
+      },
+      {
+        "type": "tick",
+        "gain": 0.18850715659558773,
+        "pitch": 3.5887914175167683,
+        "dur": 0.012,
+        "t": 11.675230061241114,
+        "pan": 0,
+        "seed": 829
+      },
+      {
+        "type": "tick",
+        "gain": 0.19226289303973318,
+        "pitch": 2.565722372988239,
+        "dur": 0.012,
+        "t": 11.692366194963299,
+        "pan": 0,
+        "seed": 830
+      },
+      {
+        "type": "tick",
+        "gain": 0.14813476586714389,
+        "pitch": 2.7560686193406583,
+        "dur": 0.012,
+        "t": 11.703516845733393,
+        "pan": 0,
+        "seed": 831
+      },
+      {
+        "type": "tick",
+        "gain": 0.12859676286578178,
+        "pitch": 2.934362512920052,
+        "dur": 0.012,
+        "t": 11.717741262024889,
+        "pan": 0,
+        "seed": 832
+      },
+      {
+        "type": "tick",
+        "gain": 0.19759373934939503,
+        "pitch": 3.4881659453269096,
+        "dur": 0.012,
+        "t": 11.743032550752009,
+        "pan": 0,
+        "seed": 836
+      },
+      {
+        "type": "tick",
+        "gain": 0.1838859967328608,
+        "pitch": 3.2181994208600373,
+        "dur": 0.012,
+        "t": 11.757985749591608,
+        "pan": 0,
+        "seed": 837
+      },
+      {
+        "type": "tick",
+        "gain": 0.13183270905166863,
+        "pitch": 2.9507095651235433,
+        "dur": 0.012,
+        "t": 11.768145755298127,
+        "pan": 0,
+        "seed": 838
+      },
+      {
+        "type": "tick",
+        "gain": 0.12090251931920648,
+        "pitch": 3.5123051579575986,
+        "dur": 0.012,
+        "t": 11.783446148248235,
+        "pan": 0,
+        "seed": 839
+      },
+      {
+        "type": "tick",
+        "gain": 0.1678352040797472,
+        "pitch": 2.7026689648628235,
+        "dur": 0.012,
+        "t": 11.805979400509969,
+        "pan": 0,
+        "seed": 843
+      },
+      {
+        "type": "tick",
+        "gain": 0.15591086352244019,
+        "pitch": 2.246707946434617,
+        "dur": 0.012,
+        "t": 11.821155524606972,
+        "pan": 0,
+        "seed": 844
+      },
+      {
+        "type": "tick",
+        "gain": 0.12174524495378138,
+        "pitch": 3.229687308566645,
+        "dur": 0.012,
+        "t": 11.833551488952557,
+        "pan": 0,
+        "seed": 845
+      },
+      {
+        "type": "tick",
+        "gain": 0.17854900307953359,
+        "pitch": 3.209951132722199,
+        "dur": 0.012,
+        "t": 11.857318625384943,
+        "pan": 0,
+        "seed": 846
+      },
+      {
+        "type": "tick",
+        "gain": 0.18451953385025263,
+        "pitch": 3.3278469639830295,
+        "dur": 0.012,
+        "t": 11.87473160839795,
+        "pan": 0,
+        "seed": 850
+      },
+      {
+        "type": "tick",
+        "gain": 0.15983395978808404,
+        "pitch": 2.3525567527860405,
+        "dur": 0.012,
+        "t": 11.888312578306845,
+        "pan": 0,
+        "seed": 851
+      },
+      {
+        "type": "tick",
+        "gain": 0.1690240434370935,
+        "pitch": 2.6403214527294043,
+        "dur": 0.012,
+        "t": 11.906128005429638,
+        "pan": 0,
+        "seed": 852
+      },
+      {
+        "type": "tick",
+        "gain": 0.18111450066789986,
+        "pitch": 2.721570857893676,
+        "dur": 0.012,
+        "t": 11.924305979250155,
+        "pan": 0,
+        "seed": 853
+      },
+      {
+        "type": "tick",
+        "gain": 0.1823746739886701,
+        "pitch": 3.0207029774785044,
+        "dur": 0.012,
+        "t": 11.941130167581917,
+        "pan": 0,
+        "seed": 857
+      },
+      {
+        "type": "tick",
+        "gain": 0.1678141904063523,
+        "pitch": 3.3118030794430524,
+        "dur": 0.012,
+        "t": 11.955976773800794,
+        "pan": 0,
+        "seed": 858
+      },
+      {
+        "type": "tick",
+        "gain": 0.17635956455022098,
+        "pitch": 2.6400118899997325,
+        "dur": 0.012,
+        "t": 11.973711612235444,
+        "pan": 0,
+        "seed": 859
+      },
+      {
+        "type": "tick",
+        "gain": 0.1812773925624788,
+        "pitch": 2.2739211678504945,
+        "dur": 0.012,
+        "t": 11.990993007403643,
+        "pan": 0,
+        "seed": 860
+      },
+      {
+        "type": "tick",
+        "gain": 0.1727749896947401,
+        "pitch": 3.4120113657321784,
+        "dur": 0.012,
+        "t": 12.006621584093663,
+        "pan": 0,
+        "seed": 864
+      },
+      {
+        "type": "tick",
+        "gain": 0.1706808141895277,
+        "pitch": 2.238652317039669,
+        "dur": 0.012,
+        "t": 12.023026179311952,
+        "pan": 0,
+        "seed": 865
+      },
+      {
+        "type": "tick",
+        "gain": 0.13298778899639843,
+        "pitch": 2.8716900454368446,
+        "dur": 0.012,
+        "t": 12.034975826950589,
+        "pan": 0,
+        "seed": 866
+      },
+      {
+        "type": "tick",
+        "gain": 0.12353390241175889,
+        "pitch": 3.003711106767878,
+        "dur": 0.012,
+        "t": 12.050459405693692,
+        "pan": 0,
+        "seed": 867
+      },
+      {
+        "type": "tick",
+        "gain": 0.1912354247974711,
+        "pitch": 3.456044753314927,
+        "dur": 0.012,
+        "t": 12.076478498917227,
+        "pan": 0,
+        "seed": 871
+      },
+      {
+        "type": "tick",
+        "gain": 0.12670352172342794,
+        "pitch": 2.257358565507457,
+        "dur": 0.012,
+        "t": 12.084772476498813,
+        "pan": 0,
+        "seed": 872
+      },
+      {
+        "type": "tick",
+        "gain": 0.18804532496382084,
+        "pitch": 2.7015827756375077,
+        "dur": 0.012,
+        "t": 12.109397932880093,
+        "pan": 0,
+        "seed": 873
+      },
+      {
+        "type": "thud",
+        "gain": 0.5138993314558737,
+        "pitch": 0.8,
+        "dur": 0.5,
+        "t": 12.115589636064646,
+        "pan": 0,
+        "seed": 878
+      },
+      {
+        "type": "tick",
+        "gain": 0.19021284340937225,
+        "pitch": 2.4358292349614206,
+        "dur": 0.012,
+        "t": 12.126345824137484,
+        "pan": 0,
+        "seed": 874
+      },
+      {
+        "type": "tick",
+        "gain": 0.10794325936246486,
+        "pitch": 3.416649666568264,
+        "dur": 0.012,
+        "t": 12.134019286379528,
+        "pan": 0,
+        "seed": 885
+      },
+      {
+        "type": "chime",
+        "gain": 0.16,
+        "pitch": 2,
+        "dur": 1.8,
+        "notes": 4,
+        "t": 12.135589636064646,
+        "pan": 0,
+        "seed": 892
+      },
+      {
+        "type": "tick",
+        "gain": 0.16534467348372653,
+        "pitch": 2.7958353305235506,
+        "dur": 0.012,
+        "t": 12.159027334360871,
+        "pan": 0,
+        "seed": 886
+      },
+      {
+        "type": "tick",
+        "gain": 0.1348477470064305,
+        "pitch": 2.9427516717929394,
+        "dur": 0.012,
+        "t": 12.171262289778484,
+        "pan": 0,
+        "seed": 887
+      },
+      {
+        "type": "tick",
+        "gain": 0.15878954707328763,
+        "pitch": 3.5993767485022543,
+        "dur": 0.012,
+        "t": 12.19140809867143,
+        "pan": 0,
+        "seed": 888
+      },
+      {
+        "type": "tick",
+        "gain": 0.10585531637305307,
+        "pitch": 3.0365457614883784,
+        "dur": 0.012,
+        "t": 12.2016668789275,
+        "pan": 0,
+        "seed": 899
+      },
+      {
+        "type": "tick",
+        "gain": 0.14745525171586446,
+        "pitch": 2.9596470473799856,
+        "dur": 0.012,
+        "t": 12.224883439444625,
+        "pan": 0,
+        "seed": 900
+      },
+      {
+        "type": "tick",
+        "gain": 0.10020046573349409,
+        "pitch": 2.3633156296797098,
+        "dur": 0.012,
+        "t": 12.234109858198401,
+        "pan": 0,
+        "seed": 901
+      },
+      {
+        "type": "tick",
+        "gain": 0.12759709760677249,
+        "pitch": 2.473988906340674,
+        "dur": 0.012,
+        "t": 12.255090114036575,
+        "pan": 0,
+        "seed": 902
+      },
+      {
+        "type": "tick",
+        "gain": 0.09833666690311262,
+        "pitch": 2.7158139302860946,
+        "dur": 0.012,
+        "t": 12.268087388716328,
+        "pan": 0,
+        "seed": 906
+      },
+      {
+        "type": "tick",
+        "gain": 0.0920947312209223,
+        "pitch": 3.0867364474572243,
+        "dur": 0.012,
+        "t": 12.283711747420798,
+        "pan": 0,
+        "seed": 907
+      },
+      {
+        "type": "tick",
+        "gain": 0.10768439990697162,
+        "pitch": 3.3283717515412716,
+        "dur": 0.012,
+        "t": 12.302981650747824,
+        "pan": 0,
+        "seed": 908
+      },
+      {
+        "type": "tick",
+        "gain": 0.14348359362919416,
+        "pitch": 3.033764894725755,
+        "dur": 0.012,
+        "t": 12.325626236213527,
+        "pan": 0,
+        "seed": 909
+      },
+      {
+        "type": "tick",
+        "gain": 0.1362495257215202,
+        "pitch": 2.8647579778917134,
+        "dur": 0.012,
+        "t": 12.34288406130004,
+        "pan": 0,
+        "seed": 913
+      },
+      {
+        "type": "tick",
+        "gain": 0.12519783817421112,
+        "pitch": 2.959973233891651,
+        "dur": 0.012,
+        "t": 12.363114885951445,
+        "pan": 0,
+        "seed": 914
+      },
+      {
+        "type": "tick",
+        "gain": 0.1259264052256303,
+        "pitch": 3.1291631873697043,
+        "dur": 0.012,
+        "t": 12.385468388274571,
+        "pan": 0,
+        "seed": 915
+      },
+      {
+        "type": "tick",
+        "gain": 0.09566666666666668,
+        "pitch": 2.8468877014145253,
+        "dur": 0.014,
+        "t": 12.4,
+        "pan": 0,
+        "seed": 920
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "pins.js: h_i(t) = sum over steps of (target_k - target_k-1) * settle(t - t_k - delay_k,i) (closed-form spring or gravity drop), max with a rolling-ball bump, plus a tap ripple; per-pin delays from position (radial / directional / seeded random).",
+      "pins": 8400,
+      "steps": [
+        {
+          "id": "hand",
+          "t": 3.35,
+          "first": 3.365,
+          "last": 3.865,
+          "land": 4.011,
+          "changed": 1749
+        },
+        {
+          "id": "word",
+          "t": 6.550000000000001,
+          "first": 6.703,
+          "last": 7.673,
+          "land": 7.696,
+          "changed": 2215
+        },
+        {
+          "id": "drop",
+          "t": 9.6,
+          "first": 9.602,
+          "last": 10.224,
+          "land": 10.367,
+          "changed": 896
+        },
+        {
+          "id": "bars",
+          "t": 11,
+          "first": 11.112,
+          "last": 11.912,
+          "land": 12.116,
+          "changed": 2340
+        }
+      ],
+      "framing": "ok (worst 0.8748 at 1.4s, ball)",
+      "caption": {
+        "ok": true,
+        "worst": {
+          "y": 0.601,
+          "t": 15,
+          "id": "bars"
+        }
+      },
+      "sampleData": "bar values are SAMPLE DATA placeholders"
+    }
+  }
+}

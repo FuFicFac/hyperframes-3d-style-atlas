@@ -1,0 +1,26 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 7 old file(s): RUN.txt t1.png t12.5.png t14.5.png t4.6.png t6.6.png t9.84.png
+check-frames run: 2026-11-14 03:45:59 UTC
+times: 1, 4.6, 6.6, 9.84, 12.5, 14.5
+newest code edit: 2026-11-14 03:19:42 UTC (clockwork/train.js)
+mp4: 34-clockwork.mp4 2026-11-13 23:57:38 UTC
+kit last changed: 2026-11-14 03:19:42 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+1         renders/checks/t1.png         848820a4e8dbe4fbd6772a992ac0d8de  SAME
+4.6       renders/checks/t4.6.png       0927d6a857fb3bf78fcf266aee6c69c9  SAME
+6.6       renders/checks/t6.6.png       15a8fe60bd8b65856f80bea1f9bfa8dc  SAME
+9.84      renders/checks/t9.84.png      6056f73069da7cb17374811e45ef5c43  SAME
+12.5      renders/checks/t12.5.png      e3ee345f4a92018dd440598055bdb7cf  SAME
+14.5      renders/checks/t14.5.png      a3d30ba7b28af05a7dbe2ac7c4c5f947  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 39.2 dB, frame 30)
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -21.5 dB, max -2.4 dB
+audio 34-clockwork.mp4: mean -21.5 dB, max -2.5 dB  (6.0 MB)
+deep t=1: hash fed0171b mean 31.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.6: hash 9af602e7 mean 37.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=6.6: hash a3d9dd63 mean 36.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.84: hash 2fdee2ca mean 29.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.5: hash b33976a2 mean 31.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.5: hash a94d2c00 mean 31.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

@@ -1,0 +1,26 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 7 old file(s): RUN.txt t1.2.png t14.5.png t2.4.png t5.4.png t7.0.png t9.5.png
+check-frames run: 2026-11-14 03:51:20 UTC
+times: 1.2, 2.4, 5.4, 7.0, 9.5, 14.5
+newest code edit: 2026-11-14 03:19:42 UTC (inflatable/style.js)
+mp4: 42-inflatable.mp4 2026-11-14 01:19:10 UTC
+kit last changed: 2026-11-14 03:19:42 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+1.2       renders/checks/t1.2.png       d6948c983ff3fa5e6ae5fc62794a8a0c  SAME
+2.4       renders/checks/t2.4.png       8fa7d83768bff0fcecb085821e4c6b8c  SAME
+5.4       renders/checks/t5.4.png       6d9a5a952fd24d8f9469a3446f3ab943  SAME
+7.0       renders/checks/t7.0.png       362a85341288ea99404ef3247a75fc14  SAME
+9.5       renders/checks/t9.5.png       a8abef0cc4397dc8a54449b1d3814ae6  SAME
+14.5      renders/checks/t14.5.png      4a45fdfe2b763ee3579e9493747aedd4  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.5 dB, frame 435)
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -20.4 dB, max -6.0 dB
+audio 42-inflatable.mp4: mean -20.4 dB, max -5.9 dB  (6.4 MB)
+deep t=7: hash 3a899137 mean 206.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.2: hash ab52d9cd mean 215.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.4: hash 8278a703 mean 211.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5.4: hash e6e034ab mean 210.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.5: hash 53fab7dc mean 204.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.5: hash 04c6b0a8 mean 201 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

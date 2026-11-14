@@ -1,0 +1,26 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 7 old file(s): RUN.txt t0.5.png t10.9.png t14.5.png t2.5.png t4.5.png t8.8.png
+check-frames run: 2026-11-14 03:49:30 UTC
+times: 0.5, 2.5, 4.5, 8.8, 10.9, 14.5
+newest code edit: 2026-11-14 03:19:42 UTC (shadow-puppets/style.js)
+mp4: 39-shadow-puppets.mp4 2026-11-14 01:11:21 UTC
+kit last changed: 2026-11-14 03:19:42 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+0.5       renders/checks/t0.5.png       344414be097d64ac8ca68205378685c1  SAME
+2.5       renders/checks/t2.5.png       e3b340c6152658b55b502ef73ef93f9e  SAME
+4.5       renders/checks/t4.5.png       c61e917163ad42f63e516dec89a3889f  SAME
+8.8       renders/checks/t8.8.png       a19d89d35870369d767a2b9051a1a499  SAME
+10.9      renders/checks/t10.9.png      537b043269b8b270ba947482c4b920b2  SAME
+14.5      renders/checks/t14.5.png      3e6cb9991ab4dbdfccba5d3dd81997c7  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 38.8 dB, frame 75)
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -21.0 dB, max -6.0 dB
+audio 39-shadow-puppets.mp4: mean -21.0 dB, max -6.0 dB  (3.0 MB)
+deep t=0.5: hash 51cc5d3a mean 80.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.5: hash f6f993f1 mean 81.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.5: hash db0ce757 mean 78.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.8: hash 5efef29c mean 69.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.9: hash ae66a5f9 mean 77.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.5: hash 7e15cec3 mean 80.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

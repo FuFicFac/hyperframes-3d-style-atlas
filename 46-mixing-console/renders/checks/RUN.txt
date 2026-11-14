@@ -1,0 +1,14 @@
+check-frames run: 2026-11-14 05:35:19 UTC
+times: 1.2, 3.6, 5, 7.6, 10.8, 14.5
+newest code edit: 2026-11-14 03:08:41 UTC (46-mixing-console/scene.js)
+mp4: 46-mixing-console.mp4 2026-11-14 03:09:48 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.9 dB, frame 108)
+  frame 36 (t=1.200): 37.1 dB
+  frame 108 (t=3.600): 34.9 dB
+  frame 150 (t=5.000): 37.2 dB
+  frame 228 (t=7.600): 38.8 dB
+  frame 324 (t=10.800): 37.3 dB
+  frame 435 (t=14.500): 37.1 dB
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

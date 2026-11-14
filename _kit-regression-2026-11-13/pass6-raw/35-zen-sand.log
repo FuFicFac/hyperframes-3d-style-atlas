@@ -1,0 +1,25 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 7 old file(s): RUN.txt t0.5.png t12.5.png t14.8.png t2.png t5.png t9.6.png
+check-frames run: 2026-11-14 00:43:32 UTC
+times: 0.5, 2, 5, 9.6, 12.5, 14.8
+newest code edit: 2026-11-13 23:41:43 UTC (zen-sand/spec.js)
+mp4: 35-zen-sand.mp4 2026-11-13 23:43:27 UTC
+kit last changed: 2026-11-14 00:14:11 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+0.5       renders/checks/t0.5.png       d8c6774292835ac7323b34443f47b657  SAME
+2         renders/checks/t2.png         2ae4915ab93da3611eba22d2ac8c52d0  SAME
+5         renders/checks/t5.png         b5634d4775569cf66954e51e537e4540  SAME
+9.6       renders/checks/t9.6.png       cc5cea7e83ab2cc3318d131e934fbd10  SAME
+12.5      renders/checks/t12.5.png      a2f8c07c5f7306f2377e2b9b295ad800  SAME
+14.8      renders/checks/t14.8.png      07ca7972e12809fd99f0a49ca26b0df0  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.5 dB, frame 15)
+determinism: OK (6 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -22.6 dB, max -5.1 dB
+audio 35-zen-sand.mp4: mean -22.6 dB, max -5.0 dB  (5.2 MB)
+deep t=2: hash c6f66dd0 mean 107.5 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5: hash fca45c2a mean 139.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=0.5: hash c94a30b8 mean 103.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.6: hash 66e2dcdd mean 145.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.5: hash b851c9fd mean 133.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.8: hash 1af5255f mean 122.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

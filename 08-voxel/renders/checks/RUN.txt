@@ -1,0 +1,17 @@
+check-frames run: 2026-11-14 05:06:56 UTC
+times: 1.2, 2.6, 4.7, 6.0, 8.2, 10.1, 11.8, 14.2
+newest code edit: 2026-11-13 14:43:20 UTC (voxel/style.js)
+mp4: 08-voxel.mp4 2026-11-13 14:26:32 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 31.1 dB, frame 78)
+  frame 36 (t=1.200): 31.2 dB
+  frame 78 (t=2.600): 31.1 dB
+  frame 141 (t=4.700): 31.8 dB
+  frame 180 (t=6.000): 32.0 dB
+  frame 246 (t=8.200): 31.9 dB
+  frame 303 (t=10.100): 31.4 dB
+  frame 354 (t=11.800): 31.7 dB
+  frame 426 (t=14.200): 31.5 dB
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

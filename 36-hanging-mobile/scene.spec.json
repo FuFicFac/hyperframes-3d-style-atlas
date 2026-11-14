@@ -1,0 +1,1154 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "hanging-mobile",
+    "name": "Hanging Mobile",
+    "description": "A kinetic hanging mobile in a bright skylit gallery: thin black wire arms with end loops, fine threads and flat painted sheet-metal plates (disc, leaf, crescent, triangle, custom outlines) in bold red, yellow, blue, black and white turn slowly in still air, while crisp soft shadows drift across the white wall behind. Balance is computed for real: every arm's pivot is solved from the weights on each side (weight = plate area), so hanging a new shape or changing a weight tilts that arm and every arm above it, the whole structure swings and re-settles with a closed-form damped oscillation, and a re-balance slides each pivot loop to the new centre. Small engraved tags hang under the plates; a museum-label overlay carries the words.",
+    "palette": {
+      "wall": "#f7f6f3",
+      "floor": "#d6d1c8",
+      "ceiling": "#f6f5f2",
+      "shadowGap": "#3a3835",
+      "wire": "#151515",
+      "thread": "#2b2a28",
+      "red": "#d42a1f",
+      "yellow": "#f3b80c",
+      "blue": "#1f4fae",
+      "black": "#161616",
+      "white": "#f7f5ef",
+      "steel": "#8a8c8e",
+      "tag": "#c9cbcc",
+      "tagInk": "#1b1b1b",
+      "labelCard": "#ffffff",
+      "labelInk": "#171717",
+      "labelRule": "#bdb8ae",
+      "labelSub": "#77736b"
+    },
+    "world": {
+      "background": "#f7f6f3",
+      "environment": "room",
+      "environmentIntensity": 0.18,
+      "toneMapping": "neutral",
+      "exposure": 1.12,
+      "shadowType": "pcf"
+    },
+    "materials": {
+      "wall": {
+        "type": "standard",
+        "baseColor": "#f7f6f3",
+        "roughness": 0.96,
+        "metalness": 0,
+        "bump": {
+          "source": "bumpNoise",
+          "scale": 26,
+          "octaves": 3,
+          "seed": 7,
+          "strength": 0.06,
+          "description": "faint plaster/paint orange-peel"
+        }
+      },
+      "floor": {
+        "type": "standard",
+        "baseColor": "#d6d1c8",
+        "roughness": 0.62,
+        "metalness": 0,
+        "map": {
+          "source": "noise",
+          "size": 512,
+          "scale": 6,
+          "octaves": 4,
+          "seed": 21,
+          "colorA": "#cfc9bf",
+          "colorB": "#ddd8d0",
+          "contrast": 0.8,
+          "repeat": [
+            5,
+            5
+          ],
+          "description": "polished concrete mottling"
+        }
+      },
+      "ceiling": {
+        "type": "standard",
+        "baseColor": "#f6f5f2",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "shadowGap": {
+        "type": "standard",
+        "baseColor": "#3a3835",
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      "skylight": {
+        "type": "lambert",
+        "baseColor": "#ffffff",
+        "emission": {
+          "color": "#f3f7ff",
+          "strength": 2.2
+        }
+      },
+      "wire": {
+        "type": "standard",
+        "baseColor": "#151515",
+        "roughness": 0.38,
+        "metalness": 0.65
+      },
+      "thread": {
+        "type": "standard",
+        "baseColor": "#2b2a28",
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      "hook": {
+        "type": "standard",
+        "baseColor": "#9a9c9e",
+        "roughness": 0.3,
+        "metalness": 1
+      },
+      "edge": {
+        "type": "standard",
+        "baseColor": "#6f7072",
+        "roughness": 0.45,
+        "metalness": 0.8
+      },
+      "paintRed": {
+        "type": "physical",
+        "baseColor": "#d42a1f",
+        "roughness": 0.5,
+        "metalness": 0,
+        "clearcoat": 0.25,
+        "clearcoatRoughness": 0.45
+      },
+      "paintYellow": {
+        "type": "physical",
+        "baseColor": "#f3b80c",
+        "roughness": 0.5,
+        "metalness": 0,
+        "clearcoat": 0.25,
+        "clearcoatRoughness": 0.45
+      },
+      "paintBlue": {
+        "type": "physical",
+        "baseColor": "#1f4fae",
+        "roughness": 0.5,
+        "metalness": 0,
+        "clearcoat": 0.25,
+        "clearcoatRoughness": 0.45
+      },
+      "paintBlack": {
+        "type": "physical",
+        "baseColor": "#161616",
+        "roughness": 0.48,
+        "metalness": 0,
+        "clearcoat": 0.3,
+        "clearcoatRoughness": 0.4
+      },
+      "paintWhite": {
+        "type": "physical",
+        "baseColor": "#f7f5ef",
+        "roughness": 0.55,
+        "metalness": 0,
+        "clearcoat": 0.2,
+        "clearcoatRoughness": 0.5
+      }
+    },
+    "lights": [
+      {
+        "id": "sky",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#d9d3c8",
+        "intensity": 1.35
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fffaf1",
+        "intensity": 2.1,
+        "position": [
+          -4.2,
+          8.5,
+          7.5
+        ],
+        "target": [
+          0.6,
+          2.3,
+          -1.8
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 2048,
+          "extent": 4.6,
+          "near": 4,
+          "far": 22,
+          "bias": -0.0004,
+          "normalBias": 0.012
+        }
+      },
+      {
+        "id": "wash",
+        "type": "directional",
+        "color": "#eef2fb",
+        "intensity": 0.55,
+        "position": [
+          0.5,
+          10,
+          -1
+        ],
+        "target": [
+          0,
+          0,
+          0.5
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.18,
+        "radius": 0.5,
+        "threshold": 2.6
+      },
+      "vignette": {
+        "darkness": 0.08,
+        "offset": 1.2
+      }
+    },
+    "camera": {
+      "fov": 34,
+      "near": 0.3,
+      "far": 60,
+      "drift": {
+        "amp": 0.02,
+        "speed": 0.22
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 500,
+      "color": "#171717",
+      "height": 0.4
+    },
+    "gallery": {
+      "wallZ": -1.7,
+      "wallW": 22,
+      "wallH": 7.2,
+      "floorD": [
+        -1.7,
+        14
+      ],
+      "floorW": 22,
+      "ceilingY": 7,
+      "rootY": 4.6,
+      "shadowGap": 0.025,
+      "skylight": {
+        "w": 3.2,
+        "d": 1.6,
+        "z": -0.2
+      }
+    },
+    "wire": {
+      "r": 0.011,
+      "loopR": 0.03,
+      "loopTube": 0.006,
+      "stirrupR": 0.008,
+      "bow": 0.035,
+      "clipR": 0.018
+    },
+    "thread": {
+      "r": 0.0042,
+      "radial": 5
+    },
+    "sheet": {
+      "thickness": 0.012,
+      "curveSegments": 6,
+      "holeR": 0.012,
+      "density": 1
+    },
+    "colors": {
+      "red": "paintRed",
+      "yellow": "paintYellow",
+      "blue": "paintBlue",
+      "black": "paintBlack",
+      "white": "paintWhite"
+    },
+    "tag": {
+      "cap": 0.045,
+      "drop": 0.07,
+      "thickness": 0.004,
+      "ppm": 1600,
+      "font": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "weight": 700,
+      "tracking": 0.12,
+      "metal": "#cfd1d2",
+      "brush": "#b4b7ba",
+      "ink": "#202020",
+      "border": "#8e9194"
+    },
+    "balance": {
+      "gain": 0.28,
+      "period": 2,
+      "zeta": 0.2,
+      "lag": 0.22,
+      "h": 0.14,
+      "wireDensity": 0.05,
+      "steps": 10,
+      "hang": {
+        "dur": 0.9
+      },
+      "weight": {
+        "dur": 0.6,
+        "ease": "inOutCubic"
+      },
+      "rebalance": {
+        "delay": 2,
+        "dur": 1,
+        "ease": "inOutSine",
+        "stagger": 0.3
+      }
+    },
+    "shadows": {
+      "quality": "good",
+      "presets": {
+        "draft": {
+          "mapSize": 1024,
+          "softness": 2,
+          "extentScale": 1
+        },
+        "good": {
+          "mapSize": 4096,
+          "softness": 4,
+          "extentScale": 1
+        },
+        "best": {
+          "mapSize": 4096,
+          "softness": 7,
+          "extentScale": 0.85
+        }
+      }
+    },
+    "label": {
+      "x": -0.9,
+      "y": -0.66,
+      "height": 0.05,
+      "card": true,
+      "pad": [
+        0.5,
+        0.42
+      ],
+      "dot": true,
+      "tracking": 0.06,
+      "weight": 600,
+      "font": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fadeIn": 0.35,
+      "fadeOut": 0.35,
+      "rise": 0.012
+    },
+    "sfx": {
+      "enter": "whoosh",
+      "exit": "whooshOut",
+      "move": "paper",
+      "land": "click",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "sound": {
+      "bed": {
+        "root": 196,
+        "chords": [
+          [
+            0,
+            7,
+            14,
+            16
+          ],
+          [
+            -3,
+            4,
+            11,
+            14
+          ],
+          [
+            2,
+            9,
+            14,
+            17
+          ],
+          [
+            0,
+            7,
+            11,
+            16
+          ]
+        ],
+        "every": 4,
+        "overlap": 1.2,
+        "attack": 1.4,
+        "release": 2.2,
+        "brightness": 950,
+        "gain": 0.95
+      },
+      "spool": {
+        "gain": 0.12,
+        "pitch": 1.5
+      },
+      "hook": {
+        "gain": 0.42,
+        "pitch": 2.4,
+        "chime": 0.1,
+        "chimePitch": 1.6
+      },
+      "grow": {
+        "hz": 120,
+        "gain": 0.12,
+        "thud": 0.3,
+        "thudPitch": 0.75
+      },
+      "slide": {
+        "gain": 0.16,
+        "pitch": 2.2
+      },
+      "swing": {
+        "gain": 0.07,
+        "pitch": 2.8
+      },
+      "settle": {
+        "gain": 0.09,
+        "pitch": 1.4
+      }
+    },
+    "motion": [
+      "Every arm's pivot is solved from the weights on each side (weight = plate area x sheet density); tilt = atan(gain (p - p*) / h).",
+      "Hanging a shape, removing one or changing a weight retargets that arm and every ancestor; each swings there as a closed-form damped step (superposed, never simulated).",
+      "Re-balance slides the arm's pivot loop along the wire to the new centre, so the arm swings back to level; nested arms re-balance deepest first.",
+      "Each arm turns slowly about its own thread (base + rate t + swing sin), plates turn too, and the hanger threads lean a little behind fast swings.",
+      "The white wall is part of the picture: one high front-left key throws crisp soft shadows of wires, threads and plates down-right onto it."
+    ]
+  },
+  "scene": {
+    "id": "36-hanging-mobile",
+    "style": "hanging-mobile",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "open",
+        "t": 0,
+        "dur": 3,
+        "label": "Everything in balance"
+      },
+      {
+        "id": "add",
+        "t": 3,
+        "dur": 3.2,
+        "label": "Add one thing"
+      },
+      {
+        "id": "centre",
+        "t": 6.2,
+        "dur": 3,
+        "label": "Find the new centre"
+      },
+      {
+        "id": "heavy",
+        "t": 9.2,
+        "dur": 2.9,
+        "label": "Make one thing heavier"
+      },
+      {
+        "id": "settle",
+        "t": 12.1,
+        "dur": 2.9,
+        "label": "And it settles again"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -0.35,
+          2.75,
+          6
+        ],
+        "target": [
+          -0.4,
+          3.5735525634814973,
+          0
+        ],
+        "fov": 34
+      },
+      {
+        "t": 3,
+        "pos": [
+          -0.2,
+          2.7,
+          5.8
+        ],
+        "target": [
+          0,
+          3.5235525634814975,
+          0
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 4.3,
+        "pos": [
+          -0.27035539958347754,
+          2.55,
+          6.7
+        ],
+        "target": [
+          0.025928920083304496,
+          3.063324263707059,
+          0.023064667115756655
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 6.5,
+        "pos": [
+          -0.27035539958347754,
+          2.5,
+          6.3
+        ],
+        "target": [
+          0.038893380124956745,
+          3.0616587307436767,
+          0.03459700067363498
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 9.2,
+        "pos": [
+          1.1,
+          2.5,
+          6.6
+        ],
+        "target": [
+          0,
+          3.026655329633824,
+          0
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 10.6,
+        "pos": [
+          1.0009538715811017,
+          2.3,
+          6.9
+        ],
+        "target": [
+          0.2702861614743305,
+          2.9129739791585005,
+          0.011469833083715656
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.299999999999999,
+        "pos": [
+          0.2702861614743305,
+          2.5,
+          5.7
+        ],
+        "target": [
+          0,
+          3.026655329633824,
+          0
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          -0.15,
+          2.65,
+          5.65
+        ],
+        "target": [
+          -0.1,
+          3.076655329633824,
+          0
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [
+      {
+        "id": "gallery",
+        "primitive": "procedural",
+        "factory": "gallery",
+        "procedural": "white gallery: matte plaster wall plane, polished concrete floor, dark shadow-gap reveal at the wall base, white ceiling with an emissive skylight panel"
+      },
+      {
+        "id": "hook",
+        "primitive": "procedural",
+        "factory": "hook",
+        "procedural": "ceiling rose + small open steel hook the mobile's top thread hangs from",
+        "position": [
+          -0.49870850932107835,
+          6.92,
+          0
+        ]
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "root": 196,
+        "chord": [
+          0,
+          7,
+          14,
+          16
+        ],
+        "dur": 6.4,
+        "attack": 0.8,
+        "release": 2.2,
+        "brightness": 950,
+        "gain": 0.95,
+        "seed": 3
+      },
+      {
+        "t": 2.8,
+        "type": "pad",
+        "root": 196,
+        "chord": [
+          -3,
+          4,
+          11,
+          14
+        ],
+        "dur": 6.4,
+        "attack": 1.4,
+        "release": 2.2,
+        "brightness": 950,
+        "gain": 0.95,
+        "seed": 4
+      },
+      {
+        "t": 6.8,
+        "type": "pad",
+        "root": 196,
+        "chord": [
+          2,
+          9,
+          14,
+          17
+        ],
+        "dur": 6.4,
+        "attack": 1.4,
+        "release": 2.2,
+        "brightness": 950,
+        "gain": 0.95,
+        "seed": 5
+      },
+      {
+        "t": 10.8,
+        "type": "pad",
+        "root": 196,
+        "chord": [
+          0,
+          7,
+          11,
+          16
+        ],
+        "dur": 4.2,
+        "attack": 1.4,
+        "release": 2.2,
+        "brightness": 950,
+        "gain": 0.95,
+        "seed": 6
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.765,
+        "gain": 0.12,
+        "pitch": 1.5,
+        "t": 3.25,
+        "pan": 0,
+        "seed": 11
+      },
+      {
+        "type": "click",
+        "gain": 0.42,
+        "pitch": 2.4,
+        "t": 4.1,
+        "pan": 0,
+        "seed": 18
+      },
+      {
+        "type": "chime",
+        "gain": 0.1,
+        "notes": 2,
+        "dur": 1.1,
+        "pitch": 1.6,
+        "t": 4.1,
+        "pan": 0,
+        "seed": 19
+      },
+      {
+        "type": "tick",
+        "gain": 0.036689891557137456,
+        "pitch": 3.136,
+        "t": 5.225000000000049,
+        "pan": 0,
+        "seed": 25
+      },
+      {
+        "type": "tick",
+        "gain": 0.04429515471509088,
+        "pitch": 2.8,
+        "t": 5.425000000000059,
+        "pan": 0,
+        "seed": 32
+      },
+      {
+        "type": "tick",
+        "gain": 0.04099199927221679,
+        "pitch": 3.136,
+        "t": 5.641666666666737,
+        "pan": 0,
+        "seed": 39
+      },
+      {
+        "type": "tick",
+        "gain": 0.019323013023658367,
+        "pitch": 2.8,
+        "t": 6.341666666666772,
+        "pan": 0,
+        "seed": 46
+      },
+      {
+        "type": "paper",
+        "dur": 0.85,
+        "density": 0.5,
+        "gain": 0.11996290425406836,
+        "pitch": 2.2,
+        "t": 6.4,
+        "pan": 0,
+        "seed": 53
+      },
+      {
+        "type": "paper",
+        "dur": 0.85,
+        "density": 0.5,
+        "gain": 0.192,
+        "pitch": 2.2,
+        "t": 6.7,
+        "pan": 0,
+        "seed": 60
+      },
+      {
+        "type": "tick",
+        "gain": 0.023020975828891427,
+        "pitch": 3.136,
+        "t": 6.7416666666667915,
+        "pan": 0,
+        "seed": 67
+      },
+      {
+        "type": "paper",
+        "dur": 0.85,
+        "density": 0.5,
+        "gain": 0.1812350368978084,
+        "pitch": 2.2,
+        "t": 7,
+        "pan": 0,
+        "seed": 74
+      },
+      {
+        "type": "tick",
+        "gain": 0.0175,
+        "pitch": 2.8,
+        "t": 7.200000000000148,
+        "pan": 0,
+        "seed": 81
+      },
+      {
+        "type": "tick",
+        "gain": 0.030337600494896744,
+        "pitch": 2.8,
+        "t": 8.141666666666845,
+        "pan": 0,
+        "seed": 88
+      },
+      {
+        "type": "chime",
+        "notes": 3,
+        "dur": 1.4,
+        "gain": 0.09,
+        "pitch": 1.4,
+        "t": 8.500000000000002,
+        "pan": 0,
+        "seed": 95
+      },
+      {
+        "type": "tick",
+        "gain": 0.034324393241016715,
+        "pitch": 3.136,
+        "t": 8.666666666666815,
+        "pan": 0,
+        "seed": 102
+      },
+      {
+        "type": "tick",
+        "gain": 0.02909027468065359,
+        "pitch": 2.8,
+        "t": 9.183333333333453,
+        "pan": 0,
+        "seed": 109
+      },
+      {
+        "type": "tick",
+        "gain": 0.0175,
+        "pitch": 3.136,
+        "t": 9.258333333333448,
+        "pan": 0,
+        "seed": 116
+      },
+      {
+        "type": "whir",
+        "hz": 120,
+        "hz2": 150,
+        "dur": 0.85,
+        "gain": 0.12,
+        "t": 9.45,
+        "pan": 0,
+        "seed": 123
+      },
+      {
+        "type": "tick",
+        "gain": 0.06442277145825155,
+        "pitch": 2.8,
+        "t": 9.783333333333418,
+        "pan": 0,
+        "seed": 130
+      },
+      {
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 0.75,
+        "t": 10.149999999999999,
+        "pan": 0,
+        "seed": 124
+      },
+      {
+        "type": "tick",
+        "gain": 0.061446225655305574,
+        "pitch": 3.136,
+        "t": 11.141666666666675,
+        "pan": 0,
+        "seed": 137
+      },
+      {
+        "type": "tick",
+        "gain": 0.03650430166107583,
+        "pitch": 3.136,
+        "t": 11.183333333333339,
+        "pan": 0,
+        "seed": 144
+      },
+      {
+        "type": "paper",
+        "dur": 0.85,
+        "density": 0.5,
+        "gain": 0.192,
+        "pitch": 2.2,
+        "t": 12.2,
+        "pan": 0,
+        "seed": 151
+      },
+      {
+        "type": "paper",
+        "dur": 0.85,
+        "density": 0.5,
+        "gain": 0.12660701901802618,
+        "pitch": 2.2,
+        "t": 12.5,
+        "pan": 0,
+        "seed": 158
+      },
+      {
+        "type": "tick",
+        "gain": 0.0175,
+        "pitch": 2.8,
+        "t": 12.52499999999993,
+        "pan": 0,
+        "seed": 165
+      },
+      {
+        "type": "tick",
+        "gain": 0.03554818639206363,
+        "pitch": 2.8,
+        "t": 14.174999999999836,
+        "pan": 0,
+        "seed": 172
+      },
+      {
+        "type": "tick",
+        "gain": 0.019193682521827442,
+        "pitch": 2.8,
+        "t": 14.699999999999806,
+        "pan": 0,
+        "seed": 179
+      },
+      {
+        "type": "chime",
+        "notes": 3,
+        "dur": 1.4,
+        "gain": 0.09,
+        "pitch": 1.4,
+        "t": 14.908333333333253,
+        "pan": 0,
+        "seed": 186
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "root": [
+        -0.49870850932107835,
+        4.6,
+        0
+      ],
+      "extent": {
+        "min": [
+          -2.5419350297795935,
+          -3.146689340732351,
+          -1.2422614650264285
+        ],
+        "max": [
+          3.93104187087377,
+          0.4662300678931798,
+          0.9742074272028163
+        ]
+      },
+      "events": [
+        {
+          "t": 3.25,
+          "kind": "hang",
+          "arm": "low",
+          "dur": 0.85,
+          "load": {
+            "id": "new",
+            "at": 0.7,
+            "drop": 0.28,
+            "shape": {
+              "id": "dot",
+              "kind": "disc",
+              "r": 0.21,
+              "color": "white",
+              "inlay": {
+                "r": 0.075,
+                "color": "black"
+              },
+              "tag": "NEW",
+              "yaw": {
+                "swing": 0.5,
+                "period": 8,
+                "phase": 0.3
+              }
+            }
+          }
+        },
+        {
+          "t": 6.4,
+          "kind": "rebalance",
+          "arm": "low",
+          "dur": 1
+        },
+        {
+          "t": 6.7,
+          "kind": "rebalance",
+          "arm": "mid",
+          "dur": 1
+        },
+        {
+          "t": 7,
+          "kind": "rebalance",
+          "arm": "top",
+          "dur": 1
+        },
+        {
+          "t": 9.45,
+          "kind": "weight",
+          "shape": "moon",
+          "scale": 1.25,
+          "dur": 0.7
+        },
+        {
+          "t": 12.2,
+          "kind": "rebalance",
+          "arm": "mid",
+          "dur": 1
+        },
+        {
+          "t": 12.5,
+          "kind": "rebalance",
+          "arm": "top",
+          "dur": 1
+        }
+      ],
+      "planEvents": [
+        {
+          "t": 3.25,
+          "kind": "spool",
+          "arm": "low"
+        },
+        {
+          "t": 4.1,
+          "kind": "hook",
+          "arm": "low"
+        },
+        {
+          "t": 5.225,
+          "kind": "swing",
+          "arm": "low"
+        },
+        {
+          "t": 5.425,
+          "kind": "swing",
+          "arm": "mid"
+        },
+        {
+          "t": 5.642,
+          "kind": "swing",
+          "arm": "top"
+        },
+        {
+          "t": 6.342,
+          "kind": "swing",
+          "arm": "low"
+        },
+        {
+          "t": 6.4,
+          "kind": "slide",
+          "arm": "low"
+        },
+        {
+          "t": 6.7,
+          "kind": "slide",
+          "arm": "mid"
+        },
+        {
+          "t": 6.742,
+          "kind": "swing",
+          "arm": "mid"
+        },
+        {
+          "t": 7,
+          "kind": "slide",
+          "arm": "top"
+        },
+        {
+          "t": 7.2,
+          "kind": "swing",
+          "arm": "top"
+        },
+        {
+          "t": 8.142,
+          "kind": "swing",
+          "arm": "low"
+        },
+        {
+          "t": 8.5,
+          "kind": "settle",
+          "arm": "low"
+        },
+        {
+          "t": 8.667,
+          "kind": "swing",
+          "arm": "mid"
+        },
+        {
+          "t": 9.183,
+          "kind": "swing",
+          "arm": "top"
+        },
+        {
+          "t": 9.258,
+          "kind": "swing",
+          "arm": "low"
+        },
+        {
+          "t": 9.45,
+          "kind": "grow",
+          "arm": "mid"
+        },
+        {
+          "t": 9.783,
+          "kind": "swing",
+          "arm": "mid"
+        },
+        {
+          "t": 11.142,
+          "kind": "swing",
+          "arm": "mid"
+        },
+        {
+          "t": 11.183,
+          "kind": "swing",
+          "arm": "top"
+        },
+        {
+          "t": 12.2,
+          "kind": "slide",
+          "arm": "mid"
+        },
+        {
+          "t": 12.5,
+          "kind": "slide",
+          "arm": "top"
+        },
+        {
+          "t": 12.525,
+          "kind": "swing",
+          "arm": "mid"
+        },
+        {
+          "t": 14.175,
+          "kind": "swing",
+          "arm": "mid"
+        },
+        {
+          "t": 14.7,
+          "kind": "swing",
+          "arm": "top"
+        },
+        {
+          "t": 14.908,
+          "kind": "settle",
+          "arm": "top"
+        }
+      ],
+      "frame": "mobile in plane z = 0; wall at gallery.wallZ; root pivot at ROOT"
+    }
+  }
+}

@@ -1,0 +1,491 @@
+{
+ "format": "3d-style-atlas/blender-export@1",
+ "project": "00-smoke",
+ "exportedAt": "2026-11-13T10:17:56.276Z",
+ "fps": 30,
+ "duration": 5,
+ "frames": 150,
+ "frameRule": "frame n <-> t = n / fps",
+ "files": {
+  "spec": "scene.spec.json",
+  "bake": "bake.json",
+  "glb": "geometry.glb",
+  "textures": "textures/",
+  "refs": "refs/"
+ },
+ "renderer": {
+  "threeRevision": "181",
+  "glRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Pro, Unspecified Version)",
+  "resolution": [
+   1920,
+   1080
+  ],
+  "pixelRatio": 1,
+  "outputColorSpace": "srgb",
+  "toneMapping": "aces",
+  "toneMappingExposure": 1,
+  "antialias": true,
+  "postMsaaSamples": 4,
+  "postTargetType": "HalfFloat (linear HDR)",
+  "shadowMap": {
+   "enabled": true,
+   "type": "pcf"
+  },
+  "background": "#d8d4cc",
+  "fog": {
+   "kind": "linear-view-z-smoothstep",
+   "color": "#d8d4cc",
+   "near": 18,
+   "far": 40
+  },
+  "environment": {
+   "kind": "room",
+   "intensity": 0.35
+  },
+  "camera": {
+   "fovDeg": 35,
+   "near": 0.1,
+   "far": 200,
+   "aspect": 1.7777777777777777,
+   "fovAxis": "vertical"
+  },
+  "post": {
+   "order": [
+    "render (linear HDR)",
+    "output (tone map + sRGB)",
+    "finish (tint, vignette, grain on display values)"
+   ],
+   "bloom": null,
+   "tiltShift": null,
+   "vignette": {
+    "darkness": 0.35,
+    "offset": 1.1
+   },
+   "grain": {
+    "amount": 0.025
+   },
+   "tint": "#ffffff"
+  },
+  "overlay": null
+ },
+ "lights": [
+  {
+   "id": "ambient",
+   "type": "hemisphere",
+   "color": "#f3f6ff",
+   "intensity": 0.55,
+   "unit": "lux-like scalar (three physical)",
+   "groundColor": "#3a3530",
+   "position": [
+    0,
+    1,
+    0
+   ],
+   "specIntensity": 0.55,
+   "blender": {
+    "type": "WORLD",
+    "strength": 0.17507
+   },
+   "castShadow": false
+  },
+  {
+   "id": "key",
+   "type": "directional",
+   "color": "#fff1e0",
+   "intensity": 3,
+   "unit": "lux-like scalar (three physical)",
+   "position": [
+    5,
+    8,
+    6
+   ],
+   "target": [
+    0,
+    0,
+    0
+   ],
+   "specIntensity": 3,
+   "blender": {
+    "type": "SUN",
+    "strength": 3
+   },
+   "castShadow": true,
+   "shadow": {
+    "mapSize": 2048,
+    "softness": 3,
+    "softnessEffectiveTexels": 3,
+    "shadowType": "pcf",
+    "bias": -0.0004,
+    "normalBias": 0.02,
+    "extent": 8,
+    "near": 0.5,
+    "far": 40,
+    "texelMetres": 0.007813,
+    "blurMetres": 0.023438,
+    "sunAngleDeg": 2.685248,
+    "softnessNote": "heuristic: penumbra matched at 1 m occluder->receiver distance"
+   }
+  },
+  {
+   "id": "fill",
+   "type": "directional",
+   "color": "#cfe0ff",
+   "intensity": 0.6,
+   "unit": "lux-like scalar (three physical)",
+   "position": [
+    -6,
+    3,
+    4
+   ],
+   "target": [
+    0,
+    0,
+    0
+   ],
+   "specIntensity": 0.6,
+   "blender": {
+    "type": "SUN",
+    "strength": 0.6
+   },
+   "castShadow": false
+  },
+  {
+   "id": "rim",
+   "type": "directional",
+   "color": "#ffffff",
+   "intensity": 1,
+   "unit": "lux-like scalar (three physical)",
+   "position": [
+    -2,
+    5,
+    -8
+   ],
+   "target": [
+    0,
+    0,
+    0
+   ],
+   "specIntensity": 1,
+   "blender": {
+    "type": "SUN",
+    "strength": 1
+   },
+   "castShadow": false
+  }
+ ],
+ "materials": [
+  {
+   "name": "floor",
+   "type": "MeshStandardMaterial",
+   "side": "front",
+   "transparent": false,
+   "opacity": 1,
+   "alphaTest": 0,
+   "depthWrite": true,
+   "depthTest": true,
+   "toneMapped": true,
+   "vertexColors": false,
+   "flatShading": false,
+   "blending": 1,
+   "color": "#d9d5cd",
+   "roughness": 0.95,
+   "metalness": 0,
+   "emissiveIntensity": 1,
+   "envMapIntensity": 1,
+   "bumpScale": 1,
+   "emissive": "#000000"
+  },
+  {
+   "name": "clayPrimary",
+   "type": "MeshStandardMaterial",
+   "side": "front",
+   "transparent": false,
+   "opacity": 1,
+   "alphaTest": 0,
+   "depthWrite": true,
+   "depthTest": true,
+   "toneMapped": true,
+   "vertexColors": false,
+   "flatShading": false,
+   "blending": 1,
+   "color": "#e4572e",
+   "roughness": 0.55,
+   "metalness": 0,
+   "emissiveIntensity": 1,
+   "envMapIntensity": 1,
+   "bumpScale": 0.6,
+   "emissive": "#000000"
+  },
+  {
+   "name": "claySecondary",
+   "type": "MeshStandardMaterial",
+   "side": "front",
+   "transparent": false,
+   "opacity": 1,
+   "alphaTest": 0,
+   "depthWrite": true,
+   "depthTest": true,
+   "toneMapped": true,
+   "vertexColors": false,
+   "flatShading": false,
+   "blending": 1,
+   "color": "#2e86ab",
+   "roughness": 0.5,
+   "metalness": 0,
+   "emissiveIntensity": 1,
+   "envMapIntensity": 1,
+   "bumpScale": 1,
+   "emissive": "#000000"
+  },
+  {
+   "name": "clayAccent",
+   "type": "MeshPhysicalMaterial",
+   "side": "front",
+   "transparent": false,
+   "opacity": 1,
+   "alphaTest": 0,
+   "depthWrite": true,
+   "depthTest": true,
+   "toneMapped": true,
+   "vertexColors": false,
+   "flatShading": false,
+   "blending": 1,
+   "color": "#f3a712",
+   "roughness": 0.35,
+   "metalness": 0,
+   "emissiveIntensity": 1,
+   "envMapIntensity": 1,
+   "bumpScale": 1,
+   "clearcoat": 0.6,
+   "clearcoatRoughness": 0.25,
+   "transmission": 0,
+   "ior": 1.5,
+   "thickness": 0,
+   "sheen": 0,
+   "iridescence": 0,
+   "specularIntensity": 1,
+   "emissive": "#000000"
+  },
+  {
+   "name": "0d40e9ec",
+   "type": "MeshBasicMaterial",
+   "side": "front",
+   "transparent": true,
+   "opacity": 0,
+   "alphaTest": 0.01,
+   "depthWrite": true,
+   "depthTest": true,
+   "toneMapped": false,
+   "vertexColors": false,
+   "flatShading": false,
+   "blending": 1,
+   "color": "#ffffff"
+  }
+ ],
+ "textures": [
+  {
+   "file": "bumpMap_clayPrimary_0.png",
+   "role": "bumpMap",
+   "material": "clayPrimary",
+   "materialType": "MeshStandardMaterial",
+   "usedBy": [
+    "cube"
+   ],
+   "usedByCount": 1,
+   "bumpScale": 0.6,
+   "size": [
+    256,
+    256
+   ],
+   "colorSpace": "",
+   "wrapS": "repeat",
+   "wrapT": "repeat",
+   "repeat": [
+    1,
+    1
+   ],
+   "offset": [
+    0,
+    0
+   ],
+   "rotation": 0,
+   "flipY": true
+  },
+  {
+   "file": "map_0d40e9ec_1.png",
+   "role": "map",
+   "material": "0d40e9ec",
+   "materialType": "MeshBasicMaterial",
+   "usedBy": [
+    "label"
+   ],
+   "usedByCount": 1,
+   "size": [
+    1108,
+    212
+   ],
+   "colorSpace": "srgb",
+   "wrapS": "clamp",
+   "wrapT": "clamp",
+   "repeat": [
+    1,
+    1
+   ],
+   "offset": [
+    0,
+    0
+   ],
+   "rotation": 0,
+   "flipY": true
+  }
+ ],
+ "labels": [
+  {
+   "id": "label",
+   "lines": [
+    "3D STYLE ATLAS"
+   ],
+   "file": "map_0d40e9ec_1.png",
+   "planeSizeMetres": [
+    4.328125,
+    0.828125
+   ],
+   "lit": false,
+   "toneMapped": false,
+   "alphaTest": 0.01,
+   "castShadow": false,
+   "onOverlay": false
+  }
+ ],
+ "bake": {
+  "file": "bake.json",
+  "frames": 150,
+  "fps": 30,
+  "cameraFrames": 150,
+  "nodes": 13,
+  "animatedNodes": 4,
+  "lights": 4,
+  "animatedMaterials": 1,
+  "deforming": []
+ },
+ "glb": {
+  "file": "geometry.glb",
+  "bytes": 339164,
+  "sampledAt": 0,
+  "nodeNames": "bake ids",
+  "note": "transforms are the state at sampledAt; animate from bake.json"
+ },
+ "refs": [
+  {
+   "file": "refs/frame_0000.png",
+   "frame": 0,
+   "t": 0
+  },
+  {
+   "file": "refs/frame_0046.png",
+   "frame": 46,
+   "t": 1.5333333333333334
+  },
+  {
+   "file": "refs/frame_0072.png",
+   "frame": 72,
+   "t": 2.4
+  },
+  {
+   "file": "refs/frame_0149.png",
+   "frame": 149,
+   "t": 4.966666666666667
+  }
+ ],
+ "audio": [
+  {
+   "role": "sfx",
+   "path": "../sfx.wav",
+   "absPath": "/Users/user/Library/CloudStorage/Dropbox/D Second Brain/Builder/HyperFrames/3d-style-atlas-pilot/00-smoke/sfx.wav",
+   "sampleRate": 48000,
+   "channels": 2,
+   "bits": 16,
+   "seconds": 5,
+   "bytes": 960044,
+   "offsetSeconds": 0,
+   "mix": "summed at gain 1 (index.html data-volume=1); sfx.wav is already limited to ~-1 dBFS"
+  }
+ ],
+ "verify": {
+  "errors": [],
+  "glbStructure": {
+   "version": 2,
+   "bytes": 339164,
+   "nodes": 13,
+   "meshes": 5,
+   "materials": 5,
+   "images": 2,
+   "accessors": 19,
+   "binBytes": 329824,
+   "generator": "THREE.GLTFExporter r181"
+  },
+  "glbLoader": {
+   "parsedBy": "GLTFLoader r181",
+   "nodes": 17,
+   "meshes": 5,
+   "triangles": 7024
+  },
+  "bakeFrames": "150 == 5 x 30",
+  "pngs": [
+   {
+    "f": "textures/bumpMap_clayPrimary_0.png",
+    "bytes": 76812,
+    "size": [
+     256,
+     256
+    ]
+   },
+   {
+    "f": "textures/map_0d40e9ec_1.png",
+    "bytes": 20094,
+    "size": [
+     1108,
+     212
+    ]
+   },
+   {
+    "f": "refs/frame_0000.png",
+    "bytes": 3127804,
+    "size": [
+     1920,
+     1080
+    ]
+   },
+   {
+    "f": "refs/frame_0046.png",
+    "bytes": 2944361,
+    "size": [
+     1920,
+     1080
+    ]
+   },
+   {
+    "f": "refs/frame_0072.png",
+    "bytes": 2844202,
+    "size": [
+     1920,
+     1080
+    ]
+   },
+   {
+    "f": "refs/frame_0149.png",
+    "bytes": 2588612,
+    "size": [
+     1920,
+     1080
+    ]
+   }
+  ]
+ },
+ "pageWarnings": [
+  "THREE.GLTFExporter: Only directional, point, and spot lights are supported. Rc",
+  "THREE.GLTFExporter: Light direction may be lost. For best results, make light.target a child of the light with position 0,0,-1.",
+  "THREE.GLTFExporter: Light direction may be lost. For best results, make light.target a child of the light with position 0,0,-1.",
+  "THREE.GLTFExporter: Light direction may be lost. For best results, make light.target a child of the light with position 0,0,-1."
+ ]
+}

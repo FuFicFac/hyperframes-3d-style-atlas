@@ -1,0 +1,16 @@
+check-frames run: 2026-11-14 05:13:30 UTC
+times: 0.3, 1.6, 3.4, 5.9, 7.3, 8.6, 11.6, 14.6
+newest code edit: 2026-11-13 19:23:55 UTC (toy-brick/style.js)
+mp4: 16-toy-brick.mp4 2026-11-13 19:25:33 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 39.2 dB, frame 438)
+  frame 9 (t=0.300): 41.1 dB
+  frame 48 (t=1.600): 40.2 dB
+  frame 102 (t=3.400): 39.9 dB
+  frame 177 (t=5.900): 39.4 dB
+  frame 219 (t=7.300): 39.3 dB
+  frame 258 (t=8.600): 40.9 dB
+  frame 348 (t=11.600): 41.5 dB
+  frame 438 (t=14.600): 39.2 dB
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

@@ -1,0 +1,492 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "neutral",
+    "name": "Neutral Studio",
+    "description": "Matte clay primitives on a warm grey studio floor, soft three-point light, gentle grain.",
+    "palette": {
+      "bg": "#d8d4cc",
+      "floor": "#d9d5cd",
+      "ink": "#1d1f24",
+      "primary": "#e4572e",
+      "secondary": "#2e86ab",
+      "accent": "#f3a712",
+      "neutral": "#f2efe9"
+    },
+    "world": {
+      "background": "#d8d4cc",
+      "fog": {
+        "color": "#d8d4cc",
+        "near": 18,
+        "far": 40
+      },
+      "environment": "room",
+      "environmentIntensity": 0.35,
+      "toneMapping": "aces",
+      "exposure": 1
+    },
+    "materials": {
+      "floor": {
+        "type": "standard",
+        "baseColor": "#d9d5cd",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "clayPrimary": {
+        "type": "standard",
+        "baseColor": "#e4572e",
+        "roughness": 0.55,
+        "metalness": 0,
+        "bump": {
+          "source": "bumpNoise",
+          "scale": 24,
+          "octaves": 3,
+          "seed": 11,
+          "strength": 0.6,
+          "description": "fine fbm value-noise, 24 cells/tile"
+        }
+      },
+      "claySecondary": {
+        "type": "standard",
+        "baseColor": "#2e86ab",
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      "clayAccent": {
+        "type": "physical",
+        "baseColor": "#f3a712",
+        "roughness": 0.35,
+        "metalness": 0,
+        "clearcoat": 0.6,
+        "clearcoatRoughness": 0.25
+      },
+      "clayNeutral": {
+        "type": "standard",
+        "baseColor": "#f2efe9",
+        "roughness": 0.7,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "ambient",
+        "type": "hemisphere",
+        "color": "#f3f6ff",
+        "groundColor": "#3a3530",
+        "intensity": 0.55
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff1e0",
+        "intensity": 3,
+        "position": [
+          5,
+          8,
+          6
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 2048,
+          "extent": 8
+        }
+      },
+      {
+        "id": "fill",
+        "type": "directional",
+        "color": "#cfe0ff",
+        "intensity": 0.6,
+        "position": [
+          -6,
+          3,
+          4
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#ffffff",
+        "intensity": 1,
+        "position": [
+          -2,
+          5,
+          -8
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.35,
+        "offset": 1.1
+      },
+      "grain": {
+        "amount": 0.025,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 35,
+      "near": 0.1,
+      "far": 200,
+      "drift": {
+        "amp": 0.06,
+        "speed": 0.4
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 800,
+      "color": "#1d1f24",
+      "height": 0.55
+    },
+    "sfx": {
+      "enter": "pop",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "thud",
+      "emphasis": "chime",
+      "ui": "blip",
+      "bed": "pad"
+    },
+    "motion": [
+      "Objects enter by dropping with outBounce (land = thud) or scaling up with outBack (pop).",
+      "Camera: one slow inOutCubic move per 2–3 s, tiny drift during holds; never cut.",
+      "Labels rise 0.3 m while fading in over ~0.6 s (outCubic)."
+    ]
+  },
+  "scene": {
+    "id": "00-smoke",
+    "style": "neutral",
+    "duration": 5,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "drop",
+        "t": 0.3,
+        "dur": 0.9
+      },
+      {
+        "id": "pop",
+        "t": 1.3,
+        "dur": 0.45
+      },
+      {
+        "id": "swing",
+        "t": 1.8,
+        "dur": 1.7
+      },
+      {
+        "id": "title",
+        "t": 3,
+        "dur": 0.7
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          5.5,
+          3.6,
+          8.5
+        ],
+        "target": [
+          0,
+          0.8,
+          0
+        ],
+        "fov": 35
+      },
+      {
+        "t": 1.8,
+        "pos": [
+          5,
+          3.4,
+          8
+        ],
+        "target": [
+          0,
+          0.8,
+          0
+        ],
+        "fov": 35,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 3.5,
+        "pos": [
+          -4.8,
+          2.8,
+          7.4
+        ],
+        "target": [
+          0,
+          1.1,
+          0
+        ],
+        "fov": 32,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 5,
+        "pos": [
+          -4.2,
+          2.6,
+          6.8
+        ],
+        "target": [
+          0,
+          1.2,
+          0
+        ],
+        "fov": 31,
+        "ease": "linear"
+      }
+    ],
+    "objects": [
+      {
+        "id": "ground",
+        "primitive": "ground",
+        "dims": {
+          "size": 60
+        },
+        "material": "floor"
+      },
+      {
+        "id": "cube",
+        "primitive": "roundedBox",
+        "dims": {
+          "w": 1,
+          "h": 1,
+          "d": 1,
+          "radius": 0.08
+        },
+        "material": "clayPrimary",
+        "position": [
+          -1.7,
+          0.5,
+          0
+        ],
+        "rotation": [
+          0,
+          0.4,
+          0
+        ],
+        "anim": [
+          {
+            "prop": "position",
+            "beat": "drop",
+            "from": [
+              -1.7,
+              4.5,
+              0
+            ],
+            "to": [
+              -1.7,
+              0.5,
+              0
+            ],
+            "ease": "outBounce"
+          }
+        ]
+      },
+      {
+        "id": "sphere",
+        "primitive": "sphere",
+        "dims": {
+          "r": 0.6
+        },
+        "material": "claySecondary",
+        "position": [
+          0,
+          0.6,
+          0.5
+        ],
+        "anim": [
+          {
+            "prop": "scale",
+            "beat": "pop",
+            "from": 0,
+            "to": 1,
+            "ease": "outBack"
+          }
+        ]
+      },
+      {
+        "id": "torus",
+        "primitive": "torus",
+        "dims": {
+          "r": 0.5,
+          "tube": 0.18
+        },
+        "material": "clayAccent",
+        "position": [
+          1.7,
+          0.68,
+          0
+        ],
+        "rotation": [
+          0,
+          -0.5,
+          0
+        ],
+        "anim": [
+          {
+            "prop": "scale",
+            "beat": "pop",
+            "offset": 0.25,
+            "from": 0,
+            "to": 1,
+            "ease": "outBack"
+          },
+          {
+            "prop": "rotation",
+            "beat": "swing",
+            "from": [
+              0,
+              -0.5,
+              0
+            ],
+            "to": [
+              0,
+              0.9,
+              0
+            ],
+            "ease": "inOutCubic"
+          }
+        ]
+      },
+      {
+        "id": "label",
+        "primitive": "text",
+        "text": "3D STYLE ATLAS",
+        "dims": {
+          "height": 0.5
+        },
+        "position": [
+          0,
+          2.35,
+          0
+        ],
+        "anim": [
+          {
+            "prop": "position",
+            "beat": "title",
+            "from": [
+              0,
+              1.95,
+              0
+            ],
+            "to": [
+              0,
+              2.35,
+              0
+            ],
+            "ease": "outCubic"
+          },
+          {
+            "prop": "opacity",
+            "beat": "title",
+            "from": 0,
+            "to": 1,
+            "ease": "outCubic"
+          }
+        ]
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 5,
+        "gain": 0.22,
+        "root": 196,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ]
+      },
+      {
+        "t": 0.25,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.35,
+        "gain": 0.35
+      },
+      {
+        "t": 0.627,
+        "type": "thud",
+        "gain": 0.9
+      },
+      {
+        "t": 0.8999999999999999,
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 1.3
+      },
+      {
+        "t": 1.3,
+        "type": "pop",
+        "gain": 0.7,
+        "pan": 0
+      },
+      {
+        "t": 1.55,
+        "type": "pop",
+        "gain": 0.6,
+        "pitch": 1.25,
+        "pan": 0.4
+      },
+      {
+        "t": 1.7,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.6,
+        "gain": 0.55
+      },
+      {
+        "t": 3,
+        "type": "chime",
+        "gain": 0.35,
+        "pitch": 1.2
+      },
+      {
+        "t": 3.05,
+        "type": "click",
+        "gain": 0.4
+      }
+    ],
+    "duck": [],
+    "notes": null
+  }
+}

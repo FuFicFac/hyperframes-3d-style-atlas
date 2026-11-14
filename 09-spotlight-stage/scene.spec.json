@@ -1,0 +1,1182 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "spotlight-stage",
+    "name": "Spotlight Stage",
+    "description": "A toy theatre in a dark auditorium: crimson velvet curtains with deep folds, a gilded proscenium, warm plank boards, flat painted cut-out actors and scenery on sliders and wires, hard follow-spots with dusty beams and soft pools, warm footlights.",
+    "palette": {
+      "void": "#0a0406",
+      "houseWall": "#3d0d15",
+      "velvet": "#8f0d1d",
+      "velvetDeep": "#3a040b",
+      "velvetSheen": "#ff7b63",
+      "gold": "#d9a640",
+      "goldDeep": "#8a5a1a",
+      "boards": "#8a5a33",
+      "boardsDark": "#4a2a16",
+      "boardsLight": "#b47c47",
+      "seam": "#26140a",
+      "apron": "#2c170c",
+      "ink": "#1c1210",
+      "parchment": "#f2e3bd",
+      "cream": "#f8eed6",
+      "rouge": "#b8302a",
+      "teal": "#2f6f6a",
+      "tealLight": "#7fb2a6",
+      "mustard": "#e0a838",
+      "slate": "#465468",
+      "slateLight": "#8a9bb0",
+      "skin": "#efc9a0",
+      "night": "#1d3157",
+      "nightLight": "#4c73a6",
+      "moon": "#f6e6b4",
+      "hills": "#2a4636",
+      "city": "#18213a",
+      "plywood": "#b89a6c",
+      "plyEdge": "#e2cc9f",
+      "spot": "#fff0d2",
+      "foot": "#ffb15a",
+      "audience": "#050203"
+    },
+    "world": {
+      "background": "#0a0406",
+      "environment": "room",
+      "environmentIntensity": 0.16,
+      "toneMapping": "neutral",
+      "exposure": 1.18,
+      "shadowType": "pcf"
+    },
+    "materials": {
+      "velvet": {
+        "type": "physical",
+        "baseColor": "#a2101f",
+        "roughness": 0.82,
+        "metalness": 0,
+        "sheen": 1,
+        "bump": {
+          "scale": 160,
+          "octaves": 2,
+          "seed": 31,
+          "strength": 0.25,
+          "description": "fine pile noise"
+        }
+      },
+      "gold": {
+        "type": "physical",
+        "baseColor": "#e0ad48",
+        "roughness": 0.34,
+        "metalness": 0.82,
+        "clearcoat": 0.2,
+        "clearcoatRoughness": 0.4,
+        "bump": {
+          "scale": 48,
+          "octaves": 3,
+          "seed": 7,
+          "strength": 0.22,
+          "description": "worn gilding / gesso noise"
+        }
+      },
+      "goldDeep": {
+        "type": "standard",
+        "baseColor": "#9a6420",
+        "roughness": 0.5,
+        "metalness": 0.7
+      },
+      "houseWall": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      "boards": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.62,
+        "metalness": 0,
+        "bump": {
+          "scale": 64,
+          "octaves": 2,
+          "seed": 5,
+          "strength": 0.25,
+          "description": "wood pores"
+        }
+      },
+      "apron": {
+        "type": "standard",
+        "baseColor": "#2c170c",
+        "roughness": 0.7,
+        "metalness": 0
+      },
+      "backdrop": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.96,
+        "metalness": 0
+      },
+      "paint": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.88,
+        "metalness": 0,
+        "bump": {
+          "scale": 36,
+          "octaves": 3,
+          "seed": 19,
+          "strength": 0.15,
+          "description": "brushed gouache on card"
+        }
+      },
+      "plywood": {
+        "type": "standard",
+        "baseColor": "#b89a6c",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "plyEdge": {
+        "type": "standard",
+        "baseColor": "#e2cc9f",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "wire": {
+        "type": "standard",
+        "baseColor": "#3a3530",
+        "roughness": 0.45,
+        "metalness": 0.6
+      },
+      "hood": {
+        "type": "standard",
+        "baseColor": "#2e2620",
+        "roughness": 0.45,
+        "metalness": 0.65
+      },
+      "bulb": {
+        "type": "standard",
+        "baseColor": "#fff2d8",
+        "roughness": 0.4,
+        "metalness": 0,
+        "emission": {
+          "color": "#ffb15a",
+          "strength": 2.4
+        }
+      },
+      "audience": {
+        "type": "standard",
+        "baseColor": "#050203",
+        "roughness": 1,
+        "metalness": 0
+      },
+      "masking": {
+        "type": "standard",
+        "baseColor": "#0d0809",
+        "roughness": 1,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "ambient",
+        "type": "hemisphere",
+        "color": "#6b3a40",
+        "groundColor": "#0c0506",
+        "intensity": 0.55
+      },
+      {
+        "id": "wash",
+        "type": "directional",
+        "color": "#ffd2a0",
+        "intensity": 0.85,
+        "position": [
+          2.5,
+          9,
+          12
+        ],
+        "target": [
+          0,
+          1.2,
+          -2
+        ],
+        "shadow": {
+          "softness": 6,
+          "mapSize": 2048,
+          "extent": 7.5,
+          "near": 4,
+          "far": 40,
+          "bias": -0.0005,
+          "normalBias": 0.02
+        }
+      },
+      {
+        "id": "back",
+        "type": "directional",
+        "color": "#f0e0d0",
+        "intensity": 0.32,
+        "position": [
+          -2,
+          9,
+          -9
+        ],
+        "target": [
+          0,
+          1,
+          0
+        ]
+      }
+    ],
+    "stage": {
+      "opening": {
+        "width": 8.4,
+        "height": 4.6,
+        "archRise": 0.5
+      },
+      "frame": {
+        "width": 0.62,
+        "depth": 0.32,
+        "bevel": 0.07,
+        "bead": 0.13,
+        "beadDepth": 0.44,
+        "cartoucheR": 0.62,
+        "columnR": 0.2
+      },
+      "wall": {
+        "width": 26,
+        "height": 14,
+        "z": 0.12
+      },
+      "floor": {
+        "depth": 6.2,
+        "apron": 1.45,
+        "drop": 1.3,
+        "boardWidth": 0.24
+      },
+      "backdropZ": -5.2,
+      "masking": {
+        "legX": 4.55,
+        "legW": 1.4,
+        "depths": [
+          -1.2,
+          -2.8
+        ]
+      }
+    },
+    "velvet": {
+      "sheenColor": "#ff6f5c",
+      "sheenRoughness": 0.42,
+      "valleyShade": 0.38,
+      "folds": 11,
+      "foldDepth": 0.17,
+      "gatherGrow": 1.5,
+      "openGap": [
+        0.32,
+        0.72
+      ],
+      "hemLift": 0.55,
+      "segments": [
+        150,
+        40
+      ],
+      "valance": {
+        "height": 0.78,
+        "swags": 4,
+        "sag": 0.24,
+        "folds": 34,
+        "foldDepth": 0.07,
+        "fringe": 0.035
+      }
+    },
+    "spots": {
+      "beamOpacity": 0.16,
+      "beamSoftness": 1.6,
+      "dust": 0.35,
+      "dustScale": 2.4,
+      "penumbra": 0.32,
+      "snapOvershoot": 0.35,
+      "snapDecay": 9,
+      "mapSize": 2048,
+      "softness": 3
+    },
+    "footlights": {
+      "count": 15,
+      "lights": 5,
+      "color": "#ffb15a",
+      "intensity": 3,
+      "distance": 6,
+      "height": 0.16
+    },
+    "paint": {
+      "pxPerMetre": 220,
+      "outline": 0.035,
+      "hatch": {
+        "spacing": 0.055,
+        "width": 0.012,
+        "alpha": 0.32
+      },
+      "grime": 0.16,
+      "cardThickness": 0.03,
+      "layerGap": 0.004
+    },
+    "textures": {
+      "boards": {
+        "size": 1024,
+        "metres": 6,
+        "boards": 6,
+        "seed": 23,
+        "grainFreq": 20,
+        "grainWarp": 2,
+        "contrast": 0.45
+      },
+      "wall": {
+        "size": 512,
+        "metres": 2.2,
+        "seed": 61,
+        "description": "dark plum damask: printed lozenge pattern + noise"
+      }
+    },
+    "motion_tuning": {
+      "slideDur": 0.9,
+      "slideEase": "outCubic",
+      "wobble": {
+        "amp": 0.045,
+        "freq": 9,
+        "decay": 4.5
+      },
+      "drop": {
+        "dur": 0.7,
+        "ease": "outCubic",
+        "swing": 0.05,
+        "freq": 5.5,
+        "decay": 3.2
+      },
+      "curtain": {
+        "openDur": 1.8,
+        "openEase": "inOutSine",
+        "closeDur": 2.2,
+        "closeEase": "inOutSine"
+      },
+      "sweep": {
+        "ease": "inOutCubic",
+        "settle": 0.12
+      }
+    },
+    "post": {
+      "bloom": {
+        "strength": 0.5,
+        "radius": 0.55,
+        "threshold": 0.95
+      },
+      "vignette": {
+        "darkness": 0.5,
+        "offset": 1.08
+      },
+      "grain": {
+        "amount": 0.022,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.5,
+      "far": 80,
+      "drift": {
+        "amp": 0.045,
+        "speed": 0.22
+      }
+    },
+    "text": {
+      "font": "\"Superclarendon\", \"Bodoni 72\", Didot, Georgia, serif",
+      "subFont": "\"Bodoni 72\", Didot, Georgia, serif",
+      "weight": 700,
+      "color": "#1c1210",
+      "height": 0.5
+    },
+    "sfx": {
+      "enter": "whoosh",
+      "exit": "whooshOut",
+      "move": "rustle",
+      "land": "thud",
+      "emphasis": "chime",
+      "ui": "clack",
+      "bed": "pad"
+    },
+    "motion": [
+      "House curtain opens on an inOutSine over ~1.8 s; folds deepen as the cloth gathers, the inner hem swags up and out.",
+      "A spot snaps on with a brief over-bright thunk, then sweeps to its mark on inOutCubic with a tiny settle.",
+      "Flats slide in from the wings on their floor track (outCubic) and rock on their foot with a damped wobble.",
+      "Signs and flats drop from the flies on visible wires and swing to rest like a pendulum.",
+      "Scene changes: flats slide out and new ones slide in; never fade a cut-out.",
+      "Camera sits in the stalls: one slow push-in over the whole piece with a slight lateral drift; never cut."
+    ]
+  },
+  "scene": {
+    "id": "09-spotlight-stage",
+    "style": "spotlight-stage",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "open",
+        "t": 0.5,
+        "dur": 1.8
+      },
+      {
+        "id": "title",
+        "t": 1.45,
+        "dur": 2.55
+      },
+      {
+        "id": "judge",
+        "t": 2.75,
+        "dur": 1.5
+      },
+      {
+        "id": "screens",
+        "t": 4.3,
+        "dur": 1.1
+      },
+      {
+        "id": "bubbles",
+        "t": 5.55,
+        "dur": 1.75
+      },
+      {
+        "id": "which",
+        "t": 7.25,
+        "dur": 3
+      },
+      {
+        "id": "reveal",
+        "t": 10.35,
+        "dur": 1.2
+      },
+      {
+        "id": "caption",
+        "t": 11.7,
+        "dur": 1.6
+      },
+      {
+        "id": "close",
+        "t": 13.35,
+        "dur": 1.65
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0.45,
+          2.85,
+          13.6
+        ],
+        "target": [
+          0.05,
+          2.2,
+          -1
+        ],
+        "fov": 30
+      },
+      {
+        "t": 7.5,
+        "pos": [
+          -0.1,
+          2.75,
+          12.2
+        ],
+        "target": [
+          0,
+          2.2,
+          -1
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0.35,
+          2.6,
+          11
+        ],
+        "target": [
+          0.2,
+          2.15,
+          -1
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [
+      {
+        "id": "theatre",
+        "primitive": "procedural",
+        "factory": "theatre",
+        "procedural": "toy-theatre house: damask wall, gilded proscenium arch + columns, plank stage with apron, black masking legs, painted night backdrop, two-half pleated velvet curtain, swagged valance with fringe, footlight trough",
+        "dims": {
+          "tracks": [
+            -1.9,
+            -2.5
+          ],
+          "paint": "night",
+          "seed": 3
+        }
+      },
+      {
+        "id": "audience",
+        "primitive": "procedural",
+        "factory": "audience",
+        "procedural": "two rows of front-row head-and-shoulder silhouettes (top hats, bowlers, bonnets) below the stage lip",
+        "dims": {
+          "perRow": 9,
+          "rows": 2,
+          "width": 11.5,
+          "z": 3.3,
+          "rowGap": 1.1,
+          "scale": 1.3,
+          "seed": 9
+        }
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.14,
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "attack": 1.8,
+        "release": 2.2,
+        "brightness": 700
+      },
+      {
+        "t": 0,
+        "type": "rumble",
+        "dur": 2.4,
+        "gain": 0.16,
+        "pitch": 0.7
+      },
+      {
+        "t": 0,
+        "type": "rustle",
+        "dur": 0.9,
+        "density": 0.18,
+        "pitch": 0.35,
+        "gain": 0.16,
+        "pan": -0.4,
+        "seed": 60
+      },
+      {
+        "t": 0.35,
+        "type": "rustle",
+        "dur": 0.9,
+        "density": 0.18,
+        "pitch": 0.39999999999999997,
+        "gain": 0.138,
+        "pan": 0.4,
+        "seed": 61
+      },
+      {
+        "t": 0.8,
+        "type": "rustle",
+        "dur": 0.9,
+        "density": 0.18,
+        "pitch": 0.44999999999999996,
+        "gain": 0.116,
+        "pan": -0.4,
+        "seed": 62
+      },
+      {
+        "t": 1.3,
+        "type": "rustle",
+        "dur": 0.9,
+        "density": 0.18,
+        "pitch": 0.35,
+        "gain": 0.094,
+        "pan": 0.4,
+        "seed": 63
+      },
+      {
+        "t": 1.9,
+        "type": "rustle",
+        "dur": 0.9,
+        "density": 0.18,
+        "pitch": 0.39999999999999997,
+        "gain": 0.07200000000000001,
+        "pan": -0.4,
+        "seed": 64
+      },
+      {
+        "t": 0.5,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.8,
+        "q": 0.7,
+        "pitch": 0.45,
+        "gain": 0.55,
+        "pan": 0
+      },
+      {
+        "t": 0.55,
+        "type": "rustle",
+        "dur": 1.62,
+        "density": 0.75,
+        "pitch": 0.55,
+        "gain": 0.32,
+        "pan": 0,
+        "seed": 21
+      },
+      {
+        "t": 1.45,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.4,
+        "q": 2.2,
+        "pitch": 1.1,
+        "gain": 0.25,
+        "pan": 0
+      },
+      {
+        "t": 1.83,
+        "type": "thud",
+        "gain": 0.45,
+        "pitch": 1.15,
+        "pan": 0,
+        "seed": 31
+      },
+      {
+        "t": 1.85,
+        "type": "clack",
+        "gain": 0.22,
+        "pitch": 1.3,
+        "pan": 0,
+        "seed": 32
+      },
+      {
+        "t": 4,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.5,
+        "q": 2,
+        "pitch": 1.2,
+        "gain": 0.2
+      },
+      {
+        "t": 2.75,
+        "type": "thud",
+        "gain": 0.55,
+        "pitch": 0.55,
+        "pan": 0,
+        "seed": 11
+      },
+      {
+        "t": 2.754,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.5,
+        "pan": 0,
+        "seed": 12
+      },
+      {
+        "t": 2.77,
+        "type": "hum",
+        "dur": 0.9,
+        "gain": 0.05,
+        "hz": 100,
+        "pan": 0
+      },
+      {
+        "t": 4.3,
+        "type": "rustle",
+        "dur": 0.8,
+        "density": 0.5,
+        "pitch": 0.4,
+        "gain": 0.35,
+        "pan": -0.55,
+        "seed": 41
+      },
+      {
+        "t": 4.3,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.85,
+        "q": 1.4,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "pan": -0.55
+      },
+      {
+        "t": 5.2,
+        "type": "clack",
+        "gain": 0.4,
+        "pitch": 0.75,
+        "pan": -0.55,
+        "seed": 42
+      },
+      {
+        "t": 5.21,
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 1.3,
+        "pan": -0.55,
+        "seed": 43
+      },
+      {
+        "t": 4.52,
+        "type": "rustle",
+        "dur": 0.8,
+        "density": 0.5,
+        "pitch": 0.4,
+        "gain": 0.35,
+        "pan": 0.55,
+        "seed": 41
+      },
+      {
+        "t": 4.52,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.85,
+        "q": 1.4,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "pan": 0.55
+      },
+      {
+        "t": 5.42,
+        "type": "clack",
+        "gain": 0.4,
+        "pitch": 0.75,
+        "pan": 0.55,
+        "seed": 42
+      },
+      {
+        "t": 5.43,
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 1.3,
+        "pan": 0.55,
+        "seed": 43
+      },
+      {
+        "t": 5.55,
+        "type": "pop",
+        "gain": 0.5,
+        "pitch": 0.9,
+        "pan": -0.5,
+        "seed": 51
+      },
+      {
+        "t": 6,
+        "type": "pop",
+        "gain": 0.5,
+        "pitch": 1.05,
+        "pan": 0.5,
+        "seed": 52
+      },
+      {
+        "t": 7.3,
+        "type": "pop",
+        "gain": 0.25,
+        "pitch": 1.5,
+        "pan": -0.4,
+        "seed": 53
+      },
+      {
+        "t": 7.35,
+        "type": "pop",
+        "gain": 0.25,
+        "pitch": 1.6,
+        "pan": 0.4,
+        "seed": 54
+      },
+      {
+        "t": 7.25,
+        "type": "thud",
+        "gain": 0.49500000000000005,
+        "pitch": 0.55,
+        "pan": -0.4,
+        "seed": 11
+      },
+      {
+        "t": 7.254,
+        "type": "clack",
+        "gain": 0.378,
+        "pitch": 0.5,
+        "pan": -0.4,
+        "seed": 12
+      },
+      {
+        "t": 7.27,
+        "type": "hum",
+        "dur": 0.9,
+        "gain": 0.045000000000000005,
+        "hz": 100,
+        "pan": -0.4
+      },
+      {
+        "t": 7.55,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.4,
+        "q": 2.2,
+        "pitch": 1.1,
+        "gain": 0.25,
+        "pan": 0
+      },
+      {
+        "t": 7.93,
+        "type": "thud",
+        "gain": 0.45,
+        "pitch": 1.15,
+        "pan": 0,
+        "seed": 31
+      },
+      {
+        "t": 7.949999999999999,
+        "type": "clack",
+        "gain": 0.22,
+        "pitch": 1.3,
+        "pan": 0,
+        "seed": 32
+      },
+      {
+        "t": 8.05,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.35,
+        "q": 3,
+        "pitch": 1.6,
+        "gain": 0.16,
+        "pan": 0.4
+      },
+      {
+        "t": 8.75,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.35,
+        "q": 3,
+        "pitch": 1.6,
+        "gain": 0.16,
+        "pan": -0.4
+      },
+      {
+        "t": 9.4,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.35,
+        "q": 3,
+        "pitch": 1.6,
+        "gain": 0.16,
+        "pan": 0.4
+      },
+      {
+        "t": 8.33,
+        "type": "tick",
+        "gain": 0.25,
+        "pan": 0.4,
+        "seed": 70
+      },
+      {
+        "t": 9.03,
+        "type": "tick",
+        "gain": 0.25,
+        "pan": -0.4,
+        "seed": 71
+      },
+      {
+        "t": 9.68,
+        "type": "tick",
+        "gain": 0.25,
+        "pan": 0.4,
+        "seed": 72
+      },
+      {
+        "t": 10.2,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.5,
+        "q": 2,
+        "pitch": 1.2,
+        "gain": 0.2
+      },
+      {
+        "t": 10.35,
+        "type": "rustle",
+        "dur": 0.85,
+        "density": 0.5,
+        "pitch": 0.4,
+        "gain": 0.35,
+        "pan": 0.6,
+        "seed": 81
+      },
+      {
+        "t": 10.35,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.8,
+        "q": 1.4,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "pan": 0.6
+      },
+      {
+        "t": 11.299999999999999,
+        "type": "blip",
+        "notes": [
+          0,
+          7,
+          12
+        ],
+        "dur": 0.09,
+        "gain": 0.3,
+        "pitch": 1,
+        "pan": 0.5
+      },
+      {
+        "t": 11.6,
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 1.4,
+        "pan": 0.5,
+        "seed": 91
+      },
+      {
+        "t": 11.149999999999999,
+        "type": "chime",
+        "dur": 1.6,
+        "gain": 0.2,
+        "pitch": 0.9
+      },
+      {
+        "t": 11.7,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.4,
+        "q": 2.2,
+        "pitch": 1.1,
+        "gain": 0.25,
+        "pan": 0
+      },
+      {
+        "t": 12.08,
+        "type": "thud",
+        "gain": 0.45,
+        "pitch": 1.15,
+        "pan": 0,
+        "seed": 31
+      },
+      {
+        "t": 12.1,
+        "type": "clack",
+        "gain": 0.22,
+        "pitch": 1.3,
+        "pan": 0,
+        "seed": 32
+      },
+      {
+        "t": 13.35,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 2,
+        "q": 0.7,
+        "pitch": 0.45,
+        "gain": 0.49500000000000005,
+        "pan": 0
+      },
+      {
+        "t": 13.4,
+        "type": "rustle",
+        "dur": 1.8,
+        "density": 0.75,
+        "pitch": 0.55,
+        "gain": 0.28800000000000003,
+        "pan": 0,
+        "seed": 21
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "set": {
+        "tracks": [
+          -1.9,
+          -2.5
+        ],
+        "judge": {
+          "x": 0,
+          "z": -1.05
+        },
+        "desk": {
+          "x": 0,
+          "z": -0.75
+        },
+        "screenA": {
+          "x": -2.65,
+          "z": -1.9,
+          "from": -8.2
+        },
+        "screenB": {
+          "x": 2.65,
+          "z": -1.9,
+          "from": 8.2,
+          "away": 8.4
+        },
+        "human": {
+          "x": -2.65,
+          "z": -2.5
+        },
+        "robot": {
+          "x": 2.65,
+          "z": -2.5
+        },
+        "bubbleA": {
+          "x": -2.45,
+          "y": 2.6,
+          "z": -1.75,
+          "text": "I'M HUMAN!"
+        },
+        "bubbleB": {
+          "x": 2.45,
+          "y": 2.6,
+          "z": -1.75,
+          "text": "ME TOO!"
+        },
+        "signZ": 0.25,
+        "wireTop": 9,
+        "title": {
+          "text": "THE TURING TEST",
+          "sub": "1950",
+          "w": 6,
+          "h": 1.5,
+          "hang": 4.05
+        },
+        "which": {
+          "text": "WHICH ONE IS\nTHE MACHINE?",
+          "w": 5.4,
+          "h": 1.75,
+          "hang": 4.3
+        },
+        "caption": {
+          "text": "IF YOU CAN'T TELL,\nIT PASSES.",
+          "w": 6.3,
+          "h": 1.8,
+          "hang": 4.35
+        },
+        "special": {
+          "from": [
+            0,
+            7.8,
+            -1.6
+          ],
+          "to": [
+            0,
+            0.6,
+            -0.95
+          ],
+          "angle": 0.2,
+          "intensity": 260
+        },
+        "follow": {
+          "from": [
+            -5,
+            9,
+            -0.7
+          ],
+          "angle": 0.11,
+          "intensity": 900
+        }
+      },
+      "cues": {
+        "curtainOpen": 0.5,
+        "curtainClose": 13.35,
+        "titleDrop": 1.45,
+        "titleOut": 4,
+        "judgeSpot": 2.75,
+        "specialDim": 7.25,
+        "slideA": 4.3,
+        "slideB": 4.52,
+        "bubbleA": 5.55,
+        "bubbleB": 6,
+        "bubblesOut": 7.3,
+        "followOn": 7.25,
+        "whichDrop": 7.55,
+        "whichOut": 10.2,
+        "aims": [
+          {
+            "t": 7.25,
+            "p": "A"
+          },
+          {
+            "t": 8.05,
+            "p": "B"
+          },
+          {
+            "t": 8.75,
+            "p": "A"
+          },
+          {
+            "t": 9.4,
+            "p": "B"
+          },
+          {
+            "t": 9.9,
+            "p": "mid"
+          },
+          {
+            "t": 10.7,
+            "p": "robot"
+          }
+        ],
+        "followOff": 14.049999999999999,
+        "slideBAway": 10.35,
+        "robotHop": 11.299999999999999,
+        "captionDrop": 11.7
+      },
+      "aimPoints": {
+        "A": [
+          -2.65,
+          1.15,
+          -1.9
+        ],
+        "B": [
+          2.65,
+          1.15,
+          -1.9
+        ],
+        "mid": [
+          0,
+          1,
+          -1.8
+        ],
+        "robot": [
+          2.65,
+          1,
+          -2.5
+        ],
+        "curtain": [
+          0,
+          1.3,
+          -0.35
+        ]
+      },
+      "frame": "x across, y up from the boards, z toward the audience; proscenium at z = 0"
+    }
+  }
+}

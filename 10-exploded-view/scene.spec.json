@@ -1,0 +1,1202 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "exploded-view",
+    "name": "Exploded View",
+    "description": "Premium product teardown: one manufactured object in a bright seamless studio separates along its assembly axis into precise bevelled parts (satin metal, matte black plastic, smoked polycarbonate, one accent hero part, brass screws), each outlined in thin dark ink, joined by dashed axis lines, with numbered callouts and a parts legend.",
+    "palette": {
+      "bgTop": "#f7f6f3",
+      "bgBottom": "#e3e1dc",
+      "ink": "#17191c",
+      "inkSoft": "#5c6169",
+      "rule": "#b9bcc1",
+      "accent": "#ff5a1f",
+      "accentDeep": "#d9400d",
+      "aluminium": "#c3c7cd",
+      "graphite": "#2b2e33",
+      "black": "#1b1d20",
+      "white": "#efeeeb",
+      "smoke": "#3d434b",
+      "brass": "#c9a14a",
+      "pcb": "#1f5c47",
+      "pad": "#d6b45a",
+      "rubber": "#232427",
+      "led": "#58e0ff",
+      "shadow": "#3a3c40"
+    },
+    "world": {
+      "background": "#ebe9e5",
+      "sky": {
+        "stops": [
+          [
+            0,
+            "#f7f6f3"
+          ],
+          [
+            0.62,
+            "#eeece8"
+          ],
+          [
+            1,
+            "#e0ded9"
+          ]
+        ]
+      },
+      "environment": "room",
+      "environmentIntensity": 0.55,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "pcf"
+    },
+    "materials": {
+      "metal": {
+        "type": "physical",
+        "baseColor": "#c3c7cd",
+        "roughness": 0.34,
+        "metalness": 0.85,
+        "clearcoat": 0.15,
+        "clearcoatRoughness": 0.4
+      },
+      "darkMetal": {
+        "type": "physical",
+        "baseColor": "#6d727a",
+        "roughness": 0.38,
+        "metalness": 0.8
+      },
+      "plasticBlack": {
+        "type": "physical",
+        "baseColor": "#1b1d20",
+        "roughness": 0.62,
+        "metalness": 0,
+        "clearcoat": 0.1,
+        "clearcoatRoughness": 0.6
+      },
+      "plasticGraphite": {
+        "type": "physical",
+        "baseColor": "#2b2e33",
+        "roughness": 0.4,
+        "metalness": 0,
+        "clearcoat": 0.55,
+        "clearcoatRoughness": 0.25
+      },
+      "plasticWhite": {
+        "type": "physical",
+        "baseColor": "#efeeeb",
+        "roughness": 0.5,
+        "metalness": 0,
+        "clearcoat": 0.3,
+        "clearcoatRoughness": 0.35
+      },
+      "plasticGrey": {
+        "type": "physical",
+        "baseColor": "#a9adb3",
+        "roughness": 0.55,
+        "metalness": 0,
+        "clearcoat": 0.15,
+        "clearcoatRoughness": 0.5
+      },
+      "rubber": {
+        "type": "physical",
+        "baseColor": "#232427",
+        "roughness": 0.85,
+        "metalness": 0
+      },
+      "smoke": {
+        "type": "physical",
+        "baseColor": "#3d434b",
+        "roughness": 0.12,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.05,
+        "opacity": 0.55
+      },
+      "accent": {
+        "type": "physical",
+        "baseColor": "#ff5a1f",
+        "roughness": 0.38,
+        "metalness": 0,
+        "clearcoat": 0.6,
+        "clearcoatRoughness": 0.2
+      },
+      "brass": {
+        "type": "physical",
+        "baseColor": "#c9a14a",
+        "roughness": 0.3,
+        "metalness": 0.95
+      },
+      "pcb": {
+        "type": "physical",
+        "baseColor": "#1f5c47",
+        "roughness": 0.45,
+        "metalness": 0,
+        "clearcoat": 0.5,
+        "clearcoatRoughness": 0.3
+      },
+      "pad": {
+        "type": "physical",
+        "baseColor": "#d6b45a",
+        "roughness": 0.3,
+        "metalness": 0.9
+      },
+      "led": {
+        "type": "standard",
+        "baseColor": "#58e0ff",
+        "roughness": 0.3,
+        "metalness": 0,
+        "emission": {
+          "color": "#58e0ff",
+          "strength": 1.2
+        }
+      },
+      "copper": {
+        "type": "physical",
+        "baseColor": "#c27b4a",
+        "roughness": 0.3,
+        "metalness": 0.95
+      }
+    },
+    "lights": [
+      {
+        "id": "ambient",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#d9d6d0",
+        "intensity": 0.9
+      },
+      {
+        "id": "softbox",
+        "type": "directional",
+        "color": "#ffffff",
+        "intensity": 2.2,
+        "position": [
+          -5,
+          16,
+          7
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 9,
+          "mapSize": 2048,
+          "extent": 11,
+          "near": 2,
+          "far": 45,
+          "bias": -0.0004,
+          "normalBias": 0.025
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#eef3ff",
+        "intensity": 0.9,
+        "position": [
+          8,
+          4,
+          -9
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "fill",
+        "type": "directional",
+        "color": "#fff6ec",
+        "intensity": 0.45,
+        "position": [
+          6,
+          2,
+          10
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.35,
+        "radius": 0.4,
+        "threshold": 2.6
+      },
+      "vignette": {
+        "darkness": 0.1,
+        "offset": 1.25
+      }
+    },
+    "camera": {
+      "fov": 26,
+      "near": 1,
+      "far": 140,
+      "drift": {
+        "amp": 0.03,
+        "speed": 0.3,
+        "orbit": 0
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#17191c",
+      "height": 0.5
+    },
+    "outline": {
+      "width": 1.7,
+      "creaseWidth": 1.05,
+      "creaseDeg": 50,
+      "creaseLevel": 0.55,
+      "color": "#17191c",
+      "bias": 0.02,
+      "highlightWidth": 3,
+      "highlightSize": 0.45
+    },
+    "explode": {
+      "overshoot": 1.35,
+      "outDur": 0.9,
+      "backDur": 0.45,
+      "snap": {
+        "amp": 0.06,
+        "freq": 26,
+        "decay": 9
+      },
+      "screwTurns": 3.5
+    },
+    "focus": {
+      "dim": 1,
+      "keepSat": 0.22,
+      "mid": 0.5,
+      "flatten": 0.6,
+      "maxL": 0.6,
+      "metalness": 0.65,
+      "dimLine": "#3a3e45",
+      "dimLineLevel": 0.8,
+      "glow": 0.018
+    },
+    "axis": {
+      "width": 1.3,
+      "color": "#7d8188",
+      "dash": [
+        0.16,
+        0.1,
+        0.03,
+        0.1
+      ],
+      "level": 0.9
+    },
+    "shadow": {
+      "floorOpacity": 0.07,
+      "blobOpacity": 0.28,
+      "blobSpread": 1.25
+    },
+    "ui": {
+      "font": "sans",
+      "ink": "#17191c",
+      "inkSoft": "#5c6169",
+      "rule": "#b9bcc1",
+      "accent": "#ff5a1f",
+      "dot": "#17191c",
+      "dotText": "#ffffff",
+      "leaderWidth": 1.6,
+      "paper": "#f7f6f3"
+    },
+    "sfx": {
+      "enter": "whoosh",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "clack",
+      "emphasis": "blip",
+      "ui": "tick",
+      "bed": "pad",
+      "servo": "buzz",
+      "screw": "click"
+    },
+    "motion": [
+      "The assembled object turns from a flat side view into a three-quarter hero angle (quaternion slerp), with a servo whir.",
+      "Parts separate along the assembly axis outermost-first with an outBack overshoot; screws spin out several turns as they travel.",
+      "Dash-dot centre lines draw on between separated parts; per-part floor shadows slide apart so the shadow stretches.",
+      "One part at a time is focused: others shift to a desaturated mid-tone grey of their own colour (ink outlines and shading kept), the focus part keeps full colour and gets an accent silhouette, and its callout leader draws on, then the label slides in.",
+      "The camera arcs slowly around the stack; at the end parts reassemble innermost-first with an inCubic rush and a small damped snap."
+    ]
+  },
+  "scene": {
+    "id": "10-exploded-view",
+    "style": "exploded-view",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "intro",
+        "t": 0,
+        "dur": 2.5
+      },
+      {
+        "id": "explode",
+        "t": 2.5,
+        "dur": 2.5
+      },
+      {
+        "id": "lidar",
+        "t": 5,
+        "dur": 2.6
+      },
+      {
+        "id": "brain",
+        "t": 7.6,
+        "dur": 2.5
+      },
+      {
+        "id": "work",
+        "t": 10.1,
+        "dur": 2.6
+      },
+      {
+        "id": "snap",
+        "t": 12.7,
+        "dur": 2.3
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          4.217,
+          2.454,
+          9.472
+        ],
+        "target": [
+          0,
+          0.25,
+          0
+        ],
+        "fov": 26,
+        "path": "arc"
+      },
+      {
+        "t": 2.4,
+        "pos": [
+          2.626,
+          5.75,
+          9.157
+        ],
+        "target": [
+          0,
+          0.25,
+          0
+        ],
+        "fov": 26,
+        "path": "arc",
+        "ease": "inOutSine"
+      },
+      {
+        "t": 2.5,
+        "pos": [
+          2.488,
+          5.8,
+          9.285
+        ],
+        "target": [
+          0,
+          0.25,
+          0
+        ],
+        "fov": 26,
+        "path": "arc",
+        "ease": "linear"
+      },
+      {
+        "t": 4.1,
+        "pos": [
+          4.343,
+          13.954,
+          17.853
+        ],
+        "target": [
+          2.947,
+          2.316,
+          1.895
+        ],
+        "fov": 26,
+        "path": "arc",
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 7.6,
+        "pos": [
+          3.5,
+          13.837,
+          17.742
+        ],
+        "target": [
+          2.947,
+          2.316,
+          1.895
+        ],
+        "fov": 26,
+        "path": "arc",
+        "ease": "inOutSine"
+      },
+      {
+        "t": 10.1,
+        "pos": [
+          2.67,
+          13.837,
+          17.749
+        ],
+        "target": [
+          2.947,
+          2.316,
+          1.895
+        ],
+        "fov": 26,
+        "path": "arc",
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.7,
+        "pos": [
+          2.109,
+          13.954,
+          17.892
+        ],
+        "target": [
+          2.947,
+          2.316,
+          1.895
+        ],
+        "fov": 26,
+        "path": "arc",
+        "ease": "inOutSine"
+      },
+      {
+        "t": 13.5,
+        "pos": [
+          1.841,
+          13.837,
+          17.713
+        ],
+        "target": [
+          2.947,
+          2.316,
+          1.895
+        ],
+        "fov": 26,
+        "path": "arc",
+        "ease": "inOutSine"
+      },
+      {
+        "t": 14.6,
+        "pos": [
+          2.056,
+          5.508,
+          9.673
+        ],
+        "target": [
+          0,
+          0.25,
+          0
+        ],
+        "fov": 26,
+        "path": "arc",
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          1.853,
+          5.414,
+          9.534
+        ],
+        "target": [
+          0,
+          0.25,
+          0
+        ],
+        "fov": 26,
+        "path": "arc",
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 12.9,
+        "gain": 0.16,
+        "root": 196,
+        "chord": [
+          0,
+          7,
+          14,
+          16
+        ],
+        "attack": 1.2,
+        "release": 1.6,
+        "brightness": 850
+      },
+      {
+        "t": 12.6,
+        "type": "pad",
+        "dur": 2.4,
+        "gain": 0.17,
+        "root": 220,
+        "chord": [
+          0,
+          7,
+          12,
+          16,
+          19
+        ],
+        "attack": 0.3,
+        "release": 1.4,
+        "brightness": 1100
+      },
+      {
+        "t": 0.25,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1,
+        "gain": 0.25,
+        "pitch": 0.8
+      },
+      {
+        "t": 0.35,
+        "type": "buzz",
+        "flicker": 0,
+        "hz": 92,
+        "dur": 0.42,
+        "gain": 0.07,
+        "pitch": 1,
+        "pan": -0.15,
+        "seed": 5
+      },
+      {
+        "t": 0.6699999999999999,
+        "type": "buzz",
+        "flicker": 0,
+        "hz": 106,
+        "dur": 0.42,
+        "gain": 0.07,
+        "pitch": 1,
+        "pan": -0.04999999999999999,
+        "seed": 6
+      },
+      {
+        "t": 0.99,
+        "type": "buzz",
+        "flicker": 0,
+        "hz": 120,
+        "dur": 0.42,
+        "gain": 0.07,
+        "pitch": 1,
+        "pan": 0.05000000000000002,
+        "seed": 7
+      },
+      {
+        "t": 1.33,
+        "type": "buzz",
+        "flicker": 0,
+        "hz": 134,
+        "dur": 0.42,
+        "gain": 0.07,
+        "pitch": 1,
+        "pan": 0.15000000000000005,
+        "seed": 8
+      },
+      {
+        "t": 2.3000000000000003,
+        "type": "clack",
+        "gain": 0.35,
+        "pitch": 0.8
+      },
+      {
+        "t": 0.35,
+        "type": "tick",
+        "gain": 0.35
+      },
+      {
+        "t": 0.47,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.06,
+        "gain": 0.22
+      },
+      {
+        "t": 3.18,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.55,
+        "gain": 0.2,
+        "pitch": 0.9,
+        "pan": 0.45,
+        "seed": 11
+      },
+      {
+        "t": 3.31,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.55,
+        "gain": 0.2,
+        "pitch": 1.02,
+        "pan": 0.4,
+        "seed": 12
+      },
+      {
+        "t": 3.4400000000000004,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.55,
+        "gain": 0.2,
+        "pitch": 1.1400000000000001,
+        "pan": 0.3,
+        "seed": 13
+      },
+      {
+        "t": 3.5700000000000003,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.55,
+        "gain": 0.2,
+        "pitch": 1.26,
+        "pan": 0.15,
+        "seed": 14
+      },
+      {
+        "t": 3.83,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.55,
+        "gain": 0.2,
+        "pitch": 0.9,
+        "pan": 0,
+        "seed": 15
+      },
+      {
+        "t": 4.220000000000001,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.55,
+        "gain": 0.2,
+        "pitch": 1.02,
+        "pan": -0.1,
+        "seed": 16
+      },
+      {
+        "t": 4.09,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.55,
+        "gain": 0.2,
+        "pitch": 1.1400000000000001,
+        "pan": -0.4,
+        "seed": 17
+      },
+      {
+        "t": 4.09,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.55,
+        "gain": 0.2,
+        "pitch": 1.26,
+        "pan": -0.3,
+        "seed": 18
+      },
+      {
+        "t": 3.96,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.55,
+        "gain": 0.2,
+        "pitch": 0.9,
+        "pan": -0.45,
+        "seed": 19
+      },
+      {
+        "t": 3.7,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.55,
+        "gain": 0.2,
+        "pitch": 1.02,
+        "pan": -0.55,
+        "seed": 20
+      },
+      {
+        "t": 3.5842553191495248,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 0.8,
+        "pan": 0.45,
+        "seed": 31
+      },
+      {
+        "t": 3.7142553191495247,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 0.9500000000000001,
+        "pan": 0.4,
+        "seed": 32
+      },
+      {
+        "t": 3.844255319149525,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 1.1,
+        "pan": 0.3,
+        "seed": 33
+      },
+      {
+        "t": 3.974255319149525,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 0.8,
+        "pan": 0.15,
+        "seed": 34
+      },
+      {
+        "t": 4.234255319149525,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 0.9500000000000001,
+        "pan": 0,
+        "seed": 35
+      },
+      {
+        "t": 4.624255319149525,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 1.1,
+        "pan": -0.1,
+        "seed": 36
+      },
+      {
+        "t": 4.4942553191495245,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 0.8,
+        "pan": -0.4,
+        "seed": 37
+      },
+      {
+        "t": 4.4942553191495245,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 0.9500000000000001,
+        "pan": -0.3,
+        "seed": 38
+      },
+      {
+        "t": 4.364255319149525,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 1.1,
+        "pan": -0.45,
+        "seed": 39
+      },
+      {
+        "t": 4.104255319149525,
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 0.8,
+        "pan": -0.55,
+        "seed": 40
+      },
+      {
+        "t": 3.34,
+        "type": "click",
+        "gain": 0.22,
+        "pitch": 1.5,
+        "pan": 0.4,
+        "seed": 51
+      },
+      {
+        "t": 3.385,
+        "type": "click",
+        "gain": 0.208,
+        "pitch": 1.7,
+        "pan": 0.4,
+        "seed": 52
+      },
+      {
+        "t": 3.43,
+        "type": "click",
+        "gain": 0.196,
+        "pitch": 1.5,
+        "pan": 0.4,
+        "seed": 53
+      },
+      {
+        "t": 3.475,
+        "type": "click",
+        "gain": 0.184,
+        "pitch": 1.7,
+        "pan": 0.4,
+        "seed": 54
+      },
+      {
+        "t": 3.52,
+        "type": "click",
+        "gain": 0.172,
+        "pitch": 1.5,
+        "pan": 0.4,
+        "seed": 55
+      },
+      {
+        "t": 3.565,
+        "type": "click",
+        "gain": 0.16,
+        "pitch": 1.7,
+        "pan": 0.4,
+        "seed": 56
+      },
+      {
+        "t": 3.61,
+        "type": "click",
+        "gain": 0.148,
+        "pitch": 1.5,
+        "pan": 0.4,
+        "seed": 57
+      },
+      {
+        "t": 3.654,
+        "type": "click",
+        "gain": 0.136,
+        "pitch": 1.7,
+        "pan": 0.4,
+        "seed": 58
+      },
+      {
+        "t": 3.699,
+        "type": "click",
+        "gain": 0.124,
+        "pitch": 1.5,
+        "pan": 0.4,
+        "seed": 59
+      },
+      {
+        "t": 2.6,
+        "type": "rumble",
+        "dur": 1.6,
+        "gain": 0.12,
+        "pitch": 1.4
+      },
+      {
+        "t": 5.25,
+        "type": "blip",
+        "notes": [
+          0,
+          12
+        ],
+        "dur": 0.05,
+        "gain": 0.25
+      },
+      {
+        "t": 7.8,
+        "type": "blip",
+        "notes": [
+          0,
+          12
+        ],
+        "dur": 0.05,
+        "gain": 0.25
+      },
+      {
+        "t": 10.299999999999999,
+        "type": "blip",
+        "notes": [
+          0,
+          12
+        ],
+        "dur": 0.05,
+        "gain": 0.25
+      },
+      {
+        "t": 5.57,
+        "type": "tick",
+        "gain": 0.3,
+        "pitch": 1.2
+      },
+      {
+        "t": 8.12,
+        "type": "tick",
+        "gain": 0.3,
+        "pitch": 1.2
+      },
+      {
+        "t": 10.62,
+        "type": "tick",
+        "gain": 0.3,
+        "pitch": 1.2
+      },
+      {
+        "t": 5.1,
+        "type": "buzz",
+        "flicker": 0,
+        "hz": 120,
+        "dur": 0.5,
+        "gain": 0.07,
+        "pan": 0.45,
+        "seed": 61
+      },
+      {
+        "t": 5.4,
+        "type": "buzz",
+        "flicker": 0,
+        "hz": 150,
+        "dur": 0.5,
+        "gain": 0.07,
+        "pan": 0.45,
+        "seed": 62
+      },
+      {
+        "t": 5.7,
+        "type": "buzz",
+        "flicker": 0,
+        "hz": 180,
+        "dur": 0.5,
+        "gain": 0.07,
+        "pan": 0.45,
+        "seed": 63
+      },
+      {
+        "t": 5.15,
+        "type": "riser",
+        "dur": 0.9,
+        "gain": 0.08,
+        "pitch": 1.8,
+        "pan": 0.45
+      },
+      {
+        "t": 8.049999999999999,
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.05,
+        "gain": 0.14,
+        "pitch": 1.5,
+        "pan": 0.15,
+        "seed": 71
+      },
+      {
+        "t": 8.23,
+        "type": "blip",
+        "notes": [
+          4
+        ],
+        "dur": 0.05,
+        "gain": 0.14,
+        "pitch": 1.5,
+        "pan": 0.15,
+        "seed": 72
+      },
+      {
+        "t": 8.36,
+        "type": "blip",
+        "notes": [
+          7
+        ],
+        "dur": 0.05,
+        "gain": 0.14,
+        "pitch": 1.5,
+        "pan": 0.15,
+        "seed": 73
+      },
+      {
+        "t": 8.57,
+        "type": "blip",
+        "notes": [
+          12
+        ],
+        "dur": 0.05,
+        "gain": 0.14,
+        "pitch": 1.5,
+        "pan": 0.15,
+        "seed": 74
+      },
+      {
+        "t": 8.709999999999999,
+        "type": "blip",
+        "notes": [
+          7
+        ],
+        "dur": 0.05,
+        "gain": 0.14,
+        "pitch": 1.5,
+        "pan": 0.15,
+        "seed": 75
+      },
+      {
+        "t": 8.95,
+        "type": "blip",
+        "notes": [
+          4
+        ],
+        "dur": 0.05,
+        "gain": 0.14,
+        "pitch": 1.5,
+        "pan": 0.15,
+        "seed": 76
+      },
+      {
+        "t": 9.1,
+        "type": "blip",
+        "notes": [
+          12
+        ],
+        "dur": 0.05,
+        "gain": 0.14,
+        "pitch": 1.5,
+        "pan": 0.15,
+        "seed": 77
+      },
+      {
+        "t": 10.2,
+        "type": "buzz",
+        "flicker": 0,
+        "hz": 70,
+        "dur": 2,
+        "gain": 0.07,
+        "pan": -0.4,
+        "seed": 81
+      },
+      {
+        "t": 10.25,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.2,
+        "gain": 0.18,
+        "pitch": 0.7,
+        "pan": -0.4
+      },
+      {
+        "t": 12.7,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "gain": 0.3,
+        "pitch": 1.1
+      },
+      {
+        "t": 13.639999999999999,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.8,
+        "pan": 0.45,
+        "seed": 91
+      },
+      {
+        "t": 13.58,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.8600000000000001,
+        "pan": 0.4,
+        "seed": 92
+      },
+      {
+        "t": 13.52,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.92,
+        "pan": 0.3,
+        "seed": 93
+      },
+      {
+        "t": 13.459999999999999,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.98,
+        "pan": 0.15,
+        "seed": 94
+      },
+      {
+        "t": 13.34,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 1.04,
+        "pan": 0,
+        "seed": 95
+      },
+      {
+        "t": 13.16,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 1.1,
+        "pan": -0.1,
+        "seed": 96
+      },
+      {
+        "t": 13.219999999999999,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 1.1600000000000001,
+        "pan": -0.4,
+        "seed": 97
+      },
+      {
+        "t": 13.219999999999999,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 1.22,
+        "pan": -0.3,
+        "seed": 98
+      },
+      {
+        "t": 13.28,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 1.28,
+        "pan": -0.45,
+        "seed": 99
+      },
+      {
+        "t": 13.4,
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 1.34,
+        "pan": -0.55,
+        "seed": 100
+      },
+      {
+        "t": 13.639999999999999,
+        "type": "thud",
+        "gain": 0.6,
+        "pitch": 1.1
+      },
+      {
+        "t": 13.79,
+        "type": "chime",
+        "dur": 1.6,
+        "gain": 0.22,
+        "pitch": 1
+      }
+    ],
+    "duck": [],
+    "notes": "Robot built procedurally from exploded-view props (plate/lathe/ring/shell/pcb/coil/fan/gear/wheel/roller/screw). Explosion = style explode.js plan (pure f(t)); SCORE derives from the same plan. Overlay callouts anchored to part-local points; legend + title pinned in NDC."
+  }
+}

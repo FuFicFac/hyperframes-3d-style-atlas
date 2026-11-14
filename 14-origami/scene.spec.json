@@ -1,0 +1,1233 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "origami",
+    "name": "Origami",
+    "description": "Japanese paper folding on a calm oak desk: single sheets of two-sided kami paper fold on screen, crease by crease, into crisp faceted models lit by soft window light, labelled with ink-printed washi strips.",
+    "palette": {
+      "bg": "#d9d3c9",
+      "table": "#c9bdab",
+      "kami": "#2f5ea6",
+      "washi": "#f6f2e9",
+      "kinari": "#ebe2d0",
+      "core": "#fbf8f2",
+      "vermilion": "#d4472f",
+      "gold": "#e2b45e",
+      "cream": "#f5ead2",
+      "indigo": "#22355f",
+      "sakura": "#e7a2ae",
+      "matcha": "#7d9a5b",
+      "sumi": "#1f1c19",
+      "hanko": "#c3342b",
+      "strip": "#f8f3e7",
+      "guide": "#3b302a"
+    },
+    "world": {
+      "background": "#d9d3c9",
+      "fog": {
+        "color": "#d9d3c9",
+        "near": 11,
+        "far": 26
+      },
+      "environment": null,
+      "toneMapping": "neutral",
+      "exposure": 1.05,
+      "shadowType": "pcf"
+    },
+    "paper": {
+      "thickness": 0.003,
+      "pitch": 0.0042,
+      "imperfect": {
+        "flat": [
+          0.03,
+          0.1
+        ],
+        "open": 1.4
+      },
+      "bendSegments": 8,
+      "fibre": {
+        "size": 512,
+        "seed": 31,
+        "strands": 1600,
+        "length": [
+          0.02,
+          0.09
+        ],
+        "darkShare": 0.22,
+        "cloud": 0.05,
+        "grain": 0.035,
+        "repeatPerSheet": 2.2,
+        "description": "kozo fibre strands + faint cloud + fine grain (style-local fibreCanvas), multiplied under every paper colour; also the bump map"
+      },
+      "bump": {
+        "strength": 0.008,
+        "description": "fibre relief: the fibre canvas as a bump map, one tile per sheet (bump UV = sheet UV, which the crease groove shares)"
+      },
+      "sheen": {
+        "gradient": 0.07,
+        "tone": 0.025,
+        "description": "per-facet vertex-colour gradient (seeded direction) + tone shift: each facet catches the light a little differently"
+      },
+      "crease": {
+        "texSize": 1024,
+        "width": 0.0042,
+        "dark": 0.06,
+        "groove": 0.0065,
+        "depth": 0.004,
+        "description": "creases baked in sheet UV, revealed per fold step: a soft groove (bump, shaded by the light) + a faint pressed darkening"
+      },
+      "roughness": 0.74
+    },
+    "chiyogami": {
+      "seigaihaRed": {
+        "pattern": "seigaiha",
+        "ground": "#d4472f",
+        "ink": "#f5ead2",
+        "accent": "#e2b45e",
+        "tiles": 12
+      },
+      "seigaihaGold": {
+        "pattern": "seigaiha",
+        "ground": "#c93f2a",
+        "ink": "#e2b45e",
+        "accent": "#f5ead2",
+        "tiles": 6
+      },
+      "shippoRed": {
+        "pattern": "shippo",
+        "ground": "#d4472f",
+        "ink": "#f5ead2",
+        "accent": "#e2b45e",
+        "tiles": 6
+      },
+      "kanokoRed": {
+        "pattern": "kanoko",
+        "ground": "#cf4430",
+        "ink": "#f8eedb",
+        "accent": "#9e2a1c",
+        "tiles": 9
+      },
+      "asanohaIndigo": {
+        "pattern": "asanoha",
+        "ground": "#22355f",
+        "ink": "#e9dcc0",
+        "accent": "#e2b45e",
+        "tiles": 5
+      }
+    },
+    "textures": {
+      "desk": {
+        "size": 1024,
+        "metresPerTile": 5,
+        "seed": 19,
+        "lines": 64,
+        "warp": 5,
+        "contrast": 0.55,
+        "blotch": 0.03,
+        "pore": 0.014,
+        "dark": "#c1b7a8",
+        "mid": "#d3cbbf",
+        "light": "#ded8ce",
+        "roughness": 0.6,
+        "roughVar": 0.12,
+        "description": "light oak veneer desk top (style-local deskTextures)"
+      }
+    },
+    "materials": {
+      "table": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.62,
+        "metalness": 0,
+        "bump": {
+          "scale": 80,
+          "octaves": 2,
+          "seed": 5,
+          "strength": 0.08,
+          "description": "fine pore noise"
+        }
+      },
+      "paperFront": {
+        "type": "standard",
+        "baseColor": "#2f5ea6",
+        "roughness": 0.74,
+        "metalness": 0,
+        "vertexColors": true
+      },
+      "paperBack": {
+        "type": "standard",
+        "baseColor": "#f6f2e9",
+        "roughness": 0.78,
+        "metalness": 0,
+        "vertexColors": true
+      },
+      "paperEdge": {
+        "type": "standard",
+        "baseColor": "#fbf8f2",
+        "roughness": 0.85,
+        "metalness": 0,
+        "emission": {
+          "color": "#fbf8f2",
+          "strength": 0.18
+        }
+      }
+    },
+    "lights": [
+      {
+        "id": "ambient",
+        "type": "hemisphere",
+        "color": "#eef0f2",
+        "groundColor": "#8f8678",
+        "intensity": 0.8
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff1dd",
+        "intensity": 3.6,
+        "position": [
+          -7.2,
+          6.6,
+          2.6
+        ],
+        "target": [
+          0.2,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 7,
+          "mapSize": 4096,
+          "extent": 6,
+          "near": 1,
+          "far": 30,
+          "bias": -0.0003,
+          "normalBias": 0.006
+        }
+      },
+      {
+        "id": "fill",
+        "type": "directional",
+        "color": "#dde6f3",
+        "intensity": 0.42,
+        "position": [
+          6,
+          3.5,
+          6
+        ],
+        "target": [
+          0,
+          0.3,
+          0
+        ]
+      }
+    ],
+    "contact": {
+      "color": "#2a2118",
+      "opacity": 0.42,
+      "pad": 0.07,
+      "reach": 0.12,
+      "stand": [
+        0.2,
+        0.45
+      ],
+      "nearShare": [
+        0.3,
+        0.5
+      ],
+      "y": 0.0015,
+      "min": 0.12
+    },
+    "window": {
+      "enabled": false,
+      "distance": 3.4,
+      "width": 7,
+      "height": 5.2,
+      "mullions": 3,
+      "transoms": 2,
+      "bar": 0.07,
+      "frame": 0,
+      "offset": [
+        0.4,
+        -0.2
+      ]
+    },
+    "post": {
+      "tiltShift": {
+        "focus": 0.5,
+        "range": 0.36,
+        "blur": 1.6
+      },
+      "vignette": {
+        "darkness": 0.28,
+        "offset": 1.1
+      },
+      "grain": {
+        "amount": 0.014,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.3,
+      "far": 60,
+      "drift": {
+        "amp": 0.03,
+        "speed": 0.22
+      }
+    },
+    "text": {
+      "font": "\"Hiragino Mincho ProN\", \"Hiragino Mincho Pro\", \"YuMincho\", Georgia, serif",
+      "weight": 600,
+      "color": "#1f1c19",
+      "height": 0.06
+    },
+    "label": {
+      "pxPerUnit": 220,
+      "mainSize": 0.56,
+      "kickerSize": 0.3,
+      "letterSpacing": 0.06,
+      "padX": 0.55,
+      "padY": 0.3,
+      "seal": "折",
+      "sealSize": 0.62,
+      "deckle": 0.08,
+      "fibre": 0.05,
+      "rule": "#c3342b",
+      "shadow": 0.22
+    },
+    "guide": {
+      "width": 3,
+      "level": 0.8,
+      "valley": [
+        0.06,
+        0.04,
+        0,
+        0
+      ],
+      "mountain": [
+        0.06,
+        0.03,
+        0.01,
+        0.03
+      ],
+      "lead": 0.45,
+      "fade": 0.35
+    },
+    "tuning": {
+      "foldDur": 0.5,
+      "pairLag": 0.2,
+      "gap": 0.12,
+      "wipeSoft": 0.18,
+      "stackPitch": 0.0055
+    },
+    "sfx": {
+      "enter": "paper",
+      "exit": "rustle",
+      "move": "whoosh",
+      "land": "fold",
+      "emphasis": "chime",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "Models are folded on screen: each step rotates a set of rigid paper facets about a crease line; the angle is a pure function of t.",
+      "Steps nest: a later crease is carried by the facets an earlier step folded, so a sequence builds a real folded shape.",
+      "A dashed crease guide (valley = dashes, mountain = dash-dot) draws on just before each fold and fades as the paper swings.",
+      "Flat folds ease in-out and land one paper pitch above the stack they cover; open folds settle with a ~4 % springy overshoot.",
+      "Crease lines appear on the paper as each fold happens and stay; a crease-only step folds and opens again.",
+      "Finished models then move as characters: a dart glides, a glider flaps by re-angling its wing creases.",
+      "Camera: calm three-quarter view from above, slow drift, push in on the fold, pull out for the reveal."
+    ]
+  },
+  "scene": {
+    "id": "14-origami",
+    "style": "origami",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "open",
+        "t": 0,
+        "dur": 1.1
+      },
+      {
+        "id": "swan",
+        "t": 1.1,
+        "dur": 5.6
+      },
+      {
+        "id": "heart",
+        "t": 6.7,
+        "dur": 5.2
+      },
+      {
+        "id": "hero",
+        "t": 11.9,
+        "dur": 3.1
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0.1,
+          5.3,
+          6.3
+        ],
+        "target": [
+          0.05,
+          0,
+          -0.05
+        ],
+        "fov": 30
+      },
+      {
+        "t": 1.2000000000000002,
+        "pos": [
+          0,
+          5.2,
+          6.1
+        ],
+        "target": [
+          0,
+          0,
+          -0.05
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 2.5,
+        "pos": [
+          -1.3,
+          4.6,
+          4.7
+        ],
+        "target": [
+          -1.45,
+          0.05,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 5.4,
+        "pos": [
+          -1.25,
+          4.2,
+          4.6
+        ],
+        "target": [
+          -1.45,
+          0.12,
+          0
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 6.6,
+        "pos": [
+          -1.15,
+          2.7,
+          5
+        ],
+        "target": [
+          -1.45,
+          0.55,
+          0.05
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 6.75,
+        "pos": [
+          -1.1,
+          2.65,
+          4.9
+        ],
+        "target": [
+          -1.45,
+          0.55,
+          0.05
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 7.9,
+        "pos": [
+          1.5499999999999998,
+          4.7,
+          4.3
+        ],
+        "target": [
+          1.5,
+          0,
+          -0.5
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 10.9,
+        "pos": [
+          1.45,
+          4.4,
+          4.2
+        ],
+        "target": [
+          1.5,
+          0.05,
+          -0.5
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 12,
+        "pos": [
+          1.3499999999999999,
+          4.3,
+          4.35
+        ],
+        "target": [
+          1.5999999999999999,
+          0.1,
+          -0.25
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 13.700000000000001,
+        "pos": [
+          0.15,
+          2.9,
+          6.4
+        ],
+        "target": [
+          0.1,
+          0.5,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0.1,
+          2.85,
+          6.25
+        ],
+        "target": [
+          0.1,
+          0.5,
+          0
+        ],
+        "fov": 30,
+        "ease": "linear"
+      }
+    ],
+    "objects": [
+      {
+        "id": "table",
+        "primitive": "procedural",
+        "factory": "table",
+        "procedural": "calm light-oak desk top, 40 x 40 m plane at y = 0 (style-local veneer texture + roughness)",
+        "dims": {
+          "size": 40
+        },
+        "position": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.3,
+        "root": 196,
+        "chord": [
+          0,
+          7,
+          12,
+          14,
+          19
+        ],
+        "attack": 2.2,
+        "release": 2.4,
+        "brightness": 1500
+      },
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.12,
+        "root": 392,
+        "chord": [
+          0,
+          7,
+          14
+        ],
+        "attack": 3,
+        "release": 3,
+        "brightness": 2600,
+        "seed": 3
+      },
+      {
+        "t": 0.05,
+        "type": "whoosh",
+        "dur": 0.5249999999999999,
+        "gain": 0.08,
+        "pitch": 0.8,
+        "seed": 6
+      },
+      {
+        "t": 0.35,
+        "type": "rustle",
+        "dur": 0.32,
+        "gain": 0.16,
+        "pitch": 1.5,
+        "pan": -0.45,
+        "seed": 200
+      },
+      {
+        "t": 0.4625,
+        "type": "paper",
+        "dur": 0.4,
+        "gain": 0.32,
+        "pitch": 0.8,
+        "pan": -0.5,
+        "seed": 5
+      },
+      {
+        "t": 0.5825,
+        "type": "paper",
+        "dur": 0.4,
+        "gain": 0.28,
+        "pitch": 0.86,
+        "pan": 0.5499999999999999,
+        "seed": 7
+      },
+      {
+        "type": "paper",
+        "fold": true,
+        "dur": 0.56,
+        "gain": 0.62,
+        "pitch": 0.95,
+        "density": 0.45,
+        "t": 1.25,
+        "pan": -0.5414213562373095,
+        "seed": 31
+      },
+      {
+        "type": "paper",
+        "fold": true,
+        "dur": 0.56,
+        "gain": 0.62,
+        "pitch": 1.02,
+        "density": 0.45,
+        "t": 1.45,
+        "pan": -0.4585786437626905,
+        "seed": 38
+      },
+      {
+        "type": "click",
+        "dur": 0.02,
+        "gain": 0.1,
+        "pitch": 0.5,
+        "t": 1.7349999999999999,
+        "pan": -0.5414213562373095,
+        "seed": 32
+      },
+      {
+        "type": "click",
+        "dur": 0.02,
+        "gain": 0.1,
+        "pitch": 0.5,
+        "t": 1.935,
+        "pan": -0.4585786437626905,
+        "seed": 39
+      },
+      {
+        "type": "rustle",
+        "dur": 0.69,
+        "gain": 0.42,
+        "pitch": 0.8,
+        "density": 0.5,
+        "t": 2.1,
+        "pan": -0.5,
+        "seed": 45
+      },
+      {
+        "type": "whoosh",
+        "dur": 0.6,
+        "gain": 0.12,
+        "pitch": 0.7,
+        "t": 2.1,
+        "pan": -0.5,
+        "seed": 46
+      },
+      {
+        "type": "paper",
+        "fold": true,
+        "dur": 0.56,
+        "gain": 0.62,
+        "pitch": 1.16,
+        "density": 0.45,
+        "t": 2.85,
+        "pan": -0.5234628899586202,
+        "seed": 52
+      },
+      {
+        "type": "paper",
+        "fold": true,
+        "dur": 0.56,
+        "gain": 0.62,
+        "pitch": 0.95,
+        "density": 0.45,
+        "t": 3.0500000000000003,
+        "pan": -0.4765374384940781,
+        "seed": 59
+      },
+      {
+        "type": "click",
+        "dur": 0.02,
+        "gain": 0.1,
+        "pitch": 0.5,
+        "t": 3.335,
+        "pan": -0.5234628899586202,
+        "seed": 53
+      },
+      {
+        "type": "click",
+        "dur": 0.02,
+        "gain": 0.1,
+        "pitch": 0.5,
+        "t": 3.535,
+        "pan": -0.4765374384940781,
+        "seed": 60
+      },
+      {
+        "type": "paper",
+        "fold": true,
+        "dur": 0.6160000000000001,
+        "gain": 0.62,
+        "pitch": 1.02,
+        "density": 0.45,
+        "t": 3.7,
+        "pan": -0.5000000619608064,
+        "seed": 66
+      },
+      {
+        "type": "click",
+        "dur": 0.02,
+        "gain": 0.1,
+        "pitch": 0.5,
+        "t": 4.2335,
+        "pan": -0.5000000619608064,
+        "seed": 67
+      },
+      {
+        "type": "paper",
+        "fold": true,
+        "dur": 0.56,
+        "gain": 0.62,
+        "pitch": 1.0899999999999999,
+        "density": 0.45,
+        "t": 4.4,
+        "pan": -0.4896137455302094,
+        "seed": 73
+      },
+      {
+        "type": "click",
+        "dur": 0.02,
+        "gain": 0.1,
+        "pitch": 0.5,
+        "t": 4.885000000000001,
+        "pan": -0.4896137455302094,
+        "seed": 74
+      },
+      {
+        "type": "paper",
+        "fold": true,
+        "dur": 0.44800000000000006,
+        "gain": 0.62,
+        "pitch": 1.16,
+        "density": 0.45,
+        "t": 5.050000000000001,
+        "pan": -0.3987385841088596,
+        "seed": 80
+      },
+      {
+        "type": "click",
+        "dur": 0.02,
+        "gain": 0.1,
+        "pitch": 0.5,
+        "t": 5.438000000000001,
+        "pan": -0.3987385841088596,
+        "seed": 81
+      },
+      {
+        "type": "paper",
+        "fold": true,
+        "dur": 0.44800000000000006,
+        "gain": 0.62,
+        "pitch": 0.95,
+        "density": 0.45,
+        "t": 5.550000000000001,
+        "pan": -0.49237174412079937,
+        "seed": 87
+      },
+      {
+        "type": "click",
+        "dur": 0.02,
+        "gain": 0.1,
+        "pitch": 0.5,
+        "t": 5.938000000000001,
+        "pan": -0.49237174412079937,
+        "seed": 88
+      },
+      {
+        "type": "rustle",
+        "dur": 0.69,
+        "gain": 0.42,
+        "pitch": 0.8,
+        "density": 0.5,
+        "t": 6.050000000000001,
+        "pan": -0.5,
+        "seed": 94
+      },
+      {
+        "type": "whoosh",
+        "dur": 0.6,
+        "gain": 0.12,
+        "pitch": 0.7,
+        "t": 6.050000000000001,
+        "pan": -0.5,
+        "seed": 95
+      },
+      {
+        "t": 6.449999999999999,
+        "type": "rustle",
+        "dur": 0.25,
+        "gain": 0.1,
+        "pitch": 1.7,
+        "pan": -0.45,
+        "seed": 220
+      },
+      {
+        "t": 6.590000000000001,
+        "type": "chime",
+        "dur": 1.6,
+        "gain": 0.07,
+        "pitch": 1,
+        "notes": 3,
+        "pan": -0.5,
+        "seed": 340
+      },
+      {
+        "type": "paper",
+        "fold": true,
+        "dur": 0.56,
+        "gain": 0.62,
+        "pitch": 0.95,
+        "density": 0.45,
+        "t": 6.8,
+        "pan": 0.5499999999999999,
+        "seed": 131
+      },
+      {
+        "t": 6.8500000000000005,
+        "type": "rustle",
+        "dur": 0.32,
+        "gain": 0.16,
+        "pitch": 1.5,
+        "pan": -0.45,
+        "seed": 201
+      },
+      {
+        "type": "click",
+        "dur": 0.02,
+        "gain": 0.1,
+        "pitch": 0.5,
+        "t": 7.285,
+        "pan": 0.5499999999999999,
+        "seed": 132
+      },
+      {
+        "type": "paper",
+        "fold": true,
+        "dur": 0.56,
+        "gain": 0.62,
+        "pitch": 1.02,
+        "density": 0.45,
+        "t": 7.4,
+        "pan": 0.5499999999999999,
+        "seed": 138
+      },
+      {
+        "type": "click",
+        "dur": 0.02,
+        "gain": 0.1,
+        "pitch": 0.5,
+        "t": 7.885000000000001,
+        "pan": 0.5499999999999999,
+        "seed": 139
+      },
+      {
+        "type": "paper",
+        "fold": true,
+        "dur": 0.56,
+        "gain": 0.62,
+        "pitch": 1.0899999999999999,
+        "density": 0.45,
+        "t": 8,
+        "pan": 0.5941942301450458,
+        "seed": 145
+      },
+      {
+        "type": "paper",
+        "fold": true,
+        "dur": 0.56,
+        "gain": 0.62,
+        "pitch": 1.16,
+        "density": 0.45,
+        "t": 8.2,
+        "pan": 0.5058056484472001,
+        "seed": 152
+      },
+      {
+        "type": "click",
+        "dur": 0.02,
+        "gain": 0.1,
+        "pitch": 0.5,
+        "t": 8.485,
+        "pan": 0.5941942301450458,
+        "seed": 146
+      },
+      {
+        "type": "click",
+        "dur": 0.02,
+        "gain": 0.1,
+        "pitch": 0.5,
+        "t": 8.684999999999999,
+        "pan": 0.5058056484472001,
+        "seed": 153
+      },
+      {
+        "type": "rustle",
+        "dur": 0.69,
+        "gain": 0.42,
+        "pitch": 0.8,
+        "density": 0.5,
+        "t": 8.85,
+        "pan": 0.5499999999999999,
+        "seed": 159
+      },
+      {
+        "type": "whoosh",
+        "dur": 0.6,
+        "gain": 0.12,
+        "pitch": 0.7,
+        "t": 8.85,
+        "pan": 0.5499999999999999,
+        "seed": 160
+      },
+      {
+        "type": "paper",
+        "fold": true,
+        "dur": 0.5040000000000001,
+        "gain": 0.62,
+        "pitch": 1.02,
+        "density": 0.45,
+        "t": 9.65,
+        "pan": 0.5499999999999999,
+        "seed": 166
+      },
+      {
+        "type": "click",
+        "dur": 0.02,
+        "gain": 0.1,
+        "pitch": 0.5,
+        "t": 10.086500000000001,
+        "pan": 0.5499999999999999,
+        "seed": 167
+      },
+      {
+        "type": "paper",
+        "fold": true,
+        "dur": 0.44800000000000006,
+        "gain": 0.62,
+        "pitch": 1.0899999999999999,
+        "density": 0.45,
+        "t": 10.25,
+        "pan": 0.6,
+        "seed": 173
+      },
+      {
+        "type": "paper",
+        "fold": true,
+        "dur": 0.44800000000000006,
+        "gain": 0.62,
+        "pitch": 1.16,
+        "density": 0.45,
+        "t": 10.45,
+        "pan": 0.47646223153956674,
+        "seed": 180
+      },
+      {
+        "type": "click",
+        "dur": 0.02,
+        "gain": 0.1,
+        "pitch": 0.5,
+        "t": 10.638,
+        "pan": 0.6,
+        "seed": 174
+      },
+      {
+        "type": "click",
+        "dur": 0.02,
+        "gain": 0.1,
+        "pitch": 0.5,
+        "t": 10.838,
+        "pan": 0.47646223153956674,
+        "seed": 181
+      },
+      {
+        "type": "rustle",
+        "dur": 0.69,
+        "gain": 0.42,
+        "pitch": 0.8,
+        "density": 0.5,
+        "t": 11.100000000000001,
+        "pan": 0.5499999999999999,
+        "seed": 187
+      },
+      {
+        "type": "whoosh",
+        "dur": 0.6,
+        "gain": 0.12,
+        "pitch": 0.7,
+        "t": 11.100000000000001,
+        "pan": 0.5499999999999999,
+        "seed": 188
+      },
+      {
+        "t": 11.55,
+        "type": "rustle",
+        "dur": 0.25,
+        "gain": 0.1,
+        "pitch": 1.7,
+        "pan": -0.45,
+        "seed": 221
+      },
+      {
+        "t": 11.64,
+        "type": "chime",
+        "dur": 1.8,
+        "gain": 0.08,
+        "pitch": 1.12,
+        "notes": 4,
+        "pan": 0.5499999999999999,
+        "seed": 341
+      },
+      {
+        "t": 12.200000000000001,
+        "type": "rustle",
+        "dur": 0.32,
+        "gain": 0.16,
+        "pitch": 1.5,
+        "pan": -0.45,
+        "seed": 202
+      },
+      {
+        "t": 12.25,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.04,
+        "gain": 0.18,
+        "pitch": 0.65,
+        "pan": 0.5499999999999999,
+        "seed": 400
+      },
+      {
+        "t": 13.485,
+        "type": "chime",
+        "dur": 2,
+        "gain": 0.11,
+        "pitch": 0.75,
+        "notes": 4,
+        "seed": 401
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "Swan and heart are styles/origami/folds.js MODELS.swan / MODELS.heart built by buildFolds (rigid facets, nested creases, auto layer lift). Picture: foldModel.userData.update(t) reads foldTimeline(PLAN, CUES).at(t). SCORE = scoreFromEvents(timeline.events): one paper fold per fold step.",
+      "swan": [
+        {
+          "id": "kiteL",
+          "kind": "valley",
+          "at": 1.25,
+          "dur": 0.5,
+          "moved": 9
+        },
+        {
+          "id": "kiteR",
+          "kind": "valley",
+          "at": 1.45,
+          "dur": 0.5,
+          "moved": 9
+        },
+        {
+          "id": "turn",
+          "kind": "turn",
+          "at": 2.1,
+          "dur": 0.6,
+          "moved": 38
+        },
+        {
+          "id": "narrowL",
+          "kind": "valley",
+          "at": 2.85,
+          "dur": 0.5,
+          "moved": 12
+        },
+        {
+          "id": "narrowR",
+          "kind": "valley",
+          "at": 3.0500000000000003,
+          "dur": 0.5,
+          "moved": 12
+        },
+        {
+          "id": "half",
+          "kind": "valley",
+          "at": 3.7,
+          "dur": 0.55,
+          "moved": 19
+        },
+        {
+          "id": "neck",
+          "kind": "valley",
+          "at": 4.4,
+          "dur": 0.5,
+          "moved": 24
+        },
+        {
+          "id": "head",
+          "kind": "valley",
+          "at": 5.050000000000001,
+          "dur": 0.4,
+          "moved": 12
+        },
+        {
+          "id": "tail",
+          "kind": "valley",
+          "at": 5.550000000000001,
+          "dur": 0.4,
+          "moved": 2
+        },
+        {
+          "id": "stand",
+          "kind": "turn",
+          "at": 6.050000000000001,
+          "dur": 0.6,
+          "moved": 38
+        }
+      ],
+      "heart": [
+        {
+          "id": "top",
+          "kind": "valley",
+          "at": 6.8,
+          "dur": 0.5,
+          "moved": 1
+        },
+        {
+          "id": "bottom",
+          "kind": "valley",
+          "at": 7.4,
+          "dur": 0.5,
+          "moved": 3
+        },
+        {
+          "id": "sideR",
+          "kind": "valley",
+          "at": 8,
+          "dur": 0.5,
+          "moved": 4
+        },
+        {
+          "id": "sideL",
+          "kind": "valley",
+          "at": 8.2,
+          "dur": 0.5,
+          "moved": 4
+        },
+        {
+          "id": "turn",
+          "kind": "turn",
+          "at": 8.85,
+          "dur": 0.6,
+          "moved": 13
+        },
+        {
+          "id": "tops",
+          "kind": "valley",
+          "at": 9.65,
+          "dur": 0.45,
+          "moved": 2
+        },
+        {
+          "id": "pointR",
+          "kind": "valley",
+          "at": 10.25,
+          "dur": 0.4,
+          "moved": 2
+        },
+        {
+          "id": "pointL",
+          "kind": "valley",
+          "at": 10.45,
+          "dur": 0.4,
+          "moved": 2
+        },
+        {
+          "id": "reveal",
+          "kind": "turn",
+          "at": 11.100000000000001,
+          "dur": 0.6,
+          "moved": 13
+        }
+      ],
+      "facets": {
+        "swan": 38,
+        "heart": 13
+      }
+    }
+  }
+}

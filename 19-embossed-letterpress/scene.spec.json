@@ -1,0 +1,744 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "embossed-letterpress",
+    "name": "Embossed Letterpress",
+    "description": "Fine stationery under raking light: one heavyweight cotton sheet with deckled edges where type and ornaments are pressed in (debossed with uneven spot ink), raised (blind embossed) or stamped in gold foil that flashes as the light sweeps; a brass die descends, presses with a soft thud and lifts to reveal each impression.",
+    "palette": {
+      "bg": "#1f2229",
+      "board": "#2a2e37",
+      "paper": "#f2ead9",
+      "paperShade": "#e6dcc7",
+      "deckle": "#f8f2e6",
+      "navy": "#1c2a4a",
+      "oxblood": "#7a2433",
+      "gold": "#d9ae58",
+      "copper": "#c8794e",
+      "brass": "#b8933f",
+      "die": "#2c2621"
+    },
+    "world": {
+      "background": "#1f2229",
+      "environment": "room",
+      "environmentIntensity": 0.55,
+      "toneMapping": "neutral",
+      "exposure": 1
+    },
+    "sheet": {
+      "width": 3.4,
+      "height": 2,
+      "pxPerMetre": 1000,
+      "wideDownsample": 4,
+      "segments": [
+        170,
+        100
+      ],
+      "shoulder": 0.0022,
+      "pillowRadius": 0.022,
+      "depth": {
+        "deboss": 0.0042,
+        "emboss": 0.0032,
+        "ink": 0.0042,
+        "foil": 0.0018
+      },
+      "pillow": {
+        "deboss": 0.45,
+        "emboss": 0,
+        "ink": 0.4,
+        "foil": 0.25
+      },
+      "maxLayers": 8,
+      "deckle": {
+        "width": 0.016,
+        "freq": 46,
+        "seed": 7,
+        "edgeLighten": 0.06,
+        "edgeDrop": 0.0012
+      },
+      "thickness": 0.006,
+      "dip": {
+        "depth": 0.006,
+        "soft": 0.07
+      }
+    },
+    "fibre": {
+      "size": 512,
+      "perMetre": 2.2,
+      "seed": 41,
+      "albedo": 0.075,
+      "bump": 0.0005,
+      "fibres": 0.8
+    },
+    "ink": {
+      "coverage": [
+        0.42,
+        0.62
+      ],
+      "squash": 0.28,
+      "mottle": 0.16,
+      "skip": 0.08,
+      "roughness": 0.62
+    },
+    "foil": {
+      "color": "#d9ae58",
+      "roughness": 0.32,
+      "brush": 0.2,
+      "env": {
+        "low": "#3b2a18",
+        "high": "#fff1d2",
+        "base": 0.55
+      },
+      "band": {
+        "width": 0.11,
+        "strength": 5.5
+      }
+    },
+    "lighting": {
+      "key": {
+        "color": "#ffe9c9",
+        "intensity": 3.1,
+        "azimuth": 2.5,
+        "elevation": 0.33
+      },
+      "fill": {
+        "color": "#ece4d6",
+        "intensity": 0.6,
+        "frontal": 0.55
+      },
+      "paperSpec": 0.035,
+      "selfShadow": {
+        "steps": 7,
+        "reach": 0.016,
+        "soft": 0.0009,
+        "strength": 0.82
+      },
+      "dieShadow": {
+        "strength": 0.78,
+        "soft": 0.035,
+        "softPerMetre": 0.45,
+        "ao": 0.35,
+        "fadeHeight": 0.45
+      }
+    },
+    "materials": {
+      "brass": {
+        "type": "standard",
+        "baseColor": "#a3854a",
+        "roughness": 0.48,
+        "metalness": 1
+      },
+      "dieFace": {
+        "type": "standard",
+        "baseColor": "#3a3836",
+        "roughness": 0.35,
+        "metalness": 0.8
+      },
+      "knob": {
+        "type": "standard",
+        "baseColor": "#2c2621",
+        "roughness": 0.5,
+        "metalness": 0.05
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#f3ead8",
+        "groundColor": "#2a2420",
+        "intensity": 0.8
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#ffe9c9",
+        "intensity": 3.1,
+        "position": [
+          -4,
+          3,
+          1.6
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.22,
+        "radius": 0.35,
+        "threshold": 2.4
+      },
+      "tiltShift": {
+        "focus": 0.5,
+        "range": 0.36,
+        "blur": 1.6
+      },
+      "vignette": {
+        "darkness": 0.36,
+        "offset": 1.08
+      }
+    },
+    "camera": {
+      "fov": 26,
+      "near": 0.3,
+      "far": 40,
+      "drift": {
+        "amp": 0.012,
+        "speed": 0.22
+      }
+    },
+    "type": {
+      "display": "Didot, 'Bodoni 72', 'Big Caslon', Georgia, serif",
+      "text": "Baskerville, 'Hoefler Text', Georgia, serif",
+      "smallCaps": "'Bodoni 72 Smallcaps', Didot, Georgia, serif",
+      "tracking": 0.12
+    },
+    "text": {
+      "font": "serif",
+      "weight": 400,
+      "color": "#1c2a4a",
+      "height": 0.12
+    },
+    "press": {
+      "approach": 0.78,
+      "settle": 0.2,
+      "hover": 0.32,
+      "dwell": 0.24,
+      "lift": 0.42,
+      "exit": 0.5,
+      "from": [
+        0,
+        1.9,
+        1.3
+      ],
+      "reliefIn": 0.16,
+      "kick": {
+        "amount": 0.012,
+        "freq": 34,
+        "decay": 14
+      }
+    },
+    "sfx": {
+      "enter": "paper",
+      "exit": "rustle",
+      "move": "whoosh",
+      "land": "thud",
+      "emphasis": "sparkle",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "Every mark arrives by a press: a brass die travels in from off-frame, drops straight down the last 0.3 m, rests 0.24 s while the sheet dips and the relief forms under it, then lifts straight up and away.",
+      "Relief depth is a per-layer press amount 0..1 (a uniform), so impressions can also grow in without a die; height maps never change after load.",
+      "The raking key light sweeps slowly in azimuth (low, ~19 deg elevation): debossed walls facing it catch light, the far walls fall into shadow.",
+      "Gold foil flashes when a travelling highlight band crosses it, and glints along the walls of its impression as the key moves.",
+      "Camera: macro, very slow drift; push to each impression as it is pressed, pull back to the whole card at the end; tilt-shift follows the subject."
+    ]
+  },
+  "scene": {
+    "id": "19-embossed-letterpress",
+    "style": "embossed-letterpress",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "title",
+        "t": 0,
+        "dur": 2.9
+      },
+      {
+        "id": "role",
+        "t": 2.9,
+        "dur": 2.9
+      },
+      {
+        "id": "task",
+        "t": 5.8,
+        "dur": 2.9
+      },
+      {
+        "id": "format",
+        "t": 8.7,
+        "dur": 2.9
+      },
+      {
+        "id": "finale",
+        "t": 11.6,
+        "dur": 3.4
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0.2,
+          -0.9,
+          5.15
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "fov": 26
+      },
+      {
+        "t": 2.9,
+        "pos": [
+          0.12,
+          -0.82,
+          4.9
+        ],
+        "target": [
+          0,
+          0.03,
+          0
+        ],
+        "fov": 26,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 3.75,
+        "pos": [
+          -0.72,
+          -0.62,
+          3
+        ],
+        "target": [
+          -0.8,
+          0.03,
+          0
+        ],
+        "fov": 26
+      },
+      {
+        "t": 5.8,
+        "pos": [
+          -0.7,
+          -0.6,
+          2.85
+        ],
+        "target": [
+          -0.8,
+          0.03,
+          0
+        ],
+        "fov": 26,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 6.6499999999999995,
+        "pos": [
+          0.06,
+          -0.62,
+          3
+        ],
+        "target": [
+          0,
+          0.03,
+          0
+        ],
+        "fov": 26
+      },
+      {
+        "t": 8.7,
+        "pos": [
+          0.04,
+          -0.6,
+          2.85
+        ],
+        "target": [
+          0,
+          0.03,
+          0
+        ],
+        "fov": 26,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 9.549999999999999,
+        "pos": [
+          0.84,
+          -0.62,
+          3
+        ],
+        "target": [
+          0.8,
+          0.03,
+          0
+        ],
+        "fov": 26
+      },
+      {
+        "t": 11.6,
+        "pos": [
+          0.8,
+          -0.6,
+          2.85
+        ],
+        "target": [
+          0.8,
+          0.03,
+          0
+        ],
+        "fov": 26,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.7,
+        "pos": [
+          0,
+          -0.92,
+          5.05
+        ],
+        "target": [
+          0,
+          -0.02,
+          0
+        ],
+        "fov": 26
+      },
+      {
+        "t": 15,
+        "pos": [
+          0,
+          -0.88,
+          4.88
+        ],
+        "target": [
+          0,
+          -0.02,
+          0
+        ],
+        "fov": 26,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [
+      {
+        "id": "board",
+        "primitive": "procedural",
+        "factory": "board",
+        "procedural": "charcoal cotton board under the card (9x6 m plane, fibre relief, receives the card's raking shadow sliver)",
+        "dims": {
+          "width": 9,
+          "height": 6,
+          "color": "#2a2e37"
+        },
+        "position": [
+          0,
+          0,
+          -0.006
+        ]
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12,
+          16,
+          19
+        ],
+        "brightness": 650,
+        "attack": 2.2,
+        "release": 3,
+        "gain": 0.42
+      },
+      {
+        "t": 0,
+        "type": "rumble",
+        "dur": 15,
+        "pitch": 0.5,
+        "gain": 0.035,
+        "seed": 3
+      },
+      {
+        "t": 0.02,
+        "type": "paper",
+        "dur": 0.75,
+        "density": 0.3,
+        "pitch": 0.7,
+        "gain": 0.45,
+        "pan": 0.3,
+        "seed": 5
+      },
+      {
+        "t": 0.8200000000000001,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "pitch": 0.42,
+        "q": 0.8,
+        "gain": 0.22,
+        "pan": 0,
+        "seed": 10
+      },
+      {
+        "t": 1.55,
+        "type": "thud",
+        "dur": 0.65,
+        "pitch": 0.42,
+        "gain": 0.5,
+        "pan": 0,
+        "seed": 31
+      },
+      {
+        "t": 1.562,
+        "type": "paper",
+        "dur": 0.38,
+        "density": 0.22,
+        "pitch": 0.55,
+        "gain": 0.42,
+        "pan": 0,
+        "seed": 51
+      },
+      {
+        "t": 1.82,
+        "type": "paper",
+        "dur": 0.42,
+        "density": 0.12,
+        "pitch": 0.75,
+        "gain": 0.26,
+        "pan": 0,
+        "seed": 72
+      },
+      {
+        "t": 2.021,
+        "type": "sparkle",
+        "dur": 1.1,
+        "pitch": 1.15,
+        "gain": 0.2,
+        "pan": 0,
+        "seed": 93
+      },
+      {
+        "t": 2.061,
+        "type": "chime",
+        "dur": 1.8,
+        "pitch": 0.8,
+        "gain": 0.07,
+        "seed": 113
+      },
+      {
+        "t": 2.9699999999999998,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "pitch": 0.42,
+        "q": 0.8,
+        "gain": 0.22,
+        "pan": -0.2825,
+        "seed": 14
+      },
+      {
+        "t": 3.7,
+        "type": "thud",
+        "dur": 0.65,
+        "pitch": 0.42,
+        "gain": 0.5,
+        "pan": -0.22599999999999998,
+        "seed": 35
+      },
+      {
+        "t": 3.712,
+        "type": "paper",
+        "dur": 0.38,
+        "density": 0.22,
+        "pitch": 0.55,
+        "gain": 0.42,
+        "pan": -0.2825,
+        "seed": 55
+      },
+      {
+        "t": 3.97,
+        "type": "paper",
+        "dur": 0.42,
+        "density": 0.12,
+        "pitch": 0.75,
+        "gain": 0.26,
+        "pan": -0.2825,
+        "seed": 76
+      },
+      {
+        "t": 5.869999999999999,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "pitch": 0.42,
+        "q": 0.8,
+        "gain": 0.22,
+        "pan": 0,
+        "seed": 18
+      },
+      {
+        "t": 6.6,
+        "type": "thud",
+        "dur": 0.65,
+        "pitch": 0.42,
+        "gain": 0.5,
+        "pan": 0,
+        "seed": 39
+      },
+      {
+        "t": 6.611999999999999,
+        "type": "paper",
+        "dur": 0.38,
+        "density": 0.22,
+        "pitch": 0.55,
+        "gain": 0.42,
+        "pan": 0,
+        "seed": 59
+      },
+      {
+        "t": 6.87,
+        "type": "paper",
+        "dur": 0.42,
+        "density": 0.12,
+        "pitch": 0.75,
+        "gain": 0.26,
+        "pan": 0,
+        "seed": 80
+      },
+      {
+        "t": 8.770000000000001,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "pitch": 0.42,
+        "q": 0.8,
+        "gain": 0.22,
+        "pan": 0.2825,
+        "seed": 22
+      },
+      {
+        "t": 9.5,
+        "type": "thud",
+        "dur": 0.65,
+        "pitch": 0.42,
+        "gain": 0.5,
+        "pan": 0.22599999999999998,
+        "seed": 43
+      },
+      {
+        "t": 9.512,
+        "type": "paper",
+        "dur": 0.38,
+        "density": 0.22,
+        "pitch": 0.55,
+        "gain": 0.42,
+        "pan": 0.2825,
+        "seed": 63
+      },
+      {
+        "t": 9.77,
+        "type": "paper",
+        "dur": 0.42,
+        "density": 0.12,
+        "pitch": 0.75,
+        "gain": 0.26,
+        "pan": 0.2825,
+        "seed": 84
+      },
+      {
+        "t": 12.120000000000001,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "pitch": 0.42,
+        "q": 0.8,
+        "gain": 0.22,
+        "pan": 0,
+        "seed": 26
+      },
+      {
+        "t": 12.85,
+        "type": "thud",
+        "dur": 0.65,
+        "pitch": 0.42,
+        "gain": 0.5,
+        "pan": 0,
+        "seed": 47
+      },
+      {
+        "t": 12.862,
+        "type": "paper",
+        "dur": 0.38,
+        "density": 0.22,
+        "pitch": 0.55,
+        "gain": 0.42,
+        "pan": 0,
+        "seed": 67
+      },
+      {
+        "t": 13.12,
+        "type": "paper",
+        "dur": 0.42,
+        "density": 0.12,
+        "pitch": 0.75,
+        "gain": 0.26,
+        "pan": 0,
+        "seed": 88
+      },
+      {
+        "t": 13.321,
+        "type": "sparkle",
+        "dur": 1.1,
+        "pitch": 1.15,
+        "gain": 0.2,
+        "pan": 0,
+        "seed": 109
+      },
+      {
+        "t": 13.360999999999999,
+        "type": "chime",
+        "dur": 1.8,
+        "pitch": 0.8,
+        "gain": 0.07,
+        "seed": 129
+      },
+      {
+        "t": 11.65,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.4,
+        "pitch": 0.38,
+        "q": 0.7,
+        "gain": 0.16,
+        "seed": 130
+      },
+      {
+        "t": 12.33,
+        "type": "sparkle",
+        "dur": 1.2,
+        "pitch": 1.3,
+        "gain": 0.16,
+        "seed": 131
+      }
+    ],
+    "duck": [],
+    "notes": "Card, dies and light rig are built in scene.js from embossed-letterpress props (reliefSheet with LAYERS, pressDie per PRESSES, rakingLight with LIGHT keys)."
+  }
+}

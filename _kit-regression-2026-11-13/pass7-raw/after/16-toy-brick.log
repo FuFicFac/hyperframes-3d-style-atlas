@@ -1,0 +1,29 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 9 old file(s): RUN.txt t0.3.png t1.6.png t11.6.png t14.6.png t3.4.png t5.9.png t7.3.png t8.6.png
+check-frames run: 2026-11-14 04:36:26 UTC
+times: 0.3, 1.6, 3.4, 5.9, 7.3, 8.6, 11.6, 14.6
+newest code edit: 2026-11-13 19:23:55 UTC (toy-brick/style.js)
+mp4: 16-toy-brick.mp4 2026-11-13 19:25:33 UTC
+kit last changed: 2026-11-14 04:24:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+0.3       renders/checks/t0.3.png       21805c10ac066b7dfd1988dfdc554933  SAME
+1.6       renders/checks/t1.6.png       70cd01e951e7ea63bd83fcde801b3cf8  SAME
+3.4       renders/checks/t3.4.png       f86e1fd9969837fad498c2ab8770e20a  SAME
+5.9       renders/checks/t5.9.png       644ce22419a165ec3f4897a04d9ce1bf  SAME
+7.3       renders/checks/t7.3.png       dcaf5e8f79b482bc9e059dcfcde48881  SAME
+8.6       renders/checks/t8.6.png       0e3124682624abeaeddd01e6ed924527  SAME
+11.6      renders/checks/t11.6.png      1770291ff2cc62b60f35c7b1254f2392  SAME
+14.6      renders/checks/t14.6.png      9b3f98e06f839cf4187430c6591d74b3  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 39.2 dB, frame 438)
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -24.1 dB, max -1.1 dB
+audio 16-toy-brick.mp4: mean -24.2 dB, max -1.0 dB  (5.4 MB)
+deep t=0.3: hash cabeeae7 mean 159 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.6: hash bec71817 mean 161.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3.4: hash fda63766 mean 170.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5.9: hash 7314c311 mean 169.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7.3: hash 1a0a9dcd mean 176.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.6: hash 85260290 mean 173 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=11.6: hash 6332a54d mean 186.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.6: hash 3eede7ba mean 187.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

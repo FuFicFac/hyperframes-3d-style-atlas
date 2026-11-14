@@ -1,0 +1,46 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 17 old file(s): RUN.txt t0.png t1.png t10.png t11.png t12.png t13.png t14.9.png t14.png t2.png t3.png t4.png t5.png t6.png t7.png t8.png t9.png
+check-frames run: 2026-11-14 03:36:23 UTC
+times: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 14.9
+newest code edit: 2026-11-14 03:19:42 UTC (chalkboard/style.js)
+mp4: 21-chalkboard.mp4 2026-11-13 21:19:43 UTC
+kit last changed: 2026-11-14 03:19:42 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+0         renders/checks/t0.png         4db9aa18f95c0464c2189b8fd5637049  SAME
+1         renders/checks/t1.png         6fdbfc0d37094f06932e9dd6170e42a7  SAME
+2         renders/checks/t2.png         5edf70e1584f9e4d788115d33d6950c7  SAME
+3         renders/checks/t3.png         5d3d997254d795f6eca096af298b197c  SAME
+4         renders/checks/t4.png         4e95aefd6ebd18ada2ca287386e2ec64  SAME
+5         renders/checks/t5.png         383fa50c6760ca6ca8c60afbc4181baf  SAME
+6         renders/checks/t6.png         1f8f573db1b24981cc0db1028b712de1  SAME
+7         renders/checks/t7.png         8f939adf0f0f81b89254d6034ee92200  SAME
+8         renders/checks/t8.png         0abd57cebba9bdb5b34b7fd5aaf27171  SAME
+9         renders/checks/t9.png         905c356d82174f9c86ba023d81fec079  SAME
+10        renders/checks/t10.png        3e46c04033482d983732a148cba251a4  SAME
+11        renders/checks/t11.png        d5b99528fd0157c76e6f5792db0b5a86  SAME
+12        renders/checks/t12.png        8792eeb9f072e737f3e8a82da2428fa4  SAME
+13        renders/checks/t13.png        44b1bfee63cad860a7349e7cdb5a0d60  SAME
+14        renders/checks/t14.png        e4db9eb2a9d8668fd0349135db6b8433  SAME
+14.9      renders/checks/t14.9.png      888ba91932f8eff036df4b07b6c75ca3  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 37.8 dB, frame 447)
+determinism: OK (16 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -22.0 dB, max -5.3 dB
+audio 21-chalkboard.mp4: mean -22.1 dB, max -5.3 dB  (4.3 MB)
+deep t=0: hash 6c9afc4d mean 42.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1: hash 09151579 mean 42.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2: hash 01eef019 mean 49.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3: hash 4f44d023 mean 49.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4: hash 8c701d15 mean 49.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5: hash 1da68435 mean 45.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=6: hash a6c033aa mean 46.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=7: hash 23770dae mean 46.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8: hash c6c6fff3 mean 46.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9: hash 1c8dd889 mean 46.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10: hash c8d1664b mean 46.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=11: hash 422995ff mean 46.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12: hash f41c89f0 mean 46.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=13: hash 8291e765 mean 46 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14: hash 4f8fec80 mean 46.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.9: hash 1e082929 mean 46.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

@@ -1,0 +1,1101 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "isometric-pastel",
+    "name": "Isometric Pastel",
+    "description": "Clean tech-explainer isometric illustration in true 3D: a locked orthographic isometric camera, extruded blocks on a modular grid with flat three-tone faces (top light, left mid, right dark) from a soft pastel palette, geometric long shadows, a pale dot-grid ground, capsule people, axis-aligned cables and conveyors, and one saturated accent.",
+    "palette": {
+      "bg": "#f3f1f7",
+      "ground": "#f3f1f7",
+      "dot": "#d3cde2",
+      "ink": "#26244a",
+      "inkSoft": "#6b6890",
+      "paper": "#ffffff",
+      "lilac": "#b3a4ee",
+      "mint": "#8fd8bf",
+      "peach": "#ffbe9c",
+      "sky": "#9fc4f3",
+      "butter": "#ffdc85",
+      "rose": "#f5a9c2",
+      "cloud": "#e9e6f3",
+      "slate": "#6f6b9e",
+      "accent": "#ff5c39",
+      "skin": "#ffd2b5",
+      "hair": "#3d3966",
+      "people": [
+        "#ff8a7a",
+        "#7aa7f0",
+        "#ffd166",
+        "#6fcfa8",
+        "#b49cf2"
+      ]
+    },
+    "tones": {
+      "top": {
+        "toward": "#ffffff",
+        "k": 0.42
+      },
+      "left": {
+        "toward": "#ffffff",
+        "k": 0
+      },
+      "right": {
+        "toward": "#4a467e",
+        "k": 0.24
+      },
+      "edge": {
+        "toward": "#2b2858",
+        "k": 0.45
+      }
+    },
+    "shadow": {
+      "dir": [
+        1,
+        0
+      ],
+      "length": 0.62,
+      "toward": "#5b5690",
+      "k": 0.13,
+      "lift": 0.004
+    },
+    "grid": {
+      "cell": 0.5,
+      "dotRadius": 0.035,
+      "majorEvery": 4,
+      "majorRadius": 0.055,
+      "size": 240
+    },
+    "outline": {
+      "enabled": false,
+      "width": 1,
+      "toward": "#2b2858",
+      "k": 0.45
+    },
+    "module": 0.5,
+    "world": {
+      "background": "#f3f1f7",
+      "toneMapping": "none",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {},
+    "lights": [],
+    "post": {},
+    "camera": {
+      "projection": "orthographic",
+      "fov": 30,
+      "near": 1,
+      "far": 400,
+      "viewHeight": 12,
+      "dist": 80,
+      "drift": null
+    },
+    "text": {
+      "font": "rounded",
+      "weight": 800,
+      "color": "#26244a",
+      "height": 0.5
+    },
+    "overlay": {
+      "captionH": 0.085,
+      "kickerH": 0.03,
+      "badgeScale": 1.25,
+      "tagH": 0.038,
+      "leaderPx": 2.5,
+      "popDur": 0.32,
+      "outDur": 0.28
+    },
+    "sfx": {
+      "enter": "pop",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "clack",
+      "emphasis": "chime",
+      "ui": "blip",
+      "loop": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Everything moves along the three iso axes: blocks rise out of the ground (outBack scale-y), floors drop in with one small hop.",
+      "Camera is locked at the true isometric angle: only pans (target) and orthographic zoom (viewHeight); never rotates.",
+      "Staggered grid reveals: items pop in by row/column with ~60-90 ms steps.",
+      "Loops tick with mechanical regularity: packets along cables, LEDs on a fixed clock, fans at constant rate.",
+      "Exploded layers separate vertically with a slight overshoot, then close with a clunk."
+    ]
+  },
+  "scene": {
+    "id": "20-isometric-pastel",
+    "style": "isometric-pastel",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "grid",
+        "t": 0,
+        "dur": 0.55
+      },
+      {
+        "id": "chips",
+        "t": 0.55,
+        "dur": 2.65
+      },
+      {
+        "id": "dc",
+        "t": 3.2,
+        "dur": 2.9
+      },
+      {
+        "id": "models",
+        "t": 6.1,
+        "dur": 2.9
+      },
+      {
+        "id": "apps",
+        "t": 9,
+        "dur": 2.3
+      },
+      {
+        "id": "finale",
+        "t": 11.3,
+        "dur": 3.7
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          44.4962,
+          46.6285,
+          47.7394
+        ],
+        "target": [
+          -1.6919,
+          0.4404,
+          1.5514
+        ],
+        "viewHeight": 8.6
+      },
+      {
+        "t": 0.55,
+        "pos": [
+          44.4962,
+          46.6285,
+          47.7394
+        ],
+        "target": [
+          -1.6919,
+          0.4404,
+          1.5514
+        ],
+        "viewHeight": 8.6
+      },
+      {
+        "t": 2.95,
+        "pos": [
+          44.4372,
+          46.9334,
+          47.7936
+        ],
+        "target": [
+          -1.7509,
+          0.7453,
+          1.6055
+        ],
+        "viewHeight": 8.9,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 3.85,
+        "pos": [
+          44.1027,
+          48.2611,
+          48.1002
+        ],
+        "target": [
+          -2.0853,
+          2.0731,
+          1.9122
+        ],
+        "viewHeight": 10.6,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 5.8,
+        "pos": [
+          44.0634,
+          48.4144,
+          48.1363
+        ],
+        "target": [
+          -2.1246,
+          2.2264,
+          1.9483
+        ],
+        "viewHeight": 10.8,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 6.75,
+        "pos": [
+          43.7093,
+          49.9438,
+          48.461
+        ],
+        "target": [
+          -2.4788,
+          3.7558,
+          2.273
+        ],
+        "viewHeight": 12.6,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 8.7,
+        "pos": [
+          43.6699,
+          50.097,
+          48.4971
+        ],
+        "target": [
+          -2.5181,
+          3.909,
+          2.3091
+        ],
+        "viewHeight": 12.8,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 9.65,
+        "pos": [
+          43.3945,
+          51.1699,
+          48.7497
+        ],
+        "target": [
+          -2.7935,
+          4.9819,
+          2.5616
+        ],
+        "viewHeight": 14.2,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 11.2,
+        "pos": [
+          43.3748,
+          51.2715,
+          48.7677
+        ],
+        "target": [
+          -2.8132,
+          5.0835,
+          2.5797
+        ],
+        "viewHeight": 14.3,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12,
+        "pos": [
+          44.5692,
+          52.8737,
+          47.5962
+        ],
+        "target": [
+          -1.6189,
+          6.6857,
+          1.4082
+        ],
+        "viewHeight": 17.2,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 12.9,
+        "pos": [
+          44.5692,
+          52.8737,
+          47.5962
+        ],
+        "target": [
+          -1.6189,
+          6.6857,
+          1.4082
+        ],
+        "viewHeight": 17.2,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 13.4,
+        "pos": [
+          44.9322,
+          51.1266,
+          47.2553
+        ],
+        "target": [
+          -1.2558,
+          4.9386,
+          1.0672
+        ],
+        "viewHeight": 15.4,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          44.9566,
+          51.123,
+          47.2345
+        ],
+        "target": [
+          -1.2314,
+          4.9349,
+          1.0464
+        ],
+        "viewHeight": 15.1,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 11.6,
+        "gain": 0.5,
+        "root": 262,
+        "chord": [
+          0,
+          4,
+          7,
+          11,
+          14
+        ],
+        "attack": 1,
+        "release": 1.4,
+        "brightness": 1500
+      },
+      {
+        "t": 0.12,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.4,
+        "seed": 3
+      },
+      {
+        "t": 0.2,
+        "type": "blip",
+        "notes": [
+          0,
+          7
+        ],
+        "dur": 0.05,
+        "gain": 0.16,
+        "pitch": 1.2
+      },
+      {
+        "t": 0.22,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.45,
+        "seed": 4
+      },
+      {
+        "t": 0.32,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.5,
+        "seed": 5
+      },
+      {
+        "t": 0.42,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.5499999999999998,
+        "seed": 6
+      },
+      {
+        "t": 0.52,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.5999999999999999,
+        "seed": 7
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.5,
+        "gain": 0.22,
+        "pitch": 0.8,
+        "t": 0.55,
+        "pan": 0,
+        "seed": 101
+      },
+      {
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.75,
+        "t": 0.922,
+        "pan": 0,
+        "seed": 108
+      },
+      {
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 1.6,
+        "t": 0.922,
+        "pan": 0,
+        "seed": 109
+      },
+      {
+        "t": 1.05,
+        "type": "pop",
+        "gain": 0.24,
+        "pitch": 1.1,
+        "seed": 300
+      },
+      {
+        "t": 1.125,
+        "type": "pop",
+        "gain": 0.24,
+        "pitch": 1.1700000000000002,
+        "seed": 301
+      },
+      {
+        "t": 1.142,
+        "type": "blip",
+        "notes": [
+          0,
+          5,
+          9
+        ],
+        "dur": 0.05,
+        "gain": 0.2,
+        "pitch": 1,
+        "seed": 200
+      },
+      {
+        "t": 1.2,
+        "type": "pop",
+        "gain": 0.24,
+        "pitch": 1.2400000000000002,
+        "seed": 302
+      },
+      {
+        "t": 1.275,
+        "type": "pop",
+        "gain": 0.24,
+        "pitch": 1.31,
+        "seed": 303
+      },
+      {
+        "t": 1.35,
+        "type": "pop",
+        "gain": 0.24,
+        "pitch": 1.3800000000000001,
+        "seed": 304
+      },
+      {
+        "t": 1.425,
+        "type": "pop",
+        "gain": 0.24,
+        "pitch": 1.4500000000000002,
+        "seed": 305
+      },
+      {
+        "t": 1.5,
+        "type": "pop",
+        "gain": 0.24,
+        "pitch": 1.52,
+        "seed": 306
+      },
+      {
+        "t": 1.6,
+        "type": "click",
+        "gain": 0.2,
+        "pitch": 1.2
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.36,
+        "gain": 0.26,
+        "pitch": 1.15,
+        "t": 3.2,
+        "pan": 0,
+        "seed": 115
+      },
+      {
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.81,
+        "t": 3.541,
+        "pan": 0,
+        "seed": 122
+      },
+      {
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 1.6,
+        "t": 3.541,
+        "pan": 0,
+        "seed": 123
+      },
+      {
+        "t": 3.661,
+        "type": "pop",
+        "gain": 0.16,
+        "pitch": 0.9,
+        "seed": 400
+      },
+      {
+        "t": 3.721,
+        "type": "pop",
+        "gain": 0.16,
+        "pitch": 0.98,
+        "seed": 401
+      },
+      {
+        "t": 3.761,
+        "type": "blip",
+        "notes": [
+          0,
+          5,
+          9
+        ],
+        "dur": 0.05,
+        "gain": 0.2,
+        "pitch": 1.06,
+        "seed": 201
+      },
+      {
+        "t": 3.781,
+        "type": "pop",
+        "gain": 0.16,
+        "pitch": 1.06,
+        "seed": 402
+      },
+      {
+        "t": 3.841,
+        "type": "pop",
+        "gain": 0.16,
+        "pitch": 1.1400000000000001,
+        "seed": 403
+      },
+      {
+        "t": 3.901,
+        "type": "pop",
+        "gain": 0.16,
+        "pitch": 0.9,
+        "seed": 404
+      },
+      {
+        "t": 3.961,
+        "type": "pop",
+        "gain": 0.16,
+        "pitch": 0.98,
+        "seed": 405
+      },
+      {
+        "t": 4.021,
+        "type": "pop",
+        "gain": 0.16,
+        "pitch": 1.06,
+        "seed": 406
+      },
+      {
+        "t": 4.081,
+        "type": "pop",
+        "gain": 0.16,
+        "pitch": 1.1400000000000001,
+        "seed": 407
+      },
+      {
+        "t": 4.161,
+        "type": "pop",
+        "gain": 0.2,
+        "pitch": 0.75,
+        "seed": 420
+      },
+      {
+        "t": 4.261,
+        "type": "pop",
+        "gain": 0.2,
+        "pitch": 0.75,
+        "seed": 421
+      },
+      {
+        "t": 4.311,
+        "type": "whir",
+        "dur": 1.6,
+        "hz": 140,
+        "hz2": 170,
+        "gain": 0.05
+      },
+      {
+        "t": 4.441,
+        "type": "tick",
+        "gain": 0.08,
+        "pitch": 2.2,
+        "seed": 430
+      },
+      {
+        "t": 4.691,
+        "type": "tick",
+        "gain": 0.08,
+        "pitch": 2.2,
+        "seed": 431
+      },
+      {
+        "t": 4.941,
+        "type": "tick",
+        "gain": 0.08,
+        "pitch": 2.2,
+        "seed": 432
+      },
+      {
+        "t": 5.191,
+        "type": "tick",
+        "gain": 0.08,
+        "pitch": 2.2,
+        "seed": 433
+      },
+      {
+        "t": 5.441,
+        "type": "tick",
+        "gain": 0.08,
+        "pitch": 2.2,
+        "seed": 434
+      },
+      {
+        "t": 5.691,
+        "type": "tick",
+        "gain": 0.08,
+        "pitch": 2.2,
+        "seed": 435
+      },
+      {
+        "t": 5.941,
+        "type": "tick",
+        "gain": 0.08,
+        "pitch": 2.2,
+        "seed": 436
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.36,
+        "gain": 0.26,
+        "pitch": 1.15,
+        "t": 6.1,
+        "pan": 0,
+        "seed": 129
+      },
+      {
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.87,
+        "t": 6.441,
+        "pan": 0,
+        "seed": 136
+      },
+      {
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 1.6,
+        "t": 6.441,
+        "pan": 0,
+        "seed": 137
+      },
+      {
+        "t": 6.55,
+        "type": "pop",
+        "gain": 0.16,
+        "pitch": 0.95,
+        "seed": 500
+      },
+      {
+        "t": 6.62,
+        "type": "pop",
+        "gain": 0.16,
+        "pitch": 1,
+        "seed": 501
+      },
+      {
+        "t": 6.661,
+        "type": "blip",
+        "notes": [
+          0,
+          5,
+          9
+        ],
+        "dur": 0.05,
+        "gain": 0.2,
+        "pitch": 1.12,
+        "seed": 202
+      },
+      {
+        "t": 6.69,
+        "type": "pop",
+        "gain": 0.16,
+        "pitch": 1.05,
+        "seed": 502
+      },
+      {
+        "t": 6.76,
+        "type": "pop",
+        "gain": 0.16,
+        "pitch": 1.1,
+        "seed": 503
+      },
+      {
+        "t": 6.7700000000000005,
+        "type": "pop",
+        "gain": 0.24,
+        "pitch": 1,
+        "seed": 510
+      },
+      {
+        "t": 6.890000000000001,
+        "type": "pop",
+        "gain": 0.24,
+        "pitch": 1.25,
+        "seed": 511
+      },
+      {
+        "t": 7.010000000000001,
+        "type": "pop",
+        "gain": 0.24,
+        "pitch": 1.5,
+        "seed": 512
+      },
+      {
+        "t": 7.1,
+        "type": "whir",
+        "dur": 0.65,
+        "hz": 220,
+        "hz2": 420,
+        "gain": 0.06
+      },
+      {
+        "t": 7.4,
+        "type": "bubble",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "seed": 560
+      },
+      {
+        "t": 8.3,
+        "type": "bubble",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "seed": 561
+      },
+      {
+        "t": 8.7763,
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.8,
+        "pan": -0.2,
+        "seed": 530
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.36,
+        "gain": 0.26,
+        "pitch": 1.15,
+        "t": 9,
+        "pan": 0,
+        "seed": 143
+      },
+      {
+        "type": "clack",
+        "gain": 0.42,
+        "pitch": 0.9299999999999999,
+        "t": 9.341,
+        "pan": 0,
+        "seed": 150
+      },
+      {
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 1.6,
+        "t": 9.341,
+        "pan": 0,
+        "seed": 151
+      },
+      {
+        "t": 9.461,
+        "type": "pop",
+        "gain": 0.2,
+        "pitch": 1,
+        "seed": 600
+      },
+      {
+        "t": 9.541,
+        "type": "pop",
+        "gain": 0.2,
+        "pitch": 1.07,
+        "seed": 601
+      },
+      {
+        "t": 9.561,
+        "type": "blip",
+        "notes": [
+          0,
+          5,
+          9
+        ],
+        "dur": 0.05,
+        "gain": 0.2,
+        "pitch": 1.18,
+        "seed": 203
+      },
+      {
+        "t": 9.621,
+        "type": "pop",
+        "gain": 0.2,
+        "pitch": 1.1400000000000001,
+        "seed": 602
+      },
+      {
+        "t": 9.701,
+        "type": "pop",
+        "gain": 0.2,
+        "pitch": 1.21,
+        "seed": 603
+      },
+      {
+        "t": 9.841,
+        "type": "bubble",
+        "gain": 0.2,
+        "pitch": 1.2,
+        "seed": 620
+      },
+      {
+        "t": 9.921,
+        "type": "bubble",
+        "gain": 0.2,
+        "pitch": 1.3,
+        "seed": 621
+      },
+      {
+        "t": 10.001,
+        "type": "bubble",
+        "gain": 0.2,
+        "pitch": 1.4,
+        "seed": 622
+      },
+      {
+        "t": 10.066,
+        "type": "blip",
+        "notes": [
+          12
+        ],
+        "dur": 0.04,
+        "gain": 0.08,
+        "pitch": 1.4,
+        "pan": 0.2,
+        "seed": 642
+      },
+      {
+        "t": 10.081,
+        "type": "bubble",
+        "gain": 0.2,
+        "pitch": 1.5,
+        "seed": 623
+      },
+      {
+        "t": 10.466,
+        "type": "blip",
+        "notes": [
+          12
+        ],
+        "dur": 0.04,
+        "gain": 0.08,
+        "pitch": 1.4,
+        "pan": 0.2,
+        "seed": 641
+      },
+      {
+        "t": 10.716,
+        "type": "blip",
+        "notes": [
+          12
+        ],
+        "dur": 0.04,
+        "gain": 0.08,
+        "pitch": 1.4,
+        "pan": 0.2,
+        "seed": 643
+      },
+      {
+        "t": 10.916,
+        "type": "blip",
+        "notes": [
+          12
+        ],
+        "dur": 0.04,
+        "gain": 0.08,
+        "pitch": 1.4,
+        "pan": 0.2,
+        "seed": 640
+      },
+      {
+        "t": 11.3,
+        "type": "pad",
+        "dur": 3.7,
+        "gain": 0.5,
+        "root": 294,
+        "chord": [
+          0,
+          4,
+          7,
+          12,
+          16
+        ],
+        "attack": 0.4,
+        "release": 1.6,
+        "brightness": 1800
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.6,
+        "gain": 0.3,
+        "pitch": 1,
+        "t": 11.3,
+        "pan": 0,
+        "seed": 157
+      },
+      {
+        "t": 11.6,
+        "type": "blip",
+        "notes": [
+          0,
+          4,
+          7,
+          12
+        ],
+        "dur": 0.06,
+        "gain": 0.22,
+        "pitch": 1
+      },
+      {
+        "t": 11.65,
+        "type": "tick",
+        "gain": 0.22,
+        "pitch": 1.6,
+        "seed": 210
+      },
+      {
+        "t": 11.75,
+        "type": "tick",
+        "gain": 0.22,
+        "pitch": 1.7200000000000002,
+        "seed": 211
+      },
+      {
+        "t": 11.85,
+        "type": "tick",
+        "gain": 0.22,
+        "pitch": 1.84,
+        "seed": 212
+      },
+      {
+        "t": 11.95,
+        "type": "tick",
+        "gain": 0.22,
+        "pitch": 1.96,
+        "seed": 213
+      },
+      {
+        "type": "clack",
+        "gain": 0.5,
+        "pitch": 0.7,
+        "t": 13.32,
+        "pan": 0,
+        "seed": 164
+      },
+      {
+        "type": "thud",
+        "gain": 0.42,
+        "pitch": 1.3,
+        "t": 13.32,
+        "pan": 0,
+        "seed": 165
+      },
+      {
+        "type": "blip",
+        "notes": [
+          0
+        ],
+        "dur": 0.09,
+        "gain": 0.3,
+        "pitch": 1,
+        "t": 13.45,
+        "pan": 0,
+        "seed": 171
+      },
+      {
+        "type": "blip",
+        "notes": [
+          4
+        ],
+        "dur": 0.09,
+        "gain": 0.3,
+        "pitch": 1,
+        "t": 13.69,
+        "pan": 0,
+        "seed": 178
+      },
+      {
+        "type": "blip",
+        "notes": [
+          7
+        ],
+        "dur": 0.09,
+        "gain": 0.3,
+        "pitch": 1,
+        "t": 13.93,
+        "pan": 0,
+        "seed": 185
+      },
+      {
+        "type": "blip",
+        "notes": [
+          12
+        ],
+        "dur": 0.09,
+        "gain": 0.3,
+        "pitch": 1,
+        "t": 14.17,
+        "pan": 0,
+        "seed": 192
+      },
+      {
+        "t": 14.25,
+        "type": "chime",
+        "dur": 1.6,
+        "gain": 0.2,
+        "pitch": 1
+      }
+    ],
+    "duck": [],
+    "notes": "Four procedurally built floors (isometric-pastel props: slab/chip/serverRack/coolingUnit/route+packets/ripple/device/person). Stack drop/explode/close/pulse = iso.stackPlan (pure f(t)); SCORE derives from the same plan. Camera locked at true isometric (orthographic), pans + zooms only. Captions/tags on the overlay (exact colours)."
+  }
+}

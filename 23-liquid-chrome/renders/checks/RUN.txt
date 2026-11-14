@@ -1,0 +1,18 @@
+check-frames run: 2026-11-14 05:19:24 UTC
+times: 1.5, 4.4, 6.7, 7.85, 8.9, 10.4, 10.8, 11.7, 13.0, 14.5
+newest code edit: 2026-11-13 19:19:40 UTC (liquid-chrome/liquid.js)
+mp4: 23-liquid-chrome.mp4 2026-11-13 19:07:10 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 32.5 dB, frame 312)
+  frame 45 (t=1.500): 36.0 dB
+  frame 132 (t=4.400): 35.3 dB
+  frame 201 (t=6.700): 36.9 dB
+  frame 267 (t=8.900): 34.6 dB
+  frame 312 (t=10.400): 32.5 dB
+  frame 324 (t=10.800): 33.9 dB
+  frame 351 (t=11.700): 35.3 dB
+  frame 390 (t=13.000): 35.2 dB
+  frame 435 (t=14.500): 33.4 dB
+determinism: OK (10 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

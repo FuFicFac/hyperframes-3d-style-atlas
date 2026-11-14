@@ -1,0 +1,34 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 11 old file(s): RUN.txt t0.2.png t0.55.png t1.6.png t10.6.png t11.9.png t14.0.png t14.62.png t3.3.png t4.9.png t8.8.png
+check-frames run: 2026-11-14 00:33:42 UTC
+times: 0.2, 0.55, 1.6, 3.3, 4.9, 8.8, 10.6, 11.9, 14.0, 14.62
+newest code edit: 2026-11-13 18:38:53 UTC (crt-retro/screen.js)
+mp4: 17-crt-retro.mp4 2026-11-13 16:07:47 UTC
+kit last changed: 2026-11-14 00:14:11 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+time      file                          md5 (in order)                    reversed
+0.2       renders/checks/t0.2.png       cf64297fd2d76dc6ee9bb18ddf6246b7  SAME
+0.55      renders/checks/t0.55.png      eb9abd873f26621796875e96467623f4  SAME
+1.6       renders/checks/t1.6.png       a77c4c6333838b465ff163d633fa77bf  SAME
+3.3       renders/checks/t3.3.png       9627a2c69c2298f91c4261a36971b084  SAME
+4.9       renders/checks/t4.9.png       e0ffab0321152fea9dcf1214ca6b54ea  SAME
+8.8       renders/checks/t8.8.png       855168566672ae3e637c2143417a4059  SAME
+10.6      renders/checks/t10.6.png      1c0a0fbe4f828668c154d60c365724a0  SAME
+11.9      renders/checks/t11.9.png      dba6ff618e3fafb2e3ef87713eb4cc05  SAME
+14.0      renders/checks/t14.0.png      ddd4643acc0c5b992f4d1fdf456b7608  SAME
+14.62     renders/checks/t14.62.png     42a8bbe476d499e0d300291eafd37942  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.9 dB, frame 264)
+determinism: OK (10 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -22.5 dB, max -3.4 dB
+audio 17-crt-retro.mp4: mean -22.5 dB, max -3.8 dB  (4.5 MB)
+deep t=14: hash 5a697d70 mean 29.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=0.2: hash cad5930f mean 21 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=0.55: hash 34085712 mean 24.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=1.6: hash 15654510 mean 30.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3.3: hash 473b0b91 mean 37.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.9: hash e13fe87d mean 52.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.8: hash 595c12f1 mean 61 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=10.6: hash 3a757945 mean 43.9 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=11.9: hash c0ce9485 mean 40.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.62: hash cf1ec3d1 mean 25.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK

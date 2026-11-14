@@ -1,0 +1,1142 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "glass-light",
+    "name": "Glass & Light",
+    "description": "Optics-bench still life: polished clear and coloured glass solids (prisms, blocks, faceted gems, lenses, spheres, rods) on a dark matte bench in a dim hazy room; volumetric beams computed by real ray optics refract through them, a prism fans white light into a spectrum, caustics and rainbow smears land on the table; screen-space refraction with per-channel dispersion, bevel glints, hairline captions.",
+    "palette": {
+      "bg": "#030305",
+      "bench": "#07080a",
+      "wall": "#050608",
+      "metal": "#16181c",
+      "ink": "#eef2f6",
+      "inkDim": "#8a93a0",
+      "line": "#c9d1db",
+      "cyan": "#3fe3ff",
+      "magenta": "#ff3fc8",
+      "amber": "#ffb23a",
+      "white": "#fff6ea",
+      "primary": "#3fe3ff",
+      "secondary": "#ff3fc8",
+      "accent": "#ffb23a"
+    },
+    "world": {
+      "background": "#030305",
+      "fog": {
+        "color": "#030305",
+        "near": 14,
+        "far": 42
+      },
+      "environment": null,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "pcf"
+    },
+    "materials": {
+      "bench": {
+        "type": "physical",
+        "baseColor": "#07080a",
+        "roughness": 0.62,
+        "metalness": 0
+      },
+      "metal": {
+        "type": "physical",
+        "baseColor": "#16181c",
+        "roughness": 0.38,
+        "metalness": 0.7,
+        "clearcoat": 0.3,
+        "clearcoatRoughness": 0.2
+      },
+      "metalDark": {
+        "type": "standard",
+        "baseColor": "#0b0c0e",
+        "roughness": 0.55,
+        "metalness": 0.4
+      }
+    },
+    "lights": [
+      {
+        "id": "room",
+        "type": "hemisphere",
+        "color": "#9fb2c8",
+        "groundColor": "#050506",
+        "intensity": 0.16
+      },
+      {
+        "id": "wash",
+        "type": "spot",
+        "color": "#7f93b8",
+        "intensity": 260,
+        "position": [
+          0,
+          7,
+          1
+        ],
+        "target": [
+          0.5,
+          1.6,
+          -12
+        ],
+        "angle": 0.42,
+        "penumbra": 1,
+        "distance": 40,
+        "decay": 2
+      },
+      {
+        "id": "key",
+        "type": "spot",
+        "color": "#e9eef7",
+        "intensity": 34,
+        "position": [
+          -3.5,
+          6.5,
+          3.5
+        ],
+        "target": [
+          -1,
+          0,
+          0
+        ],
+        "angle": 0.62,
+        "penumbra": 1,
+        "distance": 30,
+        "decay": 2,
+        "shadow": {
+          "softness": 6,
+          "mapSize": 2048,
+          "bias": -0.0004,
+          "normalBias": 0.02
+        }
+      },
+      {
+        "id": "rim",
+        "type": "spot",
+        "color": "#cfe0ff",
+        "intensity": 26,
+        "position": [
+          2.5,
+          3.2,
+          -7
+        ],
+        "target": [
+          0,
+          0.4,
+          0
+        ],
+        "angle": 0.5,
+        "penumbra": 1,
+        "distance": 30,
+        "decay": 2
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.62,
+        "radius": 0.55,
+        "threshold": 0.85
+      },
+      "vignette": {
+        "darkness": 0.5,
+        "offset": 1.1
+      },
+      "grain": {
+        "amount": 0.016,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.3,
+      "far": 60,
+      "drift": {
+        "amp": 0.01,
+        "speed": 0.25
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 300,
+      "color": "#eef2f6",
+      "height": 0.24
+    },
+    "sfx": {
+      "enter": "pad",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "chime",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "A beam switches on at its emitter and TRAVELS: its head grows along the computed ray path (≈4 m/s), a bright spark at the head.",
+      "Glass pieces slide or rotate on the bench and every beam re-routes live: the path is re-traced each frame from the pieces' current transforms.",
+      "A prism turns slowly so its spectrum fan breathes and sweeps across the table; caustics follow the computed hit points.",
+      "Encoded light pulses: after a piece, a beam can carry travelling packets (pure function of t).",
+      "Camera: one slow orbit (arc keys) with shallow depth of field focused on the active piece; no cuts.",
+      "Captions: thin light caps in one fixed lower region with a hairline leader drawn to the subject."
+    ],
+    "glass": {
+      "prepass": 0.75,
+      "ior": 1.5,
+      "dispersion": 0.035,
+      "refract": 0.13,
+      "fresnelPow": 4,
+      "fresnelMin": 0.05,
+      "bevel": 0.045,
+      "bevelRoll": 1.7,
+      "edgeDark": 0.55,
+      "env": 1,
+      "rim": "#9fb6d6",
+      "rimStrength": 0.22,
+      "imperfection": 0.018,
+      "clear": {
+        "tint": "#eef6f4",
+        "density": 0.25
+      },
+      "tints": {
+        "cyan": "#7fe8ff",
+        "magenta": "#ff8ad8",
+        "amber": "#ffc66a",
+        "smoke": "#9aa3ad",
+        "green": "#8affc8"
+      },
+      "density": 1.6,
+      "glowRadius": 0.55,
+      "glowSpec": 160,
+      "room": "#06070a",
+      "floor": "#020203",
+      "panels": [
+        {
+          "dir": [
+            -0.35,
+            0.92,
+            0.2
+          ],
+          "size": [
+            0.9,
+            0.22
+          ],
+          "intensity": 2.6,
+          "color": "#f4f7ff"
+        },
+        {
+          "dir": [
+            -0.95,
+            0.25,
+            0.25
+          ],
+          "size": [
+            0.12,
+            0.7
+          ],
+          "intensity": 3.2,
+          "color": "#fff1e0"
+        },
+        {
+          "dir": [
+            0.75,
+            0.3,
+            -0.6
+          ],
+          "size": [
+            0.1,
+            0.6
+          ],
+          "intensity": 2.4,
+          "color": "#d9e6ff"
+        },
+        {
+          "dir": [
+            0,
+            0.12,
+            1
+          ],
+          "size": [
+            1.4,
+            0.05
+          ],
+          "intensity": 0.7,
+          "color": "#ffffff"
+        }
+      ],
+      "panelSoft": 0.45
+    },
+    "beam": {
+      "width": 0.085,
+      "grow": 0.0035,
+      "core": 6,
+      "coreK": 34,
+      "halo": 0.42,
+      "haloK": 3.2,
+      "falloff": 0.06,
+      "headSoft": 0.35,
+      "spark": 1.6,
+      "dust": 0.42,
+      "dustScale": 3.2,
+      "dustDrift": [
+        0.06,
+        0.03,
+        0.02
+      ],
+      "pulse": {
+        "freq": 2.2,
+        "speed": 1.6,
+        "depth": 0.55
+      },
+      "speed": 4.2,
+      "spill": {
+        "width": 0.3,
+        "level": 0.035,
+        "y": 0.004
+      }
+    },
+    "caustic": {
+      "level": 1.4,
+      "core": 2.2,
+      "minWidth": 0.06,
+      "maxStretch": 7,
+      "y": 0.005
+    },
+    "glint": {
+      "size": 46,
+      "level": 3.2
+    },
+    "dust": {
+      "count": 320,
+      "size": 9,
+      "radius": 0.13,
+      "level": 1.6,
+      "box": [
+        [
+          -5.6,
+          0.05,
+          -2.6
+        ],
+        [
+          4.8,
+          1.7,
+          2.4
+        ]
+      ],
+      "seed": 11
+    },
+    "spillLights": {
+      "count": 6,
+      "distance": 3.2,
+      "intensity": 1.6
+    },
+    "prism": {
+      "glass": {
+        "A": 1.5046,
+        "B": 0.0042,
+        "boost": 12
+      }
+    },
+    "emitter": {
+      "size": [
+        0.95,
+        0.34,
+        0.46
+      ],
+      "aperture": 0.065,
+      "label": 0.18,
+      "labelInk": 0.85
+    },
+    "floor": {
+      "resolution": 0.5,
+      "strength": 0.13,
+      "facing": 0.05,
+      "blur": 9,
+      "fade": [
+        3.5,
+        9
+      ],
+      "envIntensity": 0,
+      "specular": 0.15,
+      "sweep": {
+        "width": 44,
+        "depth": 26,
+        "height": 14,
+        "radius": 6
+      }
+    },
+    "dof": {
+      "aperture": 0.0009,
+      "maxblur": 0.004
+    },
+    "overlay": {
+      "font": "sans",
+      "titleWeight": 200,
+      "titleTracking": 0.26,
+      "labelWeight": 300,
+      "labelTracking": 0.2,
+      "titleHeight": 0.072,
+      "subHeight": 0.03,
+      "labelHeight": 0.05,
+      "lineWidthPx": 1.3,
+      "dotPx": 4,
+      "ringPx": 10,
+      "lineColor": "#c9d1db",
+      "labelColor": "#eef2f6",
+      "subColor": "#8a93a0",
+      "dotColor": "#ffffff",
+      "drawDur": 0.6,
+      "fadeDur": 0.45,
+      "outDur": 0.45,
+      "rise": 0.01
+    }
+  },
+  "scene": {
+    "id": "22-glass-light",
+    "style": "glass-light",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "inputs",
+        "t": 0,
+        "dur": 3.4
+      },
+      {
+        "id": "encode",
+        "t": 3.4,
+        "dur": 3
+      },
+      {
+        "id": "fuse",
+        "t": 6.4,
+        "dur": 3
+      },
+      {
+        "id": "answer",
+        "t": 9.4,
+        "dur": 3
+      },
+      {
+        "id": "mind",
+        "t": 12.4,
+        "dur": 2.6
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -6.2,
+          3.6,
+          8
+        ],
+        "target": [
+          -2.7,
+          0.45,
+          0.2
+        ],
+        "fov": 30
+      },
+      {
+        "t": 3.4,
+        "pos": [
+          -4.7,
+          3.6,
+          8.5
+        ],
+        "target": [
+          -2,
+          0.45,
+          0.1
+        ],
+        "fov": 30,
+        "path": "arc",
+        "ease": "inOutSine"
+      },
+      {
+        "t": 6.4,
+        "pos": [
+          -1.9,
+          3.1,
+          8.4
+        ],
+        "target": [
+          -1,
+          0.5,
+          -0.1
+        ],
+        "fov": 30,
+        "path": "arc",
+        "ease": "inOutSine"
+      },
+      {
+        "t": 9.4,
+        "pos": [
+          1.7,
+          3.1,
+          8.2
+        ],
+        "target": [
+          1,
+          0.45,
+          -0.5
+        ],
+        "fov": 30,
+        "path": "arc",
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.4,
+        "pos": [
+          3.6,
+          3.3,
+          8
+        ],
+        "target": [
+          1.7,
+          0.35,
+          -0.7
+        ],
+        "fov": 30,
+        "path": "arc",
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          -0.2,
+          4.7,
+          11.4
+        ],
+        "target": [
+          -1,
+          0.3,
+          -0.3
+        ],
+        "fov": 30,
+        "path": "arc",
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [
+      {
+        "id": "bench",
+        "primitive": "procedural",
+        "factory": "bench",
+        "procedural": "dark matte bench + back cove (44x26 m cyclorama, 6 m cove) whose floor is a faint blurred planar mirror",
+        "dims": {}
+      },
+      {
+        "id": "emit-text",
+        "primitive": "procedural",
+        "factory": "emitter",
+        "text": "TEXT",
+        "position": [
+          -5.1,
+          0,
+          -1.4
+        ],
+        "procedural": "light-source head (0.95x0.42x0.58 m dark anodised box on a pedestal) with a glowing aperture on +X and an engraved \"TEXT\" label",
+        "dims": {
+          "color": "#3fe3ff"
+        }
+      },
+      {
+        "id": "emit-image",
+        "primitive": "procedural",
+        "factory": "emitter",
+        "text": "IMAGE",
+        "position": [
+          -5.1,
+          0,
+          0
+        ],
+        "procedural": "light-source head (0.95x0.42x0.58 m dark anodised box on a pedestal) with a glowing aperture on +X and an engraved \"IMAGE\" label",
+        "dims": {
+          "color": "#ff3fc8"
+        }
+      },
+      {
+        "id": "emit-audio",
+        "primitive": "procedural",
+        "factory": "emitter",
+        "text": "AUDIO",
+        "position": [
+          -5.1,
+          0,
+          1.4
+        ],
+        "procedural": "light-source head (0.95x0.42x0.58 m dark anodised box on a pedestal) with a glowing aperture on +X and an engraved \"AUDIO\" label",
+        "dims": {
+          "color": "#ffb23a"
+        }
+      },
+      {
+        "id": "core",
+        "primitive": "procedural",
+        "factory": "glass",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "procedural": "glass gem (clear) — custom screen-space-refraction glass shader; convex shape for the ray tracer",
+        "dims": {
+          "kind": "gem",
+          "mount": false,
+          "w": 1.3,
+          "h": 1.1,
+          "d": 1.3,
+          "edge": 0.28,
+          "corner": 0.32,
+          "tint": "clear",
+          "refract": 0.16
+        }
+      },
+      {
+        "id": "lensT",
+        "primitive": "procedural",
+        "factory": "glass",
+        "position": [
+          -2.7,
+          0.55,
+          -2.35
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "procedural": "glass lens (cyan) — custom screen-space-refraction glass shader; convex shape for the ray tracer",
+        "dims": {
+          "kind": "lens",
+          "mount": true,
+          "radius": 0.42,
+          "R": 0.9,
+          "tint": "cyan",
+          "density": 1.2,
+          "mountHeight": 0.55
+        }
+      },
+      {
+        "id": "blockI",
+        "primitive": "procedural",
+        "factory": "glass",
+        "position": [
+          -2.2,
+          0,
+          -0.85
+        ],
+        "rotation": [
+          0,
+          0.1,
+          0
+        ],
+        "procedural": "glass block (magenta) — custom screen-space-refraction glass shader; convex shape for the ray tracer",
+        "dims": {
+          "kind": "block",
+          "mount": false,
+          "w": 0.5,
+          "h": 0.85,
+          "d": 0.5,
+          "tint": "magenta",
+          "density": 1.4
+        }
+      },
+      {
+        "id": "wedgeA",
+        "primitive": "procedural",
+        "factory": "glass",
+        "position": [
+          -2.7,
+          0,
+          2.6
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "procedural": "glass poly (amber) — custom screen-space-refraction glass shader; convex shape for the ray tracer",
+        "dims": {
+          "kind": "poly",
+          "mount": false,
+          "pts": [
+            [
+              -0.24,
+              -0.22
+            ],
+            [
+              0.24,
+              -0.22
+            ],
+            [
+              0,
+              0.36
+            ]
+          ],
+          "height": 0.85,
+          "tint": "amber",
+          "density": 1.4
+        }
+      },
+      {
+        "id": "prism",
+        "primitive": "procedural",
+        "factory": "glass",
+        "position": [
+          2.1,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          -0.13,
+          0
+        ],
+        "procedural": "glass prism (clear) — custom screen-space-refraction glass shader; convex shape for the ray tracer",
+        "dims": {
+          "kind": "prism",
+          "mount": false,
+          "side": 0.8,
+          "height": 0.75,
+          "tint": "clear"
+        }
+      },
+      {
+        "id": "ball",
+        "primitive": "procedural",
+        "factory": "glass",
+        "position": [
+          0.9,
+          0,
+          -2.05
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "procedural": "glass sphere (smoke) — custom screen-space-refraction glass shader; convex shape for the ray tracer",
+        "dims": {
+          "kind": "sphere",
+          "mount": false,
+          "r": 0.3,
+          "tint": "smoke",
+          "density": 1
+        }
+      },
+      {
+        "id": "rodG",
+        "primitive": "procedural",
+        "factory": "glass",
+        "position": [
+          -3.4,
+          0.075,
+          -2.45
+        ],
+        "rotation": [
+          0,
+          0.32,
+          0
+        ],
+        "procedural": "glass rod (green) — custom screen-space-refraction glass shader; convex shape for the ray tracer",
+        "dims": {
+          "kind": "rod",
+          "mount": false,
+          "r": 0.075,
+          "length": 1.3,
+          "tint": "green",
+          "density": 1.2
+        }
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "root": 55,
+        "chord": [
+          0,
+          7,
+          12,
+          19
+        ],
+        "brightness": 360,
+        "attack": 2.2,
+        "release": 2.5,
+        "gain": 0.2
+      },
+      {
+        "t": 0.75,
+        "type": "tick",
+        "gain": 0.3,
+        "pitch": 0.8,
+        "seed": 11
+      },
+      {
+        "t": 0.75,
+        "type": "chime",
+        "dur": 1.8,
+        "pitch": 1,
+        "gain": 0.09,
+        "pan": -0.4,
+        "seed": 21
+      },
+      {
+        "t": 0.75,
+        "type": "pad",
+        "bus": "music",
+        "dur": 9.25,
+        "root": 220,
+        "chord": [
+          0,
+          12
+        ],
+        "brightness": 1500,
+        "attack": 0.35,
+        "release": 1.6,
+        "gain": 0.11,
+        "pan": -0.3,
+        "seed": 31
+      },
+      {
+        "t": 1.3,
+        "type": "tick",
+        "gain": 0.3,
+        "pitch": 0.9500000000000001,
+        "seed": 12
+      },
+      {
+        "t": 1.3,
+        "type": "chime",
+        "dur": 1.8,
+        "pitch": 1.2599090909090909,
+        "gain": 0.09,
+        "pan": -0.4,
+        "seed": 22
+      },
+      {
+        "t": 1.3,
+        "type": "pad",
+        "bus": "music",
+        "dur": 8.7,
+        "root": 277.18,
+        "chord": [
+          0,
+          12
+        ],
+        "brightness": 1500,
+        "attack": 0.35,
+        "release": 1.6,
+        "gain": 0.11,
+        "pan": 0,
+        "seed": 32
+      },
+      {
+        "t": 1.85,
+        "type": "tick",
+        "gain": 0.3,
+        "pitch": 1.1,
+        "seed": 13
+      },
+      {
+        "t": 1.85,
+        "type": "chime",
+        "dur": 1.8,
+        "pitch": 1.4983181818181819,
+        "gain": 0.09,
+        "pan": -0.4,
+        "seed": 23
+      },
+      {
+        "t": 1.85,
+        "type": "pad",
+        "bus": "music",
+        "dur": 8.15,
+        "root": 329.63,
+        "chord": [
+          0,
+          12
+        ],
+        "brightness": 1500,
+        "attack": 0.35,
+        "release": 1.6,
+        "gain": 0.11,
+        "pan": 0.3,
+        "seed": 33
+      },
+      {
+        "t": 0.55,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.6,
+        "pitch": 0.5,
+        "gain": 0.22,
+        "pan": -0.5,
+        "seed": 5
+      },
+      {
+        "t": 3.9000000000000004,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "pitch": 0.7,
+        "gain": 0.16,
+        "pan": -0.4,
+        "seed": 41
+      },
+      {
+        "t": 4.4,
+        "type": "chime",
+        "dur": 2.2,
+        "pitch": 1,
+        "gain": 0.16,
+        "pan": -0.3,
+        "seed": 51
+      },
+      {
+        "t": 4.44,
+        "type": "sparkle",
+        "dur": 0.8,
+        "pitch": 1,
+        "gain": 0.07,
+        "seed": 61
+      },
+      {
+        "t": 3.5,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "pitch": 0.7,
+        "gain": 0.16,
+        "pan": -0.4,
+        "seed": 42
+      },
+      {
+        "t": 4,
+        "type": "chime",
+        "dur": 2.2,
+        "pitch": 1.2599090909090909,
+        "gain": 0.16,
+        "pan": 0,
+        "seed": 52
+      },
+      {
+        "t": 4.04,
+        "type": "sparkle",
+        "dur": 0.8,
+        "pitch": 1.15,
+        "gain": 0.07,
+        "seed": 62
+      },
+      {
+        "t": 4.25,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "pitch": 0.7,
+        "gain": 0.16,
+        "pan": -0.4,
+        "seed": 43
+      },
+      {
+        "t": 4.75,
+        "type": "chime",
+        "dur": 2.2,
+        "pitch": 1.4983181818181819,
+        "gain": 0.16,
+        "pan": 0.3,
+        "seed": 53
+      },
+      {
+        "t": 4.79,
+        "type": "sparkle",
+        "dur": 0.8,
+        "pitch": 1.3,
+        "gain": 0.07,
+        "seed": 63
+      },
+      {
+        "t": 4.4,
+        "type": "blip",
+        "dur": 0.06,
+        "notes": [
+          0,
+          7,
+          12,
+          7
+        ],
+        "pitch": 0.5,
+        "gain": 0.05,
+        "seed": 7
+      },
+      {
+        "t": 5.550000000000001,
+        "type": "riser",
+        "dur": 1.3,
+        "pitch": 0.5,
+        "gain": 0.2
+      },
+      {
+        "t": 6.8500000000000005,
+        "type": "thud",
+        "dur": 1.6,
+        "pitch": 0.38,
+        "gain": 0.7
+      },
+      {
+        "t": 6.8500000000000005,
+        "type": "rumble",
+        "dur": 3.2,
+        "pitch": 0.6,
+        "gain": 0.38
+      },
+      {
+        "t": 6.65,
+        "type": "pad",
+        "bus": "music",
+        "dur": 5.4,
+        "root": 110,
+        "chord": [
+          0,
+          4,
+          7,
+          12,
+          16
+        ],
+        "brightness": 900,
+        "attack": 0.9,
+        "release": 2.2,
+        "gain": 0.22,
+        "seed": 71
+      },
+      {
+        "t": 6.9,
+        "type": "chime",
+        "dur": 2.6,
+        "pitch": 0.5,
+        "gain": 0.2,
+        "seed": 72
+      },
+      {
+        "t": 9.6,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.8,
+        "pitch": 0.6,
+        "gain": 0.3,
+        "pan": 0.2,
+        "seed": 81
+      },
+      {
+        "t": 10.076190476190476,
+        "type": "chime",
+        "dur": 2,
+        "pitch": 1,
+        "gain": 0.2,
+        "pan": 0.35,
+        "seed": 82
+      },
+      {
+        "t": 10.86190476190476,
+        "type": "sparkle",
+        "dur": 1.4,
+        "pitch": 0.8,
+        "notes": 9,
+        "gain": 0.16,
+        "pan": 0.45,
+        "seed": 83
+      },
+      {
+        "t": 10.86190476190476,
+        "type": "chime",
+        "dur": 2.4,
+        "pitch": 1.26,
+        "gain": 0.12,
+        "pan": 0.45,
+        "seed": 84
+      },
+      {
+        "t": 10.9,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.4,
+        "pitch": 0.45,
+        "gain": 0.18,
+        "pan": 0.4,
+        "seed": 85
+      },
+      {
+        "t": 11.200000000000001,
+        "type": "sparkle",
+        "dur": 1.2,
+        "pitch": 1.1,
+        "gain": 0.08,
+        "pan": 0.5,
+        "seed": 86
+      },
+      {
+        "t": 12.8,
+        "type": "chime",
+        "dur": 2.6,
+        "pitch": 0.5,
+        "gain": 0.2,
+        "seed": 91
+      },
+      {
+        "t": 12.8,
+        "type": "thud",
+        "dur": 1.4,
+        "pitch": 0.4,
+        "gain": 0.45,
+        "seed": 92
+      },
+      {
+        "t": 12.950000000000001,
+        "type": "sparkle",
+        "dur": 1.4,
+        "pitch": 0.9,
+        "gain": 0.08,
+        "seed": 93
+      },
+      {
+        "t": 12.5,
+        "type": "pad",
+        "bus": "music",
+        "dur": 2.499999999999999,
+        "root": 220,
+        "chord": [
+          0,
+          4,
+          7,
+          11
+        ],
+        "brightness": 1100,
+        "attack": 1.2,
+        "release": 1.4,
+        "gain": 0.14,
+        "seed": 94
+      }
+    ],
+    "duck": [],
+    "notes": "Beam paths are traced every frame (styles/glass-light/optics.js) from the PIECES' keyed transforms: Snell refraction, TIR, per-wavelength IOR for the prism fan. The three inputs stop at the point inside the gem closest to CORE; the white answer beam starts at CORE."
+  }
+}

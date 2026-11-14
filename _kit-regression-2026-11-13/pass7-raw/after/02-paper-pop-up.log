@@ -1,0 +1,47 @@
+sync-kit: _atlas refreshed from the skill
+checks: cleared 18 old file(s): RUN.txt t0.7.png t0.75.png t11.25.png t12.6.png t13.5.png t14.8.png t2.6.png t2.8.png t3.35.png t3.6.png t3.95.png t4.25.png t5.2.png t6.5.png t6.6.png t8.75.png t9.9.png
+check-frames run: 2026-11-14 04:25:55 UTC
+times: 0.7, 0.75, 2.6, 2.8, 3.35, 3.6, 3.95, 4.25, 5.2, 6.5, 6.6, 8.75, 9.9, 11.25, 12.6, 13.5, 14.8
+newest code edit: 2026-11-13 15:02:38 UTC (paper-pop-up/spec.js)
+mp4: 02-paper-pop-up.mp4 2026-11-13 15:04:44 UTC
+kit last changed: 2026-11-14 04:24:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+0.7       renders/checks/t0.7.png       650cda56ce81615485e83cf73279af61  SAME
+0.75      renders/checks/t0.75.png      d0ee24417d1bcb10a2aadb4752a3cd1d  SAME
+2.6       renders/checks/t2.6.png       b583be3d00b5280015721dfa91da76c2  SAME
+2.8       renders/checks/t2.8.png       f94a2ffef239266eacdcf1091c53bc31  SAME
+3.35      renders/checks/t3.35.png      10dade10cff1a6a41117e223188e1206  SAME
+3.6       renders/checks/t3.6.png       ac9385c007769c3cad4c3a7ffc27d268  SAME
+3.95      renders/checks/t3.95.png      acd612868e8c5b60efd3db12ae6c6b6d  SAME
+4.25      renders/checks/t4.25.png      90f160cf7668a05048829c98de2ccaf4  SAME
+5.2       renders/checks/t5.2.png       2347ade9d47bdea55d5e0bde41e22705  SAME
+6.5       renders/checks/t6.5.png       f23d71ac00cc29edc82d72d458817277  SAME
+6.6       renders/checks/t6.6.png       388ee0fbac34a87a3fbb5ae04c6d60d9  SAME
+8.75      renders/checks/t8.75.png      8d9c0c2e186dcc4939579c77ae0a2bdc  SAME
+9.9       renders/checks/t9.9.png       1797cc02d18f9fde8e88365ea5302ae8  SAME
+11.25     renders/checks/t11.25.png     d98ab8368efe06276f42b2c1cf92178c  SAME
+12.6      renders/checks/t12.6.png      286c076f2f4774e7d77d868f28fa78cb  SAME
+13.5      renders/checks/t13.5.png      5640a553a23fc9349794cf941473fa61  SAME
+14.8      renders/checks/t14.8.png      6fbf75d1fa9c3543782080e69e60786c  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.9 dB, frame 84)
+determinism: OK (17 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -22.3 dB, max -1.2 dB
+audio 02-paper-pop-up.mp4: mean -22.4 dB, max -1.7 dB  (7.9 MB)
+deep t=0.7: hash a6a7222b mean 79.4 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=0.75: hash b092ec9f mean 79.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.6: hash 1e2ebc8f mean 81.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=2.8: hash c4ed74f6 mean 81.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3.35: hash 2235fd05 mean 86.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3.6: hash 9704b377 mean 82.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=3.95: hash 2367ae2d mean 76.7 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=4.25: hash caa4f14b mean 85 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=5.2: hash dac86aae mean 76.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=6.5: hash 91d45080 mean 80.6 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=6.6: hash 33965b48 mean 80.3 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=8.75: hash b74c0cc8 mean 85.8 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=9.9: hash b06535c9 mean 82.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=11.25: hash 50c57ecb mean 81.2 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=12.6: hash 7d158c51 mean 88.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=13.5: hash fbcc0e57 mean 91.1 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep t=14.8: hash 476d971b mean 95 NaN 0 Inf 0 (1920x1080 HDR scan)
+deep self-check: OK
