@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D Style Atlas</title>
+<style>
+  :root { --bg: #0d0e11; --panel: #16181d; --line: #262931; --text: #e9e7e2; --dim: #8d919a; --accent: #f2b544; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  header { padding: 28px 28px 8px; max-width: 1700px; margin: 0 auto; }
+  h1 { margin: 0 0 4px; font-size: 26px; font-weight: 650; letter-spacing: .01em; }
+  .sub { color: var(--dim); margin: 0 0 18px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; }
+  .filters button { background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; font: inherit; font-size: 13px; cursor: pointer; }
+  .filters button.on { background: var(--accent); color: #111; border-color: var(--accent); }
+  main { display: grid; gap: 18px; padding: 18px 28px 40px; max-width: 1700px; margin: 0 auto; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+  .card.hide { display: none; }
+  .vid { position: relative; aspect-ratio: 16 / 9; background: #000; cursor: pointer; }
+  .vid video { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .vid .badge { position: absolute; right: 8px; bottom: 8px; background: #000a; color: var(--dim); font-size: 11px; padding: 2px 7px; border-radius: 6px; pointer-events: none; }
+  .vid .missing { position: absolute; inset: 0; display: grid; place-items: center; color: var(--dim); }
+  .meta { padding: 12px 14px 14px; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .name { font-weight: 650; font-size: 16px; }
+  .id { color: var(--dim); font: 12px/1 Menlo, monospace; }
+  .cat { color: var(--accent); font-size: 12px; margin: 3px 0 6px; }
+  .desc { margin: 0 0 6px; }
+  .topic { color: var(--dim); font-size: 13px; margin: 0; }
+  footer { color: var(--dim); text-align: center; padding: 0 0 30px; font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>3D Style Atlas</h1>
+  <p class="sub">50 styles · hover or tap a video to play</p>
+  <nav class="filters" id="filters"><button class="on" data-cat="all">All (50)</button><button data-cat="brand / channel">brand / channel (1)</button><button data-cat="handmade / tactile">handmade / tactile (10)</button><button data-cat="material / abstract">material / abstract (7)</button><button data-cat="mechanical / kinetic">mechanical / kinetic (4)</button><button data-cat="miniature / world-building">miniature / world-building (2)</button><button data-cat="other">other (8)</button><button data-cat="pixel / voxel">pixel / voxel (2)</button><button data-cat="print / flat graphic">print / flat graphic (2)</button><button data-cat="product / commercial">product / commercial (1)</button><button data-cat="retro / signage / typographic">retro / signage / typographic (2)</button><button data-cat="screen / UI / sci-fi">screen / UI / sci-fi (6)</button><button data-cat="technical / diagrammatic">technical / diagrammatic (2)</button><button data-cat="theatrical / narrative">theatrical / narrative (2)</button><button data-cat="toy / playful">toy / playful (1)</button></nav>
+</header>
+<main id="grid">
+  <article class="card" data-cat="miniature / world-building">
+    <div class="vid"><video src="01-low-poly/renders/01-low-poly.mp4" poster="01-low-poly/renders/01-low-poly.jpg" muted loop playsinline preload="none"></video><span class="badge">01-low-poly</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Low-Poly Miniature</span><span class="id">low-poly</span></div>
+      <div class="cat">miniature / world-building</div>
+      <p class="desc">A faceted miniature world that looks like folded paper or cut stone.</p>
+      <p class="topic">Demo: &quot;How a neural network learns&quot; as gradient descent on a low-poly island.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="handmade / tactile">
+    <div class="vid"><video src="02-paper-pop-up/renders/02-paper-pop-up.mp4" poster="02-paper-pop-up/renders/02-paper-pop-up.jpg" muted loop playsinline preload="none"></video><span class="badge">02-paper-pop-up</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Paper Pop-Up</span><span class="id">paper-pop-up</span></div>
+      <div class="cat">handmade / tactile</div>
+      <p class="desc">A mid-century pop-up book lies open on a warm plank table.</p>
+      <p class="topic">Demo: &quot;A short history of AI&quot; in four pop-up spreads.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="retro / signage / typographic">
+    <div class="vid"><video src="03-neon-sign/renders/03-neon-sign.mp4" poster="03-neon-sign/renders/03-neon-sign.jpg" muted loop playsinline preload="none"></video><span class="badge">03-neon-sign</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Neon Sign</span><span class="id">neon-sign</span></div>
+      <div class="cat">retro / signage / typographic</div>
+      <p class="desc">Glass-tube neon on a dark painted brick wall at night.</p>
+      <p class="topic">Demo: &quot;What is a token?&quot; Every frame is a pure function of t.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="handmade / tactile">
+    <div class="vid"><video src="04-soft-clay/renders/04-soft-clay.mp4" poster="04-soft-clay/renders/04-soft-clay.jpg" muted loop playsinline preload="none"></video><span class="badge">04-soft-clay</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Soft Clay</span><span class="id">soft-clay</span></div>
+      <div class="cat">handmade / tactile</div>
+      <p class="desc">A stop-motion claymation tabletop.</p>
+      <p class="topic">Demo: &quot;What is training data?&quot; in clay.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="miniature / world-building">
+    <div class="vid"><video src="05-tiny-diorama/renders/05-tiny-diorama.mp4" poster="05-tiny-diorama/renders/05-tiny-diorama.jpg" muted loop playsinline preload="none"></video><span class="badge">05-tiny-diorama</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Tiny Diorama</span><span class="id">tiny-diorama</span></div>
+      <div class="cat">miniature / world-building</div>
+      <p class="desc">A whole little world on one floating 16:10 tile, like a designer's desk model or a mobile-game map piece.</p>
+      <p class="topic">Demo: &quot;Where does your prompt go?&quot; on one floating diorama tile.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="technical / diagrammatic">
+    <div class="vid"><video src="06-blueprint-build/renders/06-blueprint-build.mp4" poster="06-blueprint-build/renders/06-blueprint-build.jpg" muted loop playsinline preload="none"></video><span class="badge">06-blueprint-build</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Blueprint Build</span><span class="id">blueprint-build</span></div>
+      <div class="cat">technical / diagrammatic</div>
+      <p class="desc">A cyanotype drafting sheet come to life.</p>
+      <p class="topic">Demo: &quot;Anatomy of an AI agent&quot; plotted on a cyanotype sheet.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="retro / signage / typographic">
+    <div class="vid"><video src="07-split-flap-board/renders/07-split-flap-board.mp4" poster="07-split-flap-board/renders/07-split-flap-board.jpg" muted loop playsinline preload="none"></video><span class="badge">07-split-flap-board</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Split-Flap Board</span><span class="id">split-flap-board</span></div>
+      <div class="cat">retro / signage / typographic</div>
+      <p class="desc">A mechanical railway/airport departure board hanging in a dim hall.</p>
+      <p class="topic">Demo: &quot;What can AI do today?&quot; on a split-flap departure board.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="pixel / voxel">
+    <div class="vid"><video src="08-voxel/renders/08-voxel.mp4" poster="08-voxel/renders/08-voxel.jpg" muted loop playsinline preload="none"></video><span class="badge">08-voxel</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Voxel Studio</span><span class="id">voxel</span></div>
+      <div class="cat">pixel / voxel</div>
+      <p class="desc">A voxel-art model photographed in a studio.</p>
+      <p class="topic">Demo: &quot;How AI makes an image&quot; (diffusion = step-by-step denoising) in the Voxel Studio style.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="theatrical / narrative">
+    <div class="vid"><video src="09-spotlight-stage/renders/09-spotlight-stage.mp4" poster="09-spotlight-stage/renders/09-spotlight-stage.jpg" muted loop playsinline preload="none"></video><span class="badge">09-spotlight-stage</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Spotlight Stage</span><span class="id">spotlight-stage</span></div>
+      <div class="cat">theatrical / narrative</div>
+      <p class="desc">A Victorian toy theatre seen from the stalls.</p>
+      <p class="topic">Demo: &quot;The Turing Test&quot; on a toy-theatre stage.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="technical / diagrammatic">
+    <div class="vid"><video src="10-exploded-view/renders/10-exploded-view.mp4" poster="10-exploded-view/renders/10-exploded-view.jpg" muted loop playsinline preload="none"></video><span class="badge">10-exploded-view</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Exploded View</span><span class="id">exploded-view</span></div>
+      <div class="cat">technical / diagrammatic</div>
+      <p class="desc">A premium product teardown.</p>
+      <p class="topic">Demo: &quot;Inside a robot vacuum&quot; as a premium exploded teardown.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="mechanical / kinetic">
+    <div class="vid"><video src="11-marble-run/renders/11-marble-run.mp4" poster="11-marble-run/renders/11-marble-run.jpg" muted loop playsinline preload="none"></video><span class="badge">11-marble-run</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Marble Run</span><span class="id">marble-run</span></div>
+      <div class="cat">mechanical / kinetic</div>
+      <p class="desc">A handmade wooden marble machine screwed to a workshop pegboard.</p>
+      <p class="topic">Demo: &quot;What is a context window?&quot; on a wooden marble machine.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="product / commercial">
+    <div class="vid"><video src="12-studio-product/renders/12-studio-product.mp4" poster="12-studio-product/renders/12-studio-product.jpg" muted loop playsinline preload="none"></video><span class="badge">12-studio-product</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Studio Product</span><span class="id">studio-product</span></div>
+      <div class="cat">product / commercial</div>
+      <p class="desc">A high-end product commercial: one hero object floating on a black seamless sweep, lit like a phone or car ad.</p>
+      <p class="topic">Demo: &quot;On-device AI: the chip in your pocket&quot;.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="screen / UI / sci-fi">
+    <div class="vid"><video src="13-wireframe-hologram/renders/13-wireframe-hologram.mp4" poster="13-wireframe-hologram/renders/13-wireframe-hologram.jpg" muted loop playsinline preload="none"></video><span class="badge">13-wireframe-hologram</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Wireframe Hologram</span><span class="id">wireframe-hologram</span></div>
+      <div class="cat">screen / UI / sci-fi</div>
+      <p class="desc">A sci-fi briefing-room hologram.</p>
+      <p class="topic">Demo: &quot;How a neural network reads a digit&quot;.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="handmade / tactile">
+    <div class="vid"><video src="14-origami/renders/14-origami.mp4" poster="14-origami/renders/14-origami.jpg" muted loop playsinline preload="none"></video><span class="badge">14-origami</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Origami</span><span class="id">origami</span></div>
+      <div class="cat">handmade / tactile</div>
+      <p class="desc">Japanese paper folding on a calm light-oak writing desk in soft window light from the front-left.</p>
+      <p class="topic">Demo: &quot;One square, no cuts&quot; — two kami sheets on a writing desk fold into a standing swan and a heart; the heart then stands up beside the swan.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="handmade / tactile">
+    <div class="vid"><video src="15-felt-stitch/renders/15-felt-stitch.mp4" poster="15-felt-stitch/renders/15-felt-stitch.jpg" muted loop playsinline preload="none"></video><span class="badge">15-felt-stitch</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Felt &amp; Stitch</span><span class="id">felt-stitch</span></div>
+      <div class="cat">handmade / tactile</div>
+      <p class="desc">A handmade felt story board.</p>
+      <p class="topic">Demo: &quot;AI agents working as a team&quot; on a felt story board.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="toy / playful">
+    <div class="vid"><video src="16-toy-brick/renders/16-toy-brick.mp4" poster="16-toy-brick/renders/16-toy-brick.jpg" muted loop playsinline preload="none"></video><span class="badge">16-toy-brick</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Toy Brick</span><span class="id">toy-brick</span></div>
+      <div class="cat">toy / playful</div>
+      <p class="desc">A build made of **generic** interlocking plastic bricks (plain studs, no brand marks, our own peg-figure), shot like toy-photography macro on a pale studio table.</p>
+      <p class="topic">Demo: &quot;What's inside a large language model?&quot; as a toy-brick tower you build.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="screen / UI / sci-fi">
+    <div class="vid"><video src="17-crt-retro/renders/17-crt-retro.mp4" poster="17-crt-retro/renders/17-crt-retro.jpg" muted loop playsinline preload="none"></video><span class="badge">17-crt-retro</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">CRT Retro</span><span class="id">crt-retro</span></div>
+      <div class="cat">screen / UI / sci-fi</div>
+      <p class="desc">A beige 1970s–80s computer terminal on a walnut desk in a dark room at night.</p>
+      <p class="topic">Demo: &quot;ELIZA, 1966: the first chatbot&quot; on a beige CRT terminal at night.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="screen / UI / sci-fi">
+    <div class="vid"><video src="18-floating-screens/renders/18-floating-screens.mp4" poster="18-floating-screens/renders/18-floating-screens.jpg" muted loop playsinline preload="none"></video><span class="badge">18-floating-screens</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Floating Screens</span><span class="id">floating-screens</span></div>
+      <div class="cat">screen / UI / sci-fi</div>
+      <p class="desc">A bright software-launch look.</p>
+      <p class="topic">Demo: &quot;How RAG works&quot;.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="print / flat graphic">
+    <div class="vid"><video src="19-embossed-letterpress/renders/19-embossed-letterpress.mp4" poster="19-embossed-letterpress/renders/19-embossed-letterpress.jpg" muted loop playsinline preload="none"></video><span class="badge">19-embossed-letterpress</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Embossed Letterpress</span><span class="id">embossed-letterpress</span></div>
+      <div class="cat">print / flat graphic</div>
+      <p class="desc">Fine stationery under a low raking light.</p>
+      <p class="topic">Demo: &quot;The three parts of a good prompt&quot;.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="print / flat graphic">
+    <div class="vid"><video src="20-isometric-pastel/renders/20-isometric-pastel.mp4" poster="20-isometric-pastel/renders/20-isometric-pastel.jpg" muted loop playsinline preload="none"></video><span class="badge">20-isometric-pastel</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Isometric Pastel</span><span class="id">isometric-pastel</span></div>
+      <div class="cat">print / flat graphic</div>
+      <p class="desc">Tech-company explainer isometric illustration, built in real 3D.</p>
+      <p class="topic">Demo: &quot;The AI stack&quot; — four floors (chips, data centres, models, apps) stack up on a dot grid.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="handmade / tactile">
+    <div class="vid"><video src="21-chalkboard/renders/21-chalkboard.mp4" poster="21-chalkboard/renders/21-chalkboard.jpg" muted loop playsinline preload="none"></video><span class="badge">21-chalkboard</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Chalkboard</span><span class="id">chalkboard</span></div>
+      <div class="cat">handmade / tactile</div>
+      <p class="desc">A real classroom chalkboard filmed in 3D: a mottled green slate in a worn oak frame with a chalk tray (sticks, a felt eraser, dust) on a sage plaster wall, side-lit by a soft window spot from the left (falloff across the board, frame sha...</p>
+      <p class="topic">Demo: &quot;Why AI makes things up&quot; on a classroom chalkboard.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="material / abstract">
+    <div class="vid"><video src="22-glass-light/renders/22-glass-light.mp4" poster="22-glass-light/renders/22-glass-light.jpg" muted loop playsinline preload="none"></video><span class="badge">22-glass-light</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Glass &amp; Light</span><span class="id">glass-light</span></div>
+      <div class="cat">material / abstract</div>
+      <p class="desc">An optics-bench still life: polished clear and coloured glass solids (prisms, blocks, faceted gems, lenses, spheres, rods) on a dark matte bench in a dim hazy room, with **light as the actor**.</p>
+      <p class="topic">Demo: &quot;Multimodal AI: many inputs, one model&quot;.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="material / abstract">
+    <div class="vid"><video src="23-liquid-chrome/renders/23-liquid-chrome.mp4" poster="23-liquid-chrome/renders/23-liquid-chrome.jpg" muted loop playsinline preload="none"></video><span class="badge">23-liquid-chrome</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Liquid Chrome</span><span class="id">liquid-chrome</span></div>
+      <div class="cat">material / abstract</div>
+      <p class="desc">Turn-of-the-millennium Y2K chrome.</p>
+      <p class="topic">Demo: &quot;What is a foundation model?&quot; Every frame is a pure function of t.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="brand / channel">
+    <div class="vid"><video src="24-wam-house/renders/24-wam-house.mp4" poster="24-wam-house/renders/24-wam-house.jpg" muted loop playsinline preload="none"></video><span class="badge">24-wam-house</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Why AI Matters — House</span><span class="id">wam-house</span></div>
+      <div class="cat">brand / channel</div>
+      <p class="desc">The **house style** for the Why AI Matters channel (host Ekello Harrid): the 3D form of its existing defaults.</p>
+      <p class="topic">Demo: the Why AI Matters channel package reel.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="material / abstract">
+    <div class="vid"><video src="25-stained-glass/renders/25-stained-glass.mp4" poster="25-stained-glass/renders/25-stained-glass.jpg" muted loop playsinline preload="none"></video><span class="badge">25-stained-glass</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Stained Glass</span><span class="id">stained-glass</span></div>
+      <div class="cat">material / abstract</div>
+      <p class="desc">A cathedral leaded window seen from a dim stone nave.</p>
+      <p class="topic">Demo: &quot;What a tree needs&quot;.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="other">
+    <div class="vid"><video src="26-subway-map/renders/26-subway-map.mp4" poster="26-subway-map/renders/26-subway-map.jpg" muted loop playsinline preload="none"></video><span class="badge">26-subway-map</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Subway Map</span><span class="id">subway-map</span></div>
+      <div class="cat">other</div>
+      <p class="desc">A transit diagram made physical.</p>
+      <p class="topic">Demo: &quot;Idea to launch&quot; drawn as a physical transit map.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="screen / UI / sci-fi">
+    <div class="vid"><video src="27-circuit-board/renders/27-circuit-board.mp4" poster="27-circuit-board/renders/27-circuit-board.jpg" muted loop playsinline preload="none"></video><span class="badge">27-circuit-board</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Circuit Board</span><span class="id">circuit-board</span></div>
+      <div class="cat">screen / UI / sci-fi</div>
+      <p class="desc">A macro photograph of a real printed circuit board.</p>
+      <p class="topic">Demo: &quot;How a signal moves through a circuit&quot;.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="handmade / tactile">
+    <div class="vid"><video src="28-cardboard-stop-motion/renders/28-cardboard-stop-motion.mp4" poster="28-cardboard-stop-motion/renders/28-cardboard-stop-motion.jpg" muted loop playsinline preload="none"></video><span class="badge">28-cardboard-stop-motion</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Cardboard Stop-Motion</span><span class="id">cardboard-stop-motion</span></div>
+      <div class="cat">handmade / tactile</div>
+      <p class="desc">A hand-built set made of corrugated cardboard on a wooden workbench under a warm clamp lamp.</p>
+      <p class="topic">Demo: &quot;How to plant a seed&quot; on a cardboard workbench set.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="handmade / tactile">
+    <div class="vid"><video src="29-newspaper-press/renders/29-newspaper-press.mp4" poster="29-newspaper-press/renders/29-newspaper-press.jpg" muted loop playsinline preload="none"></video><span class="badge">29-newspaper-press</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Newspaper Press</span><span class="id">newspaper-press</span></div>
+      <div class="cat">handmade / tactile</div>
+      <p class="desc">A broadsheet front page as a physical object on a dark print-shop imposing table, seen from above with a small forward tilt.</p>
+      <p class="topic">Demo: &quot;How news gets made&quot; on a broadsheet front page.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="screen / UI / sci-fi">
+    <div class="vid"><video src="30-film-projector/renders/30-film-projector.mp4" poster="30-film-projector/renders/30-film-projector.jpg" muted loop playsinline preload="none"></video><span class="badge">30-film-projector</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Film Projector</span><span class="id">film-projector</span></div>
+      <div class="cat">screen / UI / sci-fi</div>
+      <p class="desc">A dark screening room.</p>
+      <p class="topic">Demo: &quot;How a letter travels&quot; (SAMPLE) as a silent film in a screening room.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="material / abstract">
+    <div class="vid"><video src="31-weather-map/renders/31-weather-map.mp4" poster="31-weather-map/renders/31-weather-map.jpg" muted loop playsinline preload="none"></video><span class="badge">31-weather-map</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Weather Map</span><span class="id">weather-map</span></div>
+      <div class="cat">material / abstract</div>
+      <p class="desc">A broadcast weather map made physical.</p>
+      <p class="topic">Demo: &quot;What's coming&quot; on a physical broadcast weather map.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="material / abstract">
+    <div class="vid"><video src="32-terrarium/renders/32-terrarium.mp4" poster="32-terrarium/renders/32-terrarium.jpg" muted loop playsinline preload="none"></video><span class="badge">32-terrarium</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Terrarium</span><span class="id">terrarium</span></div>
+      <div class="cat">material / abstract</div>
+      <p class="desc">A sealed glass bottle garden on a sunlit windowsill.</p>
+      <p class="topic">Demo: a sealed bottle garden builds and cycles on a windowsill.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="other">
+    <div class="vid"><video src="33-card-table/renders/33-card-table.mp4" poster="33-card-table/renders/33-card-table.jpg" muted loop playsinline preload="none"></video><span class="badge">33-card-table</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Card Table</span><span class="id">card-table</span></div>
+      <div class="cat">other</div>
+      <p class="desc">**Look.** A card table under a low hanging lamp: a calm baize cloth (green by default; `baize: &quot;blue&quot; | &quot;red&quot; | &quot;charcoal&quot;`), a bevelled dark wooden rail, a warm lamp pool falling off to the rail, and a deck of ORIGINAL information cards...</p>
+      <p class="topic">Demo: &quot;Three ways to learn&quot; on a card table.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="mechanical / kinetic">
+    <div class="vid"><video src="34-clockwork/renders/34-clockwork.mp4" poster="34-clockwork/renders/34-clockwork.jpg" muted loop playsinline preload="none"></video><span class="badge">34-clockwork</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Clockwork</span><span class="id">clockwork</span></div>
+      <div class="cat">mechanical / kinetic</div>
+      <p class="desc">The inside of a fine mechanical movement, shot macro.</p>
+      <p class="topic">Demo: a mechanical movement where one balance paces everything.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="other">
+    <div class="vid"><video src="35-zen-sand/renders/35-zen-sand.mp4" poster="35-zen-sand/renders/35-zen-sand.jpg" muted loop playsinline preload="none"></video><span class="badge">35-zen-sand</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Zen Sand</span><span class="id">zen-sand</span></div>
+      <div class="cat">other</div>
+      <p class="desc">A raked dry garden seen close: a shallow wooden tray of pale fine sand on a dark table, one low raking morning sun from the back-left, smooth dark stones, a sprig of moss, pale wooden tools.</p>
+      <p class="topic">Demo: &quot;clearing the noise&quot; in a raked dry garden.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="mechanical / kinetic">
+    <div class="vid"><video src="36-hanging-mobile/renders/36-hanging-mobile.mp4" poster="36-hanging-mobile/renders/36-hanging-mobile.jpg" muted loop playsinline preload="none"></video><span class="badge">36-hanging-mobile</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Hanging Mobile</span><span class="id">hanging-mobile</span></div>
+      <div class="cat">mechanical / kinetic</div>
+      <p class="desc">A kinetic hanging mobile in a bright, skylit white gallery.</p>
+      <p class="topic">Demo: &quot;Add one thing and everything shifts&quot;.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="other">
+    <div class="vid"><video src="37-domino-run/renders/37-domino-run.mp4" poster="37-domino-run/renders/37-domino-run.jpg" muted loop playsinline preload="none"></video><span class="badge">37-domino-run</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Domino Run</span><span class="id">domino-run</span></div>
+      <div class="cat">other</div>
+      <p class="desc">**Look.** A domino rally on a polished honey-oak floor, seen low and close in warm window daylight.</p>
+      <p class="topic">Demo: &quot;One small push&quot;.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="other">
+    <div class="vid"><video src="38-evidence-board/renders/38-evidence-board.mp4" poster="38-evidence-board/renders/38-evidence-board.jpg" muted loop playsinline preload="none"></video><span class="badge">38-evidence-board</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Evidence Board</span><span class="id">evidence-board</span></div>
+      <div class="cat">other</div>
+      <p class="desc">**Look.** An investigator's cork board on a dim office wall under a desk lamp: calm tan cork (low-contrast blotches, granules, pits, old pin holes) in a bevelled dark-oak frame; a warm lamp pool from the upper left falling off to the cor...</p>
+      <p class="topic">Demo: &quot;Why does the fern keep wilting?&quot; on a cork board.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="theatrical / narrative">
+    <div class="vid"><video src="39-shadow-puppets/renders/39-shadow-puppets.mp4" poster="39-shadow-puppets/renders/39-shadow-puppets.jpg" muted loop playsinline preload="none"></video><span class="badge">39-shadow-puppets</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Shadow Puppets</span><span class="id">shadow-puppets</span></div>
+      <div class="cat">theatrical / narrative</div>
+      <p class="desc">A shadow theatre seen from the audience.</p>
+      <p class="topic">Demo: &quot;The Tall Tale&quot;.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="other">
+    <div class="vid"><video src="40-bead-abacus/renders/40-bead-abacus.mp4" poster="40-bead-abacus/renders/40-bead-abacus.jpg" muted loop playsinline preload="none"></video><span class="badge">40-bead-abacus</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Bead Abacus</span><span class="id">bead-abacus</span></div>
+      <div class="cat">other</div>
+      <p class="desc">A big counting frame lying on a clean bright tabletop in soft daylight.</p>
+      <p class="topic">Demo: &quot;Votes, counted&quot; (SAMPLE DATA) on a hardwood counting frame.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="handmade / tactile">
+    <div class="vid"><video src="41-sticky-notes/renders/41-sticky-notes.mp4" poster="41-sticky-notes/renders/41-sticky-notes.jpg" muted loop playsinline preload="none"></video><span class="badge">41-sticky-notes</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Sticky Notes</span><span class="id">sticky-notes</span></div>
+      <div class="cat">handmade / tactile</div>
+      <p class="desc">A workshop wall in a daylit studio.</p>
+      <p class="topic">Demo: a planning wall (brainstorm -&gt; cluster -&gt; vote -&gt; move work across).</p>
+    </div>
+  </article>
+  <article class="card" data-cat="handmade / tactile">
+    <div class="vid"><video src="42-inflatable/renders/42-inflatable.mp4" poster="42-inflatable/renders/42-inflatable.jpg" muted loop playsinline preload="none"></video><span class="badge">42-inflatable</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Inflatable</span><span class="id">inflatable</span></div>
+      <div class="cat">handmade / tactile</div>
+      <p class="desc">**Look.** Glossy inflated objects in a bright warm-white seamless studio: puffy pillow letters, numbers, stars, hearts, arrows and speech bubbles made of candy-coloured vinyl (clearcoat skin) or mirror foil (gold / silver / rose).</p>
+      <p class="topic">Demo: &quot;Just add air&quot;.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="material / abstract">
+    <div class="vid"><video src="43-pinball-table/renders/43-pinball-table.mp4" poster="43-pinball-table/renders/43-pinball-table.jpg" muted loop playsinline preload="none"></video><span class="badge">43-pinball-table</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Pinball Table</span><span class="id">pinball-table</span></div>
+      <div class="cat">material / abstract</div>
+      <p class="desc">An electro-mechanical pinball machine seen from the player's end with the glass off.</p>
+      <p class="topic">Demo: &quot;Finish a project&quot; as one ball's run.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="other">
+    <div class="vid"><video src="44-star-chart/renders/44-star-chart.mp4" poster="44-star-chart/renders/44-star-chart.jpg" muted loop playsinline preload="none"></video><span class="badge">44-star-chart</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Star Chart</span><span class="id">star-chart</span></div>
+      <div class="cat">other</div>
+      <p class="desc">**Look.** A planetarium night.</p>
+      <p class="topic">Demo: &quot;How a song comes together&quot; as two invented constellations on a planetarium dome.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="material / abstract">
+    <div class="vid"><video src="45-lab-glassware/renders/45-lab-glassware.mp4" poster="45-lab-glassware/renders/45-lab-glassware.jpg" muted loop playsinline preload="none"></video><span class="badge">45-lab-glassware</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Lab Glassware</span><span class="id">lab-glassware</span></div>
+      <div class="cat">material / abstract</div>
+      <p class="desc">A bright, clean laboratory bench in soft daylight.</p>
+      <p class="topic">Demo: measure, pour, mix, tip, fizz (SAMPLE DATA).</p>
+    </div>
+  </article>
+  <article class="card" data-cat="other">
+    <div class="vid"><video src="46-mixing-console/renders/46-mixing-console.mp4" poster="46-mixing-console/renders/46-mixing-console.jpg" muted loop playsinline preload="none"></video><span class="badge">46-mixing-console</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Mixing Console</span><span class="id">mixing-console</span></div>
+      <div class="cat">other</div>
+      <p class="desc">A vintage analogue recording console shot close and low across its surface in warm studio light.</p>
+      <p class="topic">Demo: &quot;Balancing a mix&quot; (SAMPLE DATA) on a vintage analogue console.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="mechanical / kinetic">
+    <div class="vid"><video src="47-conveyor-factory/renders/47-conveyor-factory.mp4" poster="47-conveyor-factory/renders/47-conveyor-factory.jpg" muted loop playsinline preload="none"></video><span class="badge">47-conveyor-factory</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Conveyor Factory</span><span class="id">conveyor-factory</span></div>
+      <div class="cat">mechanical / kinetic</div>
+      <p class="desc">A bright, friendly modern packing line seen at three-quarter height, under soft skylight daylight.</p>
+      <p class="topic">Demo: &quot;An order, packed&quot; on a bright packing line.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="pixel / voxel">
+    <div class="vid"><video src="48-city-lights/renders/48-city-lights.mp4" poster="48-city-lights/renders/48-city-lights.jpg" muted loop playsinline preload="none"></video><span class="badge">48-city-lights</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">City Lights</span><span class="id">city-lights</span></div>
+      <div class="cat">pixel / voxel</div>
+      <p class="desc">**Look.** An invented harbour skyline at blue hour, seen across water.</p>
+      <p class="topic">Demo: &quot;Every window, a pixel&quot;.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="handmade / tactile">
+    <div class="vid"><video src="49-ink-wash/renders/49-ink-wash.mp4" poster="49-ink-wash/renders/49-ink-wash.jpg" muted loop playsinline preload="none"></video><span class="badge">49-ink-wash</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Ink Wash</span><span class="id">ink-wash</span></div>
+      <div class="cat">handmade / tactile</div>
+      <p class="desc">**Look.** A brush-and-ink painting coming to life on a large sheet of soft, fibrous off-white paper with deckled edges, lying on a charcoal felt mat.</p>
+      <p class="topic">Demo: &quot;a short journey&quot; painted in brush and ink.</p>
+    </div>
+  </article>
+  <article class="card" data-cat="screen / UI / sci-fi">
+    <div class="vid"><video src="50-pin-art/renders/50-pin-art.mp4" poster="50-pin-art/renders/50-pin-art.jpg" muted loop playsinline preload="none"></video><span class="badge">50-pin-art</span></div>
+    <div class="meta">
+      <div class="row"><span class="name">Pin Art</span><span class="id">pin-art</span></div>
+      <div class="cat">screen / UI / sci-fi</div>
+      <p class="desc">**Look.** A giant pin-impression toy (pinscreen) on a dark matte desk.</p>
+      <p class="topic">Demo: &quot;This becomes that&quot;.</p>
+    </div>
+  </article>
+</main>
+
+<script>
+  const cards = [...document.querySelectorAll(".card")];
+  document.getElementById("filters").addEventListener("click", (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    document.querySelectorAll("#filters button").forEach((x) => x.classList.toggle("on", x === b));
+    const c = b.dataset.cat;
+    cards.forEach((card) => card.classList.toggle("hide", c !== "all" && card.dataset.cat !== c));
+  });
+  for (const card of cards) {
+    const v = card.querySelector("video"); if (!v) continue;
+    const box = card.querySelector(".vid");
+    box.addEventListener("mouseenter", () => v.play().catch(() => {}));
+    box.addEventListener("mouseleave", () => { v.pause(); });
+    box.addEventListener("click", () => (v.paused ? v.play().catch(() => {}) : v.pause()));
+  }
+</script>
+</body>
+</html>
