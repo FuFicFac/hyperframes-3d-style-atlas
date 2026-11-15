@@ -1,0 +1,13 @@
+check-frames run: 2026-11-15 05:33:57 UTC
+times: 1, 4.5, 8, 11.5, 14.5
+newest code edit: 2026-11-15 05:28:44 UTC (52-zoetrope/scene.config.js)
+mp4: 52-zoetrope.mp4 2026-11-15 05:33:18 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.3 dB, frame 345)
+  frame 30 (t=1.000): 34.6 dB
+  frame 135 (t=4.500): 37.1 dB
+  frame 240 (t=8.000): 35.1 dB
+  frame 345 (t=11.500): 34.3 dB
+  frame 435 (t=14.500): 36.5 dB
+determinism: OK (5 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

@@ -1,0 +1,748 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "thermal-camera",
+    "name": "Thermal Camera",
+    "description": "A handheld thermal imager's view of ordinary objects: the picture is temperature, not light. Plain geometry (a desk, a PC tower with its side open, a monitor, a keyboard, a mug, a hand) rendered with an unlit temperature shader through an ironbow palette (black, deep purple, magenta, orange, yellow, white). Things glow because work is happening in them: heat sources switch on and approach their temperature exponentially, a conduction front creeps along heat sinks and boards with sqrt(t), exhaust air rises as a warm plume, a hand pressed on the desk leaves a print that spreads and fades, and everything slides back down the palette when the work stops. Slightly cooler at grazing angles (emissivity) so forms still read. Sensor character: soft low-resolution blur, a faint pixel grid, gentle seeded noise. Imager HUD on the overlay: centre crosshair with a spot reading, a vertical colour scale with min/max, and a SAMPLE DATA tag because every temperature is invented.",
+    "palette": {
+      "bg": "#0a0614",
+      "ink": "#f4f1ea",
+      "hud": "#f4f1ea",
+      "hudDim": "#b9b3c9",
+      "plate": "rgba(10,6,20,0.62)",
+      "edge": "rgba(244,241,234,0.35)",
+      "amber": "#ffc23d",
+      "ironbow": [
+        [
+          0,
+          "#04020c"
+        ],
+        [
+          0.1,
+          "#140a46"
+        ],
+        [
+          0.22,
+          "#3b0f80"
+        ],
+        [
+          0.36,
+          "#82148c"
+        ],
+        [
+          0.5,
+          "#c8285f"
+        ],
+        [
+          0.62,
+          "#ec5a25"
+        ],
+        [
+          0.75,
+          "#fb9a1a"
+        ],
+        [
+          0.88,
+          "#fedb45"
+        ],
+        [
+          1,
+          "#fffcec"
+        ]
+      ]
+    },
+    "world": {
+      "background": null,
+      "fog": null,
+      "environment": null,
+      "toneMapping": "none",
+      "exposure": 1
+    },
+    "materials": {},
+    "lights": [],
+    "post": {
+      "vignette": {
+        "darkness": 0.22,
+        "offset": 1.15
+      }
+    },
+    "camera": {
+      "fov": 34,
+      "near": 0.05,
+      "far": 20,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#f4f1ea",
+      "height": 0.05
+    },
+    "range": {
+      "min": 14,
+      "max": 50
+    },
+    "ambient": {
+      "room": 22,
+      "desk": 21.2,
+      "wall": 17.2,
+      "floor": 19,
+      "reflected": 14
+    },
+    "emissivity": {
+      "face": 1,
+      "grazing": 0.62,
+      "power": 0.6
+    },
+    "form": {
+      "top": 0.7
+    },
+    "sensor": {
+      "cell": 3,
+      "blur": 1.35,
+      "grid": 0.035,
+      "noise": 0.0045,
+      "fixed": 0.003,
+      "fps": 30
+    },
+    "set": {
+      "desk": {
+        "w": 1.9,
+        "d": 0.95,
+        "t": 0.04,
+        "segX": 300,
+        "segZ": 150
+      },
+      "wall": {
+        "z": -0.5,
+        "w": 4.5,
+        "h": 2.2
+      },
+      "floor": {
+        "y": -0.75,
+        "size": 6
+      },
+      "tower": {
+        "x": -0.55,
+        "z": -0.13,
+        "len": 0.44,
+        "h": 0.46,
+        "thick": 0.22,
+        "wallT": 0.012,
+        "cpu": [
+          0.05,
+          0.29
+        ]
+      },
+      "monitor": {
+        "x": 0.08,
+        "z": -0.27,
+        "w": 0.58,
+        "h": 0.34,
+        "t": 0.024,
+        "lift": 0.13
+      },
+      "keyboard": {
+        "x": 0.08,
+        "z": 0.06,
+        "w": 0.44,
+        "d": 0.15,
+        "h": 0.018,
+        "cols": 14,
+        "rows": 5
+      },
+      "mug": {
+        "x": 0.66,
+        "z": -0.08,
+        "r": 0.05,
+        "h": 0.11
+      }
+    },
+    "hand": {
+      "scale": 1.45,
+      "yaw": 0.62,
+      "palm": {
+        "w": 0.084,
+        "l": 0.094,
+        "t": 0.028,
+        "r": 0.02
+      },
+      "fingers": [
+        [
+          -0.031,
+          0.072,
+          0.0092,
+          -0.09
+        ],
+        [
+          -0.0105,
+          0.082,
+          0.0095,
+          -0.03
+        ],
+        [
+          0.0105,
+          0.077,
+          0.0092,
+          0.03
+        ],
+        [
+          0.031,
+          0.062,
+          0.0085,
+          0.1
+        ]
+      ],
+      "thumb": {
+        "from": [
+          -0.036,
+          0.018
+        ],
+        "to": [
+          -0.078,
+          -0.03
+        ],
+        "r": 0.0115
+      },
+      "arm": {
+        "r": 0.032,
+        "len": 0.5,
+        "rise": 0.55
+      },
+      "skin": 33.5,
+      "fingerSkin": 31.5
+    },
+    "heat": {
+      "sources": {
+        "cpu": {
+          "up": 0.9,
+          "down": 1.8
+        },
+        "gpu": {
+          "up": 1.1,
+          "down": 1.9
+        },
+        "display": {
+          "up": 0.8,
+          "down": 1.7
+        },
+        "shell": {
+          "up": 2.6,
+          "down": 3.5
+        },
+        "fan": {
+          "up": 1.3,
+          "down": 1
+        }
+      },
+      "parts": {
+        "cpu": {
+          "src": "cpu",
+          "dT": 50
+        },
+        "sinkBase": {
+          "src": "cpu",
+          "dT": 42,
+          "lambda": 0.5
+        },
+        "sink": {
+          "src": "cpu",
+          "dT": 38,
+          "lambda": 0.32,
+          "k": 0.11,
+          "w": 0.022
+        },
+        "board": {
+          "src": "cpu",
+          "dT": 16,
+          "lambda": 0.1,
+          "k": 0.09,
+          "w": 0.03
+        },
+        "gpu": {
+          "src": "gpu",
+          "dT": 34,
+          "lambda": 0.13,
+          "k": 0.1,
+          "w": 0.03
+        },
+        "psu": {
+          "src": "shell",
+          "dT": 9,
+          "lambda": 0.5
+        },
+        "shell": {
+          "src": "shell",
+          "dT": 6,
+          "lambda": 0.35
+        },
+        "fan": {
+          "src": "fan",
+          "dT": 17,
+          "lambda": 0.5
+        },
+        "screen": {
+          "src": "display",
+          "dT": 13,
+          "lambda": 0.3
+        },
+        "monitorBack": {
+          "src": "display",
+          "dT": 6,
+          "lambda": 0.3
+        },
+        "keyboard": {
+          "src": "shell",
+          "dT": 1.6,
+          "lambda": 1
+        },
+        "deskHalo": {
+          "src": "shell",
+          "dT": 7,
+          "lambda": 0.05
+        }
+      },
+      "standby": {
+        "tower": 0.6,
+        "monitor": 1,
+        "mug": 0.9,
+        "keyboard": 0.6
+      },
+      "print": {
+        "dT": 11.5,
+        "rise": 0.35,
+        "fade": 2.6,
+        "width": 0.004,
+        "spread": 0.009
+      },
+      "plume": {
+        "puffs": 16,
+        "rate": 4,
+        "rise": 0.4,
+        "size": [
+          0.09,
+          0.26
+        ],
+        "dT": 20,
+        "alpha": 0.42,
+        "wobble": 0.03
+      }
+    },
+    "hud": {
+      "font": "\"SF Mono\", Menlo, Monaco, \"Courier New\", monospace",
+      "uiFont": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "caption": {
+        "x": 110,
+        "y": 72,
+        "h": 84,
+        "cap": 36
+      },
+      "tag": {
+        "text": "SAMPLE DATA",
+        "x": 1810,
+        "y": 76,
+        "h": 54,
+        "cap": 24
+      },
+      "bar": {
+        "x": 1752,
+        "y": 210,
+        "w": 30,
+        "h": 600
+      },
+      "cross": {
+        "size": 46,
+        "gap": 12,
+        "line": 3
+      },
+      "info": {
+        "x": 110,
+        "y": 980,
+        "cap": 22,
+        "text": "IRONBOW   ε 0.95   SPOT"
+      }
+    },
+    "sound": {
+      "bed": {
+        "gain": 0.75,
+        "root": 98,
+        "brightness": 650
+      },
+      "fan": {
+        "gain": 0.16,
+        "hz": 92
+      },
+      "spin": {
+        "gain": 0.32,
+        "hz": 70,
+        "hz2": 210
+      },
+      "down": {
+        "gain": 0.26,
+        "hz": 200,
+        "hz2": 55
+      },
+      "beep": {
+        "gain": 0.13,
+        "notes": [
+          12,
+          19
+        ]
+      },
+      "touch": {
+        "gain": 0.42,
+        "pitch": 0.7
+      },
+      "lift": {
+        "gain": 0.14
+      }
+    },
+    "sfx": {
+      "enter": "blip",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "thud",
+      "emphasis": "servo",
+      "ui": "blip",
+      "bed": "pad"
+    },
+    "motion": [
+      "Nothing moves to tell the story: temperature does. Each part's temperature is a closed form of t (heat.js); the picture reads it every frame.",
+      "Sources switch on and approach their target exponentially; after switch-off they cool exponentially.",
+      "Conduction: a front creeps along heat sinks and boards with reach k*sqrt(t - on); temperature falls off with distance from the source.",
+      "Residual heat: a hand pressed on the desk leaves a print that keeps the shape, blurs with sqrt(t) and fades over seconds.",
+      "Camera holds still during holds; the centre crosshair is the camera target, so the spot reading is the thing in the middle."
+    ]
+  },
+  "scene": {
+    "id": "56-thermal-camera",
+    "style": "thermal-camera",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "same",
+        "t": 0,
+        "dur": 3.2,
+        "label": "Everything looks the same"
+      },
+      {
+        "id": "work",
+        "t": 3.2,
+        "dur": 3.9,
+        "label": "Work shows up as heat"
+      },
+      {
+        "id": "touch",
+        "t": 7.1,
+        "dur": 4.3,
+        "label": "Heat remembers a touch"
+      },
+      {
+        "id": "fade",
+        "t": 11.4,
+        "dur": 3.6,
+        "label": "Then it fades"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0.3325,
+          1.1918,
+          1.8381
+        ],
+        "target": [
+          0.08,
+          0.30000000000000004,
+          -0.256
+        ],
+        "fov": 34
+      },
+      {
+        "t": 3.35,
+        "pos": [
+          0.3391,
+          1.2151,
+          1.8929
+        ],
+        "target": [
+          0.08,
+          0.30000000000000004,
+          -0.256
+        ],
+        "fov": 34,
+        "ease": "outSine"
+      },
+      {
+        "t": 4.550000000000001,
+        "pos": [
+          -0.1679,
+          0.6136,
+          1.1215
+        ],
+        "target": [
+          -0.5,
+          0.2975,
+          -0.127
+        ],
+        "fov": 34,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 7.1,
+        "pos": [
+          -0.1679,
+          0.6136,
+          1.1215
+        ],
+        "target": [
+          -0.5,
+          0.2975,
+          -0.127
+        ],
+        "fov": 34
+      },
+      {
+        "t": 8.1,
+        "pos": [
+          0.5305,
+          0.3433,
+          0.6867
+        ],
+        "target": [
+          0.46,
+          0,
+          0.25
+        ],
+        "fov": 34,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 11.5,
+        "pos": [
+          0.5305,
+          0.3433,
+          0.6867
+        ],
+        "target": [
+          0.46,
+          0,
+          0.25
+        ],
+        "fov": 34
+      },
+      {
+        "t": 12.9,
+        "pos": [
+          0.2499,
+          1.301,
+          1.8634
+        ],
+        "target": [
+          0.08,
+          0.30000000000000004,
+          -0.256
+        ],
+        "fov": 34,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0.2499,
+          1.301,
+          1.8634
+        ],
+        "target": [
+          0.08,
+          0.30000000000000004,
+          -0.256
+        ],
+        "fov": 34
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.75,
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12,
+          15
+        ],
+        "attack": 1.6,
+        "release": 2.2,
+        "brightness": 650
+      },
+      {
+        "type": "blip",
+        "gain": 0.13,
+        "notes": [
+          12,
+          19
+        ],
+        "t": 0.25,
+        "pan": 0,
+        "seed": 253
+      },
+      {
+        "type": "blip",
+        "gain": 0.13,
+        "notes": [
+          12,
+          19
+        ],
+        "t": 3.3000000000000003,
+        "pan": 0,
+        "seed": 260
+      },
+      {
+        "type": "blip",
+        "gain": 0.10400000000000001,
+        "notes": [
+          0,
+          7
+        ],
+        "pitch": 0.5,
+        "t": 3.5000000000000004,
+        "pan": 0,
+        "seed": 211
+      },
+      {
+        "type": "servo",
+        "gain": 0.32,
+        "hz": 70,
+        "hz2": 210,
+        "dur": 1.3,
+        "t": 3.5500000000000003,
+        "pan": 0,
+        "seed": 218
+      },
+      {
+        "type": "whir",
+        "gain": 0.16,
+        "hz": 92,
+        "hz2": 95.68,
+        "dur": 8.1,
+        "t": 3.8000000000000003,
+        "pan": 0,
+        "seed": 225
+      },
+      {
+        "type": "blip",
+        "gain": 0.13,
+        "notes": [
+          12,
+          19
+        ],
+        "t": 7.199999999999999,
+        "pan": 0,
+        "seed": 267
+      },
+      {
+        "type": "thud",
+        "gain": 0.42,
+        "pitch": 0.7,
+        "dur": 0.35,
+        "t": 8.4,
+        "pan": 0,
+        "seed": 232
+      },
+      {
+        "type": "paper",
+        "gain": 0.14,
+        "dur": 0.4,
+        "t": 9.399999999999999,
+        "pan": 0,
+        "seed": 239
+      },
+      {
+        "type": "blip",
+        "gain": 0.13,
+        "notes": [
+          12,
+          19
+        ],
+        "t": 11.5,
+        "pan": 0,
+        "seed": 274
+      },
+      {
+        "type": "servo",
+        "gain": 0.26,
+        "hz": 200,
+        "hz2": 55,
+        "dur": 1.8,
+        "t": 11.65,
+        "pan": 0,
+        "seed": 246
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "heat.js: T(part, s, t) = ambient + dT * level(src, t) * exp(-s/lambda) * (1 - smoothstep(R-w, R+w, s)), R = k*sqrt(t - on); level = 1 - exp(-(t-on)/up), then exp(-(t-off)/down). Handprint = amp(t) * (1 - smoothstep(-w, w, sdf)), w = w0 + spread*sqrt(age).",
+      "sources": {
+        "cpu": {
+          "on": 3.5500000000000003,
+          "off": 11.65,
+          "up": 0.9,
+          "down": 1.8
+        },
+        "gpu": {
+          "on": 4,
+          "off": 11.65,
+          "up": 1.1,
+          "down": 1.9
+        },
+        "display": {
+          "on": 3.5000000000000004,
+          "off": 11.700000000000001,
+          "up": 0.8,
+          "down": 1.7
+        },
+        "shell": {
+          "on": 3.5500000000000003,
+          "off": 11.65,
+          "up": 2.6,
+          "down": 3.5
+        },
+        "fan": {
+          "on": 3.85,
+          "off": 11.65,
+          "up": 1.3,
+          "down": 1
+        }
+      },
+      "contact": [
+        8.4,
+        9.399999999999999
+      ],
+      "framing": "ok (worst 0.8698 at 0s, set)",
+      "sampleData": "every temperature on screen is invented (SAMPLE DATA tag)"
+    }
+  }
+}

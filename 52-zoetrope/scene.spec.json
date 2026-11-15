@@ -1,0 +1,892 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "zoetrope",
+    "name": "3D Zoetrope",
+    "description": "Animation about animation: a bright toy turntable on a clean cream studio sweep carrying rings of small glossy sculptures, each ring holding N successive poses of one looping action (a red ball bouncing with squash and stretch on clear rods, a sprout in a terracotta pot growing, blooming and closing). Standing still it is a row of statues; spun up under continuous light it smears into a blur (deterministic multi-sample motion blur over a one-frame shutter); when a strobe locked to the spin snaps on, the room goes dark, a strobe lamp lights the disc and each station appears to animate in place; a slightly detuned strobe makes the whole animation creep slowly round the disc. Disc angle is a closed-form function of t (smoothstep speed steps, exact integral), so every frame is a pure function of time.",
+    "palette": {
+      "bg": "#f3ead9",
+      "sweep": "#f1e6d2",
+      "ink": "#1f2230",
+      "platter": "#fbf8f1",
+      "tier": "#ffd23f",
+      "base": "#17b3a3",
+      "ball": "#ff3b30",
+      "petal": "#ff4fa3",
+      "center": "#ffd23f",
+      "stem": "#2fae4a",
+      "leaf": "#5fd35f",
+      "pot": "#e8743b",
+      "soil": "#5a3a28",
+      "rod": "#cfd6df",
+      "cap": "#3d5afe",
+      "stripes": [
+        "#ff5a5f",
+        "#ffb400",
+        "#17b3a3",
+        "#3d5afe"
+      ],
+      "night": "#151826",
+      "strobe": "#eef4ff"
+    },
+    "world": {
+      "background": "#f3ead9",
+      "fog": null,
+      "environment": "room",
+      "environmentIntensity": 0.55,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "sweep": {
+        "type": "standard",
+        "baseColor": "#f1e6d2",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "platter": {
+        "type": "standard",
+        "baseColor": "#fbf8f1",
+        "roughness": 0.55,
+        "metalness": 0
+      },
+      "tier": {
+        "type": "physical",
+        "baseColor": "#ffd23f",
+        "roughness": 0.35,
+        "metalness": 0,
+        "clearcoat": 0.6,
+        "clearcoatRoughness": 0.2
+      },
+      "base": {
+        "type": "physical",
+        "baseColor": "#17b3a3",
+        "roughness": 0.3,
+        "metalness": 0,
+        "clearcoat": 0.8,
+        "clearcoatRoughness": 0.15
+      },
+      "ball": {
+        "type": "physical",
+        "baseColor": "#ff3b30",
+        "roughness": 0.22,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.08
+      },
+      "petal": {
+        "type": "physical",
+        "baseColor": "#ff4fa3",
+        "roughness": 0.4,
+        "metalness": 0,
+        "clearcoat": 0.4,
+        "clearcoatRoughness": 0.3,
+        "side": "double"
+      },
+      "center": {
+        "type": "standard",
+        "baseColor": "#ffd23f",
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      "stem": {
+        "type": "standard",
+        "baseColor": "#2fae4a",
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      "leaf": {
+        "type": "standard",
+        "baseColor": "#5fd35f",
+        "roughness": 0.5,
+        "metalness": 0,
+        "side": "double"
+      },
+      "pot": {
+        "type": "standard",
+        "baseColor": "#e8743b",
+        "roughness": 0.7,
+        "metalness": 0
+      },
+      "soil": {
+        "type": "standard",
+        "baseColor": "#5a3a28",
+        "roughness": 1,
+        "metalness": 0
+      },
+      "rod": {
+        "type": "physical",
+        "baseColor": "#cfd6df",
+        "roughness": 0.15,
+        "metalness": 0.2,
+        "clearcoat": 1
+      },
+      "cap": {
+        "type": "physical",
+        "baseColor": "#3d5afe",
+        "roughness": 0.25,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.1
+      },
+      "lampBody": {
+        "type": "standard",
+        "baseColor": "#2a2d38",
+        "roughness": 0.45,
+        "metalness": 0.3
+      },
+      "lampLens": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.2,
+        "metalness": 0,
+        "emission": {
+          "color": "#eef4ff",
+          "strength": 0.05
+        }
+      }
+    },
+    "lights": [
+      {
+        "id": "sky",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#e8dcc4",
+        "intensity": 1.15
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff4e4",
+        "intensity": 2.6,
+        "position": [
+          -4.5,
+          7.5,
+          5.5
+        ],
+        "target": [
+          0,
+          0.4,
+          0
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 2048,
+          "extent": 3.6,
+          "near": 1,
+          "far": 22,
+          "bias": -0.0004,
+          "normalBias": 0.02
+        }
+      },
+      {
+        "id": "fill",
+        "type": "directional",
+        "color": "#dfe9ff",
+        "intensity": 0.7,
+        "position": [
+          6,
+          3.5,
+          4
+        ],
+        "target": [
+          0,
+          0.4,
+          0
+        ]
+      },
+      {
+        "id": "strobe",
+        "type": "spot",
+        "color": "#eef4ff",
+        "intensity": 0,
+        "position": [
+          -2.55,
+          2.45,
+          1.7
+        ],
+        "target": [
+          0,
+          0.45,
+          0.2
+        ],
+        "angle": 0.7,
+        "penumbra": 0.55,
+        "distance": 14,
+        "decay": 2,
+        "shadow": {
+          "softness": 2,
+          "mapSize": 2048,
+          "near": 1,
+          "far": 14,
+          "bias": -0.0005,
+          "normalBias": 0.02
+        }
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.28,
+        "offset": 1.1
+      }
+    },
+    "camera": {
+      "fov": 34,
+      "near": 0.1,
+      "far": 60,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 800,
+      "color": "#1f2230",
+      "height": 0.3
+    },
+    "table": {
+      "baseR": 2.12,
+      "baseH": 0.22,
+      "platterR": 2,
+      "platterH": 0.08,
+      "stripeH": 0.06,
+      "tierR": 1.22,
+      "tierH": 0.3,
+      "spindleR": 0.13,
+      "spindleH": 0.36
+    },
+    "rings": [
+      {
+        "id": "flowers",
+        "pose": "flower",
+        "N": 24,
+        "radius": 1.68,
+        "tier": "platter",
+        "height": 0.34,
+        "scale": 1
+      },
+      {
+        "id": "balls",
+        "pose": "ball",
+        "N": 24,
+        "radius": 0.92,
+        "tier": "tier",
+        "height": 0.52,
+        "ballR": 0.085
+      }
+    ],
+    "flower": {
+      "potR": 0.085,
+      "potH": 0.11,
+      "stemR": 0.012,
+      "petals": 6,
+      "petalLen": 0.085,
+      "petalW": 0.05,
+      "centerR": 0.032,
+      "leafLen": 0.075
+    },
+    "ball": {
+      "rodR": 0.006,
+      "padR": 0.05,
+      "squash": 0.42,
+      "stretch": 0.22
+    },
+    "lamp": {
+      "position": [
+        2.7,
+        1.85,
+        -1.3
+      ],
+      "target": [
+        0,
+        0.55,
+        0.6
+      ],
+      "size": 0.36
+    },
+    "spin": {
+      "blurSamples": 16,
+      "shutter": 1,
+      "strobePeak": 60,
+      "lampGlow": 2.2,
+      "lampFlicker": 0.18,
+      "darkRoom": 0.08,
+      "fade": 0.22,
+      "onset": 0.35
+    },
+    "caption": {
+      "x": 96,
+      "y": 66,
+      "h": 88,
+      "cap": 38,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#ffffff",
+      "edge": "#e2d8c6",
+      "ink": "#1f2230",
+      "dots": [
+        "#ff3b30",
+        "#ffd23f",
+        "#17b3a3"
+      ],
+      "nightPlate": "#20243a",
+      "nightEdge": "#3a3f5c",
+      "nightInk": "#f3f5fb"
+    },
+    "sound": {
+      "bed": {
+        "gain": 0.62,
+        "root": 130.8,
+        "brightness": 900
+      },
+      "whir": {
+        "gain": 0.32,
+        "hz": 55,
+        "hz2": 150,
+        "seg": 0.9
+      },
+      "bounce": {
+        "gain": 0.42,
+        "hz": 392
+      },
+      "bloom": {
+        "gain": 0.3,
+        "hz": 523.25
+      },
+      "strobeOn": {
+        "gain": 0.5
+      },
+      "strobeHum": {
+        "gain": 0.07,
+        "hz": 120
+      },
+      "label": {
+        "gain": 0.22
+      }
+    },
+    "sfx": {
+      "enter": "marimba",
+      "exit": "click",
+      "move": "whir",
+      "land": "marimba",
+      "emphasis": "clack",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "Nothing on the disc ever changes shape: each station is a fixed sculpture of one pose; only the disc angle moves (a closed-form integral of smoothstep speed steps).",
+      "Continuous light: the frame averages K renders over a one-frame shutter, so at the locked speed the stations smear into one band.",
+      "Strobe: one flash per video frame; at one station per frame every spot shows the next pose, so the ring animates in place; the room darkens to ~13 % and the strobe lamp lights the disc.",
+      "Detune: a disc a few percent faster than the strobe makes the whole animation creep forward round the disc."
+    ]
+  },
+  "scene": {
+    "id": "52-zoetrope",
+    "style": "zoetrope",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "still",
+        "t": 0,
+        "dur": 3.5,
+        "label": "24 statues, each frozen"
+      },
+      {
+        "id": "spin",
+        "t": 3.5,
+        "dur": 3.5,
+        "label": "Spin them: just a blur"
+      },
+      {
+        "id": "strobe",
+        "t": 7,
+        "dur": 3.4,
+        "label": "Add a strobe: they move"
+      },
+      {
+        "id": "creep",
+        "t": 10.4,
+        "dur": 2.4,
+        "label": "Detune it: they creep"
+      },
+      {
+        "id": "stop",
+        "t": 12.8,
+        "dur": 2.2,
+        "label": "Light on: statues again"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -1.9,
+          1.85,
+          4.2
+        ],
+        "target": [
+          -0.5,
+          0.76,
+          1.15
+        ],
+        "fov": 34
+      },
+      {
+        "t": 3.4,
+        "pos": [
+          1.9,
+          1.85,
+          4.2
+        ],
+        "target": [
+          0.5,
+          0.76,
+          1.15
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 5.5,
+        "pos": [
+          0,
+          3.25,
+          5.7
+        ],
+        "target": [
+          0,
+          0.48,
+          0.1
+        ],
+        "fov": 34,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 7,
+        "pos": [
+          0,
+          3.25,
+          5.7
+        ],
+        "target": [
+          0,
+          0.48,
+          0.1
+        ],
+        "fov": 34
+      },
+      {
+        "t": 10.4,
+        "pos": [
+          0,
+          2.2,
+          4.3
+        ],
+        "target": [
+          0,
+          0.74,
+          0.85
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.8,
+        "pos": [
+          0.9,
+          2.5,
+          4.7
+        ],
+        "target": [
+          0.1,
+          0.72,
+          0.55
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 14.700000000000001,
+        "pos": [
+          0,
+          3.25,
+          5.7
+        ],
+        "target": [
+          0,
+          0.48,
+          0.1
+        ],
+        "fov": 34,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0,
+          3.25,
+          5.7
+        ],
+        "target": [
+          0,
+          0.48,
+          0.1
+        ],
+        "fov": 34
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.62,
+        "root": 130.8,
+        "chord": [
+          0,
+          4,
+          7,
+          12
+        ],
+        "attack": 1.5,
+        "release": 2,
+        "brightness": 900
+      },
+      {
+        "t": 0.25,
+        "type": "marimba",
+        "hz": 523.25,
+        "gain": 0.22,
+        "decay": 0.25,
+        "seed": 200
+      },
+      {
+        "t": 3.6,
+        "type": "marimba",
+        "hz": 587.33,
+        "gain": 0.22,
+        "decay": 0.25,
+        "seed": 201
+      },
+      {
+        "t": 7.1,
+        "type": "marimba",
+        "hz": 659.25,
+        "gain": 0.22,
+        "decay": 0.25,
+        "seed": 202
+      },
+      {
+        "t": 10.5,
+        "type": "marimba",
+        "hz": 698.46,
+        "gain": 0.22,
+        "decay": 0.25,
+        "seed": 203
+      },
+      {
+        "t": 12.9,
+        "type": "marimba",
+        "hz": 783.99,
+        "gain": 0.22,
+        "decay": 0.25,
+        "seed": 204
+      },
+      {
+        "t": 3.7,
+        "type": "whir",
+        "dur": 1.125,
+        "hz": 55,
+        "hz2": 98.75,
+        "gain": 0.208,
+        "seed": 300
+      },
+      {
+        "t": 4.6,
+        "type": "whir",
+        "dur": 1.125,
+        "hz": 98.75,
+        "hz2": 149.24,
+        "gain": 0.318,
+        "seed": 301
+      },
+      {
+        "t": 5.5,
+        "type": "whir",
+        "dur": 1.125,
+        "hz": 149.24,
+        "hz2": 150,
+        "gain": 0.32,
+        "seed": 302
+      },
+      {
+        "t": 6.4,
+        "type": "whir",
+        "dur": 1.125,
+        "hz": 150,
+        "hz2": 150,
+        "gain": 0.32,
+        "seed": 303
+      },
+      {
+        "t": 7.3,
+        "type": "whir",
+        "dur": 1.125,
+        "hz": 150,
+        "hz2": 150,
+        "gain": 0.32,
+        "seed": 304
+      },
+      {
+        "t": 8.2,
+        "type": "whir",
+        "dur": 1.125,
+        "hz": 150,
+        "hz2": 150,
+        "gain": 0.32,
+        "seed": 305
+      },
+      {
+        "t": 9.1,
+        "type": "whir",
+        "dur": 1.125,
+        "hz": 150,
+        "hz2": 150,
+        "gain": 0.32,
+        "seed": 306
+      },
+      {
+        "t": 10,
+        "type": "whir",
+        "dur": 1.125,
+        "hz": 150,
+        "hz2": 152.38,
+        "gain": 0.32,
+        "seed": 307
+      },
+      {
+        "t": 10.9,
+        "type": "whir",
+        "dur": 1.125,
+        "hz": 152.38,
+        "hz2": 152.38,
+        "gain": 0.32,
+        "seed": 308
+      },
+      {
+        "t": 11.8,
+        "type": "whir",
+        "dur": 1.125,
+        "hz": 152.38,
+        "hz2": 152.38,
+        "gain": 0.32,
+        "seed": 309
+      },
+      {
+        "t": 12.7,
+        "type": "whir",
+        "dur": 1.125,
+        "hz": 152.38,
+        "hz2": 122.46,
+        "gain": 0.32,
+        "seed": 310
+      },
+      {
+        "t": 13.6,
+        "type": "whir",
+        "dur": 1.125,
+        "hz": 122.46,
+        "hz2": 61.52,
+        "gain": 0.26,
+        "seed": 311
+      },
+      {
+        "t": 14.5,
+        "type": "whir",
+        "dur": 1.125,
+        "hz": 61.52,
+        "hz2": 55,
+        "gain": 0.126,
+        "seed": 312
+      },
+      {
+        "t": 7,
+        "type": "clack",
+        "gain": 0.5,
+        "seed": 500
+      },
+      {
+        "t": 7,
+        "type": "buzz",
+        "hz": 120,
+        "flicker": 0,
+        "dur": 5.800000000000001,
+        "gain": 0.07,
+        "seed": 1500
+      },
+      {
+        "t": 7.066666666666666,
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.42,
+        "decay": 0.18,
+        "seed": 501
+      },
+      {
+        "t": 7.533333333333333,
+        "type": "pluck",
+        "hz": 523.25,
+        "gain": 0.3,
+        "decay": 0.6,
+        "dur": 0.8,
+        "seed": 502
+      },
+      {
+        "t": 7.866666666666666,
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.42,
+        "decay": 0.18,
+        "seed": 503
+      },
+      {
+        "t": 8.333333333333334,
+        "type": "pluck",
+        "hz": 523.25,
+        "gain": 0.3,
+        "decay": 0.6,
+        "dur": 0.8,
+        "seed": 504
+      },
+      {
+        "t": 8.666666666666666,
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.42,
+        "decay": 0.18,
+        "seed": 505
+      },
+      {
+        "t": 9.133333333333333,
+        "type": "pluck",
+        "hz": 523.25,
+        "gain": 0.3,
+        "decay": 0.6,
+        "dur": 0.8,
+        "seed": 506
+      },
+      {
+        "t": 9.466666666666667,
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.42,
+        "decay": 0.18,
+        "seed": 507
+      },
+      {
+        "t": 9.933333333333334,
+        "type": "pluck",
+        "hz": 523.25,
+        "gain": 0.3,
+        "decay": 0.6,
+        "dur": 0.8,
+        "seed": 508
+      },
+      {
+        "t": 10.266666666666667,
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.42,
+        "decay": 0.18,
+        "seed": 509
+      },
+      {
+        "t": 10.733333333333333,
+        "type": "pluck",
+        "hz": 523.25,
+        "gain": 0.3,
+        "decay": 0.6,
+        "dur": 0.8,
+        "seed": 510
+      },
+      {
+        "t": 11.066666666666666,
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.42,
+        "decay": 0.18,
+        "seed": 511
+      },
+      {
+        "t": 11.5,
+        "type": "pluck",
+        "hz": 523.25,
+        "gain": 0.3,
+        "decay": 0.6,
+        "dur": 0.8,
+        "seed": 512
+      },
+      {
+        "t": 11.833333333333334,
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.42,
+        "decay": 0.18,
+        "seed": 513
+      },
+      {
+        "t": 12.3,
+        "type": "pluck",
+        "hz": 523.25,
+        "gain": 0.3,
+        "decay": 0.6,
+        "dur": 0.8,
+        "seed": 514
+      },
+      {
+        "t": 12.633333333333333,
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.42,
+        "decay": 0.18,
+        "seed": 515
+      },
+      {
+        "t": 12.8,
+        "type": "click",
+        "gain": 0.4,
+        "seed": 516
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "zoetrope.js: station i carries phase frac(-i/N); disc angle theta(t) = exact integral of smoothstep speed steps; continuous light = mean of K renders over a one-frame shutter; strobe = theta at the frame time (one station per frame when locked, x1.025 detuned).",
+      "stations": [
+        "flowers: 24 x flower",
+        "balls: 24 x ball"
+      ],
+      "lockOffset": -0.1309,
+      "events": 17,
+      "framing": "ok (worst 0.9073 at 11.133333s, front)",
+      "tau": 6.283185307179586
+    }
+  }
+}

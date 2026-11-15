@@ -52,10 +52,18 @@ Batch-4 promotions (fontoutline, optics, sdf, iso, relief, whipBlurPass, screenC
 
 - Public gallery https://hyperframes-3d-style-atlas.ekello.chatgpt.site
 - GitHub repository https://github.com/FuFicFac/hyperframes-3d-style-atlas
-- Combined master videos https://github.com/FuFicFac/hyperframes-3d-style-atlas/releases/tag/atlas-v1
+- Combined videos, 70 styles (2026-11-15) https://github.com/FuFicFac/hyperframes-3d-style-atlas/releases/tag/atlas-v2
+- Combined master videos, first 50 styles https://github.com/FuFicFac/hyperframes-3d-style-atlas/releases/tag/atlas-v1
 
-This repository includes the original scene projects, kit copies, renders, exported assets, visual checks, regression evidence, and the prepared static website in `Site/dist/`. The two combined master MP4s are attached to the `atlas-v1` release because they exceed GitHub's regular Git file size limit. Download them into `_ALL VIDEOS/` to restore the complete collection.
+This repository includes the original scene projects, kit copies, renders, exported assets, visual checks, regression evidence, and the prepared static website in `Site/dist/`. The combined MP4s (`Master Video.mp4`, `Master Video - Numbered.mp4`, `Breakout 51-70.mp4`, `Breakout 51-70 - Numbered.mp4`) are attached to the `atlas-v2` release because they exceed GitHub's regular Git file size limit. Download them into `_ALL VIDEOS/` to restore the complete collection.
 
-Serve `Site/dist/` with any static web server to preview the published gallery. The original `gallery.html` uses the original render paths. The scene rebuilding commands above depend on the separate `Skills/3d-style-atlas` toolkit in D Second Brain.
+Serve `Site/dist/` with any static web server to preview the published gallery. The original `gallery.html` uses the original render paths.
+
+## 70 styles and the skill (2026-11-15)
+
+- Styles 51–70 were added on 2026-11-14/15: anamorphic, zoetrope, cymatics, ferrofluid, point-cloud, thermal-camera, murmuration, impossible-geometry, light-painting, microscope-slide, ukiyo-e, cubism, kintsugi, impasto, op-art, multiplane-cel, mosaic, constructivist-poster, flipbook, art-deco. `gallery.html` and `contact-sheet.jpg` cover all 70.
+- `skill/` is a copy of the `3d-style-atlas` agent skill: `SKILL.md` (start here), `kit/`, `styles/<id>/`, `scripts/`, `references/`. The working copy lives in D Second Brain at `Skills/3d-style-atlas`; `skill/` here is a snapshot taken on 2026-11-15, so re-copy it after changes. To use it from a clone, point `SK` at the `skill/` folder and pass `--pilot <this folder>` to `build-index.mjs` / `build-gallery.mjs`.
+- The published website in `Site/dist/` and the public gallery link above still show the first 50 styles; they have not been republished.
+- Styles 51–70 were reviewed from still frames, not watched in motion, and nobody has listened to the audio (levels were measured only).
 
 The local `Site/` checkout also has its own OpenAI Sites Git metadata. Its files are included here as regular files so GitHub clones contain the complete website. Publish through the Sites workflow from `Site/`, using `.openai/hosting.json` and its existing project ID.

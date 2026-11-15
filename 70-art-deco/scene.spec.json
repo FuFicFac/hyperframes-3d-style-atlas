@@ -1,0 +1,1228 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "art-deco",
+    "name": "Art Deco",
+    "description": "Machine-age Art Deco in polished brass and gold, black lacquer, cream marble and jade under a bright cream-to-teal sky: bronze elevator doors with an inlaid fan slide apart, a gold sunburst fans open ray by ray like a folding fan, a stepped ziggurat skyscraper telescopes up terrace by terrace (vertical fluting, glowing frosted-glass window bays, chevron parapets, a spire extending last) while two searchlights sweep in mirror image, crown ornaments (chevrons, scallop fans, sunray fans, stepped keystone frames, finials) click into place in mirrored pairs, and a framed title panel unfolds from the centre line. The signature is symmetric unfolding and stepped ascent: every element is mirrored about one centre line and grows in terraces; a THREE-free planner (deco.js) times every unfold and the stepped rising chords (one per tier), ray notes and ornament clicks come from the same plan.",
+    "palette": {
+      "bg": "#f1e2c4",
+      "skyTop": "#3f8f8c",
+      "skyMid": "#9cc7b9",
+      "skyLow": "#f5e6c8",
+      "gold": "#e0b04f",
+      "goldDeep": "#b9852f",
+      "bronze": "#a86f3c",
+      "lacquer": "#141416",
+      "marble": "#f2e8d5",
+      "marbleShade": "#d9c9a8",
+      "jade": "#1f7d74",
+      "jadeDeep": "#135650",
+      "glass": "#fff3d8",
+      "ink": "#141416",
+      "cream": "#fbf3e2"
+    },
+    "world": {
+      "background": "#f1e2c4",
+      "sky": {
+        "stops": [
+          [
+            0,
+            "#3f8f8c"
+          ],
+          [
+            0.42,
+            "#8fc0b2"
+          ],
+          [
+            0.78,
+            "#f2dfbd"
+          ],
+          [
+            1,
+            "#f6e8cc"
+          ]
+        ],
+        "size": 256
+      },
+      "fog": null,
+      "environment": "room",
+      "environmentIntensity": 0.8,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "gold": {
+        "type": "physical",
+        "baseColor": "#e3b252",
+        "roughness": 0.26,
+        "metalness": 1,
+        "clearcoat": 0.3,
+        "clearcoatRoughness": 0.2,
+        "emission": {
+          "color": "#8a5f1c",
+          "strength": 0.18
+        }
+      },
+      "goldRay": {
+        "type": "standard",
+        "baseColor": "#e9b44e",
+        "roughness": 0.3,
+        "metalness": 0.8,
+        "emission": {
+          "color": "#b9802a",
+          "strength": 0.22
+        }
+      },
+      "rayCream": {
+        "type": "physical",
+        "baseColor": "#1f8a7f",
+        "roughness": 0.25,
+        "metalness": 0.1,
+        "clearcoat": 0.8,
+        "clearcoatRoughness": 0.1,
+        "emission": {
+          "color": "#0f5a52",
+          "strength": 0.2
+        }
+      },
+      "bronze": {
+        "type": "standard",
+        "baseColor": "#a86f3c",
+        "roughness": 0.32,
+        "metalness": 0.9,
+        "emission": {
+          "color": "#5a3416",
+          "strength": 0.15
+        }
+      },
+      "lacquer": {
+        "type": "physical",
+        "baseColor": "#17171a",
+        "roughness": 0.16,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.08
+      },
+      "marble": {
+        "type": "standard",
+        "baseColor": "#f2e8d5",
+        "roughness": 0.38,
+        "metalness": 0,
+        "bump": {
+          "source": "bumpNoise",
+          "scale": 10,
+          "octaves": 4,
+          "seed": 70,
+          "strength": 0.06,
+          "description": "soft fbm: honed marble"
+        }
+      },
+      "marbleShade": {
+        "type": "standard",
+        "baseColor": "#dccbaa",
+        "roughness": 0.45,
+        "metalness": 0
+      },
+      "jade": {
+        "type": "physical",
+        "baseColor": "#22867c",
+        "roughness": 0.22,
+        "metalness": 0.1,
+        "clearcoat": 0.8,
+        "clearcoatRoughness": 0.1,
+        "emission": {
+          "color": "#0f4a44",
+          "strength": 0.25
+        }
+      },
+      "glass": {
+        "type": "standard",
+        "baseColor": "#fff3d8",
+        "roughness": 0.55,
+        "metalness": 0,
+        "emission": {
+          "color": "#ffd890",
+          "strength": 1.1
+        }
+      },
+      "sun": {
+        "type": "standard",
+        "baseColor": "#fff6df",
+        "roughness": 0.5,
+        "metalness": 0,
+        "emission": {
+          "color": "#ffe0a0",
+          "strength": 1.3
+        }
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#fff6e6",
+        "groundColor": "#a08a68",
+        "intensity": 0.8
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#ffeccc",
+        "intensity": 2.3,
+        "position": [
+          -9,
+          18,
+          16
+        ],
+        "target": [
+          0,
+          6,
+          -12
+        ],
+        "shadow": {
+          "softness": 2.5,
+          "mapSize": 2048,
+          "extent": 16,
+          "near": 1,
+          "far": 70,
+          "bias": -0.0004,
+          "normalBias": 0.03
+        }
+      },
+      {
+        "id": "fillR",
+        "type": "directional",
+        "color": "#ffe2b8",
+        "intensity": 0.7,
+        "position": [
+          10,
+          9,
+          14
+        ],
+        "target": [
+          0,
+          5,
+          -12
+        ]
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#d6ecff",
+        "intensity": 0.9,
+        "position": [
+          0,
+          14,
+          -30
+        ],
+        "target": [
+          0,
+          5,
+          -12
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.22,
+        "radius": 0.35,
+        "threshold": 2.6
+      },
+      "vignette": {
+        "darkness": 0.22,
+        "offset": 1.15
+      }
+    },
+    "camera": {
+      "fov": 35,
+      "near": 0.3,
+      "far": 140,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "\"Futura\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "color": "#fbf3e2",
+      "height": 0.5
+    },
+    "type": {
+      "face": "\"Futura\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "display": "\"Futura\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "serif": "\"Didot\", \"Bodoni 72\", Georgia, serif",
+      "tracking": 0.22
+    },
+    "doors": {
+      "z": 4,
+      "opening": [
+        6,
+        5
+      ],
+      "leafThickness": 0.12,
+      "wallThickness": 0.6,
+      "wallSize": [
+        30,
+        10
+      ],
+      "frame": {
+        "steps": 3,
+        "step": 0.32,
+        "depth": 0.12
+      },
+      "slide": 3.05
+    },
+    "sunburst": {
+      "center": [
+        0,
+        2,
+        -21
+      ],
+      "rays": 17,
+      "spread": 180,
+      "inner": 2.6,
+      "outer": 19,
+      "width": 0.075,
+      "sunRadius": 2.4,
+      "depth": 0.25
+    },
+    "plinth": {
+      "z": -19.2,
+      "width": 80,
+      "steps": [
+        [
+          2.3,
+          0
+        ],
+        [
+          1.5,
+          0.9
+        ],
+        [
+          0.8,
+          1.8
+        ]
+      ]
+    },
+    "tower": {
+      "z": -12,
+      "tiers": [
+        {
+          "w": 11,
+          "h": 2.8,
+          "d": 7,
+          "bays": 7
+        },
+        {
+          "w": 8.4,
+          "h": 2.6,
+          "d": 5.6,
+          "bays": 5
+        },
+        {
+          "w": 6.2,
+          "h": 2.4,
+          "d": 4.4,
+          "bays": 5
+        },
+        {
+          "w": 4.6,
+          "h": 2.2,
+          "d": 3.4,
+          "bays": 3
+        },
+        {
+          "w": 3.2,
+          "h": 2,
+          "d": 2.6,
+          "bays": 3
+        }
+      ],
+      "wings": {
+        "w": 3.6,
+        "gap": 0.5,
+        "tiers": [
+          [
+            3.6,
+            2
+          ],
+          [
+            2.6,
+            1.4
+          ]
+        ],
+        "d": 4
+      },
+      "spire": {
+        "h": 3.4,
+        "r": 0.32
+      },
+      "cap": 0.2,
+      "capOver": 0.18,
+      "flute": 0.07
+    },
+    "searchlight": {
+      "x": 9.5,
+      "z": -16,
+      "length": 34,
+      "radius": 2.4,
+      "tilt": 0.16,
+      "sweep": 0.32,
+      "hz": 0.18,
+      "opacity": 0.32
+    },
+    "floor": {
+      "size": 120,
+      "z": -10
+    },
+    "panel": {
+      "w": 12,
+      "h": 3.5,
+      "z": -6,
+      "y": 1.4,
+      "steps": 3,
+      "step": 0.22
+    },
+    "caption": {
+      "x": 960,
+      "y": 900,
+      "h": 96,
+      "cap": 40,
+      "maxW": 980,
+      "plate": "#141416",
+      "edge": "#e0b04f",
+      "ink": "#fbf3e2",
+      "accent": "#2a9a8f"
+    },
+    "sound": {
+      "bed": {
+        "gain": 0.42,
+        "root": 73.42,
+        "chord": [
+          0,
+          7,
+          12,
+          16,
+          19
+        ],
+        "brightness": 700
+      },
+      "open": {
+        "gain": 0.5,
+        "rumble": 0.35,
+        "whoosh": 0.3
+      },
+      "ray": {
+        "gain": 0.26,
+        "decay": 0.35
+      },
+      "tier": {
+        "gain": 0.34,
+        "brightness": 2300,
+        "dur": 1.5,
+        "mallet": 0.22
+      },
+      "spire": {
+        "riser": 0.28,
+        "chime": 0.18
+      },
+      "click": {
+        "gain": 0.45
+      },
+      "title": {
+        "gain": 0.42,
+        "chime": 0.2
+      }
+    },
+    "sfx": {
+      "enter": "pop",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "clack",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Everything is mirrored about x = 0: a left part and its mirror move together; nothing happens on one side alone.",
+      "Doors slide apart into their wall pockets; the fan behind opens like a folding fan — the outermost blade leads and each ray stops in its slot.",
+      "Tiers telescope up out of the tier below (outBack), one chord per tier; the spire extends last; the camera cranes with the growth.",
+      "Crown ornaments arrive in mirrored pairs sliding or swinging in toward the centre line and click into place."
+    ]
+  },
+  "scene": {
+    "id": "70-art-deco",
+    "style": "art-deco",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "doors",
+        "t": 0,
+        "dur": 2.5,
+        "label": "BEHIND BRONZE DOORS"
+      },
+      {
+        "id": "fan",
+        "t": 2.5,
+        "dur": 2.7,
+        "label": "A SUNBURST UNFOLDS"
+      },
+      {
+        "id": "tower",
+        "t": 5.2,
+        "dur": 3.6,
+        "label": "TERRACE BY TERRACE"
+      },
+      {
+        "id": "crown",
+        "t": 8.8,
+        "dur": 3,
+        "label": "CROWNED IN GOLD"
+      },
+      {
+        "id": "title",
+        "t": 11.8,
+        "dur": 3.2,
+        "label": "ART DECO"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0,
+          3.4,
+          14.8
+        ],
+        "target": [
+          0,
+          3.4,
+          4
+        ]
+      },
+      {
+        "t": 1,
+        "pos": [
+          0,
+          3.4,
+          14.8
+        ],
+        "target": [
+          0,
+          3.4,
+          4
+        ]
+      },
+      {
+        "t": 4.4,
+        "pos": [
+          0,
+          4.2,
+          3
+        ],
+        "target": [
+          0,
+          6.6,
+          -21
+        ],
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 5.3,
+        "pos": [
+          0,
+          4.2,
+          3
+        ],
+        "target": [
+          0,
+          6.6,
+          -21
+        ]
+      },
+      {
+        "t": 8.6,
+        "pos": [
+          0,
+          4.6,
+          20
+        ],
+        "target": [
+          0,
+          8.4,
+          -12
+        ],
+        "ease": "inOutSine"
+      },
+      {
+        "t": 9,
+        "pos": [
+          0,
+          4.6,
+          20
+        ],
+        "target": [
+          0,
+          8.4,
+          -12
+        ]
+      },
+      {
+        "t": 10.1,
+        "pos": [
+          0,
+          9,
+          1.5
+        ],
+        "target": [
+          0,
+          10,
+          -12
+        ],
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 11.5,
+        "pos": [
+          0,
+          11.4,
+          0.5
+        ],
+        "target": [
+          0,
+          12.2,
+          -12
+        ],
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.9,
+        "pos": [
+          0,
+          11.4,
+          0.5
+        ],
+        "target": [
+          0,
+          12.2,
+          -12
+        ]
+      },
+      {
+        "t": 13.9,
+        "pos": [
+          0,
+          4.6,
+          20
+        ],
+        "target": [
+          0,
+          8.4,
+          -12
+        ],
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0,
+          4.6,
+          20
+        ],
+        "target": [
+          0,
+          8.4,
+          -12
+        ]
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "root": 73.42,
+        "chord": [
+          0,
+          7,
+          12,
+          16,
+          19
+        ],
+        "dur": 15,
+        "attack": 0.3,
+        "release": 1.6,
+        "brightness": 700,
+        "gain": 0.42,
+        "seed": 5
+      },
+      {
+        "type": "rumble",
+        "dur": 2.4,
+        "gain": 0.35,
+        "pitch": 0.8,
+        "t": 0.2,
+        "pan": 0,
+        "seed": 171
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 2,
+        "q": 1.1,
+        "pitch": 0.7,
+        "gain": 0.3,
+        "t": 0.2,
+        "pan": 0,
+        "seed": 172
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 146.83,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "dur": 2.4,
+        "attack": 0.05,
+        "release": 1.4,
+        "brightness": 1500,
+        "gain": 0.5,
+        "t": 0.2,
+        "pan": 0,
+        "seed": 173
+      },
+      {
+        "type": "marimba",
+        "hz": 587.33,
+        "decay": 0.35,
+        "dur": 0.8,
+        "gain": 0.26,
+        "mallet": 0.4,
+        "t": 1.975,
+        "pan": 0,
+        "seed": 178
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2556348335441,
+        "decay": 0.35,
+        "dur": 0.8,
+        "gain": 0.26,
+        "mallet": 0.4,
+        "t": 2.2339,
+        "pan": 0,
+        "seed": 185
+      },
+      {
+        "type": "marimba",
+        "hz": 739.9894302347559,
+        "decay": 0.35,
+        "dur": 0.8,
+        "gain": 0.26,
+        "mallet": 0.4,
+        "t": 2.4325,
+        "pan": 0,
+        "seed": 192
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0006954619814,
+        "decay": 0.35,
+        "dur": 0.8,
+        "gain": 0.26,
+        "mallet": 0.4,
+        "t": 2.6,
+        "pan": 0,
+        "seed": 199
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7673831419285,
+        "decay": 0.35,
+        "dur": 0.8,
+        "gain": 0.26,
+        "mallet": 0.4,
+        "t": 2.7675,
+        "pan": 0,
+        "seed": 206
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.66,
+        "decay": 0.35,
+        "dur": 0.8,
+        "gain": 0.26,
+        "mallet": 0.4,
+        "t": 2.9661,
+        "pan": 0,
+        "seed": 213
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5112696670883,
+        "decay": 0.35,
+        "dur": 0.8,
+        "gain": 0.26,
+        "mallet": 0.4,
+        "t": 3.225,
+        "pan": 0,
+        "seed": 220
+      },
+      {
+        "type": "marimba",
+        "hz": 1479.9788604695118,
+        "decay": 0.35,
+        "dur": 0.8,
+        "gain": 0.26,
+        "mallet": 0.4,
+        "t": 3.85,
+        "pan": 0,
+        "seed": 227
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 146.83,
+        "chord": [
+          0,
+          4,
+          7,
+          12
+        ],
+        "dur": 1.5,
+        "attack": 0.03,
+        "release": 0.9,
+        "brightness": 2300,
+        "gain": 0.34,
+        "t": 5.35,
+        "pan": 0,
+        "seed": 234
+      },
+      {
+        "type": "marimba",
+        "hz": 293.66,
+        "notes": [
+          0,
+          4,
+          7
+        ],
+        "step": 0.07,
+        "decay": 0.3,
+        "dur": 0.9,
+        "gain": 0.22,
+        "t": 5.35,
+        "pan": 0,
+        "seed": 236
+      },
+      {
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 0.7,
+        "t": 5.804545454545454,
+        "pan": 0,
+        "seed": 235
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 164.81,
+        "chord": [
+          0,
+          3,
+          7,
+          12
+        ],
+        "dur": 1.5,
+        "attack": 0.03,
+        "release": 0.9,
+        "brightness": 2300,
+        "gain": 0.34,
+        "t": 5.93,
+        "pan": 0,
+        "seed": 241
+      },
+      {
+        "type": "marimba",
+        "hz": 329.62,
+        "notes": [
+          0,
+          3,
+          7
+        ],
+        "step": 0.07,
+        "decay": 0.3,
+        "dur": 0.9,
+        "gain": 0.22,
+        "t": 5.93,
+        "pan": 0,
+        "seed": 243
+      },
+      {
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 0.7,
+        "t": 6.384545454545454,
+        "pan": 0,
+        "seed": 242
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 185,
+        "chord": [
+          0,
+          3,
+          7,
+          12
+        ],
+        "dur": 1.5,
+        "attack": 0.03,
+        "release": 0.9,
+        "brightness": 2300,
+        "gain": 0.34,
+        "t": 6.51,
+        "pan": 0,
+        "seed": 248
+      },
+      {
+        "type": "marimba",
+        "hz": 370,
+        "notes": [
+          0,
+          3,
+          7
+        ],
+        "step": 0.07,
+        "decay": 0.3,
+        "dur": 0.9,
+        "gain": 0.22,
+        "t": 6.51,
+        "pan": 0,
+        "seed": 250
+      },
+      {
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 0.7,
+        "t": 6.964545454545454,
+        "pan": 0,
+        "seed": 249
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 196,
+        "chord": [
+          0,
+          4,
+          7,
+          12
+        ],
+        "dur": 1.5,
+        "attack": 0.03,
+        "release": 0.9,
+        "brightness": 2300,
+        "gain": 0.34,
+        "t": 7.09,
+        "pan": 0,
+        "seed": 255
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "notes": [
+          0,
+          4,
+          7
+        ],
+        "step": 0.07,
+        "decay": 0.3,
+        "dur": 0.9,
+        "gain": 0.22,
+        "t": 7.09,
+        "pan": 0,
+        "seed": 257
+      },
+      {
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 0.7,
+        "t": 7.544545454545454,
+        "pan": 0,
+        "seed": 256
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 220,
+        "chord": [
+          0,
+          4,
+          7,
+          12
+        ],
+        "dur": 1.5,
+        "attack": 0.03,
+        "release": 0.9,
+        "brightness": 2300,
+        "gain": 0.34,
+        "t": 7.67,
+        "pan": 0,
+        "seed": 262
+      },
+      {
+        "type": "marimba",
+        "hz": 440,
+        "notes": [
+          0,
+          4,
+          7
+        ],
+        "step": 0.07,
+        "decay": 0.3,
+        "dur": 0.9,
+        "gain": 0.22,
+        "t": 7.67,
+        "pan": 0,
+        "seed": 264
+      },
+      {
+        "type": "thud",
+        "gain": 0.3,
+        "pitch": 0.7,
+        "t": 8.124545454545455,
+        "pan": 0,
+        "seed": 263
+      },
+      {
+        "type": "riser",
+        "dur": 0.6,
+        "gain": 0.28,
+        "pitch": 1.2,
+        "t": 8.35,
+        "pan": 0,
+        "seed": 269
+      },
+      {
+        "type": "chime",
+        "dur": 1.6,
+        "pitch": 1,
+        "gain": 0.18,
+        "t": 8.95,
+        "pan": 0,
+        "seed": 270
+      },
+      {
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1.1,
+        "t": 9.3423,
+        "pan": 0,
+        "seed": 276
+      },
+      {
+        "type": "tick",
+        "gain": 0.27,
+        "pitch": 1.8,
+        "t": 9.3423,
+        "pan": 0,
+        "seed": 277
+      },
+      {
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1.1800000000000002,
+        "t": 9.7423,
+        "pan": 0,
+        "seed": 283
+      },
+      {
+        "type": "tick",
+        "gain": 0.27,
+        "pitch": 1.8,
+        "t": 9.7423,
+        "pan": 0,
+        "seed": 284
+      },
+      {
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1.26,
+        "t": 10.1423,
+        "pan": 0,
+        "seed": 290
+      },
+      {
+        "type": "tick",
+        "gain": 0.27,
+        "pitch": 1.8,
+        "t": 10.1423,
+        "pan": 0,
+        "seed": 291
+      },
+      {
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1.34,
+        "t": 10.5423,
+        "pan": 0,
+        "seed": 297
+      },
+      {
+        "type": "tick",
+        "gain": 0.27,
+        "pitch": 1.8,
+        "t": 10.5423,
+        "pan": 0,
+        "seed": 298
+      },
+      {
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1.4200000000000002,
+        "t": 10.9423,
+        "pan": 0,
+        "seed": 304
+      },
+      {
+        "type": "tick",
+        "gain": 0.27,
+        "pitch": 1.8,
+        "t": 10.9423,
+        "pan": 0,
+        "seed": 305
+      },
+      {
+        "type": "clack",
+        "gain": 0.45,
+        "pitch": 1.5,
+        "t": 11.3423,
+        "pan": 0,
+        "seed": 311
+      },
+      {
+        "type": "tick",
+        "gain": 0.27,
+        "pitch": 1.8,
+        "t": 11.3423,
+        "pan": 0,
+        "seed": 312
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 293.66,
+        "chord": [
+          0,
+          4,
+          7,
+          12,
+          16
+        ],
+        "dur": 3.0999999999999996,
+        "attack": 0.06,
+        "release": 1.6,
+        "brightness": 2600,
+        "gain": 0.42,
+        "t": 11.9,
+        "pan": 0,
+        "seed": 318
+      },
+      {
+        "type": "chime",
+        "dur": 2.2,
+        "pitch": 1,
+        "gain": 0.2,
+        "t": 12.15,
+        "pan": 0,
+        "seed": 319
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "deco.js: doors open(t); folding fan: ray pair j at 90° ± min(j*slot, A(t)) so the outer blade leads and each ray stops in its slot (one marimba note per settle); tiers telescope up out of the tier below (one chord per tier, D-Em-F#m-G-A); spire last; crown ornaments in mirrored pairs (one click per landing); title frame unfolds from the centre line.",
+      "rays": 17,
+      "tiers": [
+        {
+          "k": 0,
+          "start": 5.35,
+          "root": 146.83
+        },
+        {
+          "k": 1,
+          "start": 5.93,
+          "root": 164.81
+        },
+        {
+          "k": 2,
+          "start": 6.51,
+          "root": 185
+        },
+        {
+          "k": 3,
+          "start": 7.09,
+          "root": 196
+        },
+        {
+          "k": 4,
+          "start": 7.67,
+          "root": 220
+        }
+      ],
+      "ornaments": [
+        {
+          "id": "finials",
+          "start": 9.15,
+          "land": 9.3423
+        },
+        {
+          "id": "chevrons",
+          "start": 9.55,
+          "land": 9.7423
+        },
+        {
+          "id": "sunfans",
+          "start": 9.95,
+          "land": 10.1423
+        },
+        {
+          "id": "scallops",
+          "start": 10.35,
+          "land": 10.5423
+        },
+        {
+          "id": "keystone",
+          "start": 10.75,
+          "land": 10.9423
+        },
+        {
+          "id": "crest",
+          "start": 11.15,
+          "land": 11.3423
+        }
+      ],
+      "doorHide": 3.7667,
+      "framing": "ok"
+    }
+  }
+}

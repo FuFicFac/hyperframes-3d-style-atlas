@@ -1,0 +1,1064 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "constructivist-poster",
+    "name": "Constructivist Poster",
+    "description": "A 1920s Constructivist poster that builds itself with force: a red wedge drives diagonally into a white circle, heavy black bars slam in on a 35 degree axis, a black cone throws words that grow as they fly, wheels roll along a bar and stop dead against the circle, and blocks of condensed capitals swing in on hinges. Cream lithograph paper, red / black / one grey, mottled ink and slight misregistration. Every element is a thick painted card at its own height on hidden dowels, so a hard key light throws offset shadows; once the poster locks, an orthographic camera tilts to reveal the layered relief, then snaps back flat. Motion is percussive (hard ease-in, dead stop, tiny ring) and every move has a mechanical hit from the same build plan.",
+    "palette": {
+      "bg": "#c9bfab",
+      "paper": "#ebe0c8",
+      "red": "#c42a1c",
+      "black": "#1a1715",
+      "grey": "#8e8a83",
+      "white": "#f7f2e4",
+      "dowel": "#9a8f7c",
+      "edge": "#cfc3a8"
+    },
+    "world": {
+      "background": "#c9bfab",
+      "sky": null,
+      "fog": null,
+      "environment": null,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "paper": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.95,
+        "metalness": 0,
+        "map": {
+          "source": "paper",
+          "size": 1024,
+          "base": "#f1e8d4",
+          "fiber": 0.045,
+          "grain": 0.05,
+          "seed": 68,
+          "variant": "even",
+          "repeat": [
+            3,
+            1.7
+          ]
+        }
+      },
+      "boardEdge": {
+        "type": "standard",
+        "baseColor": "#cfc3a8",
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      "red": {
+        "type": "standard",
+        "baseColor": "#c42a1c",
+        "roughness": 0.85,
+        "metalness": 0,
+        "map": {
+          "source": "noise",
+          "size": 256,
+          "scale": 22,
+          "octaves": 4,
+          "seed": 681,
+          "colorA": "#ddd3c6",
+          "colorB": "#ffffff",
+          "contrast": 1.25,
+          "repeat": [
+            0.22,
+            0.22
+          ]
+        }
+      },
+      "black": {
+        "type": "standard",
+        "baseColor": "#1a1715",
+        "roughness": 0.8,
+        "metalness": 0,
+        "map": {
+          "source": "noise",
+          "size": 256,
+          "scale": 22,
+          "octaves": 4,
+          "seed": 682,
+          "colorA": "#a8a39d",
+          "colorB": "#ffffff",
+          "contrast": 1.25,
+          "repeat": [
+            0.2,
+            0.2
+          ]
+        }
+      },
+      "grey": {
+        "type": "standard",
+        "baseColor": "#8e8a83",
+        "roughness": 0.9,
+        "metalness": 0,
+        "map": {
+          "source": "noise",
+          "size": 256,
+          "scale": 22,
+          "octaves": 4,
+          "seed": 683,
+          "colorA": "#ebe6dd",
+          "colorB": "#ffffff",
+          "contrast": 1.1,
+          "repeat": [
+            0.2,
+            0.2
+          ]
+        }
+      },
+      "white": {
+        "type": "standard",
+        "baseColor": "#f7f2e4",
+        "roughness": 0.9,
+        "metalness": 0,
+        "map": {
+          "source": "noise",
+          "size": 256,
+          "scale": 22,
+          "octaves": 3,
+          "seed": 684,
+          "colorA": "#f5f1e9",
+          "colorB": "#ffffff",
+          "contrast": 1.1,
+          "repeat": [
+            0.2,
+            0.2
+          ]
+        }
+      },
+      "dowel": {
+        "type": "standard",
+        "baseColor": "#9a8f7c",
+        "roughness": 0.8,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#f4efe6",
+        "intensity": 1.6
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#ffffff",
+        "intensity": 2.1,
+        "position": [
+          -4,
+          4.8,
+          19
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 1,
+          "mapSize": 4096,
+          "extent": 10,
+          "near": 1,
+          "far": 50,
+          "bias": -0.0003,
+          "normalBias": 0.01
+        }
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.22,
+        "offset": 1.15
+      },
+      "grain": {
+        "amount": 0.014,
+        "fps": 15
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 1,
+      "far": 90,
+      "projection": "orthographic",
+      "viewHeight": 9,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "\"Impact\", \"Haettenschweiler\", \"DIN Condensed\", \"Arial Black\", sans-serif",
+      "weight": 400,
+      "color": "#1a1715",
+      "height": 0.6
+    },
+    "board": {
+      "w": 16.6,
+      "h": 9.4,
+      "depth": 0.3
+    },
+    "card": {
+      "thickness": 0.16,
+      "dowelR": 0.08
+    },
+    "misregister": {
+      "offset": [
+        0.07,
+        -0.055
+      ],
+      "alpha": 1
+    },
+    "type": {
+      "font": "\"Impact\", \"Haettenschweiler\", \"DIN Condensed\", \"Arial Black\", sans-serif",
+      "weight": 400,
+      "px": 220,
+      "tracking": 0.02
+    },
+    "feel": {
+      "power": 3,
+      "over": 0.035,
+      "period": 0.16,
+      "decay": 0.07
+    },
+    "caption": {
+      "x": 960,
+      "y": 60,
+      "h": 92,
+      "cap": 50,
+      "maxW": 900,
+      "font": "\"Impact\", \"DIN Condensed\", \"Arial Black\", sans-serif",
+      "weight": 400,
+      "plate": "#1a1715",
+      "ink": "#f2e9d4",
+      "tab": "#c42a1c"
+    },
+    "sound": {
+      "hit": {
+        "gain": 0.5,
+        "dur": 0.4,
+        "pitch": 1,
+        "clack": 0.32,
+        "clackPitch": 0.9
+      },
+      "swish": {
+        "gain": 0.15,
+        "q": 1.4,
+        "pitch": 1.6
+      },
+      "tick": {
+        "gain": 0.32,
+        "pitch": 1.3
+      },
+      "throw": {
+        "gain": 0.25,
+        "pitch": 1.2,
+        "pop": 0.18
+      },
+      "servo": {
+        "gain": 0.3,
+        "hz": 90,
+        "hz2": 170
+      },
+      "bed": {
+        "root": 55,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "brightness": 420,
+        "gain": 0.26,
+        "humHz": 55,
+        "hum": 0.04
+      }
+    },
+    "sfx": {
+      "enter": "whoosh",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "impact",
+      "emphasis": "clack",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "Every piece arrives with strike(): u^3 ease-in (fastest just before contact), a dead stop on the hit, then a tiny damped ring (3.5 %).",
+      "Slides travel along the piece's own diagonal from off-frame; drops fall toward the board (the shadow offset shrinks to its rest gap); hinges swing flat from edge-on.",
+      "What gets struck recoils: the circle jolts along the wedge's axis and the whole sheet shakes a few pixels on heavy hits.",
+      "Wheels roll along a rail (turn = distance / radius) with a ratchet tick per spoke and stop dead against the circle.",
+      "After the poster locks, the orthographic camera tilts (arc) to show the card layers on their dowels, holds still, then snaps back flat with an outBack overshoot."
+    ]
+  },
+  "scene": {
+    "id": "68-constructivist-poster",
+    "style": "constructivist-poster",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "strike",
+        "t": 0,
+        "dur": 3,
+        "label": "Wedge into circle"
+      },
+      {
+        "id": "bars",
+        "t": 3,
+        "dur": 3,
+        "label": "Bars slam on the diagonal"
+      },
+      {
+        "id": "cone",
+        "t": 6,
+        "dur": 3,
+        "label": "The cone throws the word"
+      },
+      {
+        "id": "depth",
+        "t": 9,
+        "dur": 3.2,
+        "label": "Cut card, real depth"
+      },
+      {
+        "id": "lock",
+        "t": 12.2,
+        "dur": 2.8,
+        "label": "Built with force"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0,
+          0,
+          30
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "viewHeight": 9
+      },
+      {
+        "t": 9,
+        "pos": [
+          0,
+          0,
+          30
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "viewHeight": 9
+      },
+      {
+        "t": 9.85,
+        "pos": [
+          -17.7423,
+          13.1511,
+          20.338
+        ],
+        "target": [
+          0.3,
+          0,
+          0.3
+        ],
+        "viewHeight": 8.3,
+        "ease": "outCubic",
+        "path": "arc"
+      },
+      {
+        "t": 11.55,
+        "pos": [
+          -17.7423,
+          13.1511,
+          20.338
+        ],
+        "target": [
+          0.3,
+          0,
+          0.3
+        ],
+        "viewHeight": 8.3
+      },
+      {
+        "t": 11.95,
+        "pos": [
+          0,
+          0,
+          30
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "viewHeight": 9,
+        "ease": "outBack",
+        "path": "arc"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0,
+          0,
+          30
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "viewHeight": 9
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "type": "pad",
+        "dur": 15,
+        "root": 55,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "attack": 0.4,
+        "release": 1.2,
+        "brightness": 420,
+        "gain": 0.26,
+        "t": 0,
+        "pan": 0,
+        "seed": 681
+      },
+      {
+        "type": "hum",
+        "dur": 15,
+        "hz": 55,
+        "gain": 0.04,
+        "t": 0,
+        "pan": 0,
+        "seed": 682
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.24,
+        "q": 1.4,
+        "pitch": 1.5255401427929476,
+        "gain": 0.165,
+        "t": 0,
+        "pan": 0,
+        "seed": 688
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.36,
+        "q": 1.4,
+        "pitch": 1.3063945294843617,
+        "gain": 0.195,
+        "t": 0.15000000000000002,
+        "pan": 0,
+        "seed": 695
+      },
+      {
+        "type": "impact",
+        "dur": 0.4,
+        "pitch": 0.9534625892455922,
+        "gain": 0.55,
+        "t": 0.18,
+        "pan": 0,
+        "seed": 702
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.8746306731133634,
+        "gain": 0.32,
+        "t": 0.18,
+        "pan": 0,
+        "seed": 703
+      },
+      {
+        "type": "impact",
+        "dur": 0.4,
+        "pitch": 0.8164965809277261,
+        "gain": 0.7,
+        "t": 0.5,
+        "pan": 0,
+        "seed": 709
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.7969207439660005,
+        "gain": 0.32,
+        "t": 0.5,
+        "pan": 0,
+        "seed": 710
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.34,
+        "q": 1.4,
+        "pitch": 1.788854381999832,
+        "gain": 0.12,
+        "t": 1.65,
+        "pan": 0,
+        "seed": 716
+      },
+      {
+        "type": "impact",
+        "dur": 0.4,
+        "pitch": 1.118033988749895,
+        "gain": 0.4,
+        "t": 1.98,
+        "pan": 0,
+        "seed": 723
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.9623111399920693,
+        "gain": 0.32,
+        "t": 1.98,
+        "pan": 0,
+        "seed": 724
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.3599999999999998,
+        "q": 1.4,
+        "pitch": 1.4032928308912467,
+        "gain": 0.195,
+        "t": 3.0700000000000003,
+        "pan": 0,
+        "seed": 730
+      },
+      {
+        "type": "impact",
+        "dur": 0.4,
+        "pitch": 0.8770580193070292,
+        "gain": 0.65,
+        "t": 3.42,
+        "pan": 0,
+        "seed": 737
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.8318777408951209,
+        "gain": 0.32,
+        "t": 3.42,
+        "pan": 0,
+        "seed": 738
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.2600000000000002,
+        "q": 1.4,
+        "pitch": 1.460593486680443,
+        "gain": 0.18,
+        "t": 3.73,
+        "pan": 0,
+        "seed": 744
+      },
+      {
+        "type": "impact",
+        "dur": 0.4,
+        "pitch": 0.9128709291752769,
+        "gain": 0.6,
+        "t": 3.98,
+        "pan": 0,
+        "seed": 751
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.8520952328991666,
+        "gain": 0.32,
+        "t": 3.98,
+        "pan": 0,
+        "seed": 752
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.3,
+        "gain": 0.32,
+        "t": 4.806315034869683,
+        "pan": 0,
+        "seed": 758
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.3780000000000001,
+        "gain": 0.32,
+        "t": 4.933194876671493,
+        "pan": 0,
+        "seed": 765
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.3,
+        "gain": 0.32,
+        "t": 4.947834842305214,
+        "pan": 0,
+        "seed": 772
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.3,
+        "gain": 0.32,
+        "t": 5.030553203516523,
+        "pan": 0,
+        "seed": 779
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.3780000000000001,
+        "gain": 0.32,
+        "t": 5.083628480206479,
+        "pan": 0,
+        "seed": 786
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.3780000000000001,
+        "gain": 0.32,
+        "t": 5.112630069739366,
+        "pan": 0,
+        "seed": 793
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.3,
+        "gain": 0.32,
+        "t": 5.18494124049883,
+        "pan": 0,
+        "seed": 800
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.3,
+        "gain": 0.32,
+        "t": 5.187826603363962,
+        "pan": 0,
+        "seed": 807
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.3780000000000001,
+        "gain": 0.32,
+        "t": 5.25031553597356,
+        "pan": 0,
+        "seed": 814
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.3780000000000001,
+        "gain": 0.32,
+        "t": 5.2756696846104285,
+        "pan": 0,
+        "seed": 821
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 1.035,
+        "gain": 0.28800000000000003,
+        "t": 5.3,
+        "pan": 0,
+        "seed": 828
+      },
+      {
+        "type": "thud",
+        "dur": 0.25,
+        "pitch": 1.6,
+        "gain": 0.225,
+        "t": 5.3,
+        "pan": 0,
+        "seed": 829
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.3,
+        "gain": 0.32,
+        "t": 5.353060992787383,
+        "pan": 0,
+        "seed": 835
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "pitch": 1.3780000000000001,
+        "gain": 0.32,
+        "t": 5.423028083553564,
+        "pan": 0,
+        "seed": 842
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 1.035,
+        "gain": 0.28800000000000003,
+        "t": 5.48,
+        "pan": 0,
+        "seed": 849
+      },
+      {
+        "type": "thud",
+        "dur": 0.25,
+        "pitch": 1.6,
+        "gain": 0.225,
+        "t": 5.48,
+        "pan": 0,
+        "seed": 850
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.2600000000000002,
+        "q": 1.4,
+        "pitch": 2.0655911179772892,
+        "gain": 0.09,
+        "t": 5.97,
+        "pan": 0,
+        "seed": 856
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.3599999999999998,
+        "q": 1.4,
+        "pitch": 1.5255401427929476,
+        "gain": 0.165,
+        "t": 6.07,
+        "pan": 0,
+        "seed": 863
+      },
+      {
+        "type": "impact",
+        "dur": 0.4,
+        "pitch": 1.2909944487358056,
+        "gain": 0.3,
+        "t": 6.22,
+        "pan": 0,
+        "seed": 870
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 1.0490522856216442,
+        "gain": 0.32,
+        "t": 6.22,
+        "pan": 0,
+        "seed": 871
+      },
+      {
+        "type": "clack",
+        "dur": 0.14,
+        "pitch": 0.7200000000000001,
+        "gain": 0.35200000000000004,
+        "t": 6.42,
+        "pan": 0,
+        "seed": 877
+      },
+      {
+        "type": "thud",
+        "dur": 0.35,
+        "pitch": 1.2,
+        "gain": 0.44000000000000006,
+        "t": 6.42,
+        "pan": 0,
+        "seed": 878
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.31000000000000016,
+        "q": 1.2,
+        "pitch": 1.2,
+        "gain": 0.25,
+        "t": 6.5,
+        "pan": 0,
+        "seed": 884
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.31000000000000016,
+        "q": 1.2,
+        "pitch": 1.2,
+        "gain": 0.25,
+        "t": 6.56,
+        "pan": 0,
+        "seed": 891
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.31000000000000016,
+        "q": 1.2,
+        "pitch": 1.2,
+        "gain": 0.25,
+        "t": 6.62,
+        "pan": 0,
+        "seed": 898
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 1.1700000000000002,
+        "gain": 0.256,
+        "t": 6.66,
+        "pan": 0,
+        "seed": 905
+      },
+      {
+        "type": "pop",
+        "dur": 0.12,
+        "pitch": 0.7,
+        "gain": 0.18,
+        "t": 6.66,
+        "pan": 0,
+        "seed": 906
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 1.1700000000000002,
+        "gain": 0.256,
+        "t": 6.72,
+        "pan": 0,
+        "seed": 912
+      },
+      {
+        "type": "pop",
+        "dur": 0.12,
+        "pitch": 0.7,
+        "gain": 0.18,
+        "t": 6.72,
+        "pan": 0,
+        "seed": 913
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 1.1700000000000002,
+        "gain": 0.256,
+        "t": 6.78,
+        "pan": 0,
+        "seed": 919
+      },
+      {
+        "type": "pop",
+        "dur": 0.12,
+        "pitch": 0.7,
+        "gain": 0.18,
+        "t": 6.78,
+        "pan": 0,
+        "seed": 920
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.5299999999999999,
+        "q": 1.2,
+        "pitch": 1.2,
+        "gain": 0.25,
+        "t": 6.82,
+        "pan": 0,
+        "seed": 926
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 1.1700000000000002,
+        "gain": 0.256,
+        "t": 7.2,
+        "pan": 0,
+        "seed": 933
+      },
+      {
+        "type": "pop",
+        "dur": 0.12,
+        "pitch": 0.7,
+        "gain": 0.18,
+        "t": 7.2,
+        "pan": 0,
+        "seed": 934
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.57,
+        "q": 1.2,
+        "pitch": 1.2,
+        "gain": 0.25,
+        "t": 7.3,
+        "pan": 0,
+        "seed": 940
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 1.1700000000000002,
+        "gain": 0.256,
+        "t": 7.72,
+        "pan": 0,
+        "seed": 947
+      },
+      {
+        "type": "pop",
+        "dur": 0.12,
+        "pitch": 0.7,
+        "gain": 0.18,
+        "t": 7.72,
+        "pan": 0,
+        "seed": 948
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.4300000000000001,
+        "q": 1.4,
+        "pitch": 1.5255401427929476,
+        "gain": 0.165,
+        "t": 7.9,
+        "pan": 0,
+        "seed": 954
+      },
+      {
+        "type": "clack",
+        "dur": 0.14,
+        "pitch": 0.7200000000000001,
+        "gain": 0.35200000000000004,
+        "t": 8.32,
+        "pan": 0,
+        "seed": 961
+      },
+      {
+        "type": "thud",
+        "dur": 0.35,
+        "pitch": 1.2,
+        "gain": 0.44000000000000006,
+        "t": 8.32,
+        "pan": 0,
+        "seed": 962
+      },
+      {
+        "type": "servo",
+        "dur": 0.9499999999999996,
+        "hz": 90,
+        "hz2": 170,
+        "grit": 0.25,
+        "gain": 0.3,
+        "t": 9,
+        "pan": 0,
+        "seed": 968
+      },
+      {
+        "type": "servo",
+        "dur": 0.44999999999999857,
+        "hz": 204,
+        "hz2": 72,
+        "grit": 0.3,
+        "gain": 0.24,
+        "t": 11.55,
+        "pan": 0,
+        "seed": 975
+      },
+      {
+        "type": "impact",
+        "t": 11.95,
+        "dur": 0.4,
+        "pitch": 0.9,
+        "gain": 0.5,
+        "pan": 0,
+        "seed": 976
+      },
+      {
+        "type": "clack",
+        "t": 11.95,
+        "dur": 0.12,
+        "pitch": 0.9,
+        "gain": 0.32,
+        "pan": 0,
+        "seed": 977
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.28000000000000064,
+        "q": 1.4,
+        "pitch": 1.3522468075656267,
+        "gain": 0.195,
+        "t": 12.45,
+        "pan": 0,
+        "seed": 982
+      },
+      {
+        "type": "impact",
+        "dur": 0.4,
+        "pitch": 0.8451542547285166,
+        "gain": 0.7,
+        "t": 12.72,
+        "pan": 0,
+        "seed": 989
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "pitch": 0.8135871839512283,
+        "gain": 0.32,
+        "t": 12.72,
+        "pan": 0,
+        "seed": 990
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "construct.js: strike(t) = u^3 into a dead stop + tiny damped ring; slides along the piece axis, drops toward the board, hinges flat from edge-on, wheels roll s = dist*u^2 with a tick per quarter turn; the camera tilts on an arc to show the card relief and snaps back with outBack.",
+      "copy": "neutral words only (BUILD, IDEA, SIGNAL, FORWARD); original composition, no symbols or slogans",
+      "pieces": 16
+    }
+  }
+}

@@ -1,0 +1,14 @@
+check-frames run: 2026-11-15 05:39:55 UTC
+times: 1.2, 3.65, 7, 8.6, 9.5, 13.6, 14.8
+newest code edit: 2026-11-15 05:36:03 UTC (60-microscope-slide/scene.config.js)
+mp4: 60-microscope-slide.mp4 2026-11-15 05:38:56 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 39.8 dB, frame 444)
+  frame 36 (t=1.200): 40.2 dB
+  frame 210 (t=7.000): 39.9 dB
+  frame 258 (t=8.600): 39.9 dB
+  frame 285 (t=9.500): 39.9 dB
+  frame 408 (t=13.600): 39.9 dB
+  frame 444 (t=14.800): 39.8 dB
+determinism: OK (7 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

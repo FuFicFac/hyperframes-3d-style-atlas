@@ -1,0 +1,15 @@
+check-frames run: 2026-11-15 05:42:58 UTC
+times: 1.5, 3.6, 5.45, 6.6, 8.5, 10.5, 12.6, 14.8
+newest code edit: 2026-11-15 05:40:06 UTC (55-point-cloud/scene.config.js)
+mp4: 55-point-cloud.mp4 2026-11-15 05:41:15 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: STALE? the MP4 differs from the current code at frame 255 (t=8.500, PSNR 23.2 dB) — re-render before reviewing the MP4
+  frame 45 (t=1.500): 30.4 dB
+  frame 108 (t=3.600): 30.1 dB
+  frame 198 (t=6.600): 26.3 dB
+  frame 255 (t=8.500): 23.2 dB
+  frame 315 (t=10.500): 29.3 dB
+  frame 378 (t=12.600): 27.5 dB
+  frame 444 (t=14.800): 26.1 dB
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

@@ -1,0 +1,13 @@
+check-frames run: 2026-11-15 05:27:00 UTC
+times: 1, 4.5, 7.5, 10.2, 14
+newest code edit: 2026-11-15 05:25:23 UTC (anamorphic/spec.js)
+mp4: 51-anamorphic.mp4 2026-11-15 05:26:32 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 34.8 dB, frame 306)
+  frame 30 (t=1.000): 36.5 dB
+  frame 135 (t=4.500): 35.3 dB
+  frame 225 (t=7.500): 38.9 dB
+  frame 306 (t=10.200): 34.8 dB
+  frame 420 (t=14.000): 39.4 dB
+determinism: OK (5 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

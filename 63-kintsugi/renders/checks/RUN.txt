@@ -1,0 +1,16 @@
+check-frames run: 2026-11-15 12:01:15 UTC
+times: 0.5, 2, 4, 6, 8, 10, 12, 14.5
+newest code edit: 2026-11-15 11:58:57 UTC (kintsugi/spec.js)
+mp4: 63-kintsugi.mp4 2026-11-15 12:00:51 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 39.7 dB, frame 435)
+  frame 15 (t=0.500): 42.5 dB
+  frame 60 (t=2.000): 42.5 dB
+  frame 120 (t=4.000): 40.1 dB
+  frame 180 (t=6.000): 40.5 dB
+  frame 240 (t=8.000): 40.6 dB
+  frame 300 (t=10.000): 41.4 dB
+  frame 360 (t=12.000): 39.9 dB
+  frame 435 (t=14.500): 39.7 dB
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

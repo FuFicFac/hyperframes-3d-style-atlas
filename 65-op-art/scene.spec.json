@@ -1,0 +1,844 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "op-art",
+    "name": "Op Art",
+    "description": "1960s optical art on a white gallery wall: one large hard-edged panel of pure black-and-white pattern that the eye reads as depth and motion. Vertical stripes whose spacing and black/white duty are warped so a sphere seems to bulge out of the flat wall, and the bulge travels; a clear acetate sheet of rings slides over a ringed panel so moiré bands sweep much faster than the sheet moves; a Vasarely-style grid of checker squares and circles whose size and colour step ring by ring into a dome, then flip into a tunnel, with red and cobalt accents; and a reveal where the camera walks off-axis to show the 'dome' is flat paint on a flat board. Every pattern is analytic in one shader (fwidth antialiasing, stripes >= ~16 px wide, fade to mean grey below Nyquist), camera locked except the reveal, no strobing.",
+    "palette": {
+      "bg": "#eeede9",
+      "wall": "#f1f0ec",
+      "floor": "#d6d3cc",
+      "black": "#121212",
+      "white": "#f7f6f2",
+      "red": "#e2321f",
+      "blue": "#1f44c8",
+      "edge": "#f3f2ee",
+      "ink": "#141414"
+    },
+    "world": {
+      "background": "#eeede9",
+      "sky": null,
+      "fog": null,
+      "environment": null,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "wall": {
+        "type": "standard",
+        "baseColor": "#f1f0ec",
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      "floor": {
+        "type": "standard",
+        "baseColor": "#d6d3cc",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "edge": {
+        "type": "standard",
+        "baseColor": "#f3f2ee",
+        "roughness": 0.7,
+        "metalness": 0
+      },
+      "back": {
+        "type": "standard",
+        "baseColor": "#cfc8bb",
+        "roughness": 0.9,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#c9c4bc",
+        "intensity": 2.5
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fffaf2",
+        "intensity": 1.7,
+        "position": [
+          -2.6,
+          5.2,
+          5.6
+        ],
+        "target": [
+          0,
+          1.4,
+          0
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 2048,
+          "extent": 3.2,
+          "near": 0.5,
+          "far": 20,
+          "bias": -0.0004,
+          "normalBias": 0.02
+        }
+      }
+    ],
+    "post": {},
+    "camera": {
+      "fov": 30,
+      "near": 0.3,
+      "far": 60,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#141414",
+      "height": 0.3
+    },
+    "panel": {
+      "w": 3.4,
+      "h": 1.7,
+      "depth": 0.08,
+      "standoff": 0.03,
+      "y": 1.62
+    },
+    "wall": {
+      "w": 30,
+      "h": 9
+    },
+    "pattern": {
+      "stripe": {
+        "period": 0.0773,
+        "duty": 0.5
+      },
+      "bulge": {
+        "R": 0.64,
+        "A": 0.45,
+        "shade": 0.42,
+        "light": [
+          -0.45,
+          0.55,
+          0.7
+        ],
+        "shadeMid": 0.25,
+        "dutyMin": 0.3,
+        "dutyMax": 0.7,
+        "shadow": [
+          0.22,
+          -0.26,
+          1.02,
+          0
+        ],
+        "fade": [
+          0.45,
+          1
+        ]
+      },
+      "rings": {
+        "period": 0.062,
+        "duty": 0.5
+      },
+      "acetate": {
+        "w": 3.4,
+        "h": 1.7,
+        "period": 0.062,
+        "duty": 0.45,
+        "gap": 0.03,
+        "tint": 0,
+        "frame": 0.008,
+        "ink": 0.95,
+        "glideFrom": 0.16,
+        "glideTo": -0.16
+      },
+      "grid": {
+        "cell": 0.17,
+        "lensR": 1.25,
+        "dome": 0.5,
+        "tunnel": -0.45,
+        "rcBig": 0.42,
+        "rcSmall": 0.13,
+        "accentRings": 2
+      },
+      "nyquist": [
+        0.3,
+        0.6
+      ]
+    },
+    "caption": {
+      "x": 960,
+      "y": 922,
+      "h": 86,
+      "cap": 40,
+      "maxW": 900,
+      "font": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "weight": 700,
+      "card": "#ffffff",
+      "edge": "#d8d6d0",
+      "ink": "#141414",
+      "mark": "#e2321f"
+    },
+    "sound": {
+      "bed": {
+        "gain": 0.62,
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "brightness": 900
+      },
+      "grow": {
+        "pop": 0.5,
+        "thud": 0.45
+      },
+      "travel": {
+        "whoosh": 0.32,
+        "servo": 0.16
+      },
+      "wipe": {
+        "whoosh": 0.34
+      },
+      "slide": {
+        "paper": 0.35
+      },
+      "fringe": {
+        "tick": 0.22
+      },
+      "align": {
+        "chime": 0.2
+      },
+      "cell": {
+        "marimba": 0.13
+      },
+      "reveal": {
+        "whoosh": 0.36,
+        "thud": 0.5,
+        "chime": 0.16
+      }
+    },
+    "sfx": {
+      "enter": "pop",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "thud",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Nothing in the pattern is a texture: one fragment shader computes stripes, rings and the grid from panel coordinates and the plan's uniforms, antialiased with fwidth.",
+      "The bulge is a C1 radial warp of the stripe phase (wide at the centre, compressed at the rim) plus duty-cycle shading from a sphere normal; only the disc changes as it travels.",
+      "Moiré is real: two ring gratings (panel + a separate acetate mesh 3 cm in front) multiply; the sheet glides 0.84 m and the bands sweep through ~14 fringes.",
+      "Grid steps are per Chebyshev ring of cells: reveal, circle growth and the dome-to-tunnel flip all run outward ring by ring, one marimba note per ring.",
+      "Camera: locked front-on until the reveal, then one 2 s arc to ~45 deg off-axis showing a flat painted board."
+    ]
+  },
+  "scene": {
+    "id": "65-op-art",
+    "style": "op-art",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "bulge",
+        "t": 0,
+        "dur": 3,
+        "label": "Flat stripes, flat wall"
+      },
+      {
+        "id": "travel",
+        "t": 3,
+        "dur": 3,
+        "label": "Your eye adds the bulge"
+      },
+      {
+        "id": "moire",
+        "t": 6,
+        "dur": 3,
+        "label": "Two layers make moiré"
+      },
+      {
+        "id": "grid",
+        "t": 9,
+        "dur": 3,
+        "label": "Same grid: dome or tunnel"
+      },
+      {
+        "id": "reveal",
+        "t": 12,
+        "dur": 3,
+        "label": "It was flat all along"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0,
+          1.4881,
+          4.21204
+        ],
+        "target": [
+          0,
+          1.4881,
+          0.07
+        ],
+        "fov": 30
+      },
+      {
+        "t": 12,
+        "pos": [
+          0,
+          1.4881,
+          4.21204
+        ],
+        "target": [
+          0,
+          1.4881,
+          0.07
+        ],
+        "fov": 30
+      },
+      {
+        "t": 14,
+        "pos": [
+          -2.66731,
+          2.82282,
+          3.61996
+        ],
+        "target": [
+          -0.2649,
+          1.46676,
+          -0.04689
+        ],
+        "fov": 30,
+        "ease": "inOutCubic",
+        "path": "arc"
+      },
+      {
+        "t": 15,
+        "pos": [
+          -2.66731,
+          2.82282,
+          3.61996
+        ],
+        "target": [
+          -0.2649,
+          1.46676,
+          -0.04689
+        ],
+        "fov": 30
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "type": "pad",
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "dur": 15,
+        "attack": 0.25,
+        "release": 1.2,
+        "brightness": 900,
+        "gain": 0.62,
+        "t": 0,
+        "pan": 0,
+        "seed": 165
+      },
+      {
+        "type": "pop",
+        "pitch": 0.55,
+        "gain": 0.5,
+        "t": 0.15,
+        "pan": 0,
+        "seed": 172
+      },
+      {
+        "type": "thud",
+        "dur": 0.5,
+        "pitch": 0.8,
+        "gain": 0.45,
+        "t": 0.16999999999999998,
+        "pan": 0,
+        "seed": 173
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.4000000000000004,
+        "q": 1.2,
+        "gain": 0.32,
+        "pan": 0.3352941176470588,
+        "t": 3,
+        "seed": 179
+      },
+      {
+        "type": "servo",
+        "dur": 1.4000000000000004,
+        "hz": 98,
+        "hz2": 131,
+        "grit": 0.1,
+        "gain": 0.16,
+        "pan": 0.3352941176470588,
+        "t": 3,
+        "seed": 180
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.4000000000000004,
+        "q": 1.2,
+        "gain": 0.32,
+        "pan": -0.3352941176470588,
+        "t": 4.5,
+        "seed": 186
+      },
+      {
+        "type": "servo",
+        "dur": 1.4000000000000004,
+        "hz": 98,
+        "hz2": 131,
+        "grit": 0.1,
+        "gain": 0.16,
+        "pan": -0.3352941176470588,
+        "t": 4.5,
+        "seed": 187
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.85,
+        "q": 2.2,
+        "pitch": 1.4,
+        "gain": 0.34,
+        "t": 6,
+        "pan": 0,
+        "seed": 193
+      },
+      {
+        "type": "paper",
+        "dur": 0.8500000000000002,
+        "density": 0.5,
+        "gain": 0.35,
+        "pan": 0.5,
+        "t": 6.55,
+        "seed": 200
+      },
+      {
+        "type": "tick",
+        "pitch": 1.28,
+        "gain": 0.22,
+        "pan": 0.09920000000000001,
+        "t": 7.6548,
+        "seed": 207
+      },
+      {
+        "type": "tick",
+        "pitch": 1.24,
+        "gain": 0.22,
+        "pan": 0.049600000000000005,
+        "t": 7.8727,
+        "seed": 214
+      },
+      {
+        "type": "chime",
+        "dur": 1.4,
+        "notes": 3,
+        "pitch": 0.75,
+        "gain": 0.2,
+        "t": 8.05,
+        "pan": 0,
+        "seed": 221
+      },
+      {
+        "type": "tick",
+        "pitch": 1.24,
+        "gain": 0.22,
+        "pan": -0.049600000000000005,
+        "t": 8.2273,
+        "seed": 228
+      },
+      {
+        "type": "tick",
+        "pitch": 1.28,
+        "gain": 0.22,
+        "pan": -0.09920000000000001,
+        "t": 8.4452,
+        "seed": 235
+      },
+      {
+        "type": "paper",
+        "dur": 0.7499999999999997,
+        "density": 0.5,
+        "gain": 0.35,
+        "pan": -0.5,
+        "t": 8.85,
+        "seed": 242
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "decay": 0.18,
+        "gain": 0.13,
+        "pan": 0,
+        "t": 9.05,
+        "seed": 249
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "decay": 0.18,
+        "gain": 0.13,
+        "pan": 0,
+        "t": 9.12,
+        "seed": 256
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "decay": 0.18,
+        "gain": 0.13,
+        "pan": 0,
+        "t": 9.19,
+        "seed": 263
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "decay": 0.18,
+        "gain": 0.13,
+        "pan": 0,
+        "t": 9.26,
+        "seed": 270
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "decay": 0.18,
+        "gain": 0.13,
+        "pan": 0,
+        "t": 9.33,
+        "seed": 277
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "decay": 0.18,
+        "gain": 0.13,
+        "pan": 0,
+        "t": 9.4,
+        "seed": 284
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745484,
+        "decay": 0.18,
+        "gain": 0.13,
+        "pan": 0,
+        "t": 9.47,
+        "seed": 291
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175806,
+        "decay": 0.18,
+        "gain": 0.13,
+        "pan": 0,
+        "t": 9.54,
+        "seed": 298
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "decay": 0.18,
+        "gain": 0.13,
+        "pan": 0,
+        "t": 9.61,
+        "seed": 305
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "decay": 0.18,
+        "gain": 0.13,
+        "pan": 0,
+        "t": 9.68,
+        "seed": 312
+      },
+      {
+        "type": "marimba",
+        "hz": 1568,
+        "decay": 0.18,
+        "gain": 0.13,
+        "pan": 0,
+        "t": 9.75,
+        "seed": 319
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "decay": 0.22,
+        "gain": 0.1495,
+        "pan": 0,
+        "t": 10.55,
+        "seed": 326
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "decay": 0.22,
+        "gain": 0.1495,
+        "pan": 0,
+        "t": 10.63,
+        "seed": 333
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "decay": 0.22,
+        "gain": 0.1495,
+        "pan": 0,
+        "t": 10.71,
+        "seed": 340
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "decay": 0.22,
+        "gain": 0.1495,
+        "pan": 0,
+        "t": 10.79,
+        "seed": 347
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "decay": 0.22,
+        "gain": 0.1495,
+        "pan": 0,
+        "t": 10.87,
+        "seed": 354
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "decay": 0.22,
+        "gain": 0.1495,
+        "pan": 0,
+        "t": 10.95,
+        "seed": 361
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "decay": 0.22,
+        "gain": 0.1495,
+        "pan": 0,
+        "t": 11.03,
+        "seed": 368
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "decay": 0.22,
+        "gain": 0.1495,
+        "pan": 0,
+        "t": 11.11,
+        "seed": 375
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "decay": 0.22,
+        "gain": 0.1495,
+        "pan": 0,
+        "t": 11.19,
+        "seed": 382
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "decay": 0.22,
+        "gain": 0.1495,
+        "pan": 0,
+        "t": 11.27,
+        "seed": 389
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "decay": 0.22,
+        "gain": 0.1495,
+        "pan": 0,
+        "t": 11.35,
+        "seed": 396
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 2,
+        "q": 1,
+        "pitch": 0.8,
+        "gain": 0.36,
+        "pan": -0.4,
+        "t": 12,
+        "seed": 403
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "decay": 0.18,
+        "gain": 0.091,
+        "pan": 0,
+        "t": 12.1,
+        "seed": 410
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "decay": 0.18,
+        "gain": 0.091,
+        "pan": 0,
+        "t": 12.18,
+        "seed": 417
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "decay": 0.18,
+        "gain": 0.091,
+        "pan": 0,
+        "t": 12.26,
+        "seed": 424
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "decay": 0.18,
+        "gain": 0.091,
+        "pan": 0,
+        "t": 12.34,
+        "seed": 431
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "decay": 0.18,
+        "gain": 0.091,
+        "pan": 0,
+        "t": 12.42,
+        "seed": 438
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "decay": 0.18,
+        "gain": 0.091,
+        "pan": 0,
+        "t": 12.5,
+        "seed": 445
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745484,
+        "decay": 0.18,
+        "gain": 0.091,
+        "pan": 0,
+        "t": 12.58,
+        "seed": 452
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175806,
+        "decay": 0.18,
+        "gain": 0.091,
+        "pan": 0,
+        "t": 12.66,
+        "seed": 459
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "decay": 0.18,
+        "gain": 0.091,
+        "pan": 0,
+        "t": 12.74,
+        "seed": 466
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "decay": 0.18,
+        "gain": 0.091,
+        "pan": 0,
+        "t": 12.82,
+        "seed": 473
+      },
+      {
+        "type": "marimba",
+        "hz": 1568,
+        "decay": 0.18,
+        "gain": 0.091,
+        "pan": 0,
+        "t": 12.9,
+        "seed": 480
+      },
+      {
+        "type": "thud",
+        "dur": 0.6,
+        "pitch": 0.7,
+        "gain": 0.5,
+        "t": 14,
+        "pan": 0,
+        "seed": 487
+      },
+      {
+        "type": "chime",
+        "dur": 1.6,
+        "notes": 4,
+        "pitch": 0.6,
+        "gain": 0.16,
+        "t": 14.03,
+        "pan": 0,
+        "seed": 488
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "opplan.js schedules the bulge path/radius, the stripes->rings wipe, the acetate offset (fringe ticks at each ring-period crossing), and per-ring grid reveal/flip; one fragment shader draws stripes, rings and the grid analytically with fwidth AA.",
+      "fringes": 4,
+      "alignAt": 8.05,
+      "rings": 10,
+      "framing": "ok (worst 0.9361 at 12.866667s)",
+      "minPanelWidth": {
+        "w": 0.699,
+        "t": 15
+      },
+      "labels": "the captions describe what is on screen; no numbers or claims"
+    }
+  }
+}

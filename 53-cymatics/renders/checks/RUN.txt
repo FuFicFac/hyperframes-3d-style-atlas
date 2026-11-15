@@ -1,0 +1,17 @@
+check-frames run: 2026-11-15 05:45:35 UTC
+times: 2, 4, 5.5, 7.2, 8.9, 10.2, 13, 14.5
+newest code edit: 2026-11-15 05:45:17 UTC (53-cymatics/scene.js)
+mp4: 53-cymatics.mp4 2026-11-15 05:44:19 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+NOTE: the MP4 is older than the newest scene/style edit — see the MP4-vs-code comparison at the end (edits that change no pixels, e.g. kit re-exports, are fine).
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 28.4 dB, frame 120)
+  frame 60 (t=2.000): 31.3 dB
+  frame 120 (t=4.000): 28.4 dB
+  frame 165 (t=5.500): 38.9 dB
+  frame 216 (t=7.200): 40.2 dB
+  frame 267 (t=8.900): 38.5 dB
+  frame 306 (t=10.200): 30.8 dB
+  frame 390 (t=13.000): 35.0 dB
+  frame 435 (t=14.500): 37.2 dB
+determinism: OK (8 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

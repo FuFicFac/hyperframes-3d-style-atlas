@@ -1,0 +1,1033 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "ferrofluid",
+    "name": "Ferrofluid",
+    "description": "Invisible forces made visible: a mirror-flat pool of jet-black magnetic liquid in a white dish erupts into a crown of sharp glossy spikes under a steel magnet, follows it, splits when a second magnet arrives and melts flat when the field goes — black fluid read through bright studio strips on a pale set.",
+    "palette": {
+      "bg": "#e7e5e1",
+      "bench": "#d8d5cf",
+      "backdrop": "#e9e7e3",
+      "dish": "#f6f4f0",
+      "fluid": "#030304",
+      "steel": "#b9bec6",
+      "rod": "#8d939b",
+      "ink": "#ffffff",
+      "plate": "#101113",
+      "accent": "#d9473b"
+    },
+    "world": {
+      "background": "#e7e5e1",
+      "fog": {
+        "color": "#e7e5e1",
+        "near": 7,
+        "far": 16
+      },
+      "environment": null,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "pcf"
+    },
+    "materials": {
+      "bench": {
+        "type": "standard",
+        "baseColor": "#d8d5cf",
+        "roughness": 0.85,
+        "metalness": 0
+      },
+      "backdrop": {
+        "type": "standard",
+        "baseColor": "#e9e7e3",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "dish": {
+        "type": "physical",
+        "baseColor": "#f6f4f0",
+        "roughness": 0.32,
+        "metalness": 0,
+        "clearcoat": 0.8,
+        "clearcoatRoughness": 0.08
+      },
+      "steel": {
+        "type": "standard",
+        "baseColor": "#c9ced6",
+        "roughness": 0.16,
+        "metalness": 1
+      },
+      "rod": {
+        "type": "standard",
+        "baseColor": "#9aa0a8",
+        "roughness": 0.38,
+        "metalness": 1
+      },
+      "pole": {
+        "type": "standard",
+        "baseColor": "#d9473b",
+        "roughness": 0.35,
+        "metalness": 0.1
+      }
+    },
+    "lights": [
+      {
+        "id": "sky",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#d9d2c8",
+        "intensity": 1.35
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fffaf2",
+        "intensity": 1.55,
+        "position": [
+          -2.6,
+          4.2,
+          2.4
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 6,
+          "mapSize": 2048,
+          "extent": 3.6,
+          "bias": -0.0005,
+          "normalBias": 0.02
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#f2f6ff",
+        "intensity": 0.7,
+        "position": [
+          2.4,
+          2.2,
+          -3.2
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.22,
+        "radius": 0.4,
+        "threshold": 2.4
+      },
+      "vignette": {
+        "darkness": 0.2,
+        "offset": 1.15
+      },
+      "grain": {
+        "amount": 0.008,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.1,
+      "far": 40,
+      "drift": {
+        "amp": 0,
+        "speed": 0.3
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#ffffff",
+      "height": 0.1
+    },
+    "sfx": {
+      "enter": "squish",
+      "exit": "bubble",
+      "move": "tick",
+      "land": "bubble",
+      "emphasis": "squish",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "env": {
+      "bench": "#f1eee9",
+      "benchI": 0.75,
+      "dishBand": [
+        0.11,
+        0.17
+      ],
+      "wall": "#e9e7e3",
+      "wallI": 0.7,
+      "lowBand": [
+        0,
+        0.08
+      ],
+      "ceiling": "#2a2b2e",
+      "ceilingTop": "#4a4b4f",
+      "ceilingI": 0.55,
+      "panels": [
+        {
+          "id": "frontBox",
+          "rect": [
+            1.57,
+            0.1,
+            0.4,
+            0.13,
+            0.05
+          ],
+          "color": "#ffffff",
+          "intensity": 3.2
+        },
+        {
+          "id": "backStrip",
+          "rect": [
+            -1.57,
+            0.34,
+            0.6,
+            0.012,
+            0.006
+          ],
+          "color": "#ffffff",
+          "intensity": 6
+        },
+        {
+          "id": "rimLeft",
+          "rect": [
+            -2.5,
+            0.25,
+            0.05,
+            0.25,
+            0.015
+          ],
+          "color": "#f4f7ff",
+          "intensity": 10
+        },
+        {
+          "id": "rimRight",
+          "rect": [
+            -0.64,
+            0.25,
+            0.05,
+            0.25,
+            0.015
+          ],
+          "color": "#f4f7ff",
+          "intensity": 10
+        },
+        {
+          "id": "sideLeft",
+          "rect": [
+            3.14,
+            0.12,
+            0.05,
+            0.2,
+            0.015
+          ],
+          "color": "#fff6ea",
+          "intensity": 8
+        },
+        {
+          "id": "sideRight",
+          "rect": [
+            0,
+            0.12,
+            0.05,
+            0.2,
+            0.015
+          ],
+          "color": "#ffffff",
+          "intensity": 8
+        }
+      ],
+      "panelRadius": 8
+    },
+    "studio": {
+      "size": 256,
+      "sigma": 0.01,
+      "room": {
+        "w": 18,
+        "h": 10,
+        "d": 18,
+        "color": "#7d7c7a"
+      },
+      "sweep": {
+        "size": [
+          1,
+          0.1
+        ],
+        "radius": 8,
+        "from": 0.1,
+        "to": 0.2,
+        "intensity": 0,
+        "color": "#ffffff",
+        "soft": 0.3
+      },
+      "quantum": 0.002,
+      "envIntensity": 1,
+      "steelEnv": 2.2
+    },
+    "fluid": {
+      "f0": 0.075,
+      "edgeBoost": 1,
+      "body": "#030304",
+      "bodyLight": 0.06,
+      "occlusion": 0.9,
+      "magnetReflect": 0.85
+    },
+    "pool": {
+      "radius": 1.04,
+      "depth": 0.06,
+      "meniscus": 0.012,
+      "meniscusWidth": 0.035
+    },
+    "spikes": {
+      "spacing": 0.068,
+      "gridAngle": 0.28,
+      "tighten": 0.14,
+      "height": 0.24,
+      "heightCurve": 0.85,
+      "jitter": 0.18,
+      "radius": [
+        0.5,
+        0.36
+      ],
+      "blend": 0.026,
+      "mound": 0.075,
+      "ripple": 0.004
+    },
+    "field": {
+      "near": 0.4,
+      "far": 0.86,
+      "curve": 1.2,
+      "sigma": 0.26,
+      "threshold": 0.25
+    },
+    "march": {
+      "steps": 110,
+      "relax": 0.85,
+      "aoSteps": 3,
+      "maxMagnets": 2
+    },
+    "magnet": {
+      "radius": 0.085,
+      "height": 0.2,
+      "rod": 0.016,
+      "rodLength": 4,
+      "poleBand": 0.035,
+      "chamfer": 0.01
+    },
+    "dish": {
+      "inner": 1.04,
+      "outer": 1.16,
+      "rimTop": 0.035,
+      "floor": -0.06,
+      "foot": -0.12,
+      "segments": 160
+    },
+    "bench": {
+      "y": -0.12
+    },
+    "caption": {
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "cap": 46,
+      "h": 92,
+      "x": 116,
+      "y": 78,
+      "plate": "#101113",
+      "edge": "#3a3c40",
+      "ink": "#ffffff",
+      "dot": "#000000",
+      "dotHi": "#ffffff"
+    },
+    "sound": {
+      "bed": {
+        "root": 55,
+        "brightness": 420,
+        "gain": 0.62
+      },
+      "hum": {
+        "gain": 0.16,
+        "dur": 0.5
+      },
+      "erupt": {
+        "gain": 0.6,
+        "pitch": 0.8
+      },
+      "tick": {
+        "gain": 0.16,
+        "pitch": 1.1
+      },
+      "plop": {
+        "gain": 0.42,
+        "pitch": 0.55
+      }
+    },
+    "motion": [
+      "No solid hero: the subject is a liquid surface whose shape is a pure function of the magnetic field (field.js) at time t.",
+      "Magnets travel on closed-form keyed paths; strength = smoothstep of their height above the pool, so lowering a magnet IS turning the field up.",
+      "Under the field the pool heaps into a mound and a hexagonal crown of cones erupts (tallest under the magnet, sharper and tighter as the field rises, ripples at the rim).",
+      "The crown follows a moving magnet (spikes rise at the leading edge, sink at the trailing edge) and splits into two crowns when a second magnet arrives.",
+      "Lift the magnets and the spikes sag and melt back into a mirror-flat black pool. Camera: low three-quarter macro, moves only while the fluid moves."
+    ]
+  },
+  "scene": {
+    "id": "54-ferrofluid",
+    "style": "ferrofluid",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "calm",
+        "t": 0,
+        "dur": 3,
+        "label": "A pool of black liquid"
+      },
+      {
+        "id": "erupt",
+        "t": 3,
+        "dur": 3.4,
+        "label": "Bring a magnet close"
+      },
+      {
+        "id": "follow",
+        "t": 6.4,
+        "dur": 4.6,
+        "label": "It follows the field"
+      },
+      {
+        "id": "release",
+        "t": 11,
+        "dur": 4,
+        "label": "Invisible forces, visible"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          1.15,
+          1.08,
+          2.75
+        ],
+        "target": [
+          0,
+          0.36,
+          0
+        ],
+        "fov": 30
+      },
+      {
+        "t": 3.3,
+        "pos": [
+          1.15,
+          1.08,
+          2.75
+        ],
+        "target": [
+          0,
+          0.36,
+          0
+        ],
+        "fov": 30
+      },
+      {
+        "t": 5.6,
+        "pos": [
+          0.85,
+          0.72,
+          2.25
+        ],
+        "target": [
+          0,
+          0.16,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 6.6000000000000005,
+        "pos": [
+          0.85,
+          0.72,
+          2.25
+        ],
+        "target": [
+          0,
+          0.16,
+          0
+        ],
+        "fov": 30
+      },
+      {
+        "t": 9.7,
+        "pos": [
+          0.35,
+          0.8,
+          2.6
+        ],
+        "target": [
+          0,
+          0.15,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.3,
+        "pos": [
+          0.35,
+          0.8,
+          2.6
+        ],
+        "target": [
+          0,
+          0.15,
+          0
+        ],
+        "fov": 30
+      },
+      {
+        "t": 13.6,
+        "pos": [
+          0.9,
+          0.95,
+          2.75
+        ],
+        "target": [
+          0,
+          0.24,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0.9,
+          0.95,
+          2.75
+        ],
+        "target": [
+          0,
+          0.24,
+          0
+        ],
+        "fov": 30
+      }
+    ],
+    "objects": [
+      {
+        "id": "set",
+        "primitive": "procedural",
+        "factory": "set",
+        "procedural": "pale seamless bench sweeping up into a pale wall (kit cyclorama), floor at y = -0.12",
+        "dims": {}
+      },
+      {
+        "id": "dish",
+        "primitive": "procedural",
+        "factory": "dish",
+        "procedural": "glazed white ceramic dish, lathe profile, inner radius 1.04 m, rim top y = 0.035, foot on the bench",
+        "dims": {}
+      }
+    ],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.62,
+        "root": 55,
+        "chord": [
+          0,
+          7,
+          12,
+          19
+        ],
+        "attack": 2,
+        "release": 2.5,
+        "brightness": 420
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.0964188727135658,
+        "t": 4,
+        "pan": 0,
+        "seed": 171
+      },
+      {
+        "type": "squish",
+        "dur": 0.38,
+        "pitch": 0.8,
+        "gain": 0.6,
+        "t": 4.05,
+        "pan": 0,
+        "seed": 178
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 1.1199999999999999,
+        "gain": 0.27,
+        "t": 4.05,
+        "pan": 0,
+        "seed": 179
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.0472138147390124,
+        "gain": 0.11232200941658362,
+        "t": 4.05,
+        "pan": 0,
+        "seed": 185
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.0970228508393771,
+        "gain": 0.11956696012209123,
+        "t": 4.1,
+        "pan": 0,
+        "seed": 192
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.1510769863839325,
+        "gain": 0.1274293798376629,
+        "t": 4.15,
+        "pan": 0,
+        "seed": 199
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.200151899962306,
+        "gain": 0.1345675490854263,
+        "t": 4.2,
+        "pan": 0,
+        "seed": 206
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.2546290019655917,
+        "gain": 0.14249149119499513,
+        "t": 4.266666666666667,
+        "pan": 0,
+        "seed": 213
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.3079205707683697,
+        "gain": 0.15024299211176284,
+        "t": 4.358333333333333,
+        "pan": 0,
+        "seed": 220
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.15586781495108246,
+        "t": 4.4,
+        "pan": 0,
+        "seed": 227
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.3574484799542283,
+        "gain": 0.15744705162970593,
+        "t": 4.541666666666667,
+        "pan": 0,
+        "seed": 234
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.1589432969709041,
+        "t": 4.8,
+        "pan": 0,
+        "seed": 241
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.1589432969709041,
+        "t": 5.2,
+        "pan": 0,
+        "seed": 248
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.1589432969709041,
+        "t": 5.6,
+        "pan": 0,
+        "seed": 255
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.1589432969709041,
+        "t": 6,
+        "pan": 0,
+        "seed": 262
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.1589432969709041,
+        "t": 6.4,
+        "pan": 0,
+        "seed": 269
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.284675253335989,
+        "gain": 0.11748948402455145,
+        "t": 6.691666666666666,
+        "pan": 0,
+        "seed": 276
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.1589432969709041,
+        "t": 6.8,
+        "pan": 0,
+        "seed": 283
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.284675253335989,
+        "gain": 0.11748948402455145,
+        "t": 6.916666666666667,
+        "pan": 0,
+        "seed": 290
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.284675253335989,
+        "gain": 0.11748948402455145,
+        "t": 7.141666666666667,
+        "pan": 0,
+        "seed": 297
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.1589432969709041,
+        "t": 7.2,
+        "pan": 0,
+        "seed": 304
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.284675253335989,
+        "gain": 0.11748948402455145,
+        "t": 7.366666666666666,
+        "pan": 0,
+        "seed": 311
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.284675253335989,
+        "gain": 0.11748948402455145,
+        "t": 7.591666666666667,
+        "pan": 0,
+        "seed": 318
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.1589432969709041,
+        "t": 7.6,
+        "pan": 0,
+        "seed": 325
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.284675253335989,
+        "gain": 0.11748948402455145,
+        "t": 7.816666666666666,
+        "pan": 0,
+        "seed": 332
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.15894071056020267,
+        "t": 8,
+        "pan": 0,
+        "seed": 339
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.15887903311180535,
+        "t": 8.4,
+        "pan": 0,
+        "seed": 346
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.22399999999999998,
+        "t": 8.8,
+        "pan": 0,
+        "seed": 353
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.0406893315868284,
+        "gain": 0.11137299368535686,
+        "t": 8.9,
+        "pan": 0,
+        "seed": 360
+      },
+      {
+        "type": "squish",
+        "dur": 0.38,
+        "pitch": 0.8,
+        "gain": 0.6,
+        "t": 8.908333333333333,
+        "pan": 0,
+        "seed": 367
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 1.1199999999999999,
+        "gain": 0.27,
+        "t": 8.908333333333333,
+        "pan": 0,
+        "seed": 368
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.0990521733052339,
+        "gain": 0.1198621342989431,
+        "t": 8.933333333333334,
+        "pan": 0,
+        "seed": 374
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.1559077166723384,
+        "gain": 0.1281320315159765,
+        "t": 8.966666666666667,
+        "pan": 0,
+        "seed": 381
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.2069394518142114,
+        "gain": 0.13555482935479435,
+        "t": 9,
+        "pan": 0,
+        "seed": 388
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.2594771276485457,
+        "gain": 0.14319667311251572,
+        "t": 9.041666666666666,
+        "pan": 0,
+        "seed": 395
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.3053598694594728,
+        "gain": 0.14987052646683238,
+        "t": 9.091666666666667,
+        "pan": 0,
+        "seed": 402
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.22399999999999998,
+        "t": 9.2,
+        "pan": 0,
+        "seed": 409
+      },
+      {
+        "type": "tick",
+        "dur": 0.02,
+        "pitch": 1.358631963818523,
+        "gain": 0.15761919473723968,
+        "t": 9.216666666666667,
+        "pan": 0,
+        "seed": 416
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.22399999999999998,
+        "t": 9.6,
+        "pan": 0,
+        "seed": 423
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.22399999999999998,
+        "t": 10,
+        "pan": 0,
+        "seed": 430
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.22399999999999998,
+        "t": 10.4,
+        "pan": 0,
+        "seed": 437
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.22399999999999998,
+        "t": 10.8,
+        "pan": 0,
+        "seed": 444
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.22399999999999998,
+        "t": 11.2,
+        "pan": 0,
+        "seed": 451
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.22399999999999998,
+        "t": 11.6,
+        "pan": 0,
+        "seed": 458
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.14328946827549263,
+        "t": 12,
+        "pan": 0,
+        "seed": 465
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.55,
+        "gain": 0.42,
+        "t": 12.208333333333334,
+        "pan": 0,
+        "seed": 472
+      },
+      {
+        "type": "squish",
+        "dur": 0.3,
+        "pitch": 0.7150000000000001,
+        "gain": 0.21,
+        "t": 12.208333333333334,
+        "pan": 0,
+        "seed": 473
+      },
+      {
+        "type": "hum",
+        "dur": 0.5,
+        "pitch": 1,
+        "gain": 0.024119624472747445,
+        "t": 12.4,
+        "pan": 0,
+        "seed": 479
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.55,
+        "gain": 0.42,
+        "t": 12.5,
+        "pan": 0,
+        "seed": 486
+      },
+      {
+        "type": "squish",
+        "dur": 0.3,
+        "pitch": 0.7150000000000001,
+        "gain": 0.21,
+        "t": 12.5,
+        "pan": 0,
+        "seed": 487
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "field.js: magnet strength = smoothstep of its face height above the pool; F(x,z) = sum s_m exp(-r^2/sigma^2). The shader reads the same magnets every frame; SCORE = the plan's erupt / tick / collapse / hum events.",
+      "events": "erupt:A@4.05 tick:A@4.05 tick:A@4.10 tick:A@4.15 tick:A@4.20 tick:A@4.27 tick:A@4.36 tick:A@4.54 tick:A@6.69 tick:A@6.92 tick:A@7.14 tick:A@7.37 tick:A@7.59 tick:A@7.82 tick:B@8.90 erupt:B@8.91 tick:B@8.93 tick:B@8.97 tick:B@9.00 tick:B@9.04 tick:B@9.09 tick:B@9.22 collapse:A@12.21 collapse:B@12.50",
+      "framing": "ok (worst {\"t\":0,\"id\":\"pool\",\"ndc\":0.835})"
+    }
+  }
+}

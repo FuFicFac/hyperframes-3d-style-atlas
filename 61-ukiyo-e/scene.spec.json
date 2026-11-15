@@ -1,0 +1,882 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "ukiyo-e",
+    "name": "Ukiyo-e",
+    "description": "Japanese woodblock printing in passes: a sheet of cream washi with kozo fibres lies on a pale hinoki bench against two wooden kento registration guides. Carved cherry-wood blocks swing down onto it one at a time like a lid, press (the key block gets a baren rubbing pass over its back), and swing up again to reveal the ONE flat layer each has left in register: first the black key line, then the sky bokashi gradation, Prussian blue, a second blue, ochre and pink, until an original great-wave-and-mountain seascape is complete; a red seal stamps it and the printed layers lift a few centimetres off the paper for a gentle parallax. Each block's underside carries its own inked relief (mirror-correct when it opens) and kento marks. Layers are multiplied onto the lit paper like transparent ink, so fibre and wood grain show in every flat colour and the key line survives every pass.",
+    "palette": {
+      "bg": "#e9dcc2",
+      "bench": "#d9c29a",
+      "paper": "#f3ead6",
+      "ink": "#1c1a1f",
+      "sky": "#7f9cc2",
+      "prussian": "#1f3f78",
+      "blue2": "#7fa6c4",
+      "ochre": "#d39a4a",
+      "pink": "#e6a49a",
+      "seal": "#c23a2c",
+      "blockLight": "#d8a878",
+      "blockMid": "#b88356",
+      "blockDark": "#93603c",
+      "cut": "#5a3420",
+      "baren": "#2a2422",
+      "bamboo": "#c9a96a"
+    },
+    "world": {
+      "background": "#e9dcc2",
+      "sky": null,
+      "fog": {
+        "color": "#e9dcc2",
+        "near": 12,
+        "far": 30
+      },
+      "environment": "room",
+      "environmentIntensity": 0.35,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "bench": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.78,
+        "metalness": 0,
+        "map": {
+          "source": "wood",
+          "size": 1024,
+          "boards": 4,
+          "seed": 61,
+          "grainFreq": 44,
+          "grainWarp": 1.6,
+          "contrast": 0.25,
+          "dark": "#cbb084",
+          "mid": "#dcc49a",
+          "light": "#e9d7b3",
+          "seam": "#a88b60",
+          "description": "pale hinoki boards"
+        }
+      },
+      "paper": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      "kento": {
+        "type": "standard",
+        "baseColor": "#b48a5a",
+        "roughness": 0.7,
+        "metalness": 0
+      },
+      "blockSide": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "baren": {
+        "type": "standard",
+        "baseColor": "#2a2422",
+        "roughness": 0.45,
+        "metalness": 0.05
+      },
+      "bamboo": {
+        "type": "standard",
+        "baseColor": "#c9a96a",
+        "roughness": 0.55,
+        "metalness": 0
+      },
+      "sealStone": {
+        "type": "standard",
+        "baseColor": "#8e6b4e",
+        "roughness": 0.5,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#fff8ec",
+        "groundColor": "#a8916e",
+        "intensity": 1.05
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff3e0",
+        "intensity": 2.2,
+        "position": [
+          -3.5,
+          7.5,
+          4.2
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 2048,
+          "extent": 3.4,
+          "near": 0.5,
+          "far": 25,
+          "bias": -0.0004,
+          "normalBias": 0.02
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#e2ecff",
+        "intensity": 0.45,
+        "position": [
+          3,
+          4,
+          -6
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.22,
+        "offset": 1.15
+      }
+    },
+    "camera": {
+      "fov": 32,
+      "near": 0.3,
+      "far": 40,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "serif",
+      "weight": 600,
+      "color": "#1c1a1f",
+      "height": 0.3
+    },
+    "sheet": {
+      "w": 3.3,
+      "d": 2.12,
+      "margin": 0.09,
+      "thickness": 0.006,
+      "px": [
+        2048,
+        1280
+      ],
+      "fibres": 260,
+      "layerGap": 0.0007
+    },
+    "bench": {
+      "size": 26
+    },
+    "kento": {
+      "h": 0.025,
+      "w": 0.05,
+      "len": 0.42
+    },
+    "block": {
+      "pad": 0.07,
+      "thickness": 0.09,
+      "facePx": [
+        1024,
+        680
+      ],
+      "grain": 0.5,
+      "carveDark": 0.62
+    },
+    "layers": [
+      {
+        "id": "key",
+        "color": "#1c1a1f",
+        "grain": 0.12,
+        "label": "key block"
+      },
+      {
+        "id": "sky",
+        "color": "#7f9cc2",
+        "grain": 0.2,
+        "label": "sky bokashi"
+      },
+      {
+        "id": "prussian",
+        "color": "#1f3f78",
+        "grain": 0.18,
+        "label": "Prussian blue"
+      },
+      {
+        "id": "blue2",
+        "color": "#8fb2cc",
+        "grain": 0.22,
+        "label": "second blue"
+      },
+      {
+        "id": "ochre",
+        "color": "#d39a4a",
+        "grain": 0.25,
+        "label": "ochre"
+      },
+      {
+        "id": "pink",
+        "color": "#e8a89c",
+        "grain": 0.22,
+        "label": "pink"
+      },
+      {
+        "id": "seal",
+        "color": "#c23a2c",
+        "grain": 0.15,
+        "label": "seal"
+      }
+    ],
+    "baren": {
+      "r": 0.3,
+      "h": 0.06
+    },
+    "sealStone": {
+      "size": 0.24,
+      "h": 0.36
+    },
+    "timing": {
+      "close": 0.6,
+      "glide": 0.4,
+      "hold": 0.1,
+      "open": 0.65,
+      "exit": 0.28,
+      "from": 1.45,
+      "to": 1.75,
+      "exitRise": 3,
+      "exitBack": 1.2
+    },
+    "parallax": {
+      "lift": 0.05
+    },
+    "caption": {
+      "x": 960,
+      "y": 950,
+      "h": 74,
+      "cap": 36,
+      "maxW": 900,
+      "font": "\"Hiragino Mincho ProN\", \"Hiragino Mincho Pro\", Georgia, serif",
+      "weight": 600,
+      "plate": "#f3ead6",
+      "edge": "#1c1a1f",
+      "ink": "#1c1a1f",
+      "accent": "#c23a2c"
+    },
+    "sound": {
+      "bed": {
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12,
+          15
+        ],
+        "brightness": 700,
+        "gain": 0.55
+      },
+      "swing": {
+        "gain": 0.32
+      },
+      "contact": {
+        "thud": 0.8,
+        "clack": 0.35
+      },
+      "rub": {
+        "gain": 0.38,
+        "density": 0.5
+      },
+      "peel": {
+        "gain": 0.3
+      },
+      "reveal": {
+        "root": 293.66,
+        "gain": 0.85
+      },
+      "seal": {
+        "thud": 0.75,
+        "chime": 0.18
+      }
+    },
+    "sfx": {
+      "enter": "whoosh",
+      "exit": "paper",
+      "move": "rustle",
+      "land": "thud",
+      "emphasis": "chime",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "One pass per block: it swings down on a hinge at the sheet's far edge (slam ease), presses, and swings back up; its layer appears under it at contact, so the opening reveals it near edge first.",
+      "The key block gets a baren rubbing pass: the disc loops across the block's back in zig-zag rows while pressed.",
+      "Layers are multiplied onto the lit paper (like transparent ink): fibre and grain show through, the black line survives every pass.",
+      "Finale: a stone seal stamps, then the printed layers lift off the paper in order (key highest) while the camera eases sideways: parallax.",
+      "Camera: locked during printing; one slow move only for the finale."
+    ]
+  },
+  "scene": {
+    "id": "61-ukiyo-e",
+    "style": "ukiyo-e",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "key",
+        "t": 0,
+        "dur": 3.1,
+        "label": "First, the black key line"
+      },
+      {
+        "id": "sky",
+        "t": 3.1,
+        "dur": 2,
+        "label": "Sky: a soft gradation"
+      },
+      {
+        "id": "blues",
+        "t": 5.1,
+        "dur": 3.35,
+        "label": "Blue, then a second blue"
+      },
+      {
+        "id": "warm",
+        "t": 8.45,
+        "dur": 3.35,
+        "label": "Each colour in register"
+      },
+      {
+        "id": "seal",
+        "t": 11.8,
+        "dur": 3.2,
+        "label": "One print, six blocks"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0,
+          3.28249,
+          2.31122
+        ],
+        "target": [
+          0,
+          -0.12798,
+          0.2165
+        ],
+        "fov": 32
+      },
+      {
+        "t": 12.5,
+        "pos": [
+          0,
+          3.28249,
+          2.31122
+        ],
+        "target": [
+          0,
+          -0.12798,
+          0.2165
+        ],
+        "fov": 32
+      },
+      {
+        "t": 15,
+        "pos": [
+          0.0741,
+          4.11349,
+          1.87813
+        ],
+        "target": [
+          -0.0402,
+          -0.09004,
+          0.24789
+        ],
+        "fov": 32,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "q": 1.2,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "t": -0.05,
+        "pan": 0,
+        "seed": 161
+      },
+      {
+        "type": "pad",
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12,
+          15
+        ],
+        "dur": 15,
+        "attack": 1.2,
+        "release": 2.5,
+        "brightness": 700,
+        "gain": 0.55,
+        "t": 0,
+        "pan": 0,
+        "seed": 168
+      },
+      {
+        "type": "thud",
+        "dur": 0.4,
+        "pitch": 0.9,
+        "gain": 0.9199999999999999,
+        "t": 0.6,
+        "pan": 0,
+        "seed": 175
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 0.55,
+        "gain": 0.35,
+        "t": 0.6,
+        "pan": 0,
+        "seed": 176
+      },
+      {
+        "type": "rustle",
+        "dur": 0.31499999999999995,
+        "density": 0.5,
+        "pitch": 0.8,
+        "gain": 0.38,
+        "t": 0.65,
+        "pan": 0,
+        "seed": 182
+      },
+      {
+        "type": "rustle",
+        "dur": 0.31500000000000006,
+        "density": 0.5,
+        "pitch": 0.8,
+        "gain": 0.38,
+        "t": 0.95,
+        "pan": 0,
+        "seed": 189
+      },
+      {
+        "type": "rustle",
+        "dur": 0.31499999999999984,
+        "density": 0.5,
+        "pitch": 0.8,
+        "gain": 0.38,
+        "t": 1.25,
+        "pan": 0,
+        "seed": 196
+      },
+      {
+        "type": "rustle",
+        "dur": 0.3150000000000003,
+        "density": 0.5,
+        "pitch": 0.8,
+        "gain": 0.38,
+        "t": 1.5499999999999998,
+        "pan": 0,
+        "seed": 203
+      },
+      {
+        "type": "paper",
+        "dur": 0.65,
+        "density": 0.3,
+        "gain": 0.3,
+        "t": 1.9,
+        "pan": 0,
+        "seed": 210
+      },
+      {
+        "type": "pluck",
+        "hz": 293.66,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.55,
+        "gain": 0.85,
+        "t": 2.1925,
+        "pan": 0,
+        "seed": 217
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "q": 1.2,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "t": 3.0500000000000003,
+        "pan": 0,
+        "seed": 224
+      },
+      {
+        "type": "thud",
+        "dur": 0.4,
+        "pitch": 0.9,
+        "gain": 0.8,
+        "t": 3.7,
+        "pan": 0,
+        "seed": 231
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 0.55,
+        "gain": 0.35,
+        "t": 3.7,
+        "pan": 0,
+        "seed": 232
+      },
+      {
+        "type": "paper",
+        "dur": 0.65,
+        "density": 0.3,
+        "gain": 0.3,
+        "t": 3.8000000000000003,
+        "pan": 0,
+        "seed": 238
+      },
+      {
+        "type": "pluck",
+        "hz": 391.9890715755723,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.55,
+        "gain": 0.85,
+        "t": 4.0925,
+        "pan": 0,
+        "seed": 245
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "q": 1.2,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "t": 5.05,
+        "pan": 0,
+        "seed": 252
+      },
+      {
+        "type": "thud",
+        "dur": 0.4,
+        "pitch": 0.9,
+        "gain": 0.8,
+        "t": 5.699999999999999,
+        "pan": 0,
+        "seed": 259
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 0.55,
+        "gain": 0.35,
+        "t": 5.699999999999999,
+        "pan": 0,
+        "seed": 260
+      },
+      {
+        "type": "paper",
+        "dur": 0.65,
+        "density": 0.3,
+        "gain": 0.3,
+        "t": 5.799999999999999,
+        "pan": 0,
+        "seed": 266
+      },
+      {
+        "type": "pluck",
+        "hz": 439.99285619560635,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.55,
+        "gain": 0.85,
+        "t": 6.092499999999999,
+        "pan": 0,
+        "seed": 273
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "q": 1.2,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "t": 6.68,
+        "pan": 0,
+        "seed": 280
+      },
+      {
+        "type": "thud",
+        "dur": 0.4,
+        "pitch": 0.9,
+        "gain": 0.8,
+        "t": 7.329999999999999,
+        "pan": 0,
+        "seed": 287
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 0.55,
+        "gain": 0.35,
+        "t": 7.329999999999999,
+        "pan": 0,
+        "seed": 288
+      },
+      {
+        "type": "paper",
+        "dur": 0.65,
+        "density": 0.3,
+        "gain": 0.3,
+        "t": 7.429999999999999,
+        "pan": 0,
+        "seed": 294
+      },
+      {
+        "type": "pluck",
+        "hz": 466.1561929209815,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.55,
+        "gain": 0.85,
+        "t": 7.722499999999999,
+        "pan": 0,
+        "seed": 301
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "q": 1.2,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "t": 8.399999999999999,
+        "pan": 0,
+        "seed": 308
+      },
+      {
+        "type": "thud",
+        "dur": 0.4,
+        "pitch": 0.9,
+        "gain": 0.8,
+        "t": 9.049999999999999,
+        "pan": 0,
+        "seed": 315
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 0.55,
+        "gain": 0.35,
+        "t": 9.049999999999999,
+        "pan": 0,
+        "seed": 316
+      },
+      {
+        "type": "paper",
+        "dur": 0.65,
+        "density": 0.3,
+        "gain": 0.3,
+        "t": 9.149999999999999,
+        "pan": 0,
+        "seed": 322
+      },
+      {
+        "type": "pluck",
+        "hz": 587.32,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.55,
+        "gain": 0.85,
+        "t": 9.442499999999999,
+        "pan": 0,
+        "seed": 329
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "q": 1.2,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "t": 10.03,
+        "pan": 0,
+        "seed": 336
+      },
+      {
+        "type": "thud",
+        "dur": 0.4,
+        "pitch": 0.9,
+        "gain": 0.8,
+        "t": 10.68,
+        "pan": 0,
+        "seed": 343
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "pitch": 0.55,
+        "gain": 0.35,
+        "t": 10.68,
+        "pan": 0,
+        "seed": 344
+      },
+      {
+        "type": "paper",
+        "dur": 0.65,
+        "density": 0.3,
+        "gain": 0.3,
+        "t": 10.78,
+        "pan": 0,
+        "seed": 350
+      },
+      {
+        "type": "pluck",
+        "hz": 783.9781431511446,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.55,
+        "gain": 0.85,
+        "t": 11.0725,
+        "pan": 0,
+        "seed": 357
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.45,
+        "q": 1.6,
+        "pitch": 1.1,
+        "gain": 0.22399999999999998,
+        "t": 11.9,
+        "pan": 0,
+        "seed": 364
+      },
+      {
+        "type": "thud",
+        "dur": 0.35,
+        "pitch": 1.3,
+        "gain": 0.75,
+        "t": 12.3,
+        "pan": 0,
+        "seed": 371
+      },
+      {
+        "type": "chime",
+        "dur": 2.2,
+        "pitch": 0.75,
+        "notes": 4,
+        "gain": 0.18,
+        "t": 12.3,
+        "pan": 0,
+        "seed": 372
+      },
+      {
+        "type": "pluck",
+        "hz": 587.32,
+        "notes": [
+          0,
+          7,
+          12
+        ],
+        "step": 0.11,
+        "dur": 2.2,
+        "decay": 1.8,
+        "bright": 0.5,
+        "gain": 0.765,
+        "t": 12.3,
+        "pan": 0,
+        "seed": 373
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "prints.js: one pass per block (glide in, swing down on a far-edge hinge, press, baren rub on the key block, swing up, leave); its layer appears under it at contact. Layers are multiply-blended planes over the lit washi; the finale lifts them by stacking rank (key and seal highest).",
+      "passes": [
+        {
+          "id": "key",
+          "t0": 0,
+          "contact": 0.6,
+          "open0": 1.9,
+          "exit1": 2.83
+        },
+        {
+          "id": "sky",
+          "t0": 3.1,
+          "contact": 3.7,
+          "open0": 3.8,
+          "exit1": 4.73
+        },
+        {
+          "id": "prussian",
+          "t0": 5.1,
+          "contact": 5.7,
+          "open0": 5.8,
+          "exit1": 6.73
+        },
+        {
+          "id": "blue2",
+          "t0": 6.73,
+          "contact": 7.33,
+          "open0": 7.43,
+          "exit1": 8.36
+        },
+        {
+          "id": "ochre",
+          "t0": 8.45,
+          "contact": 9.05,
+          "open0": 9.15,
+          "exit1": 10.08
+        },
+        {
+          "id": "pink",
+          "t0": 10.08,
+          "contact": 10.68,
+          "open0": 10.78,
+          "exit1": 11.71
+        }
+      ],
+      "seal": {
+        "t0": 11.9,
+        "contact": 12.3
+      },
+      "framing": "ok (worst 0.96 at 14.966667s)",
+      "artwork": "an original seascape composed for this demo (wave, swell, boats, snow-capped mountain, sun, clouds); not a copy of any historical print"
+    }
+  }
+}

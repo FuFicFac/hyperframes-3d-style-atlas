@@ -1,0 +1,6 @@
+{
+  "name": "3d-style-atlas",
+  "private": true,
+  "type": "module",
+  "description": "Kit + styles for Three.js explainers rendered through HyperFrames. No dependencies."
+}

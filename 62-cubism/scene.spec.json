@@ -1,0 +1,1431 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "cubism",
+    "name": "Cubism",
+    "description": "Analytic-to-synthetic Cubism made from a real 3D still life: a guitar, bottle, wine glass, fruit bowl and folded newspaper on a round café table are rendered from six cameras into render targets, and the flat picture plane fractures into angular convex facets that EACH show the same still life from a different viewpoint (front three-quarter, bird's-eye table top, left, right, eye level, tilted) - simultaneous viewpoints. Facets crack in with dark contour lines, their cameras swing apart, they slide, rotate and overlap; the palette drains to analytic ochre/umber/grey bands with facet passage shading and ink edges, then pieces flip over like card to synthetic collage (flat coloured paper, faux-bois wood grain, newsprint with stencilled letters, wallpaper, charcoal drawing) and the whole settles into a bold flat composition. Canvas weave and brush grain over everything. Every facet pose, crack, swing and flip comes from one seeded plan (facets.js) that also writes the sound.",
+    "palette": {
+      "bg": "#d9ccb0",
+      "wall": "#dccfb4",
+      "wallLow": "#b9a888",
+      "wood": "#8a5a34",
+      "woodDark": "#4c2f1b",
+      "spruce": "#d9a85e",
+      "guitarSide": "#7a4423",
+      "bottle": "#2f5a3e",
+      "glass": "#dfe7e3",
+      "wine": "#6e1f24",
+      "ceramic": "#ece4d2",
+      "lemon": "#e6c23a",
+      "apple": "#b6402c",
+      "pear": "#9aaa4a",
+      "news": "#ece4cf",
+      "ink": "#1c1712",
+      "umber": "#3d2c1f",
+      "sienna": "#8a6640",
+      "ochre": "#c8a66a",
+      "greyLight": "#ddd5c2",
+      "tintGreen": "#9aa088",
+      "tintBlue": "#8e98a2",
+      "tintWarm": "#c9a477",
+      "blue": "#2d4f86",
+      "vermilion": "#c8442c",
+      "green": "#3f6b4a",
+      "cream": "#efe5cc",
+      "black": "#1d1a17",
+      "brown": "#6b4426",
+      "yellow": "#e2b23c"
+    },
+    "world": {
+      "background": "#d9ccb0",
+      "sky": null,
+      "environment": "room",
+      "environmentIntensity": 0.35,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "tableTop": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.55,
+        "metalness": 0,
+        "map": {
+          "source": "wood",
+          "size": 1024,
+          "boards": 4,
+          "seed": 61,
+          "dark": "#5a3520",
+          "mid": "#8a5a34",
+          "light": "#b07a4a",
+          "description": "warm planked walnut table top"
+        }
+      },
+      "tableDark": {
+        "type": "standard",
+        "baseColor": "#4c2f1b",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "floor": {
+        "type": "standard",
+        "baseColor": "#7d6a55",
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      "spruce": {
+        "type": "standard",
+        "baseColor": "#d9a85e",
+        "roughness": 0.42,
+        "metalness": 0
+      },
+      "guitarSide": {
+        "type": "standard",
+        "baseColor": "#7a4423",
+        "roughness": 0.4,
+        "metalness": 0
+      },
+      "fretboard": {
+        "type": "standard",
+        "baseColor": "#2a1d14",
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      "hole": {
+        "type": "basic",
+        "baseColor": "#140d08"
+      },
+      "string": {
+        "type": "standard",
+        "baseColor": "#e6e1d6",
+        "roughness": 0.3,
+        "metalness": 0.8
+      },
+      "bottle": {
+        "type": "physical",
+        "baseColor": "#2f5a3e",
+        "roughness": 0.18,
+        "metalness": 0,
+        "clearcoat": 0.8,
+        "clearcoatRoughness": 0.1
+      },
+      "glass": {
+        "type": "physical",
+        "baseColor": "#e7efea",
+        "roughness": 0.08,
+        "metalness": 0,
+        "opacity": 0.42,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.05
+      },
+      "wine": {
+        "type": "standard",
+        "baseColor": "#6e1f24",
+        "roughness": 0.2,
+        "metalness": 0
+      },
+      "ceramic": {
+        "type": "standard",
+        "baseColor": "#ece4d2",
+        "roughness": 0.35,
+        "metalness": 0
+      },
+      "lemon": {
+        "type": "standard",
+        "baseColor": "#e6c23a",
+        "roughness": 0.55,
+        "metalness": 0
+      },
+      "apple": {
+        "type": "standard",
+        "baseColor": "#b6402c",
+        "roughness": 0.4,
+        "metalness": 0
+      },
+      "pear": {
+        "type": "standard",
+        "baseColor": "#9aaa4a",
+        "roughness": 0.5,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#fff6e8",
+        "groundColor": "#8a7a64",
+        "intensity": 1.15
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff1dc",
+        "intensity": 2.4,
+        "position": [
+          -2.2,
+          3.4,
+          2
+        ],
+        "target": [
+          0,
+          0.75,
+          0
+        ],
+        "shadow": {
+          "softness": 2,
+          "mapSize": 2048,
+          "extent": 1.1,
+          "near": 0.5,
+          "far": 9,
+          "bias": -0.0005,
+          "normalBias": 0.012
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#dfe6f2",
+        "intensity": 0.8,
+        "position": [
+          2,
+          2.2,
+          -2.6
+        ],
+        "target": [
+          0,
+          0.75,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.22,
+        "offset": 1.2
+      }
+    },
+    "camera": {
+      "fov": 34,
+      "near": 0.1,
+      "far": 40,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#1c1712",
+      "height": 0.3
+    },
+    "frame": {
+      "w": 3.2,
+      "h": 1.8,
+      "overscan": 1.08,
+      "rt": [
+        1600,
+        900
+      ],
+      "rtSamples": 4
+    },
+    "facets": {
+      "count": 14,
+      "seed": 62,
+      "focus": [
+        0.05,
+        -0.05
+      ],
+      "aimShare": 0.55,
+      "minShare": 0.03,
+      "maxVerts": 8,
+      "keepMain": 2
+    },
+    "still": {
+      "table": {
+        "r": 0.64,
+        "y": 0.74,
+        "th": 0.04
+      },
+      "subject": {
+        "box": [
+          [
+            -0.62,
+            0.72,
+            -0.5
+          ],
+          [
+            0.62,
+            1.1,
+            0.52
+          ]
+        ]
+      },
+      "guitar": {
+        "at": [
+          -0.05,
+          0.1
+        ],
+        "yaw": 0.62,
+        "scale": 1
+      },
+      "bottle": {
+        "at": [
+          0.26,
+          -0.22
+        ]
+      },
+      "glass": {
+        "at": [
+          0.38,
+          0.12
+        ]
+      },
+      "bowl": {
+        "at": [
+          -0.42,
+          0.2
+        ]
+      },
+      "news": {
+        "at": [
+          0.18,
+          -0.08
+        ],
+        "yaw": -0.35
+      }
+    },
+    "views": [
+      {
+        "id": "front",
+        "az": 0.3,
+        "el": 0.62,
+        "fill": 1,
+        "window": {
+          "x0": -1,
+          "x1": 1,
+          "y0": -1.35,
+          "y1": 0.9
+        }
+      },
+      {
+        "id": "above",
+        "az": 0.15,
+        "el": 1.42,
+        "fill": 0.96,
+        "roll": 0.35
+      },
+      {
+        "id": "left",
+        "az": -1.05,
+        "el": 0.38,
+        "fill": 0.98
+      },
+      {
+        "id": "right",
+        "az": 1.25,
+        "el": 0.3,
+        "fill": 0.98,
+        "roll": -0.12
+      },
+      {
+        "id": "level",
+        "az": -0.2,
+        "el": 0.12,
+        "fill": 1
+      },
+      {
+        "id": "tilt",
+        "az": 0.75,
+        "el": 0.9,
+        "fill": 0.96,
+        "roll": 0.28
+      }
+    ],
+    "orbit": {
+      "az": [
+        0.12,
+        0.3
+      ],
+      "el": [
+        0.58,
+        0.62
+      ]
+    },
+    "facetMotion": {
+      "crack": {
+        "start": 0.05,
+        "spread": 0.55,
+        "dur": 0.3
+      },
+      "swing": {
+        "start": 0.5,
+        "step": 0.34,
+        "dur": 1.25
+      },
+      "slide1": [
+        0.03,
+        0.09
+      ],
+      "slide1Dur": 1,
+      "slide2": [
+        0.07,
+        0.19
+      ],
+      "slide2At": [
+        0.1,
+        1.3
+      ],
+      "slide2Dur": 1.5,
+      "lateral": 0.05,
+      "rot1": 0.05,
+      "rot2": 0.09,
+      "overlap": [
+        1.04,
+        1.12
+      ],
+      "recentre": {
+        "jitter": 0.15,
+        "lift": 0,
+        "zoom": [
+          0.72,
+          0.92
+        ]
+      },
+      "zRange": 0.05,
+      "reliefZ": 0.05,
+      "finalKeep": [
+        0.25,
+        0.6
+      ],
+      "resolveSpread": 0.45,
+      "resolveDur": 1.4,
+      "palette": {
+        "analytic": [
+          0.35,
+          2.6
+        ],
+        "synth": [
+          0.1,
+          1.7
+        ],
+        "bold": [
+          0.2,
+          1.5
+        ]
+      }
+    },
+    "collage": {
+      "flips": 6,
+      "flipStart": 0.2,
+      "flipStep": 0.26,
+      "flipDur": 0.7,
+      "kinds": [
+        2,
+        1,
+        0,
+        3,
+        4,
+        0
+      ],
+      "papers": [
+        "#2d4f86",
+        "#c8442c",
+        "#3f6b4a",
+        "#e2b23c"
+      ],
+      "extraStart": 1.7,
+      "extraStep": 0.32,
+      "extraDur": 0.6,
+      "tints": 3,
+      "synthSets": 4,
+      "words": [
+        "LE JOUR",
+        "BAR",
+        "VIN",
+        "CAFÉ"
+      ]
+    },
+    "look": {
+      "lineW": 0.0055,
+      "lineBold": 0.0045,
+      "lineJitter": 0.35,
+      "innerInk": [
+        0.09,
+        0.26
+      ],
+      "bands": 5,
+      "passage": 0.28,
+      "weave": [
+        0.035,
+        0.09
+      ],
+      "brush": 0.07
+    },
+    "caption": {
+      "x": 960,
+      "y": 918,
+      "h": 80,
+      "cap": 36,
+      "maxW": 900,
+      "font": "\"Avenir Next Condensed\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "paper": "#efe5cc",
+      "edge": "#1c1712",
+      "ink": "#1c1712",
+      "accent": "#c8442c"
+    },
+    "sound": {
+      "strum": 0.55,
+      "crack": {
+        "thud": 0.5,
+        "clack": 0.35
+      },
+      "tick": 0.22,
+      "swing": {
+        "whoosh": 0.22,
+        "pluck": 0.32
+      },
+      "slide": 0.16,
+      "flip": {
+        "paper": 0.45,
+        "marimba": 0.18
+      },
+      "paste": {
+        "paper": 0.4,
+        "thud": 0.25
+      },
+      "resolve": {
+        "strum": 0.6,
+        "chime": 0.14
+      },
+      "bed": [
+        {
+          "root": 196,
+          "chord": [
+            0,
+            7,
+            12
+          ],
+          "brightness": 1100,
+          "gain": 0.35
+        },
+        {
+          "root": 147,
+          "chord": [
+            0,
+            3,
+            7,
+            10
+          ],
+          "brightness": 650,
+          "gain": 0.42
+        },
+        {
+          "root": 131,
+          "chord": [
+            0,
+            3,
+            7,
+            12
+          ],
+          "brightness": 600,
+          "gain": 0.42
+        },
+        {
+          "root": 196,
+          "chord": [
+            0,
+            4,
+            7,
+            11
+          ],
+          "brightness": 1500,
+          "gain": 0.35
+        },
+        {
+          "root": 196,
+          "chord": [
+            0,
+            4,
+            7,
+            12,
+            16
+          ],
+          "brightness": 1300,
+          "gain": 0.38
+        }
+      ]
+    },
+    "sfx": {
+      "enter": "pluck",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "paper",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Each facet shows the still life through its own camera (render targets); facets keep their image as they slide.",
+      "Cracks propagate outward from the subject; each viewpoint's camera swings from the common view to its own on an arc.",
+      "Facets flip over like card about an in-plane axis to reveal collage backs; cut-outs slide in and stick.",
+      "Stage camera is locked except a slow push-in during the resolve."
+    ]
+  },
+  "scene": {
+    "id": "62-cubism",
+    "style": "cubism",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "still",
+        "t": 0,
+        "dur": 2.8,
+        "label": "A plain still life"
+      },
+      {
+        "id": "break",
+        "t": 2.8,
+        "dur": 2.8,
+        "label": "The picture plane breaks"
+      },
+      {
+        "id": "views",
+        "t": 5.6,
+        "dur": 3,
+        "label": "Every side at once"
+      },
+      {
+        "id": "collage",
+        "t": 8.6,
+        "dur": 3.2,
+        "label": "Paper, wood, letters"
+      },
+      {
+        "id": "resolve",
+        "t": 11.8,
+        "dur": 3.2,
+        "label": "One object, many views"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0,
+          0,
+          2.9437673566357265
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "fov": 34
+      },
+      {
+        "t": 12.100000000000001,
+        "pos": [
+          0,
+          0,
+          2.9437673566357265
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "fov": 34
+      },
+      {
+        "t": 15,
+        "pos": [
+          0.04,
+          -0.02,
+          2.7377036416712257
+        ],
+        "target": [
+          0.02,
+          -0.01,
+          0
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "root": 196,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "dur": 3.4,
+        "attack": 0.25,
+        "release": 0.8,
+        "brightness": 1100,
+        "gain": 0.35,
+        "seed": 401
+      },
+      {
+        "type": "pluck",
+        "hz": 196,
+        "notes": [
+          0,
+          7,
+          12,
+          16,
+          19,
+          24
+        ],
+        "step": 0.045,
+        "dur": 2.6,
+        "decay": 2.2,
+        "bright": 0.55,
+        "gain": 0.55,
+        "t": 0.12,
+        "pan": 0,
+        "seed": 151
+      },
+      {
+        "t": 2.8,
+        "type": "pad",
+        "root": 147,
+        "chord": [
+          0,
+          3,
+          7,
+          10
+        ],
+        "dur": 3.4,
+        "attack": 0.5,
+        "release": 0.8,
+        "brightness": 650,
+        "gain": 0.42,
+        "seed": 414
+      },
+      {
+        "type": "thud",
+        "dur": 0.5,
+        "pitch": 0.8,
+        "gain": 0.5,
+        "t": 2.8299999999999996,
+        "pan": 0,
+        "seed": 158
+      },
+      {
+        "type": "clack",
+        "dur": 0.14,
+        "pitch": 0.7,
+        "gain": 0.35,
+        "t": 2.8299999999999996,
+        "pan": 0,
+        "seed": 159
+      },
+      {
+        "type": "tick",
+        "pitch": 1.25,
+        "gain": 0.22,
+        "pan": 0.13091640863942244,
+        "t": 2.979780124600775,
+        "seed": 165
+      },
+      {
+        "type": "tick",
+        "pitch": 1.3,
+        "gain": 0.22,
+        "pan": -0.1786836562796336,
+        "t": 3.026532862919311,
+        "seed": 172
+      },
+      {
+        "type": "tick",
+        "pitch": 1.1500000000000001,
+        "gain": 0.22,
+        "pan": 0.24865654091497158,
+        "t": 3.048265050873058,
+        "seed": 179
+      },
+      {
+        "type": "tick",
+        "pitch": 1.1500000000000001,
+        "gain": 0.22,
+        "pan": -0.06759756899364835,
+        "t": 3.0534840176633806,
+        "seed": 186
+      },
+      {
+        "type": "tick",
+        "pitch": 1.1,
+        "gain": 0.22,
+        "pan": 0.12586378835755377,
+        "t": 3.0550056936728316,
+        "seed": 193
+      },
+      {
+        "type": "tick",
+        "pitch": 1.3,
+        "gain": 0.22,
+        "pan": -0.2095652750220765,
+        "t": 3.0691395550506764,
+        "seed": 200
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2000000000000002,
+        "gain": 0.22,
+        "pan": -0.09903578231732928,
+        "t": 3.0725462979966545,
+        "seed": 207
+      },
+      {
+        "type": "tick",
+        "pitch": 1.1,
+        "gain": 0.22,
+        "pan": 0.3395831231855598,
+        "t": 3.1766467670627154,
+        "seed": 214
+      },
+      {
+        "type": "tick",
+        "pitch": 1.1,
+        "gain": 0.22,
+        "pan": -0.44326259658631545,
+        "t": 3.218218520315498,
+        "seed": 221
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2000000000000002,
+        "gain": 0.22,
+        "pan": 0.48094539500156397,
+        "t": 3.238258706262136,
+        "seed": 228
+      },
+      {
+        "type": "tick",
+        "pitch": 1.3,
+        "gain": 0.22,
+        "pan": 0.5061233115952766,
+        "t": 3.2424439620568157,
+        "seed": 235
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2000000000000002,
+        "gain": 0.22,
+        "pan": -0.4312245972445017,
+        "t": 3.2446494346626555,
+        "seed": 242
+      },
+      {
+        "type": "tick",
+        "pitch": 1.25,
+        "gain": 0.22,
+        "pan": 0.4656400477767279,
+        "t": 3.2608164445971197,
+        "seed": 249
+      },
+      {
+        "type": "tick",
+        "pitch": 1.1500000000000001,
+        "gain": 0.22,
+        "pan": -0.46020330992267355,
+        "t": 3.268252926538989,
+        "seed": 256
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.125,
+        "q": 1.2,
+        "pitch": 0.88,
+        "gain": 0.22,
+        "pan": -0.35,
+        "t": 3.3,
+        "seed": 263
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.125,
+        "q": 1.2,
+        "pitch": 0.9600000000000001,
+        "gain": 0.22,
+        "pan": 0.35,
+        "t": 3.6399999999999997,
+        "seed": 270
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.125,
+        "q": 1.2,
+        "pitch": 1.04,
+        "gain": 0.22,
+        "pan": -0.35,
+        "t": 3.98,
+        "seed": 277
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.125,
+        "q": 1.2,
+        "pitch": 1.12,
+        "gain": 0.22,
+        "pan": 0.35,
+        "t": 4.32,
+        "seed": 284
+      },
+      {
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 1.4,
+        "decay": 1.2,
+        "bright": 0.5,
+        "gain": 0.32,
+        "t": 4.3625,
+        "pan": 0,
+        "seed": 264
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.125,
+        "q": 1.2,
+        "pitch": 1.2000000000000002,
+        "gain": 0.22,
+        "pan": -0.35,
+        "t": 4.66,
+        "seed": 291
+      },
+      {
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 1.4,
+        "decay": 1.2,
+        "bright": 0.5,
+        "gain": 0.32,
+        "t": 4.7025,
+        "pan": 0,
+        "seed": 271
+      },
+      {
+        "type": "pluck",
+        "hz": 440.0051229372742,
+        "dur": 1.4,
+        "decay": 1.2,
+        "bright": 0.5,
+        "gain": 0.32,
+        "t": 5.0425,
+        "pan": 0,
+        "seed": 278
+      },
+      {
+        "type": "pluck",
+        "hz": 587.3363741356592,
+        "dur": 1.4,
+        "decay": 1.2,
+        "bright": 0.5,
+        "gain": 0.32,
+        "t": 5.3825,
+        "pan": 0,
+        "seed": 285
+      },
+      {
+        "t": 5.6,
+        "type": "pad",
+        "root": 131,
+        "chord": [
+          0,
+          3,
+          7,
+          12
+        ],
+        "dur": 3.6,
+        "attack": 0.5,
+        "release": 0.8,
+        "brightness": 600,
+        "gain": 0.42,
+        "seed": 427
+      },
+      {
+        "type": "rustle",
+        "dur": 0.5,
+        "density": 0.3,
+        "pitch": 1.1,
+        "gain": 0.16,
+        "pan": 0.48094539500156397,
+        "t": 5.7074278427986425,
+        "seed": 298
+      },
+      {
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 1.4,
+        "decay": 1.2,
+        "bright": 0.5,
+        "gain": 0.32,
+        "t": 5.7225,
+        "pan": 0,
+        "seed": 292
+      },
+      {
+        "type": "rustle",
+        "dur": 0.5,
+        "density": 0.3,
+        "pitch": 1.1,
+        "gain": 0.16,
+        "pan": -0.44326259658631545,
+        "t": 5.745946050994098,
+        "seed": 305
+      },
+      {
+        "type": "rustle",
+        "dur": 0.5,
+        "density": 0.3,
+        "pitch": 1.1,
+        "gain": 0.16,
+        "pan": -0.2095652750220765,
+        "t": 6.087524583260528,
+        "seed": 312
+      },
+      {
+        "type": "rustle",
+        "dur": 0.5,
+        "density": 0.3,
+        "pitch": 1.1,
+        "gain": 0.16,
+        "pan": -0.1786836562796336,
+        "t": 6.126339909853413,
+        "seed": 319
+      },
+      {
+        "type": "rustle",
+        "dur": 0.5,
+        "density": 0.3,
+        "pitch": 1.1,
+        "gain": 0.16,
+        "pan": 0.13091640863942244,
+        "t": 6.3057336081052195,
+        "seed": 326
+      },
+      {
+        "type": "rustle",
+        "dur": 0.5,
+        "density": 0.3,
+        "pitch": 1.1,
+        "gain": 0.16,
+        "pan": 0.12586378835755377,
+        "t": 6.309325859323144,
+        "seed": 333
+      },
+      {
+        "type": "rustle",
+        "dur": 0.5,
+        "density": 0.3,
+        "pitch": 1.1,
+        "gain": 0.16,
+        "pan": 0.24865654091497158,
+        "t": 6.816093945596366,
+        "seed": 340
+      },
+      {
+        "t": 8.6,
+        "type": "pad",
+        "root": 196,
+        "chord": [
+          0,
+          4,
+          7,
+          11
+        ],
+        "dur": 3.8000000000000003,
+        "attack": 0.5,
+        "release": 0.8,
+        "brightness": 1500,
+        "gain": 0.35,
+        "seed": 440
+      },
+      {
+        "type": "paper",
+        "dur": 0.42,
+        "fold": true,
+        "density": 0.4,
+        "gain": 0.45,
+        "pan": -0.1786836562796336,
+        "t": 9.114999999999998,
+        "seed": 347
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745484,
+        "dur": 0.8,
+        "decay": 0.22,
+        "gain": 0.18,
+        "t": 9.174999999999999,
+        "pan": 0,
+        "seed": 348
+      },
+      {
+        "type": "paper",
+        "dur": 0.42,
+        "fold": true,
+        "density": 0.4,
+        "gain": 0.45,
+        "pan": -0.06759756899364835,
+        "t": 9.374999999999998,
+        "seed": 354
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "dur": 0.8,
+        "decay": 0.22,
+        "gain": 0.18,
+        "t": 9.434999999999999,
+        "pan": 0,
+        "seed": 355
+      },
+      {
+        "type": "paper",
+        "dur": 0.42,
+        "fold": true,
+        "density": 0.4,
+        "gain": 0.45,
+        "pan": -0.2095652750220765,
+        "t": 9.634999999999998,
+        "seed": 361
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "dur": 0.8,
+        "decay": 0.22,
+        "gain": 0.18,
+        "t": 9.694999999999999,
+        "pan": 0,
+        "seed": 362
+      },
+      {
+        "type": "paper",
+        "dur": 0.42,
+        "fold": true,
+        "density": 0.4,
+        "gain": 0.45,
+        "pan": 0.3395831231855598,
+        "t": 9.894999999999998,
+        "seed": 368
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745484,
+        "dur": 0.8,
+        "decay": 0.22,
+        "gain": 0.18,
+        "t": 9.954999999999998,
+        "pan": 0,
+        "seed": 369
+      },
+      {
+        "type": "paper",
+        "dur": 0.42,
+        "fold": true,
+        "density": 0.4,
+        "gain": 0.45,
+        "pan": 0.48094539500156397,
+        "t": 10.155,
+        "seed": 375
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "dur": 0.8,
+        "decay": 0.22,
+        "gain": 0.18,
+        "t": 10.215,
+        "pan": 0,
+        "seed": 376
+      },
+      {
+        "type": "paper",
+        "dur": 0.42,
+        "fold": true,
+        "density": 0.4,
+        "gain": 0.45,
+        "pan": -0.4312245972445017,
+        "t": 10.415,
+        "seed": 382
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "dur": 0.8,
+        "decay": 0.22,
+        "gain": 0.18,
+        "t": 10.475,
+        "pan": 0,
+        "seed": 383
+      },
+      {
+        "type": "paper",
+        "dur": 0.35,
+        "density": 0.5,
+        "gain": 0.4,
+        "pan": -0.5,
+        "t": 10.719999999999999,
+        "seed": 389
+      },
+      {
+        "type": "thud",
+        "dur": 0.25,
+        "pitch": 1.6,
+        "gain": 0.25,
+        "t": 10.77,
+        "pan": 0,
+        "seed": 390
+      },
+      {
+        "type": "paper",
+        "dur": 0.35,
+        "density": 0.5,
+        "gain": 0.4,
+        "pan": 0.5,
+        "t": 11.04,
+        "seed": 396
+      },
+      {
+        "type": "thud",
+        "dur": 0.25,
+        "pitch": 1.6,
+        "gain": 0.25,
+        "t": 11.09,
+        "pan": 0,
+        "seed": 397
+      },
+      {
+        "type": "paper",
+        "dur": 0.35,
+        "density": 0.5,
+        "gain": 0.4,
+        "pan": 0.5,
+        "t": 11.36,
+        "seed": 403
+      },
+      {
+        "type": "thud",
+        "dur": 0.25,
+        "pitch": 1.6,
+        "gain": 0.25,
+        "t": 11.41,
+        "pan": 0,
+        "seed": 404
+      },
+      {
+        "t": 11.8,
+        "type": "pad",
+        "root": 196,
+        "chord": [
+          0,
+          4,
+          7,
+          12,
+          16
+        ],
+        "dur": 3.1999999999999993,
+        "attack": 0.5,
+        "release": 1.4,
+        "brightness": 1300,
+        "gain": 0.38,
+        "seed": 453
+      },
+      {
+        "type": "pluck",
+        "hz": 196,
+        "notes": [
+          0,
+          4,
+          7,
+          12,
+          16,
+          19
+        ],
+        "step": 0.06,
+        "dur": 3.2,
+        "decay": 2.8,
+        "bright": 0.6,
+        "gain": 0.6,
+        "t": 13.37,
+        "pan": 0,
+        "seed": 410
+      },
+      {
+        "type": "chime",
+        "dur": 2.4,
+        "pitch": 0.9,
+        "gain": 0.14,
+        "t": 13.62,
+        "pan": 0,
+        "seed": 411
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "facets.js: seeded convex partition of the picture plane; each facet samples the render target of its own viewpoint camera at its rest frame UV; crack/swing/slide/flip/resolve windows are closed-form; SCORE from plan.events().",
+      "facets": [
+        {
+          "i": 0,
+          "view": 1,
+          "crackAt": 3.218,
+          "flip": null
+        },
+        {
+          "i": 1,
+          "view": 2,
+          "crackAt": 3.245,
+          "flip": {
+            "at": 10.1,
+            "kind": 0
+          }
+        },
+        {
+          "i": 2,
+          "view": 3,
+          "crackAt": 3.027,
+          "flip": {
+            "at": 8.799999999999999,
+            "kind": 2
+          }
+        },
+        {
+          "i": 3,
+          "view": 4,
+          "crackAt": 3.053,
+          "flip": {
+            "at": 9.059999999999999,
+            "kind": 1
+          }
+        },
+        {
+          "i": 4,
+          "view": 5,
+          "crackAt": 2.98,
+          "flip": null
+        },
+        {
+          "i": 5,
+          "view": 1,
+          "crackAt": 3.177,
+          "flip": {
+            "at": 9.579999999999998,
+            "kind": 3
+          }
+        },
+        {
+          "i": 6,
+          "view": 2,
+          "crackAt": 3.238,
+          "flip": {
+            "at": 9.84,
+            "kind": 4
+          }
+        },
+        {
+          "i": 7,
+          "view": 3,
+          "crackAt": 3.242,
+          "flip": null
+        },
+        {
+          "i": 8,
+          "view": 0,
+          "crackAt": 3.048,
+          "flip": null
+        },
+        {
+          "i": 9,
+          "view": 4,
+          "crackAt": 3.261,
+          "flip": null
+        },
+        {
+          "i": 10,
+          "view": 5,
+          "crackAt": 3.055,
+          "flip": null
+        },
+        {
+          "i": 11,
+          "view": 1,
+          "crackAt": 3.073,
+          "flip": null
+        },
+        {
+          "i": 12,
+          "view": 2,
+          "crackAt": 3.069,
+          "flip": {
+            "at": 9.319999999999999,
+            "kind": 0
+          }
+        },
+        {
+          "i": 13,
+          "view": 0,
+          "crackAt": 3.268,
+          "flip": null
+        }
+      ],
+      "views": [
+        {
+          "id": "front",
+          "swingAt": null
+        },
+        {
+          "id": "above",
+          "swingAt": 3.3
+        },
+        {
+          "id": "left",
+          "swingAt": 3.6399999999999997
+        },
+        {
+          "id": "right",
+          "swingAt": 3.98
+        },
+        {
+          "id": "level",
+          "swingAt": 4.32
+        },
+        {
+          "id": "tilt",
+          "swingAt": 4.66
+        }
+      ],
+      "words": "stencilled words on newsprint/label are decorative (LE JOUR, BAR, VIN); no data on screen"
+    }
+  }
+}

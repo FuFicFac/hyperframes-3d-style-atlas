@@ -1,0 +1,2901 @@
+{
+  "format": "3d-style-atlas/style-index@1",
+  "generatedBy": "Skills/3d-style-atlas/scripts/build-index.mjs (re-run after adding or changing a style)",
+  "generatedAt": "2026-11-15T12:22:57.319Z",
+  "pathsRelativeTo": "D Second Brain/",
+  "notes": "category is a keyword guess; props come from the STYLE.md props tables; demo topic is the first line of the demo's scene.js.",
+  "count": 71,
+  "styles": [
+    {
+      "id": "anamorphic",
+      "name": "Anamorphic Illusion",
+      "description": "A bright pale gallery room where dozens of chunky painted rods hang on thin strings at very different depths: meaningless clutter from every angle except one sweet spot (a taped cross on the floor), where every piece lines up into one crisp word or shape. Each piece is a slice of the figure moved along its own eye ray and scaled with distance, so from the sweet spot the figure is exact and from a few degrees off parallax tears it apart. Two figures can share one room (each with its own sweet spot and colour); the figure not being read sinks to its own muted mid-tone. Soft cast shadows on the floor and walls show the true scatter even at the locked moment.",
+      "summary": "**Look.** A bright, pale gallery room (warm off-white walls, a lit ceiling, a floor of large pale concrete tiles, skirting boards).",
+      "category": "other",
+      "goodFor": "\"it depends how you look at it\", perspective / point-of-view messages, reveals of one word or one icon,\n  \"the pieces only make sense together\", hidden-in-plain-sight, title reveals with a twist, two readings of one set.\n- **Avoid for:** long text (more than ~6 stroke letters gets thin), anything that must be read while the camera moves,\n  multi-step processes, numbers that must be exact (they only exist at the lock), scenes that need a free-roaming camera.",
+      "avoidFor": "long text (more than ~6 stroke letters gets thin), anything that must be read while the camera moves,\n  multi-step processes, numbers that must be exact (they only exist at the lock), scenes that need a free-roaming camera.",
+      "toneMapping": "neutral",
+      "props": [
+        "room",
+        "pieceSet",
+        "tapeMark",
+        "caption",
+        "rodGeometry"
+      ],
+      "fourthModule": [
+        {
+          "file": "anamorph.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/51-anamorphic",
+          "topic": "\"One angle.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/51-anamorphic/renders/51-anamorphic.mp4",
+          "mp4MB": 6.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/anamorphic/spec.js",
+        "style": "Skills/3d-style-atlas/styles/anamorphic/style.js",
+        "card": "Skills/3d-style-atlas/styles/anamorphic/STYLE.md"
+      }
+    },
+    {
+      "id": "art-deco",
+      "name": "Art Deco",
+      "description": "Machine-age Art Deco in polished brass and gold, black lacquer, cream marble and jade under a bright cream-to-teal sky: bronze elevator doors with an inlaid fan slide apart, a gold sunburst fans open ray by ray like a folding fan, a stepped ziggurat skyscraper telescopes up terrace by terrace (vertical fluting, glowing frosted-glass window bays, chevron parapets, a spire extending last) while two searchlights sweep in mirror image, crown ornaments (chevrons, scallop fans, sunray fans, stepped keystone frames, finials) click into place in mirrored pairs, and a framed title panel unfolds from the centre line. The signature is symmetric unfolding and stepped ascent: every element is mirrored about one centre line and grows in terraces; a THREE-free planner (deco.js) times every unfold and the stepped rising chords (one per tier), ray notes and ornament clicks come from the same plan.",
+      "summary": "**Look.** 1920s–30s machine-age ornament, all original designs: polished gold and brass, bronze, black lacquer, cream marble and jade/teal under a lit sky gradient (teal zenith → pale jade → warm cream horizon).",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "floor",
+        "plinth",
+        "sunburst",
+        "doorway",
+        "tower",
+        "tier",
+        "crown",
+        "searchlights",
+        "panel",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "deco.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/70-art-deco",
+          "topic": "\"Art Deco\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/70-art-deco/renders/70-art-deco.mp4",
+          "mp4MB": 6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/art-deco/spec.js",
+        "style": "Skills/3d-style-atlas/styles/art-deco/style.js",
+        "card": "Skills/3d-style-atlas/styles/art-deco/STYLE.md"
+      }
+    },
+    {
+      "id": "bead-abacus",
+      "name": "Bead Abacus",
+      "description": "A big counting frame on a clean bright tabletop in soft daylight: warm hardwood posts and rails, polished steel rods and chunky lacquered wooden beads (round, bicone or disc) in a small confident palette with paint worn to bare wood on the rims. Quantities become physical and countable: beads slide along their rods as a pushed block and clack home with a tiny settle; rows are labelled bars, shares, counts or place values; desk nameplates at the row ends update when the beads land; a 10x10 frame fills for percentages, and ten beads return while one moves on for a carry.",
+      "summary": "A big counting frame lying on a clean bright tabletop in soft daylight.",
+      "category": "other",
+      "goodFor": "showing one real number so it can be felt and counted, \"3 out of 10\", small comparisons (2–5 rows of\n0–10), proportions and percentages (10×10), before/after counts, simple addition with carrying, budgets in tens.",
+      "avoidFor": "values above 10 per row (or 100 per hundred-frame) without rescaling (say what a bead is worth on the\nlabel), decimals, more than ~5 labelled rows in one shot, time series, anything that needs precise values beyond whole\nbeads, dark/moody looks.",
+      "toneMapping": "neutral",
+      "props": [
+        "frame",
+        "hundredFrame",
+        "bead",
+        "rod",
+        "nameplate",
+        "rowController",
+        "hundredController",
+        "divider",
+        "caption",
+        "stamp",
+        "surface"
+      ],
+      "fourthModule": [
+        {
+          "file": "beads.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/40-bead-abacus",
+          "topic": "\"Votes, counted\" (SAMPLE DATA) on a hardwood counting frame.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/40-bead-abacus/renders/40-bead-abacus.mp4",
+          "mp4MB": 4.7
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/bead-abacus/spec.js",
+        "style": "Skills/3d-style-atlas/styles/bead-abacus/style.js",
+        "card": "Skills/3d-style-atlas/styles/bead-abacus/STYLE.md"
+      }
+    },
+    {
+      "id": "blueprint-build",
+      "name": "Blueprint Build",
+      "description": "A cyanotype drafting sheet come to life: deep Prussian-blue paper with a faint grid, fibres and fold creases; objects drawn as crisp pale hidden-line linework (visible edges solid, hidden edges dashed) that plots on stroke by stroke, with dash-dot centre-lines, dimensions, leaders, hatching and a title block in single-stroke technical lettering. Front elevation tilts into an isometric view.",
+      "summary": "A cyanotype drafting sheet come to life.",
+      "category": "technical / diagrammatic",
+      "goodFor": "anatomy/architecture explainers (\"parts of X\"), systems and pipelines, exploded views, before/after\nassembly, anything where \"drawn precisely\" = trustworthy. **Avoid for:** emotion, organic/soft subjects, photo-real\nmaterial, dense paragraphs, lots of simultaneous motion, fast cutting.",
+      "avoidFor": "emotion, organic/soft subjects, photo-real\nmaterial, dense paragraphs, lots of simultaneous motion, fast cutting.",
+      "toneMapping": "none",
+      "props": [
+        "hiddenLine",
+        "lines",
+        "polyline",
+        "text3d",
+        "dimension",
+        "hatch",
+        "loopArrow",
+        "sheet",
+        "border",
+        "sheetText",
+        "callout",
+        "plotterHead"
+      ],
+      "fourthModule": null,
+      "hasNodeSafeFourthModule": false,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/06-blueprint-build",
+          "topic": "\"Anatomy of an AI agent\" plotted on a cyanotype sheet.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/06-blueprint-build/renders/06-blueprint-build.mp4",
+          "mp4MB": 3.7
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/blueprint-build/spec.js",
+        "style": "Skills/3d-style-atlas/styles/blueprint-build/style.js",
+        "card": "Skills/3d-style-atlas/styles/blueprint-build/STYLE.md"
+      }
+    },
+    {
+      "id": "card-table",
+      "name": "Card Table",
+      "description": "A card table under a low hanging lamp: calm green baize, a bevelled wooden rail, and a deck of original illustrated information cards (thick linen stock, rounded corners, geometric backs; faces with a big drawn icon, title, caption and corner index). Cards riffle, deal along spinning arcs with a soft landing slide, flip with a bend, fan, spread and stack; chips and a dealer button slide in to mark the pick.",
+      "summary": "**Look.** A card table under a low hanging lamp: a calm baize cloth (green by default; `baize: \"blue\" | \"red\" | \"charcoal\"`), a bevelled dark wooden rail, a warm lamp pool falling off to the rail, and a deck of ORIGINAL information cards...",
+      "category": "other",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "table",
+        "lamp",
+        "card",
+        "deck",
+        "chip",
+        "dealerButton",
+        "plaque"
+      ],
+      "fourthModule": [
+        {
+          "file": "dealer.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/33-card-table",
+          "topic": "\"Three ways to learn\" on a card table.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/33-card-table/renders/33-card-table.mp4",
+          "mp4MB": 4.9
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/card-table/spec.js",
+        "style": "Skills/3d-style-atlas/styles/card-table/style.js",
+        "card": "Skills/3d-style-atlas/styles/card-table/STYLE.md"
+      }
+    },
+    {
+      "id": "cardboard-stop-motion",
+      "name": "Cardboard Stop-Motion",
+      "description": "A hand-built corrugated-cardboard set on a workbench under a warm clamp lamp: kraft cut-outs with wavy fluted cut edges and wonky hand-cut outlines, marker-pen drawings and lettering, masking tape and brass split-pin joints; everything (camera included) is animated on threes with per-pose jitter and lamp flicker, puppets rotate about split pins, and pieces slide, stand up on tabs and are swapped like replacement animation.",
+      "summary": "A hand-built set made of corrugated cardboard on a wooden workbench under a warm clamp lamp.",
+      "category": "handmade / tactile",
+      "goodFor": "stories, how-to steps, playful explanations, kids/education, \"made by hand\" brand stories, anything that should feel\nhomemade and cheap-on-purpose.",
+      "avoidFor": "precise data or charts, sleek or premium tech, serious or sombre topics, long text (more than about 3 words per card),\nfast smooth motion (by design nothing is smooth).",
+      "toneMapping": "neutral",
+      "props": [
+        "cutout",
+        "doodle",
+        "box",
+        "sign",
+        "splitPin",
+        "jointArm",
+        "puppet",
+        "wheel",
+        "arrow",
+        "tape",
+        "tapeRoll",
+        "swapper",
+        "bench"
+      ],
+      "fourthModule": [
+        {
+          "file": "poses.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/28-cardboard-stop-motion",
+          "topic": "\"How to plant a seed\" on a cardboard workbench set.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/28-cardboard-stop-motion/renders/28-cardboard-stop-motion.mp4",
+          "mp4MB": 5.4
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/cardboard-stop-motion/spec.js",
+        "style": "Skills/3d-style-atlas/styles/cardboard-stop-motion/style.js",
+        "card": "Skills/3d-style-atlas/styles/cardboard-stop-motion/STYLE.md"
+      }
+    },
+    {
+      "id": "chalkboard",
+      "name": "Chalkboard",
+      "description": "A real classroom chalkboard filmed in 3D: a dusty green slate in a worn oak frame with a chalk tray (sticks, a felt eraser, dust) on a painted wall, side-lit by window daylight. Grainy, pressure-varying hand-drawn chalk writes itself stroke by stroke over ghosts of old lessons; a floating chalk stick shedding dust follows the stroke tip, the eraser lifts off the tray to wipe a region and leaves a ghost.",
+      "summary": "A real classroom chalkboard filmed in 3D: a mottled green slate in a worn oak frame with a chalk tray (sticks, a felt eraser, dust) on a sage plaster wall, side-lit by a soft window spot from the left (falloff across the board, frame sha...",
+      "category": "handmade / tactile",
+      "goodFor": "\"teacher explains\" topics, worked examples, simple charts/diagrams built piece by piece, myth-vs-fact,\n\"the wrong answer, crossed out\", nostalgic/educational tone. **Avoid for:** dense paragraphs, photo/product subjects,\nprecise technical drawing (use blueprint-build), anything needing lowercase or many fast cuts.",
+      "avoidFor": "dense paragraphs, photo/product subjects,\nprecise technical drawing (use blueprint-build), anything needing lowercase or many fast cuts.",
+      "toneMapping": "neutral",
+      "props": [
+        "board",
+        "wall",
+        "chalkStick"
+      ],
+      "fourthModule": [
+        {
+          "file": "chalk.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/21-chalkboard",
+          "topic": "\"Why AI makes things up\" on a classroom chalkboard.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/21-chalkboard/renders/21-chalkboard.mp4",
+          "mp4MB": 4.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/chalkboard/spec.js",
+        "style": "Skills/3d-style-atlas/styles/chalkboard/style.js",
+        "card": "Skills/3d-style-atlas/styles/chalkboard/STYLE.md"
+      }
+    },
+    {
+      "id": "circuit-board",
+      "name": "Circuit Board",
+      "description": "A macro photograph of a real printed circuit board: deep matte-satin solder mask over copper pours, glossy gold traces and pads, white silkscreen lettering, black chips with gull-wing pin rows, tiny resistors, capacitors and LEDs, shallow depth of field and one low raking light. Signals travel as bright pulses along octilinear traces through vias; each part powers up when a pulse reaches it (LED lights, chip label glows, a silkscreen caption prints itself) while the camera tracks the pulse at macro scale.",
+      "summary": "A macro photograph of a real printed circuit board.",
+      "category": "screen / UI / sci-fi",
+      "goodFor": "how computers / chips / AI hardware / data pipelines work, cause-and-effect chains, \"signal flows from A\nto B\", fan-out and fan-in, step-by-step processes that have a physical \"this part does X\" reading.",
+      "avoidFor": "soft, emotional or organic topics; charts with many values; long text (silkscreen captions are one short\nline); anything needing many simultaneous labels; very fast cutting (in-world captions need the camera to hold).",
+      "toneMapping": "neutral",
+      "props": [
+        "board",
+        "trace",
+        "vias",
+        "pad",
+        "chip",
+        "passive",
+        "led",
+        "connector",
+        "crystal",
+        "part",
+        "pulse",
+        "flash",
+        "silkLabel",
+        "lightPool",
+        "bench"
+      ],
+      "fourthModule": [
+        {
+          "file": "signals.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/27-circuit-board",
+          "topic": "\"How a signal moves through a circuit\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/27-circuit-board/renders/27-circuit-board.mp4",
+          "mp4MB": 5.4
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/circuit-board/spec.js",
+        "style": "Skills/3d-style-atlas/styles/circuit-board/style.js",
+        "card": "Skills/3d-style-atlas/styles/circuit-board/STYLE.md"
+      }
+    },
+    {
+      "id": "city-lights",
+      "name": "City Lights",
+      "description": "An invented city skyline at blue hour seen across water: layered rows of towers and mid-rise blocks in deep indigo with thousands of warm lit windows, rooftop beacons, a deck-arch bridge with moving headlights, a lamplit quay road, reflections shimmering and smearing on the water, and a gradient dusk sky with a last band of orange and the first stars. Windows are pixels, as a pure function of time: every facade is a window grid whose on/off/colour comes from a THREE-free plan — windows come on in seeded waves as dusk deepens, then organise into information: a row of towers becomes a bar chart (lit height = value, LED number signs on the roofs), one tower fills floor by floor like a progress bar, a wide block spells a word like a dot-matrix display, a heartbeat pulse runs across the skyline, and floors go dark one by one for a countdown. Traffic streams as moving dashes at planned densities, and the water repeats it all, smeared.",
+      "summary": "**Look.** An invented harbour skyline at blue hour, seen across water.",
+      "category": "pixel / voxel",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "sky",
+        "skyline",
+        "beacons",
+        "leds",
+        "ledSign",
+        "bridge",
+        "quay",
+        "traffic",
+        "water",
+        "blimp",
+        "ferry",
+        "caption",
+        "lampDots"
+      ],
+      "fourthModule": [
+        {
+          "file": "cityplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/48-city-lights",
+          "topic": "\"Every window, a pixel\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/48-city-lights/renders/48-city-lights.mp4",
+          "mp4MB": 10.9
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/city-lights/spec.js",
+        "style": "Skills/3d-style-atlas/styles/city-lights/style.js",
+        "card": "Skills/3d-style-atlas/styles/city-lights/STYLE.md"
+      }
+    },
+    {
+      "id": "clockwork",
+      "name": "Clockwork",
+      "description": "The inside of a fine mechanical movement shot macro: brushed brass wheels with involute teeth and spoked hubs on a dark perlaged plate, Geneva-striped brass bridges with engraved lettering, blued screws, ruby jewels, a mainspring barrel, a balance wheel with a breathing hairspring and an anchor escapement that ticks the whole gear train forward in discrete steps; a cam drops a lever and a hammer strikes a bell. Captions on a small enamel plaque.",
+      "summary": "The inside of a fine mechanical movement, shot macro.",
+      "category": "mechanical / kinetic",
+      "goodFor": "\"how the parts drive each other\", dependencies, cause-and-effect chains, timing and cadence (heartbeats,\nclocks, schedulers, rate limits), ratios and gearing (leverage, scaling, \"small input, big output\" and the reverse),\nsystems where one small part paces the whole, \"it all hinges on X\".",
+      "avoidFor": "flows of many discrete items (use marble-run), assembly/teardown (exploded-view), drawings (blueprint-build),\nhero product shots (studio-product), long text, charts with many values, organic or emotional subjects.",
+      "toneMapping": "neutral",
+      "props": [
+        "gear",
+        "pinion",
+        "wheelSet",
+        "escapeWheel",
+        "anchor",
+        "balance",
+        "pendulum",
+        "barrel",
+        "cam",
+        "strikeLever",
+        "bell",
+        "bridge",
+        "plate",
+        "jewel",
+        "plaque"
+      ],
+      "fourthModule": [
+        {
+          "file": "train.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/34-clockwork",
+          "topic": "a mechanical movement where one balance paces everything.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/34-clockwork/renders/34-clockwork.mp4",
+          "mp4MB": 6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/clockwork/spec.js",
+        "style": "Skills/3d-style-atlas/styles/clockwork/style.js",
+        "card": "Skills/3d-style-atlas/styles/clockwork/STYLE.md"
+      }
+    },
+    {
+      "id": "constructivist-poster",
+      "name": "Constructivist Poster",
+      "description": "A 1920s Constructivist poster that builds itself with force: a red wedge drives diagonally into a white circle, heavy black bars slam in on a 35 degree axis, a black cone throws words that grow as they fly, wheels roll along a bar and stop dead against the circle, and blocks of condensed capitals swing in on hinges. Cream lithograph paper, red / black / one grey, mottled ink and slight misregistration. Every element is a thick painted card at its own height on hidden dowels, so a hard key light throws offset shadows; once the poster locks, an orthographic camera tilts to reveal the layered relief, then snaps back flat. Motion is percussive (hard ease-in, dead stop, tiny ring) and every move has a mechanical hit from the same build plan.",
+      "summary": "**Look.** A 1920s Constructivist poster that builds itself with force.",
+      "category": "handmade / tactile",
+      "goodFor": "title cards and claims with punch, manifesto-style lists (\"three things that matter\"), \"how it's put\ntogether\" reveals (the tilt), bold openers and section stingers, anything that should feel assembled, forceful and graphic.",
+      "avoidFor": "calm or reflective topics, subtle data, long text, photographic subjects, and anything where a\npropaganda-poster register would be tone-deaf.",
+      "toneMapping": "neutral",
+      "props": [
+        "board",
+        "slab",
+        "dowel",
+        "wheel",
+        "word",
+        "piece",
+        "buildPoster",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "construct.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/68-constructivist-poster",
+          "topic": "a Constructivist poster that builds itself with force.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/68-constructivist-poster/renders/68-constructivist-poster.mp4",
+          "mp4MB": 2.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/constructivist-poster/spec.js",
+        "style": "Skills/3d-style-atlas/styles/constructivist-poster/style.js",
+        "card": "Skills/3d-style-atlas/styles/constructivist-poster/STYLE.md"
+      }
+    },
+    {
+      "id": "conveyor-factory",
+      "name": "Conveyor Factory",
+      "description": "A bright, friendly modern packing line at three-quarter height: cream floor with painted safety lines, mint-green and safety-yellow machinery with rounded guards, black ribbed belts on steel frames, kraft cartons, coloured totes and poly parcels, overhead signboards, red/amber/green stack lights, a yellow robot arm and soft skylight daylight. A process becomes a production line: items enter at a planned rate and every item's position is a closed-form function of time through belt segments; stations transform them as they pass (scanner tags, diverter sorts, press stamps, filler loads, quality gate rejects one down a chute, wrapper seals, robot arm picks and places), queues build where a station is slower than the belt, stack lights follow station state and overhead counters tick.",
+      "summary": "A bright, friendly modern packing line seen at three-quarter height, under soft skylight daylight.",
+      "category": "mechanical / kinetic",
+      "goodFor": "workflows and pipelines, input → steps → output, bottlenecks and throughput (queues are real consequences\nof the schedule), sorting / routing / classification, quality checks and rejects, automation explainers, \"where does the\ntime go\" stories, before/after capacity changes (change a dwell or the release rate and re-plan).",
+      "avoidFor": "abstract data with no flow, more than ~8 stations in one line (it gets too wide for 16:9), precise numbers\nbeyond counts, dark or moody looks, toy or miniature looks (use isometric-pastel / tiny-diorama / toy-brick), marble\nmechanisms (marble-run).",
+      "toneMapping": "neutral",
+      "props": [
+        "packingLine",
+        "beltSegment",
+        "rollerBed",
+        "chute",
+        "item",
+        "scannerGate",
+        "diverter",
+        "press",
+        "filler",
+        "qcGate",
+        "pusher",
+        "wrapper",
+        "robotArm",
+        "pallet",
+        "stackLight",
+        "sign",
+        "counterBoard",
+        "hood",
+        "floorSet",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "line.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/47-conveyor-factory",
+          "topic": "\"An order, packed\" on a bright packing line.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/47-conveyor-factory/renders/47-conveyor-factory.mp4",
+          "mp4MB": 7.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/conveyor-factory/spec.js",
+        "style": "Skills/3d-style-atlas/styles/conveyor-factory/style.js",
+        "card": "Skills/3d-style-atlas/styles/conveyor-factory/STYLE.md"
+      }
+    },
+    {
+      "id": "crt-retro",
+      "name": "CRT Retro",
+      "description": "A vintage beige computer terminal on a wood desk in a dark room at night: a chunky yellowed-plastic monitor with a deeply curved CRT whose phosphor text types itself (scanlines, barrel curvature, halation, a block cursor), a clacky two-tone keyboard whose keys press with the typing, floppy drives, a desk lamp, a mug and a pinned note; the screen glow spills colour onto the desk and keys.",
+      "summary": "A beige 1970s–80s computer terminal on a walnut desk in a dark room at night.",
+      "category": "screen / UI / sci-fi",
+      "goodFor": "chat/command-line explainers, \"how a program works\", history of computing, short dialogues, ASCII\ndiagrams, small bar charts, before/after text, anything in short uppercase lines.",
+      "avoidFor": "long paragraphs (> 32 columns × ~11 rows), lowercase or non-Latin text, photo content, fast-cut\nedits, bright or daytime moods.",
+      "toneMapping": "aces",
+      "props": [
+        "workstation",
+        "monitor",
+        "crtScreen",
+        "tubeGeometry",
+        "keyboard",
+        "systemUnit",
+        "caption",
+        "handwriting"
+      ],
+      "fourthModule": [
+        {
+          "file": "screen.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/17-crt-retro",
+          "topic": "\"ELIZA, 1966: the first chatbot\" on a beige CRT terminal at night.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/17-crt-retro/renders/17-crt-retro.mp4",
+          "mp4MB": 4.5
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/crt-retro/spec.js",
+        "style": "Skills/3d-style-atlas/styles/crt-retro/style.js",
+        "card": "Skills/3d-style-atlas/styles/crt-retro/STYLE.md"
+      }
+    },
+    {
+      "id": "cubism",
+      "name": "Cubism",
+      "description": "Analytic-to-synthetic Cubism made from a real 3D still life: a guitar, bottle, wine glass, fruit bowl and folded newspaper on a round café table are rendered from six cameras into render targets, and the flat picture plane fractures into angular convex facets that EACH show the same still life from a different viewpoint (front three-quarter, bird's-eye table top, left, right, eye level, tilted) - simultaneous viewpoints. Facets crack in with dark contour lines, their cameras swing apart, they slide, rotate and overlap; the palette drains to analytic ochre/umber/grey bands with facet passage shading and ink edges, then pieces flip over like card to synthetic collage (flat coloured paper, faux-bois wood grain, newsprint with stencilled letters, wallpaper, charcoal drawing) and the whole settles into a bold flat composition. Canvas weave and brush grain over everything. Every facet pose, crack, swing and flip comes from one seeded plan (facets.js) that also writes the sound.",
+      "summary": "**Look.** A real 3D café still life (a classical guitar lying face-up, a green bottle with a stencilled \"VIN\" label, a wine glass, a bowl with a lemon, apple and pear, a folded newspaper, all on a round walnut table in a warm ochre room)...",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "picture",
+        "stillLife",
+        "facetMaterial",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "facets.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/62-cubism",
+          "topic": "\"One object, many views\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/62-cubism/renders/62-cubism.mp4",
+          "mp4MB": 10.2
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/cubism/spec.js",
+        "style": "Skills/3d-style-atlas/styles/cubism/style.js",
+        "card": "Skills/3d-style-atlas/styles/cubism/STYLE.md"
+      }
+    },
+    {
+      "id": "cymatics",
+      "name": "Cymatics",
+      "description": "Sound builds the picture: a dark anodised square metal plate on a speaker driver, dusted with tens of thousands of bright warm-white sand grains, on a clean light lab bench under a strong soft key light. A tone plays and the sand dances (grains on antinodes hop, grains on nodal lines sit still) and gathers into the crisp geometric nodal-line figure of that frequency (Chladni figure, w = cos(n pi x)cos(m pi y) +/- cos(m pi x)cos(n pi y)); the pitch steps up and the figure shatters and re-forms into a more intricate one. Every grain's settled position per mode is precomputed (seeded Newton steps onto the nodal set + a little spread); motion is a closed-form blend with per-grain delay plus a hop proportional to the local plate amplitude. The plate flexes slightly with the mode shape. Sustained tones, a sand hiss and lock chimes come from the same mode list.",
+      "summary": "**Look.** A Chladni plate on a clean, light lab bench: a dark anodised square plate (2.4 m, toy-scale exaggerated so one grain still reads at 1080p) on a brass post over a speaker-driver can, dusted with 24 000 bright warm-white sand gra...",
+      "category": "toy / playful",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "chladniPlate",
+        "sand",
+        "plate",
+        "driver",
+        "caption",
+        "readout"
+      ],
+      "fourthModule": [
+        {
+          "file": "chladni.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/53-cymatics",
+          "topic": "\"Sound has a shape\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/53-cymatics/renders/53-cymatics.mp4",
+          "mp4MB": 11.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/cymatics/spec.js",
+        "style": "Skills/3d-style-atlas/styles/cymatics/style.js",
+        "card": "Skills/3d-style-atlas/styles/cymatics/STYLE.md"
+      }
+    },
+    {
+      "id": "domino-run",
+      "name": "Domino Run",
+      "description": "A domino rally on a polished wooden floor seen low and close: hundreds of glossy plain-faced coloured tiles standing in curving lines, spirals and branching paths, up a little stair and across a plank bridge, in warm window daylight with soft floor reflections. A topple wave runs every path at a set speed; each tile's fall is a closed-form function of time that comes to rest leaning on the next; one tile splits a line in two, lines trip gadgets (a ball rolls, a flag pops up, a banner drops), and a two-colour field topples row by row to reveal a picture or word. The camera chases the wave front.",
+      "summary": "**Look.** A domino rally on a polished honey-oak floor, seen low and close in warm window daylight.",
+      "category": "other",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "rally",
+        "tiles",
+        "tile",
+        "blocks",
+        "ball",
+        "floor",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "rally.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/37-domino-run",
+          "topic": "\"One small push\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/37-domino-run/renders/37-domino-run.mp4",
+          "mp4MB": 11
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/domino-run/spec.js",
+        "style": "Skills/3d-style-atlas/styles/domino-run/style.js",
+        "card": "Skills/3d-style-atlas/styles/domino-run/STYLE.md"
+      }
+    },
+    {
+      "id": "embossed-letterpress",
+      "name": "Embossed Letterpress",
+      "description": "Fine stationery under raking light: one heavyweight cotton sheet with deckled edges where type and ornaments are pressed in (debossed with uneven spot ink), raised (blind embossed) or stamped in gold foil that flashes as the light sweeps; a brass die descends, presses with a soft thud and lifts to reveal each impression.",
+      "summary": "Fine stationery under a low raking light.",
+      "category": "print / flat graphic",
+      "goodFor": "\"the N parts of X\", principles, manifestos, definitions, quotes, invitations/launch cards, title cards,\npremium or craft brands, anything that should feel considered and permanent. One card per idea; restack sheets to change scenes.",
+      "avoidFor": "data/charts, process flows with motion, many small labels, fast edits, dark or neon moods, anything with\nmore than ~8 independent reveals per sheet, or text below ~0.07 m em (it becomes a blur of walls).",
+      "toneMapping": "neutral",
+      "props": [
+        "reliefSheet",
+        "paperBoard",
+        "pressDie",
+        "rakingLight",
+        "sheetStack"
+      ],
+      "fourthModule": [
+        {
+          "file": "pressplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/19-embossed-letterpress",
+          "topic": "\"The three parts of a good prompt\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/19-embossed-letterpress/renders/19-embossed-letterpress.mp4",
+          "mp4MB": 5.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/embossed-letterpress/spec.js",
+        "style": "Skills/3d-style-atlas/styles/embossed-letterpress/style.js",
+        "card": "Skills/3d-style-atlas/styles/embossed-letterpress/STYLE.md"
+      }
+    },
+    {
+      "id": "evidence-board",
+      "name": "Evidence Board",
+      "description": "An investigator's cork board on a dim office wall under a desk lamp: calm cork in a dark oak frame, pinned index cards with typewriter text, instant-photo prints of code-drawn pictures (objects, places, diagrams), torn notebook scraps, a map fragment of an invented place, sticky flags and coloured map pins. Items fly in and are pinned one at a time (tilt, pin drives home with a bounce); red string is drawn pin to pin, sagging as a catenary, wrapping each pin and pulling taut with a twang, until the web reveals the link; a marker circles the key item and the camera follows the thread.",
+      "summary": "**Look.** An investigator's cork board on a dim office wall under a desk lamp: calm tan cork (low-contrast blotches, granules, pits, old pin holes) in a bevelled dark-oak frame; a warm lamp pool from the upper left falling off to the cor...",
+      "category": "other",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "board",
+        "card",
+        "linkCard",
+        "photo",
+        "scrap",
+        "mapFragment",
+        "pin",
+        "string",
+        "flag",
+        "markerCircle",
+        "lampSet",
+        "caption",
+        "evidence"
+      ],
+      "fourthModule": [
+        {
+          "file": "threads.js",
+          "nodeSafe": false
+        }
+      ],
+      "hasNodeSafeFourthModule": false,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/38-evidence-board",
+          "topic": "\"Why does the fern keep wilting?\" on a cork board.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/38-evidence-board/renders/38-evidence-board.mp4",
+          "mp4MB": 6.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/evidence-board/spec.js",
+        "style": "Skills/3d-style-atlas/styles/evidence-board/style.js",
+        "card": "Skills/3d-style-atlas/styles/evidence-board/STYLE.md"
+      }
+    },
+    {
+      "id": "exploded-view",
+      "name": "Exploded View",
+      "description": "Premium product teardown: one manufactured object in a bright seamless studio separates along its assembly axis into precise bevelled parts (satin metal, matte black plastic, smoked polycarbonate, one accent hero part, brass screws), each outlined in thin dark ink, joined by dashed axis lines, with numbered callouts and a parts legend.",
+      "summary": "A premium product teardown.",
+      "category": "technical / diagrammatic",
+      "goodFor": "\"what's inside X\", product anatomy, hardware/how-it-works explainers, assembly order, BOM walk-throughs, launch films.",
+      "avoidFor": "organic/soft subjects, places and flows (use tiny-diorama), linework-only drafting (blueprint-build), dark moods,\nanything with more than ~12 parts in one stack or parts that must deform.",
+      "toneMapping": "neutral",
+      "props": [
+        "roundedBox",
+        "plate",
+        "lathe",
+        "gear",
+        "fan",
+        "screw",
+        "wheel",
+        "pcb",
+        "assembly",
+        "callout",
+        "legend",
+        "outline"
+      ],
+      "fourthModule": [
+        {
+          "file": "explode.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/10-exploded-view",
+          "topic": "\"Inside a robot vacuum\" as a premium exploded teardown.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/10-exploded-view/renders/10-exploded-view.mp4",
+          "mp4MB": 5.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/exploded-view/spec.js",
+        "style": "Skills/3d-style-atlas/styles/exploded-view/style.js",
+        "card": "Skills/3d-style-atlas/styles/exploded-view/STYLE.md"
+      }
+    },
+    {
+      "id": "felt-stitch",
+      "name": "Felt & Stitch",
+      "description": "A handmade felt story board: thick wool-felt cut-outs with fuzzy edges, layered and appliquéd onto a felt backdrop, held down with raised embroidery stitches in contrasting floss, plus buttons, beads and pom-poms; animated on twos with floppy fabric settles and stitch-by-stitch sewing.",
+      "summary": "A handmade felt story board.",
+      "category": "handmade / tactile",
+      "goodFor": "friendly process/team explainers, step-by-step flows (\"A hands off to B\"), kids/education, cosy brand stories, labels of ≤ ~24 caps.",
+      "avoidFor": "precise data/charts, technical or photoreal subjects, dark/serious moods, long or lowercase text, big camera moves (see limits).",
+      "toneMapping": "neutral",
+      "props": [
+        "piece",
+        "stuffed",
+        "stitchMesh",
+        "embroidery",
+        "patch",
+        "card",
+        "board",
+        "character",
+        "button",
+        "needle",
+        "stitchedPath",
+        "hinged"
+      ],
+      "fourthModule": [
+        {
+          "file": "stitches.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/15-felt-stitch",
+          "topic": "\"AI agents working as a team\" on a felt story board.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/15-felt-stitch/renders/15-felt-stitch.mp4",
+          "mp4MB": 8.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/felt-stitch/spec.js",
+        "style": "Skills/3d-style-atlas/styles/felt-stitch/style.js",
+        "card": "Skills/3d-style-atlas/styles/felt-stitch/STYLE.md"
+      }
+    },
+    {
+      "id": "ferrofluid",
+      "name": "Ferrofluid",
+      "description": "Invisible forces made visible: a mirror-flat pool of jet-black magnetic liquid in a white dish erupts into a crown of sharp glossy spikes under a steel magnet, follows it, splits when a second magnet arrives and melts flat when the field goes — black fluid read through bright studio strips on a pale set.",
+      "summary": "**Look.** Invisible forces made visible.",
+      "category": "material / abstract",
+      "goodFor": "invisible forces, fields and influence (cause → visible effect), attraction / pull, \"the thing responds to\n  you\", one source vs two sources (split), tension and release, physics explainers, calm-but-uncanny title moments.\n- **Avoid for:** anything needing text, numbers or many labelled parts in the scene; step-by-step processes; colourful or\n  warm topics (the palette is black/white/steel with one red accent); more than two field sources (shader slots = 2).",
+      "avoidFor": "anything needing text, numbers or many labelled parts in the scene; step-by-step processes; colourful or\n  warm topics (the palette is black/white/steel with one red accent); more than two field sources (shader slots = 2).",
+      "toneMapping": "neutral",
+      "props": [
+        "fluid",
+        "magnet",
+        "dish",
+        "set",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "field.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/54-ferrofluid",
+          "topic": ". Every frame is a pure function of t: the field plan (scene.config.js FIELD, the style's field.js) gives the magnets' positions and strengths at t; the fluid shader, the magnet meshes and the caption",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/54-ferrofluid/renders/54-ferrofluid.mp4",
+          "mp4MB": 5
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/ferrofluid/spec.js",
+        "style": "Skills/3d-style-atlas/styles/ferrofluid/style.js",
+        "card": "Skills/3d-style-atlas/styles/ferrofluid/STYLE.md"
+      }
+    },
+    {
+      "id": "film-projector",
+      "name": "Film Projector",
+      "description": "A dark screening room: a vintage reel-to-reel projector (turning reels, threaded film, a glowing lens) throws a dusty volumetric light cone onto a pull-down screen showing a sepia silent-film picture with gate weave, flicker, scratches and dust; the camera rides a sprocketed film strip frame by frame and cuts to the screen for each intertitle card, between a 3-2-1 countdown leader and a tail-out.",
+      "summary": "A dark screening room.",
+      "category": "screen / UI / sci-fi",
+      "goodFor": "history, origin stories, \"how it used to be\", before/after, nostalgic intros, step-by-step stories with 3–5\nbeats and one short caption each, archive-flavoured channel openers.",
+      "avoidFor": "data, charts and numbers (the picture is soft and worn), colour-critical content, long text (one card\n≤ ~26 chars per beat), fast cutting below ~2.5 s per beat, and bright or modern moods.",
+      "toneMapping": "neutral",
+      "props": [
+        "projector",
+        "reel",
+        "cabinet",
+        "screen",
+        "projectedMaterial",
+        "lightCone",
+        "dustMotes",
+        "filmStrip",
+        "programme",
+        "intertitle",
+        "countdownLeader",
+        "room"
+      ],
+      "fourthModule": [
+        {
+          "file": "reel.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/30-film-projector",
+          "topic": "\"How a letter travels\" (SAMPLE) as a silent film in a screening room.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/30-film-projector/renders/30-film-projector.mp4",
+          "mp4MB": 4.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/film-projector/spec.js",
+        "style": "Skills/3d-style-atlas/styles/film-projector/style.js",
+        "card": "Skills/3d-style-atlas/styles/film-projector/STYLE.md"
+      }
+    },
+    {
+      "id": "flipbook",
+      "name": "Flipbook",
+      "description": "A hand-drawn pencil flipbook riffled under a thumb: a thick pad of cream paper clamped under a walnut bar on a warm, bright desk, most of its pages bent back over the bar in a fan pinched by a stylised thumb. The thumb lets the pages go one at a time; each page curls (real bent-page geometry: hinge angle + bend + corner twist, integrated along the page every frame), falls toward the viewer and slaps flat with a small bounce, so the pencil drawing on the pages comes to life. Every page carries its own procedural graphite drawing from one planner: bold soft-edged lines with graphite grain, light construction circles and arcs, hatching, smudges and a pencil page number, with line boil (each page's strokes wobble by a page-seeded displacement). A real pencil can finish a line on the first page. The release plan gives every flip a paper tick and slap in sync, from a slow page-by-page flip to a full-speed riffle at 12 drawings a second.",
+      "summary": "**Look.** A hand-drawn pencil flipbook on a warm, bright wooden desk.",
+      "category": "handmade / tactile",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "flipbook",
+        "pencil",
+        "thumb",
+        "clampBar",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "riffle.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/69-flipbook",
+          "topic": "\"Drawings come alive\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/69-flipbook/renders/69-flipbook.mp4",
+          "mp4MB": 6.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/flipbook/spec.js",
+        "style": "Skills/3d-style-atlas/styles/flipbook/style.js",
+        "card": "Skills/3d-style-atlas/styles/flipbook/STYLE.md"
+      }
+    },
+    {
+      "id": "floating-screens",
+      "name": "Floating Screens",
+      "description": "Bright SaaS launch-video look: rounded UI cards with crisp canvas-drawn interfaces float at different depths over a soft colour-blob gradient, with large soft drop shadows from a top-left key, frosted-glass panels, depth of field on the hero card, connector lines with travelling chips, a cursor, and springy fly-in / fan / stack / focus choreography.",
+      "summary": "A bright software-launch look.",
+      "category": "screen / UI / sci-fi",
+      "goodFor": "product and feature walkthroughs, \"how X works\" for software or AI (RAG, pipelines, integrations), onboarding flows,\ndashboards and workflows, anything explained with interfaces. **Avoid for:** physical or organic subjects, dark or moody topics\n(use studio-product), dense tables, real product UIs and logos, and scenes that need an environment or a sense of place.",
+      "avoidFor": "physical or organic subjects, dark or moody topics\n(use studio-product), dense tables, real product UIs and logos, and scenes that need an environment or a sense of place.",
+      "toneMapping": "none",
+      "props": [
+        "backdrop",
+        "card",
+        "frosted",
+        "chip",
+        "connector",
+        "cursor",
+        "pulseRings",
+        "stepLabel"
+      ],
+      "fourthModule": [
+        {
+          "file": "choreo.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/18-floating-screens",
+          "topic": "\"How RAG works\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/18-floating-screens/renders/18-floating-screens.mp4",
+          "mp4MB": 5.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/floating-screens/spec.js",
+        "style": "Skills/3d-style-atlas/styles/floating-screens/style.js",
+        "card": "Skills/3d-style-atlas/styles/floating-screens/STYLE.md"
+      }
+    },
+    {
+      "id": "glass-light",
+      "name": "Glass & Light",
+      "description": "Optics-bench still life: polished clear and coloured glass solids (prisms, blocks, faceted gems, lenses, spheres, rods) on a dark matte bench in a dim hazy room; volumetric beams computed by real ray optics refract through them, a prism fans white light into a spectrum, caustics and rainbow smears land on the table; screen-space refraction with per-channel dispersion, bevel glints, hairline captions.",
+      "summary": "An optics-bench still life: polished clear and coloured glass solids (prisms, blocks, faceted gems, lenses, spheres, rods) on a dark matte bench in a dim hazy room, with **light as the actor**.",
+      "category": "material / abstract",
+      "goodFor": "\"many → one\" and \"one → many\" stories (fusion, mixtures, routing, attention, encoders/decoders,\nspectra, signal processing), anything where a transformation is a path. **Avoid for:** dense diagrams, many labels,\nwarm/cute topics, scenes that need people or places, or bright high-key looks (the glass needs a dark room).",
+      "avoidFor": "dense diagrams, many labels,\nwarm/cute topics, scenes that need people or places, or bright high-key looks (the glass needs a dark room).",
+      "toneMapping": "neutral",
+      "props": [
+        "bench",
+        "glassPiece",
+        "emitter",
+        "beams",
+        "spill",
+        "caustics",
+        "glints",
+        "dust",
+        "spillLights",
+        "caption",
+        "titleLockup"
+      ],
+      "fourthModule": [
+        {
+          "file": "optics.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/22-glass-light",
+          "topic": "\"Multimodal AI: many inputs, one model\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/22-glass-light/renders/22-glass-light.mp4",
+          "mp4MB": 9.5
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/glass-light/spec.js",
+        "style": "Skills/3d-style-atlas/styles/glass-light/style.js",
+        "card": "Skills/3d-style-atlas/styles/glass-light/STYLE.md"
+      }
+    },
+    {
+      "id": "hanging-mobile",
+      "name": "Hanging Mobile",
+      "description": "A kinetic hanging mobile in a bright skylit gallery: thin black wire arms with end loops, fine threads and flat painted sheet-metal plates (disc, leaf, crescent, triangle, custom outlines) in bold red, yellow, blue, black and white turn slowly in still air, while crisp soft shadows drift across the white wall behind. Balance is computed for real: every arm's pivot is solved from the weights on each side (weight = plate area), so hanging a new shape or changing a weight tilts that arm and every arm above it, the whole structure swings and re-settles with a closed-form damped oscillation, and a re-balance slides each pivot loop to the new centre. Small engraved tags hang under the plates; a museum-label overlay carries the words.",
+      "summary": "A kinetic hanging mobile in a bright, skylit white gallery.",
+      "category": "mechanical / kinetic",
+      "goodFor": "trade-offs and balance, priorities and weighting, portfolios and allocation (as shapes, not numbers),\n\"add one thing and everything shifts\", hierarchies and org structures (the tree *is* the hierarchy), calm openers and section breaks,\nart or design topics.",
+      "avoidFor": "exact quantities and charts (the tilt is a picture of imbalance, not a gauge), long text, step-by-step processes,\nfast or energetic pacing (it is calm by nature), dark or night moods.",
+      "toneMapping": "neutral",
+      "props": [
+        "mobile",
+        "hook",
+        "thread",
+        "arm",
+        "plate",
+        "tag",
+        "wireLoop",
+        "gallery",
+        "wallLabel"
+      ],
+      "fourthModule": [
+        {
+          "file": "balance.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/36-hanging-mobile",
+          "topic": "\"Add one thing and everything shifts\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/36-hanging-mobile/renders/36-hanging-mobile.mp4",
+          "mp4MB": 4
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/hanging-mobile/spec.js",
+        "style": "Skills/3d-style-atlas/styles/hanging-mobile/style.js",
+        "card": "Skills/3d-style-atlas/styles/hanging-mobile/STYLE.md"
+      }
+    },
+    {
+      "id": "impasto",
+      "name": "Impasto",
+      "description": "Thick oil paint in the post-impressionist manner: on a primed woven canvas, short fat brushstrokes with real 3D relief (bristle grooves along the stroke, raised edge ridges, a blob where the brush lifted, two colours dragged together) are laid one after another along a seeded swirling flow field — halo rings around a glowing moon and stars, a big double swirl in the sky, contour strokes on rolling hills, flame strokes up a cypress, dabs for a village — in ultramarine, cobalt, chrome yellow, viridian and orange. A raking light sweeps across so the paint ridges cast tiny shadows and catch glossy highlights; the camera can drop low and close so the canvas reads as a landscape of paint. Then the swirls flow: every stroke slides along its own precomputed streamline as a pure function of t. One InstancedMesh (~1,100 strokes), each instance bent into a constant-curvature arc in the vertex shader, with per-pixel bristle normals in the fragment shader; a planner schedules the stroke order and the brush sounds from the same list.",
+      "summary": "**Look.** Thick oil paint in the post-impressionist manner, seen as sculpture.",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "painting",
+        "strokeField",
+        "canvasBoard",
+        "rake",
+        "caption",
+        "weaveTexture"
+      ],
+      "fourthModule": [
+        {
+          "file": "strokes.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/64-impasto",
+          "topic": "a night landscape painted stroke by stroke in thick oil.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/64-impasto/renders/64-impasto.mp4",
+          "mp4MB": 11.4
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/impasto/spec.js",
+        "style": "Skills/3d-style-atlas/styles/impasto/style.js",
+        "card": "Skills/3d-style-atlas/styles/impasto/STYLE.md"
+      }
+    },
+    {
+      "id": "impossible-geometry",
+      "name": "Impossible Geometry",
+      "description": "Sunlit pastel-stone architecture under an orthographic camera that lies: a real open staircase whose two ends line up from one magic angle into an endless loop, with a little walker climbing for ever, then the camera swings off-axis and the loop splits open to show the trick. Flat three-tone faces, fine edge lines, a soft ground shadow, a calm sky.",
+      "summary": "Sunlit pastel-stone architecture under an **orthographic camera that lies**.",
+      "category": "print / flat graphic",
+      "goodFor": "illusions and \"it depends where you stand\" ideas; perspective, framing and bias; loops that look like progress\n(treadmills, busywork, circular reasoning, growth that returns to start); \"the trick revealed\" explainers; puzzle/game-feel intros.",
+      "avoidFor": "literal processes (use isometric-pastel or low-poly), data and numbers, emotional or photo-real subjects, anything\nthat needs a free-roaming camera — the illusion only exists from one direction and the clip must be built around that.",
+      "toneMapping": "none",
+      "props": [
+        "stairs",
+        "tower",
+        "block",
+        "flag",
+        "walker",
+        "gapLine",
+        "groundShadow"
+      ],
+      "fourthModule": [
+        {
+          "file": "impossible.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/58-impossible-geometry",
+          "topic": "\"The endless stair\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/58-impossible-geometry/renders/58-impossible-geometry.mp4",
+          "mp4MB": 1.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/impossible-geometry/spec.js",
+        "style": "Skills/3d-style-atlas/styles/impossible-geometry/style.js",
+        "card": "Skills/3d-style-atlas/styles/impossible-geometry/STYLE.md"
+      }
+    },
+    {
+      "id": "inflatable",
+      "name": "Inflatable",
+      "description": "Glossy inflated vinyl and mirror-foil balloon objects in a bright seamless studio: puffy pillow letters, numbers, arrows, stars, hearts and speech bubbles with a flat welded seam round the edge, pinched scalloped corners, tight wrinkles radiating from the seam, a little valve and strong soft-box highlights. Inflation is a pure function of time: each object starts as a flat, crumpled outline on the floor, its skin is rebuilt every frame from fill(t) — thickness swells from the middle outward, wrinkles tighten and fade, it stands up, overshoots and wobbles to rest with a squeaky stretch. Objects also deflate (sag, fold, sink), bump neighbours and squash on contact, get squeezed so the air shifts to one side, or float up on ribbons and bob. Words inflate letter by letter; air hiss, rubber squeaks and a boing come from the same plan.",
+      "summary": "**Look.** Glossy inflated objects in a bright warm-white seamless studio: puffy pillow letters, numbers, stars, hearts, arrows and speech bubbles made of candy-coloured vinyl (clearcoat skin) or mirror foil (gold / silver / rose).",
+      "category": "handmade / tactile",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "inflatable",
+        "letter",
+        "word",
+        "digit",
+        "star",
+        "studioSet",
+        "contact",
+        "ribbon",
+        "weight",
+        "caption",
+        "tag"
+      ],
+      "fourthModule": [
+        {
+          "file": "inflate.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/42-inflatable",
+          "topic": "\"Just add air\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/42-inflatable/renders/42-inflatable.mp4",
+          "mp4MB": 6.4
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/inflatable/spec.js",
+        "style": "Skills/3d-style-atlas/styles/inflatable/style.js",
+        "card": "Skills/3d-style-atlas/styles/inflatable/STYLE.md"
+      }
+    },
+    {
+      "id": "ink-wash",
+      "name": "Ink Wash",
+      "description": "Brush-and-ink painting coming to life on a large sheet of soft fibrous off-white paper with deckled edges, lying on a felt mat beside an ink stone, a water bowl and a brush rest. A real 3D brush tilts and presses along each planned stroke: ink appears exactly as far as the brush has travelled, width follows pressure, the stroke starts wet-dark and runs dry into streaky flying white, then the edges feather outward and the tone lightens as it dries. Broad grey washes bloom and settle with darker edges, a drop of indigo or vermilion spreads into a wet wash as a soft flower, and an abstract seal is pressed at the end.",
+      "summary": "**Look.** A brush-and-ink painting coming to life on a large sheet of soft, fibrous off-white paper with deckled edges, lying on a charcoal felt mat.",
+      "category": "handmade / tactile",
+      "goodFor": "calm reflective pieces, big-picture ideas, journeys, nature metaphors, \"less is more\", one brushed word,\n  simple diagrams with gravitas (an arrow, an open circle, a line), chapter openers.\n- **Avoid for:** dense information, many labels, numbers/charts, fast energetic edits, anything that needs exact\n  typography in the painting (brushed text uses the kit's single-stroke Latin capitals only). No real-script calligraphy\n  and no seals with real characters — the seal is an abstract geometric mark.",
+      "avoidFor": "dense information, many labels, numbers/charts, fast energetic edits, anything that needs exact\n  typography in the painting (brushed text uses the kit's single-stroke Latin capitals only). No real-script calligraphy\n  and no seals with real characters — the seal is an abstract geometric mark.",
+      "toneMapping": "neutral",
+      "props": [
+        "painting",
+        "sheet",
+        "mat",
+        "brush",
+        "inkStone",
+        "sealBlock",
+        "inkLayer",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "inkplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/49-ink-wash",
+          "topic": "\"a short journey\" painted in brush and ink.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/49-ink-wash/renders/49-ink-wash.mp4",
+          "mp4MB": 3.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/ink-wash/spec.js",
+        "style": "Skills/3d-style-atlas/styles/ink-wash/style.js",
+        "card": "Skills/3d-style-atlas/styles/ink-wash/STYLE.md"
+      }
+    },
+    {
+      "id": "isometric-pastel",
+      "name": "Isometric Pastel",
+      "description": "Clean tech-explainer isometric illustration in true 3D: a locked orthographic isometric camera, extruded blocks on a modular grid with flat three-tone faces (top light, left mid, right dark) from a soft pastel palette, geometric long shadows, a pale dot-grid ground, capsule people, axis-aligned cables and conveyors, and one saturated accent.",
+      "summary": "Tech-company explainer isometric illustration, built in real 3D.",
+      "category": "print / flat graphic",
+      "goodFor": "stacks and layers (tech stacks, org layers, supply chains), systems/flows on a board (data, packets, conveyors),\n\"how X works\" product explainers, cities/campuses/factories in miniature, SaaS/fintech/infra brand explainers.",
+      "avoidFor": "emotion or photo-real material, organic/soft subjects, dramatic lighting or night moods, anything needing camera\norbits or perspective depth (use tiny-diorama for a rounded toy world with real light, exploded-view for product teardowns).",
+      "toneMapping": "none",
+      "props": [
+        "toneMat",
+        "block",
+        "inset",
+        "slab",
+        "chip",
+        "device",
+        "person",
+        "route",
+        "packets",
+        "ripple",
+        "ground",
+        "stack",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "iso.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/20-isometric-pastel",
+          "topic": "\"The AI stack\" — four floors (chips, data centres, models, apps) stack up on a dot grid.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/20-isometric-pastel/renders/20-isometric-pastel.mp4",
+          "mp4MB": 4.4
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/isometric-pastel/spec.js",
+        "style": "Skills/3d-style-atlas/styles/isometric-pastel/style.js",
+        "card": "Skills/3d-style-atlas/styles/isometric-pastel/STYLE.md"
+      }
+    },
+    {
+      "id": "kintsugi",
+      "name": "Kintsugi",
+      "description": "Break and mend: a glossy celadon tea bowl on pale oatmeal linen in soft window daylight falls, cracks along a seeded fracture (weighted spherical Voronoi of warped surface directions, so each crack runs through the whole wall) and splays into a dozen-odd shards that tip outward, clink down on the cloth convex side down and rest; they rise along arcs and slot back home; then molten gold runs ALONG the seams from one pour point on the rim (a Dijkstra arrival field over the seam network, baked into a texture), glowing hot at its leading tip and cooling to a raised, glossy, slightly irregular gold bead, with a few chipped-out spots filled flush with gold. Seams are evaluated per fragment, so they stay crisp at any distance. Ends on a slow orbit with the gold catching the light. Shard landings, returns and every seam junction the gold reaches are sound cues from the same plan.",
+      "summary": "**Look.** A glossy celadon tea bowl (2.3 m across, toy-scale so a ~2 cm gold seam reads at 1080p) on pale oatmeal linen in soft window daylight.",
+      "category": "toy / playful",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "bowl",
+        "bowlGeometry",
+        "linen",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "fracture.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/63-kintsugi",
+          "topic": "\"The break becomes beauty\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/63-kintsugi/renders/63-kintsugi.mp4",
+          "mp4MB": 4.4
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/kintsugi/spec.js",
+        "style": "Skills/3d-style-atlas/styles/kintsugi/style.js",
+        "card": "Skills/3d-style-atlas/styles/kintsugi/STYLE.md"
+      }
+    },
+    {
+      "id": "lab-glassware",
+      "name": "Lab Glassware",
+      "description": "A bright clean laboratory bench in soft daylight: white worktop, pale tiled wall, clear glassware (beakers, conical flasks, measuring cylinders, test tubes in a rack, a burette on a stand, a funnel) holding saturated coloured liquids with a visible meniscus, printed graduations, bubbles and small enamel labels. Liquids are quantities: levels rise and fall to exact graduations from each vessel's volume curve, a vessel tilts and pours a parabolic stream with volume conserved into a differently shaped vessel, colours swirl and settle to a dye blend, a burette drips until the planned drop flips the colour, bubbles fizz and a foam head rises, and layers stack by density.",
+      "summary": "A bright, clean laboratory bench in soft daylight.",
+      "category": "material / abstract",
+      "goodFor": "proportions and recipes, inputs combining into an output, thresholds and tipping points (\"one more\ndrop\"), measuring, comparing amounts, before/after, conservation (\"nothing lost, just moved\").",
+      "avoidFor": "dark or dramatic moods, many labels, people or places, anything that needs real chemistry. Liquids are\nonly \"A\", \"B\", \"C\" and colour names: no chemicals, formulas or hazard content. Any number shown is SAMPLE DATA.",
+      "toneMapping": "neutral",
+      "props": [
+        "vessel",
+        "burette",
+        "liquid",
+        "marks",
+        "stream",
+        "drops",
+        "bubbles",
+        "ground",
+        "bench",
+        "stand",
+        "rack",
+        "caption",
+        "stamp",
+        "readout"
+      ],
+      "fourthModule": [
+        {
+          "file": "liquids.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/45-lab-glassware",
+          "topic": "measure, pour, mix, tip, fizz (SAMPLE DATA).",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/45-lab-glassware/renders/45-lab-glassware.mp4",
+          "mp4MB": 6.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/lab-glassware/spec.js",
+        "style": "Skills/3d-style-atlas/styles/lab-glassware/style.js",
+        "card": "Skills/3d-style-atlas/styles/lab-glassware/STYLE.md"
+      }
+    },
+    {
+      "id": "light-painting",
+      "name": "Light Painting",
+      "description": "A long-exposure night photograph: a moving light leaves hand-drawn glowing trails hanging in dark air over wet ground — wobble, speed-dependent brightness, pause blobs, a ghosted painter, and a shutter that opens and closes.",
+      "summary": "**Look.** A long-exposure night photograph.",
+      "category": "other",
+      "goodFor": "titles and one-word claims with a human, handmade feel; \"this happens over time\" / \"the record of a\nprocess\" ideas (logs, memory, history, traces, accumulation); reveals of a simple icon (idea bulb, star, arrow, spiral);\nnight/creative/photography topics. **Avoid for:** dense text (more than ~6 letters per line gets thin), data and numbers\n(nothing here is precise), daytime or bright, calm/clean corporate looks, anything that needs exact colours in the 3D layer.",
+      "avoidFor": "dense text (more than ~6 letters per line gets thin), data and numbers\n(nothing here is precise), daytime or bright, calm/clean corporate looks, anything that needs exact colours in the 3D layer.",
+      "toneMapping": "agx",
+      "props": [
+        "trails",
+        "blobs",
+        "pen",
+        "painter",
+        "backdrop",
+        "spill",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "strokes.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/59-light-painting",
+          "topic": "\"Made of time, not matter\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/59-light-painting/renders/59-light-painting.mp4",
+          "mp4MB": 2.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/light-painting/spec.js",
+        "style": "Skills/3d-style-atlas/styles/light-painting/style.js",
+        "card": "Skills/3d-style-atlas/styles/light-painting/STYLE.md"
+      }
+    },
+    {
+      "id": "liquid-chrome",
+      "name": "Liquid Chrome",
+      "description": "Turn-of-the-millennium Y2K chrome: mirror-finish liquid metal that flows, merges, splits and re-forms into icons and puffy chrome lettering, floating in a saturated cyan-violet-magenta void with a neon grid, four-point sparkles and lens flares.",
+      "summary": "Turn-of-the-millennium Y2K chrome.",
+      "category": "material / abstract",
+      "goodFor": "\"one thing becomes many\", \"many things merge into one\", playful tech and AI explainers, product or feature\nreveals with a retro-future mood, title cards, icon reveals, music/creator content.",
+      "avoidFor": "sober or serious topics, dense diagrams or data, many small labels, photoreal scenes, anything that needs\nhard edges or exact geometry. SDF icons are soft-cornered by nature.",
+      "toneMapping": "neutral",
+      "props": [
+        "liquid",
+        "inflatedText",
+        "sparkles",
+        "backdrop",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "liquid.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/23-liquid-chrome",
+          "topic": "\"What is a foundation model?\" Every frame is a pure function of t.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/23-liquid-chrome/renders/23-liquid-chrome.mp4",
+          "mp4MB": 9.5
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/liquid-chrome/spec.js",
+        "style": "Skills/3d-style-atlas/styles/liquid-chrome/style.js",
+        "card": "Skills/3d-style-atlas/styles/liquid-chrome/STYLE.md"
+      }
+    },
+    {
+      "id": "low-poly",
+      "name": "Low-Poly Miniature",
+      "description": "A faceted miniature world: noise-displaced flat-shaded terrain with height colour bands and per-face jitter, cone trees, chipped rocks, puffy faceted clouds, a sea of tilted facets, warm key light and soft haze.",
+      "summary": "A faceted miniature world that looks like folded paper or cut stone.",
+      "category": "miniature / world-building",
+      "goodFor": "journeys and processes over space (optimisation, learning, routes, supply chains, migration, evolution),\ngeography and ecology, \"how a system finds its way\" explainers, numbered step-by-step walkthroughs, and calm, friendly, kid-safe topics.",
+      "avoidFor": "precise data (charts and exact values read badly on facets), dark or urgent subjects, UI and product shots,\nanything that needs photoreal materials or text-heavy screens, and dense abstract diagrams with no ground plane.",
+      "toneMapping": "neutral",
+      "props": [
+        "terrain",
+        "water",
+        "tree",
+        "rock",
+        "cloud",
+        "scatter",
+        "flag",
+        "beacon",
+        "hero",
+        "arrow",
+        "ring",
+        "trail",
+        "banner",
+        "burst",
+        "groundPulse"
+      ],
+      "fourthModule": null,
+      "hasNodeSafeFourthModule": false,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/01-low-poly",
+          "topic": "\"How a neural network learns\" as gradient descent on a low-poly island.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/01-low-poly/renders/01-low-poly.mp4",
+          "mp4MB": 7.5
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/low-poly/spec.js",
+        "style": "Skills/3d-style-atlas/styles/low-poly/style.js",
+        "card": "Skills/3d-style-atlas/styles/low-poly/STYLE.md"
+      }
+    },
+    {
+      "id": "marble-run",
+      "name": "Marble Run",
+      "description": "A handmade wooden marble machine on a workshop pegboard: glass marbles roll down grooved maple rails and brass wire tracks, spiral through glass funnels, trip flags and brass counters, and collect in jars. Warm upper-left light casts the machine's shadows onto the wall.",
+      "summary": "A handmade wooden marble machine screwed to a workshop pegboard.",
+      "category": "mechanical / kinetic",
+      "goodFor": "queues, buffers, capacity and overflow (context windows, rate limits, caches, FIFO/LIFO), pipelines and\nrouting, counting, sorting, \"inputs flow through a process\", cause-and-effect chains, anything a Rube Goldberg toy explains.",
+      "avoidFor": "abstract or emotional topics, charts with many values, long text, organic subjects, very fast cutting.",
+      "toneMapping": "neutral",
+      "props": [
+        "wall",
+        "bench",
+        "rail",
+        "wireTrack",
+        "funnel",
+        "tube",
+        "jar",
+        "tray",
+        "liftWheel",
+        "stopPin",
+        "counter",
+        "hopper",
+        "plaque",
+        "hook",
+        "marble"
+      ],
+      "fourthModule": [
+        {
+          "file": "marbles.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/11-marble-run",
+          "topic": "\"What is a context window?\" on a wooden marble machine.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/11-marble-run/renders/11-marble-run.mp4",
+          "mp4MB": 8.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/marble-run/spec.js",
+        "style": "Skills/3d-style-atlas/styles/marble-run/style.js",
+        "card": "Skills/3d-style-atlas/styles/marble-run/STYLE.md"
+      }
+    },
+    {
+      "id": "microscope-slide",
+      "name": "Microscope Slide",
+      "description": "The view down a light-microscope eyepiece: a luminous circular field, translucent living cells with dark membrane rims and DIC-style relief, a razor-thin focal plane, focus racks, objective clicks, and cells dividing one into two into four.",
+      "summary": "**Look.** The view down a light-microscope eyepiece, the one style that is not at tabletop scale.",
+      "category": "other",
+      "goodFor": "biology and growth explainers. Also as a metaphor for things that copy themselves or multiply (cells, viruses,\n  replication, compounding, \"one becomes many\"). Works for any \"look closer\" reveal, or a focus-pull \"now it's clear\" beat.\n- **Avoid for:** anything that needs real measurements (the scale bar and magnification are illustrative and must carry the SAMPLE\n  DATA tag), dark or moody pieces (the field is bright by design), and dense text inside the field.",
+      "avoidFor": "anything that needs real measurements (the scale bar and magnification are illustrative and must carry the SAMPLE\n  DATA tag), dark or moody pieces (the field is bright by design), and dense text inside the field.",
+      "toneMapping": "none",
+      "props": [
+        "microscopeField",
+        "caption",
+        "scaleBar",
+        "magTag",
+        "sampleTag"
+      ],
+      "fourthModule": [
+        {
+          "file": "culture.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/60-microscope-slide",
+          "topic": "the view down a light microscope.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/60-microscope-slide/renders/60-microscope-slide.mp4",
+          "mp4MB": 1.7
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/microscope-slide/spec.js",
+        "style": "Skills/3d-style-atlas/styles/microscope-slide/style.js",
+        "card": "Skills/3d-style-atlas/styles/microscope-slide/STYLE.md"
+      }
+    },
+    {
+      "id": "mixing-console",
+      "name": "Mixing Console",
+      "description": "A vintage analogue recording console shot close and low across its surface in warm studio light: brushed-aluminium channel strips between walnut end-cheeks, long-throw faders, coloured rotary knobs with pointer lines, lit square push-buttons, LED bargraphs, a meter bridge of needle VU meters with warm backlit cream faces, white console tape with hand-written channel names, a jog wheel, and tape reels turning behind in shallow focus. Settings made physical: every control is a labelled parameter — faders glide to planned values (grouped, as if automated), knobs click through detents, buttons latch and light — and the meters respond with real needle ballistics to each channel's level x fader; a master meter sums the mix, solo and mute change it, an EQ knob reshapes a curve display. The sound is the mix: each channel is a synthesized layer whose loudness follows its fader.",
+      "summary": "A vintage analogue recording console shot close and low across its surface in warm studio light.",
+      "category": "other",
+      "goodFor": "tuning parameters and trade-offs, \"turn this up, that down\", balancing a mix of ingredients, settings\nwalkthroughs, signal levels and headroom, priorities as fader positions, before/after a setting change, mute/solo as\n\"isolate one factor\".",
+      "avoidFor": "precise numeric readouts (meters show behaviour, not values), more than ~8 channels in one shot, data that\nis not a level/amount, sequences/processes with many steps, dark or cold looks.",
+      "toneMapping": "neutral",
+      "props": [
+        "consoleDesk",
+        "channelStrip",
+        "masterSection",
+        "fader",
+        "knob",
+        "litButton",
+        "ledBar",
+        "vuMeter",
+        "eqDisplay",
+        "jogWheel",
+        "consoleTape",
+        "reel",
+        "studioRoom",
+        "mixController",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "mixplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/46-mixing-console",
+          "topic": "\"Balancing a mix\" (SAMPLE DATA) on a vintage analogue console.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/46-mixing-console/renders/46-mixing-console.mp4",
+          "mp4MB": 8.8
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/mixing-console/spec.js",
+        "style": "Skills/3d-style-atlas/styles/mixing-console/style.js",
+        "card": "Skills/3d-style-atlas/styles/mixing-console/STYLE.md"
+      }
+    },
+    {
+      "id": "mosaic",
+      "name": "Mosaic",
+      "description": "Byzantine / Roman tesserae mosaic built tile by tile: on a bed of wet grey lime plaster with a faint red-ochre underdrawing (sinopia), small hand-cut stone and glass tiles are pressed in one after another along the contour lines of the image (opus vermiculatum: rows of tiles trace the outlines first, then fill inward; the gold ground is laid in rows that ripple outward from the figure), not on a pixel grid. Rows are iso-contours of an exact distance transform of the picture's regions, traced by marching squares and resampled at tile pitch. Each tile is a slightly irregular, slightly tilted 3D chip (stone matte, smalti glossy, gold-leaf glass metallic), so when a low light sweeps across, the gold tiles glint one after another in a travelling shimmer. Once set a tile never moves. The grout darkens at the end and the camera pulls back to the whole bordered panel. Clicks are one per short bin of the same tile schedule, so the sound density follows the laying.",
+      "summary": "**Look.** A Byzantine / Roman tesserae panel being made on an oak workbench: an 8 x 4.5 m bed of wet grey lime plaster (16:9, so the finished panel fills the frame) in a dark wooden tray, a faint red-ochre underdrawing (sinopia) brushed ...",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "mosaicPanel",
+        "tiles",
+        "bed",
+        "sweepLight",
+        "tray",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "tessera.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/67-mosaic",
+          "topic": "a fish over waves, set tile by tile.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/67-mosaic/renders/67-mosaic.mp4",
+          "mp4MB": 9.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/mosaic/spec.js",
+        "style": "Skills/3d-style-atlas/styles/mosaic/style.js",
+        "card": "Skills/3d-style-atlas/styles/mosaic/STYLE.md"
+      }
+    },
+    {
+      "id": "multiplane-cel",
+      "name": "Multiplane Cel",
+      "description": "Classic hand-painted cel animation shot on a multiplane camera: a storybook landscape painted in flat gouache with visible brush strokes (sky, far hills, a meadow with a path and a cottage, a tree grove, dark foreground foliage) and one inked-and-painted cel bird animated on twos, each layer on its own sheet of glass. Inside the picture the camera pushes down through the stack and the layers part with strong parallax; pulled back, the truth: a vertical steel rig of six glass panes with lamps between the shelves, peg bars on every tray and a film camera looking straight down from the top. Sliding one pane sideways changes the picture (a grove slides off and reveals the cottage). Flat unlit paint, crisp black ink and flat colour on the cel with a soft cel shadow, faint glass sheen and a few dust specks.",
+      "summary": "**Look.** Classic hand-painted cel animation shot on a multiplane camera.",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "multiplane",
+        "caption",
+        "room"
+      ],
+      "fourthModule": [
+        {
+          "file": "multiplane.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/66-multiplane-cel",
+          "topic": "\"Painted on glass\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/66-multiplane-cel/renders/66-multiplane-cel.mp4",
+          "mp4MB": 7.5
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/multiplane-cel/spec.js",
+        "style": "Skills/3d-style-atlas/styles/multiplane-cel/style.js",
+        "card": "Skills/3d-style-atlas/styles/multiplane-cel/STYLE.md"
+      }
+    },
+    {
+      "id": "murmuration",
+      "name": "Murmuration",
+      "description": "A dusk sky (warm horizon, cool zenith, low sun glow, a thin dark tree line with pylons for scale) where thousands of tiny near-black birds wheel as one living cloud. Nothing is placed: each bird has a closed-form position at time t — a blend between its point in the previous and next formation (seeded volumetric samples of a blob, a ribbon, an arrow, a ring, glyphs or an icon), plus a smooth 3D noise flow so the flock swirls and breathes, plus travelling density waves that bunch the birds and bank them toward the camera so a dark band rolls through the cloud. Edges stay soft with stragglers; the whole flock sways and turns as a body. Birds are two-triangle silhouettes that flap with a per-bird phase and point along their velocity (finite difference of the same closed form). The sound is a wing-rush whose level follows flock speed, a low whoosh per density wave, sparse distant calls and a gentle pad.",
+      "summary": "**Look.** A dusk sky — warm apricot at the horizon, rose band, dusky lavender, cool blue-violet zenith — with a low sun glow on the right and a thin dark horizon (near tree line, hazy far tree line, a row of lattice pylons with sagging w...",
+      "category": "other",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "none",
+      "props": [
+        "murmuration",
+        "sky",
+        "horizon",
+        "birds",
+        "birdGeometry",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "flock.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/57-murmuration",
+          "topic": "\"Simple rules make a shape\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/57-murmuration/renders/57-murmuration.mp4",
+          "mp4MB": 13.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/murmuration/spec.js",
+        "style": "Skills/3d-style-atlas/styles/murmuration/style.js",
+        "card": "Skills/3d-style-atlas/styles/murmuration/STYLE.md"
+      }
+    },
+    {
+      "id": "neon-sign",
+      "name": "Neon Sign",
+      "description": "Glass-tube neon lettering and icons on stand-off mounts over a dark painted brick wall at night; tubes flicker on, spill coloured light onto the bricks, and cable back to a transformer box.",
+      "summary": "Glass-tube neon on a dark painted brick wall at night.",
+      "category": "retro / signage / typographic",
+      "goodFor": "short punchy claims, definitions, \"X becomes Y\" reveals, lists of 3–6 labelled items,\ncounters/IDs, night/city/retro/tech moods, anything where \"switching on\" = an idea arriving.",
+      "avoidFor": "dense text (> ~30 chars per row), charts or precise geometry, soft/organic topics,\nlots of simultaneous motion, lowercase typography, bright daytime looks.",
+      "toneMapping": "neutral",
+      "props": [
+        "brickWall",
+        "neonText",
+        "neonIcon",
+        "neonPath",
+        "acrylicPlate",
+        "spillLight",
+        "cable",
+        "transformer"
+      ],
+      "fourthModule": null,
+      "hasNodeSafeFourthModule": false,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/03-neon-sign",
+          "topic": "\"What is a token?\" Every frame is a pure function of t.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/03-neon-sign/renders/03-neon-sign.mp4",
+          "mp4MB": 9.9
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/neon-sign/spec.js",
+        "style": "Skills/3d-style-atlas/styles/neon-sign/style.js",
+        "card": "Skills/3d-style-atlas/styles/neon-sign/STYLE.md"
+      }
+    },
+    {
+      "id": "neutral",
+      "name": "Neutral Studio",
+      "description": "Matte clay primitives on a warm grey studio floor, soft three-point light, gentle grain.",
+      "summary": "Matte clay primitives on a warm grey studio floor, soft three-point light, gentle grain.",
+      "category": "reference / neutral",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "aces",
+      "props": [],
+      "fourthModule": null,
+      "hasNodeSafeFourthModule": false,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/00-smoke",
+          "topic": "neutral style, data from scene.config.js, everything a pure function of t.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/00-smoke/renders/00-smoke.mp4",
+          "mp4MB": 0.8
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/neutral/spec.js",
+        "style": "Skills/3d-style-atlas/styles/neutral/style.js",
+        "card": null
+      }
+    },
+    {
+      "id": "newspaper-press",
+      "name": "Newspaper Press",
+      "description": "A broadsheet front page as a physical object: warm newsprint with show-through and fold creases, heavy black serif headlines, column rules, greeked justified body text and procedural halftone photos — spun in, printed live by an ink roller, circled in red grease pencil.",
+      "summary": "A broadsheet front page as a physical object on a dark print-shop imposing table, seen from above with a small forward tilt.",
+      "category": "handmade / tactile",
+      "goodFor": "news-style explainers, announcements, \"what happened\" recaps, history (\"the day X happened\"), step-by-step\nstories told as successive front pages, a single key line to circle.",
+      "avoidFor": "data/charts (no chart props), anything that needs many readable labels at once, dark/neon moods, long\ncopy that must be read (body text is greeked by design), fast cutting (sheets are big; the turn needs the camera to rise).",
+      "toneMapping": "neutral",
+      "props": [
+        "frontPage",
+        "halftoneImage",
+        "pullQuoteCard",
+        "inkRoller",
+        "greasePencil",
+        "paperStack",
+        "desk",
+        "label"
+      ],
+      "fourthModule": [
+        {
+          "file": "press.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/29-newspaper-press",
+          "topic": "\"How news gets made\" on a broadsheet front page.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/29-newspaper-press/renders/29-newspaper-press.mp4",
+          "mp4MB": 11.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/newspaper-press/spec.js",
+        "style": "Skills/3d-style-atlas/styles/newspaper-press/style.js",
+        "card": "Skills/3d-style-atlas/styles/newspaper-press/STYLE.md"
+      }
+    },
+    {
+      "id": "op-art",
+      "name": "Op Art",
+      "description": "1960s optical art on a white gallery wall: one large hard-edged panel of pure black-and-white pattern that the eye reads as depth and motion. Vertical stripes whose spacing and black/white duty are warped so a sphere seems to bulge out of the flat wall, and the bulge travels; a clear acetate sheet of rings slides over a ringed panel so moiré bands sweep much faster than the sheet moves; a Vasarely-style grid of checker squares and circles whose size and colour step ring by ring into a dome, then flip into a tunnel, with red and cobalt accents; and a reveal where the camera walks off-axis to show the 'dome' is flat paint on a flat board. Every pattern is analytic in one shader (fwidth antialiasing, stripes >= ~16 px wide, fade to mean grey below Nyquist), camera locked except the reveal, no strobing.",
+      "summary": "**Look.** 1960s optical art, after the *methods* of Bridget Riley and Victor Vasarely (the compositions are our own, not copies of any work).",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "gallery",
+        "panel",
+        "acetate",
+        "room",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "opplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/65-op-art",
+          "topic": "\"It was flat all along\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/65-op-art/renders/65-op-art.mp4",
+          "mp4MB": 6.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/op-art/spec.js",
+        "style": "Skills/3d-style-atlas/styles/op-art/style.js",
+        "card": "Skills/3d-style-atlas/styles/op-art/STYLE.md"
+      }
+    },
+    {
+      "id": "origami",
+      "name": "Origami",
+      "description": "Japanese paper folding on a calm oak desk: single sheets of two-sided kami paper fold on screen, crease by crease, into crisp faceted models lit by soft window light, labelled with ink-printed washi strips.",
+      "summary": "Japanese paper folding on a calm light-oak writing desk in soft window light from the front-left.",
+      "category": "handmade / tactile",
+      "goodFor": "\"same thing, new shape\" stories (fine-tuning, refactoring, transformation), step-by-step processes,\ncalm education and brand explainers, before/after.",
+      "avoidFor": "dense data or many objects (one or two models per shot), curved or organic shapes, fast cuts, and\nmodels that need squash, sink or reverse folds (not rigid, so the engine can't do them).",
+      "toneMapping": "neutral",
+      "props": [
+        "foldModel",
+        "sheet",
+        "sheetStack",
+        "table",
+        "contact",
+        "windowShade",
+        "tag"
+      ],
+      "fourthModule": [
+        {
+          "file": "folds.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/14-origami",
+          "topic": "\"One square, no cuts\" — two kami sheets on a writing desk fold into a standing swan and a heart; the heart then stands up beside the swan.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/14-origami/renders/14-origami.mp4",
+          "mp4MB": 7.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/origami/spec.js",
+        "style": "Skills/3d-style-atlas/styles/origami/style.js",
+        "card": "Skills/3d-style-atlas/styles/origami/STYLE.md"
+      }
+    },
+    {
+      "id": "paper-pop-up",
+      "name": "Paper Pop-Up",
+      "description": "A mid-century pop-up book open on a wooden table: matte die-cut card pieces with light cut edges hinge up from the page in staggered layers, under a soft warm key light.",
+      "summary": "A mid-century pop-up book lies open on a warm plank table.",
+      "category": "handmade / tactile",
+      "goodFor": "timelines and \"a short history of X\", step-by-step explainers (one spread per step), children's and education topics, storybook brand stories, before/after reveals (pull-tab).",
+      "avoidFor": "dense data or charts, photoreal products, fast-cut energetic edits, anything that needs more than about 8 pieces per spread, and text smaller than 0.3 m.",
+      "toneMapping": "neutral",
+      "props": [
+        "table",
+        "book",
+        "cardPiece",
+        "glue",
+        "standUp",
+        "flat",
+        "stackPage",
+        "ribbon",
+        "dateBadge",
+        "pullTab",
+        "sparkle"
+      ],
+      "fourthModule": null,
+      "hasNodeSafeFourthModule": false,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/02-paper-pop-up",
+          "topic": "\"A short history of AI\" in four pop-up spreads.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/02-paper-pop-up/renders/02-paper-pop-up.mp4",
+          "mp4MB": 7.9
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/paper-pop-up/spec.js",
+        "style": "Skills/3d-style-atlas/styles/paper-pop-up/style.js",
+        "card": "Skills/3d-style-atlas/styles/paper-pop-up/STYLE.md"
+      }
+    },
+    {
+      "id": "pin-art",
+      "name": "Pin Art",
+      "description": "A giant pin-impression toy (pinscreen): a clear acrylic frame holding a dense grid of thousands of slim polished metal pins with domed heads, on a dark matte desk under a strong low raking key light and a soft coloured rim light, so any relief pushed into the pins reads as a field of bright pin heads and long shadows. Polished steel by default, brass and anodised colour finishes. Shapes are pressed through the field as a pure function of time: every pin's extension is sampled from a target height field built from text and icons (distance fields with a rounded bevel), a hand, a ball rolling underneath, ripples from a tap, bars rising as columns of pins, terrain or a bitmap; transitions morph between fields with a wave that travels across the grid (per-pin delay from position, eased, tiny overshoot, metallic settle) and pins drop back in a cascade. The camera orbits low so relief and shadows read.",
+      "summary": "**Look.** A giant pin-impression toy (pinscreen) on a dark matte desk.",
+      "category": "screen / UI / sci-fi",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "pinScreen",
+        "pinField",
+        "frame",
+        "desk",
+        "pinGeometry",
+        "caption",
+        "sampleTag"
+      ],
+      "fourthModule": [
+        {
+          "file": "pins.js",
+          "nodeSafe": false
+        }
+      ],
+      "hasNodeSafeFourthModule": false,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/50-pin-art",
+          "topic": "\"This becomes that\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/50-pin-art/renders/50-pin-art.mp4",
+          "mp4MB": 9.5
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/pin-art/spec.js",
+        "style": "Skills/3d-style-atlas/styles/pin-art/style.js",
+        "card": "Skills/3d-style-atlas/styles/pin-art/STYLE.md"
+      }
+    },
+    {
+      "id": "pinball-table",
+      "name": "Pinball Table",
+      "description": "An electro-mechanical pinball playfield seen from the player's end, glass off: glossy printed wooden playfield with original abstract art, chrome rails and a steel ball, rubber-ringed posts, mushroom pop bumpers with coloured caps, a drop-target bank, rollover lanes, slingshots, two flippers, a plastic ramp and lit inserts under the playfield, plus a backglass with mechanical score reels. The ball follows a planned contact schedule; every contact lights lamps, drops targets and steps the reels.",
+      "summary": "An electro-mechanical pinball machine seen from the player's end with the glass off.",
+      "category": "material / abstract",
+      "goodFor": "goals and progress, \"hit all the targets\", checklists (one word per drop bank or rollover lane), scoring,\n  gamified explanations, combos and multipliers, step-by-step \"shots\" (one flipper shot per step).\n- **Avoid for:** anything solemn; dense text (inserts hold one letter or one short word); exact quantities (the reels show\n  made-up points, so mark them SAMPLE DATA); processes with no target/achievement framing.",
+      "avoidFor": "anything solemn; dense text (inserts hold one letter or one short word); exact quantities (the reels show\n  made-up points, so mark them SAMPLE DATA); processes with no target/achievement framing.",
+      "toneMapping": "neutral",
+      "props": [
+        "field",
+        "playfield",
+        "insertLamp",
+        "ball",
+        "flipper",
+        "popBumper",
+        "slingshot",
+        "post",
+        "dropBank",
+        "rollover",
+        "ramp",
+        "orbitRail",
+        "plunger",
+        "scoreReels",
+        "cabinet",
+        "caption",
+        "table"
+      ],
+      "fourthModule": [
+        {
+          "file": "pinplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/43-pinball-table",
+          "topic": "\"Finish a project\" as one ball's run.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/43-pinball-table/renders/43-pinball-table.mp4",
+          "mp4MB": 8.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/pinball-table/spec.js",
+        "style": "Skills/3d-style-atlas/styles/pinball-table/style.js",
+        "card": "Skills/3d-style-atlas/styles/pinball-table/STYLE.md"
+      }
+    },
+    {
+      "id": "point-cloud",
+      "name": "Point Cloud Scan (LiDAR)",
+      "description": "A LiDAR scan made only of measured dots on near-black: a scanner head on a tripod turns while a thin bright laser fan sweeps the room and the world appears dot by dot, coloured by range (cyan near, yellow, magenta far) and shaded by return intensity. No surfaces are ever drawn: objects (a figure, a chair, a bicycle, a plant, a table, walls with a door and a window) exist only as ray targets. The scan shows the tells of a real terrestrial scan: rings and lines that spread with distance, and scan shadows — empty holes behind every object that the laser could not see, hidden from the scanner's own viewpoint and dramatic once the camera orbits away. A second scan from another tripod fills the holes.",
+      "summary": "No surfaces at all: the world exists only as measured dots laid down by a terrestrial laser scanner on a tripod.",
+      "category": "other",
+      "goodFor": "how machines perceive (LiDAR, depth cameras, self-driving, robotics, 3D scanning, photogrammetry), \"the map is\nnot the territory\", blind spots / missing data / sampling, surveying and digital twins, measurement vs. reality.",
+      "avoidFor": "warm or human-story topics, anything that needs readable surfaces or textures, text-heavy beats, bright\ndaytime moods, many small objects (under ~0.2 m they turn to a few dots).",
+      "toneMapping": "neutral",
+      "props": [
+        "scanScene",
+        "cloud",
+        "laserFan",
+        "scanner",
+        "caption",
+        "counter"
+      ],
+      "fourthModule": [
+        {
+          "file": "scan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/55-point-cloud",
+          "topic": "a LiDAR scan made only of dots.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/55-point-cloud/renders/55-point-cloud.mp4",
+          "mp4MB": 12.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/point-cloud/spec.js",
+        "style": "Skills/3d-style-atlas/styles/point-cloud/style.js",
+        "card": "Skills/3d-style-atlas/styles/point-cloud/STYLE.md"
+      }
+    },
+    {
+      "id": "shadow-puppets",
+      "name": "Shadow Puppets",
+      "description": "A shadow theatre: a warm glowing cloth screen (soft weave, slight sag, a wooden frame) lit from behind by one lamp, on which flat cut-out puppets on rods cast real shadows — crisp at the cloth, big and soft near the lamp — with jewel-coloured gel windows, jointed limbs, sliding scenery layers and a gentle cloth ripple.",
+      "summary": "A shadow theatre seen from the audience.",
+      "category": "theatrical / narrative",
+      "goodFor": "stories and fables, history, myths vs reality, scale comparisons (near = big, far = small), \"what's behind\nthe screen\", anything warm, simple and narrated. **Avoid for:** data, numbers, UI, lots of text (shadows can't carry small\ntype; titles work at ≥ 0.35 m cap), photographic realism, dark or moody palettes (this look is bright and warm), and\nfast action (it reads best at a storyteller's pace).",
+      "avoidFor": "data, numbers, UI, lots of text (shadows can't carry small\ntype; titles work at ≥ 0.35 m cap), photographic realism, dark or moody palettes (this look is bright and warm), and\nfast action (it reads best at a storyteller's pace).",
+      "toneMapping": "neutral",
+      "props": [
+        "screen",
+        "lamp",
+        "puppet",
+        "scenery",
+        "titleCut",
+        "caption",
+        "label"
+      ],
+      "fourthModule": [
+        {
+          "file": "puppetry.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/39-shadow-puppets",
+          "topic": "\"The Tall Tale\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/39-shadow-puppets/renders/39-shadow-puppets.mp4",
+          "mp4MB": 3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/shadow-puppets/spec.js",
+        "style": "Skills/3d-style-atlas/styles/shadow-puppets/style.js",
+        "card": "Skills/3d-style-atlas/styles/shadow-puppets/STYLE.md"
+      }
+    },
+    {
+      "id": "soft-clay",
+      "name": "Soft Clay",
+      "description": "A stop-motion claymation tabletop: chunky, slightly lumpy plasticine props with thumb dents and a waxy sheen on a warm paper sweep, animated on twos with squash-and-stretch and surface boil.",
+      "summary": "A stop-motion claymation tabletop.",
+      "category": "handmade / tactile",
+      "goodFor": "friendly explainers (\"what is X\", input → process → output), kids and education, product metaphors built from simple icons, playful brand stories, short loops.",
+      "avoidFor": "precise data or charts, photoreal or technical subjects, dark or serious topics, long text (more than about 3 words per label), fast cuts.",
+      "toneMapping": "neutral",
+      "props": [
+        "sweep",
+        "blob",
+        "coil",
+        "puck",
+        "letters",
+        "plaque",
+        "marble",
+        "brain",
+        "hopper",
+        "rays"
+      ],
+      "fourthModule": null,
+      "hasNodeSafeFourthModule": false,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/04-soft-clay",
+          "topic": "\"What is training data?\" in clay.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/04-soft-clay/renders/04-soft-clay.mp4",
+          "mp4MB": 4.5
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/soft-clay/spec.js",
+        "style": "Skills/3d-style-atlas/styles/soft-clay/style.js",
+        "card": "Skills/3d-style-atlas/styles/soft-clay/STYLE.md"
+      }
+    },
+    {
+      "id": "split-flap-board",
+      "name": "Split-Flap Board",
+      "description": "A mechanical railway/airport departure board in a dim hall: rows of black split flaps with off-white characters in a dark powder-coated housing with a brushed-metal header, row lamps, and a warm raking key light; every character cycles forward through the alphabet to arrive.",
+      "summary": "A mechanical railway/airport departure board hanging in a dim hall.",
+      "category": "retro / signage / typographic",
+      "goodFor": "status lists, \"what's ready / what's not\", leaderboards, schedules, rankings, short reveals of a few words, before/after re-flips.",
+      "avoidFor": "long sentences (> ~26 chars a row), lowercase or non-Latin text, charts, organic subjects, fast-cut edits.",
+      "toneMapping": "aces",
+      "props": [
+        "board",
+        "housing",
+        "flapBank",
+        "lamp",
+        "hall",
+        "glyphAtlas"
+      ],
+      "fourthModule": [
+        {
+          "file": "flaps.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/07-split-flap-board",
+          "topic": "\"What can AI do today?\" on a split-flap departure board.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/07-split-flap-board/renders/07-split-flap-board.mp4",
+          "mp4MB": 7.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/split-flap-board/spec.js",
+        "style": "Skills/3d-style-atlas/styles/split-flap-board/style.js",
+        "card": "Skills/3d-style-atlas/styles/split-flap-board/STYLE.md"
+      }
+    },
+    {
+      "id": "spotlight-stage",
+      "name": "Spotlight Stage",
+      "description": "A toy theatre in a dark auditorium: crimson velvet curtains with deep folds, a gilded proscenium, warm plank boards, flat painted cut-out actors and scenery on sliders and wires, hard follow-spots with dusty beams and soft pools, warm footlights.",
+      "summary": "A Victorian toy theatre seen from the stalls.",
+      "category": "theatrical / narrative",
+      "goodFor": "\"a play in N acts\" explainers, thought experiments (Turing test, trolley problem, Chinese room), debates and\nA-vs-B comparisons, reveals, historical scenes, and character-driven stories with 2–4 actors and one big caption at a time.",
+      "avoidFor": "data/charts, many simultaneous labels, photoreal subjects, 3D-rotating heroes (cut-outs read as planes beyond\n~30°), and fast cutting. The camera must stay in the stalls.",
+      "toneMapping": "neutral",
+      "props": [
+        "theatre",
+        "proscenium",
+        "backdrop",
+        "curtain",
+        "valance",
+        "footlights",
+        "followSpot",
+        "paintedCard",
+        "cutout",
+        "sceneryFlat",
+        "foldingScreen",
+        "bubble",
+        "hangingSign",
+        "audience"
+      ],
+      "fourthModule": [
+        {
+          "file": "cues.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/09-spotlight-stage",
+          "topic": "\"The Turing Test\" on a toy-theatre stage.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/09-spotlight-stage/renders/09-spotlight-stage.mp4",
+          "mp4MB": 8.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/spotlight-stage/spec.js",
+        "style": "Skills/3d-style-atlas/styles/spotlight-stage/style.js",
+        "card": "Skills/3d-style-atlas/styles/spotlight-stage/STYLE.md"
+      }
+    },
+    {
+      "id": "stained-glass",
+      "name": "Stained Glass",
+      "description": "A cathedral leaded window seen from a dim stone nave: coloured glass panes (thickness variation, seeds/bubbles, ripple, darker edges at the lead) held in dark lead came with soldered joints and iron saddle bars, set in a splayed stone reveal; lit from behind, the window throws coloured light shafts through dusty air and coloured patches (lead lines and all) across the flagstones. An image is assembled pane by pane, the light comes up behind it, and each region glows as it is named while the sun moves.",
+      "summary": "A cathedral leaded window seen from a dim stone nave.",
+      "category": "material / abstract",
+      "goodFor": "big ideas, values, histories, \"parts of a whole\" diagrams (each part = one region that glows when\nnamed), origin stories, anything that wants reverence or warmth. **Avoid for:** precise data or many numbers, long\nlabels, fast-paced content, small detail (a pane is ~0.2–0.5 m; text inside the glass is not supported), bright high-key\nlooks (the effect needs a dark interior).",
+      "avoidFor": "precise data or many numbers, long\nlabels, fast-paced content, small detail (a pane is ~0.2–0.5 m; text inside the glass is not supported), bright high-key\nlooks (the effect needs a dark interior).",
+      "toneMapping": "neutral",
+      "props": [
+        "window",
+        "room",
+        "shafts",
+        "caption",
+        "label"
+      ],
+      "fourthModule": [
+        {
+          "file": "glazing.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/25-stained-glass",
+          "topic": "\"What a tree needs\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/25-stained-glass/renders/25-stained-glass.mp4",
+          "mp4MB": 7.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/stained-glass/spec.js",
+        "style": "Skills/3d-style-atlas/styles/stained-glass/style.js",
+        "card": "Skills/3d-style-atlas/styles/stained-glass/STYLE.md"
+      }
+    },
+    {
+      "id": "star-chart",
+      "name": "Star Chart",
+      "description": "A planetarium night: a deep blue-black dome of sky with a visible gradient, a Milky-Way band and thousands of seeded stars (size and colour variety, gentle deterministic twinkle) over a low dark horizon of hills, trees and an observatory; antique celestial-atlas graphics drawn over it in fine gold line — coordinate grid, ticked ecliptic, constellation stick figures, engraved figure outlines, small serif star names. The invented sky turns about a pole so stars rise, drift and trail; chosen stars brighten one by one, gold lines draw between them into original constellations (each a concept, each star a part), an engraved figure fades up, a name plate writes on, a presenter's arrow sweeps to what is being named, and a dashed line connects two constellations.",
+      "summary": "**Look.** A planetarium night.",
+      "category": "other",
+      "goodFor": "big-picture overviews, how scattered points form a pattern, navigation / \"find your north star\", origin stories,\nconnecting ideas across distance, naming the parts of a whole (2–3 concepts with 4–7 parts each).",
+      "avoidFor": "data with real numbers (no axes), step-by-step mechanisms, anything that needs the REAL sky (this is invented on\npurpose), more than ~3 constellations in 15 s, long text (star names are one word; plates two words).",
+      "toneMapping": "neutral",
+      "props": [
+        "skyDome",
+        "turningSphere",
+        "milkyWay",
+        "catalogue",
+        "trails",
+        "grid",
+        "horizon",
+        "heroStars",
+        "constellation",
+        "link",
+        "pointer",
+        "shootingStar",
+        "skyLabel",
+        "caption",
+        "starChart"
+      ],
+      "fourthModule": [
+        {
+          "file": "skyplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/44-star-chart",
+          "topic": "\"How a song comes together\" as two invented constellations on a planetarium dome.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/44-star-chart/renders/44-star-chart.mp4",
+          "mp4MB": 7.2
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/star-chart/spec.js",
+        "style": "Skills/3d-style-atlas/styles/star-chart/style.js",
+        "card": "Skills/3d-style-atlas/styles/star-chart/STYLE.md"
+      }
+    },
+    {
+      "id": "sticky-notes",
+      "name": "Sticky Notes",
+      "description": "A workshop wall in a daylit studio: a bright whiteboard in an aluminium frame covered in square paper notes in soft colours, each with a short marker word, curled at the free edge over a soft shadow, plus dot stickers, marker-drawn lanes, headers and boxes, and a pad of notes on the ledge. Notes behave like real sticky notes as pure functions of time: they peel off the pad (the curl travels in from the free edge), fly, slap flat strip-first and flap down to a resting curl, then peel and hop between columns, cluster by colour, collect dot votes and ripple in a travelling breeze.",
+      "summary": "A workshop wall in a daylit studio.",
+      "category": "handmade / tactile",
+      "goodFor": "planning and prioritising, brainstorm → cluster → decide, kanban and workflow boards, lists that get\nre-ordered, retrospectives, team processes, \"how we decided\".",
+      "avoidFor": "dense text (about 2 short words per note), numbers and charts (use chalkboard or blueprint),\nproduct or photo subjects, dark or moody tone, anything needing more than about 15 notes in one shot (they get small).",
+      "toneMapping": "neutral",
+      "props": [
+        "wallBoard",
+        "board",
+        "note",
+        "pad",
+        "dot",
+        "markerInk",
+        "markerPen",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "notes.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/41-sticky-notes",
+          "topic": "a planning wall (brainstorm -> cluster -> vote -> move work across).",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/41-sticky-notes/renders/41-sticky-notes.mp4",
+          "mp4MB": 3.5
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/sticky-notes/spec.js",
+        "style": "Skills/3d-style-atlas/styles/sticky-notes/style.js",
+        "card": "Skills/3d-style-atlas/styles/sticky-notes/STYLE.md"
+      }
+    },
+    {
+      "id": "studio-product",
+      "name": "Studio Product",
+      "description": "High-end product commercial: one hero object on a black seamless sweep, procedural softbox/strip-light environment, glossy glass, brushed aluminium and satin ceramic, blurred mirror floor, crisp rim light, slow turntable and light sweeps, ultra-thin callouts.",
+      "summary": "A high-end product commercial: one hero object floating on a black seamless sweep, lit like a phone or car ad.",
+      "category": "product / commercial",
+      "goodFor": "hardware/product reveals, \"meet the X\" openers, feature callouts on one object, premium/tech moods,\nanything where \"light passing over it\" = attention. **Avoid for:** many objects, diagrams, process flows, cute or\nwarm topics, scenes needing context/environment, matte or organic subjects (they have nothing to reflect).",
+      "avoidFor": "many objects, diagrams, process flows, cute or\nwarm topics, scenes needing context/environment, matte or organic subjects (they have nothing to reflect).",
+      "toneMapping": "aces",
+      "props": [
+        "sweep",
+        "bevelSlab",
+        "lathedBody",
+        "etchedPanel",
+        "contactPads",
+        "ballGrid",
+        "edgeTrace",
+        "turntable",
+        "contactShadow",
+        "callout",
+        "titleLockup",
+        "brushedMaterial"
+      ],
+      "fourthModule": [
+        {
+          "file": "lightplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/12-studio-product",
+          "topic": "\"On-device AI: the chip in your pocket\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/12-studio-product/renders/12-studio-product.mp4",
+          "mp4MB": 6.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/studio-product/spec.js",
+        "style": "Skills/3d-style-atlas/styles/studio-product/style.js",
+        "card": "Skills/3d-style-atlas/styles/studio-product/STYLE.md"
+      }
+    },
+    {
+      "id": "subway-map",
+      "name": "Subway Map",
+      "description": "A transit diagram made physical: thick glossy enamel route strips on a clean off-white panel, running only at 0/45/90 degrees with rounded bends, white ink-ringed station pucks and interchange capsules. Routes lay their own track over time, stations pop in as the line reaches them, and small rounded trains run the lines on a timetable while the camera glides low over the panel, then pulls up to the whole diagram.",
+      "summary": "A transit diagram made physical.",
+      "category": "other",
+      "goodFor": "processes with branches and loops, user journeys, pipelines, step-by-step timelines, decision routes (\"go or\nrework\"), onboarding paths, roadmaps, \"where you are in the process\".",
+      "avoidFor": "quantities and charts (no data encodings beyond order), emotional or organic subjects, dense networks (> ~5 routes /\n~20 stations gets unreadable at 1080p), anything that needs free curves (everything is octilinear by design).",
+      "toneMapping": "neutral",
+      "props": [
+        "panel",
+        "table",
+        "route",
+        "station",
+        "interchange",
+        "train",
+        "youAreHere",
+        "legend",
+        "sign",
+        "tag"
+      ],
+      "fourthModule": [
+        {
+          "file": "transit.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/26-subway-map",
+          "topic": "\"Idea to launch\" drawn as a physical transit map.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/26-subway-map/renders/26-subway-map.mp4",
+          "mp4MB": 2.7
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/subway-map/spec.js",
+        "style": "Skills/3d-style-atlas/styles/subway-map/style.js",
+        "card": "Skills/3d-style-atlas/styles/subway-map/STYLE.md"
+      }
+    },
+    {
+      "id": "terrarium",
+      "name": "Terrarium",
+      "description": "A sealed glass bottle garden on a sunlit windowsill: a thick clear jar with rim highlights and a cork, visible strata (pebbles, charcoal, soil) poured in band by band, moss cushions, unfurling ferns and leafy stems growing on a seeded plan, condensation that beads on the inner glass and runs back into the soil, soft daylight through a window with leaf shadows that passes to night and back; hand-lettered paper tags on string as labels.",
+      "summary": "A sealed glass bottle garden on a sunlit windowsill.",
+      "category": "material / abstract",
+      "goodFor": "ecosystems, closed loops, feedback cycles, \"a small world that sustains itself\", layered systems\n(stacks, foundations, tech layers as strata), slow growth, compounding, patience, seasons and cycles.",
+      "avoidFor": "fast or mechanical processes, lots of labels or numbers, dark or techy topics, anything needing people,\nand wide panoramas (the jar is a tall subject: frame it large).",
+      "toneMapping": "neutral",
+      "props": [
+        "jar",
+        "cork",
+        "strata",
+        "rock",
+        "moss",
+        "fern",
+        "leafyPlant",
+        "vine",
+        "droplets",
+        "windowsill",
+        "tag",
+        "overlayTag",
+        "label"
+      ],
+      "fourthModule": [
+        {
+          "file": "growth.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/32-terrarium",
+          "topic": "a sealed bottle garden builds and cycles on a windowsill.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/32-terrarium/renders/32-terrarium.mp4",
+          "mp4MB": 6.4
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/terrarium/spec.js",
+        "style": "Skills/3d-style-atlas/styles/terrarium/style.js",
+        "card": "Skills/3d-style-atlas/styles/terrarium/STYLE.md"
+      }
+    },
+    {
+      "id": "thermal-camera",
+      "name": "Thermal Camera",
+      "description": "A handheld thermal imager's view of ordinary objects: the picture is temperature, not light. Plain geometry (a desk, a PC tower with its side open, a monitor, a keyboard, a mug, a hand) rendered with an unlit temperature shader through an ironbow palette (black, deep purple, magenta, orange, yellow, white). Things glow because work is happening in them: heat sources switch on and approach their temperature exponentially, a conduction front creeps along heat sinks and boards with sqrt(t), exhaust air rises as a warm plume, a hand pressed on the desk leaves a print that spreads and fades, and everything slides back down the palette when the work stops. Slightly cooler at grazing angles (emissivity) so forms still read. Sensor character: soft low-resolution blur, a faint pixel grid, gentle seeded noise. Imager HUD on the overlay: centre crosshair with a spot reading, a vertical colour scale with min/max, and a SAMPLE DATA tag because every temperature is invented.",
+      "summary": "A handheld thermal imager's view of ordinary objects.",
+      "category": "print / flat graphic",
+      "goodFor": "\"work shows up as heat\" — load, effort, activity, energy use; what is busy vs idle in a system; ideas that\n  \"warm up\" as they activate; things spreading from a source (conduction front); traces left behind (residual heat, memory,\n  footprints); before/after \"it cooled down\".\n- **Avoid for:** exact colour branding (the palette IS the data), anything needing many readable labels in-world, real\n  measurements (temperatures here are invented — keep the SAMPLE DATA tag unless the user supplies real data), materials or\n  textures (everything is one shader by design).",
+      "avoidFor": "exact colour branding (the palette IS the data), anything needing many readable labels in-world, real\n  measurements (temperatures here are invented — keep the SAMPLE DATA tag unless the user supplies real data), materials or\n  textures (everything is one shader by design).",
+      "toneMapping": "none",
+      "props": [
+        "deskSet",
+        "hud"
+      ],
+      "fourthModule": [
+        {
+          "file": "heat.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/56-thermal-camera",
+          "topic": "a desk seen through a thermal imager.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/56-thermal-camera/renders/56-thermal-camera.mp4",
+          "mp4MB": 1.8
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/thermal-camera/spec.js",
+        "style": "Skills/3d-style-atlas/styles/thermal-camera/style.js",
+        "card": "Skills/3d-style-atlas/styles/thermal-camera/STYLE.md"
+      }
+    },
+    {
+      "id": "tiny-diorama",
+      "name": "Tiny Diorama",
+      "description": "A whole little world on one floating bevelled tile: layered grass/soil/rock slab sides, chunky rounded buildings, lollipop trees, toy cars and peg people in matte pastel plastic, one soft sun, contact shadows, tilt-shift and a narrow near-isometric camera.",
+      "summary": "A whole little world on one floating 16:10 tile, like a designer's desk model or a mobile-game map piece.",
+      "category": "miniature / world-building",
+      "goodFor": "\"where does X go / how does X flow\" systems (networks, supply chains, energy, water, logistics, cloud),\ncities and neighbourhoods, onboarding maps, numbered step walkthroughs over places, and friendly product or infra explainers.",
+      "avoidFor": "precise data or charts, dark or serious subjects, organic or photoreal scenes, anything bigger than one tile\n(this style is about a contained world), and dense text.",
+      "toneMapping": "neutral",
+      "props": [
+        "tile",
+        "building",
+        "house",
+        "dataCentre",
+        "tree",
+        "car",
+        "peg",
+        "desk",
+        "road",
+        "pole",
+        "cable",
+        "packet",
+        "pulseRing",
+        "contactShadow",
+        "scatter",
+        "pinMarker",
+        "caption"
+      ],
+      "fourthModule": null,
+      "hasNodeSafeFourthModule": false,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/05-tiny-diorama",
+          "topic": "\"Where does your prompt go?\" on one floating diorama tile.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/05-tiny-diorama/renders/05-tiny-diorama.mp4",
+          "mp4MB": 5.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/tiny-diorama/spec.js",
+        "style": "Skills/3d-style-atlas/styles/tiny-diorama/style.js",
+        "card": "Skills/3d-style-atlas/styles/tiny-diorama/STYLE.md"
+      }
+    },
+    {
+      "id": "toy-brick",
+      "name": "Toy Brick",
+      "description": "Generic interlocking plastic construction bricks shot as toy-photography macro: glossy moulded ABS bricks, plates, slopes, arches, rounds and tiles on a stud grid with hairline seams and tiny bevels, crisp soft-box reflections, tinted transparent pieces, a studded baseplate on a pale studio table, shallow depth of field; everything is BUILT — bricks drop in bottom-up and snap down with a squash and a click.",
+      "summary": "A build made of **generic** interlocking plastic bricks (plain studs, no brand marks, our own peg-figure), shot like toy-photography macro on a pale studio table.",
+      "category": "toy / playful",
+      "goodFor": "anything explained as *assembly* — stacks, layers, pipelines, architectures (LLMs, networks, software stacks),\n\"building blocks of X\", modular systems, step-by-step builds and teardowns, playful kids/edtech explainers.",
+      "avoidFor": "organic or soft subjects, precise charts, serious/sombre topics, long copy, photoreal products.\nNot voxel: voxel = same-size matte cubes as pixel art; this = varied glossy moulded parts that snap together.",
+      "toneMapping": "neutral",
+      "props": [
+        "part",
+        "baseplate",
+        "build",
+        "pegFigure",
+        "printedTile",
+        "pile",
+        "table",
+        "sticker"
+      ],
+      "fourthModule": [
+        {
+          "file": "bricks.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/16-toy-brick",
+          "topic": "\"What's inside a large language model?\" as a toy-brick tower you build.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/16-toy-brick/renders/16-toy-brick.mp4",
+          "mp4MB": 5.4
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/toy-brick/spec.js",
+        "style": "Skills/3d-style-atlas/styles/toy-brick/style.js",
+        "card": "Skills/3d-style-atlas/styles/toy-brick/STYLE.md"
+      }
+    },
+    {
+      "id": "ukiyo-e",
+      "name": "Ukiyo-e",
+      "description": "Japanese woodblock printing in passes: a sheet of cream washi with kozo fibres lies on a pale hinoki bench against two wooden kento registration guides. Carved cherry-wood blocks swing down onto it one at a time like a lid, press (the key block gets a baren rubbing pass over its back), and swing up again to reveal the ONE flat layer each has left in register: first the black key line, then the sky bokashi gradation, Prussian blue, a second blue, ochre and pink, until an original great-wave-and-mountain seascape is complete; a red seal stamps it and the printed layers lift a few centimetres off the paper for a gentle parallax. Each block's underside carries its own inked relief (mirror-correct when it opens) and kento marks. Layers are multiplied onto the lit paper like transparent ink, so fibre and wood grain show in every flat colour and the key line survives every pass.",
+      "summary": "**Look.** Japanese woodblock printing, shown one pass at a time.",
+      "category": "handmade / tactile",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "printSession",
+        "sheet",
+        "kento",
+        "layers",
+        "layerCanvas",
+        "block",
+        "baren",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "artwork.js",
+          "nodeSafe": true
+        },
+        {
+          "file": "prints.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/61-ukiyo-e",
+          "topic": "one woodblock print made in passes.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/61-ukiyo-e/renders/61-ukiyo-e.mp4",
+          "mp4MB": 4.8
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/ukiyo-e/spec.js",
+        "style": "Skills/3d-style-atlas/styles/ukiyo-e/style.js",
+        "card": "Skills/3d-style-atlas/styles/ukiyo-e/STYLE.md"
+      }
+    },
+    {
+      "id": "voxel",
+      "name": "Voxel Studio",
+      "description": "Voxel-art models on a pale studio sweep: thousands of bevelled same-size cubes on a strict grid, flat limited palette, thin dark gaps, neighbour-occupancy AO in the crevices, 5x7 voxel lettering, warm key + cool fill, narrow-FOV three-quarter camera; everything moves in whole-cube steps or assembles cube by cube.",
+      "summary": "A voxel-art model photographed in a studio.",
+      "category": "pixel / voxel",
+      "goodFor": "step-by-step processes and transformations (denoising, compression, pixels to images, building and assembling,\nsorting), anything about grids, pixels, games, data cells or blocks, playful tech explainers, and counters and progress.",
+      "avoidFor": "organic or soft subjects (faces, water, cloth), photoreal or premium product looks, long body copy (5×7 text\nneeds about 6 cubes per character), and smooth curves or precise charts.",
+      "toneMapping": "neutral",
+      "props": [
+        "model",
+        "text",
+        "gapBoard",
+        "studio",
+        "helpers.flight",
+        "helpers.assemble",
+        "helpers.cubeSteps",
+        "helpers.flip",
+        "helpers.waveKey",
+        "spriteVoxels",
+        "occupancyMasks"
+      ],
+      "fourthModule": null,
+      "hasNodeSafeFourthModule": false,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/08-voxel",
+          "topic": "\"How AI makes an image\" (diffusion = step-by-step denoising) in the Voxel Studio style.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/08-voxel/renders/08-voxel.mp4",
+          "mp4MB": 10.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/voxel/spec.js",
+        "style": "Skills/3d-style-atlas/styles/voxel/style.js",
+        "card": "Skills/3d-style-atlas/styles/voxel/STYLE.md"
+      }
+    },
+    {
+      "id": "wam-house",
+      "name": "Why AI Matters — House",
+      "description": "The Why AI Matters channel package: a deep-navy newsroom studio with a faint floor grid, horizon line, haze and a reflective floor; extruded League Gothic capitals with paper faces and green/blue rim-lit bevels that rise letter by letter out of THE RULE (one thick electric-green bar that always draws on first and becomes plinth, underline, divider and progress bar); warm paper cards with serif headlines and Space Mono metadata; red reserved for the one thing that matters most; quick whip-pans between sets and rock-steady holds.",
+      "summary": "The **house style** for the Why AI Matters channel (host Ekello Harrid): the 3D form of its existing defaults.",
+      "category": "brand / channel",
+      "goodFor": "idents, bumpers, lower thirds, chapter cards, key numbers, pull quotes, end cards and recurring segments.",
+      "avoidFor": "whole explainers with many objects (use another atlas style and add the overlay pieces), light or pastel topics, and real data shown without a source.",
+      "toneMapping": "neutral",
+      "props": [
+        "rule",
+        "displayType",
+        "keyStat",
+        "chapterCard",
+        "quoteCard",
+        "paperCard",
+        "lowerThird",
+        "dataLabel",
+        "sampleTag",
+        "identBug",
+        "studioSet"
+      ],
+      "fourthModule": [
+        {
+          "file": "rundown.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/24-wam-house",
+          "topic": "the Why AI Matters channel package reel.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/24-wam-house/renders/24-wam-house.mp4",
+          "mp4MB": 2.9
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/wam-house/spec.js",
+        "style": "Skills/3d-style-atlas/styles/wam-house/style.js",
+        "card": "Skills/3d-style-atlas/styles/wam-house/STYLE.md"
+      }
+    },
+    {
+      "id": "weather-map",
+      "name": "Weather Map",
+      "description": "A broadcast weather map made physical: a raised relief model of an invented landmass (seeded coastline, hills, depth-shaded sea) on a studio table, soft cloud puffs floating above it casting shadows, and bold broadcast graphics on a glass layer above: white isobars from a pressure field, red warm and blue cold fronts with marching symbols, big H and L centres, flowing wind arrows, temperature bands draped on the land and weather icons that pop up over invented places. Fronts and pressure centres advance as functions of time; clouds and their shadows travel with them, and a place's icon and colour band change the moment its front arrives, while the camera sweeps like a broadcast fly-over.",
+      "summary": "A broadcast weather map made physical.",
+      "category": "material / abstract",
+      "goodFor": "trends moving through a system, forecasts, \"what's coming\", fronts of change (market mood, adoption waves, a\npolicy rolling out region by region), before/after across places, pressure building and releasing.",
+      "avoidFor": "real geography or real weather (everything is invented by design; don't present it as a forecast), exact\nquantities (temperatures are SAMPLE DATA, isobars carry no numbers), step-by-step processes (use subway-map / low-poly), more than\n~6 named places (cards collide at 1080p).",
+      "toneMapping": "neutral",
+      "props": [
+        "landmass",
+        "sea",
+        "table",
+        "tempBands",
+        "isobars",
+        "front",
+        "pressureMarker",
+        "cloudLayer",
+        "windField",
+        "placeMarker",
+        "placeCard",
+        "lowerThird"
+      ],
+      "fourthModule": [
+        {
+          "file": "weather.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/31-weather-map",
+          "topic": "\"What's coming\" on a physical broadcast weather map.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/31-weather-map/renders/31-weather-map.mp4",
+          "mp4MB": 9.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/weather-map/spec.js",
+        "style": "Skills/3d-style-atlas/styles/weather-map/style.js",
+        "card": "Skills/3d-style-atlas/styles/weather-map/STYLE.md"
+      }
+    },
+    {
+      "id": "wireframe-hologram",
+      "name": "Wireframe Hologram",
+      "description": "A sci-fi briefing-room hologram: additive cyan wireframes, point clouds and fresnel-rimmed scan-filled faces materialise bottom-to-top above a projector ring on a dark glossy table, with drifting scanlines, seeded glitch slices, HUD rings and amber highlights.",
+      "summary": "A sci-fi briefing-room hologram.",
+      "category": "screen / UI / sci-fi",
+      "goodFor": "systems and data flow (networks, pipelines, graphs, architectures), \"how X works\" briefings, AI/tech/sci-fi topics, anything that builds up part by part.",
+      "avoidFor": "warm, organic or human topics; photoreal products; dense paragraphs; bright daytime moods; many colours (one accent only).",
+      "toneMapping": "neutral",
+      "props": [
+        "table",
+        "projector",
+        "beam",
+        "dust",
+        "holoMesh",
+        "pointGrid",
+        "nodeLayer",
+        "connectionWeb",
+        "hudRing",
+        "gizmo",
+        "barReadout",
+        "scanFront",
+        "caption",
+        "readout"
+      ],
+      "fourthModule": [
+        {
+          "file": "holo.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/13-wireframe-hologram",
+          "topic": "\"How a neural network reads a digit\".",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/13-wireframe-hologram/renders/13-wireframe-hologram.mp4",
+          "mp4MB": 9.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/wireframe-hologram/spec.js",
+        "style": "Skills/3d-style-atlas/styles/wireframe-hologram/style.js",
+        "card": "Skills/3d-style-atlas/styles/wireframe-hologram/STYLE.md"
+      }
+    },
+    {
+      "id": "zen-sand",
+      "name": "Zen Sand",
+      "description": "A raked dry garden seen close: a shallow wooden tray of pale fine sand under a low raking morning sun, smooth dark stones and a sprig of moss. Everything is drawn IN the sand — a rake, stylus or rolling ball travels a planned path and the groove (soft ridges either side catching the light) appears exactly as far as the tool has gone; rake lines flow around stones as concentric rings, words and arrows are traced as grooves, and a flat board drags across to erase a region back to calm.",
+      "summary": "A raked dry garden seen close: a shallow wooden tray of pale fine sand on a dark table, one low raking morning sun from the back-left, smooth dark stones, a sprig of moss, pale wooden tools.",
+      "category": "other",
+      "goodFor": "calm explainers, focus/clarity/mindfulness-adjacent themes (secular), \"clearing the noise\", single words,\nsimple diagrams (arrows, circles, rings), paths and journeys, before/after with an erase beat.",
+      "avoidFor": "dense text (one word or ~10 caps per beat), numbers-heavy content, fast cuts, lowercase, anything\nneeding colour coding (the palette is sand and stone), and religious imagery (keep it a garden, not a shrine).",
+      "toneMapping": "neutral",
+      "props": [
+        "garden",
+        "tray",
+        "sandField",
+        "stone",
+        "moss",
+        "rake",
+        "caption",
+        "woodTag"
+      ],
+      "fourthModule": [
+        {
+          "file": "sandplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/35-zen-sand",
+          "topic": "\"clearing the noise\" in a raked dry garden.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/35-zen-sand/renders/35-zen-sand.mp4",
+          "mp4MB": 5.2
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/zen-sand/spec.js",
+        "style": "Skills/3d-style-atlas/styles/zen-sand/style.js",
+        "card": "Skills/3d-style-atlas/styles/zen-sand/STYLE.md"
+      }
+    },
+    {
+      "id": "zoetrope",
+      "name": "3D Zoetrope",
+      "description": "Animation about animation: a bright toy turntable on a clean cream studio sweep carrying rings of small glossy sculptures, each ring holding N successive poses of one looping action (a red ball bouncing with squash and stretch on clear rods, a sprout in a terracotta pot growing, blooming and closing). Standing still it is a row of statues; spun up under continuous light it smears into a blur (deterministic multi-sample motion blur over a one-frame shutter); when a strobe locked to the spin snaps on, the room goes dark, a strobe lamp lights the disc and each station appears to animate in place; a slightly detuned strobe makes the whole animation creep slowly round the disc. Disc angle is a closed-form function of t (smoothstep speed steps, exact integral), so every frame is a pure function of time.",
+      "summary": "**Look.** Animation about animation.",
+      "category": "toy / playful",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "turntable",
+        "ring",
+        "sweep",
+        "lamp",
+        "lighting",
+        "motionBlur",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "zoetrope.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "Builder/HyperFrames/3d-style-atlas-pilot/52-zoetrope",
+          "topic": "a 3D zoetrope.",
+          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/52-zoetrope/renders/52-zoetrope.mp4",
+          "mp4MB": 10.8
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/zoetrope/spec.js",
+        "style": "Skills/3d-style-atlas/styles/zoetrope/style.js",
+        "card": "Skills/3d-style-atlas/styles/zoetrope/STYLE.md"
+      }
+    }
+  ]
+}

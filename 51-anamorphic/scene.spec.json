@@ -1,0 +1,725 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "anamorphic",
+    "name": "Anamorphic Illusion",
+    "description": "A bright pale gallery room where dozens of chunky painted rods hang on thin strings at very different depths: meaningless clutter from every angle except one sweet spot (a taped cross on the floor), where every piece lines up into one crisp word or shape. Each piece is a slice of the figure moved along its own eye ray and scaled with distance, so from the sweet spot the figure is exact and from a few degrees off parallax tears it apart. Two figures can share one room (each with its own sweet spot and colour); the figure not being read sinks to its own muted mid-tone. Soft cast shadows on the floor and walls show the true scatter even at the locked moment.",
+    "palette": {
+      "bg": "#e9e4dc",
+      "wall": "#efebe4",
+      "wallSide": "#e3ddd3",
+      "floor": "#cfc8bc",
+      "floorLine": "#b9b1a4",
+      "ceiling": "#f4f1ec",
+      "string": "#2b2b30",
+      "tape": "#f2c230",
+      "ink": "#1d1f24",
+      "figA": [
+        "#e8492c",
+        "#f0643a",
+        "#d93d27"
+      ],
+      "figB": [
+        "#1f6fd1",
+        "#2b84e6",
+        "#1a5fb8"
+      ]
+    },
+    "world": {
+      "background": "#e9e4dc",
+      "sky": null,
+      "fog": {
+        "color": "#e9e4dc",
+        "near": 26,
+        "far": 60
+      },
+      "environment": "room",
+      "environmentIntensity": 0.25,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "wall": {
+        "type": "standard",
+        "baseColor": "#efebe4",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "wallSide": {
+        "type": "standard",
+        "baseColor": "#e3ddd3",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "floor": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.85,
+        "metalness": 0,
+        "map": {
+          "source": "grid",
+          "size": 512,
+          "cells": 4,
+          "line": 3,
+          "bg": "#d3ccc0",
+          "fg": "#bbb3a6",
+          "repeat": [
+            5,
+            5
+          ],
+          "description": "large pale concrete tiles, 1.8 m, thin grout lines"
+        }
+      },
+      "ceiling": {
+        "type": "standard",
+        "baseColor": "#f4f1ec",
+        "roughness": 0.95,
+        "metalness": 0,
+        "emission": {
+          "color": "#f4f1ec",
+          "strength": 0.45
+        }
+      },
+      "string": {
+        "type": "standard",
+        "baseColor": "#2b2b30",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "hook": {
+        "type": "standard",
+        "baseColor": "#8d8f96",
+        "roughness": 0.35,
+        "metalness": 0.9
+      },
+      "tape": {
+        "type": "standard",
+        "baseColor": "#f2c230",
+        "roughness": 0.7,
+        "metalness": 0
+      },
+      "rail": {
+        "type": "standard",
+        "baseColor": "#d8d2c8",
+        "roughness": 0.8,
+        "metalness": 0
+      }
+    },
+    "pieceMaterial": {
+      "roughness": 0.42,
+      "metalness": 0,
+      "clearcoat": 0.35,
+      "clearcoatRoughness": 0.35
+    },
+    "lights": [
+      {
+        "id": "sky",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#c9bfae",
+        "intensity": 1.35
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff6e8",
+        "intensity": 2.1,
+        "position": [
+          -7,
+          13,
+          10
+        ],
+        "target": [
+          0.5,
+          0,
+          -1
+        ],
+        "shadow": {
+          "softness": 2.5,
+          "mapSize": 4096,
+          "extent": 13,
+          "near": 1,
+          "far": 45,
+          "bias": -0.0004,
+          "normalBias": 0.03
+        }
+      },
+      {
+        "id": "fill",
+        "type": "directional",
+        "color": "#e6eeff",
+        "intensity": 0.45,
+        "position": [
+          9,
+          5,
+          8
+        ],
+        "target": [
+          0,
+          2,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.08,
+        "radius": 0.3,
+        "threshold": 3
+      },
+      "vignette": {
+        "darkness": 0.28,
+        "offset": 1.15
+      }
+    },
+    "camera": {
+      "fov": 40,
+      "near": 0.2,
+      "far": 80,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 800,
+      "color": "#1d1f24",
+      "height": 0.4
+    },
+    "room": {
+      "min": [
+        -9.5,
+        0,
+        -5.5
+      ],
+      "max": [
+        9.5,
+        6.4,
+        12.5
+      ],
+      "rail": 0.12,
+      "skirting": 0.14
+    },
+    "pieces": {
+      "radius": 0.075,
+      "chunk": 0.62,
+      "step": 0.07,
+      "depth": [
+        0.42,
+        1.7
+      ],
+      "minDist": 3.2,
+      "wallGap": 0.25,
+      "radial": 14,
+      "stringR": 0.009,
+      "sway": 0.09,
+      "swaySpeed": 0.7,
+      "dimMix": 0.86,
+      "dimTone": [
+        0.56,
+        0.57,
+        0.6
+      ],
+      "glow": 0.38
+    },
+    "tapeMark": {
+      "size": 0.7,
+      "width": 0.09
+    },
+    "caption": {
+      "y": 948,
+      "h": 86,
+      "cap": 40,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#1d1f24",
+      "ink": "#f6f3ee",
+      "eye": "#f2c230"
+    },
+    "sound": {
+      "converge": {
+        "gain": 0.32,
+        "notes": [
+          392,
+          523.25,
+          659.25,
+          783.99
+        ]
+      },
+      "lock": {
+        "clack": 0.6,
+        "thud": 0.55,
+        "chime": 0.22
+      },
+      "tear": {
+        "gain": 0.5,
+        "notes": [
+          329.63,
+          261.63,
+          196
+        ]
+      },
+      "whoosh": {
+        "gain": 0.22
+      },
+      "bed": {
+        "gain": 0.75,
+        "root": 98,
+        "brightness": 900
+      }
+    },
+    "sfx": {
+      "enter": "marimba",
+      "exit": "pluck",
+      "move": "whoosh",
+      "land": "clack",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Pieces never move toward the figure: they hang still (a faint sway away from locks); the CAMERA's position is what assembles or tears the figure.",
+      "Approach the sweet spot with a decelerating move and land exactly on it; hold perfectly still while locked (drift 0, sway exactly 0).",
+      "Leave the sweet spot sideways: parallax tears the figure apart within a few degrees.",
+      "The figure not being read sinks to its own muted mid-tone; the read figure flashes once at the lock."
+    ]
+  },
+  "scene": {
+    "id": "51-anamorphic",
+    "style": "anamorphic",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "clutter",
+        "t": 0,
+        "dur": 3.4,
+        "label": "Just scattered pieces"
+      },
+      {
+        "id": "seek",
+        "t": 3.4,
+        "dur": 2.6,
+        "label": "Find the one angle"
+      },
+      {
+        "id": "lockA",
+        "t": 6,
+        "dur": 3.2,
+        "label": "One angle. One message."
+      },
+      {
+        "id": "tear",
+        "t": 9.2,
+        "dur": 2.4,
+        "label": "Step aside: it's gone"
+      },
+      {
+        "id": "lockB",
+        "t": 11.6,
+        "dur": 3.4,
+        "label": "New angle, new shape"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -7.2,
+          4.9,
+          11.9
+        ],
+        "target": [
+          0.6,
+          2.3,
+          0.2
+        ],
+        "fov": 40
+      },
+      {
+        "t": 3.4,
+        "pos": [
+          -6,
+          4.4,
+          12.1
+        ],
+        "target": [
+          0.4,
+          2.4,
+          0.4
+        ],
+        "fov": 40,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 6,
+        "pos": [
+          0,
+          2.6,
+          10.6
+        ],
+        "target": [
+          0,
+          2.720270977387276,
+          2.1008509312991634
+        ],
+        "fov": 40,
+        "ease": "outCubic"
+      },
+      {
+        "t": 9.2,
+        "pos": [
+          0,
+          2.6,
+          10.6
+        ],
+        "target": [
+          0,
+          2.720270977387276,
+          2.1008509312991634
+        ],
+        "fov": 40
+      },
+      {
+        "t": 10.399999999999999,
+        "pos": [
+          3.6,
+          3.1,
+          11
+        ],
+        "target": [
+          0.4,
+          2.6,
+          0.4
+        ],
+        "fov": 40,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.6,
+        "pos": [
+          6.4,
+          3,
+          9.6
+        ],
+        "target": [
+          0.2,
+          2.6,
+          0.4
+        ],
+        "fov": 40,
+        "ease": "linear"
+      },
+      {
+        "t": 12.7,
+        "pos": [
+          7.4,
+          2.3,
+          6.4
+        ],
+        "target": [
+          1.3621447348804692,
+          2.702523684341302,
+          1.1671921035630728
+        ],
+        "fov": 40,
+        "ease": "outCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          7.4,
+          2.3,
+          6.4
+        ],
+        "target": [
+          1.3621447348804692,
+          2.702523684341302,
+          1.1671921035630728
+        ],
+        "fov": 40
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.75,
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "attack": 1.6,
+        "release": 2,
+        "brightness": 900
+      },
+      {
+        "t": 0,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 3.4,
+        "gain": 0.22,
+        "pan": -0.25,
+        "seed": 300
+      },
+      {
+        "t": 3.4,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 2.6,
+        "gain": 0.22,
+        "pan": 0.25,
+        "seed": 313
+      },
+      {
+        "t": 9.2,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.1999999999999993,
+        "gain": 0.22,
+        "pan": -0.25,
+        "seed": 326
+      },
+      {
+        "t": 10.399999999999999,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.200000000000001,
+        "gain": 0.22,
+        "pan": 0.25,
+        "seed": 339
+      },
+      {
+        "t": 11.6,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.0999999999999996,
+        "gain": 0.22,
+        "pan": -0.25,
+        "seed": 352
+      },
+      {
+        "type": "marimba",
+        "gain": 0.32,
+        "hz": 523.25,
+        "decay": 0.25,
+        "dur": 0.7,
+        "t": 4.133333333333333,
+        "pan": -0.1,
+        "seed": 101
+      },
+      {
+        "type": "marimba",
+        "gain": 0.32,
+        "hz": 659.25,
+        "decay": 0.25,
+        "dur": 0.7,
+        "t": 4.6,
+        "pan": -0.1,
+        "seed": 108
+      },
+      {
+        "type": "marimba",
+        "gain": 0.32,
+        "hz": 783.99,
+        "decay": 0.25,
+        "dur": 0.7,
+        "t": 4.908333333333333,
+        "pan": -0.1,
+        "seed": 115
+      },
+      {
+        "type": "clack",
+        "gain": 0.6,
+        "pitch": 0.9,
+        "dur": 0.14,
+        "t": 5.858333333333333,
+        "pan": -0.1,
+        "seed": 122
+      },
+      {
+        "type": "thud",
+        "gain": 0.55,
+        "pitch": 0.7,
+        "dur": 0.5,
+        "t": 5.858333333333333,
+        "pan": -0.1,
+        "seed": 123
+      },
+      {
+        "type": "chime",
+        "gain": 0.22,
+        "dur": 1.8,
+        "notes": 5,
+        "t": 5.888333333333334,
+        "pan": -0.1,
+        "seed": 124
+      },
+      {
+        "type": "pluck",
+        "gain": 0.5,
+        "hz": 329.63,
+        "decay": 0.6,
+        "dur": 0.9,
+        "t": 9.491666666666667,
+        "pan": -0.1,
+        "seed": 136
+      },
+      {
+        "type": "pluck",
+        "gain": 0.5,
+        "hz": 261.63,
+        "decay": 0.6,
+        "dur": 0.9,
+        "t": 9.616666666666667,
+        "pan": -0.1,
+        "seed": 143
+      },
+      {
+        "type": "pluck",
+        "gain": 0.5,
+        "hz": 196,
+        "decay": 0.6,
+        "dur": 0.9,
+        "t": 9.858333333333333,
+        "pan": -0.1,
+        "seed": 150
+      },
+      {
+        "type": "pluck",
+        "gain": 0.5,
+        "hz": 329.63,
+        "decay": 0.6,
+        "dur": 0.9,
+        "t": 10.9,
+        "pan": -0.1,
+        "seed": 157
+      },
+      {
+        "type": "marimba",
+        "gain": 0.32,
+        "hz": 392,
+        "decay": 0.25,
+        "dur": 0.7,
+        "t": 10.958333333333334,
+        "pan": 0.15,
+        "seed": 164
+      },
+      {
+        "type": "marimba",
+        "gain": 0.32,
+        "hz": 523.25,
+        "decay": 0.25,
+        "dur": 0.7,
+        "t": 11.825,
+        "pan": 0.15,
+        "seed": 171
+      },
+      {
+        "type": "marimba",
+        "gain": 0.32,
+        "hz": 659.25,
+        "decay": 0.25,
+        "dur": 0.7,
+        "t": 12.041666666666666,
+        "pan": 0.15,
+        "seed": 178
+      },
+      {
+        "type": "marimba",
+        "gain": 0.32,
+        "hz": 783.99,
+        "decay": 0.25,
+        "dur": 0.7,
+        "t": 12.191666666666666,
+        "pan": 0.15,
+        "seed": 185
+      },
+      {
+        "type": "clack",
+        "gain": 0.6,
+        "pitch": 0.9,
+        "dur": 0.14,
+        "t": 12.633333333333333,
+        "pan": 0.15,
+        "seed": 192
+      },
+      {
+        "type": "thud",
+        "gain": 0.55,
+        "pitch": 0.7,
+        "dur": 0.5,
+        "t": 12.633333333333333,
+        "pan": 0.15,
+        "seed": 193
+      },
+      {
+        "type": "chime",
+        "gain": 0.22,
+        "dur": 1.8,
+        "notes": 5,
+        "t": 12.663333333333332,
+        "pan": 0.15,
+        "seed": 194
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "anamorph.js: each piece = one chunk of the figure's polylines on an image plane at d0 in front of the sweet spot, moved along its own eye ray by a seeded depth factor s (X = E + s(P - E), radius x s): exact from E, torn by parallax elsewhere.",
+      "pieces": {
+        "A": 38,
+        "B": 23
+      },
+      "locks": [
+        {
+          "fig": "A",
+          "on": 5.858333333333333,
+          "off": 9.208333333333334
+        },
+        {
+          "fig": "B",
+          "on": 12.633333333333333,
+          "off": null
+        }
+      ],
+      "events": [
+        "converge:A@4.133",
+        "converge:A@4.600",
+        "converge:A@4.908",
+        "lock:A@5.858",
+        "release:A@9.208",
+        "tear:A@9.492",
+        "tear:A@9.617",
+        "tear:A@9.858",
+        "tear:A@10.900",
+        "converge:B@10.958",
+        "converge:B@11.825",
+        "converge:B@12.042",
+        "converge:B@12.192",
+        "lock:B@12.633"
+      ],
+      "framing": "ok (worst 0.86 at 12.666667s, B)"
+    }
+  }
+}

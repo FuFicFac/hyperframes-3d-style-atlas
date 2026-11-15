@@ -1,0 +1,3166 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "impasto",
+    "name": "Impasto",
+    "description": "Thick oil paint in the post-impressionist manner: on a primed woven canvas, short fat brushstrokes with real 3D relief (bristle grooves along the stroke, raised edge ridges, a blob where the brush lifted, two colours dragged together) are laid one after another along a seeded swirling flow field — halo rings around a glowing moon and stars, a big double swirl in the sky, contour strokes on rolling hills, flame strokes up a cypress, dabs for a village — in ultramarine, cobalt, chrome yellow, viridian and orange. A raking light sweeps across so the paint ridges cast tiny shadows and catch glossy highlights; the camera can drop low and close so the canvas reads as a landscape of paint. Then the swirls flow: every stroke slides along its own precomputed streamline as a pure function of t. One InstancedMesh (~1,100 strokes), each instance bent into a constant-curvature arc in the vertex shader, with per-pixel bristle normals in the fragment shader; a planner schedules the stroke order and the brush sounds from the same list.",
+    "palette": {
+      "bg": "#efe9dc",
+      "canvas": "#f2ede1",
+      "table": "#c9a77c",
+      "ink": "#1d2433",
+      "ultramarine": "#2c4aa0",
+      "cobalt": "#3f6cc0",
+      "chrome": "#f2c53a",
+      "viridian": "#2e7d5b",
+      "orange": "#e88a2a",
+      "chip": "#f6f1e6",
+      "chipEdge": "#c9bfa9"
+    },
+    "world": {
+      "background": "#efe9dc",
+      "sky": null,
+      "fog": null,
+      "environment": "room",
+      "environmentIntensity": 0.45,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "canvas": {
+        "type": "standard",
+        "baseColor": "#f2ede1",
+        "roughness": 0.88,
+        "metalness": 0
+      },
+      "canvasEdge": {
+        "type": "standard",
+        "baseColor": "#e9e2d2",
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      "stretcher": {
+        "type": "standard",
+        "baseColor": "#b8916a",
+        "roughness": 0.7,
+        "metalness": 0
+      },
+      "table": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.75,
+        "metalness": 0,
+        "map": {
+          "source": "wood",
+          "size": 512,
+          "boards": 5,
+          "seed": 64,
+          "dark": "#9b7650",
+          "mid": "#bf9a6e",
+          "light": "#d8b98f",
+          "repeat": [
+            3,
+            3
+          ],
+          "description": "light oak table boards"
+        }
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#fbf6ec",
+        "groundColor": "#a89a86",
+        "intensity": 1.05
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff3df",
+        "intensity": 2.5,
+        "position": [
+          -6,
+          4.2,
+          2.5
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 1.6,
+          "mapSize": 4096,
+          "extent": 2.95,
+          "near": 0.5,
+          "far": 24,
+          "bias": -0.00015,
+          "normalBias": 0.004
+        }
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.22,
+        "offset": 1.15
+      }
+    },
+    "camera": {
+      "fov": 32,
+      "near": 0.08,
+      "far": 40,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "serif",
+      "weight": 700,
+      "color": "#1d2433",
+      "height": 0.3
+    },
+    "canvas": {
+      "w": 4.8,
+      "h": 2.7,
+      "thickness": 0.045,
+      "y": 0.045,
+      "weave": {
+        "px": 512,
+        "threads": 64,
+        "repeat": [
+          20,
+          11
+        ],
+        "bump": 0.6,
+        "description": "plain-weave linen threads, primed"
+      },
+      "underpaint": {
+        "strength": 0.92,
+        "lighten": 0.04,
+        "fade": 0.7,
+        "blur": 3
+      }
+    },
+    "table": {
+      "size": 14
+    },
+    "stroke": {
+      "segU": 48,
+      "segV": 14,
+      "bristles": 7,
+      "groove": 0.16,
+      "rim": 0.38,
+      "rimAt": 0.8,
+      "blob": 0.75,
+      "blobAt": 0.86,
+      "blobW": 0.075,
+      "edge": 0.18,
+      "startTaper": 0.07,
+      "endCap": 0.12,
+      "blobWiden": 0.22,
+      "streak": 0.55,
+      "lift": 0.0006,
+      "liftStep": 0.0000055,
+      "roughness": 0.3,
+      "grooveRough": 0.25,
+      "envBoost": 1,
+      "normalStrength": 1
+    },
+    "rakeDefault": [
+      {
+        "t": 0,
+        "elev": 0.62,
+        "az": 2.5
+      }
+    ],
+    "caption": {
+      "x": 960,
+      "y": 912,
+      "h": 84,
+      "cap": 40,
+      "maxW": 820,
+      "font": "Georgia, \"Times New Roman\", Times, serif",
+      "weight": 700,
+      "italic": true,
+      "plate": "#f6f1e6",
+      "edge": "#c9bfa9",
+      "ink": "#1d2433",
+      "dab": [
+        "#2c4aa0",
+        "#f2c53a",
+        "#2e7d5b"
+      ]
+    },
+    "sound": {
+      "minGap": 0.075,
+      "slowDur": 0.3,
+      "brush": {
+        "gain": 0.55,
+        "body": 0.32,
+        "fast": 0.55,
+        "pitch": 0.42
+      },
+      "lift": {
+        "gain": 0.3
+      },
+      "beat": {
+        "gain": 0.16,
+        "notes": [
+          392,
+          440,
+          494,
+          587,
+          659
+        ]
+      },
+      "flow": {
+        "whoosh": 0.35,
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "brightness": 900,
+        "gain": 0.32
+      },
+      "bed": {
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12,
+          19
+        ],
+        "brightness": 750,
+        "gain": 0.5
+      }
+    },
+    "sfx": {
+      "enter": "penScratch",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "squish",
+      "emphasis": "marimba",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "A stroke grows from its start point along its own arc (progress = outCubic over its duration); the lift blob rides at the brush end.",
+      "Stroke order and timing come from strokes.js: moon and stars first, then the sky spiralling out from the big swirl, then hills, village, fields and the cypress last; each beat accelerates into a time-lapse.",
+      "The raking key light's elevation and azimuth are keyed on t; low elevation makes every ridge cast a shadow.",
+      "Flow: after flow.t0 each stroke slides along its precomputed streamline by v * G(t) — halo rings rotate, the swirl turns; nothing is integrated per frame."
+    ]
+  },
+  "scene": {
+    "id": "64-impasto",
+    "style": "impasto",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "moon",
+        "t": 0,
+        "dur": 3,
+        "label": "Load the brush"
+      },
+      {
+        "id": "sky",
+        "t": 3,
+        "dur": 3.2,
+        "label": "Follow the swirl"
+      },
+      {
+        "id": "land",
+        "t": 6.2,
+        "dur": 2.9,
+        "label": "Hills, cypress, village"
+      },
+      {
+        "id": "relief",
+        "t": 9.1,
+        "dur": 2.9,
+        "label": "A landscape of paint"
+      },
+      {
+        "id": "flow",
+        "t": 12,
+        "dur": 3,
+        "label": "Now the sky flows"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          1.536,
+          0.53892,
+          -0.52744
+        ],
+        "target": [
+          1.536,
+          0.05053,
+          -0.74601
+        ],
+        "fov": 32
+      },
+      {
+        "t": 2.4,
+        "pos": [
+          1.008,
+          2.78594,
+          0.94401
+        ],
+        "target": [
+          1.008,
+          0.01698,
+          -0.4653
+        ],
+        "fov": 32,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 4.4,
+        "pos": [
+          0,
+          4.86553,
+          1.99502
+        ],
+        "target": [
+          0,
+          0.01286,
+          0.1084
+        ],
+        "fov": 32,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 9.1,
+        "pos": [
+          0,
+          4.86553,
+          1.99502
+        ],
+        "target": [
+          0,
+          0.01286,
+          0.1084
+        ],
+        "fov": 32
+      },
+      {
+        "t": 10.6,
+        "pos": [
+          0.62,
+          0.345,
+          1.25
+        ],
+        "target": [
+          0.46,
+          0.045,
+          0.6
+        ],
+        "fov": 32,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.9,
+        "pos": [
+          0.62,
+          0.345,
+          1.25
+        ],
+        "target": [
+          0.46,
+          0.045,
+          0.6
+        ],
+        "fov": 32,
+        "ease": "linear"
+      },
+      {
+        "t": 13.8,
+        "pos": [
+          0,
+          4.86553,
+          1.99502
+        ],
+        "target": [
+          0,
+          0.01286,
+          0.1084
+        ],
+        "fov": 32,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0,
+          4.86553,
+          1.99502
+        ],
+        "target": [
+          0,
+          0.01286,
+          0.1084
+        ],
+        "fov": 32
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "bus": "music",
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12,
+          19
+        ],
+        "dur": 15,
+        "attack": 0.5,
+        "release": 1.6,
+        "brightness": 750,
+        "gain": 0.5,
+        "seed": 3
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "decay": 0.5,
+        "dur": 1.4,
+        "gain": 0.16,
+        "mallet": 0.3,
+        "t": 0,
+        "pan": 0,
+        "seed": 101
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.42,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.55,
+        "pan": 0.37373277497829843,
+        "t": 0.06,
+        "seed": 108
+      },
+      {
+        "type": "rustle",
+        "dur": 0.45,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "pan": 0.37373277497829843,
+        "t": 0.06,
+        "seed": 109
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.42,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.55,
+        "pan": 0.3935055605803569,
+        "t": 0.28,
+        "seed": 115
+      },
+      {
+        "type": "rustle",
+        "dur": 0.45,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "pan": 0.3935055605803569,
+        "t": 0.28,
+        "seed": 116
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.37373277497829843,
+        "t": 0.4212,
+        "seed": 122
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.42,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.55,
+        "pan": 0.38228817083360744,
+        "t": 0.5,
+        "seed": 129
+      },
+      {
+        "type": "rustle",
+        "dur": 0.45,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "pan": 0.38228817083360744,
+        "t": 0.5,
+        "seed": 130
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.3935055605803569,
+        "t": 0.6412,
+        "seed": 136
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.42,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.55,
+        "pan": 0.3605751943786699,
+        "t": 0.72,
+        "seed": 143
+      },
+      {
+        "type": "rustle",
+        "dur": 0.45,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "pan": 0.3605751943786699,
+        "t": 0.72,
+        "seed": 144
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.42,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.55,
+        "pan": 0.40608755816636627,
+        "t": 0.8061,
+        "seed": 150
+      },
+      {
+        "type": "rustle",
+        "dur": 0.45,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "pan": 0.40608755816636627,
+        "t": 0.8061,
+        "seed": 151
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.38228817083360744,
+        "t": 0.8612,
+        "seed": 157
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.4156046735566019,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.55,
+        "pan": 0.3501177866743509,
+        "t": 0.8847,
+        "seed": 164
+      },
+      {
+        "type": "rustle",
+        "dur": 0.45,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "pan": 0.3501177866743509,
+        "t": 0.8847,
+        "seed": 165
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.399754137740561,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.55,
+        "pan": 0.4174916821688606,
+        "t": 0.9703,
+        "seed": 171
+      },
+      {
+        "type": "rustle",
+        "dur": 0.4360954229897029,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "pan": 0.4174916821688606,
+        "t": 0.9703,
+        "seed": 172
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.38718978397937465,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.55,
+        "pan": 0.32750893211755694,
+        "t": 1.0455,
+        "seed": 178
+      },
+      {
+        "type": "rustle",
+        "dur": 0.42238885525022685,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "pan": 0.32750893211755694,
+        "t": 1.0455,
+        "seed": 179
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.3605751943786699,
+        "t": 1.0812,
+        "seed": 185
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.38456558846478467,
+        "t": 1.1178,
+        "seed": 192
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.3739710573910938,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.55,
+        "pan": 0.43774565027900786,
+        "t": 1.1311,
+        "seed": 199
+      },
+      {
+        "type": "rustle",
+        "dur": 0.4079684262448296,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "pan": 0.43774565027900786,
+        "t": 1.1311,
+        "seed": 200
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.40608755816636627,
+        "t": 1.1444,
+        "seed": 206
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.40064046605615083,
+        "t": 1.1678,
+        "seed": 213
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.3704476665082218,
+        "t": 1.1894,
+        "seed": 220
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.3501177866743509,
+        "t": 1.2097,
+        "seed": 227
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.36249311052680033,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.55,
+        "pan": 0.3512312909643606,
+        "t": 1.2105,
+        "seed": 234
+      },
+      {
+        "type": "rustle",
+        "dur": 0.3954470296656003,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "pan": 0.3512312909643606,
+        "t": 1.2105,
+        "seed": 235
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.37592495486678423,
+        "t": 1.229,
+        "seed": 241
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.40743756542754145,
+        "t": 1.2476,
+        "seed": 248
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.4210108844013546,
+        "t": 1.2655,
+        "seed": 255
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.4174916821688606,
+        "t": 1.2828,
+        "seed": 262
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.39132635923085796,
+        "t": 1.2998,
+        "seed": 269
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.35026525772357575,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.55,
+        "pan": 0.40997094526257427,
+        "t": 1.2999,
+        "seed": 276
+      },
+      {
+        "type": "rustle",
+        "dur": 0.38210755388026446,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "pan": 0.40997094526257427,
+        "t": 1.2999,
+        "seed": 277
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.3635144616453449,
+        "t": 1.3163,
+        "seed": 283
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.34649413376648897,
+        "t": 1.3324,
+        "seed": 290
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.32750893211755694,
+        "t": 1.3483,
+        "seed": 297
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.34260541290684804,
+        "t": 1.3638,
+        "seed": 304
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.35998865936092356,
+        "t": 1.3791,
+        "seed": 311
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.33924950423510986,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.55,
+        "pan": 0.40026491567129535,
+        "t": 1.3845,
+        "seed": 318
+      },
+      {
+        "type": "rustle",
+        "dur": 0.37009036825648345,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.32,
+        "pan": 0.40026491567129535,
+        "t": 1.3845,
+        "seed": 319
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.38831084799304144,
+        "t": 1.3941,
+        "seed": 325
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.4179626648297353,
+        "t": 1.4089,
+        "seed": 332
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.43774565027900786,
+        "t": 1.4235,
+        "seed": 339
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.43910224800032,
+        "t": 1.4379,
+        "seed": 346
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.4264376984562182,
+        "t": 1.4522,
+        "seed": 353
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.32914400356222656,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.3177693038868286,
+        "t": 1.4655,
+        "seed": 360
+      },
+      {
+        "type": "rustle",
+        "dur": 0.3590661857042471,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.3177693038868286,
+        "t": 1.4655,
+        "seed": 361
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.4018575458819401,
+        "t": 1.4662,
+        "seed": 367
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.37803157829379913,
+        "t": 1.4801,
+        "seed": 374
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.3512312909643606,
+        "t": 1.4939,
+        "seed": 381
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.33588870986352365,
+        "t": 1.5075,
+        "seed": 388
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.31604320356710663,
+        "t": 1.521,
+        "seed": 395
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.3321274899660313,
+        "t": 1.5343,
+        "seed": 402
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.3197546226817158,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.46034649621997425,
+        "t": 1.5435,
+        "seed": 409
+      },
+      {
+        "type": "rustle",
+        "dur": 0.3488232247436899,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.46034649621997425,
+        "t": 1.5435,
+        "seed": 410
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.34899705987221336,
+        "t": 1.5476,
+        "seed": 416
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.3839944651713091,
+        "t": 1.5607,
+        "seed": 423
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.40997094526257427,
+        "t": 1.5737,
+        "seed": 430
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.43524901065687266,
+        "t": 1.5866,
+        "seed": 437
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.4472722346006727,
+        "t": 1.5994,
+        "seed": 444
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.4561677886205891,
+        "t": 1.6121,
+        "seed": 451
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.31094776086608833,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.3696047611533451,
+        "t": 1.619,
+        "seed": 458
+      },
+      {
+        "type": "rustle",
+        "dur": 0.33921573912664177,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.3696047611533451,
+        "t": 1.619,
+        "seed": 459
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.44632948091558033,
+        "t": 1.6248,
+        "seed": 465
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.4291772783490571,
+        "t": 1.6373,
+        "seed": 472
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.40026491567129535,
+        "t": 1.6497,
+        "seed": 479
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.37597342424520946,
+        "t": 1.6621,
+        "seed": 486
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.34464048394334446,
+        "t": 1.6744,
+        "seed": 493
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.3292959344094553,
+        "t": 1.6866,
+        "seed": 500
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.31671923961359444,
+        "t": 1.6987,
+        "seed": 507
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.3012818747325814,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.31930473566465867,
+        "t": 1.7045,
+        "seed": 514
+      },
+      {
+        "type": "rustle",
+        "dur": 0.3286711360719069,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.31930473566465867,
+        "t": 1.7045,
+        "seed": 515
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.30291124670906505,
+        "t": 1.7108,
+        "seed": 521
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.2921652196057034,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.4845848059219283,
+        "t": 1.7875,
+        "seed": 528
+      },
+      {
+        "type": "rustle",
+        "dur": 0.31872569411531276,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.4845848059219283,
+        "t": 1.7875,
+        "seed": 529
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.2835136154389242,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.345089825121467,
+        "t": 1.8685,
+        "seed": 535
+      },
+      {
+        "type": "rustle",
+        "dur": 0.30928758047882643,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.345089825121467,
+        "t": 1.8685,
+        "seed": 536
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.27526241322168304,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.2143915639150688,
+        "t": 1.9476,
+        "seed": 542
+      },
+      {
+        "type": "rustle",
+        "dur": 0.3002862689691087,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.2143915639150688,
+        "t": 1.9476,
+        "seed": 543
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.2673606844496859,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.24278719738427207,
+        "t": 2.0252,
+        "seed": 549
+      },
+      {
+        "type": "rustle",
+        "dur": 0.29166620121783915,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.24278719738427207,
+        "t": 2.0252,
+        "seed": 550
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.25976746058064737,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.5340824819818654,
+        "t": 2.1013,
+        "seed": 556
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2833826842697971,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.5340824819818654,
+        "t": 2.1013,
+        "seed": 557
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.2514244978510958,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.5644359505912809,
+        "t": 2.1866,
+        "seed": 563
+      },
+      {
+        "type": "rustle",
+        "dur": 0.27428127038301353,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.5644359505912809,
+        "t": 2.1866,
+        "seed": 564
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.2433997158955956,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.14147208593446323,
+        "t": 2.2705,
+        "seed": 570
+      },
+      {
+        "type": "rustle",
+        "dur": 0.26552696279519516,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.14147208593446323,
+        "t": 2.2705,
+        "seed": 571
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.2356592694281706,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.1760852628722113,
+        "t": 2.3529,
+        "seed": 577
+      },
+      {
+        "type": "rustle",
+        "dur": 0.25708283937618603,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.1760852628722113,
+        "t": 2.3529,
+        "seed": 578
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.22817491917877453,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.031747683090654455,
+        "t": 2.4342,
+        "seed": 584
+      },
+      {
+        "type": "rustle",
+        "dur": 0.24891809364957218,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.031747683090654455,
+        "t": 2.4342,
+        "seed": 585
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.22092281209887196,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.06121209367059188,
+        "t": 2.5142,
+        "seed": 591
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2410067041078603,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.06121209367059188,
+        "t": 2.5142,
+        "seed": 592
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.21388258297415122,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.11499307204041224,
+        "t": 2.5933,
+        "seed": 598
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2333264541536195,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.11499307204041224,
+        "t": 2.5933,
+        "seed": 599
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.20703667962461325,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.10909441813487046,
+        "t": 2.6713,
+        "seed": 605
+      },
+      {
+        "type": "rustle",
+        "dur": 0.22585819595412351,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.10909441813487046,
+        "t": 2.6713,
+        "seed": 606
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.20036984722302117,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.20104834995608167,
+        "t": 2.7485,
+        "seed": 612
+      },
+      {
+        "type": "rustle",
+        "dur": 0.21858528787965945,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.20104834995608167,
+        "t": 2.7485,
+        "seed": 613
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.1938687281435296,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.18520507224474347,
+        "t": 2.8248,
+        "seed": 619
+      },
+      {
+        "type": "rustle",
+        "dur": 0.21149315797475954,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.18520507224474347,
+        "t": 2.8248,
+        "seed": 620
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.18752154719790556,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.20262150107553553,
+        "t": 2.9003,
+        "seed": 626
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2045689605795333,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.20262150107553553,
+        "t": 2.9003,
+        "seed": 627
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": 0.052116671511868475,
+        "t": 2.908,
+        "seed": 633
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.18055201471488086,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.30609517334619163,
+        "t": 2.9844,
+        "seed": 640
+      },
+      {
+        "type": "rustle",
+        "dur": 0.19696583423441547,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.30609517334619163,
+        "t": 2.9844,
+        "seed": 641
+      },
+      {
+        "type": "marimba",
+        "hz": 440,
+        "decay": 0.5,
+        "dur": 1.4,
+        "gain": 0.16,
+        "mallet": 0.3,
+        "t": 3,
+        "pan": 0,
+        "seed": 647
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": -0.011781628591834958,
+        "t": 3.068,
+        "seed": 654
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.3052930896013608,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.028094803541956835,
+        "t": 3.0694,
+        "seed": 661
+      },
+      {
+        "type": "rustle",
+        "dur": 0.33304700683784816,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.028094803541956835,
+        "t": 3.0694,
+        "seed": 662
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.2950591522299077,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.0186658730560447,
+        "t": 3.1497,
+        "seed": 668
+      },
+      {
+        "type": "rustle",
+        "dur": 0.3218827115235356,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.0186658730560447,
+        "t": 3.1497,
+        "seed": 669
+      },
+      {
+        "type": "squish",
+        "dur": 0.22,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "pan": -0.006905075073486566,
+        "t": 3.228,
+        "seed": 675
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.28619932930745007,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.07600747370363678,
+        "t": 3.2346,
+        "seed": 682
+      },
+      {
+        "type": "rustle",
+        "dur": 0.3122174501535818,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.07600747370363678,
+        "t": 3.2346,
+        "seed": 683
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.2788518361684249,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.06885642063368566,
+        "t": 3.3151,
+        "seed": 689
+      },
+      {
+        "type": "rustle",
+        "dur": 0.30420200309282713,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.06885642063368566,
+        "t": 3.3151,
+        "seed": 690
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.2724346408543638,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.11091852955395605,
+        "t": 3.3927,
+        "seed": 696
+      },
+      {
+        "type": "rustle",
+        "dur": 0.29720142638657865,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.11091852955395605,
+        "t": 3.3927,
+        "seed": 697
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.26666433482002005,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.06440281052370574,
+        "t": 3.468,
+        "seed": 703
+      },
+      {
+        "type": "rustle",
+        "dur": 0.29090654707638547,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.06440281052370574,
+        "t": 3.468,
+        "seed": 704
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.26074505878427867,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.07370840265286384,
+        "t": 3.5507,
+        "seed": 710
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2844491550373949,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.07370840265286384,
+        "t": 3.5507,
+        "seed": 711
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.25529332505193725,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.12495441693516911,
+        "t": 3.6316,
+        "seed": 717
+      },
+      {
+        "type": "rustle",
+        "dur": 0.27850180914756784,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.12495441693516911,
+        "t": 3.6316,
+        "seed": 718
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.25021323618044156,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.020187174401723417,
+        "t": 3.711,
+        "seed": 724
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2729598940150271,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.020187174401723417,
+        "t": 3.711,
+        "seed": 725
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.2454377857444562,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.15068713410804044,
+        "t": 3.7891,
+        "seed": 731
+      },
+      {
+        "type": "rustle",
+        "dur": 0.26775031172122493,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.15068713410804044,
+        "t": 3.7891,
+        "seed": 732
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.24091796769941207,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.06668858754681417,
+        "t": 3.8661,
+        "seed": 738
+      },
+      {
+        "type": "rustle",
+        "dur": 0.26281960112663133,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.06668858754681417,
+        "t": 3.8661,
+        "seed": 739
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.23661665631492154,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.033960209978185496,
+        "t": 3.942,
+        "seed": 745
+      },
+      {
+        "type": "rustle",
+        "dur": 0.25812726143445985,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.033960209978185496,
+        "t": 3.942,
+        "seed": 746
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.23250492691008445,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.08869653943844603,
+        "t": 4.0172,
+        "seed": 752
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2536417384473648,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.08869653943844603,
+        "t": 4.0172,
+        "seed": 753
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.22813079874373943,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.12362795615979709,
+        "t": 4.0997,
+        "seed": 759
+      },
+      {
+        "type": "rustle",
+        "dur": 0.24886996226589753,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.12362795615979709,
+        "t": 4.0997,
+        "seed": 760
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.22393691003761457,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.17544253562279047,
+        "t": 4.1813,
+        "seed": 766
+      },
+      {
+        "type": "rustle",
+        "dur": 0.24429481095012495,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.17544253562279047,
+        "t": 4.1813,
+        "seed": 767
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.21990266152104485,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.23620661891875797,
+        "t": 4.2622,
+        "seed": 773
+      },
+      {
+        "type": "rustle",
+        "dur": 0.23989381256841252,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.23620661891875797,
+        "t": 4.2622,
+        "seed": 774
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.21601110217249148,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.24064163625567456,
+        "t": 4.3423,
+        "seed": 780
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2356484750972634,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.24064163625567456,
+        "t": 4.3423,
+        "seed": 781
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.21224808402530887,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.183465384977695,
+        "t": 4.4218,
+        "seed": 787
+      },
+      {
+        "type": "rustle",
+        "dur": 0.231543364391246,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.183465384977695,
+        "t": 4.4218,
+        "seed": 788
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.208601653209398,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.19135948345053477,
+        "t": 4.5006,
+        "seed": 794
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2275654398647978,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.19135948345053477,
+        "t": 4.5006,
+        "seed": 795
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.20506160121375086,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.1921973480458837,
+        "t": 4.5789,
+        "seed": 801
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2237035649604555,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.1921973480458837,
+        "t": 4.5789,
+        "seed": 802
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.20161912767451545,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.30361140018169547,
+        "t": 4.6566,
+        "seed": 808
+      },
+      {
+        "type": "rustle",
+        "dur": 0.21994813928128956,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.30361140018169547,
+        "t": 4.6566,
+        "seed": 809
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.19826658257361984,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.22195922646881075,
+        "t": 4.7339,
+        "seed": 815
+      },
+      {
+        "type": "rustle",
+        "dur": 0.21629081735303982,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.22195922646881075,
+        "t": 4.7339,
+        "seed": 816
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.19499726612170606,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.24705954550937748,
+        "t": 4.8107,
+        "seed": 822
+      },
+      {
+        "type": "rustle",
+        "dur": 0.21272429031458842,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.24705954550937748,
+        "t": 4.8107,
+        "seed": 823
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.1918052712930265,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.2703444070838508,
+        "t": 4.887,
+        "seed": 829
+      },
+      {
+        "type": "rustle",
+        "dur": 0.20924211413784705,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.2703444070838508,
+        "t": 4.887,
+        "seed": 830
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.18868535840128045,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.32380138982376083,
+        "t": 4.9629,
+        "seed": 836
+      },
+      {
+        "type": "rustle",
+        "dur": 0.20583857280139684,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.32380138982376083,
+        "t": 4.9629,
+        "seed": 837
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.18563285409084548,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.28649733196691374,
+        "t": 5.0384,
+        "seed": 843
+      },
+      {
+        "type": "rustle",
+        "dur": 0.20250856809910414,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.28649733196691374,
+        "t": 5.0384,
+        "seed": 844
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.18264356917414276,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.3994172342792968,
+        "t": 5.1136,
+        "seed": 850
+      },
+      {
+        "type": "rustle",
+        "dur": 0.1992475300081557,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.3994172342792968,
+        "t": 5.1136,
+        "seed": 851
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.17942388276258994,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.4399434288096265,
+        "t": 5.1958,
+        "seed": 857
+      },
+      {
+        "type": "rustle",
+        "dur": 0.19573514483191629,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.4399434288096265,
+        "t": 5.1958,
+        "seed": 858
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.17627161466127061,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.35188320020802777,
+        "t": 5.2777,
+        "seed": 864
+      },
+      {
+        "type": "rustle",
+        "dur": 0.1922963069032043,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.35188320020802777,
+        "t": 5.2777,
+        "seed": 865
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.17318269918337623,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.4723038030253491,
+        "t": 5.3591,
+        "seed": 871
+      },
+      {
+        "type": "rustle",
+        "dur": 0.18892658092731948,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.4723038030253491,
+        "t": 5.3591,
+        "seed": 872
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.17015346355966898,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.4666737465805492,
+        "t": 5.4402,
+        "seed": 878
+      },
+      {
+        "type": "rustle",
+        "dur": 0.1856219602469116,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.4666737465805492,
+        "t": 5.4402,
+        "seed": 879
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.16718057674672632,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.446766206719738,
+        "t": 5.521,
+        "seed": 885
+      },
+      {
+        "type": "rustle",
+        "dur": 0.1823788109964287,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.446766206719738,
+        "t": 5.521,
+        "seed": 886
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.1642610065039392,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.5110757659961122,
+        "t": 5.6014,
+        "seed": 892
+      },
+      {
+        "type": "rustle",
+        "dur": 0.17919382527702457,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.5110757659961122,
+        "t": 5.6014,
+        "seed": 893
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.16139198316317852,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.5138907355467789,
+        "t": 5.6815,
+        "seed": 899
+      },
+      {
+        "type": "rustle",
+        "dur": 0.17606398163255835,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.5138907355467789,
+        "t": 5.6815,
+        "seed": 900
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.1585709688582343,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.5622831017993507,
+        "t": 5.7613,
+        "seed": 906
+      },
+      {
+        "type": "rustle",
+        "dur": 0.17298651148171013,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.5622831017993507,
+        "t": 5.7613,
+        "seed": 907
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.15579563124088108,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.5360059119823738,
+        "t": 5.8408,
+        "seed": 913
+      },
+      {
+        "type": "rustle",
+        "dur": 0.1699588704445975,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.5360059119823738,
+        "t": 5.8408,
+        "seed": 914
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.15306382090900209,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.5707585553003011,
+        "t": 5.92,
+        "seed": 920
+      },
+      {
+        "type": "rustle",
+        "dur": 0.16697871371891135,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.5707585553003011,
+        "t": 5.92,
+        "seed": 921
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.1503735519254464,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.5901585091592628,
+        "t": 5.9989,
+        "seed": 927
+      },
+      {
+        "type": "rustle",
+        "dur": 0.1640438748277597,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.5901585091592628,
+        "t": 5.9989,
+        "seed": 928
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.14772298492558394,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.583984099050949,
+        "t": 6.0776,
+        "seed": 934
+      },
+      {
+        "type": "rustle",
+        "dur": 0.16115234719154609,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.583984099050949,
+        "t": 6.0776,
+        "seed": 935
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.14511041240513975,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.59498468416736,
+        "t": 6.156,
+        "seed": 941
+      },
+      {
+        "type": "rustle",
+        "dur": 0.15830226807833425,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.59498468416736,
+        "t": 6.156,
+        "seed": 942
+      },
+      {
+        "type": "marimba",
+        "hz": 494,
+        "decay": 0.5,
+        "dur": 1.4,
+        "gain": 0.16,
+        "mallet": 0.3,
+        "t": 6.2,
+        "pan": 0,
+        "seed": 948
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.30800000000000005,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.5289570433223154,
+        "t": 6.34,
+        "seed": 955
+      },
+      {
+        "type": "rustle",
+        "dur": 0.336,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.5289570433223154,
+        "t": 6.34,
+        "seed": 956
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.30800000000000005,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.49164110321513144,
+        "t": 6.48,
+        "seed": 962
+      },
+      {
+        "type": "rustle",
+        "dur": 0.336,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.49164110321513144,
+        "t": 6.48,
+        "seed": 963
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.2854628989759106,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.4891493499981006,
+        "t": 6.5605,
+        "seed": 969
+      },
+      {
+        "type": "rustle",
+        "dur": 0.3114140716100842,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.4891493499981006,
+        "t": 6.5605,
+        "seed": 970
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.2755205805880443,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.588578770171362,
+        "t": 6.636,
+        "seed": 976
+      },
+      {
+        "type": "rustle",
+        "dur": 0.3005679060960483,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.588578770171362,
+        "t": 6.636,
+        "seed": 977
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.26749104681304237,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.1567724693528376,
+        "t": 6.7129,
+        "seed": 983
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2918084147051371,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.1567724693528376,
+        "t": 6.7129,
+        "seed": 984
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.26039633699528764,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.3012071202680817,
+        "t": 6.7922,
+        "seed": 990
+      },
+      {
+        "type": "rustle",
+        "dur": 0.28406873126758647,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.3012071202680817,
+        "t": 6.7922,
+        "seed": 991
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.2542297277798473,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.1163728617632877,
+        "t": 6.8695,
+        "seed": 997
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2773415212143789,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.1163728617632877,
+        "t": 6.8695,
+        "seed": 998
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.24870096444466894,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.006548293555632867,
+        "t": 6.9455,
+        "seed": 1004
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2713101430305479,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.006548293555632867,
+        "t": 6.9455,
+        "seed": 1005
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.24334259592936625,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.2770768228337403,
+        "t": 7.0249,
+        "seed": 1011
+      },
+      {
+        "type": "rustle",
+        "dur": 0.26546465010476317,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.2770768228337403,
+        "t": 7.0249,
+        "seed": 1012
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.2383955160602853,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.2134101418469916,
+        "t": 7.1033,
+        "seed": 1018
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2600678357021294,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.2134101418469916,
+        "t": 7.1033,
+        "seed": 1019
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.23377743963002362,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.366200124378712,
+        "t": 7.1809,
+        "seed": 1025
+      },
+      {
+        "type": "rustle",
+        "dur": 0.25502993414184394,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.366200124378712,
+        "t": 7.1809,
+        "seed": 1026
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.2294303318625083,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.458128035478422,
+        "t": 7.2577,
+        "seed": 1032
+      },
+      {
+        "type": "rustle",
+        "dur": 0.25028763475909993,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.458128035478422,
+        "t": 7.2577,
+        "seed": 1033
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.22531144556471938,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.4812981894082392,
+        "t": 7.3338,
+        "seed": 1039
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2457943042524211,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.4812981894082392,
+        "t": 7.3338,
+        "seed": 1040
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.22138821490145144,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.5592466479770956,
+        "t": 7.4094,
+        "seed": 1046
+      },
+      {
+        "type": "rustle",
+        "dur": 0.24151441625612882,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.5592466479770956,
+        "t": 7.4094,
+        "seed": 1047
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.21763515284515803,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.07007020343444316,
+        "t": 7.4844,
+        "seed": 1053
+      },
+      {
+        "type": "rustle",
+        "dur": 0.23742016674017236,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.07007020343444316,
+        "t": 7.4844,
+        "seed": 1054
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.21382420308340133,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.004071531231980829,
+        "t": 7.5634,
+        "seed": 1060
+      },
+      {
+        "type": "rustle",
+        "dur": 0.23326276700007414,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.004071531231980829,
+        "t": 7.5634,
+        "seed": 1061
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.21016158296234083,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.09430509532922868,
+        "t": 7.6419,
+        "seed": 1067
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2292671814134627,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.09430509532922868,
+        "t": 7.6419,
+        "seed": 1068
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.20663121302889437,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.16211722557074393,
+        "t": 7.7199,
+        "seed": 1074
+      },
+      {
+        "type": "rustle",
+        "dur": 0.22541586875879382,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.16211722557074393,
+        "t": 7.7199,
+        "seed": 1075
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.20321972468278254,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.266971869975049,
+        "t": 7.7976,
+        "seed": 1081
+      },
+      {
+        "type": "rustle",
+        "dur": 0.22169424510849003,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.266971869975049,
+        "t": 7.7976,
+        "seed": 1082
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.1999158604645882,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.3209860185095575,
+        "t": 7.8749,
+        "seed": 1088
+      },
+      {
+        "type": "rustle",
+        "dur": 0.21809002959773255,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.3209860185095575,
+        "t": 7.8749,
+        "seed": 1089
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.19671003485188407,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.5103550627577118,
+        "t": 7.9519,
+        "seed": 1095
+      },
+      {
+        "type": "rustle",
+        "dur": 0.21459276529296442,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.5103550627577118,
+        "t": 7.9519,
+        "seed": 1096
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.1935940059864548,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.304406476965663,
+        "t": 8.0286,
+        "seed": 1102
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2111934610761325,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.304406476965663,
+        "t": 8.0286,
+        "seed": 1103
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.1905606258966533,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.18941822998018468,
+        "t": 8.105,
+        "seed": 1109
+      },
+      {
+        "type": "rustle",
+        "dur": 0.20788431915998537,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.18941822998018468,
+        "t": 8.105,
+        "seed": 1110
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.18760364742508057,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.05772369596284128,
+        "t": 8.1811,
+        "seed": 1116
+      },
+      {
+        "type": "rustle",
+        "dur": 0.20465852446372423,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.05772369596284128,
+        "t": 8.1811,
+        "seed": 1117
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.1847175728787643,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.5950730510855561,
+        "t": 8.2569,
+        "seed": 1123
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2015100795041065,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.5950730510855561,
+        "t": 8.2569,
+        "seed": 1124
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.18189753388429997,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.48734371459025433,
+        "t": 8.3326,
+        "seed": 1130
+      },
+      {
+        "type": "rustle",
+        "dur": 0.1984336733283272,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.48734371459025433,
+        "t": 8.3326,
+        "seed": 1131
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.17913919492716276,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.15403768008829788,
+        "t": 8.4079,
+        "seed": 1137
+      },
+      {
+        "type": "rustle",
+        "dur": 0.19542457628417753,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.15403768008829788,
+        "t": 8.4079,
+        "seed": 1138
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.17643867510708838,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.2390180075622514,
+        "t": 8.4831,
+        "seed": 1144
+      },
+      {
+        "type": "rustle",
+        "dur": 0.1924785546622782,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.2390180075622514,
+        "t": 8.4831,
+        "seed": 1145
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.17364700162878977,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": 0.3644564040518017,
+        "t": 8.5623,
+        "seed": 1151
+      },
+      {
+        "type": "rustle",
+        "dur": 0.18943309268595246,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": 0.3644564040518017,
+        "t": 8.5623,
+        "seed": 1152
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.17091216634912273,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.46662621767799134,
+        "t": 8.6412,
+        "seed": 1158
+      },
+      {
+        "type": "rustle",
+        "dur": 0.18644963601722478,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.46662621767799134,
+        "t": 8.6412,
+        "seed": 1159
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.168230832803344,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.39991410867903615,
+        "t": 8.7199,
+        "seed": 1165
+      },
+      {
+        "type": "rustle",
+        "dur": 0.18352454487637523,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.39991410867903615,
+        "t": 8.7199,
+        "seed": 1166
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.1655999787127721,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.3729140687831095,
+        "t": 8.7985,
+        "seed": 1172
+      },
+      {
+        "type": "rustle",
+        "dur": 0.180654522232115,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.3729140687831095,
+        "t": 8.7985,
+        "seed": 1173
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.16301685606126784,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.3683028784101828,
+        "t": 8.8768,
+        "seed": 1179
+      },
+      {
+        "type": "rustle",
+        "dur": 0.1778365702486558,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.3683028784101828,
+        "t": 8.8768,
+        "seed": 1180
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.16047895746668778,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.41975792308152876,
+        "t": 8.955,
+        "seed": 1186
+      },
+      {
+        "type": "rustle",
+        "dur": 0.17506795360002303,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.41975792308152876,
+        "t": 8.955,
+        "seed": 1187
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.15798398767507685,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.3781269092915696,
+        "t": 9.033,
+        "seed": 1193
+      },
+      {
+        "type": "rustle",
+        "dur": 0.1723461683728111,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.3781269092915696,
+        "t": 9.033,
+        "seed": 1194
+      },
+      {
+        "type": "marimba",
+        "hz": 587,
+        "decay": 0.5,
+        "dur": 1.4,
+        "gain": 0.16,
+        "mallet": 0.3,
+        "t": 9.1,
+        "pan": 0,
+        "seed": 1200
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.15552983925492941,
+        "pitch": 0.42,
+        "speed": 0.55,
+        "gain": 0.30250000000000005,
+        "pan": -0.39487743412520504,
+        "t": 9.1109,
+        "seed": 1207
+      },
+      {
+        "type": "rustle",
+        "dur": 0.16966891555083205,
+        "density": 0.55,
+        "pitch": 0.7,
+        "gain": 0.17600000000000002,
+        "pan": -0.39487743412520504,
+        "t": 9.1109,
+        "seed": 1208
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.6,
+        "q": 0.7,
+        "pitch": 0.6,
+        "gain": 0.35,
+        "t": 11.4,
+        "pan": 0,
+        "seed": 1221
+      },
+      {
+        "type": "marimba",
+        "hz": 659,
+        "decay": 0.5,
+        "dur": 1.4,
+        "gain": 0.16,
+        "mallet": 0.3,
+        "t": 12,
+        "pan": 0,
+        "seed": 1214
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "dur": 3.4,
+        "attack": 1.2,
+        "release": 1.4,
+        "brightness": 900,
+        "gain": 0.32,
+        "t": 12,
+        "pan": 0,
+        "seed": 1222
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "strokes.js: seeded jittered grid + moon/star rings; each stroke = the region field's streamline through its seed point (RK2), bent as a constant-curvature arc; schedule per region group (lead strokes slow, rest accelerating); flow = slide along the stroke's own streamline by v*G(t).",
+      "strokes": 1208,
+      "groups": [
+        {
+          "id": "moon",
+          "t0": 0.06,
+          "t1": 3.2,
+          "count": 194
+        },
+        {
+          "id": "sky",
+          "t0": 2.65,
+          "t1": 6.3500000000000005,
+          "count": 404
+        },
+        {
+          "id": "land",
+          "t0": 6.2,
+          "t1": 9.299999999999999,
+          "count": 610
+        }
+      ],
+      "underpaintUncovered": 0,
+      "framing": [
+        {
+          "id": "canvasCentre",
+          "from": 0,
+          "to": 2,
+          "worst": null,
+          "reasons": [
+            "behind",
+            "safe"
+          ]
+        },
+        {
+          "id": "canvasCentre",
+          "from": 10.166667,
+          "to": 12.466667,
+          "worst": 2.4596,
+          "reasons": [
+            "safe"
+          ]
+        }
+      ]
+    }
+  }
+}

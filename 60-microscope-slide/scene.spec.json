@@ -1,0 +1,916 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "microscope-slide",
+    "name": "Microscope Slide",
+    "description": "The view down a light-microscope eyepiece: a luminous circular field, translucent living cells with dark membrane rims and DIC-style relief, a razor-thin focal plane, focus racks, objective clicks, and cells dividing one into two into four.",
+    "palette": {
+      "bg": "#f6f1e7",
+      "stainTeal": "#dcefe9",
+      "stainPink": "#f6e2ea",
+      "cyto": "#efe2ea",
+      "rim": "#5e5a6e",
+      "nucleus": "#b7b2dc",
+      "nucleolus": "#7b6fb4",
+      "chromosome": "#7a2f8f",
+      "granule": "#6c6672",
+      "surround": "#0b0c10",
+      "ink": "#f4f1ea",
+      "accent": "#e9b949"
+    },
+    "world": {
+      "background": "#0b0c10",
+      "toneMapping": "none",
+      "exposure": 1
+    },
+    "materials": {},
+    "lights": [],
+    "post": {
+      "grain": {
+        "amount": 0.012,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 35,
+      "near": 0.1,
+      "far": 10,
+      "drift": {
+        "amp": 0,
+        "speed": 0
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#f4f1ea",
+      "height": 0.5
+    },
+    "sfx": {
+      "enter": "pop",
+      "exit": "whooshOut",
+      "move": "whir",
+      "land": "pluck",
+      "emphasis": "marimba",
+      "ui": "clack",
+      "bed": "pad"
+    },
+    "field": {
+      "center": [
+        0.573,
+        0.5
+      ],
+      "radius": 0.462,
+      "edge": 2.2,
+      "fringe": 3.2,
+      "falloff": 0.16,
+      "surroundGlow": 0.35
+    },
+    "look": {
+      "relief": 0.34,
+      "shear": [
+        -0.62,
+        0.78
+      ],
+      "halo": 0.075,
+      "rimDark": 0.62,
+      "cytoAbsorb": 0.22,
+      "nucAbsorb": 0.5,
+      "chromAbsorb": 0.92,
+      "granules": 0.34,
+      "stain": 0.4,
+      "domeShade": 0.11,
+      "glow": 0.12,
+      "widths": {
+        "rim": 0.42,
+        "relief": 1.4,
+        "haloOffset": 0.75,
+        "halo": 0.95
+      }
+    },
+    "optics": {
+      "dofK": 0.42,
+      "dofRef": 22,
+      "baseBlur": 0.08,
+      "blink": {
+        "dur": 0.42,
+        "dark": 0.92,
+        "blur": 3.5
+      }
+    },
+    "lineage": {
+      "daughterScale": 0.8,
+      "sEndK": 1.06,
+      "nucK": 0.42,
+      "push": 0.45,
+      "pushDur": 2.2,
+      "growth": 0.1,
+      "growDur": 3.5,
+      "drift": {
+        "amp": 0.9,
+        "speed": 1
+      },
+      "wobble": 0.05,
+      "spin": 0.18,
+      "elong": 0.14
+    },
+    "debris": {
+      "count": 44,
+      "spread": 95,
+      "zRange": 11,
+      "size": [
+        0.25,
+        1.1
+      ],
+      "seed": 404
+    },
+    "caption": {
+      "x": 104,
+      "y": 470,
+      "maxW": 470,
+      "cap": 54,
+      "weight": 700,
+      "font": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "ink": "#f4f1ea",
+      "rule": "#e9b949"
+    },
+    "scaleBar": {
+      "right": 1800,
+      "y": 905,
+      "h": 7,
+      "cap": 28,
+      "ink": "#f4f1ea",
+      "font": "\"Helvetica Neue\", Helvetica, Arial, sans-serif"
+    },
+    "sampleTag": {
+      "right": 1800,
+      "y": 140,
+      "text": "SAMPLE DATA",
+      "cap": 22,
+      "h": 40,
+      "plate": "#e9b949",
+      "ink": "#1b1a17"
+    },
+    "magTag": {
+      "right": 1800,
+      "y": 196,
+      "cap": 46,
+      "ink": "#f4f1ea",
+      "sub": "#a9a59b"
+    },
+    "sound": {
+      "bed": {
+        "gain": 0.5,
+        "root": 196,
+        "brightness": 900
+      },
+      "water": {
+        "gain": 0.22
+      },
+      "round": {
+        "gain": 0.35,
+        "pitch": 0.8
+      },
+      "align": {
+        "gain": 0.32,
+        "hz": 523.25
+      },
+      "split": {
+        "gain": 0.9,
+        "hz": 392,
+        "pop": 0.35
+      },
+      "objective": {
+        "click": 0.75,
+        "clunk": 0.55
+      },
+      "focus": {
+        "gain": 0.32
+      }
+    },
+    "motion": [
+      "Cells drift on slow seeded sines measured from their birth time; nothing is integrated, so the culture is a pure function of t.",
+      "Division: round up -> chromatin condenses -> band at the equator -> two sets pulled to the poles -> waist pinches (smooth union, k -> 0) -> two cells.",
+      "Focus racks move the focal plane z; every cell's blur is |z - focus| x dofK, so cells at other depths swim in and out as it passes.",
+      "Objective changes are steps hidden inside a dark blink with a blur spike, then a short re-focus."
+    ]
+  },
+  "scene": {
+    "id": "60-microscope-slide",
+    "style": "microscope-slide",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "focus",
+        "t": 0,
+        "dur": 3.4,
+        "label": "One living cell"
+      },
+      {
+        "id": "copy",
+        "t": 3.4,
+        "dur": 4.4,
+        "label": "It copies everything"
+      },
+      {
+        "id": "split",
+        "t": 7.8,
+        "dur": 2.8,
+        "label": "One becomes two"
+      },
+      {
+        "id": "many",
+        "t": 10.6,
+        "dur": 4.4,
+        "label": "Then four.\nThen many."
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0,
+          0,
+          5
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "fov": 35
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.5,
+        "root": 196,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "attack": 2.5,
+        "release": 2.5,
+        "brightness": 900
+      },
+      {
+        "t": 0,
+        "type": "rumble",
+        "dur": 15,
+        "gain": 0.18,
+        "seed": 5
+      },
+      {
+        "t": 0.3,
+        "type": "bubble",
+        "gain": 0.14995037841331213,
+        "pitch": 0.7746104412944987,
+        "pan": 0.33177445344626905,
+        "seed": 300
+      },
+      {
+        "t": 1.352,
+        "type": "bubble",
+        "gain": 0.20357816361915318,
+        "pitch": 0.5440958236576989,
+        "pan": -0.293268727324903,
+        "seed": 301
+      },
+      {
+        "t": 2.01,
+        "type": "bubble",
+        "gain": 0.17064657658990473,
+        "pitch": 0.8306245863204822,
+        "pan": 0.19129429776221515,
+        "seed": 302
+      },
+      {
+        "t": 3.235,
+        "type": "bubble",
+        "gain": 0.11481587894912809,
+        "pitch": 0.869554053642787,
+        "pan": 0.3118440555408597,
+        "seed": 303
+      },
+      {
+        "t": 3.934,
+        "type": "bubble",
+        "gain": 0.15393612094875425,
+        "pitch": 0.8264346903888509,
+        "pan": 0.2032576145604253,
+        "seed": 304
+      },
+      {
+        "t": 4.605,
+        "type": "bubble",
+        "gain": 0.14426167290098965,
+        "pitch": 0.7672116931062192,
+        "pan": 0.3315997952595353,
+        "seed": 305
+      },
+      {
+        "t": 5.31,
+        "type": "bubble",
+        "gain": 0.20464492404088377,
+        "pitch": 0.9757377477362752,
+        "pan": -0.3014126820489764,
+        "seed": 306
+      },
+      {
+        "t": 6.495,
+        "type": "bubble",
+        "gain": 0.1725598017703742,
+        "pitch": 0.5058970738900825,
+        "pan": -0.09107810445129871,
+        "seed": 307
+      },
+      {
+        "t": 7.81,
+        "type": "bubble",
+        "gain": 0.21943527502100915,
+        "pitch": 0.5041492922464386,
+        "pan": -0.001121026650071144,
+        "seed": 308
+      },
+      {
+        "t": 9.201,
+        "type": "bubble",
+        "gain": 0.14368094156309966,
+        "pitch": 0.8866298311622813,
+        "pan": 0.25111941415816547,
+        "seed": 309
+      },
+      {
+        "t": 9.866,
+        "type": "bubble",
+        "gain": 0.1269112144894898,
+        "pitch": 0.979901104583405,
+        "pan": -0.2185272563248873,
+        "seed": 310
+      },
+      {
+        "t": 10.494,
+        "type": "bubble",
+        "gain": 0.128646216891706,
+        "pitch": 0.6004367537098005,
+        "pan": -0.21731688752770426,
+        "seed": 311
+      },
+      {
+        "t": 11.339,
+        "type": "bubble",
+        "gain": 0.19549639436695723,
+        "pitch": 0.771313649835065,
+        "pan": -0.01978015899658203,
+        "seed": 312
+      },
+      {
+        "t": 12.533,
+        "type": "bubble",
+        "gain": 0.09657627722620965,
+        "pitch": 0.8941065670223907,
+        "pan": 0.3468914043158293,
+        "seed": 313
+      },
+      {
+        "t": 13.451,
+        "type": "bubble",
+        "gain": 0.1283035329701379,
+        "pitch": 0.5553522866684943,
+        "pan": -0.34194498360157016,
+        "seed": 314
+      },
+      {
+        "t": 14.57,
+        "type": "bubble",
+        "gain": 0.20692318206559868,
+        "pitch": 0.9386498171370476,
+        "pan": 0.11995653957128526,
+        "seed": 315
+      },
+      {
+        "type": "whir",
+        "gain": 0.32,
+        "hz": 200,
+        "hz2": 150,
+        "dur": 1.6999999999999997,
+        "t": 0.35,
+        "pan": 0,
+        "seed": 101
+      },
+      {
+        "type": "whir",
+        "gain": 0.13701581417242806,
+        "hz": 150,
+        "hz2": 200,
+        "dur": 0.6500000000000004,
+        "t": 2.05,
+        "pan": 0,
+        "seed": 108
+      },
+      {
+        "type": "clack",
+        "gain": 0.75,
+        "pitch": 0.7,
+        "dur": 0.12,
+        "t": 3.503,
+        "pan": 0,
+        "seed": 115
+      },
+      {
+        "type": "thud",
+        "gain": 0.55,
+        "pitch": 1.4,
+        "dur": 0.3,
+        "t": 3.593,
+        "pan": 0,
+        "seed": 116
+      },
+      {
+        "type": "whir",
+        "gain": 0.20238577025077628,
+        "hz": 150,
+        "hz2": 200,
+        "dur": 0.06999999999999984,
+        "t": 3.6,
+        "pan": 0,
+        "seed": 122
+      },
+      {
+        "type": "whir",
+        "gain": 0.20238577025077628,
+        "hz": 200,
+        "hz2": 150,
+        "dur": 0.7300000000000004,
+        "t": 3.67,
+        "pan": 0,
+        "seed": 129
+      },
+      {
+        "type": "bubble",
+        "gain": 0.35,
+        "pitch": 0.8,
+        "dur": 0.14,
+        "t": 4.612,
+        "pan": 0.03768814022643339,
+        "seed": 136
+      },
+      {
+        "type": "marimba",
+        "gain": 0.32,
+        "hz": 523.25,
+        "decay": 0.5,
+        "dur": 1.2,
+        "notes": [
+          0,
+          7
+        ],
+        "step": 0.09,
+        "t": 6.74,
+        "pan": 0.03768814022643339,
+        "seed": 143
+      },
+      {
+        "type": "pluck",
+        "gain": 0.9,
+        "hz": 392,
+        "decay": 1.4,
+        "dur": 1.6,
+        "bright": 0.45,
+        "t": 9.708,
+        "pan": 0.03768814022643339,
+        "seed": 150
+      },
+      {
+        "type": "pop",
+        "gain": 0.35,
+        "pitch": 0.55,
+        "dur": 0.12,
+        "t": 9.728,
+        "pan": 0.03768814022643339,
+        "seed": 151
+      },
+      {
+        "type": "clack",
+        "gain": 0.75,
+        "pitch": 0.7,
+        "dur": 0.12,
+        "t": 10.302999999999999,
+        "pan": 0,
+        "seed": 157
+      },
+      {
+        "type": "thud",
+        "gain": 0.55,
+        "pitch": 1.4,
+        "dur": 0.3,
+        "t": 10.392999999999999,
+        "pan": 0,
+        "seed": 158
+      },
+      {
+        "type": "whir",
+        "gain": 0.1937696226622395,
+        "hz": 200,
+        "hz2": 150,
+        "dur": 0.07000000000000028,
+        "t": 10.399999999999999,
+        "pan": 0,
+        "seed": 164
+      },
+      {
+        "type": "whir",
+        "gain": 0.1937696226622395,
+        "hz": 150,
+        "hz2": 200,
+        "dur": 0.7800000000000011,
+        "t": 10.469999999999999,
+        "pan": 0,
+        "seed": 171
+      },
+      {
+        "type": "bubble",
+        "gain": 0.35,
+        "pitch": 0.8,
+        "dur": 0.14,
+        "t": 10.8734,
+        "pan": 0.29195782187665587,
+        "seed": 178
+      },
+      {
+        "type": "bubble",
+        "gain": 0.35,
+        "pitch": 0.8,
+        "dur": 0.14,
+        "t": 10.8946,
+        "pan": -0.21728970194287775,
+        "seed": 185
+      },
+      {
+        "type": "bubble",
+        "gain": 0.35,
+        "pitch": 0.8,
+        "dur": 0.14,
+        "t": 11.45,
+        "pan": -0.6,
+        "seed": 192
+      },
+      {
+        "type": "marimba",
+        "gain": 0.192,
+        "hz": 523.25,
+        "decay": 0.5,
+        "dur": 1.2,
+        "notes": [
+          0,
+          7
+        ],
+        "step": 0.09,
+        "t": 11.7854,
+        "pan": 0.29195782187665587,
+        "seed": 199
+      },
+      {
+        "type": "marimba",
+        "gain": 0.192,
+        "hz": 523.25,
+        "decay": 0.5,
+        "dur": 1.2,
+        "notes": [
+          0,
+          7
+        ],
+        "step": 0.09,
+        "t": 11.8066,
+        "pan": -0.21728970194287775,
+        "seed": 206
+      },
+      {
+        "type": "marimba",
+        "gain": 0.32,
+        "hz": 523.25,
+        "decay": 0.5,
+        "dur": 1.2,
+        "notes": [
+          0,
+          7
+        ],
+        "step": 0.09,
+        "t": 12.4,
+        "pan": -0.6,
+        "seed": 213
+      },
+      {
+        "type": "pluck",
+        "gain": 0.675,
+        "hz": 588,
+        "decay": 1.4,
+        "dur": 1.6,
+        "bright": 0.45,
+        "t": 13.0574,
+        "pan": 0.29195782187665587,
+        "seed": 220
+      },
+      {
+        "type": "pop",
+        "gain": 0.24499999999999997,
+        "pitch": 0.55,
+        "dur": 0.12,
+        "t": 13.077399999999999,
+        "pan": 0.29195782187665587,
+        "seed": 221
+      },
+      {
+        "type": "pluck",
+        "gain": 0.675,
+        "hz": 588,
+        "decay": 1.4,
+        "dur": 1.6,
+        "bright": 0.45,
+        "t": 13.0786,
+        "pan": -0.21728970194287775,
+        "seed": 227
+      },
+      {
+        "type": "pop",
+        "gain": 0.24499999999999997,
+        "pitch": 0.55,
+        "dur": 0.12,
+        "t": 13.0986,
+        "pan": -0.21728970194287775,
+        "seed": 228
+      },
+      {
+        "type": "bubble",
+        "gain": 0.35,
+        "pitch": 0.8,
+        "dur": 0.14,
+        "t": 13.5449,
+        "pan": 0.3407532369100099,
+        "seed": 234
+      },
+      {
+        "type": "bubble",
+        "gain": 0.35,
+        "pitch": 0.8,
+        "dur": 0.14,
+        "t": 13.5978,
+        "pan": -0.18211641763609124,
+        "seed": 241
+      },
+      {
+        "type": "pluck",
+        "gain": 0.9,
+        "hz": 392,
+        "decay": 1.4,
+        "dur": 1.6,
+        "bright": 0.45,
+        "t": 13.725,
+        "pan": -0.6,
+        "seed": 248
+      },
+      {
+        "type": "bubble",
+        "gain": 0.35,
+        "pitch": 0.8,
+        "dur": 0.14,
+        "t": 13.7371,
+        "pan": 0.25017212172907777,
+        "seed": 255
+      },
+      {
+        "type": "pop",
+        "gain": 0.35,
+        "pitch": 0.55,
+        "dur": 0.12,
+        "t": 13.745,
+        "pan": -0.6,
+        "seed": 249
+      },
+      {
+        "type": "bubble",
+        "gain": 0.35,
+        "pitch": 0.8,
+        "dur": 0.14,
+        "t": 13.7506,
+        "pan": -0.25513103485220634,
+        "seed": 262
+      },
+      {
+        "type": "marimba",
+        "gain": 0.192,
+        "hz": 523.25,
+        "decay": 0.5,
+        "dur": 1.2,
+        "notes": [
+          0,
+          7
+        ],
+        "step": 0.09,
+        "t": 14.2669,
+        "pan": 0.3407532369100099,
+        "seed": 269
+      },
+      {
+        "type": "marimba",
+        "gain": 0.192,
+        "hz": 523.25,
+        "decay": 0.5,
+        "dur": 1.2,
+        "notes": [
+          0,
+          7
+        ],
+        "step": 0.09,
+        "t": 14.3198,
+        "pan": -0.18211641763609124,
+        "seed": 276
+      },
+      {
+        "type": "marimba",
+        "gain": 0.192,
+        "hz": 523.25,
+        "decay": 0.5,
+        "dur": 1.2,
+        "notes": [
+          0,
+          7
+        ],
+        "step": 0.09,
+        "t": 14.4591,
+        "pan": 0.25017212172907777,
+        "seed": 283
+      },
+      {
+        "type": "marimba",
+        "gain": 0.192,
+        "hz": 523.25,
+        "decay": 0.5,
+        "dur": 1.2,
+        "notes": [
+          0,
+          7
+        ],
+        "step": 0.09,
+        "t": 14.4726,
+        "pan": -0.25513103485220634,
+        "seed": 290
+      },
+      {
+        "type": "pluck",
+        "gain": 0.675,
+        "hz": 588,
+        "decay": 1.4,
+        "dur": 1.6,
+        "bright": 0.45,
+        "t": 15.2739,
+        "pan": 0.3407532369100099,
+        "seed": 297
+      },
+      {
+        "type": "pop",
+        "gain": 0.24499999999999997,
+        "pitch": 0.55,
+        "dur": 0.12,
+        "t": 15.293899999999999,
+        "pan": 0.3407532369100099,
+        "seed": 298
+      },
+      {
+        "type": "pluck",
+        "gain": 0.675,
+        "hz": 588,
+        "decay": 1.4,
+        "dur": 1.6,
+        "bright": 0.45,
+        "t": 15.3268,
+        "pan": -0.18211641763609124,
+        "seed": 304
+      },
+      {
+        "type": "pop",
+        "gain": 0.24499999999999997,
+        "pitch": 0.55,
+        "dur": 0.12,
+        "t": 15.3468,
+        "pan": -0.18211641763609124,
+        "seed": 305
+      },
+      {
+        "type": "pluck",
+        "gain": 0.675,
+        "hz": 588,
+        "decay": 1.4,
+        "dur": 1.6,
+        "bright": 0.45,
+        "t": 15.4661,
+        "pan": 0.25017212172907777,
+        "seed": 311
+      },
+      {
+        "type": "pluck",
+        "gain": 0.675,
+        "hz": 588,
+        "decay": 1.4,
+        "dur": 1.6,
+        "bright": 0.45,
+        "t": 15.4796,
+        "pan": -0.25513103485220634,
+        "seed": 318
+      },
+      {
+        "type": "pop",
+        "gain": 0.24499999999999997,
+        "pitch": 0.55,
+        "dur": 0.12,
+        "t": 15.4861,
+        "pan": 0.25017212172907777,
+        "seed": 312
+      },
+      {
+        "type": "pop",
+        "gain": 0.24499999999999997,
+        "pitch": 0.55,
+        "dur": 0.12,
+        "t": 15.4996,
+        "pan": -0.25513103485220634,
+        "seed": 319
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "culture.js: lineage plan (birth, division start + duration, two daughters); centre = birth position + eased push + seeded drift measured from birth; division phase p -> shape (two SDF lobes, smooth union k -> 0) + stain parameters. Optics plan: objective keys (steps hidden in a dark blink) + focal-plane keys (racks).",
+      "hero": {
+        "divide": 4.5,
+        "end": 10.1,
+        "daughters": [
+          {
+            "id": "hero",
+            "t": 4.5,
+            "end": 10.1
+          },
+          {
+            "id": "heroa",
+            "t": 10.83,
+            "end": 13.23
+          },
+          {
+            "id": "heroaa",
+            "t": 13.7,
+            "end": 15.6
+          },
+          {
+            "id": "heroab",
+            "t": 13.51,
+            "end": 15.41
+          },
+          {
+            "id": "herob",
+            "t": 10.85,
+            "end": 13.25
+          },
+          {
+            "id": "heroba",
+            "t": 13.71,
+            "end": 15.61
+          },
+          {
+            "id": "herobb",
+            "t": 13.56,
+            "end": 15.46
+          }
+        ]
+      },
+      "fieldFit": {
+        "ok": true,
+        "worst": {
+          "t": 10.433,
+          "id": "heroa",
+          "fill": 0.87
+        }
+      },
+      "sampleData": "scale bar and magnification are SAMPLE DATA (illustrative); the division sequence is a simplified illustration"
+    }
+  }
+}

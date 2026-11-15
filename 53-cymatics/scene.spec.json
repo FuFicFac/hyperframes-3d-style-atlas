@@ -1,0 +1,619 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "cymatics",
+    "name": "Cymatics",
+    "description": "Sound builds the picture: a dark anodised square metal plate on a speaker driver, dusted with tens of thousands of bright warm-white sand grains, on a clean light lab bench under a strong soft key light. A tone plays and the sand dances (grains on antinodes hop, grains on nodal lines sit still) and gathers into the crisp geometric nodal-line figure of that frequency (Chladni figure, w = cos(n pi x)cos(m pi y) +/- cos(m pi x)cos(n pi y)); the pitch steps up and the figure shatters and re-forms into a more intricate one. Every grain's settled position per mode is precomputed (seeded Newton steps onto the nodal set + a little spread); motion is a closed-form blend with per-grain delay plus a hop proportional to the local plate amplitude. The plate flexes slightly with the mode shape. Sustained tones, a sand hiss and lock chimes come from the same mode list.",
+    "palette": {
+      "bg": "#cfcac1",
+      "bench": "#d8d3ca",
+      "benchEdge": "#9c968c",
+      "plate": "#1d2129",
+      "plateEdge": "#4a505c",
+      "sand": "#f6ecd8",
+      "sandShade": "#e6d3b0",
+      "driver": "#2a2c31",
+      "brass": "#b9975b",
+      "ink": "#1b1d22",
+      "accent": "#e2803a",
+      "display": "#7cf0b4"
+    },
+    "world": {
+      "background": "#cfcac1",
+      "sky": null,
+      "fog": {
+        "color": "#cfcac1",
+        "near": 9,
+        "far": 22
+      },
+      "environment": "room",
+      "environmentIntensity": 0.55,
+      "toneMapping": "neutral",
+      "exposure": 1.05,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "bench": {
+        "type": "standard",
+        "baseColor": "#d8d3ca",
+        "roughness": 0.82,
+        "metalness": 0,
+        "bump": {
+          "source": "bumpNoise",
+          "scale": 40,
+          "octaves": 3,
+          "seed": 53,
+          "strength": 0.15,
+          "description": "fine fbm noise: matte laminate bench top"
+        }
+      },
+      "benchEdge": {
+        "type": "standard",
+        "baseColor": "#9c968c",
+        "roughness": 0.7,
+        "metalness": 0
+      },
+      "plate": {
+        "type": "physical",
+        "baseColor": "#1d2129",
+        "roughness": 0.38,
+        "metalness": 0.65,
+        "clearcoat": 0.25,
+        "clearcoatRoughness": 0.4
+      },
+      "plateEdge": {
+        "type": "standard",
+        "baseColor": "#4a505c",
+        "roughness": 0.3,
+        "metalness": 0.9
+      },
+      "driver": {
+        "type": "standard",
+        "baseColor": "#2a2c31",
+        "roughness": 0.55,
+        "metalness": 0.3
+      },
+      "brass": {
+        "type": "standard",
+        "baseColor": "#b9975b",
+        "roughness": 0.3,
+        "metalness": 1
+      },
+      "box": {
+        "type": "standard",
+        "baseColor": "#e9e5dd",
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      "knob": {
+        "type": "standard",
+        "baseColor": "#24262b",
+        "roughness": 0.4,
+        "metalness": 0.2
+      },
+      "cable": {
+        "type": "standard",
+        "baseColor": "#2b2d33",
+        "roughness": 0.6,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#fbf7f0",
+        "groundColor": "#8f8a82",
+        "intensity": 0.9
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff4e4",
+        "intensity": 2.6,
+        "position": [
+          -3.2,
+          6.2,
+          3.4
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 2.2,
+          "mapSize": 2048,
+          "extent": 2.6,
+          "near": 0.5,
+          "far": 20,
+          "bias": -0.0004,
+          "normalBias": 0.01
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#cfe0ff",
+        "intensity": 0.7,
+        "position": [
+          2.5,
+          3,
+          -5
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.32,
+        "offset": 1.1
+      }
+    },
+    "camera": {
+      "fov": 34,
+      "near": 0.2,
+      "far": 40,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#1b1d22",
+      "height": 0.3
+    },
+    "plate": {
+      "size": 2.4,
+      "thickness": 0.03,
+      "y": 0.62,
+      "segments": 96,
+      "flex": 0.012,
+      "bevel": 0.006,
+      "post": {
+        "r": 0.09,
+        "driverR": 0.36,
+        "driverH": 0.22
+      }
+    },
+    "bench": {
+      "size": 30,
+      "y": 0
+    },
+    "sand": {
+      "grains": 24000,
+      "size": [
+        0.0055,
+        0.0095
+      ],
+      "hop": 0.024,
+      "kick": 0.16,
+      "mix": 0.4,
+      "spread": 0.0045,
+      "margin": 0.012,
+      "tint": 0.12,
+      "seed": 53
+    },
+    "move": {
+      "delay": [
+        0,
+        1
+      ],
+      "jitter": 0.08,
+      "dur": [
+        0.75,
+        1
+      ],
+      "dance": 0,
+      "danceHz": [
+        1.5,
+        2.5
+      ]
+    },
+    "straggle": {
+      "share": 0.02,
+      "delay": [
+        0.5,
+        2.6
+      ],
+      "dur": [
+        1.8,
+        3.4
+      ]
+    },
+    "hopFeel": {
+      "hz": [
+        3.6,
+        4.2
+      ],
+      "attack": 0.25,
+      "dead": [
+        0.08,
+        0.6
+      ],
+      "phaseJitter": 0.25,
+      "spatial": 0.9
+    },
+    "lockShare": 0.9,
+    "caption": {
+      "x": 960,
+      "y": 44,
+      "h": 88,
+      "cap": 38,
+      "align": "center",
+      "maxW": 760,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#1b1d22",
+      "edge": "#3b3f48",
+      "ink": "#f4f1ea",
+      "wave": "#f6ecd8"
+    },
+    "readout": {
+      "x": 1824,
+      "y": 44,
+      "h": 88,
+      "cap": 40,
+      "plate": "#1b1d22",
+      "edge": "#3b3f48",
+      "ink": "#7cf0b4",
+      "unit": "#a9b3c2"
+    },
+    "sound": {
+      "tone": {
+        "gain": 0.5,
+        "tilt": 0.5,
+        "attack": 0.18,
+        "release": 0.45,
+        "releaseLast": 1.2,
+        "overlap": 0.25,
+        "brightness": 1600
+      },
+      "hiss": {
+        "gain": 0.32,
+        "density": 0.55,
+        "pitch": 1.25,
+        "whoosh": 0.18
+      },
+      "lock": {
+        "tick": 0.35,
+        "chime": 0.11
+      },
+      "room": {
+        "gain": 0.35,
+        "dur": 15
+      }
+    },
+    "sfx": {
+      "enter": "tick",
+      "exit": "whooshOut",
+      "move": "rustle",
+      "land": "tick",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Sand position = closed-form blend from where it was to the precomputed nodal-line position of the current mode, with per-grain delay; nothing is simulated.",
+      "Hop = drive envelope x local |w| x |sin|: antinodes bounce, nodal lines sit still — the figure is legible because the lines are the still part.",
+      "A pitch step re-targets every grain from its current position (continuous), so the old figure shatters and the new one forms.",
+      "Camera: near-top-down three-quarter; moves only while the sand moves, perfectly still during holds (40k grains cost bitrate)."
+    ]
+  },
+  "scene": {
+    "id": "53-cymatics",
+    "style": "cymatics",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "plate",
+        "t": 0,
+        "dur": 3,
+        "label": "Sand on a metal plate"
+      },
+      {
+        "id": "note",
+        "t": 3,
+        "dur": 3.3,
+        "label": "Play one note"
+      },
+      {
+        "id": "raise",
+        "t": 6.3,
+        "dur": 5.1,
+        "label": "Raise the pitch"
+      },
+      {
+        "id": "shape",
+        "t": 11.4,
+        "dur": 3.6,
+        "label": "Sound has a shape"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0,
+          4.54328,
+          1.95072
+        ],
+        "target": [
+          0,
+          0.64658,
+          -0.03257
+        ],
+        "fov": 34
+      },
+      {
+        "t": 11.4,
+        "pos": [
+          0,
+          4.54328,
+          1.95072
+        ],
+        "target": [
+          0,
+          0.64658,
+          -0.03257
+        ],
+        "fov": 34
+      },
+      {
+        "t": 13.4,
+        "pos": [
+          0,
+          3.48957,
+          2.52854
+        ],
+        "target": [
+          0,
+          0.59702,
+          0.03831
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0,
+          3.48957,
+          2.52854
+        ],
+        "target": [
+          0,
+          0.59702,
+          0.03831
+        ],
+        "fov": 34
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 220,
+        "chord": [
+          0
+        ],
+        "dur": 3.55,
+        "attack": 0.18,
+        "release": 0.45,
+        "brightness": 1600,
+        "gain": 0.5,
+        "t": 3.2,
+        "pan": 0,
+        "seed": 131
+      },
+      {
+        "type": "rustle",
+        "dur": 1.8975999999999997,
+        "density": 0.55,
+        "pitch": 1.25,
+        "gain": 0.32,
+        "t": 3.24,
+        "pan": 0,
+        "seed": 138
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1.2,
+        "q": 0.8,
+        "pitch": 1.4,
+        "gain": 0.18,
+        "t": 3.24,
+        "pan": 0,
+        "seed": 139
+      },
+      {
+        "type": "tick",
+        "gain": 0.35,
+        "pitch": 1.6,
+        "t": 5.0976,
+        "pan": 0,
+        "seed": 145
+      },
+      {
+        "type": "chime",
+        "dur": 1.6,
+        "pitch": 0.5,
+        "gain": 0.11,
+        "t": 5.0976,
+        "pan": 0,
+        "seed": 146
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 330,
+        "chord": [
+          0
+        ],
+        "dur": 3.25,
+        "attack": 0.18,
+        "release": 0.45,
+        "brightness": 1600,
+        "gain": 0.408248290463863,
+        "t": 6.5,
+        "pan": 0,
+        "seed": 152
+      },
+      {
+        "type": "rustle",
+        "dur": 2.0067000000000004,
+        "density": 0.55,
+        "pitch": 1.25,
+        "gain": 0.32,
+        "t": 6.54,
+        "pan": 0,
+        "seed": 159
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1.2,
+        "q": 0.8,
+        "pitch": 1.4,
+        "gain": 0.18,
+        "t": 6.54,
+        "pan": 0,
+        "seed": 160
+      },
+      {
+        "type": "tick",
+        "gain": 0.35,
+        "pitch": 1.6,
+        "t": 8.5067,
+        "pan": 0,
+        "seed": 166
+      },
+      {
+        "type": "chime",
+        "dur": 1.6,
+        "pitch": 0.75,
+        "gain": 0.11,
+        "t": 8.5067,
+        "pan": 0,
+        "seed": 167
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 495,
+        "chord": [
+          0
+        ],
+        "dur": 5.75,
+        "attack": 0.18,
+        "release": 1.2,
+        "brightness": 1600,
+        "gain": 0.3333333333333333,
+        "t": 9.5,
+        "pan": 0,
+        "seed": 173
+      },
+      {
+        "type": "rustle",
+        "dur": 1.9894999999999996,
+        "density": 0.55,
+        "pitch": 1.25,
+        "gain": 0.32,
+        "t": 9.54,
+        "pan": 0,
+        "seed": 180
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1.2,
+        "q": 0.8,
+        "pitch": 1.4,
+        "gain": 0.18,
+        "t": 9.54,
+        "pan": 0,
+        "seed": 181
+      },
+      {
+        "type": "tick",
+        "gain": 0.35,
+        "pitch": 1.6,
+        "t": 11.4895,
+        "pan": 0,
+        "seed": 187
+      },
+      {
+        "type": "chime",
+        "dur": 1.6,
+        "pitch": 1.125,
+        "gain": 0.11,
+        "t": 11.4895,
+        "pan": 0,
+        "seed": 188
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "chladni.js: w = cos(n pi x)cos(m pi y) + sign cos(m pi x)cos(n pi y); settled grain positions per mode by seeded Newton steps onto w = 0 plus spread; grain(t) = lerp(start_k, settled_k, outCubic(u)) + dance, hop = drive x |w| / 2 x |sin|.",
+      "grains": 24000,
+      "modes": [
+        {
+          "id": "diamond",
+          "m": 0,
+          "n": 2,
+          "sign": 1,
+          "t": 3.2,
+          "hz": 220,
+          "lockAt": 5.0976
+        },
+        {
+          "id": "ring",
+          "m": 2,
+          "n": 4,
+          "sign": 1,
+          "t": 6.5,
+          "hz": 330,
+          "lockAt": 8.5067
+        },
+        {
+          "id": "flower",
+          "m": 2,
+          "n": 8,
+          "sign": 1,
+          "t": 9.5,
+          "hz": 495,
+          "lockAt": 11.4895
+        }
+      ],
+      "framing": "ok (worst 0.9662 at 12.366667s)",
+      "chips": {
+        "ok": true,
+        "hits": []
+      },
+      "frequencies": "the readout shows exactly the tone frequencies SCORE plays (220, 330, 495 Hz); the plate is toy-scale, real plate modes depend on size and material"
+    }
+  }
+}
