@@ -15,13 +15,14 @@ const SKILL = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const ROOT = resolve(SKILL, "../..");
 const args = process.argv.slice(2);
 const flag = (k, d) => (args.includes(k) ? args[args.indexOf(k) + 1] : d);
-const PILOT = resolve(flag("--pilot", join(ROOT, "Builder/HyperFrames/3d-style-atlas-pilot")));
+// Demos moved to the Panther drive on 2026-11-15; pass --pilot <folder> to use a clone elsewhere.
+const PILOT = resolve(flag("--pilot", "/Volumes/Panther/3D Style Atlas"));
 const idx = JSON.parse(readFileSync(resolve(SKILL, flag("--index", "references/style-index.json")), "utf8"));
 const items = idx.styles
   .filter((s) => args.includes("--with-neutral") || s.id !== "neutral")
   .map((s) => {
     const d = s.demos[0] ?? {};
-    const mp4 = d.mp4 ? join(ROOT, d.mp4) : null;
+    const mp4 = d.mp4 ? resolve(ROOT, d.mp4) : null; // absolute demo paths pass through unchanged
     return { id: s.id, name: s.name, category: s.category, summary: s.summary, goodFor: s.goodFor, topic: d.topic ?? "", project: d.project ? d.project.split("/").pop() : "", src: mp4 && existsSync(mp4) ? relative(PILOT, mp4) : null, mb: d.mp4MB };
   })
   .sort((a, b) => a.project.localeCompare(b.project));

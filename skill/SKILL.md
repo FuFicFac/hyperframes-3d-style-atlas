@@ -29,7 +29,7 @@ first). The scripts find the kit and the pilot folder relative to themselves, so
 | `references/kit-api.md` | Kit API, the style contract, the scene contract, exact build commands. |
 | `references/style-authoring.md` | How to write a new style, the done-checklist, lessons learned, determinism traps. |
 | `references/blender-translation.md` | How a scene's exported data maps to Blender (unexecuted — see Limits). |
-| Demos | `D Second Brain/Builder/HyperFrames/3d-style-atlas-pilot/NN-<id>/` — one working 15 s project per style, with `gallery.html`. |
+| Demos | `/Volumes/Panther/3D Style Atlas/NN-<id>/` (external Panther drive; moved 2026-11-15 from `D Second Brain/Builder/HyperFrames/3d-style-atlas-pilot/`, which other docs here still name; if Panther is not mounted, clone the GitHub repo) — one working 15 s project per style, with `gallery.html`. |
 
 ## Making a clip
 

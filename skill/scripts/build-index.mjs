@@ -13,9 +13,12 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const SKILL = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const args = process.argv.slice(2);
 const flag = (k, d) => (args.includes(k) ? args[args.indexOf(k) + 1] : d);
-const PILOT = resolve(flag("--pilot", join(SKILL, "../../Builder/HyperFrames/3d-style-atlas-pilot")));
+// Demos moved to the Panther drive on 2026-11-15; pass --pilot <folder> to use a clone elsewhere.
+const PILOT = resolve(flag("--pilot", "/Volumes/Panther/3D Style Atlas"));
 const OUT = resolve(SKILL, flag("--out", "references/style-index.json"));
 const ROOT = resolve(SKILL, "../.."); // D Second Brain: paths in the index are relative to it
+// Demo paths outside D Second Brain (the Panther drive, a clone) are stored absolute, not as a ../../ chain.
+const demoPath = (p) => { const r = relative(ROOT, p); return r.startsWith("..") ? p : r; };
 
 const CATEGORY_RULES = [
   ["reference / neutral", /\bneutral\b|reference/i],
@@ -64,9 +67,9 @@ if (existsSync(PILOT)) {
     const topic = (cleaned.match(/^(.+?[.!?])(\s|$)/)?.[1] ?? cleaned).slice(0, 200) || null;
     const mp4 = join(PILOT, d, "renders", `${d}.mp4`);
     (demos[style] ??= []).push({
-      project: relative(ROOT, join(PILOT, d)),
+      project: demoPath(join(PILOT, d)),
       topic,
-      mp4: existsSync(mp4) ? relative(ROOT, mp4) : null,
+      mp4: existsSync(mp4) ? demoPath(mp4) : null,
       mp4MB: existsSync(mp4) ? +(statSync(mp4).size / 1e6).toFixed(1) : null,
     });
   }
@@ -104,7 +107,7 @@ const doc = {
   format: "3d-style-atlas/style-index@1",
   generatedBy: "Skills/3d-style-atlas/scripts/build-index.mjs (re-run after adding or changing a style)",
   generatedAt: new Date().toISOString(),
-  pathsRelativeTo: "D Second Brain/",
+  pathsRelativeTo: "D Second Brain/ (demo project and mp4 paths are absolute when the demos live outside it)",
   notes: "category is a keyword guess; props come from the STYLE.md props tables; demo topic is the first line of the demo's scene.js.",
   count: styles.length,
   styles,

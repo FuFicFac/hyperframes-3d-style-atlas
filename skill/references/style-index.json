@@ -1,8 +1,8 @@
 {
   "format": "3d-style-atlas/style-index@1",
   "generatedBy": "Skills/3d-style-atlas/scripts/build-index.mjs (re-run after adding or changing a style)",
-  "generatedAt": "2026-11-15T12:22:57.319Z",
-  "pathsRelativeTo": "D Second Brain/",
+  "generatedAt": "2026-11-16T16:55:28.232Z",
+  "pathsRelativeTo": "D Second Brain/ (demo project and mp4 paths are absolute when the demos live outside it)",
   "notes": "category is a keyword guess; props come from the STYLE.md props tables; demo topic is the first line of the demo's scene.js.",
   "count": 71,
   "styles": [
@@ -31,9 +31,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/51-anamorphic",
+          "project": "/Volumes/Panther/3D Style Atlas/51-anamorphic",
           "topic": "\"One angle.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/51-anamorphic/renders/51-anamorphic.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/51-anamorphic/renders/51-anamorphic.mp4",
           "mp4MB": 6.3
         }
       ],
@@ -73,9 +73,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/70-art-deco",
+          "project": "/Volumes/Panther/3D Style Atlas/70-art-deco",
           "topic": "\"Art Deco\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/70-art-deco/renders/70-art-deco.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/70-art-deco/renders/70-art-deco.mp4",
           "mp4MB": 6
         }
       ],
@@ -116,9 +116,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/40-bead-abacus",
+          "project": "/Volumes/Panther/3D Style Atlas/40-bead-abacus",
           "topic": "\"Votes, counted\" (SAMPLE DATA) on a hardwood counting frame.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/40-bead-abacus/renders/40-bead-abacus.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/40-bead-abacus/renders/40-bead-abacus.mp4",
           "mp4MB": 4.7
         }
       ],
@@ -155,9 +155,9 @@
       "hasNodeSafeFourthModule": false,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/06-blueprint-build",
+          "project": "/Volumes/Panther/3D Style Atlas/06-blueprint-build",
           "topic": "\"Anatomy of an AI agent\" plotted on a cyanotype sheet.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/06-blueprint-build/renders/06-blueprint-build.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/06-blueprint-build/renders/06-blueprint-build.mp4",
           "mp4MB": 3.7
         }
       ],
@@ -194,9 +194,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/33-card-table",
+          "project": "/Volumes/Panther/3D Style Atlas/33-card-table",
           "topic": "\"Three ways to learn\" on a card table.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/33-card-table/renders/33-card-table.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/33-card-table/renders/33-card-table.mp4",
           "mp4MB": 4.9
         }
       ],
@@ -239,9 +239,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/28-cardboard-stop-motion",
+          "project": "/Volumes/Panther/3D Style Atlas/28-cardboard-stop-motion",
           "topic": "\"How to plant a seed\" on a cardboard workbench set.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/28-cardboard-stop-motion/renders/28-cardboard-stop-motion.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/28-cardboard-stop-motion/renders/28-cardboard-stop-motion.mp4",
           "mp4MB": 5.4
         }
       ],
@@ -274,9 +274,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/21-chalkboard",
+          "project": "/Volumes/Panther/3D Style Atlas/21-chalkboard",
           "topic": "\"Why AI makes things up\" on a classroom chalkboard.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/21-chalkboard/renders/21-chalkboard.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/21-chalkboard/renders/21-chalkboard.mp4",
           "mp4MB": 4.3
         }
       ],
@@ -321,9 +321,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/27-circuit-board",
+          "project": "/Volumes/Panther/3D Style Atlas/27-circuit-board",
           "topic": "\"How a signal moves through a circuit\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/27-circuit-board/renders/27-circuit-board.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/27-circuit-board/renders/27-circuit-board.mp4",
           "mp4MB": 5.4
         }
       ],
@@ -366,9 +366,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/48-city-lights",
+          "project": "/Volumes/Panther/3D Style Atlas/48-city-lights",
           "topic": "\"Every window, a pixel\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/48-city-lights/renders/48-city-lights.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/48-city-lights/renders/48-city-lights.mp4",
           "mp4MB": 10.9
         }
       ],
@@ -413,9 +413,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/34-clockwork",
+          "project": "/Volumes/Panther/3D Style Atlas/34-clockwork",
           "topic": "a mechanical movement where one balance paces everything.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/34-clockwork/renders/34-clockwork.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/34-clockwork/renders/34-clockwork.mp4",
           "mp4MB": 6
         }
       ],
@@ -453,9 +453,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/68-constructivist-poster",
+          "project": "/Volumes/Panther/3D Style Atlas/68-constructivist-poster",
           "topic": "a Constructivist poster that builds itself with force.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/68-constructivist-poster/renders/68-constructivist-poster.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/68-constructivist-poster/renders/68-constructivist-poster.mp4",
           "mp4MB": 2.6
         }
       ],
@@ -505,9 +505,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/47-conveyor-factory",
+          "project": "/Volumes/Panther/3D Style Atlas/47-conveyor-factory",
           "topic": "\"An order, packed\" on a bright packing line.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/47-conveyor-factory/renders/47-conveyor-factory.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/47-conveyor-factory/renders/47-conveyor-factory.mp4",
           "mp4MB": 7.1
         }
       ],
@@ -545,9 +545,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/17-crt-retro",
+          "project": "/Volumes/Panther/3D Style Atlas/17-crt-retro",
           "topic": "\"ELIZA, 1966: the first chatbot\" on a beige CRT terminal at night.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/17-crt-retro/renders/17-crt-retro.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/17-crt-retro/renders/17-crt-retro.mp4",
           "mp4MB": 4.5
         }
       ],
@@ -581,9 +581,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/62-cubism",
+          "project": "/Volumes/Panther/3D Style Atlas/62-cubism",
           "topic": "\"One object, many views\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/62-cubism/renders/62-cubism.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/62-cubism/renders/62-cubism.mp4",
           "mp4MB": 10.2
         }
       ],
@@ -619,9 +619,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/53-cymatics",
+          "project": "/Volumes/Panther/3D Style Atlas/53-cymatics",
           "topic": "\"Sound has a shape\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/53-cymatics/renders/53-cymatics.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/53-cymatics/renders/53-cymatics.mp4",
           "mp4MB": 11.6
         }
       ],
@@ -658,9 +658,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/37-domino-run",
+          "project": "/Volumes/Panther/3D Style Atlas/37-domino-run",
           "topic": "\"One small push\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/37-domino-run/renders/37-domino-run.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/37-domino-run/renders/37-domino-run.mp4",
           "mp4MB": 11
         }
       ],
@@ -695,9 +695,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/19-embossed-letterpress",
+          "project": "/Volumes/Panther/3D Style Atlas/19-embossed-letterpress",
           "topic": "\"The three parts of a good prompt\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/19-embossed-letterpress/renders/19-embossed-letterpress.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/19-embossed-letterpress/renders/19-embossed-letterpress.mp4",
           "mp4MB": 5.3
         }
       ],
@@ -740,9 +740,9 @@
       "hasNodeSafeFourthModule": false,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/38-evidence-board",
+          "project": "/Volumes/Panther/3D Style Atlas/38-evidence-board",
           "topic": "\"Why does the fern keep wilting?\" on a cork board.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/38-evidence-board/renders/38-evidence-board.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/38-evidence-board/renders/38-evidence-board.mp4",
           "mp4MB": 6.3
         }
       ],
@@ -784,9 +784,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/10-exploded-view",
+          "project": "/Volumes/Panther/3D Style Atlas/10-exploded-view",
           "topic": "\"Inside a robot vacuum\" as a premium exploded teardown.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/10-exploded-view/renders/10-exploded-view.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/10-exploded-view/renders/10-exploded-view.mp4",
           "mp4MB": 5.6
         }
       ],
@@ -828,9 +828,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/15-felt-stitch",
+          "project": "/Volumes/Panther/3D Style Atlas/15-felt-stitch",
           "topic": "\"AI agents working as a team\" on a felt story board.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/15-felt-stitch/renders/15-felt-stitch.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/15-felt-stitch/renders/15-felt-stitch.mp4",
           "mp4MB": 8.6
         }
       ],
@@ -865,9 +865,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/54-ferrofluid",
+          "project": "/Volumes/Panther/3D Style Atlas/54-ferrofluid",
           "topic": ". Every frame is a pure function of t: the field plan (scene.config.js FIELD, the style's field.js) gives the magnets' positions and strengths at t; the fluid shader, the magnet meshes and the caption",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/54-ferrofluid/renders/54-ferrofluid.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/54-ferrofluid/renders/54-ferrofluid.mp4",
           "mp4MB": 5
         }
       ],
@@ -909,9 +909,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/30-film-projector",
+          "project": "/Volumes/Panther/3D Style Atlas/30-film-projector",
           "topic": "\"How a letter travels\" (SAMPLE) as a silent film in a screening room.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/30-film-projector/renders/30-film-projector.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/30-film-projector/renders/30-film-projector.mp4",
           "mp4MB": 4.6
         }
       ],
@@ -946,9 +946,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/69-flipbook",
+          "project": "/Volumes/Panther/3D Style Atlas/69-flipbook",
           "topic": "\"Drawings come alive\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/69-flipbook/renders/69-flipbook.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/69-flipbook/renders/69-flipbook.mp4",
           "mp4MB": 6.6
         }
       ],
@@ -986,9 +986,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/18-floating-screens",
+          "project": "/Volumes/Panther/3D Style Atlas/18-floating-screens",
           "topic": "\"How RAG works\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/18-floating-screens/renders/18-floating-screens.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/18-floating-screens/renders/18-floating-screens.mp4",
           "mp4MB": 5.1
         }
       ],
@@ -1029,9 +1029,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/22-glass-light",
+          "project": "/Volumes/Panther/3D Style Atlas/22-glass-light",
           "topic": "\"Multimodal AI: many inputs, one model\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/22-glass-light/renders/22-glass-light.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/22-glass-light/renders/22-glass-light.mp4",
           "mp4MB": 9.5
         }
       ],
@@ -1070,9 +1070,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/36-hanging-mobile",
+          "project": "/Volumes/Panther/3D Style Atlas/36-hanging-mobile",
           "topic": "\"Add one thing and everything shifts\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/36-hanging-mobile/renders/36-hanging-mobile.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/36-hanging-mobile/renders/36-hanging-mobile.mp4",
           "mp4MB": 4
         }
       ],
@@ -1108,9 +1108,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/64-impasto",
+          "project": "/Volumes/Panther/3D Style Atlas/64-impasto",
           "topic": "a night landscape painted stroke by stroke in thick oil.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/64-impasto/renders/64-impasto.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/64-impasto/renders/64-impasto.mp4",
           "mp4MB": 11.4
         }
       ],
@@ -1147,9 +1147,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/58-impossible-geometry",
+          "project": "/Volumes/Panther/3D Style Atlas/58-impossible-geometry",
           "topic": "\"The endless stair\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/58-impossible-geometry/renders/58-impossible-geometry.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/58-impossible-geometry/renders/58-impossible-geometry.mp4",
           "mp4MB": 1.6
         }
       ],
@@ -1190,9 +1190,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/42-inflatable",
+          "project": "/Volumes/Panther/3D Style Atlas/42-inflatable",
           "topic": "\"Just add air\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/42-inflatable/renders/42-inflatable.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/42-inflatable/renders/42-inflatable.mp4",
           "mp4MB": 6.4
         }
       ],
@@ -1230,9 +1230,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/49-ink-wash",
+          "project": "/Volumes/Panther/3D Style Atlas/49-ink-wash",
           "topic": "\"a short journey\" painted in brush and ink.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/49-ink-wash/renders/49-ink-wash.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/49-ink-wash/renders/49-ink-wash.mp4",
           "mp4MB": 3.3
         }
       ],
@@ -1275,9 +1275,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/20-isometric-pastel",
+          "project": "/Volumes/Panther/3D Style Atlas/20-isometric-pastel",
           "topic": "\"The AI stack\" — four floors (chips, data centres, models, apps) stack up on a dot grid.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/20-isometric-pastel/renders/20-isometric-pastel.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/20-isometric-pastel/renders/20-isometric-pastel.mp4",
           "mp4MB": 4.4
         }
       ],
@@ -1311,9 +1311,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/63-kintsugi",
+          "project": "/Volumes/Panther/3D Style Atlas/63-kintsugi",
           "topic": "\"The break becomes beauty\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/63-kintsugi/renders/63-kintsugi.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/63-kintsugi/renders/63-kintsugi.mp4",
           "mp4MB": 4.4
         }
       ],
@@ -1357,9 +1357,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/45-lab-glassware",
+          "project": "/Volumes/Panther/3D Style Atlas/45-lab-glassware",
           "topic": "measure, pour, mix, tip, fizz (SAMPLE DATA).",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/45-lab-glassware/renders/45-lab-glassware.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/45-lab-glassware/renders/45-lab-glassware.mp4",
           "mp4MB": 6.1
         }
       ],
@@ -1396,9 +1396,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/59-light-painting",
+          "project": "/Volumes/Panther/3D Style Atlas/59-light-painting",
           "topic": "\"Made of time, not matter\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/59-light-painting/renders/59-light-painting.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/59-light-painting/renders/59-light-painting.mp4",
           "mp4MB": 2.3
         }
       ],
@@ -1433,9 +1433,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/23-liquid-chrome",
+          "project": "/Volumes/Panther/3D Style Atlas/23-liquid-chrome",
           "topic": "\"What is a foundation model?\" Every frame is a pure function of t.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/23-liquid-chrome/renders/23-liquid-chrome.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/23-liquid-chrome/renders/23-liquid-chrome.mp4",
           "mp4MB": 9.5
         }
       ],
@@ -1475,9 +1475,9 @@
       "hasNodeSafeFourthModule": false,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/01-low-poly",
+          "project": "/Volumes/Panther/3D Style Atlas/01-low-poly",
           "topic": "\"How a neural network learns\" as gradient descent on a low-poly island.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/01-low-poly/renders/01-low-poly.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/01-low-poly/renders/01-low-poly.mp4",
           "mp4MB": 7.5
         }
       ],
@@ -1522,9 +1522,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/11-marble-run",
+          "project": "/Volumes/Panther/3D Style Atlas/11-marble-run",
           "topic": "\"What is a context window?\" on a wooden marble machine.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/11-marble-run/renders/11-marble-run.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/11-marble-run/renders/11-marble-run.mp4",
           "mp4MB": 8.6
         }
       ],
@@ -1559,9 +1559,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/60-microscope-slide",
+          "project": "/Volumes/Panther/3D Style Atlas/60-microscope-slide",
           "topic": "the view down a light microscope.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/60-microscope-slide/renders/60-microscope-slide.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/60-microscope-slide/renders/60-microscope-slide.mp4",
           "mp4MB": 1.7
         }
       ],
@@ -1606,9 +1606,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/46-mixing-console",
+          "project": "/Volumes/Panther/3D Style Atlas/46-mixing-console",
           "topic": "\"Balancing a mix\" (SAMPLE DATA) on a vintage analogue console.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/46-mixing-console/renders/46-mixing-console.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/46-mixing-console/renders/46-mixing-console.mp4",
           "mp4MB": 8.8
         }
       ],
@@ -1644,9 +1644,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/67-mosaic",
+          "project": "/Volumes/Panther/3D Style Atlas/67-mosaic",
           "topic": "a fish over waves, set tile by tile.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/67-mosaic/renders/67-mosaic.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/67-mosaic/renders/67-mosaic.mp4",
           "mp4MB": 9.6
         }
       ],
@@ -1679,9 +1679,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/66-multiplane-cel",
+          "project": "/Volumes/Panther/3D Style Atlas/66-multiplane-cel",
           "topic": "\"Painted on glass\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/66-multiplane-cel/renders/66-multiplane-cel.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/66-multiplane-cel/renders/66-multiplane-cel.mp4",
           "mp4MB": 7.5
         }
       ],
@@ -1717,9 +1717,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/57-murmuration",
+          "project": "/Volumes/Panther/3D Style Atlas/57-murmuration",
           "topic": "\"Simple rules make a shape\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/57-murmuration/renders/57-murmuration.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/57-murmuration/renders/57-murmuration.mp4",
           "mp4MB": 13.6
         }
       ],
@@ -1752,9 +1752,9 @@
       "hasNodeSafeFourthModule": false,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/03-neon-sign",
+          "project": "/Volumes/Panther/3D Style Atlas/03-neon-sign",
           "topic": "\"What is a token?\" Every frame is a pure function of t.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/03-neon-sign/renders/03-neon-sign.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/03-neon-sign/renders/03-neon-sign.mp4",
           "mp4MB": 9.9
         }
       ],
@@ -1778,9 +1778,9 @@
       "hasNodeSafeFourthModule": false,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/00-smoke",
+          "project": "/Volumes/Panther/3D Style Atlas/00-smoke",
           "topic": "neutral style, data from scene.config.js, everything a pure function of t.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/00-smoke/renders/00-smoke.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/00-smoke/renders/00-smoke.mp4",
           "mp4MB": 0.8
         }
       ],
@@ -1818,9 +1818,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/29-newspaper-press",
+          "project": "/Volumes/Panther/3D Style Atlas/29-newspaper-press",
           "topic": "\"How news gets made\" on a broadsheet front page.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/29-newspaper-press/renders/29-newspaper-press.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/29-newspaper-press/renders/29-newspaper-press.mp4",
           "mp4MB": 11.1
         }
       ],
@@ -1855,9 +1855,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/65-op-art",
+          "project": "/Volumes/Panther/3D Style Atlas/65-op-art",
           "topic": "\"It was flat all along\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/65-op-art/renders/65-op-art.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/65-op-art/renders/65-op-art.mp4",
           "mp4MB": 6.1
         }
       ],
@@ -1894,9 +1894,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/14-origami",
+          "project": "/Volumes/Panther/3D Style Atlas/14-origami",
           "topic": "\"One square, no cuts\" — two kami sheets on a writing desk fold into a standing swan and a heart; the heart then stands up beside the swan.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/14-origami/renders/14-origami.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/14-origami/renders/14-origami.mp4",
           "mp4MB": 7.3
         }
       ],
@@ -1932,9 +1932,9 @@
       "hasNodeSafeFourthModule": false,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/02-paper-pop-up",
+          "project": "/Volumes/Panther/3D Style Atlas/02-paper-pop-up",
           "topic": "\"A short history of AI\" in four pop-up spreads.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/02-paper-pop-up/renders/02-paper-pop-up.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/02-paper-pop-up/renders/02-paper-pop-up.mp4",
           "mp4MB": 7.9
         }
       ],
@@ -1971,9 +1971,9 @@
       "hasNodeSafeFourthModule": false,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/50-pin-art",
+          "project": "/Volumes/Panther/3D Style Atlas/50-pin-art",
           "topic": "\"This becomes that\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/50-pin-art/renders/50-pin-art.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/50-pin-art/renders/50-pin-art.mp4",
           "mp4MB": 9.5
         }
       ],
@@ -2020,9 +2020,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/43-pinball-table",
+          "project": "/Volumes/Panther/3D Style Atlas/43-pinball-table",
           "topic": "\"Finish a project\" as one ball's run.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/43-pinball-table/renders/43-pinball-table.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/43-pinball-table/renders/43-pinball-table.mp4",
           "mp4MB": 8.1
         }
       ],
@@ -2058,9 +2058,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/55-point-cloud",
+          "project": "/Volumes/Panther/3D Style Atlas/55-point-cloud",
           "topic": "a LiDAR scan made only of dots.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/55-point-cloud/renders/55-point-cloud.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/55-point-cloud/renders/55-point-cloud.mp4",
           "mp4MB": 12.3
         }
       ],
@@ -2097,9 +2097,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/39-shadow-puppets",
+          "project": "/Volumes/Panther/3D Style Atlas/39-shadow-puppets",
           "topic": "\"The Tall Tale\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/39-shadow-puppets/renders/39-shadow-puppets.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/39-shadow-puppets/renders/39-shadow-puppets.mp4",
           "mp4MB": 3
         }
       ],
@@ -2134,9 +2134,9 @@
       "hasNodeSafeFourthModule": false,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/04-soft-clay",
+          "project": "/Volumes/Panther/3D Style Atlas/04-soft-clay",
           "topic": "\"What is training data?\" in clay.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/04-soft-clay/renders/04-soft-clay.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/04-soft-clay/renders/04-soft-clay.mp4",
           "mp4MB": 4.5
         }
       ],
@@ -2172,9 +2172,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/07-split-flap-board",
+          "project": "/Volumes/Panther/3D Style Atlas/07-split-flap-board",
           "topic": "\"What can AI do today?\" on a split-flap departure board.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/07-split-flap-board/renders/07-split-flap-board.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/07-split-flap-board/renders/07-split-flap-board.mp4",
           "mp4MB": 7.1
         }
       ],
@@ -2218,9 +2218,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/09-spotlight-stage",
+          "project": "/Volumes/Panther/3D Style Atlas/09-spotlight-stage",
           "topic": "\"The Turing Test\" on a toy-theatre stage.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/09-spotlight-stage/renders/09-spotlight-stage.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/09-spotlight-stage/renders/09-spotlight-stage.mp4",
           "mp4MB": 8.3
         }
       ],
@@ -2255,9 +2255,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/25-stained-glass",
+          "project": "/Volumes/Panther/3D Style Atlas/25-stained-glass",
           "topic": "\"What a tree needs\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/25-stained-glass/renders/25-stained-glass.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/25-stained-glass/renders/25-stained-glass.mp4",
           "mp4MB": 7.1
         }
       ],
@@ -2302,9 +2302,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/44-star-chart",
+          "project": "/Volumes/Panther/3D Style Atlas/44-star-chart",
           "topic": "\"How a song comes together\" as two invented constellations on a planetarium dome.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/44-star-chart/renders/44-star-chart.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/44-star-chart/renders/44-star-chart.mp4",
           "mp4MB": 7.2
         }
       ],
@@ -2342,9 +2342,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/41-sticky-notes",
+          "project": "/Volumes/Panther/3D Style Atlas/41-sticky-notes",
           "topic": "a planning wall (brainstorm -> cluster -> vote -> move work across).",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/41-sticky-notes/renders/41-sticky-notes.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/41-sticky-notes/renders/41-sticky-notes.mp4",
           "mp4MB": 3.5
         }
       ],
@@ -2386,9 +2386,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/12-studio-product",
+          "project": "/Volumes/Panther/3D Style Atlas/12-studio-product",
           "topic": "\"On-device AI: the chip in your pocket\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/12-studio-product/renders/12-studio-product.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/12-studio-product/renders/12-studio-product.mp4",
           "mp4MB": 6.6
         }
       ],
@@ -2428,9 +2428,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/26-subway-map",
+          "project": "/Volumes/Panther/3D Style Atlas/26-subway-map",
           "topic": "\"Idea to launch\" drawn as a physical transit map.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/26-subway-map/renders/26-subway-map.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/26-subway-map/renders/26-subway-map.mp4",
           "mp4MB": 2.7
         }
       ],
@@ -2473,9 +2473,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/32-terrarium",
+          "project": "/Volumes/Panther/3D Style Atlas/32-terrarium",
           "topic": "a sealed bottle garden builds and cycles on a windowsill.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/32-terrarium/renders/32-terrarium.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/32-terrarium/renders/32-terrarium.mp4",
           "mp4MB": 6.4
         }
       ],
@@ -2507,9 +2507,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/56-thermal-camera",
+          "project": "/Volumes/Panther/3D Style Atlas/56-thermal-camera",
           "topic": "a desk seen through a thermal imager.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/56-thermal-camera/renders/56-thermal-camera.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/56-thermal-camera/renders/56-thermal-camera.mp4",
           "mp4MB": 1.8
         }
       ],
@@ -2551,9 +2551,9 @@
       "hasNodeSafeFourthModule": false,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/05-tiny-diorama",
+          "project": "/Volumes/Panther/3D Style Atlas/05-tiny-diorama",
           "topic": "\"Where does your prompt go?\" on one floating diorama tile.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/05-tiny-diorama/renders/05-tiny-diorama.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/05-tiny-diorama/renders/05-tiny-diorama.mp4",
           "mp4MB": 5.3
         }
       ],
@@ -2591,9 +2591,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/16-toy-brick",
+          "project": "/Volumes/Panther/3D Style Atlas/16-toy-brick",
           "topic": "\"What's inside a large language model?\" as a toy-brick tower you build.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/16-toy-brick/renders/16-toy-brick.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/16-toy-brick/renders/16-toy-brick.mp4",
           "mp4MB": 5.4
         }
       ],
@@ -2635,9 +2635,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/61-ukiyo-e",
+          "project": "/Volumes/Panther/3D Style Atlas/61-ukiyo-e",
           "topic": "one woodblock print made in passes.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/61-ukiyo-e/renders/61-ukiyo-e.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/61-ukiyo-e/renders/61-ukiyo-e.mp4",
           "mp4MB": 4.8
         }
       ],
@@ -2673,9 +2673,9 @@
       "hasNodeSafeFourthModule": false,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/08-voxel",
+          "project": "/Volumes/Panther/3D Style Atlas/08-voxel",
           "topic": "\"How AI makes an image\" (diffusion = step-by-step denoising) in the Voxel Studio style.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/08-voxel/renders/08-voxel.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/08-voxel/renders/08-voxel.mp4",
           "mp4MB": 10.6
         }
       ],
@@ -2716,9 +2716,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/24-wam-house",
+          "project": "/Volumes/Panther/3D Style Atlas/24-wam-house",
           "topic": "the Why AI Matters channel package reel.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/24-wam-house/renders/24-wam-house.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/24-wam-house/renders/24-wam-house.mp4",
           "mp4MB": 2.9
         }
       ],
@@ -2760,9 +2760,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/31-weather-map",
+          "project": "/Volumes/Panther/3D Style Atlas/31-weather-map",
           "topic": "\"What's coming\" on a physical broadcast weather map.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/31-weather-map/renders/31-weather-map.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/31-weather-map/renders/31-weather-map.mp4",
           "mp4MB": 9.6
         }
       ],
@@ -2806,9 +2806,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/13-wireframe-hologram",
+          "project": "/Volumes/Panther/3D Style Atlas/13-wireframe-hologram",
           "topic": "\"How a neural network reads a digit\".",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/13-wireframe-hologram/renders/13-wireframe-hologram.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/13-wireframe-hologram/renders/13-wireframe-hologram.mp4",
           "mp4MB": 9.6
         }
       ],
@@ -2846,9 +2846,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/35-zen-sand",
+          "project": "/Volumes/Panther/3D Style Atlas/35-zen-sand",
           "topic": "\"clearing the noise\" in a raked dry garden.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/35-zen-sand/renders/35-zen-sand.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/35-zen-sand/renders/35-zen-sand.mp4",
           "mp4MB": 5.2
         }
       ],
@@ -2885,9 +2885,9 @@
       "hasNodeSafeFourthModule": true,
       "demos": [
         {
-          "project": "Builder/HyperFrames/3d-style-atlas-pilot/52-zoetrope",
+          "project": "/Volumes/Panther/3D Style Atlas/52-zoetrope",
           "topic": "a 3D zoetrope.",
-          "mp4": "Builder/HyperFrames/3d-style-atlas-pilot/52-zoetrope/renders/52-zoetrope.mp4",
+          "mp4": "/Volumes/Panther/3D Style Atlas/52-zoetrope/renders/52-zoetrope.mp4",
           "mp4MB": 10.8
         }
       ],
