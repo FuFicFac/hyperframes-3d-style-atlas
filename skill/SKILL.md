@@ -14,7 +14,7 @@ All of it was written in-house. Do not copy from third-party prompt packs or tem
 ## Where things are
 
 `SK` = this folder: `<D Second Brain>/Skills/3d-style-atlas`. On the M1 MacBook Pro that is
-`/Users/user/Library/CloudStorage/Dropbox/D Second Brain/Skills/3d-style-atlas`; on any other machine use that machine's
+`~/Library/CloudStorage/Dropbox/D Second Brain/Skills/3d-style-atlas`; on any other machine use that machine's
 own D Second Brain path (if you reached this file through a symlink in `~/.claude/skills`, `~/.codex/skills` etc., resolve it
 first). The scripts find the kit and the pilot folder relative to themselves, so only `SK` changes. Needs Node and
 `npx hyperframes` (headless Chrome) on the machine doing the render.
@@ -63,7 +63,7 @@ first). The scripts find the kit and the pilot folder relative to themselves, so
 3. **Scaffold.** Put the project inside the folder of whatever it belongs to (an episode folder, or `Builder/HyperFrames/` for standalone
    work) — never in a temp directory.
    ```bash
-   SK="/Users/user/Library/CloudStorage/Dropbox/D Second Brain/Skills/3d-style-atlas"
+   SK="$HOME/Library/CloudStorage/Dropbox/D Second Brain/Skills/3d-style-atlas"
    node "$SK/scripts/new-scene.mjs" <project-dir> --style <id> --duration 15
    ```
 4. **Write the scene.** Copy the structure of that style's demo project (`scene.config.js` = duration, BEATS, camera keys, SCORE;

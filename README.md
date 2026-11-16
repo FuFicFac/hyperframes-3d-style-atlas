@@ -10,7 +10,7 @@ Each subfolder is a HyperFrames project built on `Skills/3d-style-atlas`. The fu
 
 To rebuild:
 ```bash
-SK="/Users/user/Library/CloudStorage/Dropbox/D Second Brain/Skills/3d-style-atlas"
+SK="$HOME/Library/CloudStorage/Dropbox/D Second Brain/Skills/3d-style-atlas"
 cd 00-smoke && node "$SK/scripts/sync-kit.mjs" . && node "$SK/scripts/render-sfx.mjs" . \
   && npx hyperframes lint && npx hyperframes render --output renders/00-smoke.mp4 --fps 30
 ```

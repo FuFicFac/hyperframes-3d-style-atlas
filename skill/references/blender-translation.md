@@ -875,7 +875,7 @@ Run from any scratch directory with Node ≥ 20. `SK` is the skill folder.
 
 ```js
 // dump.mjs
-const SK = "/Users/user/Library/CloudStorage/Dropbox/D Second Brain/Skills/3d-style-atlas";
+const SK = `${process.env.HOME}/Library/CloudStorage/Dropbox/D Second Brain/Skills/3d-style-atlas`;
 const THREE = await import("file://" + encodeURI(SK + "/vendor/three/three.module.min.js"));
 const { ease } = await import("file://" + encodeURI(SK + "/kit/time.js"));
 const out = { ease: {}, cam: null };

@@ -11,3 +11,6 @@ node_modules/
 /_ALL VIDEOS/Breakout 51-70 - Numbered.mp4
 *conflicted copy*
 ._*
+# machine-local HyperFrames editor state
+**/.hyperframes/video-state.json
+.*hf-transaction-*/

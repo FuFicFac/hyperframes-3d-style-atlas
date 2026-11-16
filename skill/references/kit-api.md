@@ -600,7 +600,7 @@ and `<script type="module" src="./scene.js">`. Keep `data-duration` equal to `DU
 
 New scene and the one-command build (preferred):
 ```bash
-SK="/Users/user/Library/CloudStorage/Dropbox/D Second Brain/Skills/3d-style-atlas"
+SK="$HOME/Library/CloudStorage/Dropbox/D Second Brain/Skills/3d-style-atlas"
 node "$SK/scripts/new-scene.mjs" <project dir> --style <id> [--duration 6]   # valid project wired to the style
 node "$SK/scripts/build.mjs" <project dir> [--checks 1,4.5,9] [--blender] [--crf 22] [--skip-render]
 #   sync-kit -> render-sfx -> export-spec -> lint (0 err, 0 warn) -> check -> render (standard, CRF 22); exits 1 on failure
@@ -613,7 +613,7 @@ Encode default: `--quality standard --crf 22` (x264 medium); override with `buil
 
 The individual steps:
 ```bash
-SK="/Users/user/Library/CloudStorage/Dropbox/D Second Brain/Skills/3d-style-atlas"
+SK="$HOME/Library/CloudStorage/Dropbox/D Second Brain/Skills/3d-style-atlas"
 cd "<project dir>"                          # e.g. .../Builder/HyperFrames/3d-style-atlas-pilot/00-smoke
 node "$SK/scripts/sync-kit.mjs" .           # copy kit/styles/vendor -> ./_atlas (re-run after kit/style edits)
 node "$SK/scripts/render-sfx.mjs" .         # scene.config.js SCORE -> ./sfx.wav (deterministic)

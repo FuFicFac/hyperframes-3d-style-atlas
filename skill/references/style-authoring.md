@@ -33,7 +33,7 @@ lists every style, its props, demo and category — check it so a new style isn'
 ## 2. Workflow
 
 ```bash
-SK="/Users/user/Library/CloudStorage/Dropbox/D Second Brain/Skills/3d-style-atlas"
+SK="$HOME/Library/CloudStorage/Dropbox/D Second Brain/Skills/3d-style-atlas"
 cp -R "$SK/styles/neutral" "$SK/styles/<id>"                       # start from the reference style; rename id/name
 node "$SK/scripts/new-scene.mjs" <proj> --style <id> --duration 15  # valid, lint-clean project wired to the style
 node "$SK/scripts/build.mjs" <proj> --skip-render                   # sync -> sfx -> spec -> lint -> check (fast loop)
