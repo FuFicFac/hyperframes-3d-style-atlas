@@ -42,10 +42,10 @@ chart-recorder, wind-tunnel, darkroom, sky-lanterns, mirror-ball, tree-rings, ho
 snow-globe, orrery, crystal-growth, block-tower, nixie-tubes, soap-bubbles.
 
 After the run: `node scripts/build-index.mjs` and `node scripts/build-gallery.mjs` (skill folder), review stills, update
-SKILL.md's style count and good-for table. Nothing has been committed or pushed.
+SKILL.md's style count and good-for table.
 
 ## Run closed 2026-11-18
 
 14 styles added (71–84). Index (`references/style-index.json`, `STYLES.md`), `gallery.html` and `contact-sheet.jpg` rebuilt for 84 styles;
-`SKILL.md` updated. Nothing committed or pushed; the GitHub repo, the `skill/` snapshot in this folder, the combined videos in `_ALL VIDEOS`
-and the public site still stop at 70. Rows 85–100 and the reserve list are unbuilt ideas for a future run.
+`SKILL.md` updated. Committed and pushed to GitHub as aa66aac (demos 71-84, refreshed `skill/` snapshot, gallery). The combined videos in
+`_ALL VIDEOS` and the public site still stop at 70. Rows 85–100 and the reserve list are unbuilt ideas for a future run.
