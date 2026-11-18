@@ -1,0 +1,1109 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "ship-in-bottle",
+    "name": "Ship in a Bottle",
+    "description": "A bright modeller's bench in daylight: a large clear glass bottle lies on a wooden cradle, and a small wooden sailing ship (walnut hull with a red boot and a cream strake, three masts, pleated paper fan sails, thread rigging) is built outside the bottle with its masts hinged flat against the deck. The long thin bundle slides through the narrow neck on a wire, settles onto a blue putty sea, and one thread running out of the neck is pulled: the masts swing upright fore to aft, the sails fan open and the rigging draws taut. A cork goes in. One plan (rigging.js) turns thread length pulled into every hinge angle in closed form, places every thread point (taut or sagging by its slack), carries the insertion path, proves in Node that the folded bundle clears the neck and the raised ship clears the glass, and writes the score.",
+    "palette": {
+      "bg": "#e9eef0",
+      "wall": "#eef2f3",
+      "bench": "#ead9b8",
+      "mat": "#c4dcc8",
+      "matLine": "#e4f0e4",
+      "glass": "#dcefe9",
+      "cork": "#c79a62",
+      "sea": "#2f86d0",
+      "seaDeep": "#1f66b0",
+      "foam": "#e8f4ff",
+      "hullRed": "#c2442e",
+      "hullWood": "#7b4a2a",
+      "hullCream": "#f5e8c8",
+      "deck": "#dcb97c",
+      "mast": "#b98a52",
+      "sail": "#fbf4e2",
+      "sailStripe": "#d9482f",
+      "thread": "#f2ead8",
+      "knot": "#d9482f",
+      "brass": "#d7ab55",
+      "steel": "#aab2bc",
+      "cradle": "#b88752",
+      "ink": "#22303c",
+      "plate": "#fbf7ec",
+      "primary": "#2f86d0",
+      "secondary": "#c2442e",
+      "accent": "#d7ab55"
+    },
+    "world": {
+      "background": "#e9eef0",
+      "fog": {
+        "color": "#e9eef0",
+        "near": 22,
+        "far": 48
+      },
+      "environment": "room",
+      "environmentIntensity": 0.6,
+      "toneMapping": "neutral",
+      "exposure": 1.02,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "bench": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.7,
+        "metalness": 0
+      },
+      "mat": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.85,
+        "metalness": 0
+      },
+      "wall": {
+        "type": "standard",
+        "baseColor": "#eef2f3",
+        "roughness": 1,
+        "metalness": 0
+      },
+      "cradle": {
+        "type": "standard",
+        "baseColor": "#b88752",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "plank": {
+        "type": "standard",
+        "baseColor": "#d8b47e",
+        "roughness": 0.62,
+        "metalness": 0
+      },
+      "hull": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.55,
+        "metalness": 0,
+        "vertexColors": true,
+        "side": "double"
+      },
+      "mast": {
+        "type": "standard",
+        "baseColor": "#b98a52",
+        "roughness": 0.55,
+        "metalness": 0
+      },
+      "sail": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "flatShading": true,
+        "side": "double"
+      },
+      "flag": {
+        "type": "standard",
+        "baseColor": "#d9482f",
+        "roughness": 0.8,
+        "metalness": 0,
+        "side": "double"
+      },
+      "thread": {
+        "type": "standard",
+        "baseColor": "#f2ead8",
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      "knot": {
+        "type": "standard",
+        "baseColor": "#d9482f",
+        "roughness": 0.7,
+        "metalness": 0
+      },
+      "brass": {
+        "type": "physical",
+        "baseColor": "#d7ab55",
+        "roughness": 0.25,
+        "metalness": 1
+      },
+      "steel": {
+        "type": "physical",
+        "baseColor": "#aab2bc",
+        "roughness": 0.25,
+        "metalness": 1
+      },
+      "sea": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.42,
+        "metalness": 0,
+        "vertexColors": true,
+        "side": "double"
+      },
+      "cork": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      "spool": {
+        "type": "standard",
+        "baseColor": "#e9dcc0",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "pencil": {
+        "type": "standard",
+        "baseColor": "#f0b429",
+        "roughness": 0.5,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "sky",
+        "type": "hemisphere",
+        "color": "#fbfdff",
+        "groundColor": "#e8dcc4",
+        "intensity": 1.05
+      },
+      {
+        "id": "sun",
+        "type": "directional",
+        "color": "#fff4e2",
+        "intensity": 2.3,
+        "position": [
+          -4.5,
+          8.5,
+          6
+        ],
+        "target": [
+          1.2,
+          0.6,
+          0
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 4096,
+          "extent": 6.2,
+          "near": 1,
+          "far": 30,
+          "bias": -0.0004,
+          "normalBias": 0.015
+        }
+      },
+      {
+        "id": "fill",
+        "type": "directional",
+        "color": "#e8f1ff",
+        "intensity": 0.5,
+        "position": [
+          5,
+          3,
+          5
+        ],
+        "target": [
+          0,
+          1,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.12,
+        "radius": 0.4,
+        "threshold": 2.7
+      },
+      "vignette": {
+        "darkness": 0.18,
+        "offset": 1.15
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.3,
+      "far": 70,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#22303c",
+      "height": 0.3
+    },
+    "bottle": {
+      "axisY": 1.12,
+      "baseX": -2.3,
+      "bodyR": 1,
+      "heel": 0.16,
+      "shoulderX": [
+        1.3,
+        1.95
+      ],
+      "neckR": 0.37,
+      "mouthX": 2.85,
+      "wall": 0.05,
+      "lip": {
+        "len": 0.17,
+        "extra": 0.055
+      },
+      "radial": 96
+    },
+    "glass": {
+      "color": "#a9d4cd",
+      "alphaFace": 0.03,
+      "alphaRim": 0.72,
+      "fresnelPower": 2.8,
+      "rimStrength": 0.12,
+      "envIntensity": 0.22,
+      "roughness": 0.06,
+      "clearcoat": 0,
+      "specular": 0.22,
+      "thick": {
+        "alphaFace": 0.16,
+        "alphaRim": 0.8
+      },
+      "streaks": [
+        {
+          "at": 1.02,
+          "width": 0.1,
+          "opacity": 0.5
+        },
+        {
+          "at": 1.2,
+          "width": 0.035,
+          "opacity": 0.4
+        },
+        {
+          "at": -0.95,
+          "width": 0.08,
+          "opacity": 0.2
+        }
+      ]
+    },
+    "cradle": {
+      "saddles": [
+        -1.5,
+        0.55
+      ],
+      "halfWidth": 0.95,
+      "top": 0.7,
+      "thick": 0.18,
+      "rail": 0.05
+    },
+    "sea": {
+      "level": -0.56,
+      "x": [
+        -2.24,
+        1.46
+      ],
+      "fall": [
+        1.02,
+        1.46
+      ],
+      "drop": 0.36,
+      "wave": 0.03,
+      "press": 0.015,
+      "nx": 96,
+      "nz": 22,
+      "nb": 14
+    },
+    "ship": {
+      "hull": {
+        "stern": -1.1,
+        "bow": 1.1,
+        "beam": 0.2,
+        "sternBeam": 0.15,
+        "maxAt": -0.1,
+        "bottom": 0.6,
+        "deck": 0.15,
+        "sheer": 0.05,
+        "rail": 0.035,
+        "stations": 44
+      },
+      "bowsprit": {
+        "from": [
+          0.9,
+          0.2
+        ],
+        "tip": [
+          1.5,
+          0.31
+        ],
+        "r": 0.016
+      },
+      "masts": [
+        {
+          "id": "fore",
+          "x": 0.55,
+          "len": 1.1,
+          "fold": 1.379,
+          "up": 0.035,
+          "eyelet": "bowsprit"
+        },
+        {
+          "id": "main",
+          "x": 0,
+          "len": 1.28,
+          "fold": 1.466,
+          "up": 0.035,
+          "eyelet": [
+            0.43,
+            0.06,
+            0.028
+          ]
+        },
+        {
+          "id": "mizzen",
+          "x": -0.55,
+          "len": 0.92,
+          "fold": 1.536,
+          "up": 0.035,
+          "eyelet": [
+            -0.12,
+            0.06,
+            -0.028
+          ]
+        }
+      ],
+      "mast": {
+        "r": 0.022,
+        "rTop": 0.013,
+        "hinge": 0.025
+      },
+      "sail": {
+        "lo": 0.25,
+        "hi": 0.93,
+        "foot": 0.62,
+        "head": 0.46,
+        "pleats": 10,
+        "closed": 0.17,
+        "open": 0.965,
+        "off": 0.036,
+        "billow": 0.05,
+        "openFrom": 0.3,
+        "brace": -0.75
+      },
+      "shroud": {
+        "at": 0.8,
+        "aft": 0.15
+      },
+      "thread": {
+        "r": 0.0065,
+        "tail": 2.4,
+        "knot": 0.12,
+        "marks": [
+          0.3,
+          0.6
+        ],
+        "n": 14
+      },
+      "wire": {
+        "hook": [
+          0.78,
+          0.05,
+          0.07
+        ],
+        "len": 6.5,
+        "r": 0.011
+      },
+      "flag": 0.17
+    },
+    "route": {
+      "xOut": 4.5,
+      "xIn": -0.55,
+      "margin": 0.03
+    },
+    "slip": {
+      "x": [
+        3.02,
+        6.7
+      ],
+      "halfWidth": 0.34,
+      "thick": 0.07
+    },
+    "cork": {
+      "len": 0.56,
+      "r": [
+        0.325,
+        0.39
+      ],
+      "seat": 0.3,
+      "from": 5.4
+    },
+    "timing": {
+      "fold": [
+        [
+          0.5,
+          1.3
+        ],
+        [
+          1.4,
+          2.2
+        ],
+        [
+          2.3,
+          3.1
+        ]
+      ],
+      "wireIn": [
+        2.5,
+        3.4
+      ],
+      "slide": [
+        3.5,
+        6.3
+      ],
+      "lower": [
+        6.3,
+        7.15
+      ],
+      "wireOut": [
+        7.2,
+        7.9
+      ],
+      "pull": [
+        [
+          8.1,
+          9.1
+        ],
+        [
+          9.25,
+          10.25
+        ],
+        [
+          10.4,
+          11.4
+        ]
+      ],
+      "cut": 11.6,
+      "tailOut": [
+        11.6,
+        12.3
+      ],
+      "cork": [
+        11.9,
+        12.6
+      ]
+    },
+    "wood": {
+      "size": 40,
+      "tile": 8,
+      "boards": 5,
+      "seed": 82,
+      "dark": "#dcc59c",
+      "mid": "#ecdcba",
+      "light": "#f6ecd4",
+      "seam": "#cdb389",
+      "contrast": 0.3,
+      "grainFreq": 16
+    },
+    "mat": {
+      "w": 13,
+      "d": 6.4,
+      "x": 1.6,
+      "z": 0.3,
+      "cell": 0.4
+    },
+    "caption": {
+      "x": 960,
+      "y": 44,
+      "h": 112,
+      "cap": 62,
+      "maxW": 1200,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#fbf7ec",
+      "edge": "#2f86d0",
+      "ink": "#22303c",
+      "icon": "#2f86d0"
+    },
+    "sound": {
+      "tap": {
+        "gain": 0.5,
+        "hz": 330
+      },
+      "rustle": {
+        "gain": 0.22
+      },
+      "slide": {
+        "gain": 0.16
+      },
+      "clink": {
+        "gain": 0.3,
+        "hz": 2093
+      },
+      "land": {
+        "gain": 0.3
+      },
+      "wire": {
+        "gain": 0.12
+      },
+      "creak": {
+        "gain": 0.14,
+        "hz": 300
+      },
+      "lock": {
+        "gain": 0.42,
+        "hz": [
+          523.25,
+          659.25,
+          783.99
+        ]
+      },
+      "snip": {
+        "gain": 0.3
+      },
+      "cork": {
+        "gain": 0.6
+      },
+      "done": {
+        "gain": 0.22
+      },
+      "pad": {
+        "gain": 0.24,
+        "root": 130.81,
+        "chord": [
+          0,
+          7,
+          16
+        ],
+        "brightness": 900
+      }
+    },
+    "sfx": {
+      "enter": "tick",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "pop",
+      "emphasis": "marimba",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "One number drives the rigging: thread length pulled. Each mast is a hinge whose angle is a closed form of it (law of cosines on its stay).",
+      "Masts rise fore to aft because each stay has exactly the slack of the masts before it; folding is the same plan run backwards.",
+      "Threads are straight when taut and sag by their slack when not; sails are pleated paper that fans open as the mast comes up.",
+      "The folded bundle slides along the bottle's axis, then is lowered onto the putty sea; the plan proves the clearance at every step.",
+      "Camera: one move per beat, locked during holds; the bottle fills the frame once the ship is inside."
+    ]
+  },
+  "scene": {
+    "id": "82-ship-in-bottle",
+    "style": "ship-in-bottle",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "fold",
+        "t": 0,
+        "dur": 3.5,
+        "label": "Fold it flat"
+      },
+      {
+        "id": "fit",
+        "t": 3.5,
+        "dur": 4.4,
+        "label": "Fit it through the neck"
+      },
+      {
+        "id": "pull",
+        "t": 7.9,
+        "dur": 3.6999999999999993,
+        "label": "Pull one thread"
+      },
+      {
+        "id": "cork",
+        "t": 11.6,
+        "dur": 3.4000000000000004,
+        "label": "Same ship. Small doorway."
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          5.53155,
+          2.59558,
+          4.51837
+        ],
+        "target": [
+          4.31944,
+          1.63983,
+          -0.03803
+        ],
+        "fov": 30
+      },
+      {
+        "t": 3.4,
+        "pos": [
+          5.53155,
+          2.59558,
+          4.51837
+        ],
+        "target": [
+          4.31944,
+          1.63983,
+          -0.03803
+        ],
+        "fov": 30
+      },
+      {
+        "t": 6.2,
+        "pos": [
+          -0.36366,
+          2.59912,
+          6.83339
+        ],
+        "target": [
+          0.32363,
+          1.20358,
+          -0.01663
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 7.2,
+        "pos": [
+          -0.36366,
+          2.59912,
+          6.83339
+        ],
+        "target": [
+          0.32363,
+          1.20358,
+          -0.01663
+        ],
+        "fov": 30
+      },
+      {
+        "t": 8.6,
+        "pos": [
+          0.95081,
+          1.93966,
+          4.79078
+        ],
+        "target": [
+          -0.02509,
+          1.34736,
+          -0.02347
+        ],
+        "fov": 30,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 11.5,
+        "pos": [
+          0.95081,
+          1.93966,
+          4.79078
+        ],
+        "target": [
+          -0.02509,
+          1.34736,
+          -0.02347
+        ],
+        "fov": 30
+      },
+      {
+        "t": 13.1,
+        "pos": [
+          1.45231,
+          2.7703,
+          6.96459
+        ],
+        "target": [
+          0.46827,
+          1.19336,
+          -0.01829
+        ],
+        "fov": 30,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 15,
+        "pos": [
+          1.45231,
+          2.7703,
+          6.96459
+        ],
+        "target": [
+          0.46827,
+          1.19336,
+          -0.01829
+        ],
+        "fov": 30
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "type": "pad",
+        "dur": 15,
+        "root": 130.81,
+        "chord": [
+          0,
+          7,
+          16
+        ],
+        "attack": 0.8,
+        "release": 1.5,
+        "brightness": 900,
+        "gain": 0.24,
+        "pan": 0,
+        "t": 0,
+        "seed": 182
+      },
+      {
+        "type": "paper",
+        "dur": 0.8,
+        "density": 0.4,
+        "gain": 0.22,
+        "t": 0.5,
+        "pan": 0.39499999999999996,
+        "seed": 189
+      },
+      {
+        "type": "marimba",
+        "hz": 409.2,
+        "dur": 0.25,
+        "decay": 0.045,
+        "mallet": 0.9,
+        "gain": 0.5,
+        "t": 1.3,
+        "pan": 0.39499999999999996,
+        "seed": 196
+      },
+      {
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 0.7,
+        "t": 1.3,
+        "pan": 0.39499999999999996,
+        "seed": 197
+      },
+      {
+        "type": "paper",
+        "dur": 0.8000000000000003,
+        "density": 0.4,
+        "gain": 0.22,
+        "t": 1.4,
+        "pan": 0.44999999999999996,
+        "seed": 203
+      },
+      {
+        "type": "marimba",
+        "hz": 369.6,
+        "dur": 0.25,
+        "decay": 0.045,
+        "mallet": 0.9,
+        "gain": 0.5,
+        "t": 2.2,
+        "pan": 0.44999999999999996,
+        "seed": 210
+      },
+      {
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 0.7,
+        "t": 2.2,
+        "pan": 0.44999999999999996,
+        "seed": 211
+      },
+      {
+        "type": "paper",
+        "dur": 0.8000000000000003,
+        "density": 0.4,
+        "gain": 0.22,
+        "t": 2.3,
+        "pan": 0.505,
+        "seed": 217
+      },
+      {
+        "type": "marimba",
+        "hz": 330,
+        "dur": 0.25,
+        "decay": 0.045,
+        "mallet": 0.9,
+        "gain": 0.5,
+        "t": 3.1,
+        "pan": 0.505,
+        "seed": 224
+      },
+      {
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 0.7,
+        "t": 3.1,
+        "pan": 0.505,
+        "seed": 225
+      },
+      {
+        "type": "tick",
+        "gain": 0.25,
+        "pitch": 1.6,
+        "t": 3.4,
+        "pan": 0.44999999999999996,
+        "seed": 231
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 2.8,
+        "q": 0.9,
+        "gain": 0.16,
+        "t": 3.5,
+        "pan": 0.44999999999999996,
+        "seed": 238
+      },
+      {
+        "type": "marimba",
+        "hz": 2093,
+        "dur": 0.7,
+        "decay": 0.16,
+        "mallet": 0.3,
+        "gain": 0.3,
+        "t": 3.8416666666666837,
+        "pan": 0.28500000000000003,
+        "seed": 245
+      },
+      {
+        "type": "marimba",
+        "hz": 3135.314,
+        "dur": 0.5,
+        "decay": 0.1,
+        "mallet": 0.2,
+        "gain": 0.15,
+        "t": 3.8416666666666837,
+        "pan": 0.28500000000000003,
+        "seed": 246
+      },
+      {
+        "type": "marimba",
+        "hz": 2093,
+        "dur": 0.7,
+        "decay": 0.16,
+        "mallet": 0.3,
+        "gain": 0.165,
+        "t": 5.124999999999961,
+        "pan": 0.28500000000000003,
+        "seed": 252
+      },
+      {
+        "type": "marimba",
+        "hz": 3135.314,
+        "dur": 0.5,
+        "decay": 0.1,
+        "mallet": 0.2,
+        "gain": 0.0825,
+        "t": 5.124999999999961,
+        "pan": 0.28500000000000003,
+        "seed": 253
+      },
+      {
+        "type": "squish",
+        "dur": 0.3,
+        "gain": 0.3,
+        "t": 7.090000000000001,
+        "pan": -0.055,
+        "seed": 259
+      },
+      {
+        "type": "thud",
+        "dur": 0.25,
+        "gain": 0.15,
+        "t": 7.090000000000001,
+        "pan": -0.055,
+        "seed": 260
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.7000000000000002,
+        "q": 2.4,
+        "gain": 0.12,
+        "t": 7.2,
+        "pan": 0.28500000000000003,
+        "seed": 266
+      },
+      {
+        "type": "servo",
+        "dur": 0.9,
+        "hz": 300,
+        "hz2": 450,
+        "grit": 0.7,
+        "gain": 0.14,
+        "t": 8.1,
+        "pan": 0.28500000000000003,
+        "seed": 273
+      },
+      {
+        "type": "paper",
+        "dur": 0.6,
+        "density": 0.4,
+        "gain": 0.22,
+        "t": 8.549999999999999,
+        "pan": 0,
+        "seed": 280
+      },
+      {
+        "type": "tick",
+        "gain": 0.42,
+        "pitch": 1.2,
+        "t": 9.1,
+        "pan": 0,
+        "seed": 287
+      },
+      {
+        "type": "marimba",
+        "hz": 523.25,
+        "dur": 1.1,
+        "decay": 0.3,
+        "mallet": 0.4,
+        "gain": 0.294,
+        "t": 9.1,
+        "pan": 0,
+        "seed": 288
+      },
+      {
+        "type": "servo",
+        "dur": 0.9,
+        "hz": 330,
+        "hz2": 480,
+        "grit": 0.7,
+        "gain": 0.14,
+        "t": 9.25,
+        "pan": 0.28500000000000003,
+        "seed": 294
+      },
+      {
+        "type": "paper",
+        "dur": 0.6,
+        "density": 0.4,
+        "gain": 0.22,
+        "t": 9.7,
+        "pan": -0.055,
+        "seed": 301
+      },
+      {
+        "type": "tick",
+        "gain": 0.42,
+        "pitch": 1.2,
+        "t": 10.25,
+        "pan": -0.055,
+        "seed": 308
+      },
+      {
+        "type": "marimba",
+        "hz": 659.25,
+        "dur": 1.1,
+        "decay": 0.3,
+        "mallet": 0.4,
+        "gain": 0.294,
+        "t": 10.25,
+        "pan": -0.055,
+        "seed": 309
+      },
+      {
+        "type": "servo",
+        "dur": 0.9,
+        "hz": 360,
+        "hz2": 510,
+        "grit": 0.7,
+        "gain": 0.14,
+        "t": 10.4,
+        "pan": 0.28500000000000003,
+        "seed": 315
+      },
+      {
+        "type": "paper",
+        "dur": 0.6,
+        "density": 0.4,
+        "gain": 0.22,
+        "t": 10.85,
+        "pan": -0.11,
+        "seed": 322
+      },
+      {
+        "type": "tick",
+        "gain": 0.42,
+        "pitch": 1.2,
+        "t": 11.4,
+        "pan": -0.11,
+        "seed": 329
+      },
+      {
+        "type": "marimba",
+        "hz": 783.99,
+        "dur": 1.1,
+        "decay": 0.3,
+        "mallet": 0.4,
+        "gain": 0.294,
+        "t": 11.4,
+        "pan": -0.11,
+        "seed": 330
+      },
+      {
+        "type": "clack",
+        "gain": 0.3,
+        "pitch": 2.2,
+        "t": 11.6,
+        "pan": 0.28500000000000003,
+        "seed": 336
+      },
+      {
+        "type": "pop",
+        "dur": 0.14,
+        "gain": 0.6,
+        "pitch": 0.75,
+        "t": 12.549999999999999,
+        "pan": 0.28500000000000003,
+        "seed": 343
+      },
+      {
+        "type": "thud",
+        "dur": 0.3,
+        "gain": 0.24,
+        "t": 12.549999999999999,
+        "pan": 0.28500000000000003,
+        "seed": 344
+      },
+      {
+        "type": "chime",
+        "dur": 1.6,
+        "notes": 4,
+        "gain": 0.22,
+        "t": 12.95,
+        "pan": 0,
+        "seed": 350
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "rigging.js: each mast is a hinge raised by its own stay; stay length shortened ci -> hinge angle by the law of cosines; stays carry the slack of the masts before them, so ONE pull raises fore, main, mizzen in turn. Folding = the same plan backwards.",
+      "clearance": "folded bundle radius 0.255 m vs neck 0.320 m (gap 0.065); route gap 0.065; raised ship to glass 0.070 (asserted in Node, margin 0.03)",
+      "thread": "total pull 1.364 m = fore 0.642 + main 0.381 + mizzen 0.341",
+      "framing": "ok",
+      "numbers": "no data shown; toy scale (the bottle is 5.15 m long)"
+    }
+  }
+}

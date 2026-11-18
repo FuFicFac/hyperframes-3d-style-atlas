@@ -1,10 +1,10 @@
 {
   "format": "3d-style-atlas/style-index@1",
   "generatedBy": "Skills/3d-style-atlas/scripts/build-index.mjs (re-run after adding or changing a style)",
-  "generatedAt": "2026-11-16T16:55:28.232Z",
+  "generatedAt": "2026-11-18T20:12:21.424Z",
   "pathsRelativeTo": "D Second Brain/ (demo project and mp4 paths are absolute when the demos live outside it)",
   "notes": "category is a keyword guess; props come from the STYLE.md props tables; demo topic is the first line of the demo's scene.js.",
-  "count": 71,
+  "count": 85,
   "styles": [
     {
       "id": "anamorphic",
@@ -165,6 +165,46 @@
         "spec": "Skills/3d-style-atlas/styles/blueprint-build/spec.js",
         "style": "Skills/3d-style-atlas/styles/blueprint-build/style.js",
         "card": "Skills/3d-style-atlas/styles/blueprint-build/STYLE.md"
+      }
+    },
+    {
+      "id": "bullet-time",
+      "name": "Bullet Time",
+      "description": "A frozen moment: in a bright white high-speed-photography studio a striped orange ball bounces in and drops into a big white bowl of cobalt-blue liquid, and mid-splash TIME STOPS — the crown, its beaded rim, the spray of droplets and the ripples hang perfectly still while the camera keeps sweeping a near-full circle around them. Two clocks: timewarp.js maps video time t to WORLD time w(t) (run, freeze, reverse, forward, release, with linear rate ramps, so w is piecewise quadratic and exact), and separately lays out the camera arc. Every world thing — the ball's bounce and plunge, the lathe-profile crown with pinching lobes, ballistic droplets, floor splats, the cavity, ripples and the rebound jet — is a closed-form function of w, never stepped, so time can be scrubbed backward (the splash un-happens) and forward again. Sound follows w: every bounce, impact, pinch and droplet landing is cued wherever w(t) crosses it (reversed re-crossings included), with jog ticks while scrubbing and a pitch-dropping whir into the freeze. A two-track overlay gauge (CAMERA vs WORLD) shows the decoupling.",
+      "summary": "**Look.** A bright white high-speed-photography studio: pale calibration-grid floor fading into white haze, four softboxes on stands.",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "studio",
+        "bowl",
+        "ball",
+        "liquid",
+        "droplets",
+        "world",
+        "caption",
+        "gauge"
+      ],
+      "fourthModule": [
+        {
+          "file": "timewarp.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/76-bullet-time",
+          "topic": "\"Stop.",
+          "mp4": "/Volumes/Panther/3D Style Atlas/76-bullet-time/renders/76-bullet-time.mp4",
+          "mp4MB": 7.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/bullet-time/spec.js",
+        "style": "Skills/3d-style-atlas/styles/bullet-time/style.js",
+        "card": "Skills/3d-style-atlas/styles/bullet-time/STYLE.md"
       }
     },
     {
@@ -423,6 +463,45 @@
         "spec": "Skills/3d-style-atlas/styles/clockwork/spec.js",
         "style": "Skills/3d-style-atlas/styles/clockwork/style.js",
         "card": "Skills/3d-style-atlas/styles/clockwork/STYLE.md"
+      }
+    },
+    {
+      "id": "cloud-chamber",
+      "name": "Cloud Chamber",
+      "description": "A glass tank on a black cold plate with a side-lit layer of mist: white condensation trails (fat stubs, long needles, curly threads, magnet-bent spirals) appear in an instant, then drift, widen, bead up and fade.",
+      "summary": "**Look.** The tabletop instrument that makes invisible particles visible.",
+      "category": "material / abstract",
+      "goodFor": "making invisible activity visible; \"it was there all along\"; background processes; detecting signals;\nevidence and traces; interpretability (seeing what a model does inside); monitoring. **Avoid for:** anything that needs\ntext or numbers in the 3D layer, precise diagrams, bright/friendly looks, long holds on one object (the picture is\ntraffic, not a thing).",
+      "avoidFor": "anything that needs\ntext or numbers in the 3D layer, precise diagrams, bright/friendly looks, long holds on one object (the picture is\ntraffic, not a thing).",
+      "toneMapping": "agx",
+      "props": [
+        "trails",
+        "mist",
+        "chamber",
+        "room",
+        "source",
+        "magnet",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "tracks.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/84-cloud-chamber",
+          "topic": "\"Invisible, until you look this way\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/84-cloud-chamber/renders/84-cloud-chamber.mp4",
+          "mp4MB": 5.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/cloud-chamber/spec.js",
+        "style": "Skills/3d-style-atlas/styles/cloud-chamber/style.js",
+        "card": "Skills/3d-style-atlas/styles/cloud-chamber/STYLE.md"
       }
     },
     {
@@ -999,6 +1078,43 @@
       }
     },
     {
+      "id": "galton-board",
+      "name": "Galton Board",
+      "description": "A Galton board (bean machine) on a bright oak desk: a glass-fronted maple frame, an enamel-blue backboard with a triangular field of brass pegs, a walnut hopper with a brass spout and polished steel balls. A seeded, precomputed ball plan (plinko.js) gives every ball its left/right choice at each peg row, a closed-form path (drop, one parabolic hop per row, ballistic fall into its bin, two small bounces) and a stack slot, so the histogram grows ball by ball into a bell curve. Pegs flash and swell when struck; every peg tick, release click and bin landing (one marimba note per bin) is a sound cue from the same plan. A red enamel bell curve is drawn on the glass over the finished stacks.",
+      "summary": "**Look.** A Galton board (bean machine) standing on a bright oak desk against a pale wall: a glass-fronted maple frame (6.3 m wide, toy-scale so a 0.14 m ball reads at 1080p), an enamel-blue backboard, a triangle of 78 brass pegs between...",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "board",
+        "balls",
+        "curve",
+        "desk",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "plinko.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/71-galton-board",
+          "topic": "\"Chance has a shape\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/71-galton-board/renders/71-galton-board.mp4",
+          "mp4MB": 5.4
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/galton-board/spec.js",
+        "style": "Skills/3d-style-atlas/styles/galton-board/style.js",
+        "card": "Skills/3d-style-atlas/styles/galton-board/STYLE.md"
+      }
+    },
+    {
       "id": "glass-light",
       "name": "Glass & Light",
       "description": "Optics-bench still life: polished clear and coloured glass solids (prisms, blocks, faceted gems, lenses, spheres, rods) on a dark matte bench in a dim hazy room; volumetric beams computed by real ray optics refract through them, a prism fans white light into a spectrum, caustics and rainbow smears land on the table; screen-space refraction with per-channel dispersion, bevel glints, hairline captions.",
@@ -1160,6 +1276,42 @@
       }
     },
     {
+      "id": "infinity-mirror",
+      "name": "Infinity Mirror",
+      "description": "Recursion you can count: a framed light box on a dark gallery wall holds one real layer (a hoop of large warm and coloured bulbs plus a small glowing figure) between a rear mirror and a half-silvered front glass. Each reflection is REAL instanced geometry (generation n = the real layer reflected n times: alternately flipped, stepped back by the cavity depth, dimmed by mirror x glass reflectance per bounce, so deep copies go dim and green), so the tunnel can grow one generation at a time, anything placed in the real layer ripples into every copy, and the camera can push through the front glass and fly down the tunnel past copy after copy. A small tilt between the mirrors turns every step into a rotation about the mirrors' hinge line: the straight tunnel bends, and at pi/ringCells it closes into a ring, so the flight curves all the way round and arrives back in front of the box. One soft pluck per new generation, each quieter, lower and duller, comes from the same plan.",
+      "summary": "**Look.** A framed light box on a dark gallery wall in a pool of warm light.",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "tunnel",
+        "gallery",
+        "caption",
+        "counter"
+      ],
+      "fourthModule": [
+        {
+          "file": "recursion.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/80-infinity-mirror",
+          "topic": "\"A copy of a copy of a copy\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/80-infinity-mirror/renders/80-infinity-mirror.mp4",
+          "mp4MB": 9.9
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/infinity-mirror/spec.js",
+        "style": "Skills/3d-style-atlas/styles/infinity-mirror/style.js",
+        "card": "Skills/3d-style-atlas/styles/infinity-mirror/STYLE.md"
+      }
+    },
+    {
       "id": "inflatable",
       "name": "Inflatable",
       "description": "Glossy inflated vinyl and mirror-foil balloon objects in a bright seamless studio: puffy pillow letters, numbers, arrows, stars, hearts and speech bubbles with a flat welded seam round the edge, pinched scalloped corners, tight wrinkles radiating from the seam, a little valve and strong soft-box highlights. Inflation is a pure function of time: each object starts as a flat, crumpled outline on the floor, its skin is rebuilt every frame from fill(t) — thickness swells from the middle outward, wrinkles tighten and fade, it stands up, overshoots and wobbles to rest with a squeaky stretch. Objects also deflate (sag, fold, sink), bump neighbours and squash on contact, get squeezed so the air shifts to one side, or float up on ribbons and bob. Words inflate letter by letter; air hiss, rubber squeaks and a boing come from the same plan.",
@@ -1240,6 +1392,44 @@
         "spec": "Skills/3d-style-atlas/styles/ink-wash/spec.js",
         "style": "Skills/3d-style-atlas/styles/ink-wash/style.js",
         "card": "Skills/3d-style-atlas/styles/ink-wash/STYLE.md"
+      }
+    },
+    {
+      "id": "inkblot",
+      "name": "Inkblot",
+      "description": "Symmetric inkblots on heavy cream card in bright, soft daylight (original blots, not the Rorschach plates). Glossy beads of wet ink (black plus crimson and indigo) drip onto one half of an open sheet; the other half folds shut on a real hinge, a wooden press rubs it down, and the sheet peels open on a perfectly mirrored blot with noise-feathered bleeding edges, a pale capillary halo and darker pooled rims. The ink is a closed-form field (a sum of smooth elliptical blobs and voids from a seeded plan, warped by paper-fibre noise) evaluated per pixel in the card's shader in half-space, so both halves show the same function; wet ink is glossy and domed and dries to matte. Then the same blot is read several ways: pencil outlines (graphite on paper, chalk-white over ink) draw themselves on, suggest one thing, fade, and suggest another. The blot never changes, only the reading. Drip plips, the fold, the press, the peel and every pencil stroke are scored from the same plan.",
+      "summary": "**Look.** A heavy cream card (3.6 x 1.7 m, toy-scale) on a pale blue-grey desk in bright, soft daylight.",
+      "category": "pixel / voxel",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "blot",
+        "card",
+        "droplets",
+        "press",
+        "desk",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "blotplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/81-inkblot",
+          "topic": "\"Same ink.",
+          "mp4": "/Volumes/Panther/3D Style Atlas/81-inkblot/renders/81-inkblot.mp4",
+          "mp4MB": 3.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/inkblot/spec.js",
+        "style": "Skills/3d-style-atlas/styles/inkblot/style.js",
+        "card": "Skills/3d-style-atlas/styles/inkblot/STYLE.md"
       }
     },
     {
@@ -1367,6 +1557,45 @@
         "spec": "Skills/3d-style-atlas/styles/lab-glassware/spec.js",
         "style": "Skills/3d-style-atlas/styles/lab-glassware/style.js",
         "card": "Skills/3d-style-atlas/styles/lab-glassware/STYLE.md"
+      }
+    },
+    {
+      "id": "layer-print",
+      "name": "Layer Print",
+      "description": "A generic desktop 3D printer in a bright workshop: an open aluminium frame, a dark gridded heated bed, a gantry that rises with the part and a print head with a glowing brass nozzle laying down coloured filament. The object grows layer by layer and every layer is drawn as its real toolpath — outer perimeter, inner perimeter, then infill (scan lines on the floor, a zigzag inside the wall) — from a slicer plan (slicer.js): the part is sliced once into timed polylines, the whole bead geometry is built once with a per-vertex deposit time, and a frame shows every bead whose time has passed, cut exactly at the nozzle. The planned path of the current layer shows ahead of the nozzle as a thin line, fresh plastic glows for a moment, and the finished part keeps fine layer ridges. Print time is compressed honestly: timing stages speed up layer after layer. Stepper servo/whir cues per move and a tick per layer change come from the same plan.",
+      "summary": "**Look.** A generic desktop 3D printer in a bright workshop (toy scale: the machine is ~5 m wide so kit lights and text sizes apply; read 1 m as ~5 cm).",
+      "category": "print / flat graphic",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "printJob",
+        "part",
+        "ghost",
+        "printer",
+        "workshop",
+        "caption",
+        "sweepRuns"
+      ],
+      "fourthModule": [
+        {
+          "file": "slicer.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/74-layer-print",
+          "topic": "\"Built one layer at a time\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/74-layer-print/renders/74-layer-print.mp4",
+          "mp4MB": 9.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/layer-print/spec.js",
+        "style": "Skills/3d-style-atlas/styles/layer-print/style.js",
+        "card": "Skills/3d-style-atlas/styles/layer-print/STYLE.md"
       }
     },
     {
@@ -1657,6 +1886,44 @@
       }
     },
     {
+      "id": "mousetrap-chain",
+      "name": "Mousetrap Chain",
+      "description": "The classic chain-reaction demonstration on a bright blue sports-hall floor: a neat grid of toy-scale spring traps (pale wooden board, yellow pedal, red paddle hammer), each loaded with two white ping-pong balls. One orange ball is bounced in, trips one trap, which flings two balls, which trip two more — one, two, four, eight — until the whole floor erupts in a storm of flying balls and settles with every trap sprung. A seeded planner precomputes every landing, ballistic arc and snap; the same plan drives the picture, the snaps and ball ticks in the score, and a row of dots that doubles generation by generation.",
+      "summary": "**Look.** The classic chain-reaction demonstration on a bright blue sports-hall floor with white and yellow court lines.",
+      "category": "toy / playful",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "cascade",
+        "floor",
+        "traps",
+        "balls",
+        "caption",
+        "genChart"
+      ],
+      "fourthModule": [
+        {
+          "file": "cascade.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/78-mousetrap-chain",
+          "topic": "\"One becomes two becomes all\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/78-mousetrap-chain/renders/78-mousetrap-chain.mp4",
+          "mp4MB": 10.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/mousetrap-chain/spec.js",
+        "style": "Skills/3d-style-atlas/styles/mousetrap-chain/style.js",
+        "card": "Skills/3d-style-atlas/styles/mousetrap-chain/STYLE.md"
+      }
+    },
+    {
       "id": "multiplane-cel",
       "name": "Multiplane Cel",
       "description": "Classic hand-painted cel animation shot on a multiplane camera: a storybook landscape painted in flat gouache with visible brush strokes (sky, far hills, a meadow with a path and a cottage, a tree grove, dark foreground foliage) and one inked-and-painted cel bird animated on twos, each layer on its own sheet of glass. Inside the picture the camera pushes down through the stack and the layers part with strong parallax; pulled back, the truth: a vertical steel rig of six glass panes with lamps between the shelves, peg bars on every tray and a film camera looking straight down from the top. Sliding one pane sideways changes the picture (a grove slides off and reveals the cottage). Flat unlit paint, crisp black ink and flat colour on the cel with a soft cel shadow, faint glass sheen and a few dust specks.",
@@ -1730,6 +1997,44 @@
       }
     },
     {
+      "id": "music-box",
+      "name": "Music Box",
+      "description": "The open movement of a music box, shot macro in warm bright light on pale wood: a lathe-turned brass cylinder studded with steel pins turns slowly toward a polished steel comb; each pin presses one tooth down and lets it go, the tooth springs back, rings visibly and warms in colour for a moment; a hand crank with a wooden knob drives the cylinder through a brass pinion and a worm spins a two-vane governor. One note list (tune.js) places every pin (angle around the cylinder = when, position along the axis = which tooth), moves every tooth in closed form and writes the score, one pitched bar note per pin at the exact release time. Engraved track rings and bar lines on the cylinder make it read as a score. Captions on an ivory plate with a brass edge.",
+      "summary": "**Look.** The open movement of a music box, shot macro in warm bright light on pale wood (toy-scale: the cylinder is 2.6 m long so one pin reads at 1080p).",
+      "category": "toy / playful",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "wood",
+        "movement",
+        "cylinder",
+        "comb",
+        "frame",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "tune.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/73-music-box",
+          "topic": "\"The pins are the program\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/73-music-box/renders/73-music-box.mp4",
+          "mp4MB": 9.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/music-box/spec.js",
+        "style": "Skills/3d-style-atlas/styles/music-box/style.js",
+        "card": "Skills/3d-style-atlas/styles/music-box/STYLE.md"
+      }
+    },
+    {
       "id": "neon-sign",
       "name": "Neon Sign",
       "description": "Glass-tube neon lettering and icons on stand-off mounts over a dark painted brick wall at night; tubes flicker on, spill coloured light onto the bricks, and cable back to a transformer box.",
@@ -1762,6 +2067,43 @@
         "spec": "Skills/3d-style-atlas/styles/neon-sign/spec.js",
         "style": "Skills/3d-style-atlas/styles/neon-sign/style.js",
         "card": "Skills/3d-style-atlas/styles/neon-sign/STYLE.md"
+      }
+    },
+    {
+      "id": "nesting-dolls",
+      "name": "Nesting Dolls",
+      "description": "A family of lathe-turned, hand-painted, lacquered wooden nesting dolls on a pale birch table in soft window daylight. One lathe profile scaled per level makes every shell (hollow lid + cup with a bare-wood tenon, or solid for the smallest). The big doll's head twists, lifts off with a wooden pop and is set down behind; a smaller doll rises out of the cup and hops aside; the head goes back on; again and again, faster and higher-pitched as they shrink, down to the solid one. Each doll wears the same geometric pattern with less detail than its parent, and a belly emblem of concentric rings — one ring per doll still inside — around a yellow dot. A camera dive into the smallest doll's dot comes out of the biggest doll's dot onto the whole family lined up large to small. One plan (nest.js) drives visibility, every pose, the line-up and the score.",
+      "summary": "**Look.** A family of lathe-turned, hand-painted, lacquered wooden nesting dolls on a pale birch table in soft window daylight (toy scale: the biggest doll is 2.2 m tall so the smallest, 0.6 m, still reads at 1080p).",
+      "category": "toy / playful",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "table",
+        "family",
+        "doll",
+        "caption",
+        "cover"
+      ],
+      "fourthModule": [
+        {
+          "file": "nest.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/77-nesting-dolls",
+          "topic": "\"There's a smaller one inside\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/77-nesting-dolls/renders/77-nesting-dolls.mp4",
+          "mp4MB": 5.8
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/nesting-dolls/spec.js",
+        "style": "Skills/3d-style-atlas/styles/nesting-dolls/style.js",
+        "card": "Skills/3d-style-atlas/styles/nesting-dolls/STYLE.md"
       }
     },
     {
@@ -1904,6 +2246,45 @@
         "spec": "Skills/3d-style-atlas/styles/origami/spec.js",
         "style": "Skills/3d-style-atlas/styles/origami/style.js",
         "card": "Skills/3d-style-atlas/styles/origami/STYLE.md"
+      }
+    },
+    {
+      "id": "paper-marbling",
+      "name": "Paper Marbling",
+      "description": "Paper marbling in a shallow white enamel tray on a bright pale-wood studio table, seen from above with a slight tilt. A glass pipette lets drops of ink fall onto thickened water; each drop spreads into a flat disc and pushes every earlier colour outward into concentric rings; a stylus is drawn back and forth and a comb is pulled across, and the rings stretch into feathers and chevrons; a sheet of paper is rolled onto the bath, peeled away carrying the pattern (the bath is left almost clean), lifted and turned to the camera as a finished print. The pattern is not simulated: it is a composition of closed-form area-preserving marbling deformations (ink-drop displacement, tine-line and comb displacement, from the mathematical marbling literature) applied in plan order; a fragment shader inverse-maps each pixel through the operations so far, the current one partially applied by its progress, so any frame is a pure function of t. Flat saturated inks (indigo, vermilion, ochre, teal, cream) with a slightly denser rim per drop; soft daylight; water plips, soft drags and paper sounds come from the same plan.",
+      "summary": "**Look.** Paper marbling (ebru / suminagashi method) in a shallow navy-rimmed enamel tray of thickened water on a pale wood studio table, seen from above with a slight tilt, in soft daylight.",
+      "category": "handmade / tactile",
+      "goodFor": null,
+      "avoidFor": "anything needing numbers, text inside the picture, precise diagrams, or dark/moody looks.",
+      "toneMapping": "neutral",
+      "props": [
+        "marbling",
+        "bath",
+        "sheet",
+        "tray",
+        "pipette",
+        "caption",
+        "helpers.marbled"
+      ],
+      "fourthModule": [
+        {
+          "file": "marbleplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/75-paper-marbling",
+          "topic": "\"Every pass reshapes the pattern\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/75-paper-marbling/renders/75-paper-marbling.mp4",
+          "mp4MB": 4.4
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/paper-marbling/spec.js",
+        "style": "Skills/3d-style-atlas/styles/paper-marbling/style.js",
+        "card": "Skills/3d-style-atlas/styles/paper-marbling/STYLE.md"
       }
     },
     {
@@ -2107,6 +2488,81 @@
         "spec": "Skills/3d-style-atlas/styles/shadow-puppets/spec.js",
         "style": "Skills/3d-style-atlas/styles/shadow-puppets/style.js",
         "card": "Skills/3d-style-atlas/styles/shadow-puppets/STYLE.md"
+      }
+    },
+    {
+      "id": "ship-in-bottle",
+      "name": "Ship in a Bottle",
+      "description": "A bright modeller's bench in daylight: a large clear glass bottle lies on a wooden cradle, and a small wooden sailing ship (walnut hull with a red boot and a cream strake, three masts, pleated paper fan sails, thread rigging) is built outside the bottle with its masts hinged flat against the deck. The long thin bundle slides through the narrow neck on a wire, settles onto a blue putty sea, and one thread running out of the neck is pulled: the masts swing upright fore to aft, the sails fan open and the rigging draws taut. A cork goes in. One plan (rigging.js) turns thread length pulled into every hinge angle in closed form, places every thread point (taut or sagging by its slack), carries the insertion path, proves in Node that the folded bundle clears the neck and the raised ship clears the glass, and writes the score.",
+      "summary": "**Look.** A bright modeller's bench in daylight: pale wood, a sage cutting mat with a grid, a near-white wall.",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "workshop",
+        "bottle",
+        "cradle",
+        "sea",
+        "ship",
+        "bench",
+        "slip",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "rigging.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/82-ship-in-bottle",
+          "topic": "\"Fold it.",
+          "mp4": "/Volumes/Panther/3D Style Atlas/82-ship-in-bottle/renders/82-ship-in-bottle.mp4",
+          "mp4MB": 3.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/ship-in-bottle/spec.js",
+        "style": "Skills/3d-style-atlas/styles/ship-in-bottle/style.js",
+        "card": "Skills/3d-style-atlas/styles/ship-in-bottle/STYLE.md"
+      }
+    },
+    {
+      "id": "slit-scan",
+      "name": "Slit-Scan",
+      "description": "Bright toys in steady motion, photographed so every screen column shows a different moment: rigid bars twist into corkscrews, straight rods bend into waves, unison becomes a ripple.",
+      "summary": "**Look.** Time-displacement photography of a bright toy bench.",
+      "category": "screen / UI / sci-fi",
+      "goodFor": "time vs space, \"the same data read in a different order\", latency and lag, rolling-shutter intuition, streaming,\nhistory folded into one picture (a context window). **Avoid for:** static subjects (nothing happens), subjects that move\nsideways fast (they smear, see limitations), anything needing a moving camera with heavy parallax, dark/moody looks.",
+      "avoidFor": "static subjects (nothing happens), subjects that move\nsideways fast (they smear, see limitations), anything needing a moving camera with heavy parallax, dark/moody looks.",
+      "toneMapping": "none",
+      "props": [
+        "bench",
+        "timeCamera",
+        "ui"
+      ],
+      "fourthModule": [
+        {
+          "file": "timeslice.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/83-slit-scan",
+          "topic": "\"Every column is a different moment\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/83-slit-scan/renders/83-slit-scan.mp4",
+          "mp4MB": 4.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/slit-scan/spec.js",
+        "style": "Skills/3d-style-atlas/styles/slit-scan/style.js",
+        "card": "Skills/3d-style-atlas/styles/slit-scan/STYLE.md"
       }
     },
     {
@@ -2604,6 +3060,42 @@
       }
     },
     {
+      "id": "typewriter",
+      "name": "Typewriter",
+      "description": "A generic mid-century manual typewriter (no brand marks) on a pale wooden desk in daylight, shot close: sea-green enamel body, round cream keys in chrome rings, a U-shaped basket of steel type bars, a two-colour inked ribbon between two spools, cream paper on a black rubber platen. Words appear on the paper one struck letter at a time: the key dips, its type bar swings up and hits the print point, the ribbon lifts, the inked glyph is there when the bar falls back, and the carriage steps one column left. At the end of a line the bell rings, the lever throws the carriage back and the paper feeds up a line. Every strike, space, bell, ratchet tick and carriage stop is a sound cue from the same typing plan that drives the picture.",
+      "summary": "**Look.** A generic mid-century manual typewriter (no brand marks) on a pale oak desk in window daylight, shot close: sea-green enamel body, round cream keys in chrome rings, a U-shaped basket of steel type bars, a black/red ribbon betwe...",
+      "category": "brand / channel",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "props.typewriter",
+        "props.desk",
+        "props.glyphAtlas",
+        "props.label"
+      ],
+      "fourthModule": [
+        {
+          "file": "typeplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/72-typewriter",
+          "topic": "\"One letter at a time\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/72-typewriter/renders/72-typewriter.mp4",
+          "mp4MB": 8.9
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/typewriter/spec.js",
+        "style": "Skills/3d-style-atlas/styles/typewriter/style.js",
+        "card": "Skills/3d-style-atlas/styles/typewriter/STYLE.md"
+      }
+    },
+    {
       "id": "ukiyo-e",
       "name": "Ukiyo-e",
       "description": "Japanese woodblock printing in passes: a sheet of cream washi with kozo fibres lies on a pale hinoki bench against two wooden kento registration guides. Carved cherry-wood blocks swing down onto it one at a time like a lid, press (the key block gets a baren rubbing pass over its back), and swing up again to reveal the ONE flat layer each has left in register: first the black key line, then the sky bokashi gradation, Prussian blue, a second blue, ochre and pink, until an original great-wave-and-mountain seascape is complete; a red seal stamps it and the printed layers lift a few centimetres off the paper for a gentle parallax. Each block's underside carries its own inked relief (mirror-correct when it opens) and kento marks. Layers are multiplied onto the lit paper like transparent ink, so fibre and wood grain show in every flat colour and the key line survives every pass.",
@@ -2770,6 +3262,45 @@
         "spec": "Skills/3d-style-atlas/styles/weather-map/spec.js",
         "style": "Skills/3d-style-atlas/styles/weather-map/style.js",
         "card": "Skills/3d-style-atlas/styles/weather-map/STYLE.md"
+      }
+    },
+    {
+      "id": "wind-walker",
+      "name": "Wind Walker",
+      "description": "A kinetic walking sculpture on a bright low-tide beach: a skeletal creature of pale plastic tubing, black cable ties and cloth sails whose twelve legs are identical planar bar linkages (a straight-line four-bar feeding a pantograph, solved in closed form by circle–circle intersections) hung on one shared crankshaft, each station a sixth of a turn later, so rigid sticks step in a travelling wave. Body travel and height are locked to the lowest foot, so planted feet do not slide; footprints and step thuds come from the same plan. Opens on ONE leg as a diagram in sea mist (ink centre-lines, crank circle, the foot's flat-bottomed loop traced as a glowing path), then the mist lifts to reveal the whole creature striding across the sand.",
+      "summary": "**Look.** A bright, pale beach at low tide under a blue-white sky.",
+      "category": "mechanical / kinetic",
+      "goodFor": "simple rigid rules producing lifelike behaviour; emergence from mechanism; \"it looks alive but it's geometry\";\nmany dumb parts making one smart motion (neurons → behaviour); embodied AI / robotics; anything \"one input, many outputs in phase\".",
+      "avoidFor": "dark or moody topics, dense text, data charts, anything needing more than one short caption at a time.",
+      "toneMapping": "neutral",
+      "props": [
+        "beach",
+        "walker",
+        "diagram",
+        "footprints",
+        "caption",
+        "helpers.setMist",
+        "helpers.follow"
+      ],
+      "fourthModule": [
+        {
+          "file": "linkage.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/79-wind-walker",
+          "topic": "\"No brain.",
+          "mp4": "/Volumes/Panther/3D Style Atlas/79-wind-walker/renders/79-wind-walker.mp4",
+          "mp4MB": 10.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/wind-walker/spec.js",
+        "style": "Skills/3d-style-atlas/styles/wind-walker/style.js",
+        "card": "Skills/3d-style-atlas/styles/wind-walker/STYLE.md"
       }
     },
     {

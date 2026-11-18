@@ -1,0 +1,3300 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "music-box",
+    "name": "Music Box",
+    "description": "The open movement of a music box, shot macro in warm bright light on pale wood: a lathe-turned brass cylinder studded with steel pins turns slowly toward a polished steel comb; each pin presses one tooth down and lets it go, the tooth springs back, rings visibly and warms in colour for a moment; a hand crank with a wooden knob drives the cylinder through a brass pinion and a worm spins a two-vane governor. One note list (tune.js) places every pin (angle around the cylinder = when, position along the axis = which tooth), moves every tooth in closed form and writes the score, one pitched bar note per pin at the exact release time. Engraved track rings and bar lines on the cylinder make it read as a score. Captions on an ivory plate with a brass edge.",
+    "palette": {
+      "bg": "#ead9ba",
+      "wood": "#e6cfa6",
+      "woodDark": "#c9a877",
+      "brass": "#d9ae58",
+      "brassDeep": "#a67a30",
+      "brassLight": "#f0cf85",
+      "steel": "#d6d9de",
+      "steelDark": "#8e949e",
+      "glow": "#ffa000",
+      "knob": "#7a4a2a",
+      "ivory": "#f7f0df",
+      "ink": "#2a1d12",
+      "accent": "#c2452d"
+    },
+    "world": {
+      "background": "#ead9ba",
+      "sky": null,
+      "fog": {
+        "color": "#ead9ba",
+        "near": 16,
+        "far": 38
+      },
+      "environment": "room",
+      "environmentIntensity": 0.85,
+      "toneMapping": "neutral",
+      "exposure": 1.08,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "wood": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.62,
+        "metalness": 0
+      },
+      "brass": {
+        "type": "physical",
+        "baseColor": "#d9ae58",
+        "roughness": 0.3,
+        "metalness": 1
+      },
+      "brassPolished": {
+        "type": "physical",
+        "baseColor": "#e6bd66",
+        "roughness": 0.16,
+        "metalness": 1
+      },
+      "cylinder": {
+        "type": "physical",
+        "baseColor": "#ffffff",
+        "roughness": 0.27,
+        "metalness": 1
+      },
+      "cylinderCap": {
+        "type": "physical",
+        "baseColor": "#c79a48",
+        "roughness": 0.35,
+        "metalness": 1
+      },
+      "steel": {
+        "type": "physical",
+        "baseColor": "#aeb4bd",
+        "roughness": 0.34,
+        "metalness": 1
+      },
+      "tooth": {
+        "type": "physical",
+        "baseColor": "#b8bec7",
+        "roughness": 0.3,
+        "metalness": 1
+      },
+      "pin": {
+        "type": "physical",
+        "baseColor": "#f1f2f4",
+        "roughness": 0.18,
+        "metalness": 1
+      },
+      "screw": {
+        "type": "physical",
+        "baseColor": "#39507c",
+        "roughness": 0.25,
+        "metalness": 1
+      },
+      "knob": {
+        "type": "standard",
+        "baseColor": "#7a4a2a",
+        "roughness": 0.45,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#fff6e6",
+        "groundColor": "#c9ab7c",
+        "intensity": 1
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff0d8",
+        "intensity": 2.7,
+        "position": [
+          -3.6,
+          7,
+          4.6
+        ],
+        "target": [
+          0.2,
+          0.5,
+          0.5
+        ],
+        "shadow": {
+          "softness": 2.4,
+          "mapSize": 2048,
+          "extent": 3.6,
+          "near": 0.5,
+          "far": 24,
+          "bias": -0.0004,
+          "normalBias": 0.012
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#dbe8ff",
+        "intensity": 0.4,
+        "position": [
+          3.5,
+          4,
+          -5
+        ],
+        "target": [
+          0,
+          0.6,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.26,
+        "offset": 1.15
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.3,
+      "far": 60,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#2a1d12",
+      "height": 0.3
+    },
+    "movement": {
+      "axisY": 0.78,
+      "cylinder": {
+        "radius": 0.5,
+        "length": 2.6,
+        "period": 14.6,
+        "segments": 96
+      },
+      "pins": {
+        "height": 0.05,
+        "radius": 0.021,
+        "embed": 0.02,
+        "aPre": 0.05,
+        "aRel": 0.07
+      },
+      "comb": {
+        "teeth": 12,
+        "x0": -1.1,
+        "pitch": 0.2,
+        "width": 0.16,
+        "thickness": 0.045,
+        "lengthLow": 1,
+        "lengthHigh": 0.5,
+        "heelZ": [
+          1.5,
+          1.82
+        ],
+        "heelThickness": 0.07,
+        "minGap": 0.6
+      },
+      "vib": {
+        "hz": [
+          6.5,
+          10.5
+        ],
+        "tau": [
+          0.5,
+          0.3
+        ],
+        "glow": 0.42,
+        "glowTau": 0.7
+      },
+      "bedplate": {
+        "x": [
+          -1.85,
+          1.85
+        ],
+        "z": [
+          -0.7,
+          1.93
+        ],
+        "h": 0.1
+      },
+      "bracket": {
+        "x": 1.5,
+        "t": 0.1
+      },
+      "gear": {
+        "teeth": 40,
+        "module": 0.028,
+        "thickness": 0.06,
+        "x": 1.37
+      },
+      "drive": {
+        "ratio": 5,
+        "pinion": 8,
+        "bearing": 0.96,
+        "crankX": 1.72,
+        "arm": 0.34,
+        "knobLen": 0.34,
+        "knobR": 0.075,
+        "clicks": 8,
+        "x": 1.6
+      },
+      "governor": {
+        "ratio": 40,
+        "wormR": 0.07,
+        "vane": [
+          0.27,
+          0.15
+        ],
+        "vaneOffset": 0.2,
+        "top": 0.72
+      },
+      "track": {
+        "ring": "rgba(92,58,12,0.42)",
+        "bar": "rgba(92,58,12,0.26)",
+        "barEvery": 4
+      }
+    },
+    "wood": {
+      "size": 28,
+      "tile": 7,
+      "boards": 4,
+      "seed": 73,
+      "dark": "#dcc59d",
+      "mid": "#ecdcbb",
+      "light": "#f7edd6",
+      "seam": "#c9ae82",
+      "contrast": 0.36,
+      "grainFreq": 18
+    },
+    "caption": {
+      "x": 960,
+      "y": 50,
+      "h": 108,
+      "cap": 60,
+      "maxW": 1160,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#f7f0df",
+      "edge": "#b8893a",
+      "ink": "#2a1d12",
+      "pin": "#b8893a"
+    },
+    "sound": {
+      "note": {
+        "gain": 0.25,
+        "dur": 2.2,
+        "decay": [
+          0.62,
+          0.36
+        ],
+        "mallet": 0.22,
+        "tilt": 0.35,
+        "tick": 0.1
+      },
+      "shimmer": {
+        "gain": 0.24,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85
+      },
+      "ratchet": {
+        "gain": 0.12,
+        "pitch": 0.8
+      },
+      "whir": {
+        "gain": 0.06,
+        "hz": 164,
+        "grit": 0.12
+      },
+      "pad": {
+        "gain": 0.13,
+        "root": 130.81,
+        "chord": [
+          0,
+          7,
+          16
+        ],
+        "brightness": 900
+      }
+    },
+    "sfx": {
+      "enter": "tick",
+      "exit": "whooshOut",
+      "move": "whir",
+      "land": "tick",
+      "emphasis": "marimba",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "The cylinder turns at a constant rate (angle = omega * t); nothing else drives the picture.",
+      "A pin presses its tooth down for ~0.3 s, lets go, and the tooth rings: tip = -A exp(-s/tau) cos(2 pi f s), closed form.",
+      "A ringing tooth warms in colour for a moment, so the eye finds the note the ear hears.",
+      "Crank = 5 x the cylinder rate through a pinion; governor worm = 40 x (one turn per wheel tooth).",
+      "Camera: one short move per beat, locked during holds; macro shots sit on the line where pins meet tooth tips."
+    ]
+  },
+  "scene": {
+    "id": "73-music-box",
+    "style": "music-box",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "drum",
+        "t": 0,
+        "dur": 3,
+        "label": "A drum studded with pins"
+      },
+      {
+        "id": "pluck",
+        "t": 3,
+        "dur": 3,
+        "label": "Each pin plucks one tooth"
+      },
+      {
+        "id": "across",
+        "t": 6,
+        "dur": 3.2,
+        "label": "Across: which note"
+      },
+      {
+        "id": "around",
+        "t": 9.2,
+        "dur": 3,
+        "label": "Around: when it plays"
+      },
+      {
+        "id": "program",
+        "t": 12.2,
+        "dur": 2.8,
+        "label": "The pins are the program"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -1.12754,
+          3.60918,
+          5.61991
+        ],
+        "target": [
+          0.40655,
+          0.77325,
+          0.66063
+        ],
+        "fov": 30
+      },
+      {
+        "t": 2.5,
+        "pos": [
+          -1.12754,
+          3.60918,
+          5.61991
+        ],
+        "target": [
+          0.40655,
+          0.77325,
+          0.66063
+        ],
+        "fov": 30
+      },
+      {
+        "t": 3.8,
+        "pos": [
+          1.82691,
+          2.71601,
+          3.39252
+        ],
+        "target": [
+          0.49408,
+          0.93033,
+          0.40794
+        ],
+        "fov": 30,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 5.4,
+        "pos": [
+          1.82691,
+          2.71601,
+          3.39252
+        ],
+        "target": [
+          0.49408,
+          0.93033,
+          0.40794
+        ],
+        "fov": 30
+      },
+      {
+        "t": 6.6,
+        "pos": [
+          0,
+          5.17501,
+          3.22627
+        ],
+        "target": [
+          0,
+          1.02285,
+          0.44138
+        ],
+        "fov": 30,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 8.899999999999999,
+        "pos": [
+          0,
+          5.17501,
+          3.22627
+        ],
+        "target": [
+          0,
+          1.02285,
+          0.44138
+        ],
+        "fov": 30
+      },
+      {
+        "t": 10.1,
+        "pos": [
+          3.32149,
+          2.74659,
+          3.35625
+        ],
+        "target": [
+          0.22296,
+          0.81767,
+          0.34691
+        ],
+        "fov": 30,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 12,
+        "pos": [
+          3.32149,
+          2.74659,
+          3.35625
+        ],
+        "target": [
+          0.22296,
+          0.81767,
+          0.34691
+        ],
+        "fov": 30
+      },
+      {
+        "t": 13.399999999999999,
+        "pos": [
+          1.64272,
+          3.44594,
+          5.58283
+        ],
+        "target": [
+          0.12066,
+          0.76456,
+          0.66242
+        ],
+        "fov": 30,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 15,
+        "pos": [
+          1.64272,
+          3.44594,
+          5.58283
+        ],
+        "target": [
+          0.12066,
+          0.76456,
+          0.66242
+        ],
+        "fov": 30
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "type": "whir",
+        "dur": 15,
+        "hz": 164,
+        "hz2": 164,
+        "grit": 0.12,
+        "gain": 0.06,
+        "pan": -0.35,
+        "t": 0,
+        "seed": 173
+      },
+      {
+        "type": "pad",
+        "dur": 15,
+        "root": 130.81,
+        "chord": [
+          0,
+          7,
+          16
+        ],
+        "attack": 0.6,
+        "release": 1.2,
+        "brightness": 900,
+        "gain": 0.13,
+        "pan": 0,
+        "t": 0,
+        "seed": 174
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 0.365,
+        "pan": 0.45,
+        "seed": 180
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 0.73,
+        "pan": 0.45,
+        "seed": 187
+      },
+      {
+        "type": "marimba",
+        "hz": 261.63,
+        "dur": 2.2,
+        "decay": 0.62,
+        "mallet": 0.22,
+        "gain": 0.3186380254850236,
+        "t": 0.75,
+        "pan": -0.38076923076923075,
+        "seed": 194
+      },
+      {
+        "type": "pluck",
+        "hz": 523.26,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 0.75,
+        "pan": -0.38076923076923075,
+        "seed": 195
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 0.75,
+        "pan": -0.38076923076923075,
+        "seed": 196
+      },
+      {
+        "type": "marimba",
+        "hz": 659.25,
+        "dur": 2.2,
+        "decay": 0.45454545454545453,
+        "mallet": 0.22,
+        "gain": 0.23057950003159652,
+        "t": 0.75,
+        "pan": 0.10384615384615385,
+        "seed": 201
+      },
+      {
+        "type": "pluck",
+        "hz": 1318.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 0.75,
+        "pan": 0.10384615384615385,
+        "seed": 202
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 0.75,
+        "pan": 0.10384615384615385,
+        "seed": 203
+      },
+      {
+        "type": "marimba",
+        "hz": 440,
+        "dur": 2.2,
+        "decay": 0.5254545454545454,
+        "mallet": 0.22,
+        "gain": 0.2656316407686777,
+        "t": 1,
+        "pan": -0.10384615384615385,
+        "seed": 208
+      },
+      {
+        "type": "pluck",
+        "hz": 880,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 1,
+        "pan": -0.10384615384615385,
+        "seed": 209
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 1,
+        "pan": -0.10384615384615385,
+        "seed": 210
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 1.095,
+        "pan": 0.45,
+        "seed": 215
+      },
+      {
+        "type": "marimba",
+        "hz": 293.66,
+        "dur": 2.2,
+        "decay": 0.5963636363636363,
+        "mallet": 0.22,
+        "gain": 0.30601489336309556,
+        "t": 1.25,
+        "pan": -0.3115384615384616,
+        "seed": 222
+      },
+      {
+        "type": "pluck",
+        "hz": 587.32,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 1.25,
+        "pan": -0.3115384615384616,
+        "seed": 223
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 1.25,
+        "pan": -0.3115384615384616,
+        "seed": 224
+      },
+      {
+        "type": "marimba",
+        "hz": 783.99,
+        "dur": 2.2,
+        "decay": 0.4309090909090909,
+        "mallet": 0.22,
+        "gain": 0.21700990583719956,
+        "t": 1.25,
+        "pan": 0.17307692307692307,
+        "seed": 229
+      },
+      {
+        "type": "pluck",
+        "hz": 1567.98,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 1.25,
+        "pan": 0.17307692307692307,
+        "seed": 230
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 1.25,
+        "pan": 0.17307692307692307,
+        "seed": 231
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 1.46,
+        "pan": 0.45,
+        "seed": 236
+      },
+      {
+        "type": "marimba",
+        "hz": 523.25,
+        "dur": 2.2,
+        "decay": 0.5018181818181818,
+        "mallet": 0.22,
+        "gain": 0.25,
+        "t": 1.5,
+        "pan": -0.034615384615384645,
+        "seed": 243
+      },
+      {
+        "type": "pluck",
+        "hz": 1046.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 1.5,
+        "pan": -0.034615384615384645,
+        "seed": 244
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 1.5,
+        "pan": -0.034615384615384645,
+        "seed": 245
+      },
+      {
+        "type": "marimba",
+        "hz": 880,
+        "dur": 2.2,
+        "decay": 0.40727272727272723,
+        "mallet": 0.22,
+        "gain": 0.20841036124532675,
+        "t": 1.5,
+        "pan": 0.2423076923076923,
+        "seed": 250
+      },
+      {
+        "type": "pluck",
+        "hz": 1760,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 1.5,
+        "pan": 0.2423076923076923,
+        "seed": 251
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 1.5,
+        "pan": 0.2423076923076923,
+        "seed": 252
+      },
+      {
+        "type": "marimba",
+        "hz": 329.63,
+        "dur": 2.2,
+        "decay": 0.5727272727272728,
+        "mallet": 0.22,
+        "gain": 0.2938859919555823,
+        "t": 1.75,
+        "pan": -0.24230769230769236,
+        "seed": 257
+      },
+      {
+        "type": "pluck",
+        "hz": 659.26,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 1.75,
+        "pan": -0.24230769230769236,
+        "seed": 258
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 1.75,
+        "pan": -0.24230769230769236,
+        "seed": 259
+      },
+      {
+        "type": "marimba",
+        "hz": 1046.5,
+        "dur": 2.2,
+        "decay": 0.38363636363636366,
+        "mallet": 0.22,
+        "gain": 0.1961460244741877,
+        "t": 1.75,
+        "pan": 0.3115384615384615,
+        "seed": 264
+      },
+      {
+        "type": "pluck",
+        "hz": 2093,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 1.75,
+        "pan": 0.3115384615384615,
+        "seed": 265
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 1.75,
+        "pan": 0.3115384615384615,
+        "seed": 266
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 1.825,
+        "pan": 0.45,
+        "seed": 271
+      },
+      {
+        "type": "marimba",
+        "hz": 261.63,
+        "dur": 2.2,
+        "decay": 0.62,
+        "mallet": 0.22,
+        "gain": 0.3186380254850236,
+        "t": 2,
+        "pan": -0.38076923076923075,
+        "seed": 278
+      },
+      {
+        "type": "pluck",
+        "hz": 523.26,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 2,
+        "pan": -0.38076923076923075,
+        "seed": 279
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 2,
+        "pan": -0.38076923076923075,
+        "seed": 280
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 2.19,
+        "pan": 0.45,
+        "seed": 285
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "dur": 2.2,
+        "decay": 0.5490909090909091,
+        "mallet": 0.22,
+        "gain": 0.2765910469262644,
+        "t": 2.25,
+        "pan": -0.17307692307692307,
+        "seed": 292
+      },
+      {
+        "type": "pluck",
+        "hz": 784,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 2.25,
+        "pan": -0.17307692307692307,
+        "seed": 293
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 2.25,
+        "pan": -0.17307692307692307,
+        "seed": 294
+      },
+      {
+        "type": "marimba",
+        "hz": 880,
+        "dur": 2.2,
+        "decay": 0.40727272727272723,
+        "mallet": 0.22,
+        "gain": 0.20841036124532675,
+        "t": 2.25,
+        "pan": 0.2423076923076923,
+        "seed": 299
+      },
+      {
+        "type": "pluck",
+        "hz": 1760,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 2.25,
+        "pan": 0.2423076923076923,
+        "seed": 300
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 2.25,
+        "pan": 0.2423076923076923,
+        "seed": 301
+      },
+      {
+        "type": "marimba",
+        "hz": 523.25,
+        "dur": 2.2,
+        "decay": 0.5018181818181818,
+        "mallet": 0.22,
+        "gain": 0.25,
+        "t": 2.5,
+        "pan": -0.034615384615384645,
+        "seed": 306
+      },
+      {
+        "type": "pluck",
+        "hz": 1046.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 2.5,
+        "pan": -0.034615384615384645,
+        "seed": 307
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 2.5,
+        "pan": -0.034615384615384645,
+        "seed": 308
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 2.5549999999999997,
+        "pan": 0.45,
+        "seed": 313
+      },
+      {
+        "type": "marimba",
+        "hz": 440,
+        "dur": 2.2,
+        "decay": 0.5254545454545454,
+        "mallet": 0.22,
+        "gain": 0.2656316407686777,
+        "t": 2.75,
+        "pan": -0.10384615384615385,
+        "seed": 320
+      },
+      {
+        "type": "pluck",
+        "hz": 880,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 2.75,
+        "pan": -0.10384615384615385,
+        "seed": 321
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 2.75,
+        "pan": -0.10384615384615385,
+        "seed": 322
+      },
+      {
+        "type": "marimba",
+        "hz": 783.99,
+        "dur": 2.2,
+        "decay": 0.4309090909090909,
+        "mallet": 0.22,
+        "gain": 0.21700990583719956,
+        "t": 2.75,
+        "pan": 0.17307692307692307,
+        "seed": 327
+      },
+      {
+        "type": "pluck",
+        "hz": 1567.98,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 2.75,
+        "pan": 0.17307692307692307,
+        "seed": 328
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 2.75,
+        "pan": 0.17307692307692307,
+        "seed": 329
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 2.92,
+        "pan": 0.45,
+        "seed": 334
+      },
+      {
+        "type": "marimba",
+        "hz": 329.63,
+        "dur": 2.2,
+        "decay": 0.5727272727272728,
+        "mallet": 0.22,
+        "gain": 0.2938859919555823,
+        "t": 3,
+        "pan": -0.24230769230769236,
+        "seed": 341
+      },
+      {
+        "type": "pluck",
+        "hz": 659.26,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 3,
+        "pan": -0.24230769230769236,
+        "seed": 342
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 3,
+        "pan": -0.24230769230769236,
+        "seed": 343
+      },
+      {
+        "type": "marimba",
+        "hz": 293.66,
+        "dur": 2.2,
+        "decay": 0.5963636363636363,
+        "mallet": 0.22,
+        "gain": 0.30601489336309556,
+        "t": 3.25,
+        "pan": -0.3115384615384616,
+        "seed": 348
+      },
+      {
+        "type": "pluck",
+        "hz": 587.32,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 3.25,
+        "pan": -0.3115384615384616,
+        "seed": 349
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 3.25,
+        "pan": -0.3115384615384616,
+        "seed": 350
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "dur": 2.2,
+        "decay": 0.5490909090909091,
+        "mallet": 0.22,
+        "gain": 0.2765910469262644,
+        "t": 3.25,
+        "pan": -0.17307692307692307,
+        "seed": 355
+      },
+      {
+        "type": "pluck",
+        "hz": 784,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 3.25,
+        "pan": -0.17307692307692307,
+        "seed": 356
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 3.25,
+        "pan": -0.17307692307692307,
+        "seed": 357
+      },
+      {
+        "type": "marimba",
+        "hz": 659.25,
+        "dur": 2.2,
+        "decay": 0.45454545454545453,
+        "mallet": 0.22,
+        "gain": 0.23057950003159652,
+        "t": 3.25,
+        "pan": 0.10384615384615385,
+        "seed": 362
+      },
+      {
+        "type": "pluck",
+        "hz": 1318.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 3.25,
+        "pan": 0.10384615384615385,
+        "seed": 363
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 3.25,
+        "pan": 0.10384615384615385,
+        "seed": 364
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 3.285,
+        "pan": 0.45,
+        "seed": 369
+      },
+      {
+        "type": "marimba",
+        "hz": 587.33,
+        "dur": 2.2,
+        "decay": 0.47818181818181815,
+        "mallet": 0.22,
+        "gain": 0.24009298828059875,
+        "t": 3.5,
+        "pan": 0.034615384615384645,
+        "seed": 376
+      },
+      {
+        "type": "pluck",
+        "hz": 1174.66,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 3.5,
+        "pan": 0.034615384615384645,
+        "seed": 377
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 3.5,
+        "pan": 0.034615384615384645,
+        "seed": 378
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 3.65,
+        "pan": 0.45,
+        "seed": 383
+      },
+      {
+        "type": "marimba",
+        "hz": 261.63,
+        "dur": 2.2,
+        "decay": 0.62,
+        "mallet": 0.22,
+        "gain": 0.3186380254850236,
+        "t": 3.75,
+        "pan": -0.38076923076923075,
+        "seed": 390
+      },
+      {
+        "type": "pluck",
+        "hz": 523.26,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 3.75,
+        "pan": -0.38076923076923075,
+        "seed": 391
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 3.75,
+        "pan": -0.38076923076923075,
+        "seed": 392
+      },
+      {
+        "type": "marimba",
+        "hz": 523.25,
+        "dur": 2.2,
+        "decay": 0.5018181818181818,
+        "mallet": 0.22,
+        "gain": 0.25,
+        "t": 3.75,
+        "pan": -0.034615384615384645,
+        "seed": 397
+      },
+      {
+        "type": "pluck",
+        "hz": 1046.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 3.75,
+        "pan": -0.034615384615384645,
+        "seed": 398
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 3.75,
+        "pan": -0.034615384615384645,
+        "seed": 399
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 4.015,
+        "pan": 0.45,
+        "seed": 404
+      },
+      {
+        "type": "marimba",
+        "hz": 440,
+        "dur": 2.2,
+        "decay": 0.5254545454545454,
+        "mallet": 0.22,
+        "gain": 0.2656316407686777,
+        "t": 4.25,
+        "pan": -0.10384615384615385,
+        "seed": 411
+      },
+      {
+        "type": "pluck",
+        "hz": 880,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 4.25,
+        "pan": -0.10384615384615385,
+        "seed": 412
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 4.25,
+        "pan": -0.10384615384615385,
+        "seed": 413
+      },
+      {
+        "type": "marimba",
+        "hz": 587.33,
+        "dur": 2.2,
+        "decay": 0.47818181818181815,
+        "mallet": 0.22,
+        "gain": 0.24009298828059875,
+        "t": 4.25,
+        "pan": 0.034615384615384645,
+        "seed": 418
+      },
+      {
+        "type": "pluck",
+        "hz": 1174.66,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 4.25,
+        "pan": 0.034615384615384645,
+        "seed": 419
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 4.25,
+        "pan": 0.034615384615384645,
+        "seed": 420
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 4.38,
+        "pan": 0.45,
+        "seed": 425
+      },
+      {
+        "type": "marimba",
+        "hz": 659.25,
+        "dur": 2.2,
+        "decay": 0.45454545454545453,
+        "mallet": 0.22,
+        "gain": 0.23057950003159652,
+        "t": 4.5,
+        "pan": 0.10384615384615385,
+        "seed": 432
+      },
+      {
+        "type": "pluck",
+        "hz": 1318.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 4.5,
+        "pan": 0.10384615384615385,
+        "seed": 433
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 4.5,
+        "pan": 0.10384615384615385,
+        "seed": 434
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 4.745,
+        "pan": 0.45,
+        "seed": 439
+      },
+      {
+        "type": "marimba",
+        "hz": 329.63,
+        "dur": 2.2,
+        "decay": 0.5727272727272728,
+        "mallet": 0.22,
+        "gain": 0.2938859919555823,
+        "t": 4.75,
+        "pan": -0.24230769230769236,
+        "seed": 446
+      },
+      {
+        "type": "pluck",
+        "hz": 659.26,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 4.75,
+        "pan": -0.24230769230769236,
+        "seed": 447
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 4.75,
+        "pan": -0.24230769230769236,
+        "seed": 448
+      },
+      {
+        "type": "marimba",
+        "hz": 783.99,
+        "dur": 2.2,
+        "decay": 0.4309090909090909,
+        "mallet": 0.22,
+        "gain": 0.21700990583719956,
+        "t": 4.75,
+        "pan": 0.17307692307692307,
+        "seed": 453
+      },
+      {
+        "type": "pluck",
+        "hz": 1567.98,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 4.75,
+        "pan": 0.17307692307692307,
+        "seed": 454
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 4.75,
+        "pan": 0.17307692307692307,
+        "seed": 455
+      },
+      {
+        "type": "marimba",
+        "hz": 261.63,
+        "dur": 2.2,
+        "decay": 0.62,
+        "mallet": 0.22,
+        "gain": 0.3186380254850236,
+        "t": 5,
+        "pan": -0.38076923076923075,
+        "seed": 460
+      },
+      {
+        "type": "pluck",
+        "hz": 523.26,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 5,
+        "pan": -0.38076923076923075,
+        "seed": 461
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 5,
+        "pan": -0.38076923076923075,
+        "seed": 462
+      },
+      {
+        "type": "marimba",
+        "hz": 523.25,
+        "dur": 2.2,
+        "decay": 0.5018181818181818,
+        "mallet": 0.22,
+        "gain": 0.25,
+        "t": 5,
+        "pan": -0.034615384615384645,
+        "seed": 467
+      },
+      {
+        "type": "pluck",
+        "hz": 1046.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 5,
+        "pan": -0.034615384615384645,
+        "seed": 468
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 5,
+        "pan": -0.034615384615384645,
+        "seed": 469
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 5.109999999999999,
+        "pan": 0.45,
+        "seed": 474
+      },
+      {
+        "type": "marimba",
+        "hz": 293.66,
+        "dur": 2.2,
+        "decay": 0.5963636363636363,
+        "mallet": 0.22,
+        "gain": 0.30601489336309556,
+        "t": 5.25,
+        "pan": -0.3115384615384616,
+        "seed": 481
+      },
+      {
+        "type": "pluck",
+        "hz": 587.32,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 5.25,
+        "pan": -0.3115384615384616,
+        "seed": 482
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 5.25,
+        "pan": -0.3115384615384616,
+        "seed": 483
+      },
+      {
+        "type": "marimba",
+        "hz": 659.25,
+        "dur": 2.2,
+        "decay": 0.45454545454545453,
+        "mallet": 0.22,
+        "gain": 0.23057950003159652,
+        "t": 5.25,
+        "pan": 0.10384615384615385,
+        "seed": 488
+      },
+      {
+        "type": "pluck",
+        "hz": 1318.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 5.25,
+        "pan": 0.10384615384615385,
+        "seed": 489
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 5.25,
+        "pan": 0.10384615384615385,
+        "seed": 490
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 5.475,
+        "pan": 0.45,
+        "seed": 495
+      },
+      {
+        "type": "marimba",
+        "hz": 440,
+        "dur": 2.2,
+        "decay": 0.5254545454545454,
+        "mallet": 0.22,
+        "gain": 0.2656316407686777,
+        "t": 5.5,
+        "pan": -0.10384615384615385,
+        "seed": 502
+      },
+      {
+        "type": "pluck",
+        "hz": 880,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 5.5,
+        "pan": -0.10384615384615385,
+        "seed": 503
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 5.5,
+        "pan": -0.10384615384615385,
+        "seed": 504
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "dur": 2.2,
+        "decay": 0.5490909090909091,
+        "mallet": 0.22,
+        "gain": 0.2765910469262644,
+        "t": 5.75,
+        "pan": -0.17307692307692307,
+        "seed": 509
+      },
+      {
+        "type": "pluck",
+        "hz": 784,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 5.75,
+        "pan": -0.17307692307692307,
+        "seed": 510
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 5.75,
+        "pan": -0.17307692307692307,
+        "seed": 511
+      },
+      {
+        "type": "marimba",
+        "hz": 587.33,
+        "dur": 2.2,
+        "decay": 0.47818181818181815,
+        "mallet": 0.22,
+        "gain": 0.24009298828059875,
+        "t": 5.75,
+        "pan": 0.034615384615384645,
+        "seed": 516
+      },
+      {
+        "type": "pluck",
+        "hz": 1174.66,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 5.75,
+        "pan": 0.034615384615384645,
+        "seed": 517
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 5.75,
+        "pan": 0.034615384615384645,
+        "seed": 518
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 5.84,
+        "pan": 0.45,
+        "seed": 523
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 6.205,
+        "pan": 0.45,
+        "seed": 530
+      },
+      {
+        "type": "marimba",
+        "hz": 261.63,
+        "dur": 2.2,
+        "decay": 0.62,
+        "mallet": 0.22,
+        "gain": 0.3186380254850236,
+        "t": 6.25,
+        "pan": -0.38076923076923075,
+        "seed": 537
+      },
+      {
+        "type": "pluck",
+        "hz": 523.26,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 6.25,
+        "pan": -0.38076923076923075,
+        "seed": 538
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 6.25,
+        "pan": -0.38076923076923075,
+        "seed": 539
+      },
+      {
+        "type": "marimba",
+        "hz": 293.66,
+        "dur": 2.2,
+        "decay": 0.5963636363636363,
+        "mallet": 0.22,
+        "gain": 0.30601489336309556,
+        "t": 6.5,
+        "pan": -0.3115384615384616,
+        "seed": 544
+      },
+      {
+        "type": "pluck",
+        "hz": 587.32,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 6.5,
+        "pan": -0.3115384615384616,
+        "seed": 545
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 6.5,
+        "pan": -0.3115384615384616,
+        "seed": 546
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 6.57,
+        "pan": 0.45,
+        "seed": 551
+      },
+      {
+        "type": "marimba",
+        "hz": 329.63,
+        "dur": 2.2,
+        "decay": 0.5727272727272728,
+        "mallet": 0.22,
+        "gain": 0.2938859919555823,
+        "t": 6.75,
+        "pan": -0.24230769230769236,
+        "seed": 558
+      },
+      {
+        "type": "pluck",
+        "hz": 659.26,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 6.75,
+        "pan": -0.24230769230769236,
+        "seed": 559
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 6.75,
+        "pan": -0.24230769230769236,
+        "seed": 560
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 6.935,
+        "pan": 0.45,
+        "seed": 565
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "dur": 2.2,
+        "decay": 0.5490909090909091,
+        "mallet": 0.22,
+        "gain": 0.2765910469262644,
+        "t": 7,
+        "pan": -0.17307692307692307,
+        "seed": 572
+      },
+      {
+        "type": "pluck",
+        "hz": 784,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 7,
+        "pan": -0.17307692307692307,
+        "seed": 573
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 7,
+        "pan": -0.17307692307692307,
+        "seed": 574
+      },
+      {
+        "type": "marimba",
+        "hz": 440,
+        "dur": 2.2,
+        "decay": 0.5254545454545454,
+        "mallet": 0.22,
+        "gain": 0.2656316407686777,
+        "t": 7.25,
+        "pan": -0.10384615384615385,
+        "seed": 579
+      },
+      {
+        "type": "pluck",
+        "hz": 880,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 7.25,
+        "pan": -0.10384615384615385,
+        "seed": 580
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 7.25,
+        "pan": -0.10384615384615385,
+        "seed": 581
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 7.3,
+        "pan": 0.45,
+        "seed": 586
+      },
+      {
+        "type": "marimba",
+        "hz": 523.25,
+        "dur": 2.2,
+        "decay": 0.5018181818181818,
+        "mallet": 0.22,
+        "gain": 0.25,
+        "t": 7.5,
+        "pan": -0.034615384615384645,
+        "seed": 593
+      },
+      {
+        "type": "pluck",
+        "hz": 1046.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 7.5,
+        "pan": -0.034615384615384645,
+        "seed": 594
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 7.5,
+        "pan": -0.034615384615384645,
+        "seed": 595
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 7.665,
+        "pan": 0.45,
+        "seed": 600
+      },
+      {
+        "type": "marimba",
+        "hz": 587.33,
+        "dur": 2.2,
+        "decay": 0.47818181818181815,
+        "mallet": 0.22,
+        "gain": 0.24009298828059875,
+        "t": 7.75,
+        "pan": 0.034615384615384645,
+        "seed": 607
+      },
+      {
+        "type": "pluck",
+        "hz": 1174.66,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 7.75,
+        "pan": 0.034615384615384645,
+        "seed": 608
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 7.75,
+        "pan": 0.034615384615384645,
+        "seed": 609
+      },
+      {
+        "type": "marimba",
+        "hz": 659.25,
+        "dur": 2.2,
+        "decay": 0.45454545454545453,
+        "mallet": 0.22,
+        "gain": 0.23057950003159652,
+        "t": 8,
+        "pan": 0.10384615384615385,
+        "seed": 614
+      },
+      {
+        "type": "pluck",
+        "hz": 1318.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 8,
+        "pan": 0.10384615384615385,
+        "seed": 615
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 8,
+        "pan": 0.10384615384615385,
+        "seed": 616
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 8.03,
+        "pan": 0.45,
+        "seed": 621
+      },
+      {
+        "type": "marimba",
+        "hz": 783.99,
+        "dur": 2.2,
+        "decay": 0.4309090909090909,
+        "mallet": 0.22,
+        "gain": 0.21700990583719956,
+        "t": 8.25,
+        "pan": 0.17307692307692307,
+        "seed": 628
+      },
+      {
+        "type": "pluck",
+        "hz": 1567.98,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 8.25,
+        "pan": 0.17307692307692307,
+        "seed": 629
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 8.25,
+        "pan": 0.17307692307692307,
+        "seed": 630
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 8.395,
+        "pan": 0.45,
+        "seed": 635
+      },
+      {
+        "type": "marimba",
+        "hz": 880,
+        "dur": 2.2,
+        "decay": 0.40727272727272723,
+        "mallet": 0.22,
+        "gain": 0.20841036124532675,
+        "t": 8.5,
+        "pan": 0.2423076923076923,
+        "seed": 642
+      },
+      {
+        "type": "pluck",
+        "hz": 1760,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 8.5,
+        "pan": 0.2423076923076923,
+        "seed": 643
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 8.5,
+        "pan": 0.2423076923076923,
+        "seed": 644
+      },
+      {
+        "type": "marimba",
+        "hz": 1046.5,
+        "dur": 2.2,
+        "decay": 0.38363636363636366,
+        "mallet": 0.22,
+        "gain": 0.1961460244741877,
+        "t": 8.75,
+        "pan": 0.3115384615384615,
+        "seed": 649
+      },
+      {
+        "type": "pluck",
+        "hz": 2093,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 8.75,
+        "pan": 0.3115384615384615,
+        "seed": 650
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 8.75,
+        "pan": 0.3115384615384615,
+        "seed": 651
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 8.76,
+        "pan": 0.45,
+        "seed": 656
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.66,
+        "dur": 2.2,
+        "decay": 0.36,
+        "mallet": 0.22,
+        "gain": 0.1883731406214687,
+        "t": 9,
+        "pan": 0.38076923076923075,
+        "seed": 663
+      },
+      {
+        "type": "pluck",
+        "hz": 2349.32,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 9,
+        "pan": 0.38076923076923075,
+        "seed": 664
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 9,
+        "pan": 0.38076923076923075,
+        "seed": 665
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 9.125,
+        "pan": 0.45,
+        "seed": 670
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 9.49,
+        "pan": 0.45,
+        "seed": 677
+      },
+      {
+        "type": "marimba",
+        "hz": 261.63,
+        "dur": 2.2,
+        "decay": 0.62,
+        "mallet": 0.22,
+        "gain": 0.3186380254850236,
+        "t": 9.5,
+        "pan": -0.38076923076923075,
+        "seed": 684
+      },
+      {
+        "type": "pluck",
+        "hz": 523.26,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 9.5,
+        "pan": -0.38076923076923075,
+        "seed": 685
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 9.5,
+        "pan": -0.38076923076923075,
+        "seed": 686
+      },
+      {
+        "type": "marimba",
+        "hz": 523.25,
+        "dur": 2.2,
+        "decay": 0.5018181818181818,
+        "mallet": 0.22,
+        "gain": 0.25,
+        "t": 9.5,
+        "pan": -0.034615384615384645,
+        "seed": 691
+      },
+      {
+        "type": "pluck",
+        "hz": 1046.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 9.5,
+        "pan": -0.034615384615384645,
+        "seed": 692
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 9.5,
+        "pan": -0.034615384615384645,
+        "seed": 693
+      },
+      {
+        "type": "marimba",
+        "hz": 659.25,
+        "dur": 2.2,
+        "decay": 0.45454545454545453,
+        "mallet": 0.22,
+        "gain": 0.23057950003159652,
+        "t": 9.5,
+        "pan": 0.10384615384615385,
+        "seed": 698
+      },
+      {
+        "type": "pluck",
+        "hz": 1318.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 9.5,
+        "pan": 0.10384615384615385,
+        "seed": 699
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 9.5,
+        "pan": 0.10384615384615385,
+        "seed": 700
+      },
+      {
+        "type": "marimba",
+        "hz": 880,
+        "dur": 2.2,
+        "decay": 0.40727272727272723,
+        "mallet": 0.22,
+        "gain": 0.20841036124532675,
+        "t": 9.5,
+        "pan": 0.2423076923076923,
+        "seed": 705
+      },
+      {
+        "type": "pluck",
+        "hz": 1760,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 9.5,
+        "pan": 0.2423076923076923,
+        "seed": 706
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 9.5,
+        "pan": 0.2423076923076923,
+        "seed": 707
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 9.855,
+        "pan": 0.45,
+        "seed": 712
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "dur": 2.2,
+        "decay": 0.5490909090909091,
+        "mallet": 0.22,
+        "gain": 0.2765910469262644,
+        "t": 10,
+        "pan": -0.17307692307692307,
+        "seed": 719
+      },
+      {
+        "type": "pluck",
+        "hz": 784,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 10,
+        "pan": -0.17307692307692307,
+        "seed": 720
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 10,
+        "pan": -0.17307692307692307,
+        "seed": 721
+      },
+      {
+        "type": "marimba",
+        "hz": 587.33,
+        "dur": 2.2,
+        "decay": 0.47818181818181815,
+        "mallet": 0.22,
+        "gain": 0.24009298828059875,
+        "t": 10,
+        "pan": 0.034615384615384645,
+        "seed": 726
+      },
+      {
+        "type": "pluck",
+        "hz": 1174.66,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 10,
+        "pan": 0.034615384615384645,
+        "seed": 727
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 10,
+        "pan": 0.034615384615384645,
+        "seed": 728
+      },
+      {
+        "type": "marimba",
+        "hz": 783.99,
+        "dur": 2.2,
+        "decay": 0.4309090909090909,
+        "mallet": 0.22,
+        "gain": 0.21700990583719956,
+        "t": 10,
+        "pan": 0.17307692307692307,
+        "seed": 733
+      },
+      {
+        "type": "pluck",
+        "hz": 1567.98,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 10,
+        "pan": 0.17307692307692307,
+        "seed": 734
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 10,
+        "pan": 0.17307692307692307,
+        "seed": 735
+      },
+      {
+        "type": "marimba",
+        "hz": 1046.5,
+        "dur": 2.2,
+        "decay": 0.38363636363636366,
+        "mallet": 0.22,
+        "gain": 0.1961460244741877,
+        "t": 10,
+        "pan": 0.3115384615384615,
+        "seed": 740
+      },
+      {
+        "type": "pluck",
+        "hz": 2093,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 10,
+        "pan": 0.3115384615384615,
+        "seed": 741
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 10,
+        "pan": 0.3115384615384615,
+        "seed": 742
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 10.219999999999999,
+        "pan": 0.45,
+        "seed": 747
+      },
+      {
+        "type": "marimba",
+        "hz": 440,
+        "dur": 2.2,
+        "decay": 0.5254545454545454,
+        "mallet": 0.22,
+        "gain": 0.2656316407686777,
+        "t": 10.5,
+        "pan": -0.10384615384615385,
+        "seed": 754
+      },
+      {
+        "type": "pluck",
+        "hz": 880,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 10.5,
+        "pan": -0.10384615384615385,
+        "seed": 755
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 10.5,
+        "pan": -0.10384615384615385,
+        "seed": 756
+      },
+      {
+        "type": "marimba",
+        "hz": 523.25,
+        "dur": 2.2,
+        "decay": 0.5018181818181818,
+        "mallet": 0.22,
+        "gain": 0.25,
+        "t": 10.5,
+        "pan": -0.034615384615384645,
+        "seed": 761
+      },
+      {
+        "type": "pluck",
+        "hz": 1046.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 10.5,
+        "pan": -0.034615384615384645,
+        "seed": 762
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 10.5,
+        "pan": -0.034615384615384645,
+        "seed": 763
+      },
+      {
+        "type": "marimba",
+        "hz": 880,
+        "dur": 2.2,
+        "decay": 0.40727272727272723,
+        "mallet": 0.22,
+        "gain": 0.20841036124532675,
+        "t": 10.5,
+        "pan": 0.2423076923076923,
+        "seed": 768
+      },
+      {
+        "type": "pluck",
+        "hz": 1760,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 10.5,
+        "pan": 0.2423076923076923,
+        "seed": 769
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 10.5,
+        "pan": 0.2423076923076923,
+        "seed": 770
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.66,
+        "dur": 2.2,
+        "decay": 0.36,
+        "mallet": 0.22,
+        "gain": 0.1883731406214687,
+        "t": 10.5,
+        "pan": 0.38076923076923075,
+        "seed": 775
+      },
+      {
+        "type": "pluck",
+        "hz": 2349.32,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 10.5,
+        "pan": 0.38076923076923075,
+        "seed": 776
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 10.5,
+        "pan": 0.38076923076923075,
+        "seed": 777
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 10.584999999999999,
+        "pan": 0.45,
+        "seed": 782
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 10.95,
+        "pan": 0.45,
+        "seed": 789
+      },
+      {
+        "type": "marimba",
+        "hz": 293.66,
+        "dur": 2.2,
+        "decay": 0.5963636363636363,
+        "mallet": 0.22,
+        "gain": 0.30601489336309556,
+        "t": 11,
+        "pan": -0.3115384615384616,
+        "seed": 796
+      },
+      {
+        "type": "pluck",
+        "hz": 587.32,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 11,
+        "pan": -0.3115384615384616,
+        "seed": 797
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 11,
+        "pan": -0.3115384615384616,
+        "seed": 798
+      },
+      {
+        "type": "marimba",
+        "hz": 329.63,
+        "dur": 2.2,
+        "decay": 0.5727272727272728,
+        "mallet": 0.22,
+        "gain": 0.2938859919555823,
+        "t": 11,
+        "pan": -0.24230769230769236,
+        "seed": 803
+      },
+      {
+        "type": "pluck",
+        "hz": 659.26,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 11,
+        "pan": -0.24230769230769236,
+        "seed": 804
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 11,
+        "pan": -0.24230769230769236,
+        "seed": 805
+      },
+      {
+        "type": "marimba",
+        "hz": 659.25,
+        "dur": 2.2,
+        "decay": 0.45454545454545453,
+        "mallet": 0.22,
+        "gain": 0.23057950003159652,
+        "t": 11,
+        "pan": 0.10384615384615385,
+        "seed": 810
+      },
+      {
+        "type": "pluck",
+        "hz": 1318.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 11,
+        "pan": 0.10384615384615385,
+        "seed": 811
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 11,
+        "pan": 0.10384615384615385,
+        "seed": 812
+      },
+      {
+        "type": "marimba",
+        "hz": 1046.5,
+        "dur": 2.2,
+        "decay": 0.38363636363636366,
+        "mallet": 0.22,
+        "gain": 0.1961460244741877,
+        "t": 11,
+        "pan": 0.3115384615384615,
+        "seed": 817
+      },
+      {
+        "type": "pluck",
+        "hz": 2093,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 11,
+        "pan": 0.3115384615384615,
+        "seed": 818
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 11,
+        "pan": 0.3115384615384615,
+        "seed": 819
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 11.315,
+        "pan": 0.45,
+        "seed": 824
+      },
+      {
+        "type": "marimba",
+        "hz": 783.99,
+        "dur": 2.2,
+        "decay": 0.4309090909090909,
+        "mallet": 0.22,
+        "gain": 0.21700990583719956,
+        "t": 11.5,
+        "pan": 0.17307692307692307,
+        "seed": 831
+      },
+      {
+        "type": "pluck",
+        "hz": 1567.98,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 11.5,
+        "pan": 0.17307692307692307,
+        "seed": 832
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 11.5,
+        "pan": 0.17307692307692307,
+        "seed": 833
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 11.68,
+        "pan": 0.45,
+        "seed": 838
+      },
+      {
+        "type": "marimba",
+        "hz": 440,
+        "dur": 2.2,
+        "decay": 0.5254545454545454,
+        "mallet": 0.22,
+        "gain": 0.2656316407686777,
+        "t": 11.75,
+        "pan": -0.10384615384615385,
+        "seed": 845
+      },
+      {
+        "type": "pluck",
+        "hz": 880,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 11.75,
+        "pan": -0.10384615384615385,
+        "seed": 846
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 11.75,
+        "pan": -0.10384615384615385,
+        "seed": 847
+      },
+      {
+        "type": "marimba",
+        "hz": 880,
+        "dur": 2.2,
+        "decay": 0.40727272727272723,
+        "mallet": 0.22,
+        "gain": 0.20841036124532675,
+        "t": 11.75,
+        "pan": 0.2423076923076923,
+        "seed": 852
+      },
+      {
+        "type": "pluck",
+        "hz": 1760,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 11.75,
+        "pan": 0.2423076923076923,
+        "seed": 853
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 11.75,
+        "pan": 0.2423076923076923,
+        "seed": 854
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.66,
+        "dur": 2.2,
+        "decay": 0.36,
+        "mallet": 0.22,
+        "gain": 0.1883731406214687,
+        "t": 12,
+        "pan": 0.38076923076923075,
+        "seed": 859
+      },
+      {
+        "type": "pluck",
+        "hz": 2349.32,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 12,
+        "pan": 0.38076923076923075,
+        "seed": 860
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 12,
+        "pan": 0.38076923076923075,
+        "seed": 861
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 12.045,
+        "pan": 0.45,
+        "seed": 866
+      },
+      {
+        "type": "marimba",
+        "hz": 523.25,
+        "dur": 2.2,
+        "decay": 0.5018181818181818,
+        "mallet": 0.22,
+        "gain": 0.25,
+        "t": 12.25,
+        "pan": -0.034615384615384645,
+        "seed": 873
+      },
+      {
+        "type": "pluck",
+        "hz": 1046.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 12.25,
+        "pan": -0.034615384615384645,
+        "seed": 874
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 12.25,
+        "pan": -0.034615384615384645,
+        "seed": 875
+      },
+      {
+        "type": "marimba",
+        "hz": 1046.5,
+        "dur": 2.2,
+        "decay": 0.38363636363636366,
+        "mallet": 0.22,
+        "gain": 0.1961460244741877,
+        "t": 12.25,
+        "pan": 0.3115384615384615,
+        "seed": 880
+      },
+      {
+        "type": "pluck",
+        "hz": 2093,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 12.25,
+        "pan": 0.3115384615384615,
+        "seed": 881
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 12.25,
+        "pan": 0.3115384615384615,
+        "seed": 882
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 12.41,
+        "pan": 0.45,
+        "seed": 887
+      },
+      {
+        "type": "marimba",
+        "hz": 293.66,
+        "dur": 2.2,
+        "decay": 0.5963636363636363,
+        "mallet": 0.22,
+        "gain": 0.30601489336309556,
+        "t": 12.5,
+        "pan": -0.3115384615384616,
+        "seed": 894
+      },
+      {
+        "type": "pluck",
+        "hz": 587.32,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 12.5,
+        "pan": -0.3115384615384616,
+        "seed": 895
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 12.5,
+        "pan": -0.3115384615384616,
+        "seed": 896
+      },
+      {
+        "type": "marimba",
+        "hz": 880,
+        "dur": 2.2,
+        "decay": 0.40727272727272723,
+        "mallet": 0.22,
+        "gain": 0.20841036124532675,
+        "t": 12.5,
+        "pan": 0.2423076923076923,
+        "seed": 901
+      },
+      {
+        "type": "pluck",
+        "hz": 1760,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 12.5,
+        "pan": 0.2423076923076923,
+        "seed": 902
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 12.5,
+        "pan": 0.2423076923076923,
+        "seed": 903
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "dur": 2.2,
+        "decay": 0.5490909090909091,
+        "mallet": 0.22,
+        "gain": 0.2765910469262644,
+        "t": 12.75,
+        "pan": -0.17307692307692307,
+        "seed": 908
+      },
+      {
+        "type": "pluck",
+        "hz": 784,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 12.75,
+        "pan": -0.17307692307692307,
+        "seed": 909
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 12.75,
+        "pan": -0.17307692307692307,
+        "seed": 910
+      },
+      {
+        "type": "marimba",
+        "hz": 783.99,
+        "dur": 2.2,
+        "decay": 0.4309090909090909,
+        "mallet": 0.22,
+        "gain": 0.21700990583719956,
+        "t": 12.75,
+        "pan": 0.17307692307692307,
+        "seed": 915
+      },
+      {
+        "type": "pluck",
+        "hz": 1567.98,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 12.75,
+        "pan": 0.17307692307692307,
+        "seed": 916
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 12.75,
+        "pan": 0.17307692307692307,
+        "seed": 917
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 12.775,
+        "pan": 0.45,
+        "seed": 922
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 13.14,
+        "pan": 0.45,
+        "seed": 929
+      },
+      {
+        "type": "marimba",
+        "hz": 329.63,
+        "dur": 2.2,
+        "decay": 0.5727272727272728,
+        "mallet": 0.22,
+        "gain": 0.2938859919555823,
+        "t": 13.25,
+        "pan": -0.24230769230769236,
+        "seed": 936
+      },
+      {
+        "type": "pluck",
+        "hz": 659.26,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 13.25,
+        "pan": -0.24230769230769236,
+        "seed": 937
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 13.25,
+        "pan": -0.24230769230769236,
+        "seed": 938
+      },
+      {
+        "type": "marimba",
+        "hz": 659.25,
+        "dur": 2.2,
+        "decay": 0.45454545454545453,
+        "mallet": 0.22,
+        "gain": 0.23057950003159652,
+        "t": 13.25,
+        "pan": 0.10384615384615385,
+        "seed": 943
+      },
+      {
+        "type": "pluck",
+        "hz": 1318.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 13.25,
+        "pan": 0.10384615384615385,
+        "seed": 944
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 13.25,
+        "pan": 0.10384615384615385,
+        "seed": 945
+      },
+      {
+        "type": "marimba",
+        "hz": 587.33,
+        "dur": 2.2,
+        "decay": 0.47818181818181815,
+        "mallet": 0.22,
+        "gain": 0.24009298828059875,
+        "t": 13.5,
+        "pan": 0.034615384615384645,
+        "seed": 950
+      },
+      {
+        "type": "pluck",
+        "hz": 1174.66,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 13.5,
+        "pan": 0.034615384615384645,
+        "seed": 951
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 13.5,
+        "pan": 0.034615384615384645,
+        "seed": 952
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 13.504999999999999,
+        "pan": 0.45,
+        "seed": 957
+      },
+      {
+        "type": "marimba",
+        "hz": 261.63,
+        "dur": 2.2,
+        "decay": 0.62,
+        "mallet": 0.22,
+        "gain": 0.3186380254850236,
+        "t": 13.75,
+        "pan": -0.38076923076923075,
+        "seed": 964
+      },
+      {
+        "type": "pluck",
+        "hz": 523.26,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 13.75,
+        "pan": -0.38076923076923075,
+        "seed": 965
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 13.75,
+        "pan": -0.38076923076923075,
+        "seed": 966
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "dur": 2.2,
+        "decay": 0.5490909090909091,
+        "mallet": 0.22,
+        "gain": 0.2765910469262644,
+        "t": 13.75,
+        "pan": -0.17307692307692307,
+        "seed": 971
+      },
+      {
+        "type": "pluck",
+        "hz": 784,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 13.75,
+        "pan": -0.17307692307692307,
+        "seed": 972
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 13.75,
+        "pan": -0.17307692307692307,
+        "seed": 973
+      },
+      {
+        "type": "marimba",
+        "hz": 523.25,
+        "dur": 2.2,
+        "decay": 0.5018181818181818,
+        "mallet": 0.22,
+        "gain": 0.25,
+        "t": 13.75,
+        "pan": -0.034615384615384645,
+        "seed": 978
+      },
+      {
+        "type": "pluck",
+        "hz": 1046.5,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 13.75,
+        "pan": -0.034615384615384645,
+        "seed": 979
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 13.75,
+        "pan": -0.034615384615384645,
+        "seed": 980
+      },
+      {
+        "type": "marimba",
+        "hz": 783.99,
+        "dur": 2.2,
+        "decay": 0.4309090909090909,
+        "mallet": 0.22,
+        "gain": 0.21700990583719956,
+        "t": 13.75,
+        "pan": 0.17307692307692307,
+        "seed": 985
+      },
+      {
+        "type": "pluck",
+        "hz": 1567.98,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 13.75,
+        "pan": 0.17307692307692307,
+        "seed": 986
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 13.75,
+        "pan": 0.17307692307692307,
+        "seed": 987
+      },
+      {
+        "type": "marimba",
+        "hz": 1046.5,
+        "dur": 2.2,
+        "decay": 0.38363636363636366,
+        "mallet": 0.22,
+        "gain": 0.1961460244741877,
+        "t": 13.75,
+        "pan": 0.3115384615384615,
+        "seed": 992
+      },
+      {
+        "type": "pluck",
+        "hz": 2093,
+        "dur": 1.6,
+        "decay": 1.4,
+        "bright": 0.85,
+        "gain": 0.24,
+        "t": 13.75,
+        "pan": 0.3115384615384615,
+        "seed": 993
+      },
+      {
+        "type": "tick",
+        "gain": 0.1,
+        "pitch": 1.8,
+        "t": 13.75,
+        "pan": 0.3115384615384615,
+        "seed": 994
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 13.87,
+        "pan": 0.45,
+        "seed": 999
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 14.235,
+        "pan": 0.45,
+        "seed": 1006
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.8,
+        "t": 14.6,
+        "pan": 0.45,
+        "seed": 1013
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "tune.js: pin angle psi = PI/2 + aRel - omega * T (T = note time), pin x = tooth x; tooth tip = min(-A exp(-s/tau) cos(2 pi f s), pin stop); cylinder angle = omega t. SCORE = one marimba + pluck per pin at T.",
+      "tune": "Pinwheel Lullaby (original, C-major pentatonic), 80 pins on 12 teeth, one cylinder turn = 14.6 s",
+      "contact": "a pin holds its tooth 0.28 s, tip travel 66 mm (toy scale), closest re-pluck 0.75 s",
+      "framing": "ok",
+      "numbers": "no data shown; the visible vibration frequency (6.5-10.5 Hz) is a stand-in for the audible pitch, which would alias at 30 fps"
+    }
+  }
+}

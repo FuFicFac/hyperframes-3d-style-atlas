@@ -1,0 +1,17 @@
+check-frames run: 2026-11-18 07:55:01 UTC
+times: 0.5, 2, 4.5, 6.3, 8.5, 10, 11.5, 13.1, 14.5
+newest code edit: 2026-11-18 07:53:46 UTC (layer-print/style.js)
+mp4: 74-layer-print.mp4 2026-11-18 07:54:30 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 31.1 dB, frame 189)
+  frame 15 (t=0.500): 35.4 dB
+  frame 60 (t=2.000): 34.7 dB
+  frame 135 (t=4.500): 35.4 dB
+  frame 189 (t=6.300): 31.1 dB
+  frame 255 (t=8.500): 37.0 dB
+  frame 300 (t=10.000): 36.1 dB
+  frame 345 (t=11.500): 37.0 dB
+  frame 393 (t=13.100): 36.4 dB
+  frame 435 (t=14.500): 38.1 dB
+determinism: OK (9 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

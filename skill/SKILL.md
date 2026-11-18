@@ -1,6 +1,6 @@
 ---
 name: 3d-style-atlas
-description: Make short (15–60 s) 3D animated explainers, title cards and channel graphics in a named visual style — Three.js scenes written in code, rendered to MP4 through HyperFrames with synthesized sound and optional voiceover sync. 70 styles (low-poly, paper pop-up, neon sign, soft clay, blueprint, split-flap board, voxel, marble run, studio product, liquid chrome, stained glass, subway map, circuit board, clockwork, weather map, domino run, conveyor factory, mixing console, city lights, ink wash, pin art, anamorphic, zoetrope, cymatics, ferrofluid, point cloud, thermal camera, murmuration, impossible geometry, light painting, microscope slide, ukiyo-e woodblock, cubism, kintsugi, impasto, op art, multiplane cel, mosaic, constructivist poster, flipbook, art deco, the Why AI Matters house style, and more). Use when asked for a "3D explainer", "3D animation", "style atlas", "animate how X works", "make a clip in the <style> style", a Why AI Matters ident / lower third / chapter card / key stat, or to add a new 3D style. NOT for editing footage (use claude-cuts-video), 2D HTML motion graphics (use hyperframes), or Remotion projects (use remotion).
+description: Make short (15–60 s) 3D animated explainers, title cards and channel graphics in a named visual style — Three.js scenes written in code, rendered to MP4 through HyperFrames with synthesized sound and optional voiceover sync. 84 styles (low-poly, paper pop-up, neon sign, soft clay, blueprint, split-flap board, voxel, marble run, studio product, liquid chrome, stained glass, subway map, circuit board, clockwork, weather map, domino run, conveyor factory, mixing console, city lights, ink wash, pin art, anamorphic, zoetrope, cymatics, ferrofluid, point cloud, thermal camera, murmuration, impossible geometry, light painting, microscope slide, ukiyo-e woodblock, cubism, kintsugi, impasto, op art, multiplane cel, mosaic, constructivist poster, flipbook, art deco, the Why AI Matters house style, and more). Use when asked for a "3D explainer", "3D animation", "style atlas", "animate how X works", "make a clip in the <style> style", a Why AI Matters ident / lower third / chapter card / key stat, or to add a new 3D style. NOT for editing footage (use claude-cuts-video), 2D HTML motion graphics (use hyperframes), or Remotion projects (use remotion).
 ---
 
 # 3D Style Atlas
@@ -33,7 +33,7 @@ first). The scripts find the kit and the pilot folder relative to themselves, so
 
 ## Making a clip
 
-1. **Pick the style.** Read `references/STYLES.md` (all 70, with good-for / avoid-for). Match on "good for", not on taste alone.
+1. **Pick the style.** Read `references/STYLES.md` (all 84, with good-for / avoid-for). Match on "good for", not on taste alone.
    Rough map (one style can sit in several rows; read its `STYLE.md` before writing anything):
 
    | Good for | Styles |
@@ -55,6 +55,10 @@ first). The scripts find the kit and the pilot folder relative to themselves, so
    | Illusions, point of view, "it depends how you look" | anamorphic (clutter → message from one angle), impossible-geometry (loops, paradoxes), op-art (flat reads as depth), cubism (many views at once), zoetrope (stills → motion) |
    | Art and craft looks, build-up and making-of, repair | ukiyo-e (layer by layer), impasto (stroke by stroke), mosaic (piece by piece), kintsugi (break → mend, stronger after), multiplane-cel (layers and depth), flipbook (frames → life), light-painting (drawn in the air) |
    | Bold period design: posters, manifestos, grand reveals | constructivist-poster (forceful claims), art-deco (symmetric rise, premieres) |
+   | Chance, compounding and runaway growth | galton-board (randomness adds up to a bell curve), mousetrap-chain (one becomes two becomes all), paper-marbling (simple passes compound) |
+   | Made step by step, token by token, layer by layer | typewriter (one letter / one token at a time), layer-print (3D printer, built in layers), music-box (the pins are the program) |
+   | Layers inside layers, recursion, bottlenecks | nesting-dolls (a smaller one inside; distillation), infinity-mirror (a copy of a copy; AI learning from AI), ship-in-bottle (fold, fit, unfold) |
+   | Time, hidden activity and interpretation | bullet-time (freeze the world, keep the camera moving), slit-scan (every column a different moment), cloud-chamber (invisible traffic made visible), inkblot (same data, different story), wind-walker (rigid linkage that walks) |
    | Channel packaging (Why AI Matters) | wam-house (ident, lower third, chapter card, key stat, quote, end card) |
 
    Some demos are weaker than others — see "Known weaker demos" below before choosing one for an important clip.
@@ -138,7 +142,15 @@ impossible-geometry (subject small in a mostly dark frame) · microscope-slide (
 block back fills the screen during each pass) · impasto (first ~4 s mostly blank canvas) · multiplane-cel (paintings small inside
 the rig) · art-deco (tower small in the final wide). Strongest of the twenty: cymatics, microscope-slide, kintsugi, impasto, mosaic.
 
-## Limits (true as of 2026-11-13, kit pass 7; styles 51–70 added 2026-11-15 on the same kit)
+Styles 71–84 (added 2026-11-17/18 in one overnight run, stills reviewed, never watched in motion, audio never heard): galton-board
+(whole-board shot fills about half the width; quiet audio) · music-box (gold on gold, plucked-tooth tint faint) · mousetrap-chain (balls
+are specks in the wide eruption; CRF 24) · wind-walker (leg tangle hard to read in wides, creature small in the final shot; CRF 24;
+audio mean −19 dB) · infinity-mirror (the bias beat is dark; ~0.3 s near-black around 12.5 s) · cloud-chamber (the "empty" opening
+already shows trails; small corner captions) · ship-in-bottle (ship small in the bottle, no label around 7.5–8 s) · nesting-dolls
+(opening doll small) · slit-scan (641 slice renders per frame — may exceed weaker GPUs). Strongest of the fourteen: paper-marbling,
+inkblot, slit-scan, typewriter, layer-print, bullet-time.
+
+## Limits (true as of 2026-11-13, kit pass 7; styles 51–70 added 2026-11-15 and 71–84 added 2026-11-18 on the same kit)
 
 - The Blender side has never been run — Blender isn't installed on the machine this was built on. The export and the conversion
   maths were checked; the bpy script was not executed.

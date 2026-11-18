@@ -1,0 +1,1441 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "paper-marbling",
+    "name": "Paper Marbling",
+    "description": "Paper marbling in a shallow white enamel tray on a bright pale-wood studio table, seen from above with a slight tilt. A glass pipette lets drops of ink fall onto thickened water; each drop spreads into a flat disc and pushes every earlier colour outward into concentric rings; a stylus is drawn back and forth and a comb is pulled across, and the rings stretch into feathers and chevrons; a sheet of paper is rolled onto the bath, peeled away carrying the pattern (the bath is left almost clean), lifted and turned to the camera as a finished print. The pattern is not simulated: it is a composition of closed-form area-preserving marbling deformations (ink-drop displacement, tine-line and comb displacement, from the mathematical marbling literature) applied in plan order; a fragment shader inverse-maps each pixel through the operations so far, the current one partially applied by its progress, so any frame is a pure function of t. Flat saturated inks (indigo, vermilion, ochre, teal, cream) with a slightly denser rim per drop; soft daylight; water plips, soft drags and paper sounds come from the same plan.",
+    "palette": {
+      "bg": "#d9cfbf",
+      "table": "#dcc6a0",
+      "tray": "#f6f3ec",
+      "trayRim": "#27406f",
+      "bath": "#cfdcdb",
+      "paper": "#f8f2e4",
+      "indigo": "#22386b",
+      "vermilion": "#d6452a",
+      "ochre": "#ecb43c",
+      "teal": "#2c8c80",
+      "cream": "#f6ecd4",
+      "ink": "#1c2233",
+      "wood": "#b98a55",
+      "brass": "#b9975b",
+      "rubber": "#4a4f5e"
+    },
+    "world": {
+      "background": "#d9cfbf",
+      "sky": null,
+      "fog": {
+        "color": "#d9cfbf",
+        "near": 14,
+        "far": 34
+      },
+      "environment": "room",
+      "environmentIntensity": 0.4,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "table": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.78,
+        "metalness": 0,
+        "map": {
+          "source": "wood",
+          "size": 1024,
+          "boards": 4,
+          "seed": 75,
+          "grainFreq": 18,
+          "grainWarp": 1.6,
+          "contrast": 0.22,
+          "dark": "#d6c3a2",
+          "mid": "#e4d4b6",
+          "light": "#efe3cb",
+          "seam": "#c2ac88",
+          "description": "pale birch planks"
+        }
+      },
+      "tray": {
+        "type": "physical",
+        "baseColor": "#f6f3ec",
+        "roughness": 0.3,
+        "metalness": 0,
+        "clearcoat": 0.5,
+        "clearcoatRoughness": 0.25
+      },
+      "trayRim": {
+        "type": "standard",
+        "baseColor": "#27406f",
+        "roughness": 0.35,
+        "metalness": 0
+      },
+      "bath": {
+        "type": "physical",
+        "baseColor": "#ffffff",
+        "roughness": 0.3,
+        "metalness": 0,
+        "clearcoat": 0.35,
+        "clearcoatRoughness": 0.3
+      },
+      "paper": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.92,
+        "metalness": 0,
+        "side": "double"
+      },
+      "wood": {
+        "type": "standard",
+        "baseColor": "#b98a55",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "brass": {
+        "type": "standard",
+        "baseColor": "#b9975b",
+        "roughness": 0.32,
+        "metalness": 1
+      },
+      "steel": {
+        "type": "standard",
+        "baseColor": "#c9ccd2",
+        "roughness": 0.3,
+        "metalness": 1
+      },
+      "rubber": {
+        "type": "standard",
+        "baseColor": "#4a4f5e",
+        "roughness": 0.7,
+        "metalness": 0
+      },
+      "glass": {
+        "type": "physical",
+        "baseColor": "#ffffff",
+        "roughness": 0.08,
+        "metalness": 0,
+        "opacity": 0.32
+      },
+      "jar": {
+        "type": "physical",
+        "baseColor": "#f3f1ec",
+        "roughness": 0.25,
+        "metalness": 0,
+        "clearcoat": 0.4
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#fdf9f2",
+        "groundColor": "#a39a8c",
+        "intensity": 0.95
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff5e6",
+        "intensity": 2,
+        "position": [
+          -3.4,
+          7,
+          4.2
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 2.4,
+          "mapSize": 2048,
+          "extent": 3.4,
+          "near": 0.5,
+          "far": 24,
+          "bias": -0.0004,
+          "normalBias": 0.012
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#d6e4ff",
+        "intensity": 0.45,
+        "position": [
+          3,
+          3,
+          -5
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.26,
+        "offset": 1.15
+      }
+    },
+    "camera": {
+      "fov": 32,
+      "near": 0.3,
+      "far": 40,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#1c2233",
+      "height": 0.3
+    },
+    "tray": {
+      "w": 3.2,
+      "h": 1.8,
+      "wall": 0.07,
+      "height": 0.15,
+      "rim": 0.03,
+      "bathY": 0.1,
+      "table": {
+        "size": 26,
+        "y": 0,
+        "plankMetres": 2.6
+      }
+    },
+    "inks": [
+      "indigo",
+      "vermilion",
+      "ochre",
+      "teal",
+      "cream"
+    ],
+    "look": {
+      "rim": 0.16,
+      "rimStart": 0.8,
+      "mottle": 0.07,
+      "mottleScale": 5,
+      "residue": 0.86,
+      "ghost": 0.14,
+      "printGain": 0.96
+    },
+    "maxOps": 30,
+    "drop": {
+      "spread": 0.6,
+      "ease": "outCubic",
+      "fall": 0.12,
+      "form": 0.05,
+      "height": 0.5,
+      "bead": 0.055
+    },
+    "tine": {
+      "alpha": 0.42,
+      "lambda": 0.15,
+      "soft": 0.85,
+      "margin": 0.06
+    },
+    "comb": {
+      "alpha": 0.3,
+      "lambda": 0.065,
+      "soft": 0.7,
+      "spacing": 0.24,
+      "margin": 0.06
+    },
+    "tools": {
+      "pipette": {
+        "length": 0.95,
+        "r": 0.038,
+        "lean": [
+          1,
+          0.85,
+          0.5
+        ],
+        "park": [
+          -3.6,
+          1.2,
+          -0.6
+        ],
+        "hop": 0.1
+      },
+      "stylus": {
+        "length": 1.25,
+        "rTip": 0.009,
+        "rGrip": 0.04,
+        "lean": [
+          0.95,
+          0.8,
+          0.6
+        ],
+        "park": [
+          3.6,
+          0.9,
+          0.7
+        ],
+        "hop": 0.22,
+        "dip": 0.012
+      },
+      "comb": {
+        "bar": [
+          0.07,
+          0.07
+        ],
+        "tineLen": 0.24,
+        "tineR": 0.013,
+        "park": [
+          -4.2,
+          0.6,
+          0
+        ],
+        "exit": [
+          4.2,
+          0.6,
+          0
+        ],
+        "hop": 0.3,
+        "dip": 0.02,
+        "pre": 0.45,
+        "post": 0.4
+      },
+      "jars": {
+        "r": 0.11,
+        "h": 0.16
+      }
+    },
+    "paper": {
+      "w": 3,
+      "h": 1.66,
+      "segments": 56,
+      "gap": 0.004,
+      "lay": {
+        "angle": 0.6,
+        "radius": 0.3,
+        "from": [
+          3.9,
+          0.15,
+          0
+        ],
+        "slide": 0.36
+      },
+      "peel": {
+        "angle": 3,
+        "radius": 0.13,
+        "pull": [
+          2.08,
+          0
+        ]
+      },
+      "present": {
+        "centre": [
+          0,
+          1.3,
+          0.05
+        ],
+        "elevation": 0.62,
+        "lean": 0.16,
+        "hop": 0,
+        "carry": "inOutCubic"
+      }
+    },
+    "caption": {
+      "x": 960,
+      "y": 40,
+      "h": 92,
+      "cap": 40,
+      "maxW": 900,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#1c2233",
+      "edge": "#3a4563",
+      "ink": "#f8f2e4"
+    },
+    "sound": {
+      "plip": {
+        "gain": 0.5,
+        "pitch": [
+          0.75,
+          1.5
+        ],
+        "bubble": 0.34
+      },
+      "drag": {
+        "gain": 0.26,
+        "q": 0.9,
+        "pitch": 0.7,
+        "bubble": 0.16
+      },
+      "comb": {
+        "gain": 0.3,
+        "rustle": 0.2,
+        "density": 0.7
+      },
+      "lay": {
+        "gain": 0.42
+      },
+      "peel": {
+        "gain": 0.5,
+        "whoosh": 0.26
+      },
+      "present": {
+        "chime": 0.2,
+        "whoosh": 0.22
+      },
+      "bed": {
+        "gain": 0.3,
+        "root": 174.6,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "brightness": 900
+      }
+    },
+    "sfx": {
+      "enter": "bubble",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "bubble",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Every pattern frame = the plan's operations so far, composed in order; the current operation is applied by its progress. Nothing is simulated or accumulated.",
+      "A drop: radius grows with outCubic (area eases in); everything already floating is pushed out along rays so areas are preserved.",
+      "A stylus or comb stroke: ink is dragged along the stroke, falling off with distance from the tine; the drag follows the tool tip across the bath.",
+      "The sheet rolls down onto the bath (a moving contact line), rests, is peeled back from the near edge on a cylinder of fixed radius, then moves rigidly up to face the camera.",
+      "Camera: locked top-down three-quarter for the whole making; ONE lowering move while the print is presented."
+    ]
+  },
+  "scene": {
+    "id": "75-paper-marbling",
+    "style": "paper-marbling",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "drops",
+        "t": 0,
+        "dur": 4.4,
+        "label": "Input: plain drops of ink"
+      },
+      {
+        "id": "stylus",
+        "t": 4.4,
+        "dur": 2.9,
+        "label": "Pass 1 stretches it"
+      },
+      {
+        "id": "comb",
+        "t": 7.3,
+        "dur": 2.1,
+        "label": "Pass 2 folds it again"
+      },
+      {
+        "id": "paper",
+        "t": 9.4,
+        "dur": 2.1,
+        "label": "Simple moves compound"
+      },
+      {
+        "id": "print",
+        "t": 11.5,
+        "dur": 3.5,
+        "label": "Every pass is in the print"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0,
+          3.65491,
+          1.62281
+        ],
+        "target": [
+          0,
+          0.10048,
+          -0.05401
+        ],
+        "fov": 32
+      },
+      {
+        "t": 12.700000000000001,
+        "pos": [
+          0,
+          3.65491,
+          1.62281
+        ],
+        "target": [
+          0,
+          0.10048,
+          -0.05401
+        ],
+        "fov": 32
+      },
+      {
+        "t": 13.700000000000001,
+        "pos": [
+          0,
+          3.40777,
+          2.89795
+        ],
+        "target": [
+          0,
+          1.34941,
+          0.01473
+        ],
+        "fov": 32,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0,
+          3.40777,
+          2.89795
+        ],
+        "target": [
+          0,
+          1.34941,
+          0.01473
+        ],
+        "fov": 32
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.3,
+        "root": 174.6,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "brightness": 900,
+        "attack": 1.2,
+        "release": 1.5
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 0.75,
+        "gain": 0.5,
+        "t": 0.25,
+        "pan": -0.4166666666666667,
+        "seed": 175
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.375,
+        "gain": 0.34,
+        "t": 0.28,
+        "pan": -0.4166666666666667,
+        "seed": 176
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 0.9375000000000001,
+        "gain": 0.5,
+        "t": 0.42,
+        "pan": -0.4166666666666667,
+        "seed": 182
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.46875000000000006,
+        "gain": 0.34,
+        "t": 0.44999999999999996,
+        "pan": -0.4166666666666667,
+        "seed": 183
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 1.35,
+        "gain": 0.5,
+        "t": 0.59,
+        "pan": -0.4166666666666667,
+        "seed": 189
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.675,
+        "gain": 0.34,
+        "t": 0.62,
+        "pan": -0.4166666666666667,
+        "seed": 190
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 0.75,
+        "gain": 0.5,
+        "t": 0.84,
+        "pan": 0.375,
+        "seed": 196
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.375,
+        "gain": 0.34,
+        "t": 0.87,
+        "pan": 0.375,
+        "seed": 197
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 0.9375000000000001,
+        "gain": 0.5,
+        "t": 1.01,
+        "pan": 0.375,
+        "seed": 203
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.46875000000000006,
+        "gain": 0.34,
+        "t": 1.04,
+        "pan": 0.375,
+        "seed": 204
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 1.35,
+        "gain": 0.5,
+        "t": 1.18,
+        "pan": 0.375,
+        "seed": 210
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.675,
+        "gain": 0.34,
+        "t": 1.21,
+        "pan": 0.375,
+        "seed": 211
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 0.75,
+        "gain": 0.5,
+        "t": 1.43,
+        "pan": 0,
+        "seed": 217
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.375,
+        "gain": 0.34,
+        "t": 1.46,
+        "pan": 0,
+        "seed": 218
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 0.9750000000000001,
+        "gain": 0.5,
+        "t": 1.6,
+        "pan": 0,
+        "seed": 224
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.48750000000000004,
+        "gain": 0.34,
+        "t": 1.6300000000000001,
+        "pan": 0,
+        "seed": 225
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 1.35,
+        "gain": 0.5,
+        "t": 1.77,
+        "pan": 0,
+        "seed": 231
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.675,
+        "gain": 0.34,
+        "t": 1.8,
+        "pan": 0,
+        "seed": 232
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 0.75,
+        "gain": 0.5,
+        "t": 2.02,
+        "pan": -0.22916666666666669,
+        "seed": 238
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.375,
+        "gain": 0.34,
+        "t": 2.05,
+        "pan": -0.22916666666666669,
+        "seed": 239
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 0.9750000000000001,
+        "gain": 0.5,
+        "t": 2.19,
+        "pan": -0.22916666666666669,
+        "seed": 245
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.48750000000000004,
+        "gain": 0.34,
+        "t": 2.2199999999999998,
+        "pan": -0.22916666666666669,
+        "seed": 246
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 1.3875,
+        "gain": 0.5,
+        "t": 2.36,
+        "pan": -0.22916666666666669,
+        "seed": 252
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.69375,
+        "gain": 0.34,
+        "t": 2.3899999999999997,
+        "pan": -0.22916666666666669,
+        "seed": 253
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 0.75,
+        "gain": 0.5,
+        "t": 2.61,
+        "pan": 0.43750000000000006,
+        "seed": 259
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.375,
+        "gain": 0.34,
+        "t": 2.6399999999999997,
+        "pan": 0.43750000000000006,
+        "seed": 260
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 0.9750000000000001,
+        "gain": 0.5,
+        "t": 2.78,
+        "pan": 0.43750000000000006,
+        "seed": 266
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.48750000000000004,
+        "gain": 0.34,
+        "t": 2.8099999999999996,
+        "pan": 0.43750000000000006,
+        "seed": 267
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 1.3875,
+        "gain": 0.5,
+        "t": 2.95,
+        "pan": 0.43750000000000006,
+        "seed": 273
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.69375,
+        "gain": 0.34,
+        "t": 2.98,
+        "pan": 0.43750000000000006,
+        "seed": 274
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 0.75,
+        "gain": 0.5,
+        "t": 3.2,
+        "pan": 0.08333333333333334,
+        "seed": 280
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.375,
+        "gain": 0.34,
+        "t": 3.23,
+        "pan": 0.08333333333333334,
+        "seed": 281
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 1.0125000000000002,
+        "gain": 0.5,
+        "t": 3.37,
+        "pan": 0.08333333333333334,
+        "seed": 287
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.5062500000000001,
+        "gain": 0.34,
+        "t": 3.4,
+        "pan": 0.08333333333333334,
+        "seed": 288
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 1.3875,
+        "gain": 0.5,
+        "t": 3.54,
+        "pan": 0.08333333333333334,
+        "seed": 294
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.69375,
+        "gain": 0.34,
+        "t": 3.57,
+        "pan": 0.08333333333333334,
+        "seed": 295
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 0.75,
+        "gain": 0.5,
+        "t": 3.79,
+        "pan": -0.5416666666666667,
+        "seed": 301
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.375,
+        "gain": 0.34,
+        "t": 3.82,
+        "pan": -0.5416666666666667,
+        "seed": 302
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 1.0875,
+        "gain": 0.5,
+        "t": 3.96,
+        "pan": -0.5416666666666667,
+        "seed": 308
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.54375,
+        "gain": 0.34,
+        "t": 3.9899999999999998,
+        "pan": -0.5416666666666667,
+        "seed": 309
+      },
+      {
+        "type": "bubble",
+        "dur": 0.12,
+        "pitch": 1.425,
+        "gain": 0.5,
+        "t": 4.13,
+        "pan": -0.5416666666666667,
+        "seed": 315
+      },
+      {
+        "type": "bubble",
+        "dur": 0.2,
+        "pitch": 0.7125,
+        "gain": 0.34,
+        "t": 4.16,
+        "pan": -0.5416666666666667,
+        "seed": 316
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.6900000000000004,
+        "q": 0.9,
+        "pitch": 0.7,
+        "gain": 0.26,
+        "t": 4.6000000000000005,
+        "pan": -0.5,
+        "seed": 322
+      },
+      {
+        "type": "bubble",
+        "dur": 0.14,
+        "pitch": 0.6,
+        "gain": 0.16,
+        "t": 4.6000000000000005,
+        "pan": -0.5,
+        "seed": 323
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.6900000000000004,
+        "q": 0.9,
+        "pitch": 0.7,
+        "gain": 0.26,
+        "t": 5.140000000000001,
+        "pan": -0.25,
+        "seed": 329
+      },
+      {
+        "type": "bubble",
+        "dur": 0.14,
+        "pitch": 0.6,
+        "gain": 0.16,
+        "t": 5.140000000000001,
+        "pan": -0.25,
+        "seed": 330
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.6900000000000004,
+        "q": 0.9,
+        "pitch": 0.7,
+        "gain": 0.26,
+        "t": 5.680000000000001,
+        "pan": 0,
+        "seed": 336
+      },
+      {
+        "type": "bubble",
+        "dur": 0.14,
+        "pitch": 0.6,
+        "gain": 0.16,
+        "t": 5.680000000000001,
+        "pan": 0,
+        "seed": 337
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.6900000000000004,
+        "q": 0.9,
+        "pitch": 0.7,
+        "gain": 0.26,
+        "t": 6.220000000000001,
+        "pan": 0.25,
+        "seed": 343
+      },
+      {
+        "type": "bubble",
+        "dur": 0.14,
+        "pitch": 0.6,
+        "gain": 0.16,
+        "t": 6.220000000000001,
+        "pan": 0.25,
+        "seed": 344
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.6900000000000004,
+        "q": 0.9,
+        "pitch": 0.7,
+        "gain": 0.26,
+        "t": 6.760000000000001,
+        "pan": 0.5,
+        "seed": 350
+      },
+      {
+        "type": "bubble",
+        "dur": 0.14,
+        "pitch": 0.6,
+        "gain": 0.16,
+        "t": 6.760000000000001,
+        "pan": 0.5,
+        "seed": 351
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.5999999999999994,
+        "q": 0.8,
+        "pitch": 0.6,
+        "gain": 0.3,
+        "t": 7.7,
+        "pan": 0,
+        "seed": 357
+      },
+      {
+        "type": "rustle",
+        "dur": 1.3999999999999995,
+        "density": 0.7,
+        "pitch": 0.7,
+        "gain": 0.2,
+        "t": 7.7,
+        "pan": 0,
+        "seed": 358
+      },
+      {
+        "type": "paper",
+        "dur": 1.223999999999999,
+        "density": 0.3,
+        "gain": 0.42,
+        "t": 9.976,
+        "pan": 0,
+        "seed": 364
+      },
+      {
+        "type": "paper",
+        "dur": 1.4000000000000004,
+        "density": 0.55,
+        "pitch": 1.15,
+        "gain": 0.5,
+        "t": 11.5,
+        "pan": 0,
+        "seed": 371
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.4000000000000004,
+        "q": 1.2,
+        "pitch": 1.1,
+        "gain": 0.26,
+        "t": 11.5,
+        "pan": 0,
+        "seed": 372
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1,
+        "q": 1,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 12.8,
+        "pan": 0,
+        "seed": 378
+      },
+      {
+        "type": "chime",
+        "dur": 2,
+        "pitch": 1,
+        "gain": 0.2,
+        "t": 13.600000000000001,
+        "pan": 0,
+        "seed": 379
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "marbleplan.js: closed-form marbling operations (ink drop, tine line, comb) applied in plan order; each pixel is inverse-mapped through the operations so far (the running one by its progress). No simulation.",
+      "operations": [
+        {
+          "kind": "drop",
+          "t0": 0.25,
+          "t1": 0.85,
+          "c": [
+            -1,
+            -0.38
+          ],
+          "r": 0.44,
+          "ink": "indigo"
+        },
+        {
+          "kind": "drop",
+          "t0": 0.42,
+          "t1": 1.02,
+          "c": [
+            -1,
+            -0.38
+          ],
+          "r": 0.31,
+          "ink": "cream"
+        },
+        {
+          "kind": "drop",
+          "t0": 0.59,
+          "t1": 1.19,
+          "c": [
+            -1,
+            -0.38
+          ],
+          "r": 0.2,
+          "ink": "vermilion"
+        },
+        {
+          "kind": "drop",
+          "t0": 0.84,
+          "t1": 1.44,
+          "c": [
+            0.9,
+            0.42
+          ],
+          "r": 0.44,
+          "ink": "teal"
+        },
+        {
+          "kind": "drop",
+          "t0": 1.01,
+          "t1": 1.61,
+          "c": [
+            0.9,
+            0.42
+          ],
+          "r": 0.31,
+          "ink": "ochre"
+        },
+        {
+          "kind": "drop",
+          "t0": 1.18,
+          "t1": 1.78,
+          "c": [
+            0.9,
+            0.42
+          ],
+          "r": 0.2,
+          "ink": "indigo"
+        },
+        {
+          "kind": "drop",
+          "t0": 1.43,
+          "t1": 2.03,
+          "c": [
+            0,
+            -0.45
+          ],
+          "r": 0.42,
+          "ink": "vermilion"
+        },
+        {
+          "kind": "drop",
+          "t0": 1.6,
+          "t1": 2.2,
+          "c": [
+            0,
+            -0.45
+          ],
+          "r": 0.3,
+          "ink": "cream"
+        },
+        {
+          "kind": "drop",
+          "t0": 1.77,
+          "t1": 2.37,
+          "c": [
+            0,
+            -0.45
+          ],
+          "r": 0.2,
+          "ink": "teal"
+        },
+        {
+          "kind": "drop",
+          "t0": 2.02,
+          "t1": 2.62,
+          "c": [
+            -0.55,
+            0.5
+          ],
+          "r": 0.42,
+          "ink": "ochre"
+        },
+        {
+          "kind": "drop",
+          "t0": 2.19,
+          "t1": 2.79,
+          "c": [
+            -0.55,
+            0.5
+          ],
+          "r": 0.3,
+          "ink": "indigo"
+        },
+        {
+          "kind": "drop",
+          "t0": 2.36,
+          "t1": 2.96,
+          "c": [
+            -0.55,
+            0.5
+          ],
+          "r": 0.19,
+          "ink": "cream"
+        },
+        {
+          "kind": "drop",
+          "t0": 2.61,
+          "t1": 3.21,
+          "c": [
+            1.05,
+            -0.45
+          ],
+          "r": 0.42,
+          "ink": "indigo"
+        },
+        {
+          "kind": "drop",
+          "t0": 2.78,
+          "t1": 3.38,
+          "c": [
+            1.05,
+            -0.45
+          ],
+          "r": 0.3,
+          "ink": "ochre"
+        },
+        {
+          "kind": "drop",
+          "t0": 2.95,
+          "t1": 3.55,
+          "c": [
+            1.05,
+            -0.45
+          ],
+          "r": 0.19,
+          "ink": "vermilion"
+        },
+        {
+          "kind": "drop",
+          "t0": 3.2,
+          "t1": 3.8,
+          "c": [
+            0.2,
+            0.45
+          ],
+          "r": 0.4,
+          "ink": "cream"
+        },
+        {
+          "kind": "drop",
+          "t0": 3.37,
+          "t1": 3.97,
+          "c": [
+            0.2,
+            0.45
+          ],
+          "r": 0.29,
+          "ink": "vermilion"
+        },
+        {
+          "kind": "drop",
+          "t0": 3.54,
+          "t1": 4.14,
+          "c": [
+            0.2,
+            0.45
+          ],
+          "r": 0.19,
+          "ink": "indigo"
+        },
+        {
+          "kind": "drop",
+          "t0": 3.79,
+          "t1": 4.39,
+          "c": [
+            -1.3,
+            0.45
+          ],
+          "r": 0.38,
+          "ink": "teal"
+        },
+        {
+          "kind": "drop",
+          "t0": 3.96,
+          "t1": 4.56,
+          "c": [
+            -1.3,
+            0.45
+          ],
+          "r": 0.27,
+          "ink": "cream"
+        },
+        {
+          "kind": "drop",
+          "t0": 4.13,
+          "t1": 4.73,
+          "c": [
+            -1.3,
+            0.45
+          ],
+          "r": 0.18,
+          "ink": "ochre"
+        },
+        {
+          "kind": "tine",
+          "t0": 4.6,
+          "t1": 5.04,
+          "a": [
+            -1.2,
+            0
+          ],
+          "dir": [
+            0,
+            1
+          ],
+          "alpha": 0.42,
+          "lambda": 0.15,
+          "spacing": 0
+        },
+        {
+          "kind": "tine",
+          "t0": 5.14,
+          "t1": 5.58,
+          "a": [
+            -0.6,
+            0
+          ],
+          "dir": [
+            0,
+            -1
+          ],
+          "alpha": 0.42,
+          "lambda": 0.15,
+          "spacing": 0
+        },
+        {
+          "kind": "tine",
+          "t0": 5.68,
+          "t1": 6.12,
+          "a": [
+            0,
+            0
+          ],
+          "dir": [
+            0,
+            1
+          ],
+          "alpha": 0.42,
+          "lambda": 0.15,
+          "spacing": 0
+        },
+        {
+          "kind": "tine",
+          "t0": 6.22,
+          "t1": 6.66,
+          "a": [
+            0.6,
+            0
+          ],
+          "dir": [
+            0,
+            -1
+          ],
+          "alpha": 0.42,
+          "lambda": 0.15,
+          "spacing": 0
+        },
+        {
+          "kind": "tine",
+          "t0": 6.76,
+          "t1": 7.2,
+          "a": [
+            1.2,
+            0
+          ],
+          "dir": [
+            0,
+            1
+          ],
+          "alpha": 0.42,
+          "lambda": 0.15,
+          "spacing": 0
+        },
+        {
+          "kind": "comb",
+          "t0": 7.7,
+          "t1": 9.1,
+          "a": [
+            0,
+            0.12
+          ],
+          "dir": [
+            1,
+            0
+          ],
+          "alpha": 0.3,
+          "lambda": 0.065,
+          "spacing": 0.24
+        }
+      ],
+      "inkCoverage": {
+        "afterDrops": 0.8,
+        "final": 0.793
+      },
+      "paper": {
+        "in": 9.4,
+        "laid": 11,
+        "peel": 11.5,
+        "peelEnd": 12.9,
+        "lift": 12.8,
+        "liftEnd": 13.8
+      },
+      "framing": "ok (worst {\"t\":0,\"id\":\"tray\",\"ndc\":0.95})"
+    }
+  }
+}

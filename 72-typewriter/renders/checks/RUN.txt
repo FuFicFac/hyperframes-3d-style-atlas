@@ -1,0 +1,13 @@
+check-frames run: 2026-11-18 08:02:34 UTC
+times: 0.5, 2.5, 6.2, 10.1, 13
+newest code edit: 2026-11-18 08:01:05 UTC (typewriter/style.js)
+mp4: 72-typewriter.mp4 2026-11-18 08:01:54 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.6 dB, frame 303)
+  frame 15 (t=0.500): 37.3 dB
+  frame 75 (t=2.500): 37.1 dB
+  frame 186 (t=6.200): 37.0 dB
+  frame 303 (t=10.100): 36.6 dB
+  frame 390 (t=13.000): 37.5 dB
+determinism: OK (5 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

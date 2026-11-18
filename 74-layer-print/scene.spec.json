@@ -1,0 +1,1595 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "layer-print",
+    "name": "Layer Print",
+    "description": "A generic desktop 3D printer in a bright workshop: an open aluminium frame, a dark gridded heated bed, a gantry that rises with the part and a print head with a glowing brass nozzle laying down coloured filament. The object grows layer by layer and every layer is drawn as its real toolpath — outer perimeter, inner perimeter, then infill (scan lines on the floor, a zigzag inside the wall) — from a slicer plan (slicer.js): the part is sliced once into timed polylines, the whole bead geometry is built once with a per-vertex deposit time, and a frame shows every bead whose time has passed, cut exactly at the nozzle. The planned path of the current layer shows ahead of the nozzle as a thin line, fresh plastic glows for a moment, and the finished part keeps fine layer ridges. Print time is compressed honestly: timing stages speed up layer after layer. Stepper servo/whir cues per move and a tick per layer change come from the same plan.",
+    "palette": {
+      "bg": "#e6ebee",
+      "wall": "#e3e9ec",
+      "bench": "#d9bf96",
+      "ink": "#1c2530",
+      "frame": "#c8cdd2",
+      "bed": "#2a3038",
+      "head": "#17a79c",
+      "filament": "#ff6a3d",
+      "accent": "#ffd23f",
+      "path": "#49e0f2",
+      "hot": "#ff7a1a"
+    },
+    "world": {
+      "background": "#e6ebee",
+      "sky": null,
+      "fog": null,
+      "environment": "room",
+      "environmentIntensity": 0.55,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "bench": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.72,
+        "metalness": 0,
+        "map": {
+          "source": "wood",
+          "size": 512,
+          "boards": 4,
+          "seed": 74,
+          "dark": "#c2a271",
+          "mid": "#d9bf96",
+          "light": "#e8d3ae",
+          "repeat": [
+            3,
+            3
+          ],
+          "description": "pale birch workbench boards"
+        }
+      },
+      "wall": {
+        "type": "standard",
+        "baseColor": "#e3e9ec",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "aluminium": {
+        "type": "standard",
+        "baseColor": "#cdd2d7",
+        "roughness": 0.38,
+        "metalness": 0.8
+      },
+      "steel": {
+        "type": "standard",
+        "baseColor": "#9aa2ab",
+        "roughness": 0.3,
+        "metalness": 0.9
+      },
+      "dark": {
+        "type": "standard",
+        "baseColor": "#2b3038",
+        "roughness": 0.6,
+        "metalness": 0.1
+      },
+      "bed": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.58,
+        "metalness": 0.15,
+        "map": {
+          "source": "grid",
+          "size": 512,
+          "cells": 4,
+          "line": 3,
+          "bg": "#2a3038",
+          "fg": "#465060",
+          "repeat": [
+            3,
+            3
+          ],
+          "description": "dark textured build plate with a printed grid"
+        }
+      },
+      "headShell": {
+        "type": "physical",
+        "baseColor": "#17a79c",
+        "roughness": 0.42,
+        "metalness": 0,
+        "clearcoat": 0.3,
+        "clearcoatRoughness": 0.4
+      },
+      "brass": {
+        "type": "standard",
+        "baseColor": "#d9a441",
+        "roughness": 0.3,
+        "metalness": 0.9
+      },
+      "sock": {
+        "type": "standard",
+        "baseColor": "#c2452d",
+        "roughness": 0.7,
+        "metalness": 0
+      },
+      "nozzleTip": {
+        "type": "standard",
+        "baseColor": "#ffb060",
+        "roughness": 0.4,
+        "metalness": 0,
+        "emission": {
+          "color": "#ff7a1a",
+          "strength": 5
+        }
+      },
+      "bedGlow": {
+        "type": "standard",
+        "baseColor": "#ff8a4a",
+        "roughness": 0.5,
+        "metalness": 0,
+        "emission": {
+          "color": "#ff5a2a",
+          "strength": 1.6
+        }
+      },
+      "tube": {
+        "type": "standard",
+        "baseColor": "#f4f6f8",
+        "roughness": 0.4,
+        "metalness": 0
+      },
+      "filament": {
+        "type": "physical",
+        "baseColor": "#ffffff",
+        "roughness": 0.44,
+        "metalness": 0,
+        "clearcoat": 0.25,
+        "clearcoatRoughness": 0.35,
+        "vertexColors": true
+      },
+      "spoolA": {
+        "type": "standard",
+        "baseColor": "#17a79c",
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      "spoolB": {
+        "type": "standard",
+        "baseColor": "#ffd23f",
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      "spoolC": {
+        "type": "standard",
+        "baseColor": "#6b5bd6",
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      "spoolD": {
+        "type": "standard",
+        "baseColor": "#ff6a3d",
+        "roughness": 0.5,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#b9ab95",
+        "intensity": 1.15
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff4e4",
+        "intensity": 2.5,
+        "position": [
+          -5.5,
+          9.5,
+          6.5
+        ],
+        "target": [
+          0,
+          1.2,
+          0
+        ],
+        "shadow": {
+          "softness": 2.2,
+          "mapSize": 4096,
+          "extent": 5.2,
+          "near": 1,
+          "far": 30,
+          "bias": -0.0004,
+          "normalBias": 0.012
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#dcecff",
+        "intensity": 0.7,
+        "position": [
+          6,
+          5,
+          -4
+        ],
+        "target": [
+          0,
+          1.2,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.35,
+        "radius": 0.3,
+        "threshold": 2.6
+      },
+      "vignette": {
+        "darkness": 0.22,
+        "offset": 1.2
+      }
+    },
+    "camera": {
+      "fov": 32,
+      "near": 0.3,
+      "far": 80,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 800,
+      "color": "#1c2530",
+      "height": 0.4
+    },
+    "printer": {
+      "bedY": 0.42,
+      "bed": {
+        "w": 4.2,
+        "d": 3.8,
+        "t": 0.1
+      },
+      "post": {
+        "x": 2.55,
+        "z": 2.2,
+        "s": 0.22,
+        "h": 5.3
+      },
+      "rail": 0.18,
+      "gantryUp": 1.55,
+      "beamBack": 0.3,
+      "head": {
+        "w": 0.62,
+        "h": 0.62,
+        "d": 0.5
+      },
+      "nozzle": {
+        "r": 0.075,
+        "h": 0.15,
+        "tip": 0.036
+      },
+      "light": {
+        "color": "#ffb070",
+        "intensity": 2.2,
+        "distance": 2.4
+      },
+      "spool": {
+        "r": 0.6,
+        "w": 0.3,
+        "x": 1.25
+      },
+      "tube": {
+        "r": 0.024,
+        "points": 14,
+        "sag": 0.9
+      }
+    },
+    "bead": {
+      "layerHeight": 0.05,
+      "width": 0.085,
+      "height": 0.058,
+      "radial": 8,
+      "wall": 0.34,
+      "ringPts": 96,
+      "zigs": 36,
+      "floorLayers": 2,
+      "hot": {
+        "color": "#ff6a1a",
+        "strength": 0.9,
+        "tau": 0.3
+      },
+      "stops": [
+        [
+          0,
+          "#ff5647"
+        ],
+        [
+          0.5,
+          "#ff8a2b"
+        ],
+        [
+          1,
+          "#ffd23f"
+        ]
+      ]
+    },
+    "ghost": {
+      "color": "#49e0f2",
+      "width": 0.03,
+      "height": 0.014,
+      "minLayer": 0.4
+    },
+    "shape": {
+      "height": 2.3,
+      "lobes": 6,
+      "lobe": 0.06,
+      "twist": 0.7,
+      "profile": [
+        [
+          0,
+          1
+        ],
+        [
+          0.42,
+          1.42
+        ],
+        [
+          0.82,
+          1
+        ],
+        [
+          1,
+          1.2
+        ]
+      ]
+    },
+    "speeds": {
+      "travel": 3,
+      "outer": 1,
+      "inner": 1.15,
+      "infill": 1.6
+    },
+    "caption": {
+      "x": 960,
+      "y": 922,
+      "h": 92,
+      "cap": 44,
+      "maxW": 900,
+      "font": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "weight": 800,
+      "plate": "#ffffff",
+      "edge": "#1c2530",
+      "ink": "#1c2530",
+      "bar": "#ff6a3d",
+      "barOff": "#d5dbe0"
+    },
+    "sound": {
+      "motor": {
+        "hzLo": 82,
+        "refSpeed": 4,
+        "octSpan": 6.5,
+        "octaves": 1.7
+      },
+      "run": {
+        "gain": 0.3
+      },
+      "fast": {
+        "gain": 0.34
+      },
+      "zig": {
+        "gain": 0.26,
+        "hzA": 150,
+        "hzB": 185
+      },
+      "tick": {
+        "gain": 0.5,
+        "fast": 0.3,
+        "pitchLo": 0.9,
+        "pitchHi": 1.5
+      },
+      "home": {
+        "gain": 0.3
+      },
+      "done": {
+        "gain": 0.3
+      },
+      "bed": {
+        "gain": 0.5,
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "brightness": 700
+      },
+      "fan": {
+        "gain": 0.1,
+        "hz": 120
+      }
+    },
+    "sfx": {
+      "enter": "servo",
+      "exit": "whooshOut",
+      "move": "whir",
+      "land": "tick",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "The nozzle follows one planned move list (slicer.js): travel, outer perimeter, inner perimeter, infill, layer after layer; the head, beam and gantry sit exactly on plan.nozzleAt(t).",
+      "Every bead vertex carries its deposit time; a frame draws the beads whose time has passed and cuts the last one at the nozzle. Laid plastic never moves.",
+      "Timing stages speed up layer after layer (accel per layer), so minutes of printing pass in seconds without a cut.",
+      "The planned path of the current layer shows ahead of the nozzle as a thin cyan line while layers are slow enough to follow.",
+      "Camera: locked shots joined by short eased moves, no drift."
+    ]
+  },
+  "scene": {
+    "id": "74-layer-print",
+    "style": "layer-print",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "outline",
+        "t": 0,
+        "dur": 3.1,
+        "label": "First, trace the outline"
+      },
+      {
+        "id": "infill",
+        "t": 3.1,
+        "dur": 2.65,
+        "label": "Then fill it in"
+      },
+      {
+        "id": "stack",
+        "t": 5.75,
+        "dur": 3.65,
+        "label": "Layer on layer on layer"
+      },
+      {
+        "id": "fast",
+        "t": 9.4,
+        "dur": 3.1,
+        "label": "Hours pass in seconds"
+      },
+      {
+        "id": "done",
+        "t": 12.5,
+        "dur": 2.5,
+        "label": "An idea you can hold"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -0.51843,
+          3.26683,
+          3.18144
+        ],
+        "target": [
+          0.12639,
+          0.22446,
+          0.29787
+        ],
+        "fov": 32
+      },
+      {
+        "t": 2.95,
+        "pos": [
+          -0.51843,
+          3.26683,
+          3.18144
+        ],
+        "target": [
+          0.12639,
+          0.22446,
+          0.29787
+        ],
+        "fov": 32
+      },
+      {
+        "t": 4.05,
+        "pos": [
+          0.76443,
+          2.14728,
+          3.05153
+        ],
+        "target": [
+          -0.15219,
+          0.15378,
+          0.28555
+        ],
+        "fov": 32,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 5.65,
+        "pos": [
+          0.76443,
+          2.14728,
+          3.05153
+        ],
+        "target": [
+          -0.15219,
+          0.15378,
+          0.28555
+        ],
+        "fov": 32
+      },
+      {
+        "t": 6.9,
+        "pos": [
+          0.96742,
+          2.21281,
+          4.86108
+        ],
+        "target": [
+          -0.16598,
+          0.52613,
+          0.22958
+        ],
+        "fov": 32,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 9.25,
+        "pos": [
+          0.96742,
+          2.21281,
+          4.86108
+        ],
+        "target": [
+          -0.16598,
+          0.52613,
+          0.22958
+        ],
+        "fov": 32
+      },
+      {
+        "t": 10.5,
+        "pos": [
+          -1.08264,
+          3.46205,
+          7.88851
+        ],
+        "target": [
+          0.15747,
+          1.30779,
+          0.20405
+        ],
+        "fov": 32,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.5,
+        "pos": [
+          -1.08264,
+          3.46205,
+          7.88851
+        ],
+        "target": [
+          0.15747,
+          1.30779,
+          0.20405
+        ],
+        "fov": 32
+      },
+      {
+        "t": 13.75,
+        "pos": [
+          -1.58751,
+          2.52192,
+          6.60907
+        ],
+        "target": [
+          0.25571,
+          1.03044,
+          0.19908
+        ],
+        "fov": 32,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 15,
+        "pos": [
+          -1.58751,
+          2.52192,
+          6.60907
+        ],
+        "target": [
+          0.25571,
+          1.03044,
+          0.19908
+        ],
+        "fov": 32
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "type": "servo",
+        "dur": 0.9,
+        "hz": 150,
+        "hz2": 80,
+        "grit": 0.2,
+        "gain": 0.3,
+        "t": -0.45,
+        "pan": 0,
+        "seed": 174
+      },
+      {
+        "t": 0,
+        "type": "pad",
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "dur": 15,
+        "attack": 0.5,
+        "release": 1.5,
+        "brightness": 700,
+        "gain": 0.5,
+        "seed": 3
+      },
+      {
+        "t": 0,
+        "type": "hum",
+        "hz": 120,
+        "dur": 13.6,
+        "gain": 0.1,
+        "seed": 5
+      },
+      {
+        "type": "whir",
+        "dur": 1.386117931760934,
+        "hz": 84.3110320503075,
+        "hz2": 88.52658365282288,
+        "grit": 0.15,
+        "gain": 0.3,
+        "pan": 0.3009518247655621,
+        "t": 0.45,
+        "seed": 181
+      },
+      {
+        "type": "whir",
+        "dur": 1.1066402424907018,
+        "hz": 97.94386727843167,
+        "hz2": 102.84106064235326,
+        "grit": 0.15,
+        "gain": 0.3,
+        "pan": -0.3210551785547814,
+        "t": 1.8708,
+        "seed": 188
+      },
+      {
+        "t": 2.95,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.0999999999999996,
+        "gain": 0.16,
+        "seed": 7
+      },
+      {
+        "type": "servo",
+        "dur": 0.05,
+        "hz": 185,
+        "hz2": 150,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": -0.3,
+        "t": 3.2853,
+        "seed": 195
+      },
+      {
+        "type": "servo",
+        "dur": 0.056954523444108784,
+        "hz": 150,
+        "hz2": 185,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": 0.3,
+        "t": 3.3318,
+        "seed": 202
+      },
+      {
+        "type": "servo",
+        "dur": 0.09378102282663625,
+        "hz": 185,
+        "hz2": 150,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": -0.3,
+        "t": 3.3937,
+        "seed": 209
+      },
+      {
+        "type": "servo",
+        "dur": 0.10672891687351038,
+        "hz": 150,
+        "hz2": 185,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": 0.3,
+        "t": 3.4956,
+        "seed": 216
+      },
+      {
+        "type": "servo",
+        "dur": 0.11380128998111513,
+        "hz": 185,
+        "hz2": 150,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": -0.3,
+        "t": 3.6116,
+        "seed": 223
+      },
+      {
+        "type": "servo",
+        "dur": 0.12696428819156055,
+        "hz": 150,
+        "hz2": 185,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": 0.3,
+        "t": 3.7353,
+        "seed": 230
+      },
+      {
+        "type": "servo",
+        "dur": 0.13122920936252552,
+        "hz": 185,
+        "hz2": 150,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": -0.3,
+        "t": 3.8733,
+        "seed": 237
+      },
+      {
+        "type": "servo",
+        "dur": 0.13469777083339218,
+        "hz": 150,
+        "hz2": 185,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": 0.3,
+        "t": 4.0159,
+        "seed": 244
+      },
+      {
+        "type": "servo",
+        "dur": 0.1377682751824004,
+        "hz": 185,
+        "hz2": 150,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": -0.3,
+        "t": 4.1624,
+        "seed": 251
+      },
+      {
+        "type": "servo",
+        "dur": 0.13926210944091744,
+        "hz": 150,
+        "hz2": 185,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": 0.3,
+        "t": 4.3121,
+        "seed": 258
+      },
+      {
+        "type": "servo",
+        "dur": 0.13882371576192135,
+        "hz": 185,
+        "hz2": 150,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": -0.3,
+        "t": 4.4635,
+        "seed": 265
+      },
+      {
+        "type": "servo",
+        "dur": 0.13737483783007037,
+        "hz": 150,
+        "hz2": 185,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": 0.3,
+        "t": 4.6144,
+        "seed": 272
+      },
+      {
+        "type": "servo",
+        "dur": 0.13522114601885193,
+        "hz": 185,
+        "hz2": 150,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": -0.3,
+        "t": 4.7637,
+        "seed": 279
+      },
+      {
+        "type": "servo",
+        "dur": 0.13119993462841303,
+        "hz": 150,
+        "hz2": 185,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": 0.3,
+        "t": 4.9107,
+        "seed": 286
+      },
+      {
+        "type": "servo",
+        "dur": 0.12979846123894756,
+        "hz": 185,
+        "hz2": 150,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": -0.3,
+        "t": 5.0533,
+        "seed": 293
+      },
+      {
+        "type": "servo",
+        "dur": 0.11417963191203051,
+        "hz": 150,
+        "hz2": 185,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": 0.3,
+        "t": 5.1944,
+        "seed": 300
+      },
+      {
+        "type": "servo",
+        "dur": 0.10441015504490966,
+        "hz": 185,
+        "hz2": 150,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": -0.3,
+        "t": 5.3185,
+        "seed": 307
+      },
+      {
+        "type": "servo",
+        "dur": 0.11662740740573106,
+        "hz": 150,
+        "hz2": 185,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": 0.3,
+        "t": 5.432,
+        "seed": 314
+      },
+      {
+        "type": "servo",
+        "dur": 0.05848047558431173,
+        "hz": 185,
+        "hz2": 150,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": -0.3,
+        "t": 5.5587,
+        "seed": 321
+      },
+      {
+        "type": "servo",
+        "dur": 0.05,
+        "hz": 150,
+        "hz2": 185,
+        "grit": 0.35,
+        "gain": 0.26,
+        "pan": 0.3,
+        "t": 5.6223,
+        "seed": 328
+      },
+      {
+        "t": 5.65,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1.25,
+        "gain": 0.16,
+        "seed": 9
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 0.9133333333333333,
+        "gain": 0.5,
+        "t": 5.8047,
+        "pan": 0,
+        "seed": 335
+      },
+      {
+        "type": "whir",
+        "dur": 0.24113371204221937,
+        "hz": 134.0552074685723,
+        "hz2": 140.7579678420009,
+        "grit": 0.15,
+        "gain": 0.3,
+        "pan": 0.2472499743110029,
+        "t": 5.8047,
+        "seed": 342
+      },
+      {
+        "type": "whir",
+        "dur": 0.19292299201717544,
+        "hz": 155.731523253683,
+        "hz2": 163.51809941636716,
+        "grit": 0.15,
+        "gain": 0.3,
+        "pan": 0.34173154869020167,
+        "t": 6.0519,
+        "seed": 349
+      },
+      {
+        "type": "servo",
+        "dur": 0.6600352141072972,
+        "hz": 191.0026797803426,
+        "hz2": 200.55281376935972,
+        "grit": 0.4,
+        "gain": 0.3,
+        "pan": 0.3367742928719462,
+        "t": 6.2665,
+        "seed": 356
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 0.9266666666666666,
+        "gain": 0.5,
+        "t": 6.9489,
+        "pan": 0,
+        "seed": 363
+      },
+      {
+        "type": "whir",
+        "dur": 0.20272095247888086,
+        "hz": 141.21151303493468,
+        "hz2": 148.27208868668143,
+        "grit": 0.15,
+        "gain": 0.3,
+        "pan": -0.09487525965281363,
+        "t": 6.9489,
+        "seed": 370
+      },
+      {
+        "type": "whir",
+        "dur": 0.13536399048386552,
+        "hz": 164.04498147558516,
+        "hz2": 172.24723054936442,
+        "grit": 0.15,
+        "gain": 0.3,
+        "pan": -0.24019663744510047,
+        "t": 7.1584,
+        "seed": 377
+      },
+      {
+        "type": "servo",
+        "dur": 0.16897052354925077,
+        "hz": 201.19902773514048,
+        "hz2": 211.2589791218975,
+        "grit": 0.4,
+        "gain": 0.3,
+        "pan": -0.30803233325826285,
+        "t": 7.2974,
+        "seed": 384
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 0.9400000000000001,
+        "gain": 0.3,
+        "t": 7.4716,
+        "pan": 0,
+        "seed": 391
+      },
+      {
+        "type": "whir",
+        "dur": 0.4291819942714852,
+        "hz": 156.95384786636538,
+        "hz2": 166.3710787383473,
+        "grit": 0.15,
+        "gain": 0.34,
+        "pan": -0.3484522223407957,
+        "t": 7.4716,
+        "seed": 398
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 0.9533333333333334,
+        "gain": 0.3,
+        "t": 7.9104,
+        "pan": 0,
+        "seed": 405
+      },
+      {
+        "type": "whir",
+        "dur": 0.6633140673049459,
+        "hz": 165.35850845890207,
+        "hz2": 184.4961758813201,
+        "grit": 0.15,
+        "gain": 0.34,
+        "pan": -0.2133822027341673,
+        "t": 7.9104,
+        "seed": 412
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 0.9666666666666667,
+        "gain": 0.3,
+        "t": 8.2785,
+        "pan": 0,
+        "seed": 419
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 0.98,
+        "gain": 0.3,
+        "t": 8.5878,
+        "pan": 0,
+        "seed": 426
+      },
+      {
+        "type": "whir",
+        "dur": 0.46727125464920005,
+        "hz": 183.37458661628867,
+        "hz2": 204.60878834663617,
+        "grit": 0.15,
+        "gain": 0.34,
+        "pan": 0.27468232715446994,
+        "t": 8.5878,
+        "seed": 433
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 0.9933333333333334,
+        "gain": 0.3,
+        "t": 8.8472,
+        "pan": 0,
+        "seed": 440
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.0066666666666666,
+        "gain": 0.3,
+        "t": 9.0649,
+        "pan": 0,
+        "seed": 447
+      },
+      {
+        "type": "whir",
+        "dur": 0.4479974556875142,
+        "hz": 203.36858310612854,
+        "hz2": 241.93048120326247,
+        "grit": 0.15,
+        "gain": 0.34,
+        "pan": 0.3182957312499555,
+        "t": 9.0649,
+        "seed": 454
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.02,
+        "gain": 0.3,
+        "t": 9.2474,
+        "pan": 0,
+        "seed": 461
+      },
+      {
+        "t": 9.25,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.25,
+        "gain": 0.16,
+        "seed": 11
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.0333333333333334,
+        "gain": 0.3,
+        "t": 9.4002,
+        "pan": 0,
+        "seed": 468
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.0466666666666666,
+        "gain": 0.3,
+        "t": 9.5225,
+        "pan": 0,
+        "seed": 475
+      },
+      {
+        "type": "whir",
+        "dur": 0.4757061655832272,
+        "hz": 229.28674861164842,
+        "hz2": 246.84198037360673,
+        "grit": 0.15,
+        "gain": 0.34,
+        "pan": 0.03124783978212168,
+        "t": 9.5225,
+        "seed": 482
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.06,
+        "gain": 0.3,
+        "t": 9.6446,
+        "pan": 0,
+        "seed": 489
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.0733333333333333,
+        "gain": 0.3,
+        "t": 9.7664,
+        "pan": 0,
+        "seed": 496
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.0866666666666667,
+        "gain": 0.3,
+        "t": 9.8877,
+        "pan": 0,
+        "seed": 503
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.1,
+        "gain": 0.3,
+        "t": 10.0082,
+        "pan": 0,
+        "seed": 510
+      },
+      {
+        "type": "whir",
+        "dur": 0.459569397472344,
+        "hz": 233.96726883642538,
+        "hz2": 251.94193722195965,
+        "grit": 0.15,
+        "gain": 0.34,
+        "pan": -0.29964149023529174,
+        "t": 10.0082,
+        "seed": 517
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.1133333333333333,
+        "gain": 0.3,
+        "t": 10.1278,
+        "pan": 0,
+        "seed": 524
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.1266666666666667,
+        "gain": 0.3,
+        "t": 10.246,
+        "pan": 0,
+        "seed": 531
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.1400000000000001,
+        "gain": 0.3,
+        "t": 10.3627,
+        "pan": 0,
+        "seed": 538
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.1533333333333333,
+        "gain": 0.3,
+        "t": 10.4775,
+        "pan": 0,
+        "seed": 545
+      },
+      {
+        "type": "whir",
+        "dur": 0.4251032012638874,
+        "hz": 238.82508007326584,
+        "hz2": 257.2584457373278,
+        "grit": 0.15,
+        "gain": 0.34,
+        "pan": -0.3008608764924865,
+        "t": 10.4775,
+        "seed": 552
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.1666666666666667,
+        "gain": 0.3,
+        "t": 10.5902,
+        "pan": 0,
+        "seed": 559
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.18,
+        "gain": 0.3,
+        "t": 10.7003,
+        "pan": 0,
+        "seed": 566
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.1933333333333334,
+        "gain": 0.3,
+        "t": 10.8075,
+        "pan": 0,
+        "seed": 573
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.2066666666666666,
+        "gain": 0.3,
+        "t": 10.9115,
+        "pan": 0,
+        "seed": 580
+      },
+      {
+        "type": "whir",
+        "dur": 0.4565143736076034,
+        "hz": 243.89322303853808,
+        "hz2": 264.1360348345356,
+        "grit": 0.15,
+        "gain": 0.34,
+        "pan": -0.012699142048582352,
+        "t": 10.9115,
+        "seed": 587
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.22,
+        "gain": 0.3,
+        "t": 11.0121,
+        "pan": 0,
+        "seed": 594
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.2333333333333334,
+        "gain": 0.3,
+        "t": 11.109,
+        "pan": 0,
+        "seed": 601
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.2466666666666666,
+        "gain": 0.3,
+        "t": 11.2023,
+        "pan": 0,
+        "seed": 608
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.26,
+        "gain": 0.3,
+        "t": 11.2917,
+        "pan": 0,
+        "seed": 615
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.2733333333333334,
+        "gain": 0.3,
+        "t": 11.3774,
+        "pan": 0,
+        "seed": 622
+      },
+      {
+        "type": "whir",
+        "dur": 0.4316849789907253,
+        "hz": 250.64886526009855,
+        "hz2": 272.95356732651294,
+        "grit": 0.15,
+        "gain": 0.34,
+        "pan": 0.3010016250599159,
+        "t": 11.3774,
+        "seed": 629
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.2866666666666666,
+        "gain": 0.3,
+        "t": 11.4594,
+        "pan": 0,
+        "seed": 636
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.3,
+        "gain": 0.3,
+        "t": 11.5378,
+        "pan": 0,
+        "seed": 643
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.3133333333333335,
+        "gain": 0.3,
+        "t": 11.6126,
+        "pan": 0,
+        "seed": 650
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.3266666666666667,
+        "gain": 0.3,
+        "t": 11.6842,
+        "pan": 0,
+        "seed": 657
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.3399999999999999,
+        "gain": 0.3,
+        "t": 11.7525,
+        "pan": 0,
+        "seed": 664
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.3533333333333333,
+        "gain": 0.3,
+        "t": 11.818,
+        "pan": 0,
+        "seed": 671
+      },
+      {
+        "type": "whir",
+        "dur": 0.39456152721816146,
+        "hz": 259.0452972261592,
+        "hz2": 282.403913165136,
+        "grit": 0.15,
+        "gain": 0.34,
+        "pan": 0.31079299098658225,
+        "t": 11.818,
+        "seed": 678
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.3666666666666667,
+        "gain": 0.3,
+        "t": 11.8808,
+        "pan": 0,
+        "seed": 685
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.38,
+        "gain": 0.3,
+        "t": 11.9413,
+        "pan": 0,
+        "seed": 692
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.3933333333333333,
+        "gain": 0.3,
+        "t": 11.9997,
+        "pan": 0,
+        "seed": 699
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.4066666666666667,
+        "gain": 0.3,
+        "t": 12.0563,
+        "pan": 0,
+        "seed": 706
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.42,
+        "gain": 0.3,
+        "t": 12.1116,
+        "pan": 0,
+        "seed": 713
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.4333333333333333,
+        "gain": 0.3,
+        "t": 12.1663,
+        "pan": 0,
+        "seed": 720
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.4466666666666668,
+        "gain": 0.3,
+        "t": 12.2209,
+        "pan": 0,
+        "seed": 727
+      },
+      {
+        "type": "whir",
+        "dur": 0.2735426968079758,
+        "hz": 266.41878600484523,
+        "hz2": 282.403913165136,
+        "grit": 0.15,
+        "gain": 0.34,
+        "pan": 0.0579246206623408,
+        "t": 12.2209,
+        "seed": 734
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.46,
+        "gain": 0.3,
+        "t": 12.2758,
+        "pan": 0,
+        "seed": 741
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.4733333333333334,
+        "gain": 0.3,
+        "t": 12.3311,
+        "pan": 0,
+        "seed": 748
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.4866666666666668,
+        "gain": 0.3,
+        "t": 12.3871,
+        "pan": 0,
+        "seed": 755
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.5,
+        "gain": 0.3,
+        "t": 12.4435,
+        "pan": 0,
+        "seed": 762
+      },
+      {
+        "type": "servo",
+        "dur": 1.1,
+        "hz": 170,
+        "hz2": 70,
+        "grit": 0.2,
+        "gain": 0.3,
+        "t": 12.5,
+        "pan": 0,
+        "seed": 769
+      },
+      {
+        "t": 12.5,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1.25,
+        "gain": 0.16,
+        "seed": 13
+      },
+      {
+        "type": "chime",
+        "dur": 1.6,
+        "notes": 4,
+        "gain": 0.3,
+        "t": 13.435,
+        "pan": 0,
+        "seed": 776
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "slicer.js: shape radius(theta, y) -> layers of polylines (outer perimeter, inner perimeter, infill) -> one timed move list (stages; accel per layer) -> nozzleAt(t). The bead mesh is built once; each vertex carries its deposit time; a frame sets drawRange + a time uniform.",
+      "plan": {
+        "layers": 46,
+        "moves": 275,
+        "beads": 138,
+        "points": 12216,
+        "metres": 1099.9,
+        "layerSeconds": [
+          [
+            0,
+            5.2
+          ],
+          [
+            1,
+            1.135
+          ],
+          [
+            2,
+            0.521
+          ],
+          [
+            23,
+            0.1
+          ],
+          [
+            45,
+            0.057
+          ]
+        ]
+      },
+      "timeCompression": "layer 0 takes ~5 s; layers 1-9 each 1.22x faster than the one before; the last 36 layers pass in ~3 s. No cut: the same plan, faster.",
+      "framing": "ok (worst {\"t\":13.766667,\"id\":\"part\",\"ndc\":0.93})",
+      "sound": "whir per perimeter, grittier servo per infill path, one short servo per floor scan line, grouped rising whirs for the fast layers, a tick per layer change, chime when the head parks; pad + fan hum bed."
+    }
+  }
+}
