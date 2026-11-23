@@ -114,7 +114,7 @@ export function createPlan(o) {
       if (j < 1 || j > N) continue;
       for (let i = Math.floor(cx - rr - 1); i <= Math.ceil(cx + rr + 1); i++) {
         if (i < rowLo[j] || i > rowHi[j]) continue;
-        const d = Math.hypot(i - cx, j - cy);
+        const d = Math.sqrt((i - cx) * (i - cx) + (j - cy) * (j - cy)); // exactly rounded (not Math.hypot): Node and Chrome agree
         if (d > rr) continue;
         const p = j * W + i;
         // soft-edged disc, or (s.ring = width in cells) an annulus hugging the outer edge
@@ -222,7 +222,7 @@ export function invClock(keys, s) {
 }
 
 /**
- * events(plan, o) -> plain event list for SCORE: one soft drop per seed landing, and a granular texture whose grain
+ * texturePlan(plan, o) -> plain event list for SCORE: one soft drop per seed landing, and a granular texture whose grain
  * density follows the stored activity x coverage (how much of the dish is patterned and still changing).
  *   o = { start, end, rate: [min, max] grains/s, quietBelow }
  */
@@ -244,3 +244,18 @@ export function texturePlan(plan, o = {}) {
   return out;
 }
 const hash = (n) => { let x = (n * 2654435761) >>> 0; x ^= x >>> 15; x = Math.imul(x, 2246822519) >>> 0; x ^= x >>> 13; return (x >>> 0) / 4294967296; };
+
+/**
+ * runHash(plan) -> 8-hex FNV-1a fingerprint of everything the picture and the sound read from a run: the stored states,
+ * the colony labels and the coverage / activity curves (their Float32 bytes). Node (SCORE) and the page (picture) must
+ * agree bit for bit; scene.config.js compares it with a recorded value.
+ */
+export function runHash(plan) {
+  let h = 0x811c9dc5;
+  const eat = (bytes) => { for (let i = 0; i < bytes.length; i++) { h ^= bytes[i]; h = Math.imul(h, 0x01000193) >>> 0; } };
+  eat(plan.states); eat(plan.labels);
+  eat(new Uint8Array(plan.coverage.buffer, plan.coverage.byteOffset, plan.coverage.byteLength));
+  eat(new Uint8Array(plan.activity.buffer, plan.activity.byteOffset, plan.activity.byteLength));
+  eat(new Uint8Array(Float64Array.from([plan.steps]).buffer));
+  return (h >>> 0).toString(16).padStart(8, "0");
+}

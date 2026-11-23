@@ -86,4 +86,6 @@ a `marimba` arpeggio as the hoop fills; a quiet rising `whir` under the yellow t
 - The glass is fresnel-only (no refraction).
 - Load-time simulation (~2.3 s) delays the first frame; keep `M`, the length schedule and `substeps` near these values.
 - With wall grip 0 and no imperfection the ring just stays compressed against the glass and then folds in one place;
-  the seeded jitter is required.
+  the seeded jitter is required. It also shows: for ~0.5 s around 6.3 s the ring looks crinkly at the glass before the
+  waves organise. Halving it (0.02) made the planner throw (a crossing at 14.6 s), so 0.04 stays; retuning any `growth`
+  value needs the full crossing test to pass again (it runs on every load).

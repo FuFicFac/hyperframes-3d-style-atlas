@@ -72,7 +72,7 @@ export const STYLE_SPEC = {
 
   // ---- the magnet (a vertical bar on a horizontal handle; roll PI = turned over) -------------------------------
   magnet: {
-    w: 0.26, L: 0.9, radius: 0.03,
+    w: 0.32, L: 1.1, radius: 0.035,
     handle: { r: 0.032, len: 1.25, grip: 0.5, gripR: 0.05, dir: [-0.8, 0, -0.6] },
     collar: 0.08,
   },
@@ -88,7 +88,8 @@ export const STYLE_SPEC = {
     swing: { stiffness: 484, damping: 24 },  // the flip: a damped swing (omega0 22 rad/s, zeta 0.55)
     tilt: { max: 0.35, show: true },         // radians: lean toward the magnet before a flip
     h1: 0.16,                                // first pass: near pole 16 cm above the tiles
-    h2: 0.52,                                // second pass: higher, so weaker
+    h2: 0.46,                                // second pass: higher, so weaker (and narrower)
+    z2: 0.3,                                 // demo: board z of the straight second pass
   },
 
   // ---- overlay caption (a dark indigo plate with a small bar-magnet icon, top centre) -------------------------------

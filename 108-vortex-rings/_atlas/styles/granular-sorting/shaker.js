@@ -43,6 +43,18 @@ function gridBuild(G, x, y, N) {
   for (let i = 0; i < N; i++) gridInsert(G, i, cellOf(G, x[i], y[i]));
 }
 
+/** nthRoot(a, n) -> a^(1/n) for a > 0 by Newton's method with a fixed iteration count, using + - x / only. */
+export function nthRoot(a, n) {
+  if (n === 1) return a;
+  let x = 1;
+  for (let k = 0; k < 80; k++) {
+    let p = 1;
+    for (let j = 0; j < n - 1; j++) p *= x;          // x^(n-1)
+    x = x - (p * x - a) / (n * p);
+  }
+  return x;
+}
+
 /**
  * simulate(sim) -> run
  * sim = { seed, width, small, large, bigR, spread, looseHeight, settleSweeps, taps, lift, dilate, sweeps, tries,
@@ -124,8 +136,12 @@ export function simulate(sim) {
       }
     }
   }
+  // the shrinking move size is a geometric schedule built from + - x / only (exactly rounded in every JS engine):
+  // Math.pow is not, and Node's and Chrome's results differed in the last bit, which flips Monte Carlo accept/reject
   function settle(sweeps, tries, [s0, s1]) {
-    for (let s = 0; s < sweeps; s++) sweep(s0 * Math.pow(s1 / s0, s / Math.max(1, sweeps - 1)), tries);
+    const q = nthRoot(s1 / s0, Math.max(1, sweeps - 1));
+    let st = s0;
+    for (let s = 0; s < sweeps; s++) { sweep(st, tries); st *= q; }
   }
   settle(sim.settleSweeps, sim.tries, sim.step);
 
@@ -362,7 +378,10 @@ export function createPlan(run, S) {
     return end;
   });
   const trails = arrive.map((a, i) => smoothTrail(run, i, a, S.trailHalf ?? 2));
-  return { run, end, nRT, nFast, firstTap: S.taps[0].t, stopT: F.t1, trails, arrive, phase, positions, plate, focus, focusPos, restXY, uncovered, sortedShare, events, fastStart, surface: surf };
+  /** tapTime(c) -> when tap c lands (real-time taps: end of the hop; fast forward: the step's midpoint) */
+  const tapTime = (c) => (c <= 0 ? -Infinity : c <= nRT ? S.taps[c - 1].t + S.taps[c - 1].dur : fastStart(c) + 0.5 * H.fastStep * ((F.t1 - F.t0) / nFast));
+  const arriveT = arrive.map((a) => tapTime(a));
+  return { run, end, nRT, nFast, firstTap: S.taps[0].t, stopT: F.t1, trails, arrive, arriveT, tapTime, phase, positions, plate, focus, focusPos, restXY, uncovered, sortedShare, events, fastStart, surface: surf };
 }
 
 /** shakerVoices(sound) -> voices for kit/schedule.scoreFromEvents: a dry bead rattle per tap (clicks + a short
@@ -401,4 +420,19 @@ export function layout(spec) {
     outer: { x0: -innerW / 2 - g, x1: innerW / 2 + g, y0: platformY, y1: floorY + innerH + J.lidH, z0: -innerD / 2 - g, z1: innerD / 2 + g },
     toWorld: (x, y) => [(x - spec.sim.width / 2) * u, floorY + y * u],
   };
+}
+
+/** runHash(run) -> 8-hex FNV-1a hash of every stored bead position (the float32 bit patterns of xs then ys). Integer
+ *  maths only, so Node (sound) and the browser (picture) can compare runs exactly; scene.config.js checks it against a
+ *  recorded constant and fails loudly on any mismatch. */
+export function runHash(run) {
+  let h = 0x811c9dc5;
+  for (const arr of [run.xs, run.ys]) {
+    const u = new Uint32Array(arr.buffer, arr.byteOffset, arr.length);
+    for (let k = 0; k < u.length; k++) {
+      let w = u[k];
+      for (let b = 0; b < 4; b++) { h ^= w & 0xff; h = Math.imul(h, 0x01000193); w >>>= 8; }
+    }
+  }
+  return (h >>> 0).toString(16).padStart(8, "0");
 }

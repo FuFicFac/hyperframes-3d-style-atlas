@@ -142,7 +142,7 @@ export function planMemory(o) {
    *   plus a small tilt toward the magnet while a push works against the latched face. m = magnetAt(t) (pass it in when
    *   evaluating every tile of one frame).
    */
-  const angleFull = (i, t, m = magnetAt(t)) => {
+  const angle = (i, t, m = magnetAt(t)) => {
     let kNow; // latched multiple of PI at t
     let lastFlip = null;
     let k = (init[i] ? 1 : 0);
@@ -205,7 +205,7 @@ export function planMemory(o) {
     cols, rows, pitch, N, X, Z, C, init, flips, settleT, passes,
     tileXZ: (i) => [X[i], Z[i]],
     magnetAt, push: (i, t) => pushFrom(i, magnetAt(t)), pushFrom,
-    angle: angleFull, stateAt, flipsOf: (i) => flips[i], events, stats, TAU,
+    angle: angle, stateAt, flipsOf: (i) => flips[i], events, stats, TAU,
   };
 }
 

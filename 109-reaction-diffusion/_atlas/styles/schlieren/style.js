@@ -7,7 +7,7 @@
 //     derivative as light / dark on grey — or the plain bright field when the blade is out (ordinary view), or both
 //     split by a seam (beat 5).
 //   * The candle (wax, wick, brass dish + post, additive flame shader, glow sprite, flame point light), the mirror cell +
-//     yoke + post, the knife-edge stand (micrometer block, sliding carriage, razor blade, focus glint), the pinhole lamp,
+//     yoke + post, the knife-edge stand (micrometer block, sliding carriage, razor blade with a lit edge), the pinhole lamp,
 //     a box camera, the straw, the optical table + rail + wall, and an overlay caption chip with exact colours.
 // Props never animate themselves: the scene calls bench.update(t) and rig.update(t).
 import * as THREE from "three";
@@ -48,8 +48,23 @@ export function createStyle(stage, opts = {}) {
     g.add(box(B.w, B.thick, B.d, materials.bench, 0, B.y - B.thick / 2, B.z));
     g.add(box(R.w, R.h, R.z1 - R.z0, materials.alu, 0, B.y + R.h / 2, (R.z0 + R.z1) / 2, 0.01));
     const W = spec.wall;
-    const wall = new THREE.Mesh(new THREE.PlaneGeometry(W.w, W.h), materials.wall);
-    wall.position.set(0, W.h / 2 - 1, W.z); wall.receiveShadow = true; g.add(wall);
+    // back wall: an unlit soft pool of light behind the mirror (rim separation for the black cell), darker toward the edges
+    const wallMat = new THREE.ShaderMaterial({
+      name: "wall",
+      uniforms: { uBase: { value: new THREE.Color(W.base) }, uGlow: { value: new THREE.Color(W.glow) }, uC: { value: new THREE.Vector2(...W.glowAt) }, uR: { value: new THREE.Vector2(...W.glowR) } },
+      vertexShader: /* glsl */ `varying vec3 vW; void main() { vec4 w = modelMatrix * vec4(position, 1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`,
+      fragmentShader: /* glsl */ `
+        uniform vec3 uBase, uGlow; uniform vec2 uC, uR; varying vec3 vW;
+        void main() {
+          vec2 d = (vW.xy - uC) / uR;
+          float k = exp(-dot(d, d));
+          gl_FragColor = vec4(mix(uBase, uGlow, k), 1.0);
+          #include <tonemapping_fragment>
+          #include <colorspace_fragment>
+        }`,
+    });
+    const wall = new THREE.Mesh(new THREE.PlaneGeometry(W.w, W.h), wallMat);
+    wall.position.set(0, W.h / 2 - 1, W.z); wall.name = "wall"; g.add(wall);
     return g;
   }
 
@@ -68,7 +83,7 @@ export function createStyle(stage, opts = {}) {
         uJet: { value: new THREE.Vector4(0, 0, SW.y, SW.tip) }, uJetW: { value: new THREE.Vector4(PF.jet.w0, PF.jet.spread, PF.jet.amp, 0) },
         uPlane: { value: new THREE.Vector3(...tip) },
         uBright: { value: v3(MR.bright) }, uGrey: { value: v3(MR.grey) }, uLight: { value: v3(MR.light) }, uDark: { value: v3(MR.dark) },
-        uField: { value: 0 }, uGain: { value: 0 }, uContrast: { value: MR.contrast }, uFall: { value: MR.brightFall },
+        uField: { value: 0 }, uGain: { value: 0 }, uLamp: { value: 1 }, uContrast: { value: MR.contrast }, uFall: { value: MR.brightFall },
         uR: { value: MR.R }, uBevel: { value: MR.bevel }, uRoom: { value: MR.room },
         uSeam: { value: -99 }, uSeamW: { value: MR.seamLine },
       },
@@ -78,7 +93,7 @@ export function createStyle(stage, opts = {}) {
       fragmentShader: /* glsl */ `
         ${plumeplan.PLUME_GLSL}
         uniform vec3 uPlane, uBright, uGrey, uLight, uDark;
-        uniform float uField, uGain, uContrast, uFall, uR, uBevel, uRoom, uSeam, uSeamW;
+        uniform float uField, uGain, uLamp, uContrast, uFall, uR, uBevel, uRoom, uSeam, uSeamW;
         varying vec3 vW; varying vec2 vL;
         void main() {
           vec3 C = cameraPosition;
@@ -92,7 +107,7 @@ export function createStyle(stage, opts = {}) {
           S *= uGain;
           float sc = S / sqrt(1.0 + S * S);
           vec3 sch = uGrey + max(sc, 0.0) * (uLight - uGrey) + max(-sc, 0.0) * (uDark - uGrey);
-          vec3 ord = uBright * (1.0 - uFall * r * r);
+          vec3 ord = uBright * uLamp * (1.0 - uFall * r * r);
           float right = smoothstep(uSeam - 0.002, uSeam + 0.002, vL.x);
           vec3 col = mix(ord, sch, uField * right);
           col *= 1.0 - 0.9 * exp(-pow((vL.x - uSeam) / uSeamW, 2.0));
@@ -105,7 +120,7 @@ export function createStyle(stage, opts = {}) {
     mat.userData.set = (u, t) => {
       const U = mat.uniforms;
       U.uTime.value = t;
-      U.uField.value = u.field; U.uGain.value = u.gain;
+      U.uField.value = u.field; U.uGain.value = u.gain; U.uLamp.value = u.lamp;
       U.uPl1.value.w = u.rollY; U.uPl2.value.x = u.sway;
       U.uJet.value.x = u.jet; U.uJet.value.y = u.jetFront; U.uJet.value.w = u.strawX;
       U.uSeam.value = u.seam;
@@ -226,31 +241,36 @@ export function createStyle(stage, opts = {}) {
     return s;
   }
   /** knifeEdge() -> Group: post on a rail carrier, micrometer block with an orange knob, sliding carriage + arm + blade,
-   *  focus glint; userData.set(edgeX, cut) */
+   *  lit cutting edge; userData.set(edgeX, cut) */
   function knifeEdge(o = {}) {
     const g = new THREE.Group(); g.name = "knife";
-    const y = BL.y, z = BL.z, by = y - BL.h / 2 - 0.09;
-    const postH = by - 0.05 - spec.bench.y;
-    const post = cyl(0.025, postH, materials.steel, 20); post.position.set(BL.focusX + BL.w * 0.5 + 0.12, spec.bench.y + postH / 2, z); g.add(post);
-    g.add(box(0.22, 0.05, 0.26, materials.anodised, BL.focusX + BL.w * 0.5 + 0.12, spec.bench.y + 0.025, z, 0.01));
-    const blockX = BL.focusX + BL.w * 0.5 + 0.12;
-    g.add(box(0.34, 0.1, 0.16, materials.anodised, blockX, by, z, 0.012));
-    const knob = cyl(0.04, 0.06, materials.knob, 24); knob.rotation.z = Math.PI / 2; knob.position.set(blockX + 0.2, by, z); g.add(knob);
-    const thimble = cyl(0.028, 0.08, materials.steel, 24); thimble.rotation.z = Math.PI / 2; thimble.position.set(blockX + 0.13, by, z); g.add(thimble);
+    const k = BL.w / 0.26;                       // stage parts are drawn for a 0.26 m blade, then scaled with it
+    const y = BL.y, z = BL.z, by = y - BL.h / 2 - 0.09 * k;
+    const blockX = BL.focusX + BL.w * 0.5 + 0.12 * k;
+    const postH = by - 0.05 * k - spec.bench.y;
+    const post = cyl(0.025 * k, postH, materials.steel, 20); post.position.set(blockX, spec.bench.y + postH / 2, z); g.add(post);
+    g.add(box(0.22 * k, 0.05 * k, 0.26 * k, materials.anodised, blockX, spec.bench.y + 0.025 * k, z, 0.01 * k));
+    const stageG = new THREE.Group(); stageG.position.set(blockX, by, z); stageG.scale.setScalar(k * 0.62); g.add(stageG);
+    stageG.add(box(0.34, 0.1, 0.16, materials.anodised, 0, 0, 0, 0.012));
+    const knob = cyl(0.04, 0.06, materials.knob, 24); knob.rotation.z = Math.PI / 2; knob.position.set(0.2, 0, 0); stageG.add(knob);
+    const thimble = cyl(0.028, 0.08, materials.steel, 24); thimble.rotation.z = Math.PI / 2; thimble.position.set(0.13, 0, 0); stageG.add(thimble);
     // sliding carriage (moves in x): slide plate, upright arm, blade clamp, blade
     const car = new THREE.Group(); g.add(car);
-    car.add(box(0.14, 0.03, 0.14, materials.alu, BL.w * 0.75, by + 0.065, z, 0.006));
-    car.add(box(0.03, BL.h / 2 + 0.06, 0.03, materials.alu, BL.w * 0.75, by + 0.08 + (BL.h / 2 + 0.06) / 2 - 0.02, z, 0.004));
-    car.add(box(0.07, BL.h * 0.8, 0.03, materials.anodised, BL.w * 0.75, y, z + 0.004, 0.006));
+    const armX = BL.w * 0.75;
+    car.add(box(0.14 * k, 0.03 * k, 0.14 * k, materials.alu, armX, by + 0.046 * k, z, 0.006 * k));
+    const armH = y - (by + 0.06 * k);
+    car.add(box(0.03 * k, armH, 0.03 * k, materials.alu, armX, by + 0.06 * k + armH / 2, z - 0.02 * k, 0.004 * k));
+    car.add(box(0.07 * k, BL.h * 0.8, 0.03 * k, materials.anodised, armX, y, z - 0.02 * k, 0.006 * k));
     const bladeGeo = new THREE.ExtrudeGeometry(razorShape(), { depth: BL.t, bevelEnabled: false, curveSegments: 12 });
     const blade = shadow(new THREE.Mesh(bladeGeo, materials.blade)); blade.position.set(0, y, z - BL.t / 2); car.add(blade);
-    // focus glint: the converging light seen on the blade face once the edge cuts into it
-    const glintMat = new THREE.SpriteMaterial({ map: blobTexture(), color: new THREE.Color("#fff4df"), blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, opacity: 0 });
-    const glint = new THREE.Sprite(glintMat); glint.scale.set(0.12, 0.12, 1); glint.position.set(BL.focusX, y, z + 0.02); glint.renderOrder = 6; g.add(glint);
+    // the cutting edge catches the converging light once it reaches the focus: a thin bright line along the edge
+    const edgeMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(0, 0, 0) });
+    const edge = new THREE.Mesh(new THREE.BoxGeometry(0.0035, BL.h, BL.t * 1.6), edgeMat);
+    edge.position.set(0.0012, y, z); edge.name = "bladeEdge"; car.add(edge);
     g.userData.set = (edgeX, cut) => {
       car.position.x = edgeX;
-      glintMat.opacity = 0.35 + 0.65 * Math.min(1, cut * 2);
-      const s = 0.08 + 0.1 * Math.min(1, cut * 2); glint.scale.set(s, s, 1);
+      const c = Math.min(1, cut * 2), a = 0.25 + BL.glint * c;
+      edgeMat.color.setRGB(a, a * 0.93, a * 0.8);
     };
     g.userData.set(BL.from, 0);
     return g;
@@ -328,7 +348,7 @@ export function createStyle(stage, opts = {}) {
   // ---------------------------------------------------------------- everything for one plan
   /**
    * schlierenBench(plan) -> { group, mirror, disc, candle, knife, lamp, camera, straw, update(t) } (adds itself to the scene)
-   *   update(t): disc uniforms (field, gain, rolling height, jet, seam), blade + glint, flame flicker, straw.
+   *   update(t): disc uniforms (field, gain, rolling height, jet, seam), blade + lit edge, flame flicker, straw.
    */
   function schlierenBench(plan, o = {}) {
     const group = new THREE.Group(); group.name = "schlieren";

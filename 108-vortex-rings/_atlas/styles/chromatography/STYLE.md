@@ -1,10 +1,12 @@
 # Chromatography (`chromatography`)
 
-**Look.** Paper chromatography on a bright daylight lab bench: a white tiled wall, a pale grey resin bench, a short wide
+**Look.** Paper chromatography on a bright daylight lab bench: a pale blue-grey tiled wall, a mid grey resin bench, a short wide
 glass jar with a little clear solvent, a strip of white filter paper hanging from a black binder clip on a clamp-stand
 arm, a steel rule beside it (ticks only, no numerals), a felt-tip marker, and a small steel drying rack. A pen dots black
 ink near the bottom of the strip; the strip is lowered into the solvent; a damp front climbs the paper and the black dot
-stretches and splits into blue, magenta and yellow bands. Clean whites, cool steel and glass, three saturated dye colours.
+stretches and splits into blue, magenta and yellow bands. White paper (cut edges slightly darkened) standing off blue-grey
+tiles, cool steel and glass, saturated dye colours. The two rack strips carry different inks: violet / green / orange
+(three bands) and teal / red (two bands), at heights unlike the main strip's.
 Toy-scale exaggerated (a 1.2 m × 0.4 m strip) so bands and the paper read at 1080p.
 
 Motion type: analytical (closed form) with an art-directed clock. Front height above the solvent = K·sqrt(process time)
@@ -67,7 +69,8 @@ one `marimba` note per band as it separates (yellow G5, magenta D5, blue G4), `w
 ## Tuning knobs (spec)
 - `ink[].rf` / `mass` — band order and strength; `dyes` — absorbance per RGB (keep the three sums equal for a neutral black).
 - `spread.s0 / au / av / suMax / crispWet / tail / gain` — dot size, band growth, band edge softness, streaking, density.
-- `paper.wet / soaked / tide / wobble / fibre` — how the damp region reads.
+- `paper.wet / soaked / tide / wobble / fibre` — how the damp region reads; `paper.edge / edgeW` — edge darkening.
+- `finished[]` — the rack strips' inks (dyes `green`, `orange`, `violet`, `teal`, `red` exist for them).
 - Scene: `TIMES.meetDot`, `frontAtStop`, ramp window — how fast it separates (the scene's `NOTES.separations` lists the times).
 
 ## Known limitations

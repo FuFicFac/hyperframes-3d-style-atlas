@@ -51,7 +51,7 @@ export const STYLE_SPEC = {
     lid: { type: "physical", baseColor: "#d9dee3", roughness: 0.28, metalness: 0.9 },
     beadSmall: { type: "physical", baseColor: "#f1e4c6", roughness: 0.38, metalness: 0, clearcoat: 0.55, clearcoatRoughness: 0.25, sheen: 0.2 },
     beadLarge: { type: "physical", baseColor: "#d3242c", roughness: 0.22, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.08 },
-    ring: { type: "basic", baseColor: "#ffffff", opacity: 1 },
+    ring: { type: "basic", baseColor: "#1f2a2e", opacity: 0.9 },
     beaker: { type: "physical", baseColor: "#e8f6f3", roughness: 0.05, metalness: 0, opacity: 0.18, clearcoat: 1, clearcoatRoughness: 0.03, side: "double" },
     wood: { type: "standard", baseColor: "#c99a62", roughness: 0.6, metalness: 0 },
   },
@@ -106,7 +106,7 @@ export const STYLE_SPEC = {
   set: { counterTop: 0, counterDepth: 3.4, wallZ: -1.3, tile: { w: 0.42, h: 0.21, grout: 0.012 } },
   hop: { up: 0.3, stagger: 0.25, fall: 0.42, vis: 0.35, plate: 1.4, plateShare: 0.42, fastStep: 0.55, fastHop: 0.22 },
   trails: { width: 7, color: "#b8141c", level: 1, z: 0.072 },
-  rings: { color: "#ffffff", width: 0.08, grow: 1.75, dur: 0.65 },
+  rings: { color: "#1f2a2e", width: 0.06, grow: 1.75, dur: 0.65 },
   highlight: { color: "#f6b938" },              // cream beads that slip under the close-up bead turn amber
   glassLook: { env: 0.25, edgeEnv: 0.8 },
 

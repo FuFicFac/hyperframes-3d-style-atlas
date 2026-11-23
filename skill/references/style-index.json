@@ -1,7 +1,7 @@
 {
   "format": "3d-style-atlas/style-index@1",
   "generatedBy": "Skills/3d-style-atlas/scripts/build-index.mjs (re-run after adding or changing a style)",
-  "generatedAt": "2026-11-23T19:35:37.424Z",
+  "generatedAt": "2026-11-23T22:19:12.809Z",
   "pathsRelativeTo": "D Second Brain/ (demo project and mp4 paths are absolute when the demos live outside it)",
   "notes": "category is a keyword guess; props come from the STYLE.md props tables; demo topic is the first line of the demo's scene.js.",
   "count": 113,

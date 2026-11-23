@@ -1,7 +1,7 @@
 // styles/percolation/style.js — "Percolation": an enamel board of glass sight-pipes and red-lever valves. The look lives
 // in spec.js; WHICH valve opens WHEN and where the water is lives in percolate.js (THREE-free planner, shared with SCORE).
 // This file turns a plan into pictures: one InstancedMesh per part (glass pipes, brass joints, valve bodies, collars,
-// levers, water from end a, water from end b, cluster bands), two troughs, the board, a gold focus ring and an overlay
+// levers, water from end a, water from end b, cluster bands), two troughs, the board, a magenta highlight ring and an overlay
 // caption plate. Props never animate themselves: the scene calls update(t), which rewrites every instance from t.
 import * as THREE from "three";
 import { applyStyleSpec } from "../../kit/spec.js";
@@ -149,7 +149,10 @@ export function createStyle(stage, opts = {}) {
     // levers (red bars on the valve front), rotated about Z every frame
     const [lw, lh, ld] = PI.lever;
     const leverGeo = new RoundedBoxGeometry(lw, lh, ld, 2, lh * 0.45);
-    const levers = inst(leverGeo, materials.lever, N, "levers");
+    const leverMat = materials.lever.clone(); leverMat.color.set("#ffffff"); // colour per instance (red; the deciding one turns magenta)
+    const levers = inst(leverGeo, leverMat, N, "levers");
+    const cLever = new THREE.Color(spec.materials.lever.baseColor), cHi = new THREE.Color(P.highlight), cl = new THREE.Color();
+    const HI = o.highlight ?? { id: -1, level: () => 0 };
     const capGeo = new THREE.CylinderGeometry(0.022, 0.022, 0.02, 12); capGeo.rotateX(Math.PI / 2);
     const caps = inst(capGeo, materials.brass, N, "leverCaps");
     const leverZ = z + PI.valveD / 2 + ld / 2;
@@ -189,6 +192,8 @@ export function createStyle(stage, opts = {}) {
         const pop = 1 + PI.pop * Math.sin(Math.PI * u); // the lever swells while it turns: each click is visible
         M.compose(v.set(e.mid[0], e.mid[1], leverZ), q, s.set(pop, pop, 1));
         levers.setMatrixAt(i, M);
+        const hk = i === HI.id ? HI.level(t) : 0;
+        levers.setColorAt(i, cl.copy(cLever).lerp(cHi, hk));
         // water from each end
         const [fa, fb] = plan.fill(i, t);
         const dirA = v.set(e.B[0] - e.A[0], e.B[1] - e.A[1], 0).normalize();
@@ -203,7 +208,7 @@ export function createStyle(stage, opts = {}) {
           waterB.setMatrixAt(i, M); waterB.setColorAt(i, waterColour(plan.sb[i], plan.db[i], t));
         } else waterB.setMatrixAt(i, HIDE);
         // band: none until the valve opens; then the cluster tint (cross-fading on merges); then wet blue as water fills
-        const open = smoothstep(0, 1, u * 1.6);
+        const open = Math.max(smoothstep(0, 1, u * 1.6), hk); // the deciding link's band shows as soon as it is highlighted
         if (open <= 0.001) { bands.setMatrixAt(i, HIDE); bands.setColorAt(i, cWet); continue; }
         const ti = plan.tintAt(i, t, B.fade);
         tintColour(ti.from, c0); tintColour(ti.to, c1);
@@ -214,30 +219,31 @@ export function createStyle(stage, opts = {}) {
         const doneAt = Math.min(Number.isFinite(plan.sa[i]) ? plan.sa[i] + plan.da[i] : Infinity, Number.isFinite(plan.sb[i]) ? plan.sb[i] + plan.db[i] : Infinity);
         cBand.copy(cBandFront).lerp(cWet, Number.isFinite(doneAt) ? clamp((t - doneAt) / spec.front.settle) : 1);
         c0.lerp(cBand, wet);
+        if (hk > 0) c0.lerp(cHi, hk * 0.85); // the deciding link stays marked to the end
         bands.setColorAt(i, c0);
         q.setFromAxisAngle(Z, e.ang);
         M.compose(v.set(e.mid[0], e.mid[1], bandZ[i]), q, s.set(1, open, 1));
         bands.setMatrixAt(i, M);
       }
-      levers.instanceMatrix.needsUpdate = true;
+      levers.instanceMatrix.needsUpdate = true; levers.instanceColor.needsUpdate = true;
       waterA.instanceMatrix.needsUpdate = true; waterB.instanceMatrix.needsUpdate = true;
       bands.instanceMatrix.needsUpdate = true;
       if (bands.instanceColor) bands.instanceColor.needsUpdate = true;
       waterA.instanceColor.needsUpdate = true; waterB.instanceColor.needsUpdate = true;
     };
     // allocate instanceColor before the first render so the program is compiled with it
-    for (let i = 0; i < N; i++) { bands.setColorAt(i, cWet); waterA.setColorAt(i, cDeep); waterB.setColorAt(i, cDeep); }
+    for (let i = 0; i < N; i++) { levers.setColorAt(i, cLever); bands.setColorAt(i, cWet); waterA.setColorAt(i, cDeep); waterB.setColorAt(i, cDeep); }
     update(-1);
     g.userData = { update, ends, parts: { pipes, joints, bodies, collars, levers, caps, waterA, waterB, bands } };
     return g;
   }
 
-  // ---------------------------------------------------------------- gold focus ring around one valve
-  /** focusRing() -> Mesh (gold annulus on the enamel); userData.set(x, y, level 0..1) */
+  // ---------------------------------------------------------------- highlight ring around one valve
+  /** focusRing() -> Mesh (magenta annulus in front of the valve); userData.set(x, y, level 0..1, grow) */
   function focusRing(o = {}) {
     const R = { ...spec.ring, ...o };
-    const m = new THREE.Mesh(new THREE.RingGeometry(R.r0, R.r1, 48), new THREE.MeshBasicMaterial({ color: P.gold, transparent: true, depthWrite: false }));
-    m.name = "focusRing"; m.renderOrder = 1;
+    const m = new THREE.Mesh(new THREE.RingGeometry(R.r0, R.r1, 48), new THREE.MeshBasicMaterial({ color: P.highlight, transparent: true, depthWrite: false }));
+    m.name = "focusRing"; m.renderOrder = 3;
     m.userData.set = (x, y, k, grow = 1) => {
       m.visible = k > 0.003; m.material.opacity = clamp(k);
       m.position.set(x, y, R.z); m.scale.setScalar(grow);
@@ -279,8 +285,8 @@ export function createStyle(stage, opts = {}) {
   // ---------------------------------------------------------------- everything for one plan
   /**
    * percolationBoard(plan) -> { group, net, top, bottom, ring, update(t) } (adds itself to the scene)
-   *   update(t): every lever, water fill and band from the plan; bottom trough level; gold ring around the deciding valve
-   *   (`ring: { on, off, inDur, outDur }` window in seconds).
+   *   update(t): every lever, water fill and band from the plan; bottom trough level; the deciding link marked in the
+   *   highlight colour (ring in front of its valve, its lever and its band) over the `ring: { on, off, inDur, outDur }` window.
    */
   function percolationBoard(plan, o = {}) {
     const group = new THREE.Group(); group.name = "percolation";
@@ -288,19 +294,21 @@ export function createStyle(stage, opts = {}) {
     const E = extents();
     const top = trough({ name: "troughTop", y: E.yTop - spec.trough.h / 2, level: 1 }); group.add(top);
     const bottom = trough({ name: "troughBottom", y: E.yBot + spec.trough.h / 2, level: 0 }); group.add(bottom);
-    const net = network(plan); group.add(net);
+    const RW = o.ring ?? { on: Infinity, off: Infinity, inDur: 0.4, outDur: 0.6 };
+    const level = (t) => smoothstep(RW.on, RW.on + RW.inDur, t) * (1 - smoothstep(RW.off, RW.off + RW.outDur, t));
+    const net = network(plan, { highlight: { id: plan.starId, level } }); group.add(net);
     const ring = focusRing(); group.add(ring);
     stage.scene.add(group);
     const st = net.userData.ends[plan.starId];
-    const RW = o.ring ?? { on: Infinity, off: Infinity, inDur: 0.4, outDur: 0.6 };
     return {
       group, net, top, bottom, ring, board: bd, starMid: st.mid,
       update(t) {
         net.userData.update(t);
         bottom.userData.setLevel(plan.troughB(t));
-        const k = smoothstep(RW.on, RW.on + RW.inDur, t) * (1 - smoothstep(RW.off, RW.off + RW.outDur, t));
-        const pulse = 1 + 0.08 * Math.sin(Math.max(0, t - RW.on) * 6.0);
-        ring.userData.set(st.mid[0], st.mid[1], k, pulse);
+        const k = level(t);
+        const pulse = 1 + 0.1 * Math.sin(Math.max(0, t - RW.on) * 6.0) * (1 - smoothstep(RW.on + 2.5, RW.on + 3.5, t)); // pulses in beat 4, steady after
+        const grow = 1 + (spec.ring.grow ?? 0) * smoothstep(RW.on + 2.7, RW.on + 4.7, t); // bigger for the final wide
+        ring.userData.set(st.mid[0], st.mid[1], k, pulse * grow);
       },
     };
   }

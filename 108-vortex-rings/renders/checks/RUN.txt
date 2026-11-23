@@ -1,7 +1,7 @@
-check-frames run: 2026-11-23 14:16:59 UTC
+check-frames run: 2026-11-23 19:51:45 UTC
 times: 1, 4, 8, 9.7, 12, 14.5
-newest code edit: 2026-11-23 14:14:47 UTC (vortex-rings/spec.js)
-mp4: 108-vortex-rings.mp4 2026-11-23 14:16:13 UTC
+newest code edit: 2026-11-23 19:50:20 UTC (108-vortex-rings/scene.config.js)
+mp4: 108-vortex-rings.mp4 2026-11-23 19:50:58 UTC
 kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
 mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 41.1 dB, frame 30)
   frame 30 (t=1.000): 41.1 dB

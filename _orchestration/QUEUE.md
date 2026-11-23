@@ -101,3 +101,14 @@ Index (`references/style-index.json`, `STYLES.md`), `gallery.html` (links line k
 .gitignore, the model-comparison render folders) belong to other sessions and were left alone.
 
 Committed and pushed to GitHub as aa9cc66 (demos 101-112, refreshed `skill/` snapshot, index, gallery, briefs and storyboards).
+
+## After the run, 2026-11-23 (same session)
+
+- 108 vortex-rings and 109 reaction-diffusion now carry the same Node-versus-Chrome run fingerprint check as 110 and 111. 108's table
+  really did differ between the two (Math.log) and was fixed; 109 already matched. All four planner-simulated styles are verified.
+- Label changeovers at beat boundaries (101, 108, 109, 112) checked in frames from the MP4s: short cross-fades, no missing label.
+- `_orchestration/build-reels-101-112.sh` run: `_ALL VIDEOS/` now has flat copies of 101–112, "Breakout 101-112" (plain and numbered,
+  3:00) and "Master Video 01-112" (plain and numbered, 28:05). Like the 85–100 files they are not in git (the masters exceed GitHub's
+  file limit). The numbered badge slightly overlaps top-left captions on a few styles (112 for one).
+- A 112-style version of the website exists only as a local preview in `/Volumes/Panther/New horizons/site-preview` (homepage hero,
+  film dialog, chapter links, media for 85–112). `Site/` and the live site were not touched and still show 84.

@@ -1980,6 +1980,7 @@
     "notes": {
       "mechanism": "grayscott.js: Gray–Scott (Du 1, Dv .5, 9-point Laplacian, explicit Euler dt 1) on a 160-cell grid clipped to a 76-cell-radius dish with a no-flux rim; run once at load; activator stored every 0.25 s of video; the gel shader blends the two stored states around t.",
       "steps": 8200,
+      "runHash": "1e7b15cb",
       "clock": "video time -> steps is piecewise linear (40 steps by 2.5 s, 8200 by 15 s)",
       "schedule": "F/k 0.0367/0.0649 (spots split) eased to 0.0545/0.062 (stripes) over 8.5-11.5 s",
       "meet": {

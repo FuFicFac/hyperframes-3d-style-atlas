@@ -76,7 +76,7 @@ export const STYLE_SPEC = {
   // ---- the bench -------------------------------------------------------------------------------------------
   bench: { y: 0, w: 5.2, d: 6.4, z: 1.6, thick: 0.08 },
   rail: { w: 0.16, h: 0.06, z0: -0.4, z1: 4.4 },
-  wall: { z: -1.6, w: 14, h: 7 },
+  wall: { z: -1.6, w: 16, h: 8, base: "#06080c", glow: "#2b3446", glowAt: [-0.6, 1.9], glowR: [3.6, 2.2] },   // linear-ish colours of an unlit gradient
 
   // ---- the mirror ------------------------------------------------------------------------------------------
   mirror: {
@@ -86,7 +86,7 @@ export const STYLE_SPEC = {
     grey: [0.2, 0.2, 0.205],       // schlieren view: the knife at half cut (linear)
     light: [1.08, 1.0, 0.86],      // where the gradient bends light past the knife
     dark: [0.006, 0.01, 0.026],    // where it bends light onto the knife
-    contrast: 0.5,                 // schlieren gain: s = contrast × ∂n/∂x (1/m), soft-clipped
+    contrast: 0.22,                 // schlieren gain: s = contrast × ∂n/∂x (1/m), soft-clipped
     bevel: 0.022,                  // darker bevel ring at the edge of the glass
     room: 0.022,                   // faint large-scale room convection in the field (keeps the grey alive)
     seamLine: 0.006,               // half-width (m) of the split seam line
@@ -97,9 +97,9 @@ export const STYLE_SPEC = {
   flame: { h: 0.17, r: 0.032, glow: 0.38, emissive: 3.2, light: 0.9, tipInside: 0.03 },
 
   // ---- knife edge, lamp, camera (near the focus) -------------------------------------------------------------
-  blade: { w: 0.26, h: 0.11, t: 0.004, y: 1.02, z: 3.0, focusX: 0.5, spot: 0.016, from: 1.25, to: 0.5, stand: 0.06 },
-  lamp: { x: 0.5, y: 1.2, z: 3.05 },
-  camBox: { x: 0.78, y: 1.02, z: 3.35, w: 0.26, h: 0.2, d: 0.34 },
+  blade: { w: 0.22, h: 0.085, t: 0.003, y: 1.3, z: 4.0, focusX: 0.26, spot: 0.12, from: 0.95, to: 0.26, glint: 3.5 },   // glint: HDR level of the lit edge at full cut
+  lamp: { x: 0.95, y: 1.1, z: 4.3 },
+  camBox: { x: 0.62, y: 1.12, z: 4.6, w: 0.26, h: 0.2, d: 0.34 },
 
   // ---- the straw (beat 4) ----------------------------------------------------------------------------------
   straw: { y: 0.28, len: 1.9, r: 0.02, hidden: -2.7, tip: -0.48 },   // y and x relative to the flame tip
@@ -108,10 +108,10 @@ export const STYLE_SPEC = {
   plume: {
     v: 0.45,          // rise speed (m/s)
     w0: 0.012,        // column half-width at the flame tip
-    spread: 0.13,     // half-width growth per metre of height
+    spread: 0.075,     // half-width growth per metre of height
     decay: 0.6,       // amplitude halves by this height
-    rollScale: 5.2,   // rolling: noise frequency (1/m)
-    rollAmp: 0.075,   // rolling: domain-warp amplitude (m)
+    rollScale: 6.0,   // rolling: noise frequency (1/m)
+    rollAmp: 0.085,   // rolling: domain-warp amplitude (m)
     rollGrow: 0.35,   // rolling grows over this height above the transition
     rollTop: 1.9, rollLow: 0.28,
     sway: 0.012,      // slow sway of the column (m)
@@ -130,10 +130,10 @@ export const STYLE_SPEC = {
   },
 
   sound: {
-    bed: { gain: 0.32, root: 55, brightness: 420 },
+    bed: { gain: 0.6, root: 55, brightness: 480 },
     slide: { gain: 0.32, servo: 0.22 },
     cut: { gain: 0.45 },
-    air: { gain: 0.34, dur: 2.4 },
+    air: { gain: 0.5, dur: 2.4 },
     straw: { gain: 0.22 },
     puff: { gain: 0.7 },
     swirl: { gain: 0.28 },

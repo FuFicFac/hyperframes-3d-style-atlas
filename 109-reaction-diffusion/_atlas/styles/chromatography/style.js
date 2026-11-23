@@ -27,6 +27,7 @@ uniform vec4 uDyeC[MAX_DYES];   // crisp exponent, tail, origin v, -
 uniform vec4 uFront;            // front v (-1 = dry), solvent v (-1 = not dipped), tide, wetness
 uniform vec4 uPaperK;           // 1/tile, fibre contrast, wobble, wet roughness
 uniform vec3 uPaperCol;
+uniform vec4 uEdge;            // half width, length, edge darkening, edge width
 uniform vec3 uWetCol;
 uniform vec3 uSoakCol;
 uniform sampler2D uFibre;
@@ -68,7 +69,9 @@ const STRIP_APPLY = /* glsl */ `
     A += b.rgb * b.w * (g + tail) * (0.85 + 0.3 * fib.g) * (1.0 + 0.5 * (1.0 - fib.r));
   }
   vec3 trans = exp(-A);
-  diffuseColor.rgb = paper * wetMul * trans;
+  float eD = min(uEdge.x - abs(sp.x), min(sp.y, uEdge.y - sp.y));
+  float edge = uEdge.z * (1.0 - smoothstep(0.0, uEdge.w, eD));
+  diffuseColor.rgb = paper * wetMul * trans * (1.0 - edge);
 }
 `;
 
@@ -142,6 +145,7 @@ export function createStyle(stage, opts = {}) {
       uFront: { value: new THREE.Vector4(-1, -1, PK.tide, 1) },
       uPaperK: { value: new THREE.Vector4(1 / PK.tile, PK.fibre, PK.wobble, PK.wetRough) },
       uPaperCol: { value: new THREE.Color(P.paper) },
+      uEdge: { value: new THREE.Vector4(spec.strip.W / 2, spec.strip.L, PK.edge ?? 0, PK.edgeW ?? 0.004) },
       uWetCol: { value: new THREE.Color(PK.wet) },
       uSoakCol: { value: new THREE.Color(PK.soaked) },
       uFibre: { value: fibreTex },
@@ -156,7 +160,7 @@ export function createStyle(stage, opts = {}) {
         .replace("#include <map_fragment>", STRIP_APPLY)
         .replace("#include <roughnessmap_fragment>", "#include <roughnessmap_fragment>\nroughnessFactor = mix(roughnessFactor, uPaperK.w, gWet);");
     };
-    mat.customProgramCacheKey = () => "chromatography-strip-1";
+    mat.customProgramCacheKey = () => "chromatography-strip-2";
     const setDyes = (dyes) => {
       for (let i = 0; i < MAX_DYES; i++) {
         const d = dyes[i];

@@ -5,7 +5,7 @@
 //
 // The look: a macro shot of a shallow glass dish on a pale lab bench. Cream gel fills it; a deep-teal pattern grows in
 // the gel, slightly raised so the key light catches its edges and a wet specular glint runs along every stripe.
-// grayscott.js runs the two-chemical simulation once at load and stores the activator field every half second; the gel
+// grayscott.js runs the two-chemical simulation once at load and stores the activator field every 0.25 s; the gel
 // shader blends the two neighbouring stored states, samples them with a smooth (B-spline) filter, raises the surface
 // from the same value and shades it. Five drops land, ring out, pinch into spots, split, meet and lock into a maze.
 
@@ -13,7 +13,7 @@ export const STYLE_SPEC = {
   id: "reaction-diffusion",
   name: "Reaction-Diffusion",
   description:
-    "Rules, not a plan: a macro shot of a shallow glass petri dish on a pale lab bench, filled with cream gel in which a deep-teal pattern grows. Five drops land; each spreads into a ring that pinches into spots, the spots split again and again, fronts from different drops meet and lock into one winding maze. The pattern is a real Gray–Scott reaction-diffusion simulation (two substances, 9-point Laplacian, explicit Euler, seeded drops) run once on the CPU at page load; the activator field is stored every 0.5 s of video and the gel shader blends the two neighbouring states, B-spline-filters them, raises the surface from the same value (wet glossy relief) and optionally tints each drop's territory. Soft drop plinks, then a quiet granular crackle whose density follows how much of the dish is patterned and still changing.",
+    "Rules, not a plan: a macro shot of a shallow glass petri dish on a pale lab bench, filled with cream gel in which a deep-teal pattern grows. Five drops land; each spreads into a ring that pinches into spots, the spots split again and again, fronts from different drops meet and lock into one winding maze. The pattern is a real Gray–Scott reaction-diffusion simulation (two substances, 9-point Laplacian, explicit Euler, seeded drops) run once on the CPU at page load; the activator field is stored every 0.25 s of video and the gel shader blends the two neighbouring states, B-spline-filters them, raises the surface from the same value (wet glossy relief) and optionally tints each drop's territory. Soft drop plinks, then a quiet granular crackle whose density follows how much of the dish is patterned and still changing.",
   palette: {
     bg: "#e3e4e1",
     bench: "#dfe1df",
@@ -83,7 +83,7 @@ export const STYLE_SPEC = {
     sheen: 0.18,            // grazing fresnel brightening (wet gel)
     mottle: 0.035,          // static cream mottling amplitude
     colonyBase: 0,          // how much each drop's territory is tinted outside beat 4 (0 = all one teal)
-    colonyBlur: 2,          // box-blur passes on the territory colours (soft borders)
+    colonyBlur: 1,          // box-blur passes on the territory colours (soft borders)
     sss: 0.22,              // soft light that wraps into shadowed slopes (gel is translucent)
   },
   // ---- simulation (grayscott.js) --------------------------------------------------------------------------
@@ -94,7 +94,7 @@ export const STYLE_SPEC = {
     stripes: { F: 0.0545, k: 0.062 },
     ring: { r: 14, w: 4 },          // each drop lands as an annulus (cells): it pinches into spots
   },
-  drop: { radius: 0.06, fall: 0.42, height: 1.6, squash: 0.2, ripple: { amp: 0.006, speed: 0.9, width: 0.05, decay: 2.6, life: 1.1 } },
+  drop: { radius: 0.06, fall: 0.4, height: 1.0, squash: 0.2, ripple: { amp: 0.006, speed: 0.9, width: 0.05, decay: 2.6, life: 1.1 } },
 
   // ---- overlay caption (top-left chip) -----------------------------------------------------------------------
   caption: {

@@ -4,7 +4,7 @@
 // integrated ONCE here (rings.js, RK4) and every camera key, framing check and sound cue reads that same PLAN.
 // World: ring axis = +X at y = 0, z = 0; the drum face with the hole is the plane x = 0; the camera stays on the +Z side.
 import { STYLE_SPEC as S } from "./_atlas/styles/vortex-rings/spec.js";
-import { createPlan, soundEvents } from "./_atlas/styles/vortex-rings/rings.js";
+import { createPlan, soundEvents, tableHash } from "./_atlas/styles/vortex-rings/rings.js";
 import { scoreFromEvents } from "./_atlas/kit/schedule.js";
 import { framingReport, fitShot, pxRect } from "./_atlas/kit/framing.js";
 
@@ -38,6 +38,14 @@ export const RINGS = TAPS.map((tp, i) => {
   return { id: `ring${i}`, launch: tp.t + RS.launchDelay, x0: RS.x0, R0: k.R0, a0: k.a0, G: k.G };
 });
 export const PLAN = createPlan({ rings: RINGS, nu: RS.nu, dt: RS.dt, end: DURATION + 0.5 });
+// Node (sound, camera keys) and Chrome (picture) each integrate the plan; they must agree to the bit. RUN_HASH was
+// recorded from this code and confirmed equal in Node and in the page; any other value fails here in both environments.
+export const RUN_HASH = "4a77f4d9";
+export const RUN_HASH_NOW = tableHash(PLAN);
+if (typeof globalThis.window !== "undefined") globalThis.window.__vrTableHash = RUN_HASH_NOW;
+if (RUN_HASH_NOW !== RUN_HASH && !globalThis.process?.env?.VR_RECORD) {
+  throw new Error(`108-vortex-rings: ring-table hash ${RUN_HASH_NOW} != recorded ${RUN_HASH} (${typeof globalThis.window !== "undefined" ? "browser" : "node"})`);
+}
 export const PASS = PLAN.pass[0] ?? null;
 if (!PASS || PASS.t < B.through.t + 0.6 || PASS.t > B.through.t + 2.6) {
   throw new Error(`108-vortex-rings: the threading must fall inside beat "through" (got ${PASS ? PASS.t.toFixed(2) : "none"})`);

@@ -14,7 +14,8 @@
 // Integrated ONCE with classic fixed-step RK4 (dt = 1/480 s) from the first launch to `end`; states stored every step;
 // state(i, t) interpolates linearly between stored steps (well below a pixel at 30 fps). A ring exists from its launch
 // time on; before that it is not in the system. The leapfrog / pass-through is NOT keyframed: it comes out of the
-// mutual induction. Units: metres, seconds. Seeded nothing: the dynamics are deterministic arithmetic.
+// mutual induction. Units: metres, seconds. Seeded nothing: the dynamics use only + - * /, Math.sqrt and detLog
+// (no engine-dependent transcendental), so Node and Chrome store bit-identical tables (tableHash).
 
 const PI = Math.PI;
 
@@ -51,8 +52,26 @@ export function ringVel(G, R, x0, r, x) {
   return [dpr / r, -dpx / r];
 }
 
+/**
+ * detLog(x): natural log from + - * / only (power-of-two range reduction, then the atanh series), so Node and Chrome
+ * get the same bits. Math.log is not required to be exactly rounded and differed between the two (measured: the
+ * stored table hashed b3c4f6b9 in Node and af680bc0 in the page). Accurate to ~1 ulp-ish for x > 0.
+ */
+const LN2 = 0.6931471805599453;
+export function detLog(x) {
+  if (!(x > 0)) return x === 0 ? -Infinity : NaN;
+  let e = 0;
+  while (x >= 2) { x /= 2; e++; }
+  while (x < 1) { x *= 2; e--; }
+  if (x > 1.4142135623730951) { x /= 2; e++; }
+  const s = (x - 1) / (x + 1), s2 = s * s;
+  let term = s, sum = 0;
+  for (let n = 1; n < 40; n += 2) { sum += term / n; term *= s2; }
+  return e * LN2 + 2 * sum;
+}
+
 /** self-induced speed of a thin ring with a uniform core */
-export const selfSpeed = (G, R, a) => (G / (4 * PI * R)) * (Math.log((8 * R) / a) - 0.25);
+export const selfSpeed = (G, R, a) => (G / (4 * PI * R)) * (detLog((8 * R) / a) - 0.25);
 
 /**
  * createPlan({ rings, nu, dt, end, start }) -> plan
@@ -177,4 +196,22 @@ export function soundEvents(plan, { taps = [], step = 0.4, end = plan.end } = {}
   });
   for (const p of plan.pass) if (p.t > 0 && p.t < end) ev.push({ t: p.t - 0.35, kind: "pass", ring: p.rear, rel: 1 });
   return ev.sort((a, b) => a.t - b.t);
+}
+
+/**
+ * tableHash(plan) -> 8 hex chars: FNV-1a over the raw bytes of every stored step (t, and per ring x, R, phi, U, Ur).
+ * Node (sound, camera keys) and Chrome (picture) each integrate the plan themselves; this proves they agree to the bit.
+ */
+export function tableHash(plan) {
+  let h = 0x811c9dc5;
+  const arrays = [plan.table.t];
+  for (const r of plan.table.rings) arrays.push(r.x, r.R, r.phi, r.U, r.Ur);
+  for (const arr of arrays) {
+    const u = new Uint32Array(arr.buffer, arr.byteOffset, arr.length * 2);
+    for (let k = 0; k < u.length; k++) {
+      let w = u[k];
+      for (let b = 0; b < 4; b++) { h ^= w & 0xff; h = Math.imul(h, 0x01000193); w >>>= 8; }
+    }
+  }
+  return (h >>> 0).toString(16).padStart(8, "0");
 }

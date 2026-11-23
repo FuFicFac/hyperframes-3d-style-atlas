@@ -21,13 +21,14 @@ export const STYLE_SPEC = {
     brass: "#c9a04a",
     lever: "#d4372c",
     water: "#1f77e0",
-    wetBand: "#8cc6ff",
-    waterFront: "#3cc8ff",
-    bandFront: "#a6ecff",
+    wetBand: "#4f94ff",
+    waterFront: "#1d8bff",
+    bandFront: "#2a5cff",
+    highlight: "#ff1f8f",
     bottom: "#ffb938",
     pending: "#d9e2ec",
     gold: "#f2b632",
-    tints: ["#ff8b78", "#7fd36b", "#ff9fd0", "#cfe05a", "#ffa877"],
+    tints: ["#7fd36b", "#cfe05a", "#ffa877"],
   },
   world: {
     background: "#e8e4dc",
@@ -44,7 +45,7 @@ export const STYLE_SPEC = {
     navy: { type: "physical", baseColor: "#1d3570", roughness: 0.3, metalness: 0, clearcoat: 0.6, clearcoatRoughness: 0.15 },
     brass: { type: "standard", baseColor: "#c9a04a", roughness: 0.3, metalness: 0.9 },
     lever: { type: "physical", baseColor: "#d4372c", roughness: 0.35, metalness: 0, clearcoat: 0.7, clearcoatRoughness: 0.12 },
-    water: { type: "physical", baseColor: "#1868e0", roughness: 0.12, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.05, emission: { color: "#0b48b8", strength: 0.6 } },
+    water: { type: "physical", baseColor: "#0b55e6", roughness: 0.12, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.05, emission: { color: "#0a44c8", strength: 0.7 } },
     troughInside: { type: "standard", baseColor: "#e4eaef", roughness: 0.4, metalness: 0 },
     band: { type: "lambert", baseColor: "#ffffff" },
   },
@@ -53,7 +54,7 @@ export const STYLE_SPEC = {
     { id: "fill", type: "hemisphere", color: "#ffffff", groundColor: "#b8b0a2", intensity: 1.15 },
     {
       id: "key", type: "directional", color: "#fff6ea", intensity: 2.1, position: [-5, 7, 9], target: [0, 0, 0],
-      shadow: { softness: 1.4, mapSize: 4096, extent: 6.8, near: 1, far: 30, bias: -0.0004, normalBias: 0.015 },
+      shadow: { softness: 1.4, mapSize: 4096, extent: 7.2, near: 1, far: 30, bias: -0.0004, normalBias: 0.015 },
     },
     { id: "rim", type: "directional", color: "#e8f0ff", intensity: 0.5, position: [6, 3, 6], target: [0, 0, 0] },
   ],
@@ -65,22 +66,22 @@ export const STYLE_SPEC = {
   text: { font: "sans", weight: 800, color: "#ffffff", height: 0.4 },
 
   // ---- board + network geometry (metres) ----------------------------------------------------------------------
-  grid: { W: 24, H: 12, pitch: 0.42 },
-  board: { margin: [2.6, 1.6], depth: 0.16, border: 0.12, rivet: 0.045 },
-  pipe: { z: 0.1, glassR: 0.06, waterR: 0.047, joint: 0.072, valveR: 0.058, valveD: 0.1, collarR: 0.07, collarL: 0.12, lever: [0.17, 0.032, 0.022], pop: 0.4 },
-  band: { width: 0.2, z: 0.004, fade: 0.25 },
-  front: { settle: 0.8, boost: 1.3 },   // s: a pipe's water glows bright cyan while it fills, then settles to deep blue
-  trough: { h: 0.34, d: 0.26, extra: 0.3, rim: 0.022 },
-  ring: { r0: 0.27, r1: 0.34, z: 0.006 },
+  grid: { W: 16, H: 8, pitch: 0.6 },
+  board: { margin: [3.6, 2.2], depth: 0.2, border: 0.16, rivet: 0.06 },
+  pipe: { z: 0.13, glassR: 0.095, waterR: 0.077, joint: 0.106, valveR: 0.085, valveD: 0.13, collarR: 0.106, collarL: 0.14, lever: [0.26, 0.048, 0.032], pop: 0.4 },
+  band: { width: 0.32, z: 0.004, fade: 0.25 },
+  front: { settle: 0.6, boost: 1.15 },   // s: a filling pipe is the most saturated blue (vivid band + bright water), then settles
+  trough: { h: 0.46, d: 0.34, extra: 0.42, rim: 0.03 },
+  ring: { r0: 0.25, r1: 0.335, z: 0.25, grow: 0.5 },   // magenta ring IN FRONT of the deciding valve (z = in front of the lever)
 
   // ---- the plan (percolate.js) -------------------------------------------------------------------------------------
   plan: {
-    seed: 6068,
+    seed: 483,
     turn: 0.2,
     open: { knots: [[0, 0.12], [0.18, 2.4], [0.58, 5.4], [1, 7.1]] },
     decide: { at: 9.55, turn: 0.55, dt: 0.6 },
-    flow: { dt: 0.13, reachB: 13.1 },
-    tints: 5,
+    flow: { dt: 0.16, reachB: 12.4 },
+    tints: 3,
   },
 
   // ---- overlay caption (an enamel sign plate, top centre) ---------------------------------------------------------

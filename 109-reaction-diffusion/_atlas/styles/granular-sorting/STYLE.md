@@ -32,6 +32,7 @@ soft (20-30 % overlaps on landing).
 | `coverOf`, `uncoveredCount`, `sortedTap(run, from, hold)` | how many cream beads sit above a red one; the first tap after which every red bead stays uncovered. |
 | `arrivals(run, i, c)`, `pickFocus(run, c0, c1, margin)` | cream beads newly under red bead i after tap c; the red bead that best shows the gap-filling rule over a tap window (rise + 1.5 x arrivals, away from walls, mid-bed). |
 | `smoothTrail(run, i, end, half)` | moving-average rest path for the drawn trail. |
+| `runHash(run)`, `nthRoot(a, n)` | bit-exact hash of every stored position (Node vs browser gate); exact-arithmetic root for the move-size schedule. |
 | `createPlan(run, schedule)` | playback: `phase(t)`, `positions(t, X, Y)`, `plate(t)`, `focus`, `focusPos(t)`, `trails`, `arrive`/`arriveT` (tap/time each red bead reaches the top), `tapTime(c)`, `uncovered[]`, `sortedShare(t)`, `events()`; `schedule = { taps: [{t, dur}], fast: {t0, t1, slope}, hop, focus: {c0, c1, margin}, end? }`. |
 | `layout(spec)` | metres: inside floor, inside width/height/depth, outer box, `toWorld(x, y)`. |
 | `shakerVoices(spec.sound)` | voices for `kit/schedule.scoreFromEvents`: `tap` (dry rattle: short `paper` crackle + low `thud` + seeded `click`s, brighter with the share of red beads on top, quieter/shorter in the fast forward), `stop` (soft marimba). |
@@ -90,6 +91,13 @@ final report for the last run). Measured, never listened to.
   another mid-fall (rest states never overlap).
 - Surface red beads wander sideways between taps (nothing holds them); the trails stop at each bead's arrival tap so the
   wander does not scribble; a frozen trail end can sit a little away from its bead before it fades.
-- The simulation is re-run at every page load and in Node (render-sfx/export-spec): about 0.6 s each.
+- The simulation is re-run at every page load and in Node (render-sfx/export-spec): about 0.6 s each. Node (sound) and
+  Chrome (picture) must produce the same run to the bit: with `Math.pow` in the move-size schedule they did not
+  (hashes 3aca5bec vs 237f3969 — a last-bit difference flips Monte Carlo accept/reject). The schedule now uses
+  `nthRoot` (Newton, + - x / only) and repeated multiplication; both give `404ce3de`. `runHash(run)` (FNV-1a over the
+  float32 bits) is checked against `RUN_HASH` in scene.config.js and throws in either environment on a mismatch (the
+  browser throw fails `hyperframes check` as a page_error; `GS_RECORD=1` skips the Node throw to re-record). Change
+  `spec.sim` -> re-record the constant. No other transcendental call feeds the simulation (sin/cos only shape the
+  drawn hop and plate per frame; `Math.sqrt` is exactly rounded).
 - Kit candidates: none promoted. A generic "instanced bead field from a stored run" helper and per-instance highlight
   tinting (target / base colour) could serve other particle styles.

@@ -33,8 +33,14 @@ this machine (plain JS doubles/Float32Arrays, seeded RNG); not checked on anothe
   is still changing; it thins out as the maze locks.
 - scene.config.js imports the planner too: the same run drives the picture (DataArrayTexture), SCORE, the colony
   "meet point" the beat-4 camera aims at, and the NOTES.
-- Load time: the 15 s demo's run (8200 steps on 160²) takes ≈ 1.8 s in Node on the M1 Pro; not separately timed in
-  Chrome (all check/render timeouts passed).
+- Load time (budget ~3 s): the 15 s demo's run (8200 steps on 160²) takes ≈ 1.8 s in Node on the M1 Pro; in headless
+  Chrome (chrome-headless-shell, hardware GPU flags) a fresh import of the whole scene.config.js — simulation + meet
+  point + framing gate + SCORE — took 1.81–1.91 s over 6 timed imports (2026-11-23).
+- `runHash(plan)` → 8-hex FNV-1a over the stored states, colony labels, coverage/activity (Float32 bytes) and step
+  count. Node (which makes the sound) and Chrome (which draws the picture) gave the same hash, `1e7b15cb`, before and
+  after the change below; scene.config.js records it as `RUN_HASH` and throws in either environment on a mismatch
+  (`RD_RECORD=1` to re-record after an intended change). Only exactly-rounded maths (+ − × / and Math.sqrt, Math.imul)
+  feeds the run: the one Math.hypot (seed disc distance) was replaced by Math.sqrt of a sum of squares (hash unchanged).
 
 ## Good for / avoid for
 
@@ -84,4 +90,4 @@ this machine (plain JS doubles/Float32Arrays, seeded RNG); not checked on anothe
 - The far inner glass wall reads as a pale band between the gel edge and the rim in the wide (physically right, but it
   can look like a gap). The pattern relief is faded to zero over the outer 0.1 m so the gel edge stays clean.
 - The caption chip (top-left) overlaps the dish rim in the wide shot; the bottle sits top-right.
-- Sound was measured, not listened to.
+- Sound was measured, not listened to. The hash check covers this machine's Node and Chrome only.

@@ -113,11 +113,13 @@ export function createPlumePlan(cfg) {
     return u <= 0 ? -99 : lerp(SM.from, SM.to, u);
   };
   const D = (y, t) => puffDisplacement(y, t, PF, PL.v);
+  /** the pinhole lamp switches on at the start: the disc glows up from a dim level (something happens in the first second) */
+  const lamp = (t) => { const L = cfg.lamp ?? { on: [0, 0.01], from: 1 }; return lerp(L.from, 1, ease.outCubic(clamp((t - L.on[0]) / (L.on[1] - L.on[0])))); };
 
   function uniformsAt(t) {
     const f = flicker(t, PL.flickerAmt ?? 1);
     return {
-      bladeX: bladeX(t), cut: cut(t), field: field(t), gain: gain(t), rollY: rollY(t),
+      lamp: lamp(t), bladeX: bladeX(t), cut: cut(t), field: field(t), gain: gain(t), rollY: rollY(t),
       strawX: strawX(t), strawOn: t >= ST.in[0] && t <= ST.out[1] + 0.05,
       jet: jet(t), jetFront: jetFront(t), seam: seamX(t), flicker: f,
       sway: PL.sway * (Math.sin(0.9 * t + 0.4) + 0.5 * Math.sin(2.3 * t + 1.1)),
@@ -127,6 +129,7 @@ export function createPlumePlan(cfg) {
   /** the score plan: one event list; scene.config.js turns it into SCORE with kit/schedule.scoreFromEvents */
   function events({ end }) {
     const ev = [];
+    if (cfg.lamp) ev.push({ t: cfg.lamp.on[0], type: "lamp", dur: cfg.lamp.on[1] - cfg.lamp.on[0] });
     ev.push({ t: BL.slide[0], type: "slide", dur: BL.slide[1] - BL.slide[0] });
     // the knife reaches the spot: field starts to dim -> a soft tick when the edge crosses the spot centre
     let tc = BL.slide[0];
@@ -148,7 +151,7 @@ export function createPlumePlan(cfg) {
     return ev.sort((p, q) => p.t - q.t);
   }
 
-  return { bladeX, cut, field, gain, rollY, strawX, jet, jetFront, seamX, D, uniformsAt, events, cfg };
+  return { lamp, bladeX, cut, field, gain, rollY, strawX, jet, jetFront, seamX, D, uniformsAt, events, cfg };
 }
 
 /**
@@ -167,7 +170,7 @@ float vnoise(vec3 p) {
   float n001 = hash31(i + vec3(0,0,1)), n101 = hash31(i + vec3(1,0,1)), n011 = hash31(i + vec3(0,1,1)), n111 = hash31(i + vec3(1,1,1));
   return mix(mix(mix(n000, n100, u.x), mix(n010, n110, u.x), u.y), mix(mix(n001, n101, u.x), mix(n011, n111, u.x), u.y), u.z);
 }
-float fbm3n(vec3 p) { float s = 0.0, a = 0.5; for (int i = 0; i < 3; i++) { s += a * vnoise(p); p = p * 2.03 + vec3(1.7, 9.2, 3.1); a *= 0.5; } return s / 0.875; }
+float fbm3n(vec3 p) { float s = 0.0, a = 0.5; for (int i = 0; i < 4; i++) { s += a * vnoise(p); p = p * 2.03 + vec3(1.7, 9.2, 3.1); a *= 0.5; } return s / 0.9375; }
 float erfA(float x) {
   float s = sign(x), a = abs(x), k = 1.0 / (1.0 + 0.3275911 * a);
   float y = 1.0 - (((((1.061405429 * k - 1.453152027) * k) + 1.421413741) * k - 0.284496736) * k + 0.254829592) * k * exp(-a * a);
@@ -198,7 +201,7 @@ float plumeN(vec2 p, float t, vec2 warp, float roll, float D) {
 }
 float jetN(vec2 p, float t, float turb) {
   float xr = p.x - uJet.w;                       // distance downstream of the straw tip
-  float along = smoothstep(-0.01, 0.03, xr) * (1.0 - smoothstep(uJet.y - 0.12, uJet.y + 0.04, xr));
+  float along = smoothstep(-0.01, 0.03, xr) * (1.0 - smoothstep(uJet.y - 0.3, uJet.y + 0.05, xr)) * exp(-max(xr, 0.0) / 0.8);
   float w = uJetW.x + uJetW.y * max(xr, 0.0);
   float dy = p.y - uJet.z + 0.05 * (turb - 0.5) * (0.3 + xr);
   return uJet.x * uJetW.z * along * exp(-(dy * dy) / (w * w)) * (0.55 + 0.9 * turb);
@@ -209,8 +212,8 @@ float schlierenS(vec2 p, float t) {
   float y = max(p.y, 0.0);
   float D = puffD(y, t);
   float Dd = (puffD(y + 0.05, t) - puffD(max(y - 0.05, 0.0), t)) / 0.1;           // vertical shear of the push -> eddies
-  float roll = smoothstep(uPl1.w, uPl1.w + uPl1.z, y) + clamp(abs(Dd) * 1.6, 0.0, 1.0);
-  roll = clamp(roll, 0.0, 1.25);
+  float roll = smoothstep(uPl1.w, uPl1.w + uPl1.z, y) + clamp(abs(Dd) * 1.6, 0.0, 1.6);
+  roll = clamp(roll, 0.0, 1.9);
   vec3 q = vec3((p.x - D) * rs, (y - v * t) * rs, t * uPl2.z);
   vec2 warp = vec2(fbm3n(q) - 0.5, fbm3n(q + vec3(5.2, 1.3, 2.7)) - 0.5) * 2.0;
   float hh = uPl2.y;

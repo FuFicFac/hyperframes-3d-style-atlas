@@ -18,10 +18,10 @@ export const STYLE_SPEC = {
     tableEdge: "#e9e1d6",
     ribbon: "#ff6f61",
     ribbonB: "#ff8f7e",
-    ribbonEdge: "#ffd9cf",
+    ribbonEdge: "#ffa394",
     glass: "#e8f6f2",
     ink: "#2b2230",
-    sweepLight: "#fff3d6",
+    sweepLight: "#ffc93c",
   },
   world: {
     background: "#cfeee3",
@@ -56,29 +56,30 @@ export const STYLE_SPEC = {
   // ---- set ----------------------------------------------------------------------------------------------------
   table: { r: 1.75, thick: 0.05, segments: 128 },
   sweepWall: { width: 30, depth: 16, height: 9, radius: 3, z: -3.6 },
-  hoop: { r: 1.0, wall: 0.034, h: 0.09, segments: 192, lip: "#d9f3ec", lipOpacity: 0.55, shade: 0.16 },
+  hoop: { r: 1.0, wall: 0.034, h: 0.09, segments: 192, lip: "#8ed3c1", lipOpacity: 0.8, shade: 0.2 },
   glass: { color: "#bfe6dc", alphaFace: 0.16, alphaRim: 0.85, fresnelPower: 2.0, rimStrength: 0.55, envIntensity: 1.4 },
 
   // ---- ribbon (extrusion of the simulated curve) ---------------------------------------------------------------
   ribbon: {
     h: 0.13,           // standing height (m)
-    thick: 0.006,      // paper thickness (m); faces sit at ±thick/2 from the curve
+    thick: 0.009,      // paper thickness (m, toy-scale thick so the maze reads from above); faces at ±thick/2
     roughness: 0.72,
     glow: 0.1,         // paper translucency fake: emissive share of the face colour (keeps deep folds pink, not grey)
     gradient: 0.35,    // colour drift along the ribbon's length (ribbon → ribbonB), so it reads as one long strip
-    sweepWidth: 0.035, // width of the light band that can run along the ribbon (in material coordinate, 0..1)
-    sweepGain: 0.9,
+    sweepWidth: 0.03,  // half-width of the yellow band that can run along the ribbon (material coordinate, 0..1)
+    sweepGain: 1.0,
+    sweepGlow: 0.35,   // extra self-light on the band
   },
 
   // ---- the simulation (growth.js) -----------------------------------------------------------------------------
   growth: {
-    R: 1.0 - 0.0075,   // wall for the curve = hoop inner radius minus half the paper thickness and a hair
+    R: 1.0 - 0.0075,   // wall for the curve (R − wallGap = 0.988) = hoop inner radius minus half the paper and a hair
     wallGap: 0.0045,
     seed: 110,
     M: 4096,           // stored points per frame (fixed material coordinates)
     substeps: 8,
     // natural length (m) of the ribbon on the video clock; d = repulsion radius (spacing between neighbouring walls)
-    lengthKeys: [[0, 2.639], [2.5, 3.1416], [5.4, 6.2832], [6.5, 8.6], [8.5, 14], [12, 37], [13.6, 50], [15, 53]],
+    lengthKeys: [[0, 2.639], [2.5, 3.1416], [5.4, 6.2832], [6.5, 8.6], [8.5, 14], [12, 37], [13.6, 52], [15, 57]],
     scaleKeys: [[0, 0.2], [7.5, 0.2], [8.6, 0.17], [11.5, 0.08], [15, 0.07]],
     bendKeys: [[0, 1], [15, 1]],
     sim: { grip: 0, jitter: 0.04, noise: 0.006, modes: [[7, 0.012]] },

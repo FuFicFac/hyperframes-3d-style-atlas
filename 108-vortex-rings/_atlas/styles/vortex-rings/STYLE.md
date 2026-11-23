@@ -31,6 +31,7 @@ in the plan. The ART-DIRECTED part covers the rest:
 |---|---|
 | `ellipKE(k)`, `ringPsi`, `ringVel`, `selfSpeed` | the filament maths (AGM elliptic integrals; velocity = central differences of psi; checked against the on-axis closed form to 1e-6). |
 | `createPlan({ rings: [{ launch, x0, R0, a0, G }], nu, dt, end })` | integrates once; `{ state(i, t) -> { alive, age, x, R, a, U, Ur, spin }, pass: [{ t, front, rear, Rrear, Rfront }], impulse: { start, end, drift }, table, speedRange(i) }`. It throws if a ring blows up. `state` interpolates linearly between stored steps. |
+| `detLog(x)`, `tableHash(plan)` | `detLog` is a natural log from + − × / only. `Math.log` gave different bits in Node and in Chrome, so the stored table hashed b3c4f6b9 in Node and af680bc0 in the page; with `detLog` both give 4a77f4d9. Its error against `Math.log` is at most 2.6e-16 relative over e^±10. `tableHash` is FNV-1a over every stored step; the demo records `RUN_HASH` in `scene.config.js` and throws on a mismatch in either environment. |
 | `soundEvents(plan, { taps, step })` | `tap` per drum hit, `air` every 0.4 s per travelling ring (with relative speed), and `pass` 0.35 s before each threading. |
 
 Demo numbers: soft tap R0 1.1, a0 0.2, G 2.4 (0.58 m/s); hard tap R0 0.715, a0 0.13, G 3.3 (about 1.3 m/s). The
@@ -90,6 +91,8 @@ Measured on the demo, never listened to.
 - The harder ring's smaller radius is an art-directed initial condition: the same hole does not really make a
   smaller ring.
 - `state(i, t)` interpolates linearly between 1/480 s steps.
+- The planner may use only + − × /, `Math.sqrt` and `detLog`. Any other `Math` transcendental can break the Node/page
+  agreement; the `RUN_HASH` check catches that, and the hash must be re-recorded after any spec or planner change.
 - The smoke is additive. It glows rather than occludes, so where the two rings overlap it brightens instead of
   hiding the far ring. Sprites seen edge-on (a ring at the frame edge on a wide lens) pile up toward white.
   The demo uses a 24 deg lens for the wide shot for this reason.

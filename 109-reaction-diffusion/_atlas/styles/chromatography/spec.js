@@ -13,12 +13,12 @@ export const STYLE_SPEC = {
   id: "chromatography",
   name: "Chromatography",
   description:
-    "Paper chromatography on a bright daylight lab bench: a white filter-paper strip hangs from a binder clip into a short glass jar with a little clear solvent, beside a steel rule, in front of a white tiled wall; a felt pen dots black ink near the bottom, the damp solvent front climbs the paper (square-root-of-time wicking on a speeding time-lapse clock) and the black dot stretches and splits into blue, magenta and yellow bands, each travelling at its own fixed fraction of the front and widening as it goes; the strip is lifted out and hung on a rack beside two finished strips with different band sets. The strip is one shader: code-baked fibre texture, darker damp region with a tide line, and Gaussian dye bands that subtract light per RGB channel (overlaps go dark, separated dyes show their colour). Clean whites, cool steel and glass, three saturated dye colours.",
+    "Paper chromatography on a bright daylight lab bench: a white filter-paper strip hangs from a binder clip into a short glass jar with a little clear solvent, beside a steel rule, in front of a pale blue-grey tiled wall; a felt pen dots black ink near the bottom, the damp solvent front climbs the paper (square-root-of-time wicking on a speeding time-lapse clock) and the black dot stretches and splits into blue, magenta and yellow bands, each travelling at its own fixed fraction of the front and widening as it goes; the strip is lifted out and hung on a rack beside two finished strips with different band sets. The strip is one shader: code-baked fibre texture, darker damp region with a tide line, and Gaussian dye bands that subtract light per RGB channel (overlaps go dark, separated dyes show their colour). Clean white paper on blue-grey tiles, cool steel and glass, saturated dye colours.",
   palette: {
     bg: "#e9ecee",
-    wall: "#e6eaec",
-    grout: "#b4bdc3",
-    bench: "#b9c2c8",
+    wall: "#cdd6dc",
+    grout: "#97a4ad",
+    bench: "#9ba7b0",
     benchEdge: "#9aa3aa",
     paper: "#f7f6f1",
     steel: "#c4cad0",
@@ -44,9 +44,9 @@ export const STYLE_SPEC = {
     shadowType: "auto",
   },
   materials: {
-    bench: { type: "standard", baseColor: "#b9c2c8", roughness: 0.5, metalness: 0 },
+    bench: { type: "standard", baseColor: "#9ba7b0", roughness: 0.5, metalness: 0 },
     benchEdge: { type: "standard", baseColor: "#9aa3aa", roughness: 0.5, metalness: 0 },
-    wall: { type: "standard", baseColor: "#ffffff", roughness: 0.35, metalness: 0, map: { source: "grid", size: 512, cells: 4, line: 5, bg: "#e6eaec", fg: "#b4bdc3", description: "white square wall tiles with grey grout, 4 tiles per texture tile" } },
+    wall: { type: "standard", baseColor: "#ffffff", roughness: 0.35, metalness: 0, map: { source: "grid", size: 512, cells: 4, line: 5, bg: "#cdd6dc", fg: "#97a4ad", description: "pale blue-grey square wall tiles with grey grout, 4 tiles per texture tile" } },
     steel: { type: "standard", baseColor: "#c4cad0", roughness: 0.32, metalness: 0.9 },
     darkSteel: { type: "standard", baseColor: "#4b5157", roughness: 0.45, metalness: 0.6 },
     clip: { type: "physical", baseColor: "#24272b", roughness: 0.32, metalness: 0.2, clearcoat: 0.6, clearcoatRoughness: 0.2 },
@@ -94,6 +94,8 @@ export const STYLE_SPEC = {
     soaked: "#c9d3da",   // below the solvent surface
     tide: 0.2,          // darkening of the thin tide line at the front
     wetRough: 0.55,      // damp paper is a little glossier
+    edge: 0.3,           // darkening right at the cut edges (definition against the wall)
+    edgeW: 0.004,        // m
   },
   // the black ink: three dyes with fixed retention factors (Rf) — absorbance per RGB channel in `dyes`
   ink: [
@@ -105,12 +107,17 @@ export const STYLE_SPEC = {
     blue: [3.05, 1.05, 0.1],
     magenta: [0.4, 2.3, 0.75],
     yellow: [0.15, 0.25, 2.75],
+    green: [2.5, 0.35, 2.1],     // background inks only (rack strips)
+    orange: [0.08, 1.35, 2.8],
+    violet: [1.5, 2.6, 0.35],
+    teal: [2.7, 0.55, 0.9],
+    red: [0.1, 2.6, 2.2],
   },
-  spread: { s0: 0.024, au: 0.11, av: 0.014, bloom: 0.008, bloomAt: 0.04, crispDry: 2.4, crispWet: 1.6, tail: 0.1, gain: 3.5, suMax: 0.125 },
+  spread: { s0: 0.024, au: 0.11, av: 0.014, bloom: 0.008, bloomAt: 0.04, crispDry: 2.4, crispWet: 1.6, tail: 0.1, gain: 4.2, suMax: 0.125 },
   // the two strips that were run earlier (rack, left to right): different inks, different band sets
   finished: [
-    { name: "green ink", frontV: 0.98, ink: [{ dye: "blue", rf: 0.34, mass: 0.95 }, { dye: "yellow", rf: 0.78, mass: 1.15 }] },
-    { name: "violet ink", frontV: 1.0, ink: [{ dye: "blue", rf: 0.2, mass: 0.7 }, { dye: "magenta", rf: 0.5, mass: 1.05 }, { dye: "yellow", rf: 0.9, mass: 0.35 }] },
+    { name: "brown ink", frontV: 0.97, ink: [{ dye: "violet", rf: 0.16, mass: 0.95 }, { dye: "green", rf: 0.42, mass: 0.9 }, { dye: "orange", rf: 0.7, mass: 1.05 }] },
+    { name: "purple ink", frontV: 1.0, ink: [{ dye: "teal", rf: 0.24, mass: 1.0 }, { dye: "red", rf: 0.92, mass: 0.95 }] },
   ],
 
   // ---- overlay caption chip (top left) ------------------------------------------------------------------------

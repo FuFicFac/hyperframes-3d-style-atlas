@@ -20,11 +20,12 @@ uniform vec3 uColA;
 uniform vec3 uColB;
 uniform vec3 uEdge;
 uniform vec3 uSweepCol;
-uniform vec4 uRib;      // gradient, glow, -, -
+uniform vec4 uRib;      // gradient, glow, sweep glow, -
 uniform vec4 uSweep;    // centre m, width, gain, -
 varying float vM;
 varying float vPart;
 vec3 gRib;
+float gS;
 `;
 
 /**
@@ -79,7 +80,7 @@ export function createStyle(stage, opts = {}) {
       uColB: { value: new THREE.Color(P.ribbonB) },
       uEdge: { value: new THREE.Color(P.ribbonEdge) },
       uSweepCol: { value: new THREE.Color(P.sweepLight) },
-      uRib: { value: new THREE.Vector4(Rb.gradient, Rb.glow, 0, 0) },
+      uRib: { value: new THREE.Vector4(Rb.gradient, Rb.glow, Rb.sweepGlow, 0) },
       uSweep: { value: new THREE.Vector4(-1, Rb.sweepWidth, 0, 0) },
     };
     mat.onBeforeCompile = (sh) => {
@@ -93,11 +94,12 @@ export function createStyle(stage, opts = {}) {
           float gG = 0.5 - 0.5 * cos(6.2831853 * vM);
           gRib = mix(uColA, uColB, gG * uRib.x);
           gRib = mix(gRib, uEdge, vPart);
+          float gD = (vM - uSweep.x) / max(uSweep.y, 1e-4);
+          gS = exp(-gD * gD) * uSweep.z;
+          gRib = mix(gRib, uSweepCol, clamp(gS, 0.0, 1.0));
           diffuseColor.rgb = gRib;`)
         .replace("#include <emissivemap_fragment>", `#include <emissivemap_fragment>
-          float gD = (vM - uSweep.x) / max(uSweep.y, 1e-4);
-          float gS = exp(-gD * gD) * uSweep.z;
-          totalEmissiveRadiance += gRib * uRib.y + uSweepCol * gS;`);
+          totalEmissiveRadiance += gRib * uRib.y + uSweepCol * gS * uRib.z;`);
     };
     mat.customProgramCacheKey = () => "differential-growth-ribbon-1";
     mat.userData.rib = { uniforms: U, sweep(m, gain) { U.uSweep.value.x = m; U.uSweep.value.z = gain; } };

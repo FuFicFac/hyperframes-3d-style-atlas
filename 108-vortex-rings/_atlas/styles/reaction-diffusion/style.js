@@ -14,7 +14,7 @@ import { FONTS } from "../../kit/text.js";
 import { screenCanvas } from "../../kit/overlay.js";
 import { fresnelGlass, GLSL_SAFE } from "../../kit/materials.js";
 import { uploadTexture } from "../../kit/textures.js";
-import { clamp, smoothstep, ease } from "../../kit/time.js";
+import { clamp, ease } from "../../kit/time.js";
 import * as grayscott from "./grayscott.js";
 import { STYLE_SPEC } from "./spec.js";
 export { STYLE_SPEC };
@@ -371,17 +371,17 @@ export function createStyle(stage, opts = {}) {
   /** pipette({ position, rotationY }) -> a glass dropper pipette lying on the bench: thin tube, teal tip, rust bulb */
   function pipette(o = {}) {
     const g = new THREE.Group(); g.name = "pipette";
-    const L = 0.9, r = 0.032;
-    const gl = fresnelGlass({ color: DS.glass.color, alphaFace: 0.12, alphaRim: 0.7, rimStrength: 0.4, toLight: lightSpec("key").position });
+    const L = 0.9, r = 0.036;
+    const gl = fresnelGlass({ color: DS.glass.color, alphaFace: 0.3, alphaRim: 0.85, rimStrength: 0.5, toLight: lightSpec("key").position });
     gl.name = "pipetteGlass";
     const tube = new THREE.Mesh(new THREE.CylinderGeometry(r, r, L, 24, 1, true), gl);
     tube.rotation.z = Math.PI / 2; tube.position.set(0, r, 0); tube.renderOrder = 3; g.add(tube);
     const tip = new THREE.Mesh(new THREE.CylinderGeometry(r * 0.75, r * 0.3, 0.16, 24), materials.drop);
     tip.rotation.z = Math.PI / 2; tip.position.set(L / 2 + 0.08, r, 0); tip.castShadow = true; g.add(tip);
-    const fill = new THREE.Mesh(new THREE.CylinderGeometry(r * 0.7, r * 0.7, L * 0.3, 20), materials.drop);
-    fill.rotation.z = Math.PI / 2; fill.position.set(L * 0.32, r, 0); g.add(fill);
+    const fill = new THREE.Mesh(new THREE.CylinderGeometry(r * 0.72, r * 0.72, L * 0.62, 20), materials.drop);
+    fill.rotation.z = Math.PI / 2; fill.position.set(L * 0.18, r, 0); fill.castShadow = true; g.add(fill);
     const bulb = new THREE.Mesh(new THREE.CapsuleGeometry(0.065, 0.16, 6, 24), materials.bulb);
-    bulb.rotation.z = Math.PI / 2; bulb.position.set(-L / 2 - 0.12, 0.065, 0); bulb.castShadow = true; g.add(bulb);
+    bulb.rotation.z = Math.PI / 2; bulb.position.set(-L / 2 - 0.1, 0.065, 0); bulb.castShadow = true; g.add(bulb);
     if (o.position) g.position.set(...o.position);
     g.rotation.y = o.rotationY ?? 0;
     return g;
@@ -423,9 +423,9 @@ export function createStyle(stage, opts = {}) {
     const gm = gel(plan); group.add(gm);
     const seeds = plan.seeds.map((s) => { const [x, z] = dishToWorld(plan, s.x, s.y); return { x, z, t: s.t }; });
     const dr = drops(seeds); group.add(dr);
-    const bp = o.bottle ?? [1.4, 0.42];
+    const bp = o.bottle ?? [1.32, -0.25];
     group.add(bottle({ position: [bp[0], 0, bp[1]] }));
-    const pp = o.pipette ?? [-1.38, 0.15, 0.75];
+    const pp = o.pipette ?? [-1.3, -0.45, 1.237];
     group.add(pipette({ position: [pp[0], 0, pp[1]], rotationY: pp[2] }));
     stage.scene.add(group);
     if (stage.renderer) uploadTexture(stage, ...gm.userData.textures);

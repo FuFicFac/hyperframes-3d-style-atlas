@@ -5,7 +5,7 @@
 // much of the dish is patterned and still changing.
 // Dish coords (0..1 of the sim grid) map to world X (x) and +Z toward the viewer (y); the dish is centred on the origin.
 import { STYLE_SPEC as S } from "./_atlas/styles/reaction-diffusion/spec.js";
-import { createPlan, texturePlan } from "./_atlas/styles/reaction-diffusion/grayscott.js";
+import { createPlan, texturePlan, runHash } from "./_atlas/styles/reaction-diffusion/grayscott.js";
 import { scoreFromEvents } from "./_atlas/kit/schedule.js";
 import { framingReport, fitShot, pxRect } from "./_atlas/kit/framing.js";
 
@@ -53,6 +53,16 @@ export const PLAN = createPlan({
   seeds: SEEDS,
 });
 
+// Node (render-sfx: the sound) and the page (the picture) each run the simulation; they must agree bit for bit.
+// RUN_HASH was recorded from this code (Node and headless Chrome both gave it, 2026-11-23); any other value (a JS
+// engine's maths, a changed spec/seed/clock) fails here in BOTH environments instead of shipping picture != sound.
+export const RUN_HASH = "1e7b15cb";
+export const RUN_HASH_NOW = runHash(PLAN);
+if (typeof globalThis.window !== "undefined") globalThis.window.__rdRunHash = RUN_HASH_NOW;
+if (RUN_HASH_NOW !== RUN_HASH && !globalThis.process?.env?.RD_RECORD) {
+  throw new Error(`109-reaction-diffusion: simulation hash ${RUN_HASH_NOW} != recorded ${RUN_HASH} (${typeof globalThis.window !== "undefined" ? "browser" : "node"})`);
+}
+
 /** dish coords -> world [x, z] (same mapping as style.dishToWorld) */
 const R = S.dish.radius;
 export const dishToWorld = (x, y) => { const c = (PLAN.n - 1) / 2; return [((x * (PLAN.n - 1) - c) / PLAN.radius) * R, ((y * (PLAN.n - 1) - c) / PLAN.radius) * R]; };
@@ -70,7 +80,7 @@ export const MEET = (() => {
       if (PLAN.labels[q]) seen.add(PLAN.labels[q]);
       if (PLAN.states[last + q] > 0.4 * 255) ink++;
     }
-    const d = Math.hypot(i - (N - 1) / 2, j - (N - 1) / 2) / PLAN.radius; // prefer the middle of the dish
+    const di = i - (N - 1) / 2, dj = j - (N - 1) / 2, d = Math.sqrt(di * di + dj * dj) / PLAN.radius; // prefer the middle (exactly rounded)
     const score = seen.size * 100 + ink * 0.1 - d * 40;
     if (score > best.score) best = { score, i, j, colonies: seen.size };
   }
@@ -143,6 +153,7 @@ export const DUCK = [];
 export const NOTES = {
   mechanism: "grayscott.js: Gray–Scott (Du 1, Dv .5, 9-point Laplacian, explicit Euler dt 1) on a 160-cell grid clipped to a 76-cell-radius dish with a no-flux rim; run once at load; activator stored every 0.25 s of video; the gel shader blends the two stored states around t.",
   steps: PLAN.steps,
+  runHash: RUN_HASH_NOW,
   clock: "video time -> steps is piecewise linear (40 steps by 2.5 s, 8200 by 15 s)",
   schedule: `F/k ${SIM.spots.F}/${SIM.spots.k} (spots split) eased to ${SIM.stripes.F}/${SIM.stripes.k} (stripes) over ${B.compete.t}-${B.compete.t + 3} s`,
   meet: MEET,

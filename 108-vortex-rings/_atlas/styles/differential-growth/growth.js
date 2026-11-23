@@ -6,13 +6,17 @@
 //   - neighbour springs pull each edge toward its rest length (rest = L(t) × its share of the material),
 //   - a discrete bending term (biharmonic smoothing) keeps the curve fair at the current length scale,
 //   - short-range repulsion keeps every pair of non-neighbouring nodes at least ~d(t) apart (spatial hash),
-//   - the wall projects nodes back inside radius R − gap,
-//   - an edge whose rest length exceeds split × d(t) is split at its midpoint (growth adds points).
+//   - the wall projects nodes back inside radius R − gap; touching nodes keep only `grip` of their sliding and get a
+//     tiny seeded inward nudge (an imperfection, so a ring pressed on a perfect circle can start to buckle anywhere),
+//   - hard constraints after each step: minimum edge length, minimum 2nd/3rd-neighbour chord, minimum distance for
+//     close pairs (these make the no-crossing guarantee hold),
+//   - an edge whose rest length exceeds split × d(t) is split at its midpoint (growth adds points),
+//   - until the ring first touches the wall it grows as a uniform scale (the stress-free solution for a free ring).
 // d(t), the repulsion radius, is a SCHEDULE (art-directed): large while the first waves form, shrinking later, so the
 // long walls of the first waves buckle again at a smaller scale ("folds upon folds").
 // Every node carries a material coordinate m ∈ [0,1) (a node inserted between two others takes the mid value). Each
-// video frame the curve is resampled at M fixed material coordinates and stored, so any t can be read back (and
-// blended between neighbouring frames) without stepping in renderAt. The stored curves are tested for self-crossing
+// video frame the curve is resampled (Catmull–Rom through the nodes) at M fixed material coordinates and stored, so
+// any t can be read back (and blended between neighbouring frames) without stepping in renderAt. The stored curves are tested for self-crossing
 // and the planner THROWS if any frame (or any half-way blend between frames) crosses itself.
 import { rng, clamp, hash01 } from "../../kit/time.js";
 
@@ -69,7 +73,7 @@ export function crossings(P, count, R) {
   let maxLen = 0;
   for (let i = 0; i < count; i++) {
     const j = (i + 1) % count;
-    maxLen = Math.max(maxLen, Math.sqrt((P[2 * j] - P[2 * i]) ** 2 + (P[2 * j + 1] - P[2 * i + 1]) ** 2));
+    maxLen = Math.max(maxLen, Math.sqrt((P[2 * j] - P[2 * i]) * (P[2 * j] - P[2 * i]) + (P[2 * j + 1] - P[2 * i + 1]) * (P[2 * j + 1] - P[2 * i + 1])));
   }
   const cell = Math.max(2 * maxLen, 1e-4), G = Math.max(1, Math.ceil((2 * R + 4 * cell) / cell));
   const head = new Int32Array(G * G).fill(-1), next = [], segOf = [];
@@ -311,8 +315,11 @@ export function createGrowthPlan(o) {
     for (let k = 0; k < M; k++) {
       const mk = k / M;
       while (i < N - 1 && Mm[i + 1] <= mk) i++;
-      const j = i === N - 1 ? 0 : i + 1, dm = dmOf(i), u = dm > 0 ? (mk - Mm[i]) / dm : 0;
-      const x = X[i] + (X[j] - X[i]) * u, y = Y[i] + (Y[j] - Y[i]) * u;
+      // uniform Catmull–Rom through nodes h, i, j, k (smooth walls instead of straight node-to-node facets)
+      const j = i === N - 1 ? 0 : i + 1, h = i === 0 ? N - 1 : i - 1, k2 = j === N - 1 ? 0 : j + 1;
+      const dm = dmOf(i), u = dm > 0 ? (mk - Mm[i]) / dm : 0, u2 = u * u, u3 = u2 * u;
+      const ch = -0.5 * u3 + u2 - 0.5 * u, ci = 1.5 * u3 - 2.5 * u2 + 1, cj = -1.5 * u3 + 2 * u2 + 0.5 * u, ck = 0.5 * u3 - 0.5 * u2;
+      const x = ch * X[h] + ci * X[i] + cj * X[j] + ck * X[k2], y = ch * Y[h] + ci * Y[i] + cj * Y[j] + ck * Y[k2];
       frames[base + 2 * k] = x; frames[base + 2 * k + 1] = y;
       rm = Math.max(rm, Math.sqrt(x * x + y * y));
     }
@@ -368,9 +375,13 @@ export function createGrowthPlan(o) {
     foldCount[f] = runs;
   }
 
+  // FNV-1a over the stored frames' bits: Node (SCORE) and the browser (picture) must agree exactly
+  let hash = 0x811c9dc5;
+  { const u = new Uint32Array(frames.buffer, frames.byteOffset, frames.length); for (let i = 0; i < u.length; i++) hash = Math.imul(hash ^ u[i], 16777619) >>> 0; }
+
   const fi = (t) => clamp(t * fps, 0, F - 1);
   const plan = {
-    M, F, fps, duration, R, frames, nodes, foldCount, gaps, maxR,
+    M, F, fps, duration, R, frames, nodes, foldCount, gaps, maxR, hash,
     lengthAt: Lof, scaleAt: dOf,
     /** radiusAt(t): largest |p| of the stored curve (blended) */
     radiusAt(t) { const x = fi(t), a = Math.floor(x), b = Math.min(F - 1, a + 1), u = x - a; return maxR[a] * (1 - u) + maxR[b] * u; },

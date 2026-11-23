@@ -24,16 +24,18 @@ a textbook approximation; it was not checked against a real magnet or real tiles
 - Passes: `[{ id, pol, from, to, keys: [{ t, x, z, h, hold? }] }]`. `pol` +1 = red end down (pushes to dark),
   -1 = turned over, silver end down (pushes to pale). Outside its window a pass is off (magnet hidden, no field).
 - Hysteresis is what makes the memory: nothing pulls a tile back when the magnet leaves; only a later opposite push
-  stronger than its threshold can. A higher pass is weaker (peak ~ 1/h^2): in the demo pass 1 peaks at 38 pull units,
-  pass 2 at 3.2 against a median threshold of 2.2, so pass 2 flips back only the low-threshold tiles (127 of the 762
-  dark tiles; the rest stay).
-- Track width scales like (h1 / threshold)^(1/3) and the second pass's lane like its height, so with point poles the
-  rewrite lane is ~0.7 x the track width. The demo runs pass 2 at a shallow angle along the track's left arm so the
-  partial rewrite covers a long stretch instead of a small crossing.
+  stronger than its threshold can. Pass 2 is the opposite pole down (the wand rolled over), so tiles it reaches flip
+  back to pale. It runs higher, and a higher pass is weaker (peak ~ 1/h^2) and narrower: in the demo pass 1 (16 cm)
+  peaks at 38 pull units, pass 2 (46 cm) at 4.8 against a median threshold of 2.2, so pass 2 cuts a pale lane about
+  7 tiles wide straight across the board, flipping only tiles whose threshold its pull beats (198 flips; a few
+  high-threshold tiles inside the lane stay dark). Where the lane crosses the dark arch it cuts it in two places; the
+  rest of the track survives untouched.
+- Track width scales like (h1 / threshold)^(1/3) and the pass-2 lane like its height, so with point poles the lane
+  is narrower than the track. Pass 2 also cleans the random speckle along its lane (correct for the model).
 
 | call | what |
 |---|---|
-| `planMemory({ cols, rows, pitch, seed, darkShare, coerc, settle, magnet: { q, L }, passes, dt, swing, tilt })` | the plan (~150 ms for 1680 tiles and 6.4 s of passes) |
+| `planMemory({ cols, rows, pitch, seed, darkShare, coerc, settle, magnet: { q, L }, passes, dt, swing, tilt })` | the plan (~150 ms for 1680 tiles and ~7.5 s of passes) |
 | `plan.angle(i, t, m?)`, `plan.stateAt(i, t)`, `plan.magnetAt(t)`, `plan.push(i, t)` | state at t |
 | `plan.flipsOf(i)`, `plan.stats`, `plan.events({ binHz })`, `memoryVoices(spec.sound)` | flips, numbers, sound events |
 | `hermite(keys, t, field)`, `pull(d2, h, L)` | building blocks (also used by the demo camera) |
@@ -62,16 +64,17 @@ times come from the plan / BEATS.
 ## Knobs (spec.js)
 - `grid` (cols, rows, pitch), `tile` (size, thickness, bevel, sink, `darkEnv`), `board` (margin, pit depth, wall, lip),
   `magnet` (bar width, length L, handle direction and sizes).
-- `plan`: seed, `darkShare`, thresholds (median, sigma), settle flurry, swing spring, tilt, `h1` / `h2` pass heights.
+- `plan`: seed, `darkShare`, thresholds (median, sigma), settle flurry, swing spring, tilt, `h1` / `h2` pass heights,
+  `z2` (the demo's straight pass-2 line).
 - `dof` (relativeAperture, maxblur), `fly` (demo fly-along: height, side offset, look-ahead, fov), `caption`, `sound`.
 
 ## Known limits (seen while building the demo)
 - Dense high-contrast grid under a moving camera: the demo MP4 is ~12 MB and needed CRF 23.
-- Pass 2's rewrite is clear in the final wide but quieter than pass 1's track: a point-pole magnet cannot make a lane as
-  wide as the track and still flip only "some" tiles; the demo runs pass 2 along the track's left arm to compensate.
+- Pass 2's lane is a straight stripe across the whole board: besides cutting the arch it also wipes the random
+  speckle along its path, so the "cut" reads partly as a pale band rather than only as gaps in the track.
 - At top-down angles a faint brighter patch remains on the lacquer under the camera (the room environment's ceiling
   light), even with `darkEnv` 0.2.
-- The magnet enters and leaves through frame edges; it is ~6 % of frame width in the wides (bar 0.26 x 0.9 m on a
-  5.6 m board). Its shadow mostly falls behind it.
+- The magnet (bar 0.32 x 1.1 m on a 5.6 m board, ~8 % of frame width in the wides) enters and leaves through frame
+  edges; its handle trails behind it and is the last part to leave frame. Its shadow mostly falls behind it.
 - The turned-over magnet in pass 2 (red end up) is shown, not explained.
 - Not watched in motion at full speed; audio levels measured, not listened to.
