@@ -1,0 +1,4455 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "pendulum-wave",
+    "name": "Pendulum Wave",
+    "description": "A classic pendulum-wave demonstration on a bright, cool-white bench: a row of 15 large glossy balls, saturated rainbow by index, hangs on V-strings from a curved wooden beam carried by two A-frames, each pendulum a little shorter than the last. Pendulum k completes (N + k) swings in one cycle, so released together from a wooden plank they drift into a travelling snake wave, split into groups, look like chaos, and then all return to one line at the same instant, where the plank catches them. Everything is a closed form of t (wave.js): angles, string lengths (from the periods), motion-trail ghosts (the same formula at earlier times), a lamp on the bench under each ball that flashes at its centre crossing, and one pitched bar note per crossing, so the sound goes from a chord strike to a ripple and back to a unison. A planned clock can freeze the motion: a camera flash, and the frozen positions fly down into an overlay 'fingerprint' card.",
+    "palette": {
+      "bg": "#e8eef2",
+      "bench": "#dde5ea",
+      "slot": "#8b98a3",
+      "wood": "#d9a35f",
+      "woodDark": "#a8743a",
+      "string": "#39424e",
+      "ink": "#1c2430",
+      "plate": "#ffffff",
+      "edge": "#1c2430",
+      "balls": [
+        "#e3242b",
+        "#f04e1b",
+        "#f97a12",
+        "#f9a20c",
+        "#f2c40a",
+        "#b4cf18",
+        "#5bbb2c",
+        "#1daa57",
+        "#10a391",
+        "#1299c4",
+        "#1b7be0",
+        "#3560e6",
+        "#5a47de",
+        "#8a39d3",
+        "#bb2cbe"
+      ]
+    },
+    "world": {
+      "background": "#e8eef2",
+      "fog": {
+        "color": "#e8eef2",
+        "near": 22,
+        "far": 60
+      },
+      "environment": "room",
+      "environmentIntensity": 0.55,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "bench": {
+        "type": "standard",
+        "baseColor": "#dde5ea",
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      "slot": {
+        "type": "standard",
+        "baseColor": "#8b98a3",
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      "wood": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "plank": {
+        "type": "standard",
+        "baseColor": "#c98f4c",
+        "roughness": 0.62,
+        "metalness": 0
+      },
+      "ball": {
+        "type": "physical",
+        "baseColor": "#ffffff",
+        "roughness": 0.3,
+        "metalness": 0,
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.18
+      },
+      "string": {
+        "type": "standard",
+        "baseColor": "#39424e",
+        "roughness": 0.8,
+        "metalness": 0
+      },
+      "brass": {
+        "type": "physical",
+        "baseColor": "#d9ae58",
+        "roughness": 0.3,
+        "metalness": 1
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#c9d3da",
+        "intensity": 1.15
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff6ea",
+        "intensity": 2.3,
+        "position": [
+          -3.5,
+          10,
+          6.5
+        ],
+        "target": [
+          0,
+          0.5,
+          0
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 2048,
+          "extent": 6.2,
+          "near": 0.5,
+          "far": 30,
+          "bias": -0.0004,
+          "normalBias": 0.02
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#dbe8ff",
+        "intensity": 0.5,
+        "position": [
+          4,
+          5,
+          -6
+        ],
+        "target": [
+          0,
+          0.6,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.2,
+        "offset": 1.2
+      }
+    },
+    "camera": {
+      "fov": 32,
+      "near": 0.3,
+      "far": 90,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#1c2430",
+      "height": 0.4
+    },
+    "rig": {
+      "count": 15,
+      "swings0": 16,
+      "spacing": 0.5,
+      "ballRadius": 0.215,
+      "ballY": 0.52,
+      "lengthMin": 0.9,
+      "reach": 0.62,
+      "vHalf": 0.19,
+      "stringRadius": 0.009,
+      "hanger": {
+        "drop": 0.32,
+        "rod": 0.016,
+        "bar": 0.014
+      },
+      "beam": {
+        "height": 0.16,
+        "depth": 0.14,
+        "over": 0.5
+      },
+      "aframe": {
+        "spreadTall": 1.95,
+        "spreadShort": 1.05,
+        "leg": 0.12,
+        "foot": 0.08
+      },
+      "plank": {
+        "height": 0.66,
+        "thickness": 0.045,
+        "y0": 0.2,
+        "drop": 0.95,
+        "dropDur": 0.14,
+        "lead": 0.04,
+        "over": 0.3
+      },
+      "trail": {
+        "ghosts": 7,
+        "step": 0.011,
+        "shrink": 0.075,
+        "opacity": 0.3,
+        "lighten": 0.3
+      },
+      "lamp": {
+        "radius": 0.12,
+        "y": 0.012,
+        "decay": 0.1,
+        "dim": 0.72
+      }
+    },
+    "wood": {
+      "seed": 96,
+      "boards": 2,
+      "dark": "#b9813f",
+      "mid": "#d9a35f",
+      "light": "#edc387",
+      "seam": "#9c6a31",
+      "contrast": 0.4,
+      "grainFreq": 14,
+      "perMetre": 0.5
+    },
+    "caption": {
+      "x": 960,
+      "y": 54,
+      "h": 112,
+      "cap": 62,
+      "maxW": 1240,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#ffffff",
+      "edge": "#1c2430",
+      "ink": "#1c2430"
+    },
+    "card": {
+      "w": 620,
+      "h": 230,
+      "margin": 64,
+      "radius": 22,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "cap": 38,
+      "plate": "#ffffff",
+      "edge": "#1c2430",
+      "ink": "#1c2430",
+      "rule": "#b7c2cb",
+      "stem": "#9aa7b2",
+      "dot": 13,
+      "padX": 56,
+      "midY": 142,
+      "swing": 50,
+      "fly": 0.55,
+      "stagger": 0.018,
+      "flash": 0.32,
+      "flashPeak": 0.55
+    },
+    "sound": {
+      "scale": [
+        0,
+        2,
+        4,
+        7,
+        9,
+        12,
+        14,
+        16,
+        19,
+        21,
+        24,
+        26,
+        28,
+        31,
+        33
+      ],
+      "root": 196,
+      "tick": {
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3
+      },
+      "release": {
+        "gain": 0.5
+      },
+      "shutter": {
+        "gain": 0.5
+      },
+      "catch": {
+        "gain": 0.6
+      },
+      "pad": {
+        "gain": 0.22,
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          14,
+          19
+        ],
+        "brightness": 800
+      }
+    },
+    "sfx": {
+      "enter": "clack",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "thud",
+      "emphasis": "marimba",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "Pendulum k: angle = A_k cos(2 pi (N + k) tau / T); A_k = asin(reach / L_k) so every ball leaves the same straight plank.",
+      "String lengths come from the periods: L_k = Lmin ((N + n - 1) / (N + k))^2.",
+      "tau(t) is a planned clock (piecewise-linear rate, closed form and invertible): it can slow to a freeze-frame and resume.",
+      "Trails are the same formula at earlier tau, scaled by the clock rate, so they vanish in a freeze. Nothing accumulates.",
+      "At tau = T every ball is back at the plank with zero speed; the plank rises and holds them: start state = end state.",
+      "Camera: one move per beat, locked during holds; end-on for the snake, high front for the frozen patterns."
+    ]
+  },
+  "scene": {
+    "id": "96-pendulum-wave",
+    "style": "pendulum-wave",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "release",
+        "t": 0,
+        "dur": 2.8,
+        "label": "Released together"
+      },
+      {
+        "id": "drift",
+        "t": 2.8,
+        "dur": 3.4,
+        "label": "Each has its own rhythm"
+      },
+      {
+        "id": "freeze",
+        "t": 6.2,
+        "dur": 3.6,
+        "label": "Every moment: a new pattern"
+      },
+      {
+        "id": "words",
+        "t": 9.8,
+        "dur": 2.5,
+        "label": "How AI tags word order"
+      },
+      {
+        "id": "line",
+        "t": 12.3,
+        "dur": 2.7,
+        "label": "And back in one line"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -4.37794,
+          2.86128,
+          7.08372
+        ],
+        "target": [
+          -0.41301,
+          1.18484,
+          -0.17403
+        ],
+        "fov": 32
+      },
+      {
+        "t": 2.5,
+        "pos": [
+          -3.60051,
+          2.55989,
+          7.19464
+        ],
+        "target": [
+          -0.33593,
+          1.10302,
+          -0.11566
+        ],
+        "fov": 32,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 3.6999999999999997,
+        "pos": [
+          -11.66735,
+          4.19473,
+          0.56728
+        ],
+        "target": [
+          -0.05856,
+          0.59469,
+          -0.25595
+        ],
+        "fov": 20,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 6,
+        "pos": [
+          -11.66735,
+          4.19473,
+          0.56728
+        ],
+        "target": [
+          -0.05856,
+          0.59469,
+          -0.25595
+        ],
+        "fov": 20
+      },
+      {
+        "t": 6.9,
+        "pos": [
+          0,
+          8.0065,
+          5.52343
+        ],
+        "target": [
+          0,
+          0.61833,
+          0.24006
+        ],
+        "fov": 32,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 9.9,
+        "pos": [
+          0,
+          8.0065,
+          5.52343
+        ],
+        "target": [
+          0,
+          0.61833,
+          0.24006
+        ],
+        "fov": 32
+      },
+      {
+        "t": 12.100000000000001,
+        "pos": [
+          1.32111,
+          7.23555,
+          6.96936
+        ],
+        "target": [
+          0.10236,
+          0.50114,
+          0.27183
+        ],
+        "fov": 32,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.9,
+        "pos": [
+          4.76362,
+          1.9202,
+          5.61305
+        ],
+        "target": [
+          0.67275,
+          0.78398,
+          -0.11719
+        ],
+        "fov": 32,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 15,
+        "pos": [
+          4.46272,
+          1.94065,
+          6.10704
+        ],
+        "target": [
+          0.61295,
+          0.8453,
+          -0.03345
+        ],
+        "fov": 32,
+        "ease": "outSine"
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.22,
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          14,
+          19
+        ],
+        "brightness": 800,
+        "attack": 0.4,
+        "release": 1.2,
+        "t": 0,
+        "pan": 0,
+        "seed": 196
+      },
+      {
+        "type": "clack",
+        "gain": 0.5,
+        "pitch": 0.7,
+        "t": 0.46,
+        "pan": 0,
+        "seed": 203
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.5,
+        "gain": 0.25,
+        "t": 0.46,
+        "pan": 0,
+        "seed": 204
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.5862499999999999,
+        "pan": 0.6533333333333333,
+        "seed": 210
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.5892241379310345,
+        "pan": 0.5599999999999999,
+        "seed": 217
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.5924107142857142,
+        "pan": 0.4666666666666666,
+        "seed": 224
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.5958333333333333,
+        "pan": 0.3733333333333333,
+        "seed": 231
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.5995192307692307,
+        "pan": 0.27999999999999997,
+        "seed": 238
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.6035,
+        "pan": 0.18666666666666665,
+        "seed": 245
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.6078125,
+        "pan": 0.09333333333333332,
+        "seed": 252
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.6125,
+        "pan": 0,
+        "seed": 259
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.6176136363636364,
+        "pan": -0.09333333333333332,
+        "seed": 266
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.6232142857142857,
+        "pan": -0.18666666666666665,
+        "seed": 273
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.629375,
+        "pan": -0.27999999999999997,
+        "seed": 280
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.6361842105263158,
+        "pan": -0.3733333333333333,
+        "seed": 287
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.64375,
+        "pan": -0.4666666666666666,
+        "seed": 294
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.6522058823529412,
+        "pan": -0.5599999999999999,
+        "seed": 301
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.66171875,
+        "pan": -0.6533333333333333,
+        "seed": 308
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.93125,
+        "pan": 0.6533333333333333,
+        "seed": 315
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.9461206896551724,
+        "pan": 0.5599999999999999,
+        "seed": 322
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.9620535714285714,
+        "pan": 0.4666666666666666,
+        "seed": 329
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.9791666666666667,
+        "pan": 0.3733333333333333,
+        "seed": 336
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 0.9975961538461539,
+        "pan": 0.27999999999999997,
+        "seed": 343
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.0175,
+        "pan": 0.18666666666666665,
+        "seed": 350
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.0390625,
+        "pan": 0.09333333333333332,
+        "seed": 357
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.0625,
+        "pan": 0,
+        "seed": 364
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.0880681818181817,
+        "pan": -0.09333333333333332,
+        "seed": 371
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.1160714285714286,
+        "pan": -0.18666666666666665,
+        "seed": 378
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.146875,
+        "pan": -0.27999999999999997,
+        "seed": 385
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.180921052631579,
+        "pan": -0.3733333333333333,
+        "seed": 392
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.21875,
+        "pan": -0.4666666666666666,
+        "seed": 399
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.2610294117647058,
+        "pan": -0.5599999999999999,
+        "seed": 406
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.2762499999999999,
+        "pan": 0.6533333333333333,
+        "seed": 413
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.3030172413793104,
+        "pan": 0.5599999999999999,
+        "seed": 420
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.30859375,
+        "pan": -0.6533333333333333,
+        "seed": 427
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.3316964285714286,
+        "pan": 0.4666666666666666,
+        "seed": 434
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.3624999999999998,
+        "pan": 0.3733333333333333,
+        "seed": 441
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.3956730769230767,
+        "pan": 0.27999999999999997,
+        "seed": 448
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.4314999999999998,
+        "pan": 0.18666666666666665,
+        "seed": 455
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.4703125,
+        "pan": 0.09333333333333332,
+        "seed": 462
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.5125,
+        "pan": 0,
+        "seed": 469
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.5585227272727271,
+        "pan": -0.09333333333333332,
+        "seed": 476
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.6089285714285713,
+        "pan": -0.18666666666666665,
+        "seed": 483
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.6212499999999999,
+        "pan": 0.6533333333333333,
+        "seed": 490
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.6599137931034482,
+        "pan": 0.5599999999999999,
+        "seed": 497
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.664375,
+        "pan": -0.27999999999999997,
+        "seed": 504
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.7013392857142855,
+        "pan": 0.4666666666666666,
+        "seed": 511
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.725657894736842,
+        "pan": -0.3733333333333333,
+        "seed": 518
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.7458333333333331,
+        "pan": 0.3733333333333333,
+        "seed": 525
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.7937499999999997,
+        "pan": 0.27999999999999997,
+        "seed": 532
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.79375,
+        "pan": -0.4666666666666666,
+        "seed": 539
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.8455,
+        "pan": 0.18666666666666665,
+        "seed": 546
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.8698529411764704,
+        "pan": -0.5599999999999999,
+        "seed": 553
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.9015624999999998,
+        "pan": 0.09333333333333332,
+        "seed": 560
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.9554687499999999,
+        "pan": -0.6533333333333333,
+        "seed": 567
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.9625,
+        "pan": 0,
+        "seed": 574
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 1.9662499999999998,
+        "pan": 0.6533333333333333,
+        "seed": 581
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.016810344827586,
+        "pan": 0.5599999999999999,
+        "seed": 588
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.0289772727272726,
+        "pan": -0.09333333333333332,
+        "seed": 595
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.070982142857143,
+        "pan": 0.4666666666666666,
+        "seed": 602
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.101785714285714,
+        "pan": -0.18666666666666665,
+        "seed": 609
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.1291666666666664,
+        "pan": 0.3733333333333333,
+        "seed": 616
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.181875,
+        "pan": -0.27999999999999997,
+        "seed": 623
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.191826923076923,
+        "pan": 0.27999999999999997,
+        "seed": 630
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.2595,
+        "pan": 0.18666666666666665,
+        "seed": 637
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.270394736842105,
+        "pan": -0.3733333333333333,
+        "seed": 644
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.3112500000000002,
+        "pan": 0.6533333333333333,
+        "seed": 651
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.3328125,
+        "pan": 0.09333333333333332,
+        "seed": 658
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.3687499999999995,
+        "pan": -0.4666666666666666,
+        "seed": 665
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.373706896551724,
+        "pan": 0.5599999999999999,
+        "seed": 672
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.4124999999999996,
+        "pan": 0,
+        "seed": 679
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.440625,
+        "pan": 0.4666666666666666,
+        "seed": 686
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.478676470588235,
+        "pan": -0.5599999999999999,
+        "seed": 693
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.499431818181818,
+        "pan": -0.09333333333333332,
+        "seed": 700
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.5124999999999997,
+        "pan": 0.3733333333333333,
+        "seed": 707
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.589903846153846,
+        "pan": 0.27999999999999997,
+        "seed": 714
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.594642857142857,
+        "pan": -0.18666666666666665,
+        "seed": 721
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.6023437499999997,
+        "pan": -0.6533333333333333,
+        "seed": 728
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.65625,
+        "pan": 0.6533333333333333,
+        "seed": 735
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.6734999999999998,
+        "pan": 0.18666666666666665,
+        "seed": 742
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.699375,
+        "pan": -0.27999999999999997,
+        "seed": 749
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.730603448275862,
+        "pan": 0.5599999999999999,
+        "seed": 756
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.7640625,
+        "pan": 0.09333333333333332,
+        "seed": 763
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.810267857142857,
+        "pan": 0.4666666666666666,
+        "seed": 770
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.8151315789473683,
+        "pan": -0.3733333333333333,
+        "seed": 777
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.8625,
+        "pan": 0,
+        "seed": 784
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.8958333333333335,
+        "pan": 0.3733333333333333,
+        "seed": 791
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.9437499999999996,
+        "pan": -0.4666666666666666,
+        "seed": 798
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.9698863636363635,
+        "pan": -0.09333333333333332,
+        "seed": 805
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 2.987980769230769,
+        "pan": 0.27999999999999997,
+        "seed": 812
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.0012499999999998,
+        "pan": 0.6533333333333333,
+        "seed": 819
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.0875,
+        "pan": -0.5599999999999999,
+        "seed": 826
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.0875,
+        "pan": -0.18666666666666665,
+        "seed": 833
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.0875,
+        "pan": 0.18666666666666665,
+        "seed": 840
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.0875,
+        "pan": 0.5599999999999999,
+        "seed": 847
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.179910714285714,
+        "pan": 0.4666666666666666,
+        "seed": 854
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.1953125,
+        "pan": 0.09333333333333332,
+        "seed": 861
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.216875,
+        "pan": -0.27999999999999997,
+        "seed": 868
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.24921875,
+        "pan": -0.6533333333333333,
+        "seed": 875
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.2791666666666663,
+        "pan": 0.3733333333333333,
+        "seed": 882
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.3125,
+        "pan": 0,
+        "seed": 889
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.34625,
+        "pan": 0.6533333333333333,
+        "seed": 896
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.3598684210526315,
+        "pan": -0.3733333333333333,
+        "seed": 903
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.386057692307692,
+        "pan": 0.27999999999999997,
+        "seed": 910
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.440340909090909,
+        "pan": -0.09333333333333332,
+        "seed": 917
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.444396551724138,
+        "pan": 0.5599999999999999,
+        "seed": 924
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.5014999999999996,
+        "pan": 0.18666666666666665,
+        "seed": 931
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.51875,
+        "pan": -0.4666666666666666,
+        "seed": 938
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.5495535714285715,
+        "pan": 0.4666666666666666,
+        "seed": 945
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.580357142857143,
+        "pan": -0.18666666666666665,
+        "seed": 952
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.6265625,
+        "pan": 0.09333333333333332,
+        "seed": 959
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.6625,
+        "pan": 0.3733333333333333,
+        "seed": 966
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.6912499999999997,
+        "pan": 0.6533333333333333,
+        "seed": 973
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.6963235294117647,
+        "pan": -0.5599999999999999,
+        "seed": 980
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.734375,
+        "pan": -0.27999999999999997,
+        "seed": 987
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.7624999999999997,
+        "pan": 0,
+        "seed": 994
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.7841346153846156,
+        "pan": 0.27999999999999997,
+        "seed": 1001
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.801293103448276,
+        "pan": 0.5599999999999999,
+        "seed": 1008
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.89609375,
+        "pan": -0.6533333333333333,
+        "seed": 1015
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.9046052631578947,
+        "pan": -0.3733333333333333,
+        "seed": 1022
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.9107954545454544,
+        "pan": -0.09333333333333332,
+        "seed": 1029
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.9155,
+        "pan": 0.18666666666666665,
+        "seed": 1036
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 3.9191964285714285,
+        "pan": 0.4666666666666666,
+        "seed": 1043
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.03625,
+        "pan": 0.6533333333333333,
+        "seed": 1050
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.045833333333333,
+        "pan": 0.3733333333333333,
+        "seed": 1057
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.057812500000001,
+        "pan": 0.09333333333333332,
+        "seed": 1064
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.073214285714285,
+        "pan": -0.18666666666666665,
+        "seed": 1071
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.09375,
+        "pan": -0.4666666666666666,
+        "seed": 1078
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.158189655172413,
+        "pan": 0.5599999999999999,
+        "seed": 1085
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.182211538461538,
+        "pan": 0.27999999999999997,
+        "seed": 1092
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.2125,
+        "pan": 0,
+        "seed": 1099
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.251875,
+        "pan": -0.27999999999999997,
+        "seed": 1106
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.288839285714285,
+        "pan": 0.4666666666666666,
+        "seed": 1113
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.305147058823529,
+        "pan": -0.5599999999999999,
+        "seed": 1120
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.3294999999999995,
+        "pan": 0.18666666666666665,
+        "seed": 1127
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.38125,
+        "pan": -0.09333333333333332,
+        "seed": 1134
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.38125,
+        "pan": 0.6533333333333333,
+        "seed": 1141
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.429166666666666,
+        "pan": 0.3733333333333333,
+        "seed": 1148
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.449342105263158,
+        "pan": -0.3733333333333333,
+        "seed": 1155
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.489062499999999,
+        "pan": 0.09333333333333332,
+        "seed": 1162
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.515086206896552,
+        "pan": 0.5599999999999999,
+        "seed": 1169
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.54296875,
+        "pan": -0.6533333333333333,
+        "seed": 1176
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.566071428571429,
+        "pan": -0.18666666666666665,
+        "seed": 1183
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.580288461538461,
+        "pan": 0.27999999999999997,
+        "seed": 1190
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.658482142857143,
+        "pan": 0.4666666666666666,
+        "seed": 1197
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.6625,
+        "pan": 0,
+        "seed": 1204
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.668749999999999,
+        "pan": -0.4666666666666666,
+        "seed": 1211
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.726249999999999,
+        "pan": 0.6533333333333333,
+        "seed": 1218
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.7435,
+        "pan": 0.18666666666666665,
+        "seed": 1225
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.769375,
+        "pan": -0.27999999999999997,
+        "seed": 1232
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.8125,
+        "pan": 0.3733333333333333,
+        "seed": 1239
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.851704545454545,
+        "pan": -0.09333333333333332,
+        "seed": 1246
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.87198275862069,
+        "pan": 0.5599999999999999,
+        "seed": 1253
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.913970588235294,
+        "pan": -0.5599999999999999,
+        "seed": 1260
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.9203125,
+        "pan": 0.09333333333333332,
+        "seed": 1267
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.978365384615385,
+        "pan": 0.27999999999999997,
+        "seed": 1274
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 4.994078947368421,
+        "pan": -0.3733333333333333,
+        "seed": 1281
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.028125,
+        "pan": 0.4666666666666666,
+        "seed": 1288
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.058928571428571,
+        "pan": -0.18666666666666665,
+        "seed": 1295
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.07125,
+        "pan": 0.6533333333333333,
+        "seed": 1302
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.1125,
+        "pan": 0,
+        "seed": 1309
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.1575,
+        "pan": 0.18666666666666665,
+        "seed": 1316
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.18984375,
+        "pan": -0.6533333333333333,
+        "seed": 1323
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.195833333333333,
+        "pan": 0.3733333333333333,
+        "seed": 1330
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.228879310344827,
+        "pan": 0.5599999999999999,
+        "seed": 1337
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.24375,
+        "pan": -0.4666666666666666,
+        "seed": 1344
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.286875,
+        "pan": -0.27999999999999997,
+        "seed": 1351
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.32215909090909,
+        "pan": -0.09333333333333332,
+        "seed": 1358
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.3515625,
+        "pan": 0.09333333333333332,
+        "seed": 1365
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.376442307692307,
+        "pan": 0.27999999999999997,
+        "seed": 1372
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.397767857142857,
+        "pan": 0.4666666666666666,
+        "seed": 1379
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.41625,
+        "pan": 0.6533333333333333,
+        "seed": 1386
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.522794117647059,
+        "pan": -0.5599999999999999,
+        "seed": 1393
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.538815789473684,
+        "pan": -0.3733333333333333,
+        "seed": 1400
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.551785714285714,
+        "pan": -0.18666666666666665,
+        "seed": 1407
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.5625,
+        "pan": 0,
+        "seed": 1414
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.5714999999999995,
+        "pan": 0.18666666666666665,
+        "seed": 1421
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.579166666666667,
+        "pan": 0.3733333333333333,
+        "seed": 1428
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.585775862068965,
+        "pan": 0.5599999999999999,
+        "seed": 1435
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.76125,
+        "pan": 0.6533333333333333,
+        "seed": 1442
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.767410714285714,
+        "pan": 0.4666666666666666,
+        "seed": 1449
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.77451923076923,
+        "pan": 0.27999999999999997,
+        "seed": 1456
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.7828124999999995,
+        "pan": 0.09333333333333332,
+        "seed": 1463
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.792613636363637,
+        "pan": -0.09333333333333332,
+        "seed": 1470
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.804374999999999,
+        "pan": -0.27999999999999997,
+        "seed": 1477
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.81875,
+        "pan": -0.4666666666666666,
+        "seed": 1484
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.83671875,
+        "pan": -0.6533333333333333,
+        "seed": 1491
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.942672413793104,
+        "pan": 0.5599999999999999,
+        "seed": 1498
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.9624999999999995,
+        "pan": 0.3733333333333333,
+        "seed": 1505
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 5.985499999999999,
+        "pan": 0.18666666666666665,
+        "seed": 1512
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.0125,
+        "pan": 0,
+        "seed": 1519
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.044642857142857,
+        "pan": -0.18666666666666665,
+        "seed": 1526
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.0835526315789465,
+        "pan": -0.3733333333333333,
+        "seed": 1533
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.10625,
+        "pan": 0.6533333333333333,
+        "seed": 1540
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.131617647058824,
+        "pan": -0.5599999999999999,
+        "seed": 1547
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.137053571428572,
+        "pan": 0.4666666666666666,
+        "seed": 1554
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.172596153846153,
+        "pan": 0.27999999999999997,
+        "seed": 1561
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.2140625,
+        "pan": 0.09333333333333332,
+        "seed": 1568
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.2630681818181815,
+        "pan": -0.09333333333333332,
+        "seed": 1575
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.299568965517241,
+        "pan": 0.5599999999999999,
+        "seed": 1582
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.321875,
+        "pan": -0.27999999999999997,
+        "seed": 1589
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.345833333333333,
+        "pan": 0.3733333333333333,
+        "seed": 1596
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.39375,
+        "pan": -0.4666666666666666,
+        "seed": 1603
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.3995,
+        "pan": 0.18666666666666665,
+        "seed": 1610
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.45125,
+        "pan": 0.6533333333333333,
+        "seed": 1617
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.4624999999999995,
+        "pan": 0,
+        "seed": 1624
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.48359375,
+        "pan": -0.6533333333333333,
+        "seed": 1631
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.506696428571429,
+        "pan": 0.4666666666666666,
+        "seed": 1638
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.5375,
+        "pan": -0.18666666666666665,
+        "seed": 1645
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.570673076923077,
+        "pan": 0.27999999999999997,
+        "seed": 1652
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.628289473684211,
+        "pan": -0.3733333333333333,
+        "seed": 1659
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.645312499999999,
+        "pan": 0.09333333333333332,
+        "seed": 1666
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.656465517241379,
+        "pan": 0.5599999999999999,
+        "seed": 1673
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.729166666666667,
+        "pan": 0.3733333333333333,
+        "seed": 1680
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.733522727272727,
+        "pan": -0.09333333333333332,
+        "seed": 1687
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.740441176470588,
+        "pan": -0.5599999999999999,
+        "seed": 1694
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.801568651670156,
+        "pan": 0.6533333333333333,
+        "seed": 1701
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.824643220832499,
+        "pan": 0.18666666666666665,
+        "seed": 1708
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 6.866536521849608,
+        "pan": -0.27999999999999997,
+        "seed": 1715
+      },
+      {
+        "type": "click",
+        "gain": 0.5,
+        "pitch": 0.8,
+        "t": 7,
+        "pan": 0,
+        "seed": 1722
+      },
+      {
+        "type": "clack",
+        "gain": 0.4,
+        "pitch": 1.5,
+        "t": 7.04,
+        "pan": 0,
+        "seed": 1723
+      },
+      {
+        "type": "chime",
+        "gain": 0.225,
+        "dur": 1,
+        "notes": 3,
+        "t": 7.12,
+        "pan": 0,
+        "seed": 1724
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.35,
+        "gain": 0.175,
+        "t": 7.9,
+        "pan": 0,
+        "seed": 1729
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 7.9231455024943145,
+        "pan": 0.4666666666666666,
+        "seed": 1736
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.022474487139158,
+        "pan": 0,
+        "seed": 1743
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.093649167310371,
+        "pan": -0.4666666666666666,
+        "seed": 1750
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.093649167310371,
+        "pan": 0.27999999999999997,
+        "seed": 1757
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.138362068965517,
+        "pan": 0.5599999999999999,
+        "seed": 1764
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.155357142857142,
+        "pan": -0.18666666666666665,
+        "seed": 1771
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.201562500000001,
+        "pan": 0.09333333333333332,
+        "seed": 1778
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.2375,
+        "pan": 0.3733333333333333,
+        "seed": 1785
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.255468749999999,
+        "pan": -0.6533333333333333,
+        "seed": 1792
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.26625,
+        "pan": 0.6533333333333333,
+        "seed": 1799
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.298026315789475,
+        "pan": -0.3733333333333333,
+        "seed": 1806
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.328977272727272,
+        "pan": -0.09333333333333332,
+        "seed": 1813
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.3525,
+        "pan": 0.18666666666666665,
+        "seed": 1820
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.370982142857143,
+        "pan": 0.4666666666666666,
+        "seed": 1827
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.474264705882353,
+        "pan": -0.5599999999999999,
+        "seed": 1834
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.481874999999999,
+        "pan": -0.27999999999999997,
+        "seed": 1841
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.4875,
+        "pan": 0,
+        "seed": 1848
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.491826923076923,
+        "pan": 0.27999999999999997,
+        "seed": 1855
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.495258620689654,
+        "pan": 0.5599999999999999,
+        "seed": 1862
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.611515199645764,
+        "pan": 0.6533333333333333,
+        "seed": 1869
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.62178226770618,
+        "pan": 0.3733333333333333,
+        "seed": 1876
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.63530544953353,
+        "pan": 0.09333333333333332,
+        "seed": 1883
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.654059046795068,
+        "pan": -0.18666666666666665,
+        "seed": 1890
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 8.682294901687515,
+        "pan": -0.4666666666666666,
+        "seed": 1897
+      },
+      {
+        "type": "click",
+        "gain": 0.5,
+        "pitch": 0.8,
+        "t": 8.85,
+        "pan": 0,
+        "seed": 1904
+      },
+      {
+        "type": "clack",
+        "gain": 0.4,
+        "pitch": 1.5,
+        "t": 8.889999999999999,
+        "pan": 0,
+        "seed": 1905
+      },
+      {
+        "type": "chime",
+        "gain": 0.225,
+        "dur": 1,
+        "notes": 3,
+        "t": 8.969999999999999,
+        "pan": 0,
+        "seed": 1906
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.35,
+        "gain": 0.175,
+        "t": 9.65,
+        "pan": 0,
+        "seed": 1911
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 9.72905694150421,
+        "pan": 0.4666666666666666,
+        "seed": 1918
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 9.778840987267252,
+        "pan": 0.18666666666666665,
+        "seed": 1925
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 9.822547753600931,
+        "pan": -0.09333333333333332,
+        "seed": 1932
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 9.867763157894736,
+        "pan": -0.3733333333333333,
+        "seed": 1939
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 9.877155172413794,
+        "pan": 0.5599999999999999,
+        "seed": 1946
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 9.914903846153846,
+        "pan": 0.27999999999999997,
+        "seed": 1953
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 9.92734375,
+        "pan": -0.6533333333333333,
+        "seed": 1960
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 9.9625,
+        "pan": 0,
+        "seed": 1967
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 9.98125,
+        "pan": 0.6533333333333333,
+        "seed": 1974
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.024375,
+        "pan": -0.27999999999999997,
+        "seed": 1981
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.029166666666667,
+        "pan": 0.3733333333333333,
+        "seed": 1988
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.0890625,
+        "pan": 0.09333333333333332,
+        "seed": 1995
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.108088235294119,
+        "pan": -0.5599999999999999,
+        "seed": 2002
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.135267857142857,
+        "pan": 0.4666666666666666,
+        "seed": 2009
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.16607142857143,
+        "pan": -0.18666666666666665,
+        "seed": 2016
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.2055,
+        "pan": 0.18666666666666665,
+        "seed": 2023
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.234051724137931,
+        "pan": 0.5599999999999999,
+        "seed": 2030
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.26875,
+        "pan": -0.4666666666666666,
+        "seed": 2037
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.294886363636364,
+        "pan": -0.09333333333333332,
+        "seed": 2044
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.31298076923077,
+        "pan": 0.27999999999999997,
+        "seed": 2051
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.32625,
+        "pan": 0.6533333333333333,
+        "seed": 2058
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.4125,
+        "pan": -0.3733333333333333,
+        "seed": 2065
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.412500000000001,
+        "pan": 0,
+        "seed": 2072
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.412500000000001,
+        "pan": 0.3733333333333333,
+        "seed": 2079
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.504910714285714,
+        "pan": 0.4666666666666666,
+        "seed": 2086
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.5203125,
+        "pan": 0.09333333333333332,
+        "seed": 2093
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.541875000000001,
+        "pan": -0.27999999999999997,
+        "seed": 2100
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.57421875,
+        "pan": -0.6533333333333333,
+        "seed": 2107
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.590948275862068,
+        "pan": 0.5599999999999999,
+        "seed": 2114
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.619499999999999,
+        "pan": 0.18666666666666665,
+        "seed": 2121
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.658928571428572,
+        "pan": -0.18666666666666665,
+        "seed": 2128
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.67125,
+        "pan": 0.6533333333333333,
+        "seed": 2135
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.711057692307692,
+        "pan": 0.27999999999999997,
+        "seed": 2142
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.716911764705882,
+        "pan": -0.5599999999999999,
+        "seed": 2149
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.76534090909091,
+        "pan": -0.09333333333333332,
+        "seed": 2156
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.795833333333334,
+        "pan": 0.3733333333333333,
+        "seed": 2163
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.84375,
+        "pan": -0.4666666666666666,
+        "seed": 2170
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.8625,
+        "pan": 0,
+        "seed": 2177
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.87455357142857,
+        "pan": 0.4666666666666666,
+        "seed": 2184
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.947844827586207,
+        "pan": 0.5599999999999999,
+        "seed": 2191
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.9515625,
+        "pan": 0.09333333333333332,
+        "seed": 2198
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 10.957236842105264,
+        "pan": -0.3733333333333333,
+        "seed": 2205
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.01625,
+        "pan": 0.6533333333333333,
+        "seed": 2212
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.0335,
+        "pan": 0.18666666666666665,
+        "seed": 2219
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.059375000000001,
+        "pan": -0.27999999999999997,
+        "seed": 2226
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.109134615384615,
+        "pan": 0.27999999999999997,
+        "seed": 2233
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.151785714285714,
+        "pan": -0.18666666666666665,
+        "seed": 2240
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.179166666666667,
+        "pan": 0.3733333333333333,
+        "seed": 2247
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.22109375,
+        "pan": -0.6533333333333333,
+        "seed": 2254
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.235795454545455,
+        "pan": -0.09333333333333332,
+        "seed": 2261
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.244196428571428,
+        "pan": 0.4666666666666666,
+        "seed": 2268
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.304741379310345,
+        "pan": 0.5599999999999999,
+        "seed": 2275
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.3125,
+        "pan": 0,
+        "seed": 2282
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.325735294117646,
+        "pan": -0.5599999999999999,
+        "seed": 2289
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.36125,
+        "pan": 0.6533333333333333,
+        "seed": 2296
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.3828125,
+        "pan": 0.09333333333333332,
+        "seed": 2303
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.418750000000001,
+        "pan": -0.4666666666666666,
+        "seed": 2310
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.4475,
+        "pan": 0.18666666666666665,
+        "seed": 2317
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.501973684210526,
+        "pan": -0.3733333333333333,
+        "seed": 2324
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.507211538461538,
+        "pan": 0.27999999999999997,
+        "seed": 2331
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.5625,
+        "pan": 0.3733333333333333,
+        "seed": 2338
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.576875,
+        "pan": -0.27999999999999997,
+        "seed": 2345
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.613839285714285,
+        "pan": 0.4666666666666666,
+        "seed": 2352
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.644642857142857,
+        "pan": -0.18666666666666665,
+        "seed": 2359
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.661637931034482,
+        "pan": 0.5599999999999999,
+        "seed": 2366
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.706249999999999,
+        "pan": -0.09333333333333332,
+        "seed": 2373
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.70625,
+        "pan": 0.6533333333333333,
+        "seed": 2380
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.762500000000001,
+        "pan": 0,
+        "seed": 2387
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.8140625,
+        "pan": 0.09333333333333332,
+        "seed": 2394
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.8615,
+        "pan": 0.18666666666666665,
+        "seed": 2401
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.86796875,
+        "pan": -0.6533333333333333,
+        "seed": 2408
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.905288461538461,
+        "pan": 0.27999999999999997,
+        "seed": 2415
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.934558823529413,
+        "pan": -0.5599999999999999,
+        "seed": 2422
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.945833333333333,
+        "pan": 0.3733333333333333,
+        "seed": 2429
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.983482142857142,
+        "pan": 0.4666666666666666,
+        "seed": 2436
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 11.99375,
+        "pan": -0.4666666666666666,
+        "seed": 2443
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.018534482758621,
+        "pan": 0.5599999999999999,
+        "seed": 2450
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.04671052631579,
+        "pan": -0.3733333333333333,
+        "seed": 2457
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.05125,
+        "pan": 0.6533333333333333,
+        "seed": 2464
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.094375,
+        "pan": -0.27999999999999997,
+        "seed": 2471
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.1375,
+        "pan": -0.18666666666666665,
+        "seed": 2478
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.176704545454546,
+        "pan": -0.09333333333333332,
+        "seed": 2485
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.2125,
+        "pan": 0,
+        "seed": 2492
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.2453125,
+        "pan": 0.09333333333333332,
+        "seed": 2499
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.2755,
+        "pan": 0.18666666666666665,
+        "seed": 2506
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.303365384615384,
+        "pan": 0.27999999999999997,
+        "seed": 2513
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.329166666666666,
+        "pan": 0.3733333333333333,
+        "seed": 2520
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.353125,
+        "pan": 0.4666666666666666,
+        "seed": 2527
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.375431034482757,
+        "pan": 0.5599999999999999,
+        "seed": 2534
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.39625,
+        "pan": 0.6533333333333333,
+        "seed": 2541
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.51484375,
+        "pan": -0.6533333333333333,
+        "seed": 2548
+      },
+      {
+        "type": "marimba",
+        "hz": 220.0025614686371,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.543382352941176,
+        "pan": -0.5599999999999999,
+        "seed": 2555
+      },
+      {
+        "type": "marimba",
+        "hz": 246.94452577939515,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.56875,
+        "pan": -0.4666666666666666,
+        "seed": 2562
+      },
+      {
+        "type": "marimba",
+        "hz": 293.6681870678296,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.591447368421052,
+        "pan": -0.3733333333333333,
+        "seed": 2569
+      },
+      {
+        "type": "marimba",
+        "hz": 329.6313947794561,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.611875,
+        "pan": -0.27999999999999997,
+        "seed": 2576
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.630357142857143,
+        "pan": -0.18666666666666665,
+        "seed": 2583
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.647159090909092,
+        "pan": -0.09333333333333332,
+        "seed": 2590
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.6625,
+        "pan": 0,
+        "seed": 2597
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.6765625,
+        "pan": 0.09333333333333332,
+        "seed": 2604
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.689499999999999,
+        "pan": 0.18666666666666665,
+        "seed": 2611
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.701442307692307,
+        "pan": 0.27999999999999997,
+        "seed": 2618
+      },
+      {
+        "type": "marimba",
+        "hz": 880.0102458745482,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.7125,
+        "pan": 0.3733333333333333,
+        "seed": 2625
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7781031175807,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.722767857142856,
+        "pan": 0.4666666666666666,
+        "seed": 2632
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6727482713184,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.732327586206896,
+        "pan": 0.5599999999999999,
+        "seed": 2639
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5255791178245,
+        "gain": 0.085,
+        "dur": 0.38,
+        "decay": 0.085,
+        "mallet": 0.3,
+        "t": 12.74125,
+        "pan": 0.6533333333333333,
+        "seed": 2646
+      },
+      {
+        "type": "clack",
+        "gain": 0.6,
+        "pitch": 0.6,
+        "t": 13,
+        "pan": 0,
+        "seed": 2653
+      },
+      {
+        "type": "thud",
+        "gain": 0.48,
+        "dur": 0.4,
+        "t": 13,
+        "pan": 0,
+        "seed": 2654
+      },
+      {
+        "type": "marimba",
+        "hz": 196,
+        "notes": [
+          0,
+          7,
+          12,
+          16,
+          19,
+          24
+        ],
+        "step": 0.012,
+        "gain": 0.3,
+        "dur": 1.8,
+        "decay": 0.5,
+        "t": 13.02,
+        "pan": 0,
+        "seed": 2655
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "wave.js: pendulum k makes (16 + k) swings per cycle; angle = A_k cos(2 pi (16 + k) tau / T); L_k ~ 1 / (16 + k)^2; tau(t) = planned clock (freezes); T = tau(catchAt), so all 15 are back on the plank at 13.0 s.",
+      "plan": "T = 10.35 s of clock, 345 centre crossings (one note + lamp flash each), lengths 0.90..3.16 m",
+      "framing": "ok",
+      "numbers": "no data shown; the fingerprint cards plot the frozen ball displacements from the plan"
+    }
+  }
+}

@@ -1,0 +1,885 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "laser-mirrors",
+    "name": "Laser & Mirrors",
+    "description": "An optics bench seen from above at an angle: a slate-blue anodised breadboard with a hole grid, a cream laser head, small swivelling mirrors on posts (silver glass in aluminium yokes; the router mirror in brass), a glass splitter that rises from a well, and drum-shaped sensor targets with name plates. Light haze makes the beam a thick glowing line; an exact ray tracer reflects it mirror to mirror, so turning one mirror re-routes the whole downstream path live.",
+    "palette": {
+      "bg": "#262d38",
+      "bench": "#6b7c92",
+      "benchHole": "#3d4858",
+      "rail": "#2a303a",
+      "steel": "#aeb6c0",
+      "alu": "#dfe4ea",
+      "brass": "#f0ae2c",
+      "body": "#ece8dc",
+      "dark": "#1c2028",
+      "ink": "#f4f6f9",
+      "beam": "#ff3d8b",
+      "cyan": "#22d3ff",
+      "amber": "#ffab1f",
+      "green": "#4dff7a"
+    },
+    "beamColors": {
+      "main": "#ff3d8b",
+      "cyan": "#22d3ff",
+      "amber": "#ffab1f",
+      "green": "#4dff7a"
+    },
+    "world": {
+      "background": "#262d38",
+      "environment": "room",
+      "environmentIntensity": 0.55,
+      "toneMapping": "neutral",
+      "exposure": 1
+    },
+    "materials": {
+      "benchSide": {
+        "type": "standard",
+        "baseColor": "#39424f",
+        "roughness": 0.7,
+        "metalness": 0.3
+      },
+      "rail": {
+        "type": "standard",
+        "baseColor": "#2a303a",
+        "roughness": 0.85,
+        "metalness": 0.1
+      },
+      "steel": {
+        "type": "standard",
+        "baseColor": "#aeb6c0",
+        "roughness": 0.35,
+        "metalness": 0.85
+      },
+      "alu": {
+        "type": "standard",
+        "baseColor": "#dfe4ea",
+        "roughness": 0.5,
+        "metalness": 0.25
+      },
+      "brass": {
+        "type": "standard",
+        "baseColor": "#f0ae2c",
+        "roughness": 0.4,
+        "metalness": 0.35
+      },
+      "dark": {
+        "type": "standard",
+        "baseColor": "#1c2028",
+        "roughness": 0.6,
+        "metalness": 0.2
+      },
+      "body": {
+        "type": "standard",
+        "baseColor": "#ece8dc",
+        "roughness": 0.55,
+        "metalness": 0.05
+      },
+      "mirror": {
+        "type": "standard",
+        "baseColor": "#f2f6fb",
+        "roughness": 0.05,
+        "metalness": 1
+      }
+    },
+    "lights": [
+      {
+        "id": "sky",
+        "type": "hemisphere",
+        "color": "#dfe8f5",
+        "groundColor": "#59616d",
+        "intensity": 0.85
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff4e4",
+        "intensity": 1.9,
+        "position": [
+          -6,
+          12,
+          7
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 2048,
+          "extent": 9,
+          "bias": -0.0005,
+          "normalBias": 0.03
+        }
+      },
+      {
+        "id": "fill",
+        "type": "directional",
+        "color": "#b8cdf0",
+        "intensity": 0.45,
+        "position": [
+          8,
+          6,
+          -4
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.55,
+        "radius": 0.45,
+        "threshold": 1.9
+      },
+      "vignette": {
+        "darkness": 0.3,
+        "offset": 1.15
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.5,
+      "far": 80,
+      "drift": {
+        "amp": 0,
+        "speed": 0
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 800,
+      "color": "#f4f6f9",
+      "height": 0.42
+    },
+    "bench": {
+      "margin": 0.32,
+      "thickness": 0.5,
+      "holePitch": 0.5,
+      "holeR": 0.055,
+      "pxPerMetre": 150,
+      "railT": 0.2,
+      "railH": 1.05,
+      "railFrontH": 0.22
+    },
+    "beamY": 0.95,
+    "beam": {
+      "half": 0.2,
+      "coreK": 38,
+      "core": 5.2,
+      "halo": 1.55,
+      "haze": 0.16,
+      "spillHalf": 0.62,
+      "spill": 0.34,
+      "maxSegments": 28,
+      "headSize": 1.1,
+      "hitSize": 0.95,
+      "hitLevel": 1.5,
+      "flareSize": 1.5
+    },
+    "mirror": {
+      "glassT": 0.06,
+      "frameT": 0.08,
+      "barD": 0.12,
+      "postR": 0.08,
+      "baseR": 0.36,
+      "baseH": 0.08,
+      "holderH": 0.24,
+      "knobR": 0.14,
+      "sheen": {
+        "base": "#e9f1fa",
+        "level": 0.85,
+        "sky": [
+          "#8fb4dc",
+          "#e4f0fb",
+          "#9fbfe0",
+          "#5d7fa6"
+        ],
+        "glints": [
+          [
+            0.12,
+            0.1,
+            0.75
+          ],
+          [
+            0.3,
+            0.04,
+            0.55
+          ],
+          [
+            0.62,
+            0.07,
+            0.4
+          ]
+        ]
+      }
+    },
+    "laser": {
+      "length": 1.5,
+      "width": 0.78,
+      "height": 0.66,
+      "nozzleR": 0.15,
+      "nozzleL": 0.26
+    },
+    "target": {
+      "bodyH": 0.56,
+      "bandH": 0.2,
+      "capR": 0.8,
+      "labelY": 1.95,
+      "labelTilt": -0.62,
+      "labelH": 0.4,
+      "idle": "#465062",
+      "lit": 2.6,
+      "halo": 2.2,
+      "pool": 1.9
+    },
+    "splitter": {
+      "height": 0.9,
+      "sides": 3,
+      "wellR": 0.62,
+      "low": -0.03,
+      "engage": 0.6,
+      "color": "#bfe6ff",
+      "glow": 2
+    },
+    "caption": {
+      "x": 960,
+      "y": 946,
+      "h": 86,
+      "cap": 44,
+      "maxW": 900,
+      "font": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "weight": 700,
+      "plate": "#10151d",
+      "edge": "#3a4556",
+      "ink": "#f4f6f9",
+      "mark": "#ff3d8b"
+    },
+    "sound": {
+      "bed": {
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12,
+          19
+        ],
+        "brightness": 700,
+        "gain": 0.3
+      },
+      "hum": {
+        "hz": 120,
+        "gain": 0.1
+      },
+      "power": {
+        "click": 0.5,
+        "riser": 0.45,
+        "gain": 0.25
+      },
+      "launch": {
+        "gain": 0.45,
+        "blip": 0.3
+      },
+      "ping": {
+        "hz": 1320,
+        "scale": [
+          0,
+          3,
+          7,
+          10,
+          12,
+          15
+        ],
+        "decay": 0.1,
+        "gain": 0.5
+      },
+      "chime": {
+        "dur": 1.3,
+        "gain": 0.55,
+        "bell": 0.4,
+        "pitch": {
+          "SEARCH": 1,
+          "CODE": 1.189,
+          "ANSWER": 1.498
+        }
+      },
+      "servo": {
+        "hz": 170,
+        "hz2": 250,
+        "gain": 0.3,
+        "tick": 0.4
+      },
+      "split": {
+        "whir": 0.3,
+        "clack": 0.5,
+        "whoosh": 0.5,
+        "sparkle": 0.4
+      }
+    },
+    "sfx": {
+      "enter": "blip",
+      "exit": "whooshOut",
+      "move": "servo",
+      "land": "marimba",
+      "emphasis": "chime",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "The beam is traced exactly from the mirror angles at t; it first arrives along its path at a planned speed.",
+      "A mirror turn is eased (inOutSine); the downstream beam sweeps and re-routes live, nothing is keyframed by hand.",
+      "Hit points flare on arrival then hold a small glow; a target drum lights in its own colour while struck.",
+      "The splitter rises from its well; when the glass meets the beam the fan grows so every child arrives together.",
+      "Camera: locked during holds, one eased move per beat at most."
+    ]
+  },
+  "scene": {
+    "id": "92-laser-mirrors",
+    "style": "laser-mirrors",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "request",
+        "t": 0,
+        "dur": 2.3,
+        "label": "A request enters the agent"
+      },
+      {
+        "id": "search",
+        "t": 2.3,
+        "dur": 3.1,
+        "label": "Mirrors route it to SEARCH"
+      },
+      {
+        "id": "code",
+        "t": 5.4,
+        "dur": 3.1,
+        "label": "One small turn: now CODE"
+      },
+      {
+        "id": "answer",
+        "t": 8.5,
+        "dur": 2.7,
+        "label": "Turn again: the ANSWER"
+      },
+      {
+        "id": "all",
+        "t": 11.2,
+        "dur": 3.8,
+        "label": "Split: every tool at once"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -3.25396,
+          8.17563,
+          8.75743
+        ],
+        "target": [
+          -2.51688,
+          0.57371,
+          1.41121
+        ],
+        "fov": 30
+      },
+      {
+        "t": 1.5,
+        "pos": [
+          -3.25396,
+          8.17563,
+          8.75743
+        ],
+        "target": [
+          -2.51688,
+          0.57371,
+          1.41121
+        ],
+        "fov": 30
+      },
+      {
+        "t": 3.6,
+        "pos": [
+          0,
+          13.00869,
+          10.78177
+        ],
+        "target": [
+          0,
+          0.42144,
+          0.79315
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.5,
+        "pos": [
+          0,
+          13.00869,
+          10.78177
+        ],
+        "target": [
+          0,
+          0.42144,
+          0.79315
+        ],
+        "fov": 30
+      },
+      {
+        "t": 13.6,
+        "pos": [
+          0.84962,
+          10.27432,
+          11.28181
+        ],
+        "target": [
+          -0.46285,
+          0.65857,
+          0.39713
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0.84962,
+          10.27432,
+          11.28181
+        ],
+        "target": [
+          -0.46285,
+          0.65857,
+          0.39713
+        ],
+        "fov": 30
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15.5,
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12,
+          19
+        ],
+        "attack": 0.5,
+        "release": 1.5,
+        "brightness": 700,
+        "gain": 0.3,
+        "seed": 5
+      },
+      {
+        "type": "click",
+        "gain": 0.5,
+        "t": 0.2,
+        "pan": -0.6428571428571429,
+        "seed": 192
+      },
+      {
+        "type": "riser",
+        "dur": 0.45,
+        "gain": 0.25,
+        "t": 0.22,
+        "pan": -0.6428571428571429,
+        "seed": 193
+      },
+      {
+        "t": 0.30000000000000004,
+        "type": "hum",
+        "dur": 14.7,
+        "hz": 120,
+        "gain": 0.1,
+        "seed": 9
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.45,
+        "pitch": 1.5,
+        "gain": 0.45,
+        "t": 0.6,
+        "pan": -0.6428571428571429,
+        "seed": 199
+      },
+      {
+        "type": "blip",
+        "notes": [
+          12
+        ],
+        "dur": 0.07,
+        "gain": 0.3,
+        "t": 0.6,
+        "pan": -0.6428571428571429,
+        "seed": 200
+      },
+      {
+        "type": "marimba",
+        "hz": 1977.7653414772196,
+        "decay": 0.1,
+        "dur": 0.5,
+        "mallet": 0.8,
+        "gain": 0.5,
+        "t": 1.5791666666666666,
+        "pan": 0,
+        "seed": 206
+      },
+      {
+        "type": "marimba",
+        "hz": 2351.972615890496,
+        "decay": 0.1,
+        "dur": 0.5,
+        "mallet": 0.8,
+        "gain": 0.5,
+        "t": 2.3833333333333333,
+        "pan": -0.36999999999999916,
+        "seed": 213
+      },
+      {
+        "type": "marimba",
+        "hz": 2640,
+        "decay": 0.1,
+        "dur": 0.5,
+        "mallet": 0.8,
+        "gain": 0.5,
+        "t": 2.975,
+        "pan": -0.7,
+        "seed": 220
+      },
+      {
+        "type": "chime",
+        "dur": 1.3,
+        "pitch": 1,
+        "notes": 4,
+        "gain": 0.55,
+        "t": 3.625,
+        "pan": -0.689517424396656,
+        "seed": 227
+      },
+      {
+        "type": "marimba",
+        "hz": 660,
+        "decay": 0.3,
+        "dur": 0.9,
+        "gain": 0.4,
+        "t": 3.625,
+        "pan": -0.689517424396656,
+        "seed": 228
+      },
+      {
+        "type": "servo",
+        "dur": 1.7,
+        "hz": 170,
+        "hz2": 250,
+        "grit": 0.2,
+        "gain": 0.3,
+        "t": 5.7,
+        "pan": 0,
+        "seed": 234
+      },
+      {
+        "type": "marimba",
+        "hz": 1569.7533918035917,
+        "decay": 0.1,
+        "dur": 0.5,
+        "mallet": 0.8,
+        "gain": 0.5,
+        "t": 6.4875,
+        "pan": -0.18614973749035912,
+        "seed": 241
+      },
+      {
+        "type": "marimba",
+        "hz": 1977.7653414772196,
+        "decay": 0.1,
+        "dur": 0.5,
+        "mallet": 0.8,
+        "gain": 0.5,
+        "t": 6.966666666666667,
+        "pan": 0.5597038241729352,
+        "seed": 248
+      },
+      {
+        "type": "chime",
+        "dur": 1.3,
+        "pitch": 1.189,
+        "notes": 4,
+        "gain": 0.55,
+        "t": 7.05,
+        "pan": 0.6201772798083472,
+        "seed": 255
+      },
+      {
+        "type": "marimba",
+        "hz": 784.74,
+        "decay": 0.3,
+        "dur": 0.9,
+        "gain": 0.4,
+        "t": 7.05,
+        "pan": 0.6201772798083472,
+        "seed": 256
+      },
+      {
+        "type": "tick",
+        "gain": 0.4,
+        "t": 7.4,
+        "pan": 0,
+        "seed": 235
+      },
+      {
+        "type": "servo",
+        "dur": 1.3,
+        "hz": 170,
+        "hz2": 250,
+        "grit": 0.2,
+        "gain": 0.3,
+        "t": 8.8,
+        "pan": 0,
+        "seed": 262
+      },
+      {
+        "type": "chime",
+        "dur": 1.3,
+        "pitch": 1.498,
+        "notes": 4,
+        "gain": 0.55,
+        "t": 9.675,
+        "pan": -0.06449791089515088,
+        "seed": 269
+      },
+      {
+        "type": "marimba",
+        "hz": 988.68,
+        "decay": 0.3,
+        "dur": 0.9,
+        "gain": 0.4,
+        "t": 9.675,
+        "pan": -0.06449791089515088,
+        "seed": 270
+      },
+      {
+        "type": "tick",
+        "gain": 0.4,
+        "t": 10.100000000000001,
+        "pan": 0,
+        "seed": 263
+      },
+      {
+        "type": "whir",
+        "dur": 0.5358411166387214,
+        "hz": 90,
+        "hz2": 190,
+        "gain": 0.3,
+        "t": 11.399999999999999,
+        "pan": 0,
+        "seed": 276
+      },
+      {
+        "type": "clack",
+        "gain": 0.5,
+        "t": 11.93584111663872,
+        "pan": 0,
+        "seed": 283
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.7,
+        "pitch": 1.2,
+        "gain": 0.5,
+        "t": 11.93584111663872,
+        "pan": 0,
+        "seed": 284
+      },
+      {
+        "type": "chime",
+        "sparkle": true,
+        "dur": 1.6,
+        "gain": 0.4,
+        "t": 11.98584111663872,
+        "pan": 0,
+        "seed": 285
+      },
+      {
+        "type": "chime",
+        "dur": 1.3,
+        "pitch": 1,
+        "notes": 4,
+        "gain": 0.55,
+        "t": 12.5375,
+        "pan": -0.6248321963605334,
+        "seed": 297
+      },
+      {
+        "type": "marimba",
+        "hz": 660,
+        "decay": 0.3,
+        "dur": 0.9,
+        "gain": 0.4,
+        "t": 12.5375,
+        "pan": -0.6248321963605334,
+        "seed": 298
+      },
+      {
+        "type": "chime",
+        "dur": 1.3,
+        "pitch": 1.498,
+        "notes": 4,
+        "gain": 0.55,
+        "t": 12.5375,
+        "pan": 2.1700183367764974e-17,
+        "seed": 304
+      },
+      {
+        "type": "marimba",
+        "hz": 988.68,
+        "decay": 0.3,
+        "dur": 0.9,
+        "gain": 0.4,
+        "t": 12.5375,
+        "pan": 2.1700183367764974e-17,
+        "seed": 305
+      },
+      {
+        "type": "chime",
+        "dur": 1.3,
+        "pitch": 1.189,
+        "notes": 4,
+        "gain": 0.55,
+        "t": 12.5375,
+        "pan": 0.6248321963605343,
+        "seed": 311
+      },
+      {
+        "type": "marimba",
+        "hz": 784.74,
+        "decay": 0.3,
+        "dur": 0.9,
+        "gain": 0.4,
+        "t": 12.5375,
+        "pan": 0.6248321963605343,
+        "seed": 312
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "beamplan.js: exact 2D ray tracer (two-sided mirror segments, absorbing target circles, a splitter that fans child beams); mirror aims are SOLVED per route, a turn eases one mirror between two solved aims and the beam is re-traced from scratch at every t; events/glow come from one 240 Hz scan of that pure function.",
+      "routes": {
+        "SEARCH": {
+          "ok": true,
+          "got": [
+            "M1",
+            "A1",
+            "A2",
+            "SEARCH"
+          ],
+          "length": 13.904424890321868
+        },
+        "CODE": {
+          "ok": true,
+          "got": [
+            "M1",
+            "C1",
+            "C2",
+            "CODE"
+          ],
+          "length": 15.782674472117803
+        },
+        "ANSWER": {
+          "ok": true,
+          "got": [
+            "M1",
+            "ANSWER"
+          ],
+          "length": 8.889999999999999
+        }
+      },
+      "routerTurnsDeg": [
+        -11,
+        -11.2
+      ],
+      "engage": 11.936,
+      "events": 18,
+      "framing": "ok",
+      "mirrorEnds": {
+        "M1": [
+          [
+            -0.25,
+            -2.89
+          ],
+          [
+            0.25,
+            -1.71
+          ]
+        ],
+        "A1": [
+          [
+            -3.2,
+            0.44
+          ],
+          [
+            -1.98,
+            0.24
+          ]
+        ],
+        "A2": [
+          [
+            -5.49,
+            -0.58
+          ],
+          [
+            -4.51,
+            -1.22
+          ]
+        ],
+        "C1": [
+          [
+            -1.3,
+            -0.42
+          ],
+          [
+            -0.6,
+            0.42
+          ]
+        ],
+        "C2": [
+          [
+            3.91,
+            -1.55
+          ],
+          [
+            4.89,
+            -0.85
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,845 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "uv-reveal",
+    "name": "UV Reveal",
+    "description": "Two-layer surface revealed by a moving ultraviolet torch: an ordinary printed page (illustration + dummy text) lies on a warm oak desk under bright room light and shows no trace of anything else. A hand-held UV torch switches on, the room light dims, and inside the torch's violet pool a hidden fluorescent layer glows — a repeating watermark lattice, neon contours, a code strip and a big stamp — in saturated cyan, green and magenta on deep violet paper. The pool position, its radius (torch height and beam zoom) and a short phosphor afterglow behind the moving pool are pure functions of t along a planned torch path (torchplan.js); in the shader the visible print sinks to deep violet and the hidden layer is added to the page's emission only where the pool or afterglow masks are non-zero. Final move: the room goes dark, the torch lifts away, the pool radius grows past the sheet and the whole hidden layer glows at once. Switch click, lamp hum, sweep whooshes, per-mark pings and the flood chime come from the same plan.",
+    "palette": {
+      "bg": "#cdbfae",
+      "bgDark": "#0d0620",
+      "desk": "#b98a5a",
+      "paper": "#f6f2e8",
+      "ink": "#2a2c33",
+      "inkSoft": "#8b8e98",
+      "uv": "#7a3cff",
+      "uvDeep": "#2a1466",
+      "cyan": "#19f0ff",
+      "green": "#56ff7a",
+      "magenta": "#ff2bd6",
+      "lime": "#d8ff3a",
+      "torch": "#2b2e36",
+      "torchGrip": "#16181d",
+      "accent": "#ff7a3c"
+    },
+    "world": {
+      "background": "#cdbfae",
+      "environment": null,
+      "toneMapping": "neutral",
+      "exposure": 1
+    },
+    "materials": {
+      "desk": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.78,
+        "metalness": 0,
+        "map": {
+          "source": "wood",
+          "size": 1024,
+          "boards": 6,
+          "seed": 41,
+          "grainFreq": 20,
+          "contrast": 0.42,
+          "dark": "#8a5f3a",
+          "mid": "#b98a5a",
+          "light": "#d9ae7c",
+          "seam": "#6b4526",
+          "repeat": [
+            2,
+            2
+          ],
+          "description": "warm oak planks, 6 boards per tile, tile = 6 x 4 m"
+        }
+      },
+      "paperEdge": {
+        "type": "standard",
+        "baseColor": "#e9e3d6",
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      "torchBody": {
+        "type": "standard",
+        "baseColor": "#6b7385",
+        "roughness": 0.45,
+        "metalness": 0.25
+      },
+      "torchGrip": {
+        "type": "standard",
+        "baseColor": "#262a33",
+        "roughness": 0.85,
+        "metalness": 0
+      },
+      "torchRing": {
+        "type": "standard",
+        "baseColor": "#d7dbe4",
+        "roughness": 0.4,
+        "metalness": 0.2
+      },
+      "torchLens": {
+        "type": "standard",
+        "baseColor": "#1a1030",
+        "roughness": 0.2,
+        "metalness": 0,
+        "emission": {
+          "color": "#9a66ff",
+          "strength": 0.001
+        }
+      },
+      "pencilWood": {
+        "type": "standard",
+        "baseColor": "#e9c48f",
+        "roughness": 0.8,
+        "metalness": 0
+      },
+      "pencilPaint": {
+        "type": "standard",
+        "baseColor": "#e0572e",
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      "graphite": {
+        "type": "standard",
+        "baseColor": "#2a2c33",
+        "roughness": 0.5,
+        "metalness": 0.2
+      },
+      "marker": {
+        "type": "standard",
+        "baseColor": "#d8ff3a",
+        "roughness": 0.45,
+        "metalness": 0,
+        "emission": {
+          "color": "#c8ff2a",
+          "strength": 0.001
+        }
+      },
+      "markerCap": {
+        "type": "standard",
+        "baseColor": "#23262d",
+        "roughness": 0.5,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#fff6ea",
+        "groundColor": "#a08f7c",
+        "intensity": 1.15
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff1dc",
+        "intensity": 2.1,
+        "position": [
+          -2.6,
+          6,
+          2.8
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 2048,
+          "extent": 3.4,
+          "near": 0.5,
+          "far": 20,
+          "bias": -0.0004,
+          "normalBias": 0.012
+        }
+      },
+      {
+        "id": "uvFill",
+        "type": "hemisphere",
+        "color": "#6a35ff",
+        "groundColor": "#1a0b45",
+        "intensity": 0
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0,
+        "radius": 0.55,
+        "threshold": 0.9
+      },
+      "vignette": {
+        "darkness": 0.3,
+        "offset": 1.1
+      }
+    },
+    "camera": {
+      "fov": 34,
+      "near": 0.2,
+      "far": 60,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#2a2c33",
+      "height": 0.3
+    },
+    "page": {
+      "w": 3.2,
+      "h": 1.8,
+      "thickness": 0.012,
+      "pxPerMetre": 640,
+      "y": 0.012,
+      "roughness": 0.92,
+      "drop": {
+        "from": 0.9,
+        "dur": 0.75,
+        "tilt": 0.16,
+        "yaw": -0.1,
+        "slide": 0.5
+      }
+    },
+    "print": {
+      "font": "\"Georgia\", \"Times New Roman\", serif",
+      "heading": "Morning in the valley",
+      "paper": "#f6f2e8",
+      "ink": "#2a2c33",
+      "bar": "#9a9da6",
+      "barDark": "#5d606a",
+      "rule": "#c9c3b5",
+      "sky": [
+        "#bfe3f5",
+        "#fbe3c2"
+      ],
+      "sun": "#ffc94d",
+      "hills": [
+        "#8fc7a4",
+        "#5fae86",
+        "#3b8a6b"
+      ],
+      "river": "#8fd0ea",
+      "roof": "#d9573c",
+      "wall": "#fbf3e2",
+      "trunk": "#7a5236",
+      "leaf": "#2f7a55",
+      "bird": "#3a3f4a"
+    },
+    "hidden": {
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "cyan": "#19f0ff",
+      "green": "#56ff7a",
+      "magenta": "#ff2bd6",
+      "lime": "#d8ff3a",
+      "mark": "AI",
+      "stamp": "MADE BY AI",
+      "stampSub": "SYNTHETIC IMAGE",
+      "gain": 1.15,
+      "paperGlow": [
+        0.04,
+        0.012,
+        0.14
+      ],
+      "poolTint": [
+        0.22,
+        0.1,
+        0.4
+      ],
+      "shimmer": {
+        "amp": 0.07,
+        "hz": 0.55
+      }
+    },
+    "torch": {
+      "length": 0.95,
+      "radius": 0.085,
+      "headRadius": 0.13,
+      "headLength": 0.24,
+      "lean": [
+        0.6,
+        1,
+        -0.2
+      ],
+      "poolSoft": 0.68,
+      "spot": {
+        "color": "#7d44ff",
+        "candela": 1.9,
+        "penumbra": 0.65
+      },
+      "beam": {
+        "color": "#8a55ff",
+        "opacity": 0.2
+      },
+      "lensGlow": 2.2,
+      "uvFill": {
+        "torch": 0.42,
+        "flood": 1.5
+      },
+      "room": {
+        "torch": 0.3,
+        "flood": 0.045
+      },
+      "bloom": 0.5,
+      "afterglow": {
+        "tau": 0.8,
+        "step": 0.07,
+        "samples": 20,
+        "radius": 0.85
+      },
+      "wobble": {
+        "amp": 0.018,
+        "hz": 0.7
+      }
+    },
+    "caption": {
+      "x": 960,
+      "y": 40,
+      "h": 92,
+      "cap": 40,
+      "maxW": 900,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#15101f",
+      "edge": "#7a3cff",
+      "ink": "#f7f3ff",
+      "dot": "#19f0ff"
+    },
+    "sound": {
+      "bed": {
+        "gain": 0.42,
+        "root": 110,
+        "brightness": 900
+      },
+      "bedUv": {
+        "gain": 0.36,
+        "root": 82.4,
+        "brightness": 1500
+      },
+      "hum": {
+        "gain": 0.16,
+        "hz": 100
+      },
+      "leg": {
+        "gain": 0.32
+      },
+      "hit": {
+        "gain": 0.3
+      },
+      "stamp": {
+        "gain": 0.5
+      },
+      "flood": {
+        "gain": 0.6
+      }
+    },
+    "sfx": {
+      "enter": "paper",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "thud",
+      "emphasis": "chime",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "The torch pool follows a planned path (timed Hermite keys + a tiny hand-held sway); hidden ink glows only inside the pool mask.",
+      "Afterglow: the mask is also the max over the last ~1.4 s of pool positions, weighted e^(-age/tau) — a fading phosphor trail.",
+      "Switch-on dims the room over ~0.6 s; the final flood kills the room light, lifts the torch away and grows the pool past the sheet.",
+      "Camera: one slow push while the torch works, then one rise to a top shot that fills the frame with the glowing sheet."
+    ]
+  },
+  "scene": {
+    "id": "89-uv-reveal",
+    "style": "uv-reveal",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "page",
+        "t": 0,
+        "dur": 2.9,
+        "label": "A normal printed page"
+      },
+      {
+        "id": "torch",
+        "t": 2.9,
+        "dur": 2.1,
+        "label": "Switch on a UV torch"
+      },
+      {
+        "id": "sweep",
+        "t": 5,
+        "dur": 3.7,
+        "label": "Hidden ink starts to glow"
+      },
+      {
+        "id": "stamp",
+        "t": 8.7,
+        "dur": 2.6,
+        "label": "A stamp you never saw"
+      },
+      {
+        "id": "reveal",
+        "t": 11.3,
+        "dur": 3.7,
+        "label": "AI's invisible watermark"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0.22056,
+          3.42828,
+          2.67983
+        ],
+        "target": [
+          -0.04932,
+          0.02174,
+          -0.00992
+        ],
+        "fov": 34
+      },
+      {
+        "t": 1,
+        "pos": [
+          0.22056,
+          3.42828,
+          2.67983
+        ],
+        "target": [
+          -0.04932,
+          0.02174,
+          -0.00992
+        ],
+        "fov": 34
+      },
+      {
+        "t": 4.5,
+        "pos": [
+          0.05955,
+          3.3033,
+          1.99064
+        ],
+        "target": [
+          -0.02099,
+          0.02397,
+          -0.02192
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.200000000000001,
+        "pos": [
+          0.05955,
+          3.3033,
+          1.99064
+        ],
+        "target": [
+          -0.02099,
+          0.02397,
+          -0.02192
+        ],
+        "fov": 34
+      },
+      {
+        "t": 13.4,
+        "pos": [
+          0,
+          3.01855,
+          0.23169
+        ],
+        "target": [
+          0,
+          0.00871,
+          0.01825
+        ],
+        "fov": 34,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0,
+          3.01855,
+          0.23169
+        ],
+        "target": [
+          0,
+          0.00871,
+          0.01825
+        ],
+        "fov": 34
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "type": "pad",
+        "dur": 5.1,
+        "gain": 0.42,
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "brightness": 900,
+        "attack": 0.4,
+        "release": 1.2,
+        "t": 0,
+        "pan": 0,
+        "seed": 211
+      },
+      {
+        "type": "paper",
+        "dur": 0.6,
+        "gain": 0.5,
+        "fold": false,
+        "t": 0.05,
+        "pan": 0,
+        "seed": 218
+      },
+      {
+        "type": "thud",
+        "dur": 0.25,
+        "gain": 0.25,
+        "t": 0.67,
+        "pan": 0,
+        "seed": 219
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.6,
+        "gain": 0.32,
+        "q": 2.2,
+        "t": 1,
+        "pan": 0,
+        "seed": 225
+      },
+      {
+        "type": "pad",
+        "dur": 11.899999999999999,
+        "gain": 0.36,
+        "root": 82.4,
+        "chord": [
+          0,
+          7,
+          12,
+          15,
+          22
+        ],
+        "brightness": 1500,
+        "attack": 0.8,
+        "release": 0.6,
+        "t": 3.0999999999999996,
+        "pan": 0,
+        "seed": 232
+      },
+      {
+        "type": "clack",
+        "dur": 0.1,
+        "gain": 0.7,
+        "t": 3.3,
+        "pan": 0,
+        "seed": 239
+      },
+      {
+        "type": "hum",
+        "dur": 9.400000000000002,
+        "hz": 100,
+        "gain": 0.16,
+        "t": 3.3,
+        "pan": 0,
+        "seed": 246
+      },
+      {
+        "type": "thud",
+        "dur": 0.5,
+        "gain": 0.4,
+        "t": 3.34,
+        "pan": 0,
+        "seed": 240
+      },
+      {
+        "type": "blip",
+        "dur": 0.07,
+        "notes": [
+          31
+        ],
+        "gain": 0.3,
+        "pan": -0.6927083333333334,
+        "t": 3.3666666666666667,
+        "seed": 253
+      },
+      {
+        "type": "blip",
+        "dur": 0.07,
+        "notes": [
+          12
+        ],
+        "gain": 0.3,
+        "pan": -0.16319444444444453,
+        "t": 4.833333333333333,
+        "seed": 260
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.5,
+        "gain": 0.32,
+        "q": 2.2,
+        "t": 5,
+        "pan": 0,
+        "seed": 267
+      },
+      {
+        "type": "blip",
+        "dur": 0.07,
+        "notes": [
+          19
+        ],
+        "gain": 0.3,
+        "pan": -0.013888888888888963,
+        "t": 5.3,
+        "seed": 274
+      },
+      {
+        "type": "blip",
+        "dur": 0.07,
+        "notes": [
+          22
+        ],
+        "gain": 0.3,
+        "pan": 0.2170138888888889,
+        "t": 5.566666666666666,
+        "seed": 281
+      },
+      {
+        "type": "blip",
+        "dur": 0.07,
+        "notes": [
+          24
+        ],
+        "gain": 0.3,
+        "pan": 0.36631944444444436,
+        "t": 5.8,
+        "seed": 288
+      },
+      {
+        "type": "blip",
+        "dur": 0.07,
+        "notes": [
+          27
+        ],
+        "gain": 0.3,
+        "pan": 0.5972222222222221,
+        "t": 6.133333333333334,
+        "seed": 295
+      },
+      {
+        "type": "blip",
+        "dur": 0.07,
+        "notes": [
+          31
+        ],
+        "gain": 0.3,
+        "pan": 0.7,
+        "t": 6.566666666666666,
+        "seed": 302
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.6,
+        "gain": 0.32,
+        "q": 2.2,
+        "t": 6.7,
+        "pan": 0,
+        "seed": 309
+      },
+      {
+        "type": "blip",
+        "dur": 0.07,
+        "notes": [
+          15
+        ],
+        "gain": 0.3,
+        "pan": 0.6927083333333331,
+        "t": 6.9,
+        "seed": 316
+      },
+      {
+        "type": "blip",
+        "dur": 0.07,
+        "notes": [
+          19
+        ],
+        "gain": 0.3,
+        "pan": 0.7,
+        "t": 7.133333333333334,
+        "seed": 323
+      },
+      {
+        "type": "blip",
+        "dur": 0.07,
+        "notes": [
+          22
+        ],
+        "gain": 0.3,
+        "pan": 0.3125,
+        "t": 7.433333333333334,
+        "seed": 330
+      },
+      {
+        "type": "blip",
+        "dur": 0.07,
+        "notes": [
+          24
+        ],
+        "gain": 0.3,
+        "pan": 0.16319444444444442,
+        "t": 7.633333333333334,
+        "seed": 337
+      },
+      {
+        "type": "blip",
+        "dur": 0.07,
+        "notes": [
+          27
+        ],
+        "gain": 0.3,
+        "pan": -0.2170138888888889,
+        "t": 8.066666666666666,
+        "seed": 344
+      },
+      {
+        "type": "blip",
+        "dur": 0.07,
+        "notes": [
+          31
+        ],
+        "gain": 0.3,
+        "pan": -0.5972222222222223,
+        "t": 8.4,
+        "seed": 351
+      },
+      {
+        "type": "blip",
+        "dur": 0.07,
+        "notes": [
+          12
+        ],
+        "gain": 0.3,
+        "pan": -0.7,
+        "t": 8.733333333333333,
+        "seed": 358
+      },
+      {
+        "type": "chime",
+        "dur": 1.4,
+        "notes": 4,
+        "gain": 0.5,
+        "t": 9,
+        "pan": 0,
+        "seed": 365
+      },
+      {
+        "type": "thud",
+        "dur": 0.4,
+        "gain": 0.45,
+        "t": 9,
+        "pan": 0,
+        "seed": 366
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.7,
+        "gain": 0.32,
+        "q": 2.2,
+        "t": 9.2,
+        "pan": 0,
+        "seed": 372
+      },
+      {
+        "type": "clack",
+        "dur": 0.12,
+        "gain": 0.8,
+        "t": 11.3,
+        "pan": 0,
+        "seed": 379
+      },
+      {
+        "type": "riser",
+        "dur": 0.75,
+        "gain": 0.4,
+        "t": 11.3,
+        "pan": 0,
+        "seed": 380
+      },
+      {
+        "type": "rumble",
+        "dur": 2.2,
+        "gain": 0.35,
+        "t": 11.3,
+        "pan": 0,
+        "seed": 381
+      },
+      {
+        "type": "chime",
+        "sparkle": true,
+        "dur": 2.4,
+        "notes": 8,
+        "gain": 0.6,
+        "t": 12.07,
+        "pan": 0,
+        "seed": 386
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1.4,
+        "gain": 0.4,
+        "t": 12.07,
+        "pan": 0,
+        "seed": 387
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "torchplan.js: pool(t) = timed Hermite keys + hand sway; glow mask = lamp(t) x (1 - smoothstep(soft r, r, d)) max'ed with 20 afterglow samples weighted e^(-age/tau); the hidden layer is added to the sheet's emission x mask in the shader. Room level, uvFill, bloom and the spot follow roomAt / onAt / floodAt.",
+      "switchOn": 3.3,
+      "lightsOff": 11.3,
+      "stampFoundAt": 9,
+      "markPings": 14,
+      "framing": "ok (worst 1.0213 at 12.6s)",
+      "fill": {
+        "minW": 0.774,
+        "endW": 1,
+        "endH": 0.976,
+        "ok": true
+      },
+      "content": "The page, its illustration and the hidden marks are original and generic; the watermark/stamp are an analogy for invisible AI-content watermarks, not a depiction of any real scheme."
+    }
+  }
+}

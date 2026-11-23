@@ -1,0 +1,1792 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "tessellation-morph",
+    "name": "Tessellation Morph",
+    "description": "A wall of interlocking cut-paper tiles in two alternating colours, bevelled and layered so it is clearly 3D, where every tile is the same creature and the creature morphs smoothly (plain tile -> fish -> bird) without ever leaving a gap. Each lattice cell is a parallelogram whose opposite sides are one shared curve: what bulges out of one side is cut from the other, so any curve tiles. Key shapes are pairs of curves; the morph interpolates them point by point, and because each edge carries its own morph value the wall can show the whole transition in one frame, left to right. Eyes, gills, a beak and wing lines fade in only near a key shape. Tiles can leave the wall: a row of birds lifts off, folds along its body line to flap, and flies out, leaving bird-shaped holes. Whooshes, clicks and flutters come from the same morph plan.",
+    "palette": {
+      "bg": "#e9603f",
+      "cream": "#f4ead4",
+      "navy": "#1c3d61",
+      "backing": "#e9603f",
+      "accent": "#f0683f",
+      "ink": "#14263b",
+      "plate": "#14263b",
+      "plateInk": "#f7efdc"
+    },
+    "world": {
+      "background": "#e9603f",
+      "fog": null,
+      "environment": "room",
+      "environmentIntensity": 0.3,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "tile": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.82,
+        "metalness": 0,
+        "vertexColors": true,
+        "map": {
+          "source": "paper",
+          "size": 512,
+          "base": "#ffffff",
+          "fiber": 0.035,
+          "grain": 0.03,
+          "seed": 93,
+          "variant": "even",
+          "description": "faint even paper fibre, multiplied over the tile colour"
+        }
+      },
+      "ink": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.75,
+        "metalness": 0,
+        "vertexColors": true
+      },
+      "backing": {
+        "type": "standard",
+        "baseColor": "#e9603f",
+        "roughness": 0.9,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#b9b2c4",
+        "intensity": 1.15
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff3df",
+        "intensity": 2.1,
+        "position": [
+          -7.5,
+          8.5,
+          9.5
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 2.2,
+          "mapSize": 4096,
+          "extent": 13,
+          "near": 1,
+          "far": 40,
+          "bias": -0.0006,
+          "normalBias": 0.012
+        }
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.22,
+        "offset": 1.2
+      }
+    },
+    "camera": {
+      "fov": 35,
+      "near": 1,
+      "far": 60,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "rounded",
+      "weight": 800,
+      "color": "#14263b",
+      "height": 0.4
+    },
+    "tiling": {
+      "size": 2,
+      "a": [
+        0.5,
+        -0.5
+      ],
+      "b": [
+        0.5,
+        0.5
+      ],
+      "per": 4,
+      "keys": [
+        {
+          "id": "square",
+          "name": "plain tile",
+          "a": [
+            [
+              0,
+              0
+            ],
+            [
+              0.08333333333333333,
+              -0.08333333333333333
+            ],
+            [
+              0.16666666666666666,
+              -0.16666666666666666
+            ],
+            [
+              0.25,
+              -0.25
+            ],
+            [
+              0.3333333333333333,
+              -0.3333333333333333
+            ],
+            [
+              0.4166666666666667,
+              -0.4166666666666667
+            ],
+            [
+              0.5,
+              -0.5
+            ]
+          ],
+          "b": [
+            [
+              0,
+              0
+            ],
+            [
+              0.08333333333333333,
+              0.08333333333333333
+            ],
+            [
+              0.16666666666666666,
+              0.16666666666666666
+            ],
+            [
+              0.25,
+              0.25
+            ],
+            [
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            [
+              0.4166666666666667,
+              0.4166666666666667
+            ],
+            [
+              0.5,
+              0.5
+            ]
+          ],
+          "details": []
+        },
+        {
+          "id": "fish",
+          "name": "fish",
+          "b": [
+            [
+              0,
+              0
+            ],
+            [
+              0.03,
+              0.17
+            ],
+            [
+              -0.02,
+              0.33,
+              1
+            ],
+            [
+              0.12,
+              0.17
+            ],
+            [
+              0.25,
+              0.15
+            ],
+            [
+              0.38,
+              0.3
+            ],
+            [
+              0.5,
+              0.5
+            ]
+          ],
+          "a": [
+            [
+              0,
+              0
+            ],
+            [
+              0.03,
+              -0.15
+            ],
+            [
+              -0.01,
+              -0.29,
+              1
+            ],
+            [
+              0.12,
+              -0.15
+            ],
+            [
+              0.26,
+              -0.13
+            ],
+            [
+              0.4,
+              -0.29
+            ],
+            [
+              0.5,
+              -0.5
+            ]
+          ],
+          "details": [
+            {
+              "type": "eye",
+              "at": [
+                0.79,
+                0.06
+              ],
+              "r": 0.04
+            },
+            {
+              "type": "stroke",
+              "pts": [
+                [
+                  0.66,
+                  0.17
+                ],
+                [
+                  0.632,
+                  0.09
+                ],
+                [
+                  0.626,
+                  0
+                ],
+                [
+                  0.636,
+                  -0.08
+                ],
+                [
+                  0.664,
+                  -0.15
+                ]
+              ],
+              "w": 0.024
+            }
+          ]
+        },
+        {
+          "id": "bird",
+          "name": "bird",
+          "b": [
+            [
+              0,
+              0
+            ],
+            [
+              0.03,
+              0.07
+            ],
+            [
+              0.01,
+              0.14,
+              1
+            ],
+            [
+              0.12,
+              0.07
+            ],
+            [
+              0.27,
+              0.1
+            ],
+            [
+              0.35,
+              0.36
+            ],
+            [
+              0.5,
+              0.5
+            ]
+          ],
+          "a": [
+            [
+              0,
+              0
+            ],
+            [
+              0.1,
+              -0.2
+            ],
+            [
+              0.18,
+              -0.35
+            ],
+            [
+              0.28,
+              -0.4
+            ],
+            [
+              0.37,
+              -0.37
+            ],
+            [
+              0.44,
+              -0.43
+            ],
+            [
+              0.5,
+              -0.5
+            ]
+          ],
+          "details": [
+            {
+              "type": "eye",
+              "at": [
+                0.862,
+                0.045
+              ],
+              "r": 0.027
+            },
+            {
+              "type": "beak",
+              "pts": [
+                [
+                  0.992,
+                  0
+                ],
+                [
+                  0.94,
+                  0.052
+                ],
+                [
+                  0.928,
+                  -0.048
+                ]
+              ]
+            },
+            {
+              "type": "stroke",
+              "pts": [
+                [
+                  0.33,
+                  0.14
+                ],
+                [
+                  0.44,
+                  0.06
+                ],
+                [
+                  0.57,
+                  0.06
+                ],
+                [
+                  0.665,
+                  0.15
+                ]
+              ],
+              "w": 0.013
+            },
+            {
+              "type": "stroke",
+              "pts": [
+                [
+                  0.43,
+                  0.17
+                ],
+                [
+                  0.455,
+                  0.27
+                ],
+                [
+                  0.49,
+                  0.37
+                ]
+              ],
+              "w": 0.01
+            },
+            {
+              "type": "stroke",
+              "pts": [
+                [
+                  0.53,
+                  0.16
+                ],
+                [
+                  0.535,
+                  0.24
+                ],
+                [
+                  0.545,
+                  0.31
+                ]
+              ],
+              "w": 0.01
+            }
+          ]
+        }
+      ],
+      "detail": {
+        "lo": 0.72,
+        "hi": 0.97
+      }
+    },
+    "tile": {
+      "heights": [
+        0.24,
+        0.13
+      ],
+      "bevelW": 0.045,
+      "bevelH": 0.04,
+      "tint": 0.035,
+      "chamferShade": 0.96,
+      "sideShade": 0.86,
+      "miterMax": 2.2,
+      "chordInset": 1.4,
+      "uvScale": 3.2,
+      "inkLift": 0.004,
+      "tap": {
+        "depth": 0.06,
+        "dur": 0.28
+      }
+    },
+    "caption": {
+      "x": 960,
+      "y": 846,
+      "w": 920,
+      "h": 168,
+      "cap": 46,
+      "textY": 66,
+      "slider": {
+        "x0": 150,
+        "y": 140,
+        "icon": 52,
+        "lift": 34
+      },
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "weight": 700,
+      "plate": "#14263b",
+      "edge": "#f7efdc",
+      "ink": "#f7efdc",
+      "accent": "#f0683f",
+      "dim": "#6f8199"
+    },
+    "sound": {
+      "morph": {
+        "gain": 0.3,
+        "q": 1.4,
+        "pitch": 0.9
+      },
+      "slide": {
+        "gain": 0.26,
+        "pitch": 1.25
+      },
+      "tap": {
+        "gain": 0.085,
+        "max": 0.4,
+        "pressPitch": 0.8,
+        "homePitch": 1.35
+      },
+      "lift": {
+        "gain": 0.36,
+        "pitch": 1,
+        "rustle": 0.22,
+        "chime": 0.3
+      },
+      "flap": {
+        "gain": 0.1
+      },
+      "bed": {
+        "gain": 0.85,
+        "root": 146.8,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "brightness": 850
+      }
+    },
+    "sfx": {
+      "enter": "click",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "click",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Nothing translates: the tiles stay on their lattice and only the two shared edge curves change, so the wall is gap-free at every instant.",
+      "A morph rolls across the wall (a per-position delay), and each tile dips and clicks home when it reaches a key shape; eyes and marks pop in only near a key.",
+      "The morph value can be a left-to-right gradient that slides, so one frame shows plain tile -> fish -> bird.",
+      "A row of tiles can leave the wall: lift straight out, fold along the body line to flap, then fly forward and out (closed-form pose), leaving a coral hole of its own shape.",
+      "Camera: locked shots joined by short eased moves; no drift."
+    ]
+  },
+  "scene": {
+    "id": "93-tessellation-morph",
+    "style": "tessellation-morph",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "tiles",
+        "t": 0,
+        "dur": 2.2,
+        "label": "Start with plain tiles"
+      },
+      {
+        "id": "fish",
+        "t": 2.2,
+        "dur": 3,
+        "label": "Bend the edges: fish"
+      },
+      {
+        "id": "birds",
+        "t": 5.2,
+        "dur": 3.2,
+        "label": "Slide further: birds"
+      },
+      {
+        "id": "space",
+        "t": 8.4,
+        "dur": 3.2,
+        "label": "Latent space, on one wall"
+      },
+      {
+        "id": "fly",
+        "t": 11.6,
+        "dur": 3.4,
+        "label": "Then an idea takes off"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -2.6,
+          2.2,
+          10.6
+        ],
+        "target": [
+          0.4,
+          0.15,
+          0
+        ],
+        "fov": 35
+      },
+      {
+        "t": 2.4000000000000004,
+        "pos": [
+          -1.6,
+          1.6,
+          9.7
+        ],
+        "target": [
+          0.6,
+          0.1,
+          0
+        ],
+        "fov": 35,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 8.5,
+        "pos": [
+          -1.6,
+          1.6,
+          9.7
+        ],
+        "target": [
+          0.6,
+          0.1,
+          0
+        ],
+        "fov": 35
+      },
+      {
+        "t": 10.4,
+        "pos": [
+          0.2,
+          0.6,
+          21.5
+        ],
+        "target": [
+          0.2,
+          -0.2,
+          0
+        ],
+        "fov": 35,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 11.7,
+        "pos": [
+          0.2,
+          0.6,
+          21.5
+        ],
+        "target": [
+          0.2,
+          -0.2,
+          0
+        ],
+        "fov": 35
+      },
+      {
+        "t": 13.8,
+        "pos": [
+          9.5,
+          -0.8,
+          18
+        ],
+        "target": [
+          4.5,
+          1,
+          2
+        ],
+        "fov": 35,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          10,
+          -0.4,
+          18.6
+        ],
+        "target": [
+          6.3,
+          1.9,
+          3.6
+        ],
+        "fov": 35,
+        "ease": "linear"
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "root": 146.8,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "dur": 15,
+        "attack": 0.5,
+        "release": 1.6,
+        "brightness": 850,
+        "gain": 0.85,
+        "seed": 3
+      },
+      {
+        "type": "click",
+        "gain": 0.17,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 0.125,
+        "pan": 0,
+        "seed": 193
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 0.3125,
+        "pan": 0,
+        "seed": 200
+      },
+      {
+        "type": "click",
+        "gain": 0.17,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 0.4375,
+        "pan": 0,
+        "seed": 207
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 0.5,
+        "pan": 0,
+        "seed": 214
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 0.5625,
+        "pan": 0,
+        "seed": 221
+      },
+      {
+        "type": "click",
+        "gain": 0.281913107180209,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 0.6875,
+        "pan": 0,
+        "seed": 228
+      },
+      {
+        "type": "click",
+        "gain": 0.20820662813657012,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 0.75,
+        "pan": 0,
+        "seed": 235
+      },
+      {
+        "type": "click",
+        "gain": 0.17,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 0.875,
+        "pan": 0,
+        "seed": 242
+      },
+      {
+        "type": "click",
+        "gain": 0.2687936011143123,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 0.9375,
+        "pan": 0,
+        "seed": 249
+      },
+      {
+        "type": "click",
+        "gain": 0.1202081528017131,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 1,
+        "pan": 0,
+        "seed": 256
+      },
+      {
+        "type": "click",
+        "gain": 0.17,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 1.0625,
+        "pan": 0,
+        "seed": 263
+      },
+      {
+        "type": "click",
+        "gain": 0.281913107180209,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 1.125,
+        "pan": 0,
+        "seed": 270
+      },
+      {
+        "type": "click",
+        "gain": 0.17,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 1.25,
+        "pan": 0,
+        "seed": 277
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 1.3125,
+        "pan": 0,
+        "seed": 284
+      },
+      {
+        "type": "click",
+        "gain": 0.14722431864335458,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 1.375,
+        "pan": 0,
+        "seed": 291
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 1.4375,
+        "pan": 0,
+        "seed": 298
+      },
+      {
+        "type": "click",
+        "gain": 0.20820662813657012,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 1.5,
+        "pan": 0,
+        "seed": 305
+      },
+      {
+        "type": "click",
+        "gain": 0.14722431864335458,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 1.5625,
+        "pan": 0,
+        "seed": 312
+      },
+      {
+        "type": "click",
+        "gain": 0.19006577808748215,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 1.625,
+        "pan": 0,
+        "seed": 319
+      },
+      {
+        "type": "click",
+        "gain": 0.1202081528017131,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 1.6875,
+        "pan": 0,
+        "seed": 326
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 1.75,
+        "pan": 0,
+        "seed": 333
+      },
+      {
+        "type": "click",
+        "gain": 0.085,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 1.8125,
+        "pan": 0,
+        "seed": 340
+      },
+      {
+        "type": "click",
+        "gain": 0.17,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 1.875,
+        "pan": 0,
+        "seed": 347
+      },
+      {
+        "type": "click",
+        "gain": 0.19006577808748215,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 1.9375,
+        "pan": 0,
+        "seed": 354
+      },
+      {
+        "type": "click",
+        "gain": 0.14722431864335458,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2,
+        "pan": 0,
+        "seed": 361
+      },
+      {
+        "type": "click",
+        "gain": 0.14722431864335458,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2.0625,
+        "pan": 0,
+        "seed": 368
+      },
+      {
+        "type": "click",
+        "gain": 0.17,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2.125,
+        "pan": 0,
+        "seed": 375
+      },
+      {
+        "type": "click",
+        "gain": 0.19006577808748215,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2.1875,
+        "pan": 0,
+        "seed": 382
+      },
+      {
+        "type": "click",
+        "gain": 0.085,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2.25,
+        "pan": 0,
+        "seed": 389
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 2.3449999999999998,
+        "gain": 0.3,
+        "q": 1.4,
+        "pitch": 1.0080000000000002,
+        "t": 2.3000000000000003,
+        "pan": 0,
+        "seed": 396
+      },
+      {
+        "type": "click",
+        "gain": 0.20820662813657012,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2.3125,
+        "pan": 0,
+        "seed": 403
+      },
+      {
+        "type": "click",
+        "gain": 0.1202081528017131,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2.375,
+        "pan": 0,
+        "seed": 410
+      },
+      {
+        "type": "click",
+        "gain": 0.17,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2.4375,
+        "pan": 0,
+        "seed": 417
+      },
+      {
+        "type": "click",
+        "gain": 0.14722431864335458,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2.5,
+        "pan": 0,
+        "seed": 424
+      },
+      {
+        "type": "click",
+        "gain": 0.17,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2.5625,
+        "pan": 0,
+        "seed": 431
+      },
+      {
+        "type": "click",
+        "gain": 0.14722431864335458,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2.625,
+        "pan": 0,
+        "seed": 438
+      },
+      {
+        "type": "click",
+        "gain": 0.14722431864335458,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2.6875,
+        "pan": 0,
+        "seed": 445
+      },
+      {
+        "type": "click",
+        "gain": 0.19006577808748215,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2.75,
+        "pan": 0,
+        "seed": 452
+      },
+      {
+        "type": "click",
+        "gain": 0.085,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2.8125,
+        "pan": 0,
+        "seed": 459
+      },
+      {
+        "type": "click",
+        "gain": 0.1202081528017131,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2.875,
+        "pan": 0,
+        "seed": 466
+      },
+      {
+        "type": "click",
+        "gain": 0.085,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 2.9375,
+        "pan": 0,
+        "seed": 473
+      },
+      {
+        "type": "click",
+        "gain": 0.085,
+        "pitch": 0.8,
+        "dur": 0.03,
+        "t": 3.0625,
+        "pan": 0,
+        "seed": 480
+      },
+      {
+        "type": "click",
+        "gain": 0.4,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 3.625,
+        "pan": 0,
+        "seed": 487
+      },
+      {
+        "type": "click",
+        "gain": 0.3292035844276305,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 3.6875,
+        "pan": 0,
+        "seed": 494
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 3.75,
+        "pan": 0,
+        "seed": 501
+      },
+      {
+        "type": "click",
+        "gain": 0.3292035844276305,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 3.8125,
+        "pan": 0,
+        "seed": 508
+      },
+      {
+        "type": "click",
+        "gain": 0.22488886144049022,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 3.875,
+        "pan": 0,
+        "seed": 515
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 3.9375,
+        "pan": 0,
+        "seed": 522
+      },
+      {
+        "type": "click",
+        "gain": 0.3292035844276305,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 4,
+        "pan": 0,
+        "seed": 529
+      },
+      {
+        "type": "click",
+        "gain": 0.22488886144049022,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 4.0625,
+        "pan": 0,
+        "seed": 536
+      },
+      {
+        "type": "click",
+        "gain": 0.3292035844276305,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 4.125,
+        "pan": 0,
+        "seed": 543
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 4.1875,
+        "pan": 0,
+        "seed": 550
+      },
+      {
+        "type": "click",
+        "gain": 0.22488886144049022,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 4.25,
+        "pan": 0,
+        "seed": 557
+      },
+      {
+        "type": "click",
+        "gain": 0.3292035844276305,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 4.3125,
+        "pan": 0,
+        "seed": 564
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 4.375,
+        "pan": 0,
+        "seed": 571
+      },
+      {
+        "type": "click",
+        "gain": 0.22488886144049022,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 4.4375,
+        "pan": 0,
+        "seed": 578
+      },
+      {
+        "type": "click",
+        "gain": 0.3292035844276305,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 4.5,
+        "pan": 0,
+        "seed": 585
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 4.5625,
+        "pan": 0,
+        "seed": 592
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 2.3449999999999998,
+        "gain": 0.3,
+        "q": 1.4,
+        "pitch": 1.116,
+        "t": 5.3,
+        "pan": 0,
+        "seed": 599
+      },
+      {
+        "type": "click",
+        "gain": 0.4,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 6.625,
+        "pan": 0,
+        "seed": 606
+      },
+      {
+        "type": "click",
+        "gain": 0.3292035844276305,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 6.6875,
+        "pan": 0,
+        "seed": 613
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 6.75,
+        "pan": 0,
+        "seed": 620
+      },
+      {
+        "type": "click",
+        "gain": 0.3292035844276305,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 6.8125,
+        "pan": 0,
+        "seed": 627
+      },
+      {
+        "type": "click",
+        "gain": 0.22488886144049022,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 6.875,
+        "pan": 0,
+        "seed": 634
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 6.9375,
+        "pan": 0,
+        "seed": 641
+      },
+      {
+        "type": "click",
+        "gain": 0.3292035844276305,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 7,
+        "pan": 0,
+        "seed": 648
+      },
+      {
+        "type": "click",
+        "gain": 0.22488886144049022,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 7.0625,
+        "pan": 0,
+        "seed": 655
+      },
+      {
+        "type": "click",
+        "gain": 0.3292035844276305,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 7.125,
+        "pan": 0,
+        "seed": 662
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 7.1875,
+        "pan": 0,
+        "seed": 669
+      },
+      {
+        "type": "click",
+        "gain": 0.22488886144049022,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 7.25,
+        "pan": 0,
+        "seed": 676
+      },
+      {
+        "type": "click",
+        "gain": 0.3292035844276305,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 7.3125,
+        "pan": 0,
+        "seed": 683
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 7.375,
+        "pan": 0,
+        "seed": 690
+      },
+      {
+        "type": "click",
+        "gain": 0.22488886144049022,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 7.4375,
+        "pan": 0,
+        "seed": 697
+      },
+      {
+        "type": "click",
+        "gain": 0.3292035844276305,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 7.5,
+        "pan": 0,
+        "seed": 704
+      },
+      {
+        "type": "click",
+        "gain": 0.2404163056034262,
+        "pitch": 1.35,
+        "dur": 0.03,
+        "t": 7.5625,
+        "pan": 0,
+        "seed": 711
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.9,
+        "gain": 0.3,
+        "q": 1.4,
+        "pitch": 0.9,
+        "t": 8.450000000000001,
+        "pan": 0,
+        "seed": 718
+      },
+      {
+        "t": 8.5,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1.9000000000000004,
+        "gain": 0.2,
+        "seed": 5
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1.4,
+        "gain": 0.26,
+        "pitch": 1.25,
+        "t": 11.6,
+        "pan": 0,
+        "seed": 725
+      },
+      {
+        "t": 11.7,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 2.1000000000000014,
+        "gain": 0.18,
+        "seed": 7
+      },
+      {
+        "type": "pop",
+        "gain": 0.36,
+        "pitch": 1,
+        "t": 12.049999999999999,
+        "pan": 0,
+        "seed": 732
+      },
+      {
+        "type": "paper",
+        "gain": 0.22,
+        "dur": 0.4,
+        "density": 0.5,
+        "t": 12.049999999999999,
+        "pan": 0,
+        "seed": 733
+      },
+      {
+        "type": "chime",
+        "gain": 0.3,
+        "dur": 1.6,
+        "notes": 5,
+        "t": 12.049999999999999,
+        "pan": 0,
+        "seed": 734
+      },
+      {
+        "type": "pop",
+        "gain": 0.36,
+        "pitch": 1.07,
+        "t": 12.27,
+        "pan": 0,
+        "seed": 739
+      },
+      {
+        "type": "paper",
+        "gain": 0.22,
+        "dur": 0.4,
+        "density": 0.5,
+        "t": 12.27,
+        "pan": 0,
+        "seed": 740
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 12.423328935206392,
+        "pan": 0,
+        "seed": 746
+      },
+      {
+        "type": "pop",
+        "gain": 0.36,
+        "pitch": 1.1400000000000001,
+        "t": 12.489999999999998,
+        "pan": 0,
+        "seed": 753
+      },
+      {
+        "type": "paper",
+        "gain": 0.22,
+        "dur": 0.4,
+        "density": 0.5,
+        "t": 12.489999999999998,
+        "pan": 0,
+        "seed": 754
+      },
+      {
+        "type": "pop",
+        "gain": 0.36,
+        "pitch": 1.21,
+        "t": 12.709999999999999,
+        "pan": 0,
+        "seed": 760
+      },
+      {
+        "type": "paper",
+        "gain": 0.22,
+        "dur": 0.4,
+        "density": 0.5,
+        "t": 12.709999999999999,
+        "pan": 0,
+        "seed": 761
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 12.839995601873058,
+        "pan": 0,
+        "seed": 767
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 12.865102835709486,
+        "pan": 0,
+        "seed": 774
+      },
+      {
+        "type": "pop",
+        "gain": 0.36,
+        "pitch": 1.28,
+        "t": 12.93,
+        "pan": 0,
+        "seed": 781
+      },
+      {
+        "type": "paper",
+        "gain": 0.22,
+        "dur": 0.4,
+        "density": 0.5,
+        "t": 12.93,
+        "pan": 0,
+        "seed": 782
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 13.176434982510639,
+        "pan": 0,
+        "seed": 788
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 13.256662268539726,
+        "pan": 0,
+        "seed": 795
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 13.263760355049582,
+        "pan": 0,
+        "seed": 802
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 13.281769502376152,
+        "pan": 0,
+        "seed": 809
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 13.299720219869343,
+        "pan": 0,
+        "seed": 816
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 13.593101649177306,
+        "pan": 0,
+        "seed": 823
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 13.673328935206392,
+        "pan": 0,
+        "seed": 830
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 13.680427021716248,
+        "pan": 0,
+        "seed": 837
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 13.698436169042818,
+        "pan": 0,
+        "seed": 844
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 13.716386886536009,
+        "pan": 0,
+        "seed": 851
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 14.009768315843973,
+        "pan": 0,
+        "seed": 858
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 14.08999560187306,
+        "pan": 0,
+        "seed": 865
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 14.097093688382914,
+        "pan": 0,
+        "seed": 872
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 14.115102835709486,
+        "pan": 0,
+        "seed": 879
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 14.133053553202677,
+        "pan": 0,
+        "seed": 886
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 14.426434982510639,
+        "pan": 0,
+        "seed": 893
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 14.506662268539726,
+        "pan": 0,
+        "seed": 900
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 14.513760355049582,
+        "pan": 0,
+        "seed": 907
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 14.531769502376152,
+        "pan": 0,
+        "seed": 914
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 14.549720219869343,
+        "pan": 0,
+        "seed": 921
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 14.843101649177306,
+        "pan": 0,
+        "seed": 928
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 14.923328935206392,
+        "pan": 0,
+        "seed": 935
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 14.930427021716248,
+        "pan": 0,
+        "seed": 942
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 14.948436169042818,
+        "pan": 0,
+        "seed": 949
+      },
+      {
+        "type": "paper",
+        "gain": 0.1,
+        "dur": 0.16,
+        "density": 0.7,
+        "t": 14.966386886536009,
+        "pan": 0,
+        "seed": 956
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "tiling.js: a diamond lattice cell whose two side pairs are each ONE shared curve (what bulges out of one side is cut from its opposite), key shapes = curve pairs, morph = point-wise interpolation; each edge takes its own morph value from a field m(x, y, t), so a gradient across the wall stays gap-free.",
+      "tiles": {
+        "tiles": 410,
+        "edges": 880,
+        "pointsPerTile": 96,
+        "flyers": 5
+      },
+      "framing": "ok (worst {\"t\":15,\"id\":\"bird0\",\"ndc\":0.9254})",
+      "sound": "one click per 1/16 s bin of tile dips (press ripple, clicks home at each key), a whoosh per morph stage and the slide, a pop + paper rustle per bird lift-off, a soft paper flutter per wing down-stroke, a chime as the first bird leaves; warm pad bed."
+    }
+  }
+}

@@ -1,6 +1,6 @@
 ---
 name: 3d-style-atlas
-description: Make short (15–60 s) 3D animated explainers, title cards and channel graphics in a named visual style — Three.js scenes written in code, rendered to MP4 through HyperFrames with synthesized sound and optional voiceover sync. 84 styles (low-poly, paper pop-up, neon sign, soft clay, blueprint, split-flap board, voxel, marble run, studio product, liquid chrome, stained glass, subway map, circuit board, clockwork, weather map, domino run, conveyor factory, mixing console, city lights, ink wash, pin art, anamorphic, zoetrope, cymatics, ferrofluid, point cloud, thermal camera, murmuration, impossible geometry, light painting, microscope slide, ukiyo-e woodblock, cubism, kintsugi, impasto, op art, multiplane cel, mosaic, constructivist poster, flipbook, art deco, the Why AI Matters house style, and more). Use when asked for a "3D explainer", "3D animation", "style atlas", "animate how X works", "make a clip in the <style> style", a Why AI Matters ident / lower third / chapter card / key stat, or to add a new 3D style. NOT for editing footage (use claude-cuts-video), 2D HTML motion graphics (use hyperframes), or Remotion projects (use remotion).
+description: Make short (15–60 s) 3D animated explainers, title cards and channel graphics in a named visual style — Three.js scenes written in code, rendered to MP4 through HyperFrames with synthesized sound and optional voiceover sync. 100 styles (low-poly, paper pop-up, neon sign, soft clay, blueprint, split-flap board, voxel, marble run, studio product, liquid chrome, stained glass, subway map, circuit board, clockwork, weather map, domino run, conveyor factory, mixing console, city lights, ink wash, pin art, anamorphic, zoetrope, cymatics, ferrofluid, point cloud, thermal camera, murmuration, impossible geometry, light painting, microscope slide, ukiyo-e woodblock, cubism, kintsugi, impasto, op art, multiplane cel, mosaic, constructivist poster, flipbook, art deco, tiny planet, fireworks, UV reveal, tessellation morph, fogged glass, endless zoom, the Why AI Matters house style, and more). Use when asked for a "3D explainer", "3D animation", "style atlas", "animate how X works", "make a clip in the <style> style", a Why AI Matters ident / lower third / chapter card / key stat, or to add a new 3D style. NOT for editing footage (use claude-cuts-video), 2D HTML motion graphics (use hyperframes), or Remotion projects (use remotion).
 ---
 
 # 3D Style Atlas
@@ -33,7 +33,7 @@ first). The scripts find the kit and the pilot folder relative to themselves, so
 
 ## Making a clip
 
-1. **Pick the style.** Read `references/STYLES.md` (all 84, with good-for / avoid-for). Match on "good for", not on taste alone.
+1. **Pick the style.** Read `references/STYLES.md` (all 100, with good-for / avoid-for). Match on "good for", not on taste alone.
    Rough map (one style can sit in several rows; read its `STYLE.md` before writing anything):
 
    | Good for | Styles |
@@ -59,6 +59,10 @@ first). The scripts find the kit and the pilot folder relative to themselves, so
    | Made step by step, token by token, layer by layer | typewriter (one letter / one token at a time), layer-print (3D printer, built in layers), music-box (the pins are the program) |
    | Layers inside layers, recursion, bottlenecks | nesting-dolls (a smaller one inside; distillation), infinity-mirror (a copy of a copy; AI learning from AI), ship-in-bottle (fold, fit, unfold) |
    | Time, hidden activity and interpretation | bullet-time (freeze the world, keep the camera moving), slit-scan (every column a different moment), cloud-chamber (invisible traffic made visible), inkblot (same data, different story), wind-walker (rigid linkage that walks) |
+   | Hidden things revealed, looking inside | uv-reveal (invisible marks, watermarks), cross-section (slice the black box open), dollhouse-cutaway (one request, room by room), fogged-glass (what fades from view; context window), endless-zoom (what is inside what, all the way down and back) |
+   | Search, routing and control | lichtenberg (many paths tried, one connects), laser-mirrors (re-route with one small turn; tool use), marionette (who pulls which string) |
+   | Sampling, noise and smooth change | fireworks (temperature: exact → loose → scatter), flip-dot (a picture settles out of noise; diffusion), tessellation-morph (one idea slides into another; latent space), pendulum-wave (many rhythms, one pattern per moment) |
+   | Simple parts add up, shaped step by step | string-art (straight lines make curves), loom-weave (holes are a program), pottery-wheel (same clay, reshaped; fine-tuning), tiny-planet (a world grows from what it reads) |
    | Channel packaging (Why AI Matters) | wam-house (ident, lower third, chapter card, key stat, quote, end card) |
 
    Some demos are weaker than others — see "Known weaker demos" below before choosing one for an important clip.
@@ -150,7 +154,18 @@ already shows trails; small corner captions) · ship-in-bottle (ship small in th
 (opening doll small) · slit-scan (641 slice renders per frame — may exceed weaker GPUs). Strongest of the fourteen: paper-marbling,
 inkblot, slit-scan, typewriter, layer-print, bullet-time.
 
-## Limits (true as of 2026-11-13, kit pass 7; styles 51–70 added 2026-11-15 and 71–84 added 2026-11-18 on the same kit)
+Styles 85–100 (added 2026-11-22/23, stills reviewed, never watched in motion, audio never heard; 85–90 built by Fable builders, 91–96
+started on Fable and finished on Opus 5.5, 97–100 built on Opus 5.5): string-art (first two beats sparse, heavy wood grain, upper left of
+the final wide empty) · pendulum-wave (the link to word order is thin; the return is a tightening, not a snap) · marionette (puppet about
+half the frame height in the final wide; knee strings cross the face) · fireworks (small caption, dim beat changes at ~3.4 s and ~6.7 s) ·
+flip-dot (small caption, camera static for the last 4.7 s; 10.4 MB) · loom-weave (the card shows the robot before the cloth does; 10.8 MB) ·
+dollhouse-cutaway (courier small against the whole house) · pottery-wheel (tool reads like a spoon, no hands) · laser-mirrors (splitter is a
+white glow) · lichtenberg (board mostly empty until ~4 s) · uv-reveal (torch floats with no hand) · endless-zoom (caption text jumps at the
+loop seam) · tiny-planet and fireworks audio mean about −19.4 dB, slightly louder than the −20 target. Small captions are common in this
+batch (fireworks, flip-dot, laser-mirrors, loom-weave, pottery-wheel). Strongest of the sixteen: uv-reveal, fogged-glass, lichtenberg,
+tessellation-morph, endless-zoom, tiny-planet.
+
+## Limits (true as of 2026-11-13, kit pass 7; styles 51–70 added 2026-11-15, 71–84 added 2026-11-18 and 85–100 added 2026-11-23 on the same kit)
 
 - The Blender side has never been run — Blender isn't installed on the machine this was built on. The export and the conversion
   maths were checked; the bpy script was not executed.

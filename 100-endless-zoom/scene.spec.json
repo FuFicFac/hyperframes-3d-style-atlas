@@ -1,0 +1,3821 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "endless-zoom",
+    "name": "Endless Zoom",
+    "description": "One continuous, constant-speed zoom inward through nested worlds, each a bright toy-like 3D relief in its own clean colour key (cream chat app, coral token tiles, electric-blue glowing value sliders, golden neural network, green circuit board with a chip, violet switch with a spark). Every world is authored at unit size around a portal at its centre whose face is the next world's colour; the camera dollies in exponentially (one rate for the whole loop, so perceived speed never changes), the next world fades in on the portal's face and grows until it fills the frame, and only two worlds are ever drawn (the outer one directly, the inner one rendered through the portal as a live window). The last portal contains the first world: the loop closes and the final frame equals the first. A rising Shepard scale and a chime per crossing come from the same zoom clock.",
+    "palette": {
+      "ink": "#241a3a",
+      "white": "#ffffff",
+      "chat": "#ffd6b8",
+      "tokens": "#ff6a52",
+      "numbers": "#2f5bff",
+      "network": "#ffc43a",
+      "chip": "#14a86c",
+      "switch": "#8e4cff",
+      "panel": "#fff4ea",
+      "sidebar": "#ffe6d4",
+      "bubble": "#ffffff",
+      "userBubble": "#4d9dff",
+      "inputBar": "#ffffff",
+      "placeholder": "#a99c95",
+      "cursor": "#ff6a52",
+      "tilePastels": [
+        "#ffd5df",
+        "#c8f1d1",
+        "#cfe2ff",
+        "#fff0b5",
+        "#e5d5ff"
+      ],
+      "tileInk": "#2a1d3f",
+      "rail": "#5d84ff",
+      "railLit": "#ffd86a",
+      "knob": "#ffc43a",
+      "bracket": "#e8eeff",
+      "grid": "#4a71ff",
+      "node": "#23305e",
+      "nodeRim": "#fff6df",
+      "link": "#fff8ea",
+      "pulse": "#ff5a3c",
+      "pcbTrace": "#f2c14e",
+      "chipBody": "#2a2d36",
+      "chipPin": "#d9dde6",
+      "die": "#b9c0d4",
+      "cell": "#dcd6ff",
+      "cellLit": "#7ef2ff",
+      "pad": "#f1c15a",
+      "gate": "#c9b6ff",
+      "spark": "#fff4e6",
+      "arc": "#e9f3ff",
+      "shadow": "#1b1030"
+    },
+    "world": {
+      "background": "#ffd6b8",
+      "fog": null,
+      "environment": "room",
+      "environmentIntensity": 0.32,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {},
+    "lights": [
+      {
+        "id": "sky",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#d9cfc4",
+        "intensity": 0.72
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff4e8",
+        "intensity": 0.9,
+        "position": [
+          -1.2,
+          1.6,
+          2.4
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.38,
+        "radius": 0.22,
+        "threshold": 1.45
+      },
+      "vignette": {
+        "darkness": 0.14,
+        "offset": 1.2
+      }
+    },
+    "camera": {
+      "fov": 35,
+      "near": 0.01,
+      "far": 60,
+      "sway": {
+        "yaw": 0.03,
+        "pitch": 0.018
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 800,
+      "color": "#241a3a",
+      "height": 0.07
+    },
+    "zoom": {
+      "phase": 0.45,
+      "fade": [
+        0.2,
+        0.42
+      ],
+      "labelAt": 0.5,
+      "labelFade": 0.2,
+      "blinkCycles": 16,
+      "portalLift": 0.0005
+    },
+    "relief": {
+      "shadow": {
+        "dx": 0.012,
+        "dy": -0.018,
+        "opacity": 0.26,
+        "soft": 0.42
+      },
+      "bevel": 0.006,
+      "bgDepth": -0.06
+    },
+    "caption": {
+      "y": 868,
+      "h": 132,
+      "cap": 86,
+      "maxW": 1640,
+      "weight": 800,
+      "dot": 24
+    },
+    "glow": {
+      "cursor": 0.9,
+      "knob": 0.35,
+      "railLit": 1.15,
+      "pulse": 2.2,
+      "cellLit": 0.62,
+      "spark": 2.6,
+      "arc": 3,
+      "gate": 1.1
+    },
+    "sound": {
+      "shepard": {
+        "octaves": 3,
+        "steps": 36,
+        "base": 55,
+        "partials": 7,
+        "centre": 3.3,
+        "width": 1.05,
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.18
+      },
+      "chime": {
+        "gain": 0.58,
+        "pitches": [
+          1,
+          1.122,
+          1.26,
+          1.335,
+          1.498,
+          1.682
+        ]
+      },
+      "whoosh": {
+        "gain": 0.24
+      },
+      "sparkle": {
+        "gain": 0.85
+      }
+    },
+    "sfx": {
+      "enter": "chime",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "chime",
+      "emphasis": "sparkle",
+      "ui": "blip",
+      "bed": "pad"
+    },
+    "motion": [
+      "The zoom is s(t) = exp(k t) with one k for the whole loop: constant perceived speed, scale computed from t, never accumulated.",
+      "Only two worlds are drawn: the outer one directly, the inner one rendered to a target and shown through the portal window.",
+      "The inner world fades in on the portal's face (whose colour is its background), then grows until it is the frame.",
+      "Inside each world, small motion (bobbing tiles, settling sliders, travelling pulses, flickering switches) runs on the world's own local clock, so a world looks the same on every visit.",
+      "The camera only sways (periodic yaw/pitch of a few degrees) for parallax; the dolly itself is the zoom."
+    ]
+  },
+  "scene": {
+    "id": "100-endless-zoom",
+    "style": "endless-zoom",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "open",
+        "t": 0,
+        "dur": 1.649,
+        "label": "What's inside one answer?"
+      },
+      {
+        "id": "tokens",
+        "t": 1.649,
+        "dur": 2.099,
+        "label": "Every word is a token",
+        "fill": 2.462
+      },
+      {
+        "id": "numbers",
+        "t": 3.749,
+        "dur": 2.099,
+        "label": "Every token is numbers",
+        "fill": 4.561
+      },
+      {
+        "id": "network",
+        "t": 5.848,
+        "dur": 2.099,
+        "label": "Numbers flow through layers",
+        "fill": 6.66
+      },
+      {
+        "id": "chip",
+        "t": 7.948,
+        "dur": 3.51,
+        "label": "Layers run on chips",
+        "fill": 8.76
+      },
+      {
+        "id": "switch",
+        "t": 11.458,
+        "dur": 1.862,
+        "label": "A spark, on or off",
+        "fill": 12.27
+      },
+      {
+        "id": "chat",
+        "t": 13.32,
+        "dur": 1.68,
+        "label": "And it all adds up to this",
+        "fill": 14.55
+      }
+    ],
+    "camera": [],
+    "objects": [],
+    "score": [
+      {
+        "type": "pad",
+        "root": 110,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.016344,
+        "dur": 0.6667,
+        "t": -0.45,
+        "pan": 0.25,
+        "seed": 300
+      },
+      {
+        "type": "pad",
+        "root": 220,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.083646,
+        "dur": 0.6667,
+        "t": -0.45,
+        "pan": -0.25,
+        "seed": 307
+      },
+      {
+        "type": "pad",
+        "root": 440,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.17279999999999998,
+        "dur": 0.6667,
+        "t": -0.45,
+        "pan": 0.25,
+        "seed": 314
+      },
+      {
+        "type": "pad",
+        "root": 880,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.14412599999999998,
+        "dur": 0.6667,
+        "t": -0.45,
+        "pan": -0.25,
+        "seed": 321
+      },
+      {
+        "type": "pad",
+        "root": 1760,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.048528,
+        "dur": 0.6667,
+        "t": -0.45,
+        "pan": 0.25,
+        "seed": 328
+      },
+      {
+        "type": "pad",
+        "root": 3520,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.006606000000000001,
+        "dur": 0.6667,
+        "t": -0.45,
+        "pan": -0.25,
+        "seed": 335
+      },
+      {
+        "type": "pad",
+        "root": 116.541,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.019386,
+        "dur": 0.6667,
+        "t": -0.0333,
+        "pan": 0.25,
+        "seed": 342
+      },
+      {
+        "type": "pad",
+        "root": 233.082,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.09197999999999999,
+        "dur": 0.6667,
+        "t": -0.0333,
+        "pan": -0.25,
+        "seed": 349
+      },
+      {
+        "type": "pad",
+        "root": 466.164,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.176202,
+        "dur": 0.6667,
+        "t": -0.0333,
+        "pan": 0.25,
+        "seed": 356
+      },
+      {
+        "type": "pad",
+        "root": 932.328,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.13627799999999998,
+        "dur": 0.6667,
+        "t": -0.0333,
+        "pan": -0.25,
+        "seed": 363
+      },
+      {
+        "type": "pad",
+        "root": 1864.655,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.042552,
+        "dur": 0.6667,
+        "t": -0.0333,
+        "pan": 0.25,
+        "seed": 370
+      },
+      {
+        "type": "pad",
+        "root": 3729.31,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.005364,
+        "dur": 0.6667,
+        "t": -0.0333,
+        "pan": -0.25,
+        "seed": 377
+      },
+      {
+        "type": "pad",
+        "root": 123.471,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.022842,
+        "dur": 0.6667,
+        "t": 0.3833,
+        "pan": 0.25,
+        "seed": 384
+      },
+      {
+        "type": "pad",
+        "root": 246.942,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.10053,
+        "dur": 0.6667,
+        "t": 0.3833,
+        "pan": -0.25,
+        "seed": 391
+      },
+      {
+        "type": "pad",
+        "root": 493.883,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.17856,
+        "dur": 0.6667,
+        "t": 0.3833,
+        "pan": 0.25,
+        "seed": 398
+      },
+      {
+        "type": "pad",
+        "root": 987.767,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.128034,
+        "dur": 0.6667,
+        "t": 0.3833,
+        "pan": -0.25,
+        "seed": 405
+      },
+      {
+        "type": "pad",
+        "root": 1975.533,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.037062,
+        "dur": 0.6667,
+        "t": 0.3833,
+        "pan": 0.25,
+        "seed": 412
+      },
+      {
+        "type": "pad",
+        "root": 3951.066,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.004338,
+        "dur": 0.6667,
+        "t": 0.3833,
+        "pan": -0.25,
+        "seed": 419
+      },
+      {
+        "type": "pad",
+        "root": 130.813,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.026765999999999998,
+        "dur": 0.6667,
+        "t": 0.8,
+        "pan": 0.25,
+        "seed": 426
+      },
+      {
+        "type": "pad",
+        "root": 261.626,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.10917,
+        "dur": 0.6667,
+        "t": 0.8,
+        "pan": -0.25,
+        "seed": 433
+      },
+      {
+        "type": "pad",
+        "root": 523.251,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.179802,
+        "dur": 0.6667,
+        "t": 0.8,
+        "pan": 0.25,
+        "seed": 440
+      },
+      {
+        "type": "pad",
+        "root": 1046.502,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.119538,
+        "dur": 0.6667,
+        "t": 0.8,
+        "pan": -0.25,
+        "seed": 447
+      },
+      {
+        "type": "pad",
+        "root": 2093.005,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.032094,
+        "dur": 0.6667,
+        "t": 0.8,
+        "pan": 0.25,
+        "seed": 454
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.24,
+        "pitch": 1.06,
+        "t": 1.0994183900883037,
+        "pan": 0,
+        "seed": 1896
+      },
+      {
+        "type": "pad",
+        "root": 138.591,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.031157999999999998,
+        "dur": 0.6667,
+        "t": 1.2167,
+        "pan": 0.25,
+        "seed": 461
+      },
+      {
+        "type": "pad",
+        "root": 277.183,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.11782799999999999,
+        "dur": 0.6667,
+        "t": 1.2167,
+        "pan": -0.25,
+        "seed": 468
+      },
+      {
+        "type": "pad",
+        "root": 554.365,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.17991000000000001,
+        "dur": 0.6667,
+        "t": 1.2167,
+        "pan": 0.25,
+        "seed": 475
+      },
+      {
+        "type": "pad",
+        "root": 1108.731,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.11091599999999999,
+        "dur": 0.6667,
+        "t": 1.2167,
+        "pan": -0.25,
+        "seed": 482
+      },
+      {
+        "type": "pad",
+        "root": 2217.461,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.027612,
+        "dur": 0.6667,
+        "t": 1.2167,
+        "pan": 0.25,
+        "seed": 489
+      },
+      {
+        "type": "pad",
+        "root": 73.416,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.00414,
+        "dur": 0.6667,
+        "t": 1.6333,
+        "pan": -0.25,
+        "seed": 496
+      },
+      {
+        "type": "pad",
+        "root": 146.832,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.036036,
+        "dur": 0.6667,
+        "t": 1.6333,
+        "pan": 0.25,
+        "seed": 503
+      },
+      {
+        "type": "pad",
+        "root": 293.665,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.12636,
+        "dur": 0.6667,
+        "t": 1.6333,
+        "pan": -0.25,
+        "seed": 510
+      },
+      {
+        "type": "pad",
+        "root": 587.33,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.178884,
+        "dur": 0.6667,
+        "t": 1.6333,
+        "pan": 0.25,
+        "seed": 517
+      },
+      {
+        "type": "pad",
+        "root": 1174.659,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.102258,
+        "dur": 0.6667,
+        "t": 1.6333,
+        "pan": -0.25,
+        "seed": 524
+      },
+      {
+        "type": "pad",
+        "root": 2349.318,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.023597999999999997,
+        "dur": 0.6667,
+        "t": 1.6333,
+        "pan": 0.25,
+        "seed": 531
+      },
+      {
+        "type": "chime",
+        "pitch": 1.122,
+        "dur": 1.6,
+        "gain": 0.58,
+        "t": 1.6494183900883037,
+        "pan": 0,
+        "seed": 1854
+      },
+      {
+        "type": "pad",
+        "root": 77.782,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.005148,
+        "dur": 0.6667,
+        "t": 2.05,
+        "pan": -0.25,
+        "seed": 538
+      },
+      {
+        "type": "pad",
+        "root": 155.563,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.041417999999999996,
+        "dur": 0.6667,
+        "t": 2.05,
+        "pan": 0.25,
+        "seed": 545
+      },
+      {
+        "type": "pad",
+        "root": 311.127,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.134658,
+        "dur": 0.6667,
+        "t": 2.05,
+        "pan": -0.25,
+        "seed": 552
+      },
+      {
+        "type": "pad",
+        "root": 622.254,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.17676,
+        "dur": 0.6667,
+        "t": 2.05,
+        "pan": 0.25,
+        "seed": 559
+      },
+      {
+        "type": "pad",
+        "root": 1244.508,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.09369,
+        "dur": 0.6667,
+        "t": 2.05,
+        "pan": -0.25,
+        "seed": 566
+      },
+      {
+        "type": "pad",
+        "root": 2489.016,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.020052,
+        "dur": 0.6667,
+        "t": 2.05,
+        "pan": 0.25,
+        "seed": 573
+      },
+      {
+        "type": "pad",
+        "root": 82.407,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.0063360000000000005,
+        "dur": 0.6667,
+        "t": 2.4667,
+        "pan": -0.25,
+        "seed": 580
+      },
+      {
+        "type": "pad",
+        "root": 164.814,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.04730399999999999,
+        "dur": 0.6667,
+        "t": 2.4667,
+        "pan": 0.25,
+        "seed": 587
+      },
+      {
+        "type": "pad",
+        "root": 329.628,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.142596,
+        "dur": 0.6667,
+        "t": 2.4667,
+        "pan": -0.25,
+        "seed": 594
+      },
+      {
+        "type": "pad",
+        "root": 659.255,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.173556,
+        "dur": 0.6667,
+        "t": 2.4667,
+        "pan": 0.25,
+        "seed": 601
+      },
+      {
+        "type": "pad",
+        "root": 1318.51,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.085284,
+        "dur": 0.6667,
+        "t": 2.4667,
+        "pan": -0.25,
+        "seed": 608
+      },
+      {
+        "type": "pad",
+        "root": 2637.02,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.01692,
+        "dur": 0.6667,
+        "t": 2.4667,
+        "pan": 0.25,
+        "seed": 615
+      },
+      {
+        "type": "pad",
+        "root": 87.307,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.007757999999999999,
+        "dur": 0.6667,
+        "t": 2.8833,
+        "pan": -0.25,
+        "seed": 622
+      },
+      {
+        "type": "pad",
+        "root": 174.614,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.053676,
+        "dur": 0.6667,
+        "t": 2.8833,
+        "pan": 0.25,
+        "seed": 629
+      },
+      {
+        "type": "pad",
+        "root": 349.228,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.150066,
+        "dur": 0.6667,
+        "t": 2.8833,
+        "pan": -0.25,
+        "seed": 636
+      },
+      {
+        "type": "pad",
+        "root": 698.456,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.169344,
+        "dur": 0.6667,
+        "t": 2.8833,
+        "pan": 0.25,
+        "seed": 643
+      },
+      {
+        "type": "pad",
+        "root": 1396.913,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.077166,
+        "dur": 0.6667,
+        "t": 2.8833,
+        "pan": -0.25,
+        "seed": 650
+      },
+      {
+        "type": "pad",
+        "root": 2793.826,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.014202,
+        "dur": 0.6667,
+        "t": 2.8833,
+        "pan": 0.25,
+        "seed": 657
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.24,
+        "pitch": 1.12,
+        "t": 3.1988367801766033,
+        "pan": 0,
+        "seed": 1903
+      },
+      {
+        "type": "pad",
+        "root": 92.499,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.009432,
+        "dur": 0.6667,
+        "t": 3.3,
+        "pan": -0.25,
+        "seed": 664
+      },
+      {
+        "type": "pad",
+        "root": 184.997,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.060551999999999995,
+        "dur": 0.6667,
+        "t": 3.3,
+        "pan": 0.25,
+        "seed": 671
+      },
+      {
+        "type": "pad",
+        "root": 369.994,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.156924,
+        "dur": 0.6667,
+        "t": 3.3,
+        "pan": -0.25,
+        "seed": 678
+      },
+      {
+        "type": "pad",
+        "root": 739.989,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.164214,
+        "dur": 0.6667,
+        "t": 3.3,
+        "pan": 0.25,
+        "seed": 685
+      },
+      {
+        "type": "pad",
+        "root": 1479.978,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.069372,
+        "dur": 0.6667,
+        "t": 3.3,
+        "pan": -0.25,
+        "seed": 692
+      },
+      {
+        "type": "pad",
+        "root": 2959.955,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.011825999999999998,
+        "dur": 0.6667,
+        "t": 3.3,
+        "pan": 0.25,
+        "seed": 699
+      },
+      {
+        "type": "pad",
+        "root": 97.999,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.011393999999999998,
+        "dur": 0.6667,
+        "t": 3.7167,
+        "pan": -0.25,
+        "seed": 706
+      },
+      {
+        "type": "pad",
+        "root": 195.998,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.06786,
+        "dur": 0.6667,
+        "t": 3.7167,
+        "pan": 0.25,
+        "seed": 713
+      },
+      {
+        "type": "pad",
+        "root": 391.995,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.16308,
+        "dur": 0.6667,
+        "t": 3.7167,
+        "pan": -0.25,
+        "seed": 720
+      },
+      {
+        "type": "pad",
+        "root": 783.991,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.15822,
+        "dur": 0.6667,
+        "t": 3.7167,
+        "pan": 0.25,
+        "seed": 727
+      },
+      {
+        "type": "pad",
+        "root": 1567.982,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.061973999999999994,
+        "dur": 0.6667,
+        "t": 3.7167,
+        "pan": -0.25,
+        "seed": 734
+      },
+      {
+        "type": "pad",
+        "root": 3135.963,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.009791999999999999,
+        "dur": 0.6667,
+        "t": 3.7167,
+        "pan": 0.25,
+        "seed": 741
+      },
+      {
+        "type": "chime",
+        "pitch": 1.26,
+        "dur": 1.6,
+        "gain": 0.58,
+        "t": 3.748836780176603,
+        "pan": 0,
+        "seed": 1861
+      },
+      {
+        "type": "pad",
+        "root": 103.826,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.013698,
+        "dur": 0.6667,
+        "t": 4.1333,
+        "pan": -0.25,
+        "seed": 748
+      },
+      {
+        "type": "pad",
+        "root": 207.652,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.075582,
+        "dur": 0.6667,
+        "t": 4.1333,
+        "pan": 0.25,
+        "seed": 755
+      },
+      {
+        "type": "pad",
+        "root": 415.305,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.16838999999999998,
+        "dur": 0.6667,
+        "t": 4.1333,
+        "pan": -0.25,
+        "seed": 762
+      },
+      {
+        "type": "pad",
+        "root": 830.609,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.15148799999999998,
+        "dur": 0.6667,
+        "t": 4.1333,
+        "pan": 0.25,
+        "seed": 769
+      },
+      {
+        "type": "pad",
+        "root": 1661.219,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.055026000000000005,
+        "dur": 0.6667,
+        "t": 4.1333,
+        "pan": -0.25,
+        "seed": 776
+      },
+      {
+        "type": "pad",
+        "root": 3322.438,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.008064,
+        "dur": 0.6667,
+        "t": 4.1333,
+        "pan": 0.25,
+        "seed": 783
+      },
+      {
+        "type": "pad",
+        "root": 110,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.016344,
+        "dur": 0.6667,
+        "t": 4.55,
+        "pan": 0.25,
+        "seed": 790
+      },
+      {
+        "type": "pad",
+        "root": 220,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.083646,
+        "dur": 0.6667,
+        "t": 4.55,
+        "pan": -0.25,
+        "seed": 797
+      },
+      {
+        "type": "pad",
+        "root": 440,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.17279999999999998,
+        "dur": 0.6667,
+        "t": 4.55,
+        "pan": 0.25,
+        "seed": 804
+      },
+      {
+        "type": "pad",
+        "root": 880,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.14412599999999998,
+        "dur": 0.6667,
+        "t": 4.55,
+        "pan": -0.25,
+        "seed": 811
+      },
+      {
+        "type": "pad",
+        "root": 1760,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.048528,
+        "dur": 0.6667,
+        "t": 4.55,
+        "pan": 0.25,
+        "seed": 818
+      },
+      {
+        "type": "pad",
+        "root": 3520,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.006606000000000001,
+        "dur": 0.6667,
+        "t": 4.55,
+        "pan": -0.25,
+        "seed": 825
+      },
+      {
+        "type": "pad",
+        "root": 116.541,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.019386,
+        "dur": 0.6667,
+        "t": 4.9667,
+        "pan": 0.25,
+        "seed": 832
+      },
+      {
+        "type": "pad",
+        "root": 233.082,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.09197999999999999,
+        "dur": 0.6667,
+        "t": 4.9667,
+        "pan": -0.25,
+        "seed": 839
+      },
+      {
+        "type": "pad",
+        "root": 466.164,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.176202,
+        "dur": 0.6667,
+        "t": 4.9667,
+        "pan": 0.25,
+        "seed": 846
+      },
+      {
+        "type": "pad",
+        "root": 932.328,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.13627799999999998,
+        "dur": 0.6667,
+        "t": 4.9667,
+        "pan": -0.25,
+        "seed": 853
+      },
+      {
+        "type": "pad",
+        "root": 1864.655,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.042552,
+        "dur": 0.6667,
+        "t": 4.9667,
+        "pan": 0.25,
+        "seed": 860
+      },
+      {
+        "type": "pad",
+        "root": 3729.31,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.005364,
+        "dur": 0.6667,
+        "t": 4.9667,
+        "pan": -0.25,
+        "seed": 867
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.24,
+        "pitch": 1.18,
+        "t": 5.298255170264906,
+        "pan": 0,
+        "seed": 1910
+      },
+      {
+        "type": "pad",
+        "root": 123.471,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.022842,
+        "dur": 0.6667,
+        "t": 5.3833,
+        "pan": 0.25,
+        "seed": 874
+      },
+      {
+        "type": "pad",
+        "root": 246.942,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.10053,
+        "dur": 0.6667,
+        "t": 5.3833,
+        "pan": -0.25,
+        "seed": 881
+      },
+      {
+        "type": "pad",
+        "root": 493.883,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.17856,
+        "dur": 0.6667,
+        "t": 5.3833,
+        "pan": 0.25,
+        "seed": 888
+      },
+      {
+        "type": "pad",
+        "root": 987.767,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.128034,
+        "dur": 0.6667,
+        "t": 5.3833,
+        "pan": -0.25,
+        "seed": 895
+      },
+      {
+        "type": "pad",
+        "root": 1975.533,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.037062,
+        "dur": 0.6667,
+        "t": 5.3833,
+        "pan": 0.25,
+        "seed": 902
+      },
+      {
+        "type": "pad",
+        "root": 3951.066,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.004338,
+        "dur": 0.6667,
+        "t": 5.3833,
+        "pan": -0.25,
+        "seed": 909
+      },
+      {
+        "type": "pad",
+        "root": 130.813,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.026765999999999998,
+        "dur": 0.6667,
+        "t": 5.8,
+        "pan": 0.25,
+        "seed": 916
+      },
+      {
+        "type": "pad",
+        "root": 261.626,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.10917,
+        "dur": 0.6667,
+        "t": 5.8,
+        "pan": -0.25,
+        "seed": 923
+      },
+      {
+        "type": "pad",
+        "root": 523.251,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.179802,
+        "dur": 0.6667,
+        "t": 5.8,
+        "pan": 0.25,
+        "seed": 930
+      },
+      {
+        "type": "pad",
+        "root": 1046.502,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.119538,
+        "dur": 0.6667,
+        "t": 5.8,
+        "pan": -0.25,
+        "seed": 937
+      },
+      {
+        "type": "pad",
+        "root": 2093.005,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.032094,
+        "dur": 0.6667,
+        "t": 5.8,
+        "pan": 0.25,
+        "seed": 944
+      },
+      {
+        "type": "chime",
+        "pitch": 1.335,
+        "dur": 1.6,
+        "gain": 0.58,
+        "t": 5.848255170264906,
+        "pan": 0,
+        "seed": 1868
+      },
+      {
+        "type": "pad",
+        "root": 138.591,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.031157999999999998,
+        "dur": 0.6667,
+        "t": 6.2167,
+        "pan": 0.25,
+        "seed": 951
+      },
+      {
+        "type": "pad",
+        "root": 277.183,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.11782799999999999,
+        "dur": 0.6667,
+        "t": 6.2167,
+        "pan": -0.25,
+        "seed": 958
+      },
+      {
+        "type": "pad",
+        "root": 554.365,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.17991000000000001,
+        "dur": 0.6667,
+        "t": 6.2167,
+        "pan": 0.25,
+        "seed": 965
+      },
+      {
+        "type": "pad",
+        "root": 1108.731,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.11091599999999999,
+        "dur": 0.6667,
+        "t": 6.2167,
+        "pan": -0.25,
+        "seed": 972
+      },
+      {
+        "type": "pad",
+        "root": 2217.461,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.027612,
+        "dur": 0.6667,
+        "t": 6.2167,
+        "pan": 0.25,
+        "seed": 979
+      },
+      {
+        "type": "pad",
+        "root": 73.416,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.00414,
+        "dur": 0.6667,
+        "t": 6.6333,
+        "pan": -0.25,
+        "seed": 986
+      },
+      {
+        "type": "pad",
+        "root": 146.832,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.036036,
+        "dur": 0.6667,
+        "t": 6.6333,
+        "pan": 0.25,
+        "seed": 993
+      },
+      {
+        "type": "pad",
+        "root": 293.665,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.12636,
+        "dur": 0.6667,
+        "t": 6.6333,
+        "pan": -0.25,
+        "seed": 1000
+      },
+      {
+        "type": "pad",
+        "root": 587.33,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.178884,
+        "dur": 0.6667,
+        "t": 6.6333,
+        "pan": 0.25,
+        "seed": 1007
+      },
+      {
+        "type": "pad",
+        "root": 1174.659,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.102258,
+        "dur": 0.6667,
+        "t": 6.6333,
+        "pan": -0.25,
+        "seed": 1014
+      },
+      {
+        "type": "pad",
+        "root": 2349.318,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.023597999999999997,
+        "dur": 0.6667,
+        "t": 6.6333,
+        "pan": 0.25,
+        "seed": 1021
+      },
+      {
+        "type": "pad",
+        "root": 77.782,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.005148,
+        "dur": 0.6667,
+        "t": 7.05,
+        "pan": -0.25,
+        "seed": 1028
+      },
+      {
+        "type": "pad",
+        "root": 155.563,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.041417999999999996,
+        "dur": 0.6667,
+        "t": 7.05,
+        "pan": 0.25,
+        "seed": 1035
+      },
+      {
+        "type": "pad",
+        "root": 311.127,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.134658,
+        "dur": 0.6667,
+        "t": 7.05,
+        "pan": -0.25,
+        "seed": 1042
+      },
+      {
+        "type": "pad",
+        "root": 622.254,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.17676,
+        "dur": 0.6667,
+        "t": 7.05,
+        "pan": 0.25,
+        "seed": 1049
+      },
+      {
+        "type": "pad",
+        "root": 1244.508,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.09369,
+        "dur": 0.6667,
+        "t": 7.05,
+        "pan": -0.25,
+        "seed": 1056
+      },
+      {
+        "type": "pad",
+        "root": 2489.016,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.020052,
+        "dur": 0.6667,
+        "t": 7.05,
+        "pan": 0.25,
+        "seed": 1063
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.24,
+        "pitch": 1.24,
+        "t": 7.397673560353209,
+        "pan": 0,
+        "seed": 1917
+      },
+      {
+        "type": "pad",
+        "root": 82.407,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.0063360000000000005,
+        "dur": 0.6667,
+        "t": 7.4667,
+        "pan": -0.25,
+        "seed": 1070
+      },
+      {
+        "type": "pad",
+        "root": 164.814,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.04730399999999999,
+        "dur": 0.6667,
+        "t": 7.4667,
+        "pan": 0.25,
+        "seed": 1077
+      },
+      {
+        "type": "pad",
+        "root": 329.628,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.142596,
+        "dur": 0.6667,
+        "t": 7.4667,
+        "pan": -0.25,
+        "seed": 1084
+      },
+      {
+        "type": "pad",
+        "root": 659.255,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.173556,
+        "dur": 0.6667,
+        "t": 7.4667,
+        "pan": 0.25,
+        "seed": 1091
+      },
+      {
+        "type": "pad",
+        "root": 1318.51,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.085284,
+        "dur": 0.6667,
+        "t": 7.4667,
+        "pan": -0.25,
+        "seed": 1098
+      },
+      {
+        "type": "pad",
+        "root": 2637.02,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.01692,
+        "dur": 0.6667,
+        "t": 7.4667,
+        "pan": 0.25,
+        "seed": 1105
+      },
+      {
+        "type": "pad",
+        "root": 87.307,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.007757999999999999,
+        "dur": 0.6667,
+        "t": 7.8833,
+        "pan": -0.25,
+        "seed": 1112
+      },
+      {
+        "type": "pad",
+        "root": 174.614,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.053676,
+        "dur": 0.6667,
+        "t": 7.8833,
+        "pan": 0.25,
+        "seed": 1119
+      },
+      {
+        "type": "pad",
+        "root": 349.228,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.150066,
+        "dur": 0.6667,
+        "t": 7.8833,
+        "pan": -0.25,
+        "seed": 1126
+      },
+      {
+        "type": "pad",
+        "root": 698.456,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.169344,
+        "dur": 0.6667,
+        "t": 7.8833,
+        "pan": 0.25,
+        "seed": 1133
+      },
+      {
+        "type": "pad",
+        "root": 1396.913,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.077166,
+        "dur": 0.6667,
+        "t": 7.8833,
+        "pan": -0.25,
+        "seed": 1140
+      },
+      {
+        "type": "pad",
+        "root": 2793.826,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.014202,
+        "dur": 0.6667,
+        "t": 7.8833,
+        "pan": 0.25,
+        "seed": 1147
+      },
+      {
+        "type": "chime",
+        "pitch": 1.498,
+        "dur": 1.6,
+        "gain": 0.58,
+        "t": 7.947673560353209,
+        "pan": 0,
+        "seed": 1875
+      },
+      {
+        "type": "pad",
+        "root": 92.499,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.009432,
+        "dur": 0.6667,
+        "t": 8.3,
+        "pan": -0.25,
+        "seed": 1154
+      },
+      {
+        "type": "pad",
+        "root": 184.997,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.060551999999999995,
+        "dur": 0.6667,
+        "t": 8.3,
+        "pan": 0.25,
+        "seed": 1161
+      },
+      {
+        "type": "pad",
+        "root": 369.994,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.156924,
+        "dur": 0.6667,
+        "t": 8.3,
+        "pan": -0.25,
+        "seed": 1168
+      },
+      {
+        "type": "pad",
+        "root": 739.989,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.164214,
+        "dur": 0.6667,
+        "t": 8.3,
+        "pan": 0.25,
+        "seed": 1175
+      },
+      {
+        "type": "pad",
+        "root": 1479.978,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.069372,
+        "dur": 0.6667,
+        "t": 8.3,
+        "pan": -0.25,
+        "seed": 1182
+      },
+      {
+        "type": "pad",
+        "root": 2959.955,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.011825999999999998,
+        "dur": 0.6667,
+        "t": 8.3,
+        "pan": 0.25,
+        "seed": 1189
+      },
+      {
+        "type": "pad",
+        "root": 97.999,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.011393999999999998,
+        "dur": 0.6667,
+        "t": 8.7167,
+        "pan": -0.25,
+        "seed": 1196
+      },
+      {
+        "type": "pad",
+        "root": 195.998,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.06786,
+        "dur": 0.6667,
+        "t": 8.7167,
+        "pan": 0.25,
+        "seed": 1203
+      },
+      {
+        "type": "pad",
+        "root": 391.995,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.16308,
+        "dur": 0.6667,
+        "t": 8.7167,
+        "pan": -0.25,
+        "seed": 1210
+      },
+      {
+        "type": "pad",
+        "root": 783.991,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.15822,
+        "dur": 0.6667,
+        "t": 8.7167,
+        "pan": 0.25,
+        "seed": 1217
+      },
+      {
+        "type": "pad",
+        "root": 1567.982,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.061973999999999994,
+        "dur": 0.6667,
+        "t": 8.7167,
+        "pan": -0.25,
+        "seed": 1224
+      },
+      {
+        "type": "pad",
+        "root": 3135.963,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.009791999999999999,
+        "dur": 0.6667,
+        "t": 8.7167,
+        "pan": 0.25,
+        "seed": 1231
+      },
+      {
+        "type": "pad",
+        "root": 103.826,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.013698,
+        "dur": 0.6667,
+        "t": 9.1333,
+        "pan": -0.25,
+        "seed": 1238
+      },
+      {
+        "type": "pad",
+        "root": 207.652,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.075582,
+        "dur": 0.6667,
+        "t": 9.1333,
+        "pan": 0.25,
+        "seed": 1245
+      },
+      {
+        "type": "pad",
+        "root": 415.305,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.16838999999999998,
+        "dur": 0.6667,
+        "t": 9.1333,
+        "pan": -0.25,
+        "seed": 1252
+      },
+      {
+        "type": "pad",
+        "root": 830.609,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.15148799999999998,
+        "dur": 0.6667,
+        "t": 9.1333,
+        "pan": 0.25,
+        "seed": 1259
+      },
+      {
+        "type": "pad",
+        "root": 1661.219,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.055026000000000005,
+        "dur": 0.6667,
+        "t": 9.1333,
+        "pan": -0.25,
+        "seed": 1266
+      },
+      {
+        "type": "pad",
+        "root": 3322.438,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.008064,
+        "dur": 0.6667,
+        "t": 9.1333,
+        "pan": 0.25,
+        "seed": 1273
+      },
+      {
+        "type": "pad",
+        "root": 110,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.016344,
+        "dur": 0.6667,
+        "t": 9.55,
+        "pan": 0.25,
+        "seed": 1280
+      },
+      {
+        "type": "pad",
+        "root": 220,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.083646,
+        "dur": 0.6667,
+        "t": 9.55,
+        "pan": -0.25,
+        "seed": 1287
+      },
+      {
+        "type": "pad",
+        "root": 440,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.17279999999999998,
+        "dur": 0.6667,
+        "t": 9.55,
+        "pan": 0.25,
+        "seed": 1294
+      },
+      {
+        "type": "pad",
+        "root": 880,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.14412599999999998,
+        "dur": 0.6667,
+        "t": 9.55,
+        "pan": -0.25,
+        "seed": 1301
+      },
+      {
+        "type": "pad",
+        "root": 1760,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.048528,
+        "dur": 0.6667,
+        "t": 9.55,
+        "pan": 0.25,
+        "seed": 1308
+      },
+      {
+        "type": "pad",
+        "root": 3520,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.006606000000000001,
+        "dur": 0.6667,
+        "t": 9.55,
+        "pan": -0.25,
+        "seed": 1315
+      },
+      {
+        "type": "pad",
+        "root": 116.541,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.019386,
+        "dur": 0.6667,
+        "t": 9.9667,
+        "pan": 0.25,
+        "seed": 1322
+      },
+      {
+        "type": "pad",
+        "root": 233.082,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.09197999999999999,
+        "dur": 0.6667,
+        "t": 9.9667,
+        "pan": -0.25,
+        "seed": 1329
+      },
+      {
+        "type": "pad",
+        "root": 466.164,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.176202,
+        "dur": 0.6667,
+        "t": 9.9667,
+        "pan": 0.25,
+        "seed": 1336
+      },
+      {
+        "type": "pad",
+        "root": 932.328,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.13627799999999998,
+        "dur": 0.6667,
+        "t": 9.9667,
+        "pan": -0.25,
+        "seed": 1343
+      },
+      {
+        "type": "pad",
+        "root": 1864.655,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.042552,
+        "dur": 0.6667,
+        "t": 9.9667,
+        "pan": 0.25,
+        "seed": 1350
+      },
+      {
+        "type": "pad",
+        "root": 3729.31,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.005364,
+        "dur": 0.6667,
+        "t": 9.9667,
+        "pan": -0.25,
+        "seed": 1357
+      },
+      {
+        "type": "pad",
+        "root": 123.471,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.022842,
+        "dur": 0.6667,
+        "t": 10.3833,
+        "pan": 0.25,
+        "seed": 1364
+      },
+      {
+        "type": "pad",
+        "root": 246.942,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.10053,
+        "dur": 0.6667,
+        "t": 10.3833,
+        "pan": -0.25,
+        "seed": 1371
+      },
+      {
+        "type": "pad",
+        "root": 493.883,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.17856,
+        "dur": 0.6667,
+        "t": 10.3833,
+        "pan": 0.25,
+        "seed": 1378
+      },
+      {
+        "type": "pad",
+        "root": 987.767,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.128034,
+        "dur": 0.6667,
+        "t": 10.3833,
+        "pan": -0.25,
+        "seed": 1385
+      },
+      {
+        "type": "pad",
+        "root": 1975.533,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.037062,
+        "dur": 0.6667,
+        "t": 10.3833,
+        "pan": 0.25,
+        "seed": 1392
+      },
+      {
+        "type": "pad",
+        "root": 3951.066,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.004338,
+        "dur": 0.6667,
+        "t": 10.3833,
+        "pan": -0.25,
+        "seed": 1399
+      },
+      {
+        "type": "pad",
+        "root": 130.813,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.026765999999999998,
+        "dur": 0.6667,
+        "t": 10.8,
+        "pan": 0.25,
+        "seed": 1406
+      },
+      {
+        "type": "pad",
+        "root": 261.626,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.10917,
+        "dur": 0.6667,
+        "t": 10.8,
+        "pan": -0.25,
+        "seed": 1413
+      },
+      {
+        "type": "pad",
+        "root": 523.251,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.179802,
+        "dur": 0.6667,
+        "t": 10.8,
+        "pan": 0.25,
+        "seed": 1420
+      },
+      {
+        "type": "pad",
+        "root": 1046.502,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.119538,
+        "dur": 0.6667,
+        "t": 10.8,
+        "pan": -0.25,
+        "seed": 1427
+      },
+      {
+        "type": "pad",
+        "root": 2093.005,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.032094,
+        "dur": 0.6667,
+        "t": 10.8,
+        "pan": 0.25,
+        "seed": 1434
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.24,
+        "pitch": 1.3,
+        "t": 10.90779617161526,
+        "pan": 0,
+        "seed": 1924
+      },
+      {
+        "type": "pad",
+        "root": 138.591,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.031157999999999998,
+        "dur": 0.6667,
+        "t": 11.2167,
+        "pan": 0.25,
+        "seed": 1441
+      },
+      {
+        "type": "pad",
+        "root": 277.183,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.11782799999999999,
+        "dur": 0.6667,
+        "t": 11.2167,
+        "pan": -0.25,
+        "seed": 1448
+      },
+      {
+        "type": "pad",
+        "root": 554.365,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.17991000000000001,
+        "dur": 0.6667,
+        "t": 11.2167,
+        "pan": 0.25,
+        "seed": 1455
+      },
+      {
+        "type": "pad",
+        "root": 1108.731,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.11091599999999999,
+        "dur": 0.6667,
+        "t": 11.2167,
+        "pan": -0.25,
+        "seed": 1462
+      },
+      {
+        "type": "pad",
+        "root": 2217.461,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.027612,
+        "dur": 0.6667,
+        "t": 11.2167,
+        "pan": 0.25,
+        "seed": 1469
+      },
+      {
+        "type": "chime",
+        "pitch": 1.682,
+        "dur": 1.6,
+        "gain": 0.58,
+        "t": 11.45779617161526,
+        "pan": 0,
+        "seed": 1882
+      },
+      {
+        "type": "pad",
+        "root": 73.416,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.00414,
+        "dur": 0.6667,
+        "t": 11.6333,
+        "pan": -0.25,
+        "seed": 1476
+      },
+      {
+        "type": "pad",
+        "root": 146.832,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.036036,
+        "dur": 0.6667,
+        "t": 11.6333,
+        "pan": 0.25,
+        "seed": 1483
+      },
+      {
+        "type": "pad",
+        "root": 293.665,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.12636,
+        "dur": 0.6667,
+        "t": 11.6333,
+        "pan": -0.25,
+        "seed": 1490
+      },
+      {
+        "type": "pad",
+        "root": 587.33,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.178884,
+        "dur": 0.6667,
+        "t": 11.6333,
+        "pan": 0.25,
+        "seed": 1497
+      },
+      {
+        "type": "pad",
+        "root": 1174.659,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.102258,
+        "dur": 0.6667,
+        "t": 11.6333,
+        "pan": -0.25,
+        "seed": 1504
+      },
+      {
+        "type": "pad",
+        "root": 2349.318,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.023597999999999997,
+        "dur": 0.6667,
+        "t": 11.6333,
+        "pan": 0.25,
+        "seed": 1511
+      },
+      {
+        "type": "pad",
+        "root": 77.782,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.005148,
+        "dur": 0.6667,
+        "t": 12.05,
+        "pan": -0.25,
+        "seed": 1518
+      },
+      {
+        "type": "pad",
+        "root": 155.563,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.041417999999999996,
+        "dur": 0.6667,
+        "t": 12.05,
+        "pan": 0.25,
+        "seed": 1525
+      },
+      {
+        "type": "pad",
+        "root": 311.127,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.134658,
+        "dur": 0.6667,
+        "t": 12.05,
+        "pan": -0.25,
+        "seed": 1532
+      },
+      {
+        "type": "pad",
+        "root": 622.254,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.17676,
+        "dur": 0.6667,
+        "t": 12.05,
+        "pan": 0.25,
+        "seed": 1539
+      },
+      {
+        "type": "pad",
+        "root": 1244.508,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.09369,
+        "dur": 0.6667,
+        "t": 12.05,
+        "pan": -0.25,
+        "seed": 1546
+      },
+      {
+        "type": "pad",
+        "root": 2489.016,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.020052,
+        "dur": 0.6667,
+        "t": 12.05,
+        "pan": 0.25,
+        "seed": 1553
+      },
+      {
+        "type": "pad",
+        "root": 82.407,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.0063360000000000005,
+        "dur": 0.6667,
+        "t": 12.4667,
+        "pan": -0.25,
+        "seed": 1560
+      },
+      {
+        "type": "pad",
+        "root": 164.814,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.04730399999999999,
+        "dur": 0.6667,
+        "t": 12.4667,
+        "pan": 0.25,
+        "seed": 1567
+      },
+      {
+        "type": "pad",
+        "root": 329.628,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.142596,
+        "dur": 0.6667,
+        "t": 12.4667,
+        "pan": -0.25,
+        "seed": 1574
+      },
+      {
+        "type": "pad",
+        "root": 659.255,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.173556,
+        "dur": 0.6667,
+        "t": 12.4667,
+        "pan": 0.25,
+        "seed": 1581
+      },
+      {
+        "type": "pad",
+        "root": 1318.51,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.085284,
+        "dur": 0.6667,
+        "t": 12.4667,
+        "pan": -0.25,
+        "seed": 1588
+      },
+      {
+        "type": "pad",
+        "root": 2637.02,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.01692,
+        "dur": 0.6667,
+        "t": 12.4667,
+        "pan": 0.25,
+        "seed": 1595
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.24,
+        "pitch": 1,
+        "t": 12.769915319357205,
+        "pan": 0,
+        "seed": 1931
+      },
+      {
+        "type": "pad",
+        "root": 87.307,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.007757999999999999,
+        "dur": 0.6667,
+        "t": 12.8833,
+        "pan": -0.25,
+        "seed": 1602
+      },
+      {
+        "type": "pad",
+        "root": 174.614,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.053676,
+        "dur": 0.6667,
+        "t": 12.8833,
+        "pan": 0.25,
+        "seed": 1609
+      },
+      {
+        "type": "pad",
+        "root": 349.228,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.150066,
+        "dur": 0.6667,
+        "t": 12.8833,
+        "pan": -0.25,
+        "seed": 1616
+      },
+      {
+        "type": "pad",
+        "root": 698.456,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.169344,
+        "dur": 0.6667,
+        "t": 12.8833,
+        "pan": 0.25,
+        "seed": 1623
+      },
+      {
+        "type": "pad",
+        "root": 1396.913,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.077166,
+        "dur": 0.6667,
+        "t": 12.8833,
+        "pan": -0.25,
+        "seed": 1630
+      },
+      {
+        "type": "pad",
+        "root": 2793.826,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.014202,
+        "dur": 0.6667,
+        "t": 12.8833,
+        "pan": 0.25,
+        "seed": 1637
+      },
+      {
+        "type": "pad",
+        "root": 92.499,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.009432,
+        "dur": 0.6667,
+        "t": 13.3,
+        "pan": -0.25,
+        "seed": 1644
+      },
+      {
+        "type": "pad",
+        "root": 184.997,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.060551999999999995,
+        "dur": 0.6667,
+        "t": 13.3,
+        "pan": 0.25,
+        "seed": 1651
+      },
+      {
+        "type": "pad",
+        "root": 369.994,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.156924,
+        "dur": 0.6667,
+        "t": 13.3,
+        "pan": -0.25,
+        "seed": 1658
+      },
+      {
+        "type": "pad",
+        "root": 739.989,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.164214,
+        "dur": 0.6667,
+        "t": 13.3,
+        "pan": 0.25,
+        "seed": 1665
+      },
+      {
+        "type": "pad",
+        "root": 1479.978,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.069372,
+        "dur": 0.6667,
+        "t": 13.3,
+        "pan": -0.25,
+        "seed": 1672
+      },
+      {
+        "type": "pad",
+        "root": 2959.955,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.011825999999999998,
+        "dur": 0.6667,
+        "t": 13.3,
+        "pan": 0.25,
+        "seed": 1679
+      },
+      {
+        "type": "chime",
+        "pitch": 1,
+        "dur": 1.6,
+        "gain": 0.58,
+        "t": 13.319915319357206,
+        "pan": 0,
+        "seed": 1889
+      },
+      {
+        "type": "sparkle",
+        "dur": 1.2,
+        "notes": 9,
+        "gain": 0.85,
+        "t": 13.339915319357205,
+        "pan": 0,
+        "seed": 1938
+      },
+      {
+        "type": "pad",
+        "root": 97.999,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.011393999999999998,
+        "dur": 0.6667,
+        "t": 13.7167,
+        "pan": -0.25,
+        "seed": 1686
+      },
+      {
+        "type": "pad",
+        "root": 195.998,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.06786,
+        "dur": 0.6667,
+        "t": 13.7167,
+        "pan": 0.25,
+        "seed": 1693
+      },
+      {
+        "type": "pad",
+        "root": 391.995,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.16308,
+        "dur": 0.6667,
+        "t": 13.7167,
+        "pan": -0.25,
+        "seed": 1700
+      },
+      {
+        "type": "pad",
+        "root": 783.991,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.15822,
+        "dur": 0.6667,
+        "t": 13.7167,
+        "pan": 0.25,
+        "seed": 1707
+      },
+      {
+        "type": "pad",
+        "root": 1567.982,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.061973999999999994,
+        "dur": 0.6667,
+        "t": 13.7167,
+        "pan": -0.25,
+        "seed": 1714
+      },
+      {
+        "type": "pad",
+        "root": 3135.963,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.009791999999999999,
+        "dur": 0.6667,
+        "t": 13.7167,
+        "pan": 0.25,
+        "seed": 1721
+      },
+      {
+        "type": "pad",
+        "root": 103.826,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.013698,
+        "dur": 0.6667,
+        "t": 14.1333,
+        "pan": -0.25,
+        "seed": 1728
+      },
+      {
+        "type": "pad",
+        "root": 207.652,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.075582,
+        "dur": 0.6667,
+        "t": 14.1333,
+        "pan": 0.25,
+        "seed": 1735
+      },
+      {
+        "type": "pad",
+        "root": 415.305,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.16838999999999998,
+        "dur": 0.6667,
+        "t": 14.1333,
+        "pan": -0.25,
+        "seed": 1742
+      },
+      {
+        "type": "pad",
+        "root": 830.609,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.15148799999999998,
+        "dur": 0.6667,
+        "t": 14.1333,
+        "pan": 0.25,
+        "seed": 1749
+      },
+      {
+        "type": "pad",
+        "root": 1661.219,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.055026000000000005,
+        "dur": 0.6667,
+        "t": 14.1333,
+        "pan": -0.25,
+        "seed": 1756
+      },
+      {
+        "type": "pad",
+        "root": 3322.438,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.008064,
+        "dur": 0.6667,
+        "t": 14.1333,
+        "pan": 0.25,
+        "seed": 1763
+      },
+      {
+        "type": "pad",
+        "root": 110,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.016344,
+        "dur": 0.6667,
+        "t": 14.55,
+        "pan": 0.25,
+        "seed": 1770
+      },
+      {
+        "type": "pad",
+        "root": 220,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.083646,
+        "dur": 0.6667,
+        "t": 14.55,
+        "pan": -0.25,
+        "seed": 1777
+      },
+      {
+        "type": "pad",
+        "root": 440,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.17279999999999998,
+        "dur": 0.6667,
+        "t": 14.55,
+        "pan": 0.25,
+        "seed": 1784
+      },
+      {
+        "type": "pad",
+        "root": 880,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.14412599999999998,
+        "dur": 0.6667,
+        "t": 14.55,
+        "pan": -0.25,
+        "seed": 1791
+      },
+      {
+        "type": "pad",
+        "root": 1760,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.048528,
+        "dur": 0.6667,
+        "t": 14.55,
+        "pan": 0.25,
+        "seed": 1798
+      },
+      {
+        "type": "pad",
+        "root": 3520,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.006606000000000001,
+        "dur": 0.6667,
+        "t": 14.55,
+        "pan": -0.25,
+        "seed": 1805
+      },
+      {
+        "type": "pad",
+        "root": 116.541,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.019386,
+        "dur": 0.6667,
+        "t": 14.9667,
+        "pan": 0.25,
+        "seed": 1812
+      },
+      {
+        "type": "pad",
+        "root": 233.082,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.09197999999999999,
+        "dur": 0.6667,
+        "t": 14.9667,
+        "pan": -0.25,
+        "seed": 1819
+      },
+      {
+        "type": "pad",
+        "root": 466.164,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.176202,
+        "dur": 0.6667,
+        "t": 14.9667,
+        "pan": 0.25,
+        "seed": 1826
+      },
+      {
+        "type": "pad",
+        "root": 932.328,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.13627799999999998,
+        "dur": 0.6667,
+        "t": 14.9667,
+        "pan": -0.25,
+        "seed": 1833
+      },
+      {
+        "type": "pad",
+        "root": 1864.655,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.042552,
+        "dur": 0.6667,
+        "t": 14.9667,
+        "pan": 0.25,
+        "seed": 1840
+      },
+      {
+        "type": "pad",
+        "root": 3729.31,
+        "chord": [
+          0
+        ],
+        "attack": 0.12,
+        "release": 0.22,
+        "brightness": 2600,
+        "gain": 0.005364,
+        "dur": 0.6667,
+        "t": 14.9667,
+        "pan": -0.25,
+        "seed": 1847
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "zoom.js: S_m(t) = exp(k (tau - tau_m)), tau = t + phase wrapped; k = ln(prod R) / duration; T_m = ln R_m / k. Two worlds drawn per frame: the outer one directly, the inner one through the portal window (render target, SDF mask, alpha from S_inner).",
+      "k": 0.8535,
+      "levelSeconds": [
+        2.912,
+        2.099,
+        2.099,
+        2.099,
+        3.51,
+        2.28
+      ],
+      "totalZoom": 362880,
+      "labels": [
+        {
+          "level": 0,
+          "text": "What's inside one answer?",
+          "spans": [
+            [
+              0,
+              1.649
+            ]
+          ],
+          "full": 1.449,
+          "opening": true
+        },
+        {
+          "level": 1,
+          "text": "Every word is a token",
+          "spans": [
+            [
+              1.649,
+              3.749
+            ]
+          ],
+          "full": 1.699
+        },
+        {
+          "level": 2,
+          "text": "Every token is numbers",
+          "spans": [
+            [
+              3.749,
+              5.848
+            ]
+          ],
+          "full": 1.699
+        },
+        {
+          "level": 3,
+          "text": "Numbers flow through layers",
+          "spans": [
+            [
+              5.848,
+              7.948
+            ]
+          ],
+          "full": 1.699
+        },
+        {
+          "level": 4,
+          "text": "Layers run on chips",
+          "spans": [
+            [
+              7.948,
+              11.458
+            ]
+          ],
+          "full": 3.11
+        },
+        {
+          "level": 5,
+          "text": "A spark, on or off",
+          "spans": [
+            [
+              11.458,
+              13.32
+            ]
+          ],
+          "full": 1.462
+        },
+        {
+          "level": 0,
+          "text": "And it all adds up to this",
+          "spans": [
+            [
+              13.32,
+              15
+            ]
+          ],
+          "full": 1.48
+        }
+      ]
+    }
+  }
+}

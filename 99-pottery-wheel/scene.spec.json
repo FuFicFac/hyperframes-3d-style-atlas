@@ -1,0 +1,1615 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "pottery-wheel",
+    "name": "Pottery Wheel",
+    "description": "A potter's wheel in a sunlit plaster studio: wet, glossy grey-brown clay spins on a steel wheel head inside a pale splash pan, a window's light patch on the wall behind it and a shelf of finished glazed pots out of focus. The clay is one lathe surface whose profile is a pure function of t, morphing between named key profiles (lump, cone, opened cylinder, bowl, collar, vase) bottom-up like a real pull, with its volume held constant so it is always the same clay. Spin reads through slip streaks, throwing rings that appear once it is thrown, a lumpy off-centre wobble that damps as it is centred, and marks on the wheel head. A wooden rib on a handle rides the wall exactly where the profile is changing fastest. At the end the wheel slows and a brush sweeps glaze on in a spiral from foot to lip. Wheel hum pitched by spin speed, wet squelches at shape changes and the brush come from the same plan.",
+    "palette": {
+      "bg": "#e9dfcf",
+      "plaster": "#e3d8c6",
+      "plasterShade": "#d2c4ad",
+      "sun": "#fff5e2",
+      "clay": "#5f5249",
+      "clayDark": "#4a3f37",
+      "clayLight": "#85766a",
+      "slip": "#8d7d70",
+      "glaze": "#1f6f8b",
+      "glazeDeep": "#123f5c",
+      "glazeBreak": "#c99a5b",
+      "steel": "#9aa0a3",
+      "pan": "#c9d2cc",
+      "wheelBody": "#7f998c",
+      "wood": "#b98a55",
+      "woodDark": "#8a5f34",
+      "bristle": "#e9d9b5",
+      "ink": "#2a2420"
+    },
+    "world": {
+      "background": "#e9dfcf",
+      "sky": null,
+      "fog": null,
+      "environment": "room",
+      "environmentIntensity": 0.38,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "plaster": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "floor": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.85,
+        "metalness": 0
+      },
+      "steel": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.38,
+        "metalness": 0.75
+      },
+      "pan": {
+        "type": "standard",
+        "baseColor": "#c9d2cc",
+        "roughness": 0.55,
+        "metalness": 0
+      },
+      "slurry": {
+        "type": "physical",
+        "baseColor": "#5a4d44",
+        "roughness": 0.3,
+        "metalness": 0,
+        "clearcoat": 0.5,
+        "clearcoatRoughness": 0.2
+      },
+      "body": {
+        "type": "standard",
+        "baseColor": "#7f998c",
+        "roughness": 0.5,
+        "metalness": 0.05
+      },
+      "wood": {
+        "type": "standard",
+        "baseColor": "#b98a55",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "woodDark": {
+        "type": "standard",
+        "baseColor": "#8a5f34",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "ferrule": {
+        "type": "standard",
+        "baseColor": "#c8b27a",
+        "roughness": 0.3,
+        "metalness": 0.9
+      },
+      "bristle": {
+        "type": "standard",
+        "baseColor": "#e9d9b5",
+        "roughness": 0.8,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#f6f2ea",
+        "groundColor": "#bba78c",
+        "intensity": 1
+      },
+      {
+        "id": "sun",
+        "type": "directional",
+        "color": "#ffeed6",
+        "intensity": 3,
+        "position": [
+          -4.2,
+          5.2,
+          4
+        ],
+        "target": [
+          0,
+          0.4,
+          0
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 2048,
+          "extent": 3.2,
+          "near": 0.5,
+          "far": 20,
+          "bias": -0.0006,
+          "normalBias": 0.03
+        }
+      },
+      {
+        "id": "bounce",
+        "type": "directional",
+        "color": "#e6eef5",
+        "intensity": 0.9,
+        "position": [
+          4.5,
+          1.8,
+          3
+        ],
+        "target": [
+          0,
+          0.5,
+          0
+        ]
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#fff6ea",
+        "intensity": 1.4,
+        "position": [
+          2.5,
+          3.5,
+          -4
+        ],
+        "target": [
+          0,
+          0.5,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.18,
+        "radius": 0.3,
+        "threshold": 2.6
+      },
+      "vignette": {
+        "darkness": 0.2,
+        "offset": 1.15
+      }
+    },
+    "dof": {
+      "relativeAperture": 0.01,
+      "maxblur": 0.0045
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.2,
+      "far": 40,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 600,
+      "color": "#2a2420",
+      "height": 0.3
+    },
+    "profile": {
+      "counts": {
+        "bottom": 10,
+        "outer": 132,
+        "inner": 104
+      },
+      "segments": 144,
+      "volume": 0.27,
+      "rings": 15,
+      "ringAmp": 0.0026,
+      "stagger": 0.42
+    },
+    "keys": {
+      "lump": {
+        "outer": [
+          [
+            0.5,
+            0
+          ],
+          [
+            0.52,
+            0.05
+          ],
+          [
+            0.51,
+            0.15
+          ],
+          [
+            0.45,
+            0.28
+          ],
+          [
+            0.34,
+            0.39
+          ],
+          [
+            0.19,
+            0.45
+          ],
+          [
+            0.04,
+            0.47
+          ]
+        ],
+        "inner": [
+          [
+            0.025,
+            0.471
+          ],
+          [
+            0,
+            0.472
+          ]
+        ]
+      },
+      "cone": {
+        "outer": [
+          [
+            0.44,
+            0
+          ],
+          [
+            0.45,
+            0.06
+          ],
+          [
+            0.42,
+            0.3
+          ],
+          [
+            0.36,
+            0.6
+          ],
+          [
+            0.28,
+            0.86
+          ],
+          [
+            0.17,
+            1
+          ],
+          [
+            0.04,
+            1.05
+          ]
+        ],
+        "inner": [
+          [
+            0.02,
+            1.051
+          ],
+          [
+            0,
+            1.052
+          ]
+        ]
+      },
+      "cylinder": {
+        "outer": [
+          [
+            0.42,
+            0
+          ],
+          [
+            0.43,
+            0.05
+          ],
+          [
+            0.41,
+            0.3
+          ],
+          [
+            0.39,
+            0.7
+          ],
+          [
+            0.385,
+            1
+          ],
+          [
+            0.37,
+            1.1
+          ]
+        ],
+        "inner": [
+          [
+            0.33,
+            1.13
+          ],
+          [
+            0.3,
+            1.1
+          ],
+          [
+            0.29,
+            0.75
+          ],
+          [
+            0.285,
+            0.4
+          ],
+          [
+            0.27,
+            0.26
+          ],
+          [
+            0.14,
+            0.22
+          ],
+          [
+            0,
+            0.215
+          ]
+        ]
+      },
+      "bowl": {
+        "outer": [
+          [
+            0.36,
+            0
+          ],
+          [
+            0.38,
+            0.04
+          ],
+          [
+            0.5,
+            0.16
+          ],
+          [
+            0.68,
+            0.32
+          ],
+          [
+            0.83,
+            0.48
+          ],
+          [
+            0.9,
+            0.58
+          ]
+        ],
+        "inner": [
+          [
+            0.875,
+            0.61
+          ],
+          [
+            0.84,
+            0.58
+          ],
+          [
+            0.74,
+            0.47
+          ],
+          [
+            0.58,
+            0.33
+          ],
+          [
+            0.4,
+            0.22
+          ],
+          [
+            0.2,
+            0.16
+          ],
+          [
+            0,
+            0.15
+          ]
+        ]
+      },
+      "collar": {
+        "outer": [
+          [
+            0.36,
+            0
+          ],
+          [
+            0.4,
+            0.05
+          ],
+          [
+            0.42,
+            0.3
+          ],
+          [
+            0.38,
+            0.65
+          ],
+          [
+            0.29,
+            1
+          ],
+          [
+            0.25,
+            1.28
+          ],
+          [
+            0.25,
+            1.4
+          ]
+        ],
+        "inner": [
+          [
+            0.22,
+            1.42
+          ],
+          [
+            0.2,
+            1.39
+          ],
+          [
+            0.2,
+            1.25
+          ],
+          [
+            0.24,
+            0.95
+          ],
+          [
+            0.32,
+            0.62
+          ],
+          [
+            0.34,
+            0.3
+          ],
+          [
+            0.24,
+            0.16
+          ],
+          [
+            0,
+            0.14
+          ]
+        ]
+      },
+      "vase": {
+        "outer": [
+          [
+            0.33,
+            0
+          ],
+          [
+            0.38,
+            0.05
+          ],
+          [
+            0.5,
+            0.25
+          ],
+          [
+            0.53,
+            0.45
+          ],
+          [
+            0.45,
+            0.72
+          ],
+          [
+            0.26,
+            0.98
+          ],
+          [
+            0.16,
+            1.13
+          ],
+          [
+            0.155,
+            1.26
+          ],
+          [
+            0.21,
+            1.38
+          ],
+          [
+            0.24,
+            1.44
+          ]
+        ],
+        "inner": [
+          [
+            0.21,
+            1.455
+          ],
+          [
+            0.18,
+            1.41
+          ],
+          [
+            0.125,
+            1.28
+          ],
+          [
+            0.12,
+            1.14
+          ],
+          [
+            0.21,
+            0.97
+          ],
+          [
+            0.39,
+            0.72
+          ],
+          [
+            0.47,
+            0.45
+          ],
+          [
+            0.44,
+            0.25
+          ],
+          [
+            0.3,
+            0.13
+          ],
+          [
+            0,
+            0.11
+          ]
+        ]
+      }
+    },
+    "wobble": {
+      "amp": 0.075,
+      "offset": 0.035,
+      "terms": [
+        [
+          2,
+          1.3,
+          4,
+          1
+        ],
+        [
+          3,
+          -0.7,
+          7,
+          0.6
+        ],
+        [
+          5,
+          2.1,
+          -3,
+          0.35
+        ]
+      ]
+    },
+    "spin": {
+      "rps": 1,
+      "endRps": 0.16
+    },
+    "streaks": {
+      "amp": 0.2,
+      "freq": [
+        2,
+        3,
+        5
+      ]
+    },
+    "glaze": {
+      "soft": 0.022,
+      "spiral": 0.035,
+      "footBare": 0.035
+    },
+    "tool": {
+      "azimuth": -0.26,
+      "gap": 0.004,
+      "ribW": 0.34,
+      "ribH": 0.2,
+      "ribT": 0.012,
+      "handle": 1.8,
+      "handleR": 0.024,
+      "handleTilt": 0.75,
+      "handleYaw": 0.5,
+      "retract": 0.55
+    },
+    "brush": {
+      "azimuth": 2.9,
+      "len": 1.6,
+      "handleR": 0.022,
+      "headW": 0.17,
+      "headH": 0.13,
+      "headT": 0.05,
+      "tilt": 0.55,
+      "yaw": -0.45
+    },
+    "wheel": {
+      "headR": 0.8,
+      "headT": 0.07,
+      "panR": 1.08,
+      "panH": 0.2,
+      "bodyR": 0.62,
+      "floorY": -0.95,
+      "marks": 6
+    },
+    "room": {
+      "wallZ": -2.6,
+      "wallW": 14,
+      "wallH": 7,
+      "shelfY": 0.62,
+      "shelfZ": -2.38
+    },
+    "sunPatch": {
+      "x": 0.25,
+      "y": 0.42,
+      "w": 0.36,
+      "h": 0.62,
+      "skew": -0.16,
+      "soft": 0.05,
+      "mullion": 0.018
+    },
+    "caption": {
+      "x": 112,
+      "y": 900,
+      "h": 88,
+      "cap": 44,
+      "maxW": 860,
+      "font": "\"Avenir Next\", \"Gill Sans\", \"Helvetica Neue\", Helvetica, sans-serif",
+      "weight": 600,
+      "plate": "#3a2e26",
+      "edge": "#5a4a3d",
+      "ink": "#fbf4e8",
+      "accent": "#d9a46a"
+    },
+    "sound": {
+      "bed": {
+        "root": 130.81,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "brightness": 820,
+        "gain": 0.55
+      },
+      "hum": {
+        "hz0": 52,
+        "hzPerRps": 46,
+        "gain": 0.32,
+        "grit": 0.12
+      },
+      "squish": {
+        "gain": 0.5,
+        "pitch": 1
+      },
+      "tool": {
+        "gain": 0.18
+      },
+      "brush": {
+        "gain": 0.3
+      },
+      "finish": {
+        "hz": 392,
+        "gain": 0.32
+      }
+    },
+    "sfx": {
+      "enter": "squish",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "squish",
+      "emphasis": "marimba",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "The clay is one lathe surface: every frame its profile is interpolated between named key profiles, bottom-up like a pull, then rescaled radially so its volume never changes.",
+      "Spin is shown, not simulated: slip streaks and a lumpy off-centre wobble are fixed to the clay and rotate with a closed-form spin angle; the wobble damps to zero as the clay is centred.",
+      "The wooden rib sits where the profile is moving fastest (velocity-weighted centroid of the profile), so the tool rides up the wall during a pull.",
+      "Glaze sweeps on as a spiral front from foot to lip while the wheel slows; a brush rides the front."
+    ]
+  },
+  "scene": {
+    "id": "99-pottery-wheel",
+    "style": "pottery-wheel",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "lump",
+        "t": 0,
+        "dur": 2.6,
+        "label": "One lump of clay"
+      },
+      {
+        "id": "form",
+        "t": 2.6,
+        "dur": 3.1,
+        "label": "Training gives it a form"
+      },
+      {
+        "id": "bowl",
+        "t": 5.7,
+        "dur": 2.9,
+        "label": "Fine-tune it for one job"
+      },
+      {
+        "id": "vase",
+        "t": 8.6,
+        "dur": 3.2,
+        "label": "Or reshape it for another"
+      },
+      {
+        "id": "glaze",
+        "t": 11.8,
+        "dur": 3.2,
+        "label": "Same clay. New purpose."
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0.74465,
+          0.67631,
+          1.77068
+        ],
+        "target": [
+          -0.00649,
+          0.06585,
+          0.08867
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 2.4,
+        "pos": [
+          0.74465,
+          0.67631,
+          1.77068
+        ],
+        "target": [
+          -0.00649,
+          0.06585,
+          0.08867
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 2.6,
+        "pos": [
+          0.6867700000000001,
+          0.6209950000000001,
+          1.6564549999999998
+        ],
+        "target": [
+          -0.017034999999999998,
+          0.08786000000000001,
+          0.0804275
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 2.85,
+        "pos": [
+          0.7089325000000001,
+          0.6564650000000001,
+          1.726345
+        ],
+        "target": [
+          -0.025425,
+          0.104465,
+          0.08191000000000001
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 3.1,
+        "pos": [
+          0.8095075,
+          0.8066150000000001,
+          2.031625
+        ],
+        "target": [
+          -0.057655,
+          0.166425,
+          0.08981
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 3.35,
+        "pos": [
+          0.9643124999999999,
+          1.036335,
+          2.50597
+        ],
+        "target": [
+          -0.10743749999999999,
+          0.2647125,
+          0.1060275
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 3.6,
+        "pos": [
+          1.0656025,
+          1.18352,
+          2.827295
+        ],
+        "target": [
+          -0.14260499999999998,
+          0.3394625,
+          0.121785
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 3.85,
+        "pos": [
+          1.08746,
+          1.2005475,
+          2.90512
+        ],
+        "target": [
+          -0.1525975,
+          0.36502,
+          0.1282875
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 4.1,
+        "pos": [
+          1.0862925,
+          1.16996,
+          2.9033175
+        ],
+        "target": [
+          -0.1532475,
+          0.36788750000000003,
+          0.127645
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 4.35,
+        "pos": [
+          1.0889575,
+          1.140805,
+          2.9092350000000002
+        ],
+        "target": [
+          -0.1544275,
+          0.36889,
+          0.1249525
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 4.6,
+        "pos": [
+          1.095805,
+          1.120205,
+          2.92892
+        ],
+        "target": [
+          -0.1578175,
+          0.372305,
+          0.1217125
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 4.85,
+        "pos": [
+          1.111035,
+          1.108055,
+          2.967625
+        ],
+        "target": [
+          -0.16133749999999997,
+          0.3751675,
+          0.1184375
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 5.1,
+        "pos": [
+          1.1301075,
+          1.0980575000000001,
+          3.0088600000000003
+        ],
+        "target": [
+          -0.1617775,
+          0.37372,
+          0.11598
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 5.35,
+        "pos": [
+          1.13993,
+          1.0939225000000001,
+          3.0281700000000003
+        ],
+        "target": [
+          -0.161,
+          0.3716225,
+          0.11503
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 5.6,
+        "pos": [
+          1.1414175,
+          1.0991875,
+          3.0316425000000002
+        ],
+        "target": [
+          -0.1609675,
+          0.37137250000000005,
+          0.11524499999999999
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 5.75,
+        "pos": [
+          1.1467525,
+          1.16363,
+          3.0442124999999995
+        ],
+        "target": [
+          -0.1603025,
+          0.37245500000000004,
+          0.1173625
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 6.05,
+        "pos": [
+          1.1565400000000001,
+          1.225155,
+          3.047285
+        ],
+        "target": [
+          -0.15402249999999998,
+          0.3730925,
+          0.11258
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 6.35,
+        "pos": [
+          1.169435,
+          1.3563474999999998,
+          3.02804
+        ],
+        "target": [
+          -0.13972,
+          0.37358499999999994,
+          0.0964825
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 6.65,
+        "pos": [
+          1.1594200000000001,
+          1.494685,
+          2.9126174999999996
+        ],
+        "target": [
+          -0.1109525,
+          0.35898749999999996,
+          0.06790249999999999
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 6.95,
+        "pos": [
+          1.0957675,
+          1.5425,
+          2.6536725
+        ],
+        "target": [
+          -0.069955,
+          0.3145325,
+          0.0433025
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 7.25,
+        "pos": [
+          1.0042075,
+          1.5126974999999998,
+          2.3610875
+        ],
+        "target": [
+          -0.034425,
+          0.2632275,
+          0.0353075
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 7.55,
+        "pos": [
+          0.946985,
+          1.491385,
+          2.194975
+        ],
+        "target": [
+          -0.0169325,
+          0.2360875,
+          0.0364925
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 7.85,
+        "pos": [
+          0.9328425,
+          1.4939,
+          2.15552
+        ],
+        "target": [
+          -0.012950000000000001,
+          0.2302225,
+          0.03762
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 8.6,
+        "pos": [
+          0.9560825,
+          1.514795,
+          2.2059925000000002
+        ],
+        "target": [
+          -0.0106075,
+          0.2276275,
+          0.041295
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 8.9,
+        "pos": [
+          1.0094349999999999,
+          1.564935,
+          2.3442950000000002
+        ],
+        "target": [
+          -0.01567,
+          0.2409875,
+          0.048797499999999994
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 9.2,
+        "pos": [
+          1.12345,
+          1.69454,
+          2.6701050000000004
+        ],
+        "target": [
+          -0.040145,
+          0.2916325,
+          0.0644925
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 9.5,
+        "pos": [
+          1.2802,
+          1.856255,
+          3.140375
+        ],
+        "target": [
+          -0.0826675,
+          0.3757975,
+          0.0885375
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 9.8,
+        "pos": [
+          1.4248025,
+          1.9427325,
+          3.6131925
+        ],
+        "target": [
+          -0.1358025,
+          0.45921,
+          0.118565
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 10.1,
+        "pos": [
+          1.5092925,
+          1.8831175,
+          3.9298275
+        ],
+        "target": [
+          -0.1820725,
+          0.51242,
+          0.1423875
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 10.4,
+        "pos": [
+          1.5376075,
+          1.70383,
+          4.0421825
+        ],
+        "target": [
+          -0.2017525,
+          0.532625,
+          0.1472675
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 10.7,
+        "pos": [
+          1.5439825,
+          1.49623,
+          4.051845
+        ],
+        "target": [
+          -0.20379000000000003,
+          0.5372775000000001,
+          0.138095
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 11,
+        "pos": [
+          1.5390125000000001,
+          1.3165200000000001,
+          4.02583
+        ],
+        "target": [
+          -0.2020075,
+          0.5354475,
+          0.1272
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 11.3,
+        "pos": [
+          1.518875,
+          1.183095,
+          3.9624700000000006
+        ],
+        "target": [
+          -0.19719,
+          0.5271275,
+          0.11972000000000001
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 11.6,
+        "pos": [
+          1.50119,
+          1.11627,
+          3.909935
+        ],
+        "target": [
+          -0.192965,
+          0.5199675,
+          0.1162525
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 12,
+        "pos": [
+          1.4684,
+          1.0546,
+          3.81632
+        ],
+        "target": [
+          -0.18666,
+          0.52395,
+          0.11018
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          1.42954,
+          1.00609,
+          3.70628
+        ],
+        "target": [
+          -0.17918,
+          0.53037,
+          0.10391
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15.5,
+        "root": 130.81,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "attack": 0.5,
+        "release": 2,
+        "brightness": 820,
+        "gain": 0.55,
+        "seed": 5
+      },
+      {
+        "type": "whir",
+        "dur": 12,
+        "hz": 98,
+        "hz2": 98,
+        "grit": 0.12,
+        "gain": 0.32,
+        "t": 0,
+        "pan": 0,
+        "seed": 199
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.45,
+        "q": 1.1,
+        "pitch": 1.2,
+        "gain": 0.18,
+        "t": 0.5,
+        "pan": 0.35,
+        "seed": 206
+      },
+      {
+        "type": "squish",
+        "dur": 0.34,
+        "pitch": 0.9,
+        "gain": 0.5,
+        "t": 0.9,
+        "pan": -0.15,
+        "seed": 213
+      },
+      {
+        "type": "squish",
+        "dur": 0.34,
+        "pitch": 0.96,
+        "gain": 0.41000000000000003,
+        "t": 1.425,
+        "pan": -0.15,
+        "seed": 220
+      },
+      {
+        "type": "squish",
+        "dur": 0.34,
+        "pitch": 1.02,
+        "gain": 0.32,
+        "t": 1.9500000000000002,
+        "pan": -0.15,
+        "seed": 227
+      },
+      {
+        "type": "squish",
+        "dur": 0.34,
+        "pitch": 1.08,
+        "gain": 0.22999999999999998,
+        "t": 2.475,
+        "pan": -0.15,
+        "seed": 234
+      },
+      {
+        "type": "squish",
+        "dur": 0.34,
+        "pitch": 0.85,
+        "gain": 0.45,
+        "t": 2.64,
+        "pan": 0.2,
+        "seed": 241
+      },
+      {
+        "type": "squish",
+        "dur": 0.42,
+        "pitch": 0.8400000000000001,
+        "gain": 0.30000000000000004,
+        "t": 3.449999999999997,
+        "pan": 0.25,
+        "seed": 248
+      },
+      {
+        "type": "rustle",
+        "dur": 0.5850000000000002,
+        "density": 0.25,
+        "pitch": 0.6,
+        "gain": 0.175,
+        "t": 3.499999999999997,
+        "pan": 0.25,
+        "seed": 249
+      },
+      {
+        "type": "squish",
+        "dur": 0.34,
+        "pitch": 0.9299999999999999,
+        "gain": 0.45,
+        "t": 4.09,
+        "pan": 0.2,
+        "seed": 255
+      },
+      {
+        "type": "squish",
+        "dur": 0.42,
+        "pitch": 0.8880000000000001,
+        "gain": 0.30000000000000004,
+        "t": 5.099999999999996,
+        "pan": 0.25,
+        "seed": 262
+      },
+      {
+        "type": "rustle",
+        "dur": 0.6300000000000002,
+        "density": 0.25,
+        "pitch": 0.6,
+        "gain": 0.175,
+        "t": 5.149999999999996,
+        "pan": 0.25,
+        "seed": 263
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.45,
+        "q": 1.1,
+        "pitch": 1.2,
+        "gain": 0.18,
+        "t": 5.45,
+        "pan": 0.35,
+        "seed": 269
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.4,
+        "q": 1.1,
+        "pitch": 1.3,
+        "gain": 0.144,
+        "t": 5.5,
+        "pan": 0.35,
+        "seed": 276
+      },
+      {
+        "type": "squish",
+        "dur": 0.34,
+        "pitch": 1.01,
+        "gain": 0.45,
+        "t": 5.890000000000001,
+        "pan": 0.2,
+        "seed": 283
+      },
+      {
+        "type": "squish",
+        "dur": 0.42,
+        "pitch": 0.9359999999999999,
+        "gain": 0.30000000000000004,
+        "t": 7.049999999999996,
+        "pan": 0.25,
+        "seed": 290
+      },
+      {
+        "type": "rustle",
+        "dur": 0.8099999999999999,
+        "density": 0.25,
+        "pitch": 0.6,
+        "gain": 0.175,
+        "t": 7.099999999999996,
+        "pan": 0.25,
+        "seed": 291
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.4,
+        "q": 1.1,
+        "pitch": 1.3,
+        "gain": 0.144,
+        "t": 7.7,
+        "pan": 0.35,
+        "seed": 297
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.45,
+        "q": 1.1,
+        "pitch": 1.2,
+        "gain": 0.18,
+        "t": 8.299999999999999,
+        "pan": 0.35,
+        "seed": 304
+      },
+      {
+        "type": "squish",
+        "dur": 0.34,
+        "pitch": 1.0899999999999999,
+        "gain": 0.45,
+        "t": 8.739999999999998,
+        "pan": 0.2,
+        "seed": 311
+      },
+      {
+        "type": "squish",
+        "dur": 0.42,
+        "pitch": 0.984,
+        "gain": 0.30000000000000004,
+        "t": 9.900000000000016,
+        "pan": 0.25,
+        "seed": 318
+      },
+      {
+        "type": "rustle",
+        "dur": 0.9,
+        "density": 0.25,
+        "pitch": 0.6,
+        "gain": 0.175,
+        "t": 9.950000000000017,
+        "pan": 0.25,
+        "seed": 319
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.4,
+        "q": 1.1,
+        "pitch": 1.3,
+        "gain": 0.144,
+        "t": 11.55,
+        "pan": 0.35,
+        "seed": 325
+      },
+      {
+        "type": "whir",
+        "dur": 3.1999999999999993,
+        "hz": 98,
+        "hz2": 59.36,
+        "grit": 0.12,
+        "gain": 0.32,
+        "t": 11.8,
+        "pan": 0,
+        "seed": 332
+      },
+      {
+        "type": "rustle",
+        "dur": 0.5,
+        "density": 0.5,
+        "pitch": 1.4,
+        "gain": 0.3,
+        "t": 12.15,
+        "pan": -0.3,
+        "seed": 339
+      },
+      {
+        "type": "rustle",
+        "dur": 0.5,
+        "density": 0.5,
+        "pitch": 1.4,
+        "gain": 0.3,
+        "t": 13.250000000000055,
+        "pan": -0.3,
+        "seed": 346
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "notes": [
+          0,
+          4,
+          7,
+          12
+        ],
+        "step": 0.11,
+        "decay": 0.5,
+        "mallet": 0.6,
+        "gain": 0.32,
+        "t": 14.1,
+        "pan": 0,
+        "seed": 353
+      },
+      {
+        "type": "chime",
+        "dur": 1.6,
+        "notes": 5,
+        "gain": 0.16,
+        "t": 14.35,
+        "pan": 0,
+        "seed": 354
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "throw.js: the clay is one lathe surface; its profile is interpolated per point between named key profiles (lump, cone, cylinder, bowl, collar, vase), staggered bottom-up like a pull, the bowl->vase move a quadratic Bezier through the collar, then rescaled radially every frame so the volume stays constant. Spin angle closed form; centring wobble damps; rib at the velocity-weighted centroid of the profile; glaze a helix front.",
+      "volume": 0.27,
+      "framing": "ok (smallest height fill 0.516 at 9.6s)"
+    }
+  }
+}

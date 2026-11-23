@@ -1,0 +1,13 @@
+check-frames run: 2026-11-23 06:02:05 UTC
+times: 1, 4, 8, 12, 14.5
+newest code edit: 2026-11-23 05:59:42 UTC (93-tessellation-morph/scene.config.js)
+mp4: 93-tessellation-morph.mp4 2026-11-23 06:01:13 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 31.9 dB, frame 435)
+  frame 30 (t=1.000): 37.6 dB
+  frame 120 (t=4.000): 35.6 dB
+  frame 240 (t=8.000): 36.4 dB
+  frame 360 (t=12.000): 32.5 dB
+  frame 435 (t=14.500): 31.9 dB
+determinism: OK (5 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

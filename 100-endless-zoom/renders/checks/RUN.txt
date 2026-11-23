@@ -1,0 +1,15 @@
+check-frames run: 2026-11-23 08:14:38 UTC
+times: 0, 0.05, 1, 1.649, 1.75, 2.462, 3.749, 4, 4.561, 5.848, 6.66, 7.948, 8, 8.76, 11.458, 12, 12.27, 13.32, 14.5, 14.55, 14.95, 14.999
+newest code edit: 2026-11-23 07:45:39 UTC (endless-zoom/style.js)
+mp4: 100-endless-zoom.mp4 2026-11-23 07:54:37 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 31.5 dB, frame 240)
+  frame 0 (t=0.000): 39.3 dB
+  frame 30 (t=1.000): 39.2 dB
+  frame 120 (t=4.000): 34.7 dB
+  frame 240 (t=8.000): 31.5 dB
+  frame 360 (t=12.000): 36.6 dB
+  frame 435 (t=14.500): 39.5 dB
+  frame 450 (t=15.000): NaN dB
+determinism: OK (22 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

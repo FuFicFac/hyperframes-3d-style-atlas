@@ -1,0 +1,1201 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "fogged-glass",
+    "name": "Fogged Glass",
+    "description": "A steamed-up window pane: behind it a bright sunrise town (sky, balloons, skyline, river, lamps) painted once into a sharp texture and once into a pre-blurred, milky, bokeh-dotted 'fogged' texture. An unseen finger writes in the condensation: the fog mask is a pure function of t — for every pixel, clear = max over planned strokes of (drawn by now x re-fogging decay), redrawn from the plan each frame into a small mask canvas (no accumulation). The pane shader shows the fogged texture where the mask is 0 and the sharp scene where it is 1, with a beaded boundary, a refracting lit/shaded water rim along every wiped edge, a wet sheen on fresh strokes and lens-like drops that gather under the strokes and run down with stick-slip, leaving clear trails. Old strokes narrow and fog over; a palm sweep clears the whole pane and the last fog evaporates. Squeaks, drip plinks, the palm swipe and the reveal chime come from the same plan (fogplan.js).",
+    "palette": {
+      "bg": "#d6cbbb",
+      "wall": "#d6cbbb",
+      "wood": "#7a553c",
+      "milk": "#eef1f4",
+      "skyTop": "#2c4aa0",
+      "skyMid": "#7466c4",
+      "coral": "#ee7f7a",
+      "gold": "#ffd98a",
+      "river": "#3f6fa8",
+      "roof": "#4a2a57",
+      "lamp": "#ffd36a",
+      "ink": "#1b2140",
+      "accent": "#ffb23c"
+    },
+    "world": {
+      "background": "#d6cbbb",
+      "environment": null,
+      "toneMapping": "none",
+      "exposure": 1
+    },
+    "materials": {
+      "wall": {
+        "type": "standard",
+        "baseColor": "#d6cbbb",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "wood": {
+        "type": "standard",
+        "baseColor": "#8a6144",
+        "roughness": 0.7,
+        "metalness": 0
+      },
+      "sill": {
+        "type": "standard",
+        "baseColor": "#e9e2d6",
+        "roughness": 0.6,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#fff4e6",
+        "groundColor": "#b9a995",
+        "intensity": 2.1
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff0dc",
+        "intensity": 1.2,
+        "position": [
+          -2.5,
+          3.5,
+          5
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.22,
+        "offset": 1.15
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.2,
+      "far": 60,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#1b2140",
+      "height": 0.3
+    },
+    "pane": {
+      "w": 3.2,
+      "h": 1.8,
+      "frame": 0.16,
+      "frameDepth": 0.12,
+      "backdrop": 6,
+      "restDistance": 3.359,
+      "zoom": 0.92,
+      "mask": [
+        960,
+        540
+      ]
+    },
+    "woodGrain": {
+      "freq": 26,
+      "contrast": 0.55,
+      "dark": "#7a5236",
+      "mid": "#a87a54",
+      "light": "#d2a274"
+    },
+    "fog": {
+      "blur": 34,
+      "milk": "#eef1f4",
+      "milkAmount": 0.66,
+      "milkBottom": 0.1,
+      "bokeh": {
+        "gain": 0.62,
+        "rim": 0.3,
+        "scale": 1
+      },
+      "bead": {
+        "amount": 0.08,
+        "scale": 2.1,
+        "edge": 0.26
+      },
+      "rim": {
+        "light": 0.55,
+        "dark": 0.34,
+        "refract": 0.02,
+        "dir": [
+          -0.5,
+          0.8
+        ]
+      },
+      "wiped": {
+        "gain": 0.96,
+        "residue": 0.1,
+        "sheen": 0.07
+      },
+      "evaporate": {
+        "noise": 0.75
+      },
+      "reflection": 0.035
+    },
+    "drop": {
+      "lens": 11,
+      "rimDark": 0.55,
+      "highlight": 0.95,
+      "squash": 0.74
+    },
+    "scene": {
+      "size": [
+        2048,
+        1152
+      ],
+      "seed": 23,
+      "horizon": 0.7,
+      "sky": [
+        [
+          0,
+          "#2c4aa0"
+        ],
+        [
+          0.4,
+          "#7466c4"
+        ],
+        [
+          0.7,
+          "#ee7f7a"
+        ],
+        [
+          0.9,
+          "#ff9f4a"
+        ],
+        [
+          1,
+          "#ffd98a"
+        ]
+      ],
+      "sun": {
+        "u": 0.2,
+        "r": 80,
+        "glow": 560,
+        "color": "#fff6d0",
+        "glowColor": "255,232,160"
+      },
+      "cloud": {
+        "top": "#5a55a8",
+        "bottom": "#ff9a86",
+        "count": 10
+      },
+      "hills": [
+        "#9a78c0",
+        "#7658a8"
+      ],
+      "city": {
+        "dark": "#2c2660",
+        "light": "#453a86",
+        "window": "#ffd870",
+        "windowHot": "#ffae4a",
+        "rim": "#ff9f6e",
+        "lit": 0.34
+      },
+      "river": {
+        "far": "#ffc878",
+        "mid": "#d8789a",
+        "near": "#3f5fa8",
+        "glitter": "#fff3c0",
+        "ripple": "#2a3f86"
+      },
+      "bank": {
+        "color": "#4f4580",
+        "rail": "#2a2358",
+        "lamp": "#ffe9a8",
+        "lampGlow": "255,214,120",
+        "tree": "#1f5d5a",
+        "treeRim": "#ffa860"
+      },
+      "roofs": {
+        "a": "#4a2a57",
+        "b": "#5d3466",
+        "rim": "#ff9d5c",
+        "window": "#ffd870",
+        "chimney": "#3a2046"
+      },
+      "balloons": [
+        {
+          "u": 0.53,
+          "v": 0.28,
+          "r": 128,
+          "a": "#e8433f",
+          "b": "#fff1d0"
+        },
+        {
+          "u": 0.83,
+          "v": 0.34,
+          "r": 80,
+          "a": "#1fa7a0",
+          "b": "#ffd24a"
+        },
+        {
+          "u": 0.685,
+          "v": 0.47,
+          "r": 46,
+          "a": "#8a4fd0",
+          "b": "#ff9f4a"
+        }
+      ],
+      "bird": "#2a2358"
+    },
+    "caption": {
+      "x": 960,
+      "y": 30,
+      "h": 92,
+      "cap": 40,
+      "maxW": 960,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#1b2140",
+      "edge": "#ffb23c",
+      "ink": "#ffffff",
+      "dot": "#ffd98a"
+    },
+    "sound": {
+      "bed": {
+        "gain": 0.44,
+        "root": 146.83,
+        "chord": [
+          0,
+          7,
+          12,
+          16,
+          19
+        ],
+        "brightness": 1000
+      },
+      "squeak": {
+        "hz": 980,
+        "grit": 0.08,
+        "gain": 0.07,
+        "rub": 0.3
+      },
+      "plink": {
+        "gain": 0.3,
+        "note": 0.16
+      },
+      "refog": {
+        "gain": 0.16
+      },
+      "palm": {
+        "gain": 0.5,
+        "hz": 520,
+        "squeal": 0.1
+      },
+      "reveal": {
+        "gain": 0.5,
+        "pad": 0.3
+      }
+    },
+    "sfx": {
+      "enter": "penScratch",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "bubble",
+      "emphasis": "chime",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "Finger strokes are timed polylines: clear = max over strokes of (drawn by now x re-fogging decay); the mask is redrawn from the plan every frame.",
+      "Old strokes narrow from the edges and fade as the fog creeps back, in the order they were written.",
+      "Drops gather under the lowest point of a stroke, let go and run down with closed-form stick-slip and a seeded wobble, leaving clear trails.",
+      "Finale: a palm sweeps two wide arcs, the last corners evaporate in patches and the sharp scene fills the frame.",
+      "Camera: slightly oblique at the start (frame and wall visible, parallax through the glass), square-on while the finger writes, one slow push at the reveal."
+    ]
+  },
+  "scene": {
+    "id": "94-fogged-glass",
+    "style": "fogged-glass",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "start",
+        "t": 0,
+        "dur": 3.2,
+        "label": "A chat starts here"
+      },
+      {
+        "id": "grow",
+        "t": 3.2,
+        "dur": 3.2,
+        "label": "The chat keeps growing"
+      },
+      {
+        "id": "forget",
+        "t": 6.4,
+        "dur": 2.7,
+        "label": "The start fogs over"
+      },
+      {
+        "id": "window",
+        "t": 9.1,
+        "dur": 2.1,
+        "label": "That's the context window"
+      },
+      {
+        "id": "reveal",
+        "t": 11.2,
+        "dur": 3.8,
+        "label": "Bigger window, whole view"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -0.62,
+          0.1,
+          3.8964399999999997
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "fov": 30
+      },
+      {
+        "t": 2.3,
+        "pos": [
+          0,
+          0,
+          3.308615
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.399999999999999,
+        "pos": [
+          0,
+          0,
+          3.308615
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "fov": 30
+      },
+      {
+        "t": 14.6,
+        "pos": [
+          0.14,
+          0.03,
+          3.0231
+        ],
+        "target": [
+          0.02,
+          0,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0.14,
+          0.03,
+          3.0231
+        ],
+        "target": [
+          0.02,
+          0,
+          0
+        ],
+        "fov": 30
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.44,
+        "root": 146.83,
+        "chord": [
+          0,
+          7,
+          12,
+          16,
+          19
+        ],
+        "brightness": 1000,
+        "attack": 0.5,
+        "release": 1.2,
+        "t": 0,
+        "pan": 0,
+        "seed": 311
+      },
+      {
+        "type": "servo",
+        "dur": 0.4305383302892926,
+        "hz": 1156.3999999999999,
+        "hz2": 980,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": -0.4209875721244677,
+        "t": 0.45,
+        "seed": 318
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.4305383302892926,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": -0.4209875721244677,
+        "t": 0.45,
+        "seed": 319
+      },
+      {
+        "type": "servo",
+        "dur": 0.1149048759449206,
+        "hz": 1295.1680000000001,
+        "hz2": 1097.6000000000001,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": -0.3756221155249952,
+        "t": 0.993384145233526,
+        "seed": 325
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.1149048759449206,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": -0.3756221155249952,
+        "t": 0.993384145233526,
+        "seed": 326
+      },
+      {
+        "type": "servo",
+        "dur": 0.19312785876010863,
+        "hz": 1087.0159999999998,
+        "hz2": 921.1999999999999,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": -0.3337457998339479,
+        "t": 1.1334757667051751,
+        "seed": 332
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.19312785876010863,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": -0.3337457998339479,
+        "t": 1.1334757667051751,
+        "seed": 333
+      },
+      {
+        "type": "servo",
+        "dur": 0.33511572695218317,
+        "hz": 1038.8,
+        "hz2": 1267.336,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": -0.2699435492817928,
+        "t": 1.3749849547157662,
+        "seed": 339
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.33511572695218317,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": -0.2699435492817928,
+        "t": 1.3749849547157662,
+        "seed": 340
+      },
+      {
+        "type": "servo",
+        "dur": 0.08,
+        "hz": 862.4,
+        "hz2": 1052.128,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": -0.24836941323082237,
+        "t": 1.7629615699633416,
+        "seed": 346
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.08,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": -0.24836941323082237,
+        "t": 1.7629615699633416,
+        "seed": 347
+      },
+      {
+        "type": "servo",
+        "dur": 0.46214498266108794,
+        "hz": 980,
+        "hz2": 1195.6,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": -0.14657995674263455,
+        "t": 1.8807460389232653,
+        "seed": 353
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.46214498266108794,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": -0.14657995674263455,
+        "t": 1.8807460389232653,
+        "seed": 354
+      },
+      {
+        "type": "bubble",
+        "dur": 0.09,
+        "pitch": 2.38,
+        "gain": 0.3,
+        "pan": -0.4668958630297859,
+        "t": 2.084525320343449,
+        "seed": 360
+      },
+      {
+        "type": "marimba",
+        "dur": 0.5,
+        "hz": 3135.963487853994,
+        "decay": 0.12,
+        "gain": 0.16,
+        "pan": -0.4668958630297859,
+        "t": 2.0945253203434486,
+        "seed": 361
+      },
+      {
+        "type": "servo",
+        "dur": 0.11677427572247145,
+        "hz": 1087.0159999999998,
+        "hz2": 921.1999999999999,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": -0.10712048822075035,
+        "t": 2.3570443807634702,
+        "seed": 367
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.11677427572247145,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": -0.10712048822075035,
+        "t": 2.3570443807634702,
+        "seed": 368
+      },
+      {
+        "type": "bubble",
+        "dur": 0.09,
+        "pitch": 1.62,
+        "gain": 0.3,
+        "pan": -0.24836941323082237,
+        "t": 2.4649064405116645,
+        "seed": 374
+      },
+      {
+        "type": "marimba",
+        "dur": 0.5,
+        "hz": 1046.5022612023945,
+        "decay": 0.12,
+        "gain": 0.16,
+        "pan": -0.24836941323082237,
+        "t": 2.4749064405116643,
+        "seed": 375
+      },
+      {
+        "type": "servo",
+        "dur": 0.120795406361355,
+        "hz": 862.4,
+        "hz2": 1052.128,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": -0.017728368861545673,
+        "t": 2.5653399072892955,
+        "seed": 381
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.120795406361355,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": -0.017728368861545673,
+        "t": 2.5653399072892955,
+        "seed": 382
+      },
+      {
+        "type": "servo",
+        "dur": 0.185470464297532,
+        "hz": 1156.3999999999999,
+        "hz2": 980,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": 0.023888690570966365,
+        "t": 2.714529535702468,
+        "seed": 388
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.185470464297532,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": 0.023888690570966365,
+        "t": 2.714529535702468,
+        "seed": 389
+      },
+      {
+        "type": "bubble",
+        "dur": 0.09,
+        "pitch": 1.98,
+        "gain": 0.3,
+        "pan": -0.3457272200589149,
+        "t": 2.7953552016356094,
+        "seed": 395
+      },
+      {
+        "type": "marimba",
+        "dur": 0.5,
+        "hz": 1760,
+        "decay": 0.12,
+        "gain": 0.16,
+        "pan": -0.3457272200589149,
+        "t": 2.805355201635609,
+        "seed": 396
+      },
+      {
+        "type": "bubble",
+        "dur": 0.09,
+        "pitch": 2.1,
+        "gain": 0.3,
+        "pan": -0.14657995674263455,
+        "t": 2.9251718753615785,
+        "seed": 402
+      },
+      {
+        "type": "marimba",
+        "dur": 0.5,
+        "hz": 2093.004522404789,
+        "decay": 0.12,
+        "gain": 0.16,
+        "pan": -0.14657995674263455,
+        "t": 2.9351718753615783,
+        "seed": 403
+      },
+      {
+        "type": "servo",
+        "dur": 0.4710115765790319,
+        "hz": 1225.7839999999999,
+        "hz2": 1038.8,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": -0.2742483810342927,
+        "t": 3.5,
+        "seed": 409
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.4710115765790319,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": -0.2742483810342927,
+        "t": 3.5,
+        "seed": 410
+      },
+      {
+        "type": "servo",
+        "dur": 0.17377251677270777,
+        "hz": 862.4,
+        "hz2": 1052.128,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": -0.13809051841707531,
+        "t": 3.993345330715366,
+        "seed": 416
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.17377251677270777,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": -0.13809051841707531,
+        "t": 3.993345330715366,
+        "seed": 417
+      },
+      {
+        "type": "servo",
+        "dur": 0.4597598757075039,
+        "hz": 1156.3999999999999,
+        "hz2": 980,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": -0.09703741970902428,
+        "t": 4.238491465509932,
+        "seed": 423
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.4597598757075039,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": -0.09703741970902428,
+        "t": 4.238491465509932,
+        "seed": 424
+      },
+      {
+        "type": "servo",
+        "dur": 0.45373988749350236,
+        "hz": 1295.1680000000001,
+        "hz2": 1097.6000000000001,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": 0.018683747338646795,
+        "t": 4.761985525988934,
+        "seed": 430
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.45373988749350236,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": 0.018683747338646795,
+        "t": 4.761985525988934,
+        "seed": 431
+      },
+      {
+        "type": "servo",
+        "dur": 0.24487977047611587,
+        "hz": 1087.0159999999998,
+        "hz2": 921.1999999999999,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": 0.15300725106101423,
+        "t": 5.3229749609365005,
+        "seed": 437
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.24487977047611587,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": 0.15300725106101423,
+        "t": 5.3229749609365005,
+        "seed": 438
+      },
+      {
+        "type": "bubble",
+        "dur": 0.09,
+        "pitch": 1.9,
+        "gain": 0.3,
+        "pan": -0.17723612709426714,
+        "t": 5.477417561934409,
+        "seed": 444
+      },
+      {
+        "type": "marimba",
+        "dur": 0.5,
+        "hz": 1567.9817439269973,
+        "decay": 0.12,
+        "gain": 0.16,
+        "pan": -0.17723612709426714,
+        "t": 5.487417561934409,
+        "seed": 445
+      },
+      {
+        "type": "servo",
+        "dur": 0.3540367100640669,
+        "hz": 1017.632,
+        "hz2": 862.4,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": 0.3323853299710685,
+        "t": 5.675363624380214,
+        "seed": 451
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.3540367100640669,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": 0.3323853299710685,
+        "t": 5.675363624380214,
+        "seed": 452
+      },
+      {
+        "type": "servo",
+        "dur": 0.08,
+        "hz": 980,
+        "hz2": 1195.6,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": 0.2592209438469515,
+        "t": 6.081016628346297,
+        "seed": 458
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.08,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": 0.2592209438469515,
+        "t": 6.081016628346297,
+        "seed": 459
+      },
+      {
+        "type": "bubble",
+        "dur": 0.09,
+        "pitch": 2.26,
+        "gain": 0.3,
+        "pan": 0.04569291121723311,
+        "t": 6.635302243206034,
+        "seed": 465
+      },
+      {
+        "type": "marimba",
+        "dur": 0.5,
+        "hz": 2637.0204553029594,
+        "decay": 0.12,
+        "gain": 0.16,
+        "pan": 0.04569291121723311,
+        "t": 6.645302243206034,
+        "seed": 466
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 2.2,
+        "gain": 0.16,
+        "q": 0.9,
+        "pan": -0.50625,
+        "t": 6.7,
+        "seed": 472
+      },
+      {
+        "type": "servo",
+        "dur": 0.47890302009182495,
+        "hz": 1038.8,
+        "hz2": 1267.336,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": 0.11690697073073814,
+        "t": 6.8500000000000005,
+        "seed": 479
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.47890302009182495,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": 0.11690697073073814,
+        "t": 6.8500000000000005,
+        "seed": 480
+      },
+      {
+        "type": "bubble",
+        "dur": 0.09,
+        "pitch": 1.62,
+        "gain": 0.3,
+        "pan": 0.2589923779845423,
+        "t": 7.3530299430393775,
+        "seed": 486
+      },
+      {
+        "type": "marimba",
+        "dur": 0.5,
+        "hz": 1046.5022612023945,
+        "decay": 0.12,
+        "gain": 0.16,
+        "pan": 0.2589923779845423,
+        "t": 7.363029943039377,
+        "seed": 487
+      },
+      {
+        "type": "servo",
+        "dur": 0.5654120810934655,
+        "hz": 980,
+        "hz2": 1195.6,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": 0.29133158325024844,
+        "t": 7.388062230272951,
+        "seed": 493
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.5654120810934655,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": 0.29133158325024844,
+        "t": 7.388062230272951,
+        "seed": 494
+      },
+      {
+        "type": "servo",
+        "dur": 0.5911225375007039,
+        "hz": 1295.1680000000001,
+        "hz2": 1097.6000000000001,
+        "grit": 0.08,
+        "gain": 0.07,
+        "pan": 0.3817275137105188,
+        "t": 8.008877462499298,
+        "seed": 500
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.5911225375007039,
+        "speed": 0.7,
+        "gain": 0.3,
+        "pan": 0.3817275137105188,
+        "t": 8.008877462499298,
+        "seed": 501
+      },
+      {
+        "type": "bubble",
+        "dur": 0.09,
+        "pitch": 1.98,
+        "gain": 0.3,
+        "pan": 0.11690697073073814,
+        "t": 8.18100423393771,
+        "seed": 507
+      },
+      {
+        "type": "marimba",
+        "dur": 0.5,
+        "hz": 1760,
+        "decay": 0.12,
+        "gain": 0.16,
+        "pan": 0.11690697073073814,
+        "t": 8.19100423393771,
+        "seed": 508
+      },
+      {
+        "type": "bubble",
+        "dur": 0.09,
+        "pitch": 2.1,
+        "gain": 0.3,
+        "pan": 0.28494742918451416,
+        "t": 8.310068419991595,
+        "seed": 514
+      },
+      {
+        "type": "marimba",
+        "dur": 0.5,
+        "hz": 2093.004522404789,
+        "decay": 0.12,
+        "gain": 0.16,
+        "pan": 0.28494742918451416,
+        "t": 8.320068419991594,
+        "seed": 515
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 2.2,
+        "gain": 0.16,
+        "q": 0.9,
+        "pan": -0.275,
+        "t": 9.6,
+        "seed": 521
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.8000000000000007,
+        "gain": 0.5,
+        "q": 1.2,
+        "pan": -0.6,
+        "t": 11.5,
+        "seed": 528
+      },
+      {
+        "type": "servo",
+        "dur": 0.7200000000000006,
+        "hz": 520,
+        "hz2": 780,
+        "grit": 0.25,
+        "gain": 0.1,
+        "pan": -0.6,
+        "t": 11.5,
+        "seed": 529
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.8000000000000007,
+        "gain": 0.5,
+        "q": 1.2,
+        "pan": 0.6,
+        "t": 12.4,
+        "seed": 535
+      },
+      {
+        "type": "servo",
+        "dur": 0.7200000000000006,
+        "hz": 520,
+        "hz2": 780,
+        "grit": 0.25,
+        "gain": 0.1,
+        "pan": 0.6,
+        "t": 12.4,
+        "seed": 536
+      },
+      {
+        "type": "chime",
+        "sparkle": true,
+        "dur": 2.2,
+        "notes": 8,
+        "gain": 0.5,
+        "t": 13.200000000000001,
+        "pan": 0,
+        "seed": 542
+      },
+      {
+        "type": "pad",
+        "dur": 3.2,
+        "gain": 0.3,
+        "root": 293.66,
+        "chord": [
+          0,
+          4,
+          7,
+          12,
+          16
+        ],
+        "brightness": 2400,
+        "attack": 0.3,
+        "release": 1,
+        "t": 13.200000000000001,
+        "pan": 0,
+        "seed": 543
+      },
+      {
+        "type": "bubble",
+        "dur": 0.09,
+        "pitch": 1.78,
+        "gain": 0.3,
+        "pan": -0.33749999999999997,
+        "t": 13.3,
+        "seed": 549
+      },
+      {
+        "type": "marimba",
+        "dur": 0.5,
+        "hz": 1318.5102276514797,
+        "decay": 0.12,
+        "gain": 0.16,
+        "pan": -0.33749999999999997,
+        "t": 13.31,
+        "seed": 550
+      },
+      {
+        "type": "bubble",
+        "dur": 0.09,
+        "pitch": 1.9,
+        "gain": 0.3,
+        "pan": 0.33124999999999993,
+        "t": 13.7,
+        "seed": 556
+      },
+      {
+        "type": "marimba",
+        "dur": 0.5,
+        "hz": 1567.9817439269973,
+        "decay": 0.12,
+        "gain": 0.16,
+        "pan": 0.33124999999999993,
+        "t": 13.709999999999999,
+        "seed": 557
+      },
+      {
+        "type": "bubble",
+        "dur": 0.09,
+        "pitch": 1.98,
+        "gain": 0.3,
+        "pan": 0.031249999999999955,
+        "t": 14,
+        "seed": 563
+      },
+      {
+        "type": "marimba",
+        "dur": 0.5,
+        "hz": 1760,
+        "decay": 0.12,
+        "gain": 0.16,
+        "pan": 0.031249999999999955,
+        "t": 14.01,
+        "seed": 564
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "fogplan.js: every wipe is a timed polyline (p.t drawn, p.f re-fog start); clear(t, pixel) = max over wipes of drawn x (1 - smoothstep(f, f + fade, t)); the mask canvas is redrawn from segmentsAt(t) each frame with 'lighten' compositing. Drips: s(tau) = v (tau - k/w (sin(w tau + phi) - sin phi)), x = x0 + seeded wobble table; trails are timed polylines too.",
+      "strokes": 19,
+      "drips": 12,
+      "palm": [
+        11.5,
+        13.200000000000001
+      ],
+      "words": [
+        {
+          "text": "START",
+          "x0": 138.74792271445244,
+          "y0": 145.53320802210257,
+          "x1": 1087.9566968104136,
+          "y1": 419.1376569610073
+        },
+        {
+          "text": "MIDDLE",
+          "x0": 501.2025903451316,
+          "y0": 437.68400945318155,
+          "x1": 1511.8165279537097,
+          "y1": 712.8419316563509
+        },
+        {
+          "text": "NOW",
+          "x0": 1127.0511531691811,
+          "y0": 730.0509800403285,
+          "x1": 1788.7589216718964,
+          "y1": 999.0985220739954
+        }
+      ],
+      "content": "The town behind the glass is an original, generic painting. START / MIDDLE / NOW stand for the oldest, middle and newest parts of a long chat; the fog creeping back is the context window sliding on."
+    }
+  }
+}

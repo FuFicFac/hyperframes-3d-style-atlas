@@ -1,0 +1,26 @@
+build: sync-kit ... ok (327.1s)
+build: render-sfx ... ok (329.7s)
+build: export-spec ... ok (331.4s)
+build: lint ... ok (0 errors, 0 warnings)
+build: check ... ok (344.4s)
+build: render (quality standard, crf 22) ... ok (379.9s)
+build: renders/99-pottery-wheel.mp4 5.0 MB
+sync-kit: _atlas refreshed from the skill
+checks: cleared 11 old file(s): ._t1.png ._t12.png ._t14.5.png ._t4.png ._t8.png RUN.txt t1.png t12.png t14.5.png t4.png t8.png
+check-frames run: 2026-11-23 07:10:08 UTC
+times: 1, 4, 8, 12, 14.5
+newest code edit: 2026-11-23 07:03:44 UTC (pottery-wheel/style.js)
+mp4: 99-pottery-wheel.mp4 2026-11-23 07:10:04 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+time      file                          md5 (in order)                    reversed
+1         renders/checks/t1.png         6783309eb42f6d3758ca0b90789d29de  SAME
+4         renders/checks/t4.png         6e74950f647d454c9192c3d02bc38895  SAME
+8         renders/checks/t8.png         437d748c7cf9678af0eed50f272d4bfb  SAME
+12        renders/checks/t12.png        ba6fae089f7be43977a4e592dbf5b723  SAME
+14.5      renders/checks/t14.5.png      8a184125877d48396cb378906d923596  SAME
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 41.9 dB, frame 435)
+determinism: OK (5 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+audio sfx.wav: mean -20.8 dB, max -5.3 dB
+audio 99-pottery-wheel.mp4: mean -20.9 dB, max -5.3 dB  (5.0 MB)
+build: done in 418.1s
+EXIT 0

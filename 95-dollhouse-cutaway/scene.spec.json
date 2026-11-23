@@ -1,0 +1,1394 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "dollhouse-cutaway",
+    "name": "Dollhouse Cutaway",
+    "description": "A toy house seen front-on with its front wall swung open: a grid of brightly coloured furnished rooms that start dim and light up warmly one by one as a glowing courier travels room to room along a belt, a rail, a lift, steps and a chimney tube.",
+    "palette": {
+      "bg": "#2c3a6e",
+      "skyTop": "#4a62b0",
+      "skyMid": "#7f8fd0",
+      "skyLow": "#f3b08a",
+      "skyTopNight": "#141c44",
+      "skyMidNight": "#2b3577",
+      "skyLowNight": "#b0607a",
+      "ground": "#46558c",
+      "groundFar": "#3a4778",
+      "groundShadow": "#262f5a",
+      "ink": "#161a2e",
+      "shell": "#f6ead2",
+      "facade": "#f3dfbd",
+      "facadeLine": "#e6cfa6",
+      "trim": "#ffffff",
+      "shutter": "#3f7fbf",
+      "door": "#d9483b",
+      "knob": "#ffd23f",
+      "inside": "#d8b98a",
+      "glassOff": "#2a335c",
+      "glassOn": "#ffd98a",
+      "roof": "#5a6a99",
+      "roofAlt": "#4b5a88",
+      "chimney": "#c0583f",
+      "chimneyCap": "#6e3a2c",
+      "plinth": "#6f7896",
+      "plinthTop": "#959dbb",
+      "sign": "#1b2246",
+      "signTrim": "#ffd23f",
+      "signInk": "#fff4d6",
+      "ceiling": "#f4efe6",
+      "wood": "#c98f5a",
+      "woodDark": "#8a5a36",
+      "woodLight": "#e2b07a",
+      "steel": "#b9c2d0",
+      "steelDark": "#5d6678",
+      "rubber": "#3a3f52",
+      "bulb": "#fff4cc",
+      "shade": "#ffffff",
+      "glass": "#cfefff",
+      "paper": "#fbf6ea",
+      "parcel": "#ffc93c",
+      "parcelTape": "#e2582e",
+      "tokens": [
+        "#19c3ff",
+        "#ff4fa3",
+        "#7be04a",
+        "#ff9f1c"
+      ],
+      "answer": "#ffffff",
+      "answerRing": "#ffb300",
+      "tick": "#22c55e",
+      "tickOff": "#3a3557",
+      "halo": "#fff0b8",
+      "books": [
+        "#e8604c",
+        "#3d8fd6",
+        "#ffd23f",
+        "#8a63d2",
+        "#f6ead2",
+        "#2fb59a",
+        "#ef6fa3",
+        "#1b2246"
+      ],
+      "primary": "#ffd23f",
+      "secondary": "#3d8fd6",
+      "accent": "#ef6fa3"
+    },
+    "world": {
+      "background": "#2c3a6e",
+      "fog": null,
+      "environment": null,
+      "toneMapping": "none",
+      "exposure": 1
+    },
+    "materials": {},
+    "lights": [],
+    "post": {},
+    "camera": {
+      "fov": 24,
+      "near": 2,
+      "far": 140,
+      "drift": {
+        "amp": 0,
+        "speed": 0
+      }
+    },
+    "text": {
+      "font": "rounded",
+      "weight": 800,
+      "color": "#fff4d6",
+      "height": 0.78
+    },
+    "sfx": {
+      "enter": "thud",
+      "exit": "whooshOut",
+      "move": "servo",
+      "land": "clack",
+      "emphasis": "chime",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "The front wall is two half-fronts on side hinges: they swing toward the camera and out of frame (frontAt).",
+      "Rooms never move; each one's light level, activity and action pulses are pure functions of t from the route plan.",
+      "One courier (parcel -> four tokens -> answer orb) is the only traveller; its position along the connectors comes from the plan.",
+      "A room dims to a 'visited' level when the courier leaves; in the finale every room switches to full in a ripple.",
+      "The caption is a flip sign on the roof: each label flips over (scale y through 0) when the courier heads for the next room."
+    ],
+    "shade": {
+      "top": 1,
+      "front": 0.94,
+      "side": 0.8,
+      "bottom": 0.72
+    },
+    "light": {
+      "dim": 0.56,
+      "dimSat": 0.62,
+      "cool": [
+        0.84,
+        0.9,
+        1.1
+      ],
+      "warm": [
+        1.06,
+        1,
+        0.9
+      ],
+      "bounce": 0.74,
+      "direct": 0.5,
+      "falloff": 0.14,
+      "over": 0.16,
+      "exterior": 0.92,
+      "exteriorFinale": 1,
+      "emitOff": 0.45,
+      "glow": 0.13,
+      "glowFinale": 0.2,
+      "halo": 0.42
+    },
+    "levels": {
+      "visited": 0.5,
+      "finale": 1.25
+    },
+    "house": {
+      "cols": 3,
+      "floors": 2,
+      "roomW": 5.4,
+      "roomH": 3.3,
+      "depth": 3.4,
+      "wall": 0.3,
+      "trackZ": -0.3,
+      "lampZ": 0.15,
+      "lampDrop": 0.6,
+      "plinth": {
+        "h": 0.45,
+        "out": 1.5,
+        "back": 0.6
+      },
+      "roof": {
+        "h": 1.7,
+        "eave": 0.3,
+        "top": 8.4,
+        "front": 0.35
+      },
+      "sign": {
+        "w": 11.6,
+        "h": 1.2,
+        "y": 0.9,
+        "z": 0.17,
+        "post": 0.12
+      },
+      "chimney": {
+        "w": 0.9,
+        "top": 2.05,
+        "z": -0.7
+      },
+      "door": {
+        "dx": -1.35,
+        "w": 1.15,
+        "h": 2.15
+      },
+      "window": {
+        "dx": 1.35,
+        "w": 1.3,
+        "h": 1.5,
+        "sill": 1.05
+      },
+      "front": {
+        "thick": 0.25,
+        "angle": 1.78
+      },
+      "rooms": [
+        {
+          "id": "mail",
+          "col": 0,
+          "floor": 0,
+          "wall": "#3d8fd6",
+          "floorCol": "#c98f5a",
+          "spot": [
+            0.3,
+            0.95
+          ]
+        },
+        {
+          "id": "tokens",
+          "col": 1,
+          "floor": 0,
+          "wall": "#e8604c",
+          "floorCol": "#e3d3b4",
+          "spot": [
+            -1.5,
+            0.95
+          ],
+          "row": 1.86
+        },
+        {
+          "id": "library",
+          "col": 2,
+          "floor": 0,
+          "wall": "#44a565",
+          "floorCol": "#b9794a",
+          "spot": [
+            1.2,
+            0.95
+          ],
+          "row": 1.2
+        },
+        {
+          "id": "workshop",
+          "col": 2,
+          "floor": 1,
+          "wall": "#f0b93a",
+          "floorCol": "#9aa3b5",
+          "spot": [
+            1.85,
+            1.2
+          ],
+          "walkTo": -2,
+          "stations": [
+            0.8,
+            0.1,
+            -0.6,
+            -1.3
+          ]
+        },
+        {
+          "id": "check",
+          "col": 1,
+          "floor": 1,
+          "wall": "#8a63d2",
+          "floorCol": "#e3d3b4",
+          "spot": [
+            0.2,
+            1
+          ]
+        },
+        {
+          "id": "answer",
+          "col": 0,
+          "floor": 1,
+          "wall": "#ef6fa3",
+          "floorCol": "#c98f5a",
+          "spot": [
+            0.4,
+            0.5
+          ],
+          "tube": -1.5
+        }
+      ],
+      "layers": [
+        "#2f80ff",
+        "#00b8a9",
+        "#ff4fa3",
+        "#ff7a1a"
+      ],
+      "pipeHigh": 2.72,
+      "riserDx": 2.25,
+      "dropDx": -1.95,
+      "liftDx": 1.85,
+      "steps": [
+        [
+          -1.3,
+          0.75
+        ],
+        [
+          -2.15,
+          0.5
+        ]
+      ],
+      "hover": [
+        -1,
+        1.8,
+        2.5
+      ]
+    },
+    "route": {
+      "entry": {
+        "hops": [
+          0,
+          0.26,
+          0.52
+        ],
+        "door": 0.74,
+        "end": 0.95
+      },
+      "door": {
+        "open": 0.3,
+        "shut": 1.02,
+        "dur": 0.2
+      },
+      "front": {
+        "t0": 1.3,
+        "t1": 2.8
+      },
+      "stops": [
+        {
+          "room": "mail",
+          "arrive": 0.95,
+          "leave": 2.95,
+          "actions": [
+            {
+              "kind": "stamp",
+              "at": 0.4
+            },
+            {
+              "kind": "stamp",
+              "at": 0.75
+            }
+          ]
+        },
+        {
+          "room": "tokens",
+          "arrive": 3.5,
+          "leave": 4.7,
+          "actions": [
+            {
+              "kind": "chop",
+              "at": 0.22
+            },
+            {
+              "kind": "chop",
+              "at": 0.5
+            },
+            {
+              "kind": "chop",
+              "at": 0.78
+            }
+          ]
+        },
+        {
+          "room": "library",
+          "arrive": 5.6,
+          "leave": 6.75,
+          "actions": [
+            {
+              "kind": "book",
+              "at": 0.2
+            },
+            {
+              "kind": "book",
+              "at": 0.42
+            },
+            {
+              "kind": "book",
+              "at": 0.64
+            },
+            {
+              "kind": "book",
+              "at": 0.86
+            }
+          ]
+        },
+        {
+          "room": "workshop",
+          "arrive": 7.7,
+          "leave": 9.3,
+          "walk": [
+            0.1,
+            1.3
+          ],
+          "actions": [
+            {
+              "kind": "fuse",
+              "at": 1.35
+            }
+          ]
+        },
+        {
+          "room": "check",
+          "arrive": 9.8,
+          "leave": 11.3,
+          "actions": [
+            {
+              "kind": "tick",
+              "at": 1
+            }
+          ]
+        },
+        {
+          "room": "answer",
+          "arrive": 11.9,
+          "leave": 12.4,
+          "actions": [
+            {
+              "kind": "pump",
+              "at": 0.08
+            },
+            {
+              "kind": "pump",
+              "at": 0.3
+            }
+          ]
+        }
+      ],
+      "exit": {
+        "tube": 12.55,
+        "chimney": 13,
+        "settle": 13.45
+      },
+      "finale": {
+        "t": 13.45,
+        "step": 0.12,
+        "period": 0.56
+      },
+      "lightDelay": 0.05,
+      "lightRamp": 0.14,
+      "dimDur": 0.6,
+      "labelLead": 0.35,
+      "flip": 0.12,
+      "labels": [
+        "A question arrives",
+        "Chopped into tokens",
+        "It looks things up",
+        "Layers do the work",
+        "The answer is checked",
+        "Out comes an answer"
+      ]
+    },
+    "courier": {
+      "token": 0.48,
+      "gap": 0.28,
+      "orb": 0.9,
+      "halo": 2.4,
+      "bubble": [
+        2.5,
+        1.75,
+        0.6
+      ],
+      "hop": 0.45
+    },
+    "sound": {
+      "pad": {
+        "gain": 0.34,
+        "root": 110,
+        "brightness": 900
+      },
+      "padHigh": {
+        "gain": 0.14,
+        "root": 220,
+        "brightness": 1500
+      },
+      "hop": {
+        "gain": 0.32
+      },
+      "door": {
+        "gain": 0.4
+      },
+      "front": {
+        "gain": 0.42
+      },
+      "thunk": {
+        "gain": 0.62
+      },
+      "switch": {
+        "gain": 0.32
+      },
+      "chime": {
+        "gain": 0.26,
+        "base": 392,
+        "steps": [
+          0,
+          2,
+          4,
+          7,
+          9,
+          12
+        ]
+      },
+      "action": {
+        "gain": 0.3
+      },
+      "move": {
+        "gain": 0.14
+      },
+      "out": {
+        "gain": 0.45
+      },
+      "finale": {
+        "gain": 0.4
+      },
+      "flip": {
+        "gain": 0.2
+      }
+    }
+  },
+  "scene": {
+    "id": "95-dollhouse-cutaway",
+    "style": "dollhouse-cutaway",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "mail",
+        "t": 0,
+        "dur": 3.15,
+        "label": "A question arrives"
+      },
+      {
+        "id": "tokens",
+        "t": 3.15,
+        "dur": 2.1,
+        "label": "Chopped into tokens"
+      },
+      {
+        "id": "library",
+        "t": 5.25,
+        "dur": 2.1000000000000005,
+        "label": "It looks things up"
+      },
+      {
+        "id": "workshop",
+        "t": 7.3500000000000005,
+        "dur": 2.1000000000000005,
+        "label": "Layers do the work"
+      },
+      {
+        "id": "check",
+        "t": 9.450000000000001,
+        "dur": 2.0999999999999996,
+        "label": "The answer is checked"
+      },
+      {
+        "id": "answer",
+        "t": 11.55,
+        "dur": 3.4499999999999993,
+        "label": "Out comes an answer"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -2.40839,
+          7.18667,
+          34.18893
+        ],
+        "target": [
+          -0.03308,
+          4.80553,
+          0.31135
+        ],
+        "fov": 24
+      },
+      {
+        "t": 3,
+        "pos": [
+          0,
+          6.5651,
+          33.65718
+        ],
+        "target": [
+          0,
+          4.89611,
+          0.3052
+        ],
+        "fov": 24,
+        "path": "arc",
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.55,
+        "pos": [
+          1.1853,
+          6.54687,
+          33.61669
+        ],
+        "target": [
+          0.01893,
+          4.87889,
+          0.3054
+        ],
+        "fov": 24,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 13.6,
+        "pos": [
+          0,
+          7.35421,
+          33.71647
+        ],
+        "target": [
+          0,
+          5.34723,
+          0.30692
+        ],
+        "fov": 24,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0,
+          7.35421,
+          33.71647
+        ],
+        "target": [
+          0,
+          5.34723,
+          0.30692
+        ],
+        "fov": 24
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.34,
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "attack": 1,
+        "release": 1.5,
+        "brightness": 900
+      },
+      {
+        "t": 13.149999999999999,
+        "type": "pad",
+        "dur": 1.8500000000000008,
+        "gain": 0.14,
+        "root": 220,
+        "chord": [
+          0,
+          4,
+          7,
+          11,
+          14
+        ],
+        "attack": 0.5,
+        "release": 1.2,
+        "brightness": 1500,
+        "seed": 3
+      },
+      {
+        "type": "pop",
+        "gain": 0.32,
+        "pitch": 0.75,
+        "t": 0.26,
+        "pan": -0.5133333333333334,
+        "seed": 101
+      },
+      {
+        "type": "click",
+        "gain": 0.4,
+        "pitch": 0.7,
+        "t": 0.3,
+        "pan": -0.4308333333333334,
+        "seed": 108
+      },
+      {
+        "type": "fold",
+        "gain": 0.2,
+        "dur": 0.3,
+        "t": 0.3,
+        "pan": -0.4308333333333334,
+        "seed": 109
+      },
+      {
+        "type": "pop",
+        "gain": 0.32,
+        "pitch": 0.75,
+        "t": 0.52,
+        "pan": -0.4308333333333334,
+        "seed": 115
+      },
+      {
+        "type": "thud",
+        "gain": 0.32,
+        "pitch": 1.6,
+        "dur": 0.25,
+        "t": 0.95,
+        "pan": -0.33000000000000007,
+        "seed": 122
+      },
+      {
+        "type": "click",
+        "gain": 0.32,
+        "pitch": 1.1,
+        "t": 1,
+        "pan": -0.34833333333333333,
+        "seed": 129
+      },
+      {
+        "type": "thud",
+        "gain": 0.4,
+        "pitch": 1.4,
+        "dur": 0.3,
+        "t": 1.02,
+        "pan": -0.4308333333333334,
+        "seed": 136
+      },
+      {
+        "type": "click",
+        "gain": 0.24,
+        "pitch": 1.2,
+        "t": 1.02,
+        "pan": -0.4308333333333334,
+        "seed": 137
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "dur": 0.8,
+        "gain": 0.26,
+        "mallet": 0.4,
+        "t": 1.04,
+        "pan": -0.34833333333333333,
+        "seed": 130
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.4999999999999998,
+        "gain": 0.42,
+        "t": 1.3,
+        "pan": 0,
+        "seed": 143
+      },
+      {
+        "type": "servo",
+        "dur": 1.4999999999999998,
+        "hz": 70,
+        "hz2": 120,
+        "grit": 0.25,
+        "gain": 0.21,
+        "t": 1.3,
+        "pan": 0,
+        "seed": 144
+      },
+      {
+        "type": "clack",
+        "gain": 0.3,
+        "pitch": 0.75,
+        "t": 1.35,
+        "pan": -0.34833333333333333,
+        "seed": 150
+      },
+      {
+        "type": "thud",
+        "gain": 0.18,
+        "pitch": 1.8,
+        "dur": 0.2,
+        "t": 1.35,
+        "pan": -0.34833333333333333,
+        "seed": 151
+      },
+      {
+        "type": "clack",
+        "gain": 0.3,
+        "pitch": 0.75,
+        "t": 1.7,
+        "pan": -0.34833333333333333,
+        "seed": 157
+      },
+      {
+        "type": "thud",
+        "gain": 0.18,
+        "pitch": 1.8,
+        "dur": 0.2,
+        "t": 1.7,
+        "pan": -0.34833333333333333,
+        "seed": 158
+      },
+      {
+        "type": "thud",
+        "gain": 0.62,
+        "pitch": 0.8,
+        "t": 2.8,
+        "pan": 0,
+        "seed": 164
+      },
+      {
+        "type": "clack",
+        "gain": 0.31,
+        "pitch": 0.7,
+        "t": 2.8,
+        "pan": 0,
+        "seed": 165
+      },
+      {
+        "type": "servo",
+        "dur": 0.5499999999999998,
+        "hz": 95,
+        "hz2": 150,
+        "grit": 0.2,
+        "gain": 0.14,
+        "t": 2.95,
+        "pan": 0,
+        "seed": 171
+      },
+      {
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.7,
+        "t": 3.15,
+        "pan": 0,
+        "seed": 178
+      },
+      {
+        "type": "click",
+        "gain": 0.32,
+        "pitch": 1.1,
+        "t": 3.55,
+        "pan": 0,
+        "seed": 185
+      },
+      {
+        "type": "marimba",
+        "hz": 440.0051229372742,
+        "dur": 0.8,
+        "gain": 0.26,
+        "mallet": 0.4,
+        "t": 3.59,
+        "pan": 0,
+        "seed": 186
+      },
+      {
+        "type": "clack",
+        "gain": 0.33,
+        "pitch": 1.25,
+        "t": 3.72,
+        "pan": -0.051944444444444446,
+        "seed": 192
+      },
+      {
+        "type": "tick",
+        "gain": 0.18,
+        "pitch": 2,
+        "t": 3.72,
+        "pan": -0.051944444444444446,
+        "seed": 193
+      },
+      {
+        "type": "clack",
+        "gain": 0.33,
+        "pitch": 1.35,
+        "t": 4,
+        "pan": -0.051944444444444446,
+        "seed": 199
+      },
+      {
+        "type": "tick",
+        "gain": 0.18,
+        "pitch": 2,
+        "t": 4,
+        "pan": -0.051944444444444446,
+        "seed": 200
+      },
+      {
+        "type": "clack",
+        "gain": 0.33,
+        "pitch": 1.45,
+        "t": 4.28,
+        "pan": -0.051944444444444446,
+        "seed": 206
+      },
+      {
+        "type": "tick",
+        "gain": 0.18,
+        "pitch": 2,
+        "t": 4.28,
+        "pan": -0.051944444444444446,
+        "seed": 207
+      },
+      {
+        "type": "servo",
+        "dur": 0.8999999999999995,
+        "hz": 95,
+        "hz2": 150,
+        "grit": 0.2,
+        "gain": 0.14,
+        "t": 4.7,
+        "pan": 0.12222222222222223,
+        "seed": 213
+      },
+      {
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.7,
+        "t": 5.25,
+        "pan": 0,
+        "seed": 220
+      },
+      {
+        "type": "click",
+        "gain": 0.32,
+        "pitch": 1.1,
+        "t": 5.6499999999999995,
+        "pan": 0.34833333333333333,
+        "seed": 227
+      },
+      {
+        "type": "marimba",
+        "hz": 493.8890515587903,
+        "dur": 0.8,
+        "gain": 0.26,
+        "mallet": 0.4,
+        "t": 5.6899999999999995,
+        "pan": 0.34833333333333333,
+        "seed": 228
+      },
+      {
+        "type": "blip",
+        "gain": 0.24,
+        "pitch": 1,
+        "notes": [
+          0,
+          7
+        ],
+        "t": 5.8,
+        "pan": 0.34833333333333333,
+        "seed": 234
+      },
+      {
+        "type": "paper",
+        "gain": 0.15,
+        "dur": 0.25,
+        "t": 5.8,
+        "pan": 0.34833333333333333,
+        "seed": 235
+      },
+      {
+        "type": "blip",
+        "gain": 0.24,
+        "pitch": 1.12,
+        "notes": [
+          0,
+          7
+        ],
+        "t": 6.02,
+        "pan": 0.34833333333333333,
+        "seed": 241
+      },
+      {
+        "type": "paper",
+        "gain": 0.15,
+        "dur": 0.25,
+        "t": 6.02,
+        "pan": 0.34833333333333333,
+        "seed": 242
+      },
+      {
+        "type": "blip",
+        "gain": 0.24,
+        "pitch": 1.24,
+        "notes": [
+          0,
+          7
+        ],
+        "t": 6.239999999999999,
+        "pan": 0.34833333333333333,
+        "seed": 248
+      },
+      {
+        "type": "paper",
+        "gain": 0.15,
+        "dur": 0.25,
+        "t": 6.239999999999999,
+        "pan": 0.34833333333333333,
+        "seed": 249
+      },
+      {
+        "type": "blip",
+        "gain": 0.24,
+        "pitch": 1.3599999999999999,
+        "notes": [
+          0,
+          7
+        ],
+        "t": 6.46,
+        "pan": 0.34833333333333333,
+        "seed": 255
+      },
+      {
+        "type": "paper",
+        "gain": 0.15,
+        "dur": 0.25,
+        "t": 6.46,
+        "pan": 0.34833333333333333,
+        "seed": 256
+      },
+      {
+        "type": "servo",
+        "dur": 0.9500000000000002,
+        "hz": 110,
+        "hz2": 260,
+        "grit": 0.2,
+        "gain": 0.14,
+        "t": 6.75,
+        "pan": 0.3055555555555556,
+        "seed": 262
+      },
+      {
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.7,
+        "t": 7.3500000000000005,
+        "pan": 0,
+        "seed": 269
+      },
+      {
+        "type": "click",
+        "gain": 0.32,
+        "pitch": 1.1,
+        "t": 7.75,
+        "pan": 0.34833333333333333,
+        "seed": 276
+      },
+      {
+        "type": "marimba",
+        "hz": 587.3363741356592,
+        "dur": 0.8,
+        "gain": 0.26,
+        "mallet": 0.4,
+        "t": 7.79,
+        "pan": 0.34833333333333333,
+        "seed": 277
+      },
+      {
+        "type": "servo",
+        "dur": 1.2000000000000002,
+        "hz": 95,
+        "hz2": 150,
+        "grit": 0.2,
+        "gain": 0.14,
+        "t": 7.8,
+        "pan": 0.3055555555555556,
+        "seed": 283
+      },
+      {
+        "type": "clack",
+        "gain": 0.3,
+        "pitch": 0.9,
+        "t": 8.114222352422427,
+        "pan": 0.39722222222222225,
+        "seed": 290
+      },
+      {
+        "type": "marimba",
+        "hz": 262,
+        "dur": 0.5,
+        "gain": 0.24,
+        "mallet": 0.6,
+        "t": 8.114222352422427,
+        "pan": 0.39722222222222225,
+        "seed": 291
+      },
+      {
+        "type": "clack",
+        "gain": 0.3,
+        "pitch": 0.9,
+        "t": 8.335666764316821,
+        "pan": 0.35444444444444445,
+        "seed": 297
+      },
+      {
+        "type": "marimba",
+        "hz": 311.5722641307129,
+        "dur": 0.5,
+        "gain": 0.24,
+        "mallet": 0.6,
+        "t": 8.335666764316821,
+        "pan": 0.35444444444444445,
+        "seed": 298
+      },
+      {
+        "type": "clack",
+        "gain": 0.3,
+        "pitch": 0.9,
+        "t": 8.557111176211214,
+        "pan": 0.31166666666666676,
+        "seed": 304
+      },
+      {
+        "type": "marimba",
+        "hz": 349.728041792549,
+        "dur": 0.5,
+        "gain": 0.24,
+        "mallet": 0.6,
+        "t": 8.557111176211214,
+        "pan": 0.31166666666666676,
+        "seed": 305
+      },
+      {
+        "type": "clack",
+        "gain": 0.3,
+        "pitch": 0.9,
+        "t": 8.778555588105608,
+        "pan": 0.26888888888888896,
+        "seed": 311
+      },
+      {
+        "type": "marimba",
+        "hz": 392.55645414169055,
+        "dur": 0.5,
+        "gain": 0.24,
+        "mallet": 0.6,
+        "t": 8.778555588105608,
+        "pan": 0.26888888888888896,
+        "seed": 312
+      },
+      {
+        "type": "chime",
+        "sparkle": true,
+        "notes": 5,
+        "dur": 1.2,
+        "gain": 0.3,
+        "t": 9.05,
+        "pan": 0.22611111111111115,
+        "seed": 318
+      },
+      {
+        "type": "servo",
+        "dur": 0.5,
+        "hz": 95,
+        "hz2": 150,
+        "grit": 0.2,
+        "gain": 0.14,
+        "t": 9.3,
+        "pan": 0.061111111111111116,
+        "seed": 325
+      },
+      {
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.7,
+        "t": 9.450000000000001,
+        "pan": 0,
+        "seed": 332
+      },
+      {
+        "type": "click",
+        "gain": 0.32,
+        "pitch": 1.1,
+        "t": 9.850000000000001,
+        "pan": 0,
+        "seed": 339
+      },
+      {
+        "type": "marimba",
+        "hz": 659.2627895589122,
+        "dur": 0.8,
+        "gain": 0.26,
+        "mallet": 0.4,
+        "t": 9.89,
+        "pan": 0,
+        "seed": 340
+      },
+      {
+        "type": "blip",
+        "gain": 0.3,
+        "pitch": 1.5,
+        "notes": [
+          0,
+          4,
+          7
+        ],
+        "t": 10.8,
+        "pan": 0,
+        "seed": 346
+      },
+      {
+        "type": "chime",
+        "notes": 3,
+        "dur": 0.9,
+        "gain": 0.18,
+        "pitch": 1.3,
+        "t": 10.8,
+        "pan": 0,
+        "seed": 347
+      },
+      {
+        "type": "pop",
+        "gain": 0.32,
+        "pitch": 1,
+        "t": 11.478275541090156,
+        "pan": -0.07944444444444446,
+        "seed": 353
+      },
+      {
+        "type": "clack",
+        "gain": 0.2,
+        "pitch": 1.7,
+        "t": 11.55,
+        "pan": 0,
+        "seed": 360
+      },
+      {
+        "type": "pop",
+        "gain": 0.32,
+        "pitch": 1.2,
+        "t": 11.614962592785373,
+        "pan": -0.1313888888888889,
+        "seed": 367
+      },
+      {
+        "type": "pop",
+        "gain": 0.32,
+        "pitch": 1.4,
+        "t": 11.9,
+        "pan": -0.32388888888888895,
+        "seed": 374
+      },
+      {
+        "type": "click",
+        "gain": 0.32,
+        "pitch": 1.1,
+        "t": 11.950000000000001,
+        "pan": -0.34833333333333333,
+        "seed": 381
+      },
+      {
+        "type": "squish",
+        "gain": 0.3,
+        "t": 11.98,
+        "pan": -0.34833333333333333,
+        "seed": 388
+      },
+      {
+        "type": "marimba",
+        "hz": 784,
+        "dur": 0.8,
+        "gain": 0.26,
+        "mallet": 0.4,
+        "t": 11.99,
+        "pan": -0.34833333333333333,
+        "seed": 382
+      },
+      {
+        "type": "squish",
+        "gain": 0.3,
+        "t": 12.200000000000001,
+        "pan": -0.34833333333333333,
+        "seed": 395
+      },
+      {
+        "type": "tick",
+        "gain": 0.15,
+        "pitch": 1.4,
+        "t": 12.4,
+        "pan": -0.44000000000000006,
+        "seed": 402
+      },
+      {
+        "type": "riser",
+        "dur": 0.4499999999999993,
+        "gain": 0.36000000000000004,
+        "t": 12.55,
+        "pan": -0.44000000000000006,
+        "seed": 409
+      },
+      {
+        "type": "pop",
+        "gain": 0.45,
+        "pitch": 1.1,
+        "t": 13,
+        "pan": -0.44000000000000006,
+        "seed": 416
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.5,
+        "gain": 0.27,
+        "t": 13,
+        "pan": -0.44000000000000006,
+        "seed": 417
+      },
+      {
+        "type": "chime",
+        "sparkle": true,
+        "notes": 6,
+        "dur": 1.6,
+        "gain": 0.4,
+        "t": 13.45,
+        "pan": -0.5011111111111111,
+        "seed": 423
+      },
+      {
+        "type": "chime",
+        "notes": 6,
+        "dur": 2.2,
+        "gain": 0.27999999999999997,
+        "pitch": 0.75,
+        "t": 13.45,
+        "pan": 0,
+        "seed": 430
+      },
+      {
+        "type": "click",
+        "gain": 0.22399999999999998,
+        "pitch": 1.55,
+        "t": 13.45,
+        "pan": -0.34833333333333333,
+        "seed": 437
+      },
+      {
+        "type": "click",
+        "gain": 0.22399999999999998,
+        "pitch": 1.3,
+        "t": 13.569999999999999,
+        "pan": -0.34833333333333333,
+        "seed": 444
+      },
+      {
+        "type": "click",
+        "gain": 0.22399999999999998,
+        "pitch": 1.5,
+        "t": 13.569999999999999,
+        "pan": 0,
+        "seed": 451
+      },
+      {
+        "type": "click",
+        "gain": 0.22399999999999998,
+        "pitch": 1.35,
+        "t": 13.69,
+        "pan": 0,
+        "seed": 458
+      },
+      {
+        "type": "click",
+        "gain": 0.22399999999999998,
+        "pitch": 1.4500000000000002,
+        "t": 13.69,
+        "pan": 0.34833333333333333,
+        "seed": 465
+      },
+      {
+        "type": "click",
+        "gain": 0.22399999999999998,
+        "pitch": 1.4000000000000001,
+        "t": 13.809999999999999,
+        "pan": 0.34833333333333333,
+        "seed": 472
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "rooms.js plans the house (room boxes, lamps, track points) and the courier's route (stops, legs, train spacing, hops); every room's light level, every mini-animation pulse, the front-wall angle, the label flips and every SCORE cue are pure functions of t read from that one plan. style.js draws the whole house with one unlit shader indexed by room.",
+      "stops": "mail 0.95-2.95, tokens 3.5-4.7, library 5.6-6.75, workshop 7.7-9.3, check 9.8-11.3, answer 11.9-12.4",
+      "events": 54,
+      "framing": "ok (worst 0.8927 at 6.433333s)"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+check-frames run: 2026-11-23 05:22:46 UTC
+times: 0.1, 1.5, 3.4, 5, 6.7, 8.5, 9.8, 10.6, 12, 14.9
+newest code edit: 2026-11-23 05:21:12 UTC (86-fireworks/scene.js)
+mp4: 86-fireworks.mp4 2026-11-23 05:22:13 UTC
+kit last changed: 2026-11-14 05:00:34 UTC (kit maintenance proves pixel identity separately)
+mp4-vs-code: OK — the MP4 matches the current code (worst PSNR 36.1 dB, frame 255)
+  frame 3 (t=0.100): 39.8 dB
+  frame 45 (t=1.500): 36.8 dB
+  frame 102 (t=3.400): 39.1 dB
+  frame 150 (t=5.000): 36.7 dB
+  frame 201 (t=6.700): 39.0 dB
+  frame 255 (t=8.500): 36.1 dB
+  frame 294 (t=9.800): 37.3 dB
+  frame 318 (t=10.600): 37.3 dB
+  frame 360 (t=12.000): 37.4 dB
+  frame 447 (t=14.900): 38.0 dB
+determinism: OK (10 times identical in both seek orders, GPU-noise tolerance ±1 level on < 0.05 % px)
+deep self-check: OK

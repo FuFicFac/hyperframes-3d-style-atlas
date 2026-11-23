@@ -1,10 +1,10 @@
 {
   "format": "3d-style-atlas/style-index@1",
   "generatedBy": "Skills/3d-style-atlas/scripts/build-index.mjs (re-run after adding or changing a style)",
-  "generatedAt": "2026-11-18T20:12:21.424Z",
+  "generatedAt": "2026-11-23T08:24:46.694Z",
   "pathsRelativeTo": "D Second Brain/ (demo project and mp4 paths are absolute when the demos live outside it)",
   "notes": "category is a keyword guess; props come from the STYLE.md props tables; demo topic is the first line of the demo's scene.js.",
-  "count": 85,
+  "count": 101,
   "styles": [
     {
       "id": "anamorphic",
@@ -597,6 +597,43 @@
       }
     },
     {
+      "id": "cross-section",
+      "name": "Cross-Section",
+      "description": "Technical-illustration cutaway: a slicing plane sweeps through a solid object and removes the near side; every part shows a flat coloured cut face with a crisp ink outline (hatched for the outer shell), on pale drafting paper.",
+      "summary": "**Look.** A clean technical-illustration cutaway on pale drafting paper.",
+      "category": "technical / diagrammatic",
+      "goodFor": "\"what is inside X\", black boxes, anatomy of a system or a machine, layers and stacks, anything where the\ninside is the surprise; MRI-style \"scan through it\" moves; before/after of one object. **Avoid for:** organic or soft\nshapes (every solid must be a box, a capsule or a hollow box), stories that need parts to move, photoreal materials,\nmore than 80 solids in one object.",
+      "avoidFor": "organic or soft\nshapes (every solid must be a box, a capsule or a hollow box), stories that need parts to move, photoreal materials,\nmore than 80 solids in one object.",
+      "toneMapping": "none",
+      "props": [
+        "solid",
+        "sheet",
+        "floaters",
+        "ground",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "slice.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/87-cross-section",
+          "topic": "\"Opening the black box\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/87-cross-section/renders/87-cross-section.mp4",
+          "mp4MB": 5.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/cross-section/spec.js",
+        "style": "Skills/3d-style-atlas/styles/cross-section/style.js",
+        "card": "Skills/3d-style-atlas/styles/cross-section/STYLE.md"
+      }
+    },
+    {
       "id": "crt-retro",
       "name": "CRT Retro",
       "description": "A vintage beige computer terminal on a wood desk in a dark room at night: a chunky yellowed-plastic monitor with a deeply curved CRT whose phosphor text types itself (scanlines, barrel curvature, halation, a block cursor), a clacky two-tone keyboard whose keys press with the typing, floppy drives, a desk lamp, a mug and a pinned note; the screen glow spills colour onto the desk and keys.",
@@ -711,6 +748,42 @@
       }
     },
     {
+      "id": "dollhouse-cutaway",
+      "name": "Dollhouse Cutaway",
+      "description": "A toy house seen front-on with its front wall swung open: a grid of brightly coloured furnished rooms that start dim and light up warmly one by one as a glowing courier travels room to room along a belt, a rail, a lift, steps and a chimney tube.",
+      "summary": "## Look A toy house seen straight on.",
+      "category": "brand / channel",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "none",
+      "props": [
+        "house",
+        "courier",
+        "caption",
+        "backdrop"
+      ],
+      "fourthModule": [
+        {
+          "file": "rooms.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/95-dollhouse-cutaway",
+          "topic": "\"What happens to one question inside an AI system\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/95-dollhouse-cutaway/renders/95-dollhouse-cutaway.mp4",
+          "mp4MB": 3.7
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/dollhouse-cutaway/spec.js",
+        "style": "Skills/3d-style-atlas/styles/dollhouse-cutaway/style.js",
+        "card": "Skills/3d-style-atlas/styles/dollhouse-cutaway/STYLE.md"
+      }
+    },
+    {
       "id": "domino-run",
       "name": "Domino Run",
       "description": "A domino rally on a polished wooden floor seen low and close: hundreds of glossy plain-faced coloured tiles standing in curving lines, spirals and branching paths, up a little stair and across a plank bridge, in warm window daylight with soft floor reflections. A topple wave runs every path at a set speed; each tile's fall is a closed-form function of time that comes to rest leaning on the next; one tile splits a line in two, lines trip gadgets (a ball rolls, a flag pops up, a banner drops), and a two-colour field topples row by row to reveal a picture or word. The camera chases the wave front.",
@@ -784,6 +857,37 @@
         "spec": "Skills/3d-style-atlas/styles/embossed-letterpress/spec.js",
         "style": "Skills/3d-style-atlas/styles/embossed-letterpress/style.js",
         "card": "Skills/3d-style-atlas/styles/embossed-letterpress/STYLE.md"
+      }
+    },
+    {
+      "id": "endless-zoom",
+      "name": "Endless Zoom",
+      "description": "One continuous, constant-speed zoom inward through nested worlds, each a bright toy-like 3D relief in its own clean colour key (cream chat app, coral token tiles, electric-blue glowing value sliders, golden neural network, green circuit board with a chip, violet switch with a spark). Every world is authored at unit size around a portal at its centre whose face is the next world's colour; the camera dollies in exponentially (one rate for the whole loop, so perceived speed never changes), the next world fades in on the portal's face and grows until it fills the frame, and only two worlds are ever drawn (the outer one directly, the inner one rendered through the portal as a live window). The last portal contains the first world: the loop closes and the final frame equals the first. A rising Shepard scale and a chime per crossing come from the same zoom clock.",
+      "summary": "**Look.** One unbroken, constant-speed zoom inward through nested worlds that ends exactly where it began.",
+      "category": "toy / playful",
+      "goodFor": "\"what is inside X\" explainers (an answer, a photo, a file, a cell, a city), scale journeys, loops for\nsocials (the clip repeats seamlessly), channel idents. **Avoid for:** anything needing a wide establishing shot that\nholds still, side-by-side comparisons, more than ~7 worlds in 15 s (each needs ≈ 2 s to read), content whose\nportal cannot sit at the centre of its world.",
+      "avoidFor": "anything needing a wide establishing shot that\nholds still, side-by-side comparisons, more than ~7 worlds in 15 s (each needs ≈ 2 s to read), content whose\nportal cannot sit at the centre of its world.",
+      "toneMapping": "neutral",
+      "props": [],
+      "fourthModule": [
+        {
+          "file": "zoom.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/100-endless-zoom",
+          "topic": "\"What is inside one AI answer\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/100-endless-zoom/renders/100-endless-zoom.mp4",
+          "mp4MB": 8
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/endless-zoom/spec.js",
+        "style": "Skills/3d-style-atlas/styles/endless-zoom/style.js",
+        "card": "Skills/3d-style-atlas/styles/endless-zoom/STYLE.md"
       }
     },
     {
@@ -1001,6 +1105,83 @@
       }
     },
     {
+      "id": "fireworks",
+      "name": "Fireworks",
+      "description": "Night-sky fireworks over a harbour whose bursts form planned shapes. A closed-form ballistic shell planner (shells.js) gives each shell a launch time, an apex and a burst; each star flies from the burst centre to its target point of a planned shape (ring, heart, letter, word) under linear drag, then droops under gravity and fades. A per-shell TEMPERATURE loosens the plan: target noise, a random 'take' on the shape (turn, stretch, shear), speed and colour variety, and above a threshold a blend toward plain scatter. Stars, comet tails, flashes and their water reflections are one instanced draw of glowing sprites evaluated in the vertex shader from t. The skyline and water are lit by the bursts (flash colour from the same plan). Sound — lift thump, rising whistle, boom, crackle — is derived from the same shell plan.",
+      "summary": "**Look.** A deep blue night over a harbour, seen from a locked camera 6 m above the water and 150 m from the launch barges.",
+      "category": "other",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "none",
+      "props": [
+        "sky",
+        "skyline",
+        "barges",
+        "show",
+        "caption",
+        "harbour"
+      ],
+      "fourthModule": [
+        {
+          "file": "shells.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/86-fireworks",
+          "topic": "\"Temperature — one prompt, many answers\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/86-fireworks/renders/86-fireworks.mp4",
+          "mp4MB": 9
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/fireworks/spec.js",
+        "style": "Skills/3d-style-atlas/styles/fireworks/style.js",
+        "card": "Skills/3d-style-atlas/styles/fireworks/STYLE.md"
+      }
+    },
+    {
+      "id": "flip-dot",
+      "name": "Flip-Dot Display",
+      "description": "A giant mechanical flip-disc sign: thousands of round discs, fluorescent yellow on one side and matt black on the other, physically flip on diagonal pivots in visible waves to form pictures and words, with a clatter made from the same flip plan.",
+      "summary": "**Look.** A giant electromechanical flip-disc sign (the kind old buses and station boards used) on a blue painted wall.",
+      "category": "retro / signage / typographic",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "sign",
+        "discField",
+        "axles",
+        "housing",
+        "wall",
+        "caption",
+        "discGeometry"
+      ],
+      "fourthModule": [
+        {
+          "file": "flipplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/91-flip-dot",
+          "topic": "\"How an AI image appears out of noise\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/91-flip-dot/renders/91-flip-dot.mp4",
+          "mp4MB": 10.9
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/flip-dot/spec.js",
+        "style": "Skills/3d-style-atlas/styles/flip-dot/style.js",
+        "card": "Skills/3d-style-atlas/styles/flip-dot/STYLE.md"
+      }
+    },
+    {
       "id": "flipbook",
       "name": "Flipbook",
       "description": "A hand-drawn pencil flipbook riffled under a thumb: a thick pad of cream paper clamped under a walnut bar on a warm, bright desk, most of its pages bent back over the bar in a fan pinched by a stylised thumb. The thumb lets the pages go one at a time; each page curls (real bent-page geometry: hinge angle + bend + corner twist, integrated along the page every frame), falls toward the viewer and slaps flat with a small bounce, so the pencil drawing on the pages comes to life. Every page carries its own procedural graphite drawing from one planner: bold soft-edged lines with graphite grain, light construction circles and arcs, hatching, smudges and a pencil page number, with line boil (each page's strokes wobble by a page-seeded displacement). A real pencil can finish a line on the first page. The release plan gives every flip a paper tick and slap in sync, from a slow page-by-page flip to a full-speed riffle at 12 drawings a second.",
@@ -1075,6 +1256,42 @@
         "spec": "Skills/3d-style-atlas/styles/floating-screens/spec.js",
         "style": "Skills/3d-style-atlas/styles/floating-screens/style.js",
         "card": "Skills/3d-style-atlas/styles/floating-screens/STYLE.md"
+      }
+    },
+    {
+      "id": "fogged-glass",
+      "name": "Fogged Glass",
+      "description": "A steamed-up window pane: behind it a bright sunrise town (sky, balloons, skyline, river, lamps) painted once into a sharp texture and once into a pre-blurred, milky, bokeh-dotted 'fogged' texture. An unseen finger writes in the condensation: the fog mask is a pure function of t — for every pixel, clear = max over planned strokes of (drawn by now x re-fogging decay), redrawn from the plan each frame into a small mask canvas (no accumulation). The pane shader shows the fogged texture where the mask is 0 and the sharp scene where it is 1, with a beaded boundary, a refracting lit/shaded water rim along every wiped edge, a wet sheen on fresh strokes and lens-like drops that gather under the strokes and run down with stick-slip, leaving clear trails. Old strokes narrow and fog over; a palm sweep clears the whole pane and the last fog evaporates. Squeaks, drip plinks, the palm swipe and the reveal chime come from the same plan (fogplan.js).",
+      "summary": "**Look.** A steamed-up window pane in a wooden frame.",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": "dense text (the finger is ~40 px wide; 3 words\nof 3–6 letters fill a frame), precise diagrams, anything that needs numbers.",
+      "toneMapping": "none",
+      "props": [
+        "windowSet",
+        "pane",
+        "frame",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "fogplan.js",
+          "nodeSafe": false
+        }
+      ],
+      "hasNodeSafeFourthModule": false,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/94-fogged-glass",
+          "topic": "\"The context window — why AI forgets the start of a long chat\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/94-fogged-glass/renders/94-fogged-glass.mp4",
+          "mp4MB": 4.2
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/fogged-glass/spec.js",
+        "style": "Skills/3d-style-atlas/styles/fogged-glass/style.js",
+        "card": "Skills/3d-style-atlas/styles/fogged-glass/STYLE.md"
       }
     },
     {
@@ -1560,6 +1777,46 @@
       }
     },
     {
+      "id": "laser-mirrors",
+      "name": "Laser & Mirrors",
+      "description": "An optics bench seen from above at an angle: a slate-blue anodised breadboard with a hole grid, a cream laser head, small swivelling mirrors on posts (silver glass in aluminium yokes; the router mirror in brass), a glass splitter that rises from a well, and drum-shaped sensor targets with name plates. Light haze makes the beam a thick glowing line; an exact ray tracer reflects it mirror to mirror, so turning one mirror re-routes the whole downstream path live.",
+      "summary": "**Look.** An optics bench seen from above at an angle: a mid-tone slate-blue anodised breadboard with a printed hole grid, dark beam-stop rails, a cream laser head with a pink stripe, ROUND silvered mirrors in dark ring mounts on steel p...",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "opticsBench",
+        "bench",
+        "laser",
+        "mirror",
+        "target",
+        "splitter",
+        "beams",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "beamplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/92-laser-mirrors",
+          "topic": "\"How an AI agent routes a request\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/92-laser-mirrors/renders/92-laser-mirrors.mp4",
+          "mp4MB": 3.4
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/laser-mirrors/spec.js",
+        "style": "Skills/3d-style-atlas/styles/laser-mirrors/style.js",
+        "card": "Skills/3d-style-atlas/styles/laser-mirrors/STYLE.md"
+      }
+    },
+    {
       "id": "layer-print",
       "name": "Layer Print",
       "description": "A generic desktop 3D printer in a bright workshop: an open aluminium frame, a dark gridded heated bed, a gantry that rises with the part and a print head with a glowing brass nozzle laying down coloured filament. The object grows layer by layer and every layer is drawn as its real toolpath — outer perimeter, inner perimeter, then infill (scan lines on the floor, a zigzag inside the wall) — from a slicer plan (slicer.js): the part is sliced once into timed polylines, the whole bead geometry is built once with a per-vertex deposit time, and a frame shows every bead whose time has passed, cut exactly at the nozzle. The planned path of the current layer shows ahead of the nozzle as a thin line, fresh plastic glows for a moment, and the finished part keeps fine layer ridges. Print time is compressed honestly: timing stages speed up layer after layer. Stepper servo/whir cues per move and a tick per layer change come from the same plan.",
@@ -1596,6 +1853,45 @@
         "spec": "Skills/3d-style-atlas/styles/layer-print/spec.js",
         "style": "Skills/3d-style-atlas/styles/layer-print/style.js",
         "card": "Skills/3d-style-atlas/styles/layer-print/STYLE.md"
+      }
+    },
+    {
+      "id": "lichtenberg",
+      "name": "Lichtenberg",
+      "description": "Fractal wood burning: a pale maple board on a dark slate workbench mat with two copper electrodes clamped to it. A high-voltage discharge burns a branching Lichtenberg figure into the wood between them. The whole tree is planned once, seeded (space colonisation from the first electrode, half-width from downstream length, a burn time per node, dead ends everywhere and exactly one path that reaches the second electrode) and baked into a distance + burn-time field; at time t each groove is drawn up to its burn front: white-blue arc at the tip, glowing orange ember just behind, near-black char with a soft brown scorch halo after. When the one path connects, a return stroke flashes back along it, the channel widens and stays glowing. Smoke wisps, flickering tip glints, the crackle, the hum and the connection crack all come from the same plan.",
+      "summary": "**Look.** Fractal wood burning.",
+      "category": "other",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "burnBoard",
+        "board",
+        "burnMaterial",
+        "electrode",
+        "glints",
+        "bench",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "burnplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/88-lichtenberg",
+          "topic": "\"How a model searches for an answer\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/88-lichtenberg/renders/88-lichtenberg.mp4",
+          "mp4MB": 5.7
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/lichtenberg/spec.js",
+        "style": "Skills/3d-style-atlas/styles/lichtenberg/style.js",
+        "card": "Skills/3d-style-atlas/styles/lichtenberg/STYLE.md"
       }
     },
     {
@@ -1672,6 +1968,45 @@
         "spec": "Skills/3d-style-atlas/styles/liquid-chrome/spec.js",
         "style": "Skills/3d-style-atlas/styles/liquid-chrome/style.js",
         "card": "Skills/3d-style-atlas/styles/liquid-chrome/STYLE.md"
+      }
+    },
+    {
+      "id": "loom-weave",
+      "name": "Loom Weave",
+      "description": "A wooden tabletop jacquard loom in bright daylight, seen from the weaver's side: cream warp threads, a harness of string heddles that lift threads one by one, a boat shuttle flying red, gold and blue weft through the shed, a reed beating each row into the fell, and the growing cloth rendered crossing by crossing (a shader reads the weave draft: over/under per crossing, thread relief and twist). Beside the cloth a brown punched card glows on a lightbox and advances one row per pick in step with the cloth, so each row of holes sits beside the row of cloth it wove. A draft planner (pattern bitmap + plain-weave borders) decides every lift; shed, shuttle, beat, cloth advance, card pins and every clack, swish and thump are functions of t from the same pick plan, which speeds up so a motif emerges out of ordinary-looking rows.",
+      "summary": "**Look.** A pale honey-beech tabletop jacquard loom on a limed-oak table in bright daylight, seen from the weaver's side and a little above.",
+      "category": "other",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "loom",
+        "cloth",
+        "card",
+        "warp",
+        "reed",
+        "draftTexture",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "draft.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/98-loom-weave",
+          "topic": "a tabletop jacquard loom weaves a little robot row by row while the punched card that drives it advances beside the cloth.",
+          "mp4": "/Volumes/Panther/3D Style Atlas/98-loom-weave/renders/98-loom-weave.mp4",
+          "mp4MB": 11.4
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/loom-weave/spec.js",
+        "style": "Skills/3d-style-atlas/styles/loom-weave/style.js",
+        "card": "Skills/3d-style-atlas/styles/loom-weave/STYLE.md"
       }
     },
     {
@@ -1761,6 +2096,45 @@
         "spec": "Skills/3d-style-atlas/styles/marble-run/spec.js",
         "style": "Skills/3d-style-atlas/styles/marble-run/style.js",
         "card": "Skills/3d-style-atlas/styles/marble-run/STYLE.md"
+      }
+    },
+    {
+      "id": "marionette",
+      "name": "Marionette",
+      "description": "A lacquered, brightly painted wooden string puppet on a small toy-theatre stage (pale painted-sky backdrop, red pleated curtains, plank floor), worked from above by a wooden control bar with a rocking leg bar and a rail of painted name tags. A closed-form string rig is the whole mechanism: the bar's pose (lift, pitch, roll, yaw, leg-bar rock) and the pull on each tagged string are the only animated inputs; every string has a fixed length, so each limb end hangs from its eyelet and the joints are solved analytically (torso = pendulum under the head string with the hips held by the back string, arms = two-bone IK under their eyelets, knees = sphere-sphere intersection, shins hang, feet stop on the floor) with a planned damped sway. Taut strings are straight, slack ones sag. Wood clacks, string creaks and plucks come from the same control plan.",
+      "summary": "**Look.** A lacquered, brightly painted wooden string puppet (a friendly robot: yellow block head, teal body, orange and blue limbs, wooden bead joints) on a small toy-theatre stage — pale painted-sky backdrop with hills and clouds, red ...",
+      "category": "theatrical / narrative",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "stageSet",
+        "puppet",
+        "controlBar",
+        "stringSet",
+        "tagSet",
+        "marionette",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "strings.js",
+          "nodeSafe": false
+        }
+      ],
+      "hasNodeSafeFourthModule": false,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/90-marionette",
+          "topic": "\"Who pulls the strings?\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/90-marionette/renders/90-marionette.mp4",
+          "mp4MB": 5.5
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/marionette/spec.js",
+        "style": "Skills/3d-style-atlas/styles/marionette/style.js",
+        "card": "Skills/3d-style-atlas/styles/marionette/STYLE.md"
       }
     },
     {
@@ -2326,6 +2700,45 @@
       }
     },
     {
+      "id": "pendulum-wave",
+      "name": "Pendulum Wave",
+      "description": "A classic pendulum-wave demonstration on a bright, cool-white bench: a row of 15 large glossy balls, saturated rainbow by index, hangs on V-strings from a curved wooden beam carried by two A-frames, each pendulum a little shorter than the last. Pendulum k completes (N + k) swings in one cycle, so released together from a wooden plank they drift into a travelling snake wave, split into groups, look like chaos, and then all return to one line at the same instant, where the plank catches them. Everything is a closed form of t (wave.js): angles, string lengths (from the periods), motion-trail ghosts (the same formula at earlier times), a lamp on the bench under each ball that flashes at its centre crossing, and one pitched bar note per crossing, so the sound goes from a chord strike to a ripple and back to a unison. A planned clock can freeze the motion: a camera flash, and the frozen positions fly down into an overlay 'fingerprint' card.",
+      "summary": "**Look.** A classic pendulum-wave demonstration on a bright, cool-white bench (toy scale: balls 0.43 m across, the row 7 m long, so one ball reads at 1080p).",
+      "category": "toy / playful",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "rig",
+        "bench",
+        "frame",
+        "pendulums",
+        "plank",
+        "caption",
+        "cards"
+      ],
+      "fourthModule": [
+        {
+          "file": "wave.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/96-pendulum-wave",
+          "topic": "\"How AI tags word order\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/96-pendulum-wave/renders/96-pendulum-wave.mp4",
+          "mp4MB": 10.2
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/pendulum-wave/spec.js",
+        "style": "Skills/3d-style-atlas/styles/pendulum-wave/style.js",
+        "card": "Skills/3d-style-atlas/styles/pendulum-wave/STYLE.md"
+      }
+    },
+    {
       "id": "pin-art",
       "name": "Pin Art",
       "description": "A giant pin-impression toy (pinscreen): a clear acrylic frame holding a dense grid of thousands of slim polished metal pins with domed heads, on a dark matte desk under a strong low raking key light and a soft coloured rim light, so any relief pushed into the pins reads as a field of bright pin heads and long shadows. Polished steel by default, brass and anodised colour finishes. Shapes are pressed through the field as a pure function of time: every pin's extension is sampled from a target height field built from text and icons (distance fields with a rounded bevel), a hand, a ball rolling underneath, ripples from a tap, bars rising as columns of pins, terrain or a bitmap; transitions morph between fields with a wave that travels across the grid (per-pin delay from position, eased, tiny overshoot, metallic settle) and pins drop back in a cascade. The camera orbits low so relief and shadows read.",
@@ -2449,6 +2862,44 @@
         "spec": "Skills/3d-style-atlas/styles/point-cloud/spec.js",
         "style": "Skills/3d-style-atlas/styles/point-cloud/style.js",
         "card": "Skills/3d-style-atlas/styles/point-cloud/STYLE.md"
+      }
+    },
+    {
+      "id": "pottery-wheel",
+      "name": "Pottery Wheel",
+      "description": "A potter's wheel in a sunlit plaster studio: wet, glossy grey-brown clay spins on a steel wheel head inside a pale splash pan, a window's light patch on the wall behind it and a shelf of finished glazed pots out of focus. The clay is one lathe surface whose profile is a pure function of t, morphing between named key profiles (lump, cone, opened cylinder, bowl, collar, vase) bottom-up like a real pull, with its volume held constant so it is always the same clay. Spin reads through slip streaks, throwing rings that appear once it is thrown, a lumpy off-centre wobble that damps as it is centred, and marks on the wheel head. A wooden rib on a handle rides the wall exactly where the profile is changing fastest. At the end the wheel slows and a brush sweeps glaze on in a spiral from foot to lip. Wheel hum pitched by spin speed, wet squelches at shape changes and the brush come from the same plan.",
+      "summary": "**Look.** A potter's wheel in a sunlit plaster studio.",
+      "category": "handmade / tactile",
+      "goodFor": "\"same thing, reshaped\" stories — fine-tuning, refactoring, iteration, one resource many uses, training as\nshaping, craft and patience, before/after transformations of a single object, product evolution.",
+      "avoidFor": "many objects at once, hard-edged or mechanical subjects, data-heavy explainers (one hero, one silhouette),\nanything that needs text on the object.",
+      "toneMapping": "neutral",
+      "props": [
+        "room",
+        "wheel",
+        "clay",
+        "rib",
+        "brush",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "throw.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/99-pottery-wheel",
+          "topic": "\"Fine-tuning: the same model, reshaped for a job\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/99-pottery-wheel/renders/99-pottery-wheel.mp4",
+          "mp4MB": 5
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/pottery-wheel/spec.js",
+        "style": "Skills/3d-style-atlas/styles/pottery-wheel/style.js",
+        "card": "Skills/3d-style-atlas/styles/pottery-wheel/STYLE.md"
       }
     },
     {
@@ -2811,6 +3262,44 @@
       }
     },
     {
+      "id": "string-art",
+      "name": "String Art",
+      "description": "Curve stitching on a nail board: a dark walnut-stained board (well lit, warm workshop light) with rows and a ring of brass nails; saturated cotton thread is wound nail to nail by a moving needle tip, each thread drawn up to the current point with a tiny wrap round every nail it turns on. Every thread is perfectly straight, yet together they make smooth curves — parabola fans between two nail rows, a cardioid from a ring (chords m -> 2m, wound as continuous doubling cycles). Threads stack in winding order, cast thin shadows on the board and catch a soft sheen; nails catch highlights. A winding planner (winding.js) is the single source of truth for picture and sound: a soft pluck per thread, pitch rising with its index.",
+      "summary": "**Look.** An upright, mid-walnut board (5.4 x 3.0 m, toy scale; horizontal planks from the kit wood texture with visible grain, slim moulded frame) brightly lit by warm workshop light from the upper left plus a cool front fill.",
+      "category": "toy / playful",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "board",
+        "nails",
+        "threads",
+        "wraps",
+        "needles",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "winding.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/97-string-art",
+          "topic": "\"A neural network draws curves with straight lines\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/97-string-art/renders/97-string-art.mp4",
+          "mp4MB": 7.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/string-art/spec.js",
+        "style": "Skills/3d-style-atlas/styles/string-art/style.js",
+        "card": "Skills/3d-style-atlas/styles/string-art/STYLE.md"
+      }
+    },
+    {
       "id": "studio-product",
       "name": "Studio Product",
       "description": "High-end product commercial: one hero object on a black seamless sweep, procedural softbox/strip-light environment, glossy glass, brushed aluminium and satin ceramic, blurred mirror floor, crisp rim light, slow turntable and light sweeps, ultra-thin callouts.",
@@ -2942,6 +3431,41 @@
       }
     },
     {
+      "id": "tessellation-morph",
+      "name": "Tessellation Morph",
+      "description": "A wall of interlocking cut-paper tiles in two alternating colours, bevelled and layered so it is clearly 3D, where every tile is the same creature and the creature morphs smoothly (plain tile -> fish -> bird) without ever leaving a gap. Each lattice cell is a parallelogram whose opposite sides are one shared curve: what bulges out of one side is cut from the other, so any curve tiles. Key shapes are pairs of curves; the morph interpolates them point by point, and because each edge carries its own morph value the wall can show the whole transition in one frame, left to right. Eyes, gills, a beak and wing lines fade in only near a key shape. Tiles can leave the wall: a row of birds lifts off, folds along its body line to flap, and flies out, leaving bird-shaped holes. Whooshes, clicks and flutters come from the same morph plan.",
+      "summary": "**Look.** A wall of interlocking cut-paper / painted tiles in two strongly contrasting colours (cream, raised 24 cm; navy, 13 cm), every tile the same creature.",
+      "category": "handmade / tactile",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "wall",
+        "caption",
+        "style.makeTiling"
+      ],
+      "fourthModule": [
+        {
+          "file": "tiling.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/93-tessellation-morph",
+          "topic": ". The morph plan, beats, camera keys and SCORE live in scene.config.js; the wall (tiles, ink, backing) and the caption come from the style.",
+          "mp4": "/Volumes/Panther/3D Style Atlas/93-tessellation-morph/renders/93-tessellation-morph.mp4",
+          "mp4MB": 9.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/tessellation-morph/spec.js",
+        "style": "Skills/3d-style-atlas/styles/tessellation-morph/style.js",
+        "card": "Skills/3d-style-atlas/styles/tessellation-morph/STYLE.md"
+      }
+    },
+    {
       "id": "thermal-camera",
       "name": "Thermal Camera",
       "description": "A handheld thermal imager's view of ordinary objects: the picture is temperature, not light. Plain geometry (a desk, a PC tower with its side open, a monitor, a keyboard, a mug, a hand) rendered with an unlit temperature shader through an ironbow palette (black, deep purple, magenta, orange, yellow, white). Things glow because work is happening in them: heat sources switch on and approach their temperature exponentially, a conduction front creeps along heat sinks and boards with sqrt(t), exhaust air rises as a warm plume, a hand pressed on the desk leaves a print that spreads and fades, and everything slides back down the palette when the work stops. Slightly cooler at grazing angles (emissivity) so forms still read. Sensor character: soft low-resolution blur, a faint pixel grid, gentle seeded noise. Imager HUD on the overlay: centre crosshair with a spot reading, a vertical colour scale with min/max, and a SAMPLE DATA tag because every temperature is invented.",
@@ -3017,6 +3541,47 @@
         "spec": "Skills/3d-style-atlas/styles/tiny-diorama/spec.js",
         "style": "Skills/3d-style-atlas/styles/tiny-diorama/style.js",
         "card": "Skills/3d-style-atlas/styles/tiny-diorama/STYLE.md"
+      }
+    },
+    {
+      "id": "tiny-planet",
+      "name": "Tiny Planet",
+      "description": "A whole world on one small rotating globe that fills the frame: a faceted low-poly sphere on a warm cream backdrop, lit by a fixed sun so the right limb is always a blue night crescent. A bare grey gridded ball turns under a fixed camera; streams of small word chips rain onto it, and from every landing point a front spreads along the surface: land rises out of the ball, colours in (sea, sand, grass, rock, snow), then trees, houses, roads and clouds pop up, and warm lamps come on as they turn into the night side. One planner (globe.js) places everything in latitude/longitude, computes when each front reaches each vertex and feature in closed form, and writes the score.",
+      "summary": "**Look.** One small faceted low-poly globe (6 m across, toy scale) on a warm cream backdrop with a soft pale halo behind it.",
+      "category": "toy / playful",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "world",
+        "surface",
+        "grid",
+        "trees",
+        "roads",
+        "lamps",
+        "chips",
+        "halo",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "globe.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/85-tiny-planet",
+          "topic": "\"A model builds its world from what it reads\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/85-tiny-planet/renders/85-tiny-planet.mp4",
+          "mp4MB": 8.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/tiny-planet/spec.js",
+        "style": "Skills/3d-style-atlas/styles/tiny-planet/style.js",
+        "card": "Skills/3d-style-atlas/styles/tiny-planet/STYLE.md"
       }
     },
     {
@@ -3137,6 +3702,43 @@
         "spec": "Skills/3d-style-atlas/styles/ukiyo-e/spec.js",
         "style": "Skills/3d-style-atlas/styles/ukiyo-e/style.js",
         "card": "Skills/3d-style-atlas/styles/ukiyo-e/STYLE.md"
+      }
+    },
+    {
+      "id": "uv-reveal",
+      "name": "UV Reveal",
+      "description": "Two-layer surface revealed by a moving ultraviolet torch: an ordinary printed page (illustration + dummy text) lies on a warm oak desk under bright room light and shows no trace of anything else. A hand-held UV torch switches on, the room light dims, and inside the torch's violet pool a hidden fluorescent layer glows — a repeating watermark lattice, neon contours, a code strip and a big stamp — in saturated cyan, green and magenta on deep violet paper. The pool position, its radius (torch height and beam zoom) and a short phosphor afterglow behind the moving pool are pure functions of t along a planned torch path (torchplan.js); in the shader the visible print sinks to deep violet and the hidden layer is added to the page's emission only where the pool or afterglow masks are non-zero. Final move: the room goes dark, the torch lifts away, the pool radius grows past the sheet and the whole hidden layer glows at once. Switch click, lamp hum, sweep whooshes, per-mark pings and the flood chime come from the same plan.",
+      "summary": "**Look.** An ordinary printed page on a warm oak desk under bright room light: a headline, a flat illustration, grey lines of dummy text.",
+      "category": "print / flat graphic",
+      "goodFor": "anything hidden in plain sight — watermarks, provenance, metadata, fingerprints, steganography, hidden\nbias, fine print, \"what the model also learned\", forensic checks, security features. **Avoid for:** stories with no\n\"before\" surface (the mechanic is the contrast between the two layers), dense data, anything that needs a bright frame\nthroughout (the UV beats are deliberately violet), long text in the hidden layer (marks must be big and few).",
+      "avoidFor": "stories with no\n\"before\" surface (the mechanic is the contrast between the two layers), dense data, anything that needs a bright frame\nthroughout (the UV beats are deliberately violet), long text in the hidden layer (marks must be big and few).",
+      "toneMapping": "neutral",
+      "props": [
+        "uvDesk",
+        "sheet",
+        "torch",
+        "desk",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "torchplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/89-uv-reveal",
+          "topic": "\"AI's invisible watermark\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/89-uv-reveal/renders/89-uv-reveal.mp4",
+          "mp4MB": 6.4
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/uv-reveal/spec.js",
+        "style": "Skills/3d-style-atlas/styles/uv-reveal/style.js",
+        "card": "Skills/3d-style-atlas/styles/uv-reveal/STYLE.md"
       }
     },
     {

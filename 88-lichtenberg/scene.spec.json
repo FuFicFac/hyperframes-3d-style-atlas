@@ -1,0 +1,2109 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "lichtenberg",
+    "name": "Lichtenberg",
+    "description": "Fractal wood burning: a pale maple board on a dark slate workbench mat with two copper electrodes clamped to it. A high-voltage discharge burns a branching Lichtenberg figure into the wood between them. The whole tree is planned once, seeded (space colonisation from the first electrode, half-width from downstream length, a burn time per node, dead ends everywhere and exactly one path that reaches the second electrode) and baked into a distance + burn-time field; at time t each groove is drawn up to its burn front: white-blue arc at the tip, glowing orange ember just behind, near-black char with a soft brown scorch halo after. When the one path connects, a return stroke flashes back along it, the channel widens and stays glowing. Smoke wisps, flickering tip glints, the crackle, the hum and the connection crack all come from the same plan.",
+    "palette": {
+      "bg": "#232a31",
+      "bench": "#2b343d",
+      "benchLine": "#3d4a56",
+      "wood": "#ecd9b4",
+      "woodMid": "#e2c99c",
+      "woodDark": "#cfae7c",
+      "woodEdge": "#b98f5c",
+      "char": "#17100c",
+      "scorch": "#8a5326",
+      "ember": "#ffa62e",
+      "emberCool": "#e2380c",
+      "arc": "#9fd0ff",
+      "flash": "#6fb4ff",
+      "winHot": "#ff7a10",
+      "winMid": "#ffe2a0",
+      "copper": "#c8763c",
+      "steel": "#aeb4bb",
+      "question": "#d8402c",
+      "answer": "#2f7fd6",
+      "ink": "#3a2616",
+      "smoke": "#8e8a86",
+      "chip": "#1a1310",
+      "chipText": "#f6ead2"
+    },
+    "world": {
+      "background": "#232a31",
+      "sky": null,
+      "fog": null,
+      "environment": "room",
+      "environmentIntensity": 0.3,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "bench": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "map": {
+          "source": "grid",
+          "size": 512,
+          "cells": 4,
+          "line": 3,
+          "bg": "#2b343d",
+          "fg": "#3d4a56",
+          "description": "dark slate cutting mat with a faint 5 cm grid"
+        }
+      },
+      "wood": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.62,
+        "metalness": 0
+      },
+      "woodEdge": {
+        "type": "standard",
+        "baseColor": "#c9a26c",
+        "roughness": 0.7,
+        "metalness": 0
+      },
+      "copper": {
+        "type": "standard",
+        "baseColor": "#c8763c",
+        "roughness": 0.5,
+        "metalness": 1
+      },
+      "steel": {
+        "type": "standard",
+        "baseColor": "#aeb4bb",
+        "roughness": 0.55,
+        "metalness": 1
+      },
+      "clamp": {
+        "type": "standard",
+        "baseColor": "#23262b",
+        "roughness": 0.55,
+        "metalness": 0.2
+      },
+      "leadQ": {
+        "type": "standard",
+        "baseColor": "#d8402c",
+        "roughness": 0.5,
+        "metalness": 0
+      },
+      "leadA": {
+        "type": "standard",
+        "baseColor": "#2f7fd6",
+        "roughness": 0.5,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#fff6ea",
+        "groundColor": "#8a8478",
+        "intensity": 1
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff1dc",
+        "intensity": 2.3,
+        "position": [
+          -1.4,
+          3.2,
+          -1.2
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 2.5,
+          "mapSize": 2048,
+          "extent": 1.3,
+          "near": 0.5,
+          "far": 12,
+          "bias": -0.0003,
+          "normalBias": 0.004
+        }
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.55,
+        "radius": 0.45,
+        "threshold": 1.25
+      },
+      "vignette": {
+        "darkness": 0.28,
+        "offset": 1.15
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.05,
+      "far": 30,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 800,
+      "color": "#3a2616",
+      "height": 0.042
+    },
+    "board": {
+      "w": 1.6,
+      "h": 0.938,
+      "thickness": 0.04,
+      "y": 0.04,
+      "pxPerMetre": 1000,
+      "woodPx": [
+        1280,
+        750
+      ],
+      "seed": 88
+    },
+    "bench": {
+      "size": 9,
+      "gridMetres": 0.2
+    },
+    "electrodes": {
+      "q": [
+        0.118,
+        0.469
+      ],
+      "a": [
+        1.482,
+        0.469
+      ],
+      "r": 0.03,
+      "h": 0.014,
+      "bolt": 0.013,
+      "lead": 0.011,
+      "tag": {
+        "cap": 0.03,
+        "dy": 0.088,
+        "q": "QUESTION",
+        "a": "ANSWER",
+        "opacity": 0.88
+      }
+    },
+    "keepOut": [
+      {
+        "id": "caption",
+        "x0": 0,
+        "y0": 0,
+        "x1": 0.8,
+        "y1": 0.128
+      },
+      {
+        "id": "tagQ",
+        "x0": 0,
+        "y0": 0.525,
+        "x1": 0.31,
+        "y1": 0.6
+      },
+      {
+        "id": "tagA",
+        "x0": 1.33,
+        "y0": 0.525,
+        "x1": 1.6,
+        "y1": 0.6
+      }
+    ],
+    "grow": {
+      "spacing": 0.047,
+      "step": 0.016,
+      "influence": 0.115,
+      "kill": 0.03,
+      "influenceAnswer": 0.17,
+      "killAnswer": 0.05,
+      "answerPull": 2.2,
+      "answerClear": 0.085,
+      "answerStop": 0.012,
+      "rootClear": 0.03,
+      "wiggle": 0.42,
+      "minGap": 0.5,
+      "margin": 0.03,
+      "maxIter": 500,
+      "spur": {
+        "p": 0.3,
+        "steps": [
+          1,
+          3
+        ],
+        "len": [
+          0.5,
+          0.95
+        ],
+        "angle": [
+          0.7,
+          1.5
+        ],
+        "gap": 0.42
+      }
+    },
+    "width": {
+      "min": 0.0018,
+      "max": 0.0084,
+      "power": 0.5,
+      "win": 0.0105
+    },
+    "times": {
+      "start": 0.45,
+      "connect": 10,
+      "leap": 0.16,
+      "leapLen": 0.07,
+      "sweep": 0.26,
+      "die": 9.2,
+      "dieSpread": 2.4,
+      "bigArm": 0.7,
+      "speed": [
+        0.8,
+        1.2
+      ],
+      "delay": [
+        0.02,
+        0.22
+      ],
+      "slow": 1.35,
+      "minLife": 0.3,
+      "pruneLate": 0.9
+    },
+    "burn": {
+      "halo": {
+        "base": 0.004,
+        "k": 1.9,
+        "fall": 0.42,
+        "amount": 0.8,
+        "time": 1.3
+      },
+      "char": {
+        "grain": 0.35
+      },
+      "ember": {
+        "tau": 0.45,
+        "widthTau": 0.035,
+        "gain": 3.6,
+        "spill": 0.3
+      },
+      "arc": {
+        "tau": 0.075,
+        "gain": 16,
+        "spill": 0.16
+      },
+      "win": {
+        "glow": 0.014,
+        "inner": 5.4,
+        "flashTau": 0.5,
+        "flashGain": 10,
+        "hotGain": 1.7,
+        "sustain": 0.6,
+        "cool": 3
+      }
+    },
+    "glints": {
+      "max": 220,
+      "size": 0.024,
+      "sizeW": 3.5,
+      "gain": 7,
+      "flicker": 0.6,
+      "electrode": 0.13,
+      "pre": 0.08
+    },
+    "smoke": {
+      "life": [
+        1.5,
+        2.3
+      ],
+      "size": [
+        0.045,
+        0.075
+      ],
+      "rise": 0.13,
+      "drift": [
+        0.035,
+        -0.02
+      ],
+      "grow": 2.6,
+      "alpha": 0.24,
+      "dieGap": 0.16,
+      "trailGap": 0.11,
+      "lag": 0.4,
+      "minWidth": 0.0022,
+      "winEvery": 3,
+      "max": 96
+    },
+    "flash": {
+      "dim": 0.5,
+      "rise": 0.05,
+      "hold": 0.25,
+      "fall": 1.3,
+      "bloom": 0.12,
+      "shake": 0.004,
+      "shakeDur": 0.45
+    },
+    "crackle": {
+      "bin": 0.07,
+      "popShare": 0.16,
+      "fizzGap": 0.22,
+      "sizzleEvery": 1.6,
+      "sizzleFull": 40
+    },
+    "caption": {
+      "x": 40,
+      "y": 34,
+      "h": 92,
+      "cap": 40,
+      "maxW": 860,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#1a1310",
+      "edge": "#5a3a20",
+      "ink": "#f6ead2",
+      "icon": "#ff9a3c"
+    },
+    "sound": {
+      "strike": {
+        "clack": 0.5
+      },
+      "hum": {
+        "hz": 100,
+        "flicker": 0.55,
+        "gain": 0.2,
+        "low": 0.16
+      },
+      "crackle": {
+        "gain": 0.3,
+        "pop": 0.22
+      },
+      "fizz": {
+        "gain": 0.1
+      },
+      "sizzle": {
+        "gain": 0.3
+      },
+      "connect": {
+        "riser": 0.3,
+        "riserDur": 1.3,
+        "thud": 0.95,
+        "clack": 0.7,
+        "zap": 0.6,
+        "whoosh": 0.45
+      },
+      "glow": {
+        "chime": 0.22,
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "brightness": 900,
+        "gain": 0.42
+      },
+      "room": {
+        "root": 55,
+        "chord": [
+          0,
+          7
+        ],
+        "brightness": 500,
+        "gain": 0.3
+      }
+    },
+    "sfx": {
+      "enter": "tick",
+      "exit": "whooshOut",
+      "move": "rustle",
+      "land": "thud",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Nothing is simulated per frame: the tree, its widths and every node's burn time are planned once; a groove at time t is drawn up to (t - ta) / (tb - ta).",
+      "Three ages of a burn: white-blue arc at the front (under 0.1 s), orange ember cooling to dark red behind it (about half a second, longer on thick trunks), then black char with a brown scorch halo that keeps spreading for a second.",
+      "Side branches slow down as they die; the winning path keeps a steady crawl, then leaps the last gap.",
+      "The connection: a return stroke runs back along the winning path in a quarter second, the room light dips, the channel widens and stays glowing.",
+      "Camera: one rise from a low three-quarter view to near top-down while the tree spreads, then locked; a few millimetres of shake on the connection."
+    ]
+  },
+  "scene": {
+    "id": "88-lichtenberg",
+    "style": "lichtenberg",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "ask",
+        "t": 0,
+        "dur": 2.6,
+        "label": "A question goes in"
+      },
+      {
+        "id": "explore",
+        "t": 2.6,
+        "dur": 3.6,
+        "label": "Many paths are tried"
+      },
+      {
+        "id": "die",
+        "t": 6.2,
+        "dur": 3.1,
+        "label": "Most of them die out"
+      },
+      {
+        "id": "connect",
+        "t": 9.3,
+        "dur": 2.9,
+        "label": "One path connects"
+      },
+      {
+        "id": "answer",
+        "t": 12.2,
+        "dur": 2.8,
+        "label": "That path is the answer"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -0.71151,
+          0.83009,
+          1.08479
+        ],
+        "target": [
+          -0.36347,
+          -0.04896,
+          0.10089
+        ],
+        "fov": 30
+      },
+      {
+        "t": 0.5,
+        "pos": [
+          -0.71151,
+          0.83009,
+          1.08479
+        ],
+        "target": [
+          -0.36347,
+          -0.04896,
+          0.10089
+        ],
+        "fov": 30
+      },
+      {
+        "t": 4.6,
+        "pos": [
+          0,
+          1.69573,
+          0.68818
+        ],
+        "target": [
+          0,
+          0.02498,
+          0.03863
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.2,
+        "pos": [
+          0,
+          1.69573,
+          0.68818
+        ],
+        "target": [
+          0,
+          0.02498,
+          0.03863
+        ],
+        "fov": 30
+      },
+      {
+        "t": 14.1,
+        "pos": [
+          0,
+          1.72474,
+          0.46286
+        ],
+        "target": [
+          0,
+          0.03249,
+          0.02932
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0,
+          1.72474,
+          0.46286
+        ],
+        "target": [
+          0,
+          0.03249,
+          0.02932
+        ],
+        "fov": 30
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15.5,
+        "root": 55,
+        "chord": [
+          0,
+          7
+        ],
+        "attack": 0.5,
+        "release": 1.5,
+        "brightness": 500,
+        "gain": 0.3,
+        "seed": 5
+      },
+      {
+        "type": "clack",
+        "gain": 0.5,
+        "pitch": 1.5,
+        "t": 0.45,
+        "pan": -0.5541250000000001,
+        "seed": 211
+      },
+      {
+        "type": "buzz",
+        "dur": 9.700000000000001,
+        "hz": 100,
+        "flicker": 0.55,
+        "gain": 0.2,
+        "t": 0.45,
+        "pan": -0.5541250000000001,
+        "seed": 212
+      },
+      {
+        "type": "hum",
+        "dur": 9.700000000000001,
+        "hz": 50,
+        "gain": 0.16,
+        "t": 0.45,
+        "pan": -0.5541250000000001,
+        "seed": 213
+      },
+      {
+        "type": "rustle",
+        "dur": 1.9500000000000002,
+        "density": 0.36,
+        "pitch": 1.7,
+        "gain": 0.045,
+        "t": 0.55,
+        "pan": 0,
+        "seed": 218
+      },
+      {
+        "type": "tick",
+        "gain": 0.41034987148350144,
+        "pitch": 1.2130804128479213,
+        "t": 0.5540728295226457,
+        "pan": -0.5459749142821282,
+        "seed": 225
+      },
+      {
+        "type": "pop",
+        "gain": 0.13893229011289382,
+        "pitch": 2.3261817569844423,
+        "dur": 0.07,
+        "t": 0.6257502198309645,
+        "pan": -0.5644236101702709,
+        "seed": 232
+      },
+      {
+        "type": "tick",
+        "gain": 0.40772368602153014,
+        "pitch": 1.2131706191692502,
+        "t": 0.6581456590452913,
+        "pan": -0.5349931928379843,
+        "seed": 239
+      },
+      {
+        "type": "click",
+        "gain": 0.4281899730069124,
+        "pitch": 2.4745698990300298,
+        "t": 0.7622184885679368,
+        "pan": -0.5264233326332768,
+        "seed": 246
+      },
+      {
+        "type": "pop",
+        "gain": 0.20638446521231432,
+        "pitch": 1.6889301943592727,
+        "dur": 0.07,
+        "t": 0.7894022127691871,
+        "pan": -0.5162220085351128,
+        "seed": 253
+      },
+      {
+        "type": "tick",
+        "gain": 0.33728327851068296,
+        "pitch": 1.3083868877962233,
+        "t": 0.8662913180905825,
+        "pan": -0.5138671435113293,
+        "seed": 260
+      },
+      {
+        "type": "click",
+        "gain": 0.3934032528338359,
+        "pitch": 2.3396673791576177,
+        "t": 0.9703641476132283,
+        "pan": -0.5013340139349776,
+        "seed": 267
+      },
+      {
+        "type": "pop",
+        "gain": 0.20606073196176686,
+        "pitch": 2.351568295620382,
+        "dur": 0.07,
+        "t": 0.9814263848141799,
+        "pan": -0.46681144342616576,
+        "seed": 274
+      },
+      {
+        "type": "rustle",
+        "dur": 0.22344930176623165,
+        "density": 0.85,
+        "pitch": 2.528744181385264,
+        "gain": 0.1,
+        "t": 0.9886998704496923,
+        "pan": -0.5718165541878593,
+        "seed": 281
+      },
+      {
+        "type": "pop",
+        "gain": 0.22520825670436148,
+        "pitch": 1.8351830257102848,
+        "dur": 0.07,
+        "t": 1.074436977135874,
+        "pan": -0.4885723100596431,
+        "seed": 288
+      },
+      {
+        "type": "click",
+        "gain": 0.4407827997887546,
+        "pitch": 3.2131260038353506,
+        "t": 1.1785098066585198,
+        "pan": -0.4755725884425008,
+        "seed": 295
+      },
+      {
+        "type": "pop",
+        "gain": 0.20556137208265485,
+        "pitch": 1.8004760300740599,
+        "dur": 0.07,
+        "t": 1.218356565144122,
+        "pan": -0.4193116255032497,
+        "seed": 302
+      },
+      {
+        "type": "click",
+        "gain": 0.3993204688486308,
+        "pitch": 2.455402578599751,
+        "t": 1.2825826361811654,
+        "pan": -0.46257488882666714,
+        "seed": 309
+      },
+      {
+        "type": "tick",
+        "gain": 0.3728045434344056,
+        "pitch": 1.971698266034946,
+        "t": 1.3866554657038113,
+        "pan": -0.45012770332930657,
+        "seed": 316
+      },
+      {
+        "type": "click",
+        "gain": 0.3657764452248155,
+        "pitch": 2.586608064826578,
+        "t": 1.4179748212999521,
+        "pan": -0.38237143805301393,
+        "seed": 323
+      },
+      {
+        "type": "tick",
+        "gain": 0.34134898252810203,
+        "pitch": 1.3974356509745123,
+        "t": 1.4907282952264567,
+        "pan": -0.4373800200528461,
+        "seed": 330
+      },
+      {
+        "type": "rustle",
+        "dur": 0.17152636042796077,
+        "density": 0.85,
+        "pitch": 2.0960530035663396,
+        "gain": 0.1,
+        "t": 1.4943795961665542,
+        "pan": -0.5658414869392042,
+        "seed": 337
+      },
+      {
+        "type": "tick",
+        "gain": 0.3668015058889408,
+        "pitch": 1.8664895991794768,
+        "t": 1.5948011247491025,
+        "pan": -0.42515510007780655,
+        "seed": 344
+      },
+      {
+        "type": "click",
+        "gain": 0.3470873658021833,
+        "pitch": 2.253225102601573,
+        "t": 1.6332436887923918,
+        "pan": -0.34938840160447127,
+        "seed": 351
+      },
+      {
+        "type": "click",
+        "gain": 0.4226574784937758,
+        "pitch": 2.896456582704559,
+        "t": 1.6988739542717484,
+        "pan": -0.41220479584594655,
+        "seed": 358
+      },
+      {
+        "type": "tick",
+        "gain": 0.379431546000841,
+        "pitch": 2.106411343207583,
+        "t": 1.802946783794394,
+        "pan": -0.4001177200087263,
+        "seed": 365
+      },
+      {
+        "type": "rustle",
+        "dur": 0.21155713664367795,
+        "density": 0.85,
+        "pitch": 2.429642805363983,
+        "gain": 0.1,
+        "t": 1.8572160886646791,
+        "pan": -0.3734966967845395,
+        "seed": 372
+      },
+      {
+        "type": "click",
+        "gain": 0.3157592363749502,
+        "pitch": 2.3298306314740334,
+        "t": 1.8622889825317959,
+        "pan": -0.32115033144303623,
+        "seed": 379
+      },
+      {
+        "type": "tick",
+        "gain": 0.3357363962674186,
+        "pitch": 1.317510129325092,
+        "t": 1.9070196133170396,
+        "pan": -0.3891336815001625,
+        "seed": 386
+      },
+      {
+        "type": "tick",
+        "gain": 0.3385937819426558,
+        "pitch": 1.3723359815310687,
+        "t": 2.0110924428396855,
+        "pan": -0.37872474498733744,
+        "seed": 393
+      },
+      {
+        "type": "click",
+        "gain": 0.3123612672631349,
+        "pitch": 2.817095171986148,
+        "t": 2.0910141737451258,
+        "pan": -0.338016197606766,
+        "seed": 400
+      },
+      {
+        "type": "pop",
+        "gain": 0.22415046724724225,
+        "pitch": 2.309344020858407,
+        "dur": 0.07,
+        "t": 2.1151652723623307,
+        "pan": -0.3660395419436338,
+        "seed": 407
+      },
+      {
+        "type": "rustle",
+        "dur": 1.9500000000000002,
+        "density": 0.47,
+        "pitch": 1.7,
+        "gain": 0.1275,
+        "t": 2.1500000000000004,
+        "pan": 0,
+        "seed": 414
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2283967866934836,
+        "density": 0.85,
+        "pitch": 2.5699732224456966,
+        "gain": 0.1,
+        "t": 2.1716725936919516,
+        "pan": -0.40690540741826264,
+        "seed": 421
+      },
+      {
+        "type": "click",
+        "gain": 0.42711333122802186,
+        "pitch": 3.002213956275955,
+        "t": 2.2192381018849763,
+        "pan": -0.353262790177121,
+        "seed": 428
+      },
+      {
+        "type": "tick",
+        "gain": 0.24590326953932154,
+        "pitch": 1.4303532891906798,
+        "t": 2.271011372294852,
+        "pan": -0.26297656486307863,
+        "seed": 435
+      },
+      {
+        "type": "tick",
+        "gain": 0.3284839877548364,
+        "pitch": 1.196456464426592,
+        "t": 2.323310931407622,
+        "pan": -0.3417279086663199,
+        "seed": 442
+      },
+      {
+        "type": "pop",
+        "gain": 0.2238111473669532,
+        "pitch": 1.655769642535597,
+        "dur": 0.07,
+        "t": 2.4273837609302675,
+        "pan": -0.32914173036667144,
+        "seed": 449
+      },
+      {
+        "type": "tick",
+        "gain": 0.2209669142912833,
+        "pitch": 1.1914086922071876,
+        "t": 2.506888438768258,
+        "pan": -0.2773535583542778,
+        "seed": 456
+      },
+      {
+        "type": "rustle",
+        "dur": 0.23934939020313323,
+        "density": 0.85,
+        "pitch": 2.6612449183594435,
+        "gain": 0.1,
+        "t": 2.506888438768258,
+        "pan": -0.30235026455545205,
+        "seed": 463
+      },
+      {
+        "type": "click",
+        "gain": 0.4283355638874839,
+        "pitch": 3.037355094822124,
+        "t": 2.531456590452913,
+        "pan": -0.3173581544726882,
+        "seed": 470
+      },
+      {
+        "type": "tick",
+        "gain": 0.340306680632982,
+        "pitch": 1.4502725169528277,
+        "t": 2.635529419975559,
+        "pan": -0.3045910481919486,
+        "seed": 477
+      },
+      {
+        "type": "click",
+        "gain": 0.30978508454648074,
+        "pitch": 2.626506758295,
+        "t": 2.7095405827541743,
+        "pan": -0.20638825491600113,
+        "seed": 484
+      },
+      {
+        "type": "click",
+        "gain": 0.39563039813948847,
+        "pitch": 2.4670161561109127,
+        "t": 2.7396022494982044,
+        "pan": -0.2949919585612704,
+        "seed": 491
+      },
+      {
+        "type": "rustle",
+        "dur": 0.1775651077646762,
+        "density": 0.85,
+        "pitch": 2.1463758980389684,
+        "gain": 0.1,
+        "t": 2.7706088998620997,
+        "pan": -0.26478219904991906,
+        "seed": 498
+      },
+      {
+        "type": "tick",
+        "gain": 0.3653521379402476,
+        "pitch": 1.9143920017406346,
+        "t": 2.84367507902085,
+        "pan": -0.28201509454769447,
+        "seed": 505
+      },
+      {
+        "type": "click",
+        "gain": 0.3371297295361711,
+        "pitch": 3.1379248099401598,
+        "t": 2.892513953137575,
+        "pan": -0.18864534506686534,
+        "seed": 512
+      },
+      {
+        "type": "tick",
+        "gain": 0.321711490524959,
+        "pitch": 1.830131791951135,
+        "t": 2.947747908543496,
+        "pan": -0.2722548627070779,
+        "seed": 519
+      },
+      {
+        "type": "click",
+        "gain": 0.34673927142821614,
+        "pitch": 2.2945320209022615,
+        "t": 3.051820738066141,
+        "pan": -0.25962091277026894,
+        "seed": 526
+      },
+      {
+        "type": "rustle",
+        "dur": 0.22583567187190057,
+        "density": 0.85,
+        "pitch": 2.5486305989325047,
+        "gain": 0.1,
+        "t": 3.0795361650119917,
+        "pan": -0.2615063064655708,
+        "seed": 533
+      },
+      {
+        "type": "tick",
+        "gain": 0.2588019574422839,
+        "pitch": 1.3105059849098326,
+        "t": 3.105397894480527,
+        "pan": -0.21774334286824393,
+        "seed": 540
+      },
+      {
+        "type": "click",
+        "gain": 0.34199929235642623,
+        "pitch": 2.2107776551507414,
+        "t": 3.1558935675887865,
+        "pan": -0.24710278518886308,
+        "seed": 547
+      },
+      {
+        "type": "pop",
+        "gain": 0.20349494482700195,
+        "pitch": 1.9608726480044425,
+        "dur": 0.07,
+        "t": 3.259966397111433,
+        "pan": -0.23622128590339475,
+        "seed": 554
+      },
+      {
+        "type": "click",
+        "gain": 0.3581738518354176,
+        "pitch": 3.175781691167504,
+        "t": 3.3001443019085785,
+        "pan": -0.1500426141631608,
+        "seed": 561
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2352975692972541,
+        "density": 0.85,
+        "pitch": 2.627479744143784,
+        "gain": 0.1,
+        "t": 3.3266589269532405,
+        "pan": -0.2150747625615641,
+        "seed": 568
+      },
+      {
+        "type": "pop",
+        "gain": 0.20341087434182362,
+        "pitch": 1.5745306422002614,
+        "dur": 0.07,
+        "t": 3.3640392266340777,
+        "pan": -0.223295340479623,
+        "seed": 575
+      },
+      {
+        "type": "click",
+        "gain": 0.3582811598923075,
+        "pitch": 3.2011998841073366,
+        "t": 3.450192604676502,
+        "pan": -0.10760652504831615,
+        "seed": 582
+      },
+      {
+        "type": "click",
+        "gain": 0.3055723688760764,
+        "pitch": 2.2476331527810545,
+        "t": 3.5302050712263364,
+        "pan": -0.08560126004875103,
+        "seed": 589
+      },
+      {
+        "type": "rustle",
+        "dur": 0.229136650133878,
+        "density": 0.85,
+        "pitch": 2.57613875111565,
+        "gain": 0.1,
+        "t": 3.563812902204552,
+        "pan": -0.37018059255600066,
+        "seed": 596
+      },
+      {
+        "type": "tick",
+        "gain": 0.2746156048320538,
+        "pitch": 1.6549722514580938,
+        "t": 3.5928092721779343,
+        "pan": -0.21168136885604968,
+        "seed": 603
+      },
+      {
+        "type": "tick",
+        "gain": 0.2898712240616499,
+        "pitch": 1.9677494521252812,
+        "t": 3.655300889316142,
+        "pan": -0.1806263923402225,
+        "seed": 610
+      },
+      {
+        "type": "tick",
+        "gain": 0.29414793903194547,
+        "pitch": 2.0661613611038776,
+        "t": 3.7386594737049452,
+        "pan": -0.14563403118389703,
+        "seed": 617
+      },
+      {
+        "type": "rustle",
+        "dur": 1.9500000000000002,
+        "density": 0.5,
+        "pitch": 1.7,
+        "gain": 0.15,
+        "t": 3.7500000000000004,
+        "pan": 0,
+        "seed": 624
+      },
+      {
+        "type": "tick",
+        "gain": 0.26219350158010163,
+        "pitch": 1.491885826131329,
+        "t": 3.8021636833011065,
+        "pan": -0.13026069693522113,
+        "seed": 631
+      },
+      {
+        "type": "rustle",
+        "dur": 0.23553552510216832,
+        "density": 0.85,
+        "pitch": 2.629462709184736,
+        "gain": 0.1,
+        "t": 3.8651873002196586,
+        "pan": -0.5534506335429394,
+        "seed": 638
+      },
+      {
+        "type": "click",
+        "gain": 0.33699494973010863,
+        "pitch": 2.871974085317925,
+        "t": 3.870841141753237,
+        "pan": -0.10884718949976722,
+        "seed": 645
+      },
+      {
+        "type": "click",
+        "gain": 0.3239395800556127,
+        "pitch": 2.637444912735373,
+        "t": 3.9249715367956153,
+        "pan": 0.018840588628132326,
+        "seed": 652
+      },
+      {
+        "type": "tick",
+        "gain": 0.2950468306493611,
+        "pitch": 2.123744441289455,
+        "t": 4.0195261792432575,
+        "pan": 0.044355773362307706,
+        "seed": 659
+      },
+      {
+        "type": "tick",
+        "gain": 0.27005406472331284,
+        "pitch": 1.679717483604327,
+        "t": 4.067647070859688,
+        "pan": 0.05592981860525342,
+        "seed": 666
+      },
+      {
+        "type": "click",
+        "gain": 0.31896562266918255,
+        "pitch": 2.5881191730964934,
+        "t": 4.144086682243275,
+        "pan": -0.029507577583790984,
+        "seed": 673
+      },
+      {
+        "type": "rustle",
+        "dur": 0.24706579920835792,
+        "density": 0.85,
+        "pitch": 2.725548326736316,
+        "gain": 0.1,
+        "t": 4.165517062420019,
+        "pan": 0.06270909133903599,
+        "seed": 680
+      },
+      {
+        "type": "click",
+        "gain": 0.3087349807827356,
+        "pitch": 2.4095436279196294,
+        "t": 4.230086472686347,
+        "pan": -0.005792676202947961,
+        "seed": 687
+      },
+      {
+        "type": "tick",
+        "gain": 0.2846500851682386,
+        "pitch": 1.9724965038243683,
+        "t": 4.274248940715033,
+        "pan": 0.00476142992431966,
+        "seed": 694
+      },
+      {
+        "type": "tick",
+        "gain": 0.25664941632508076,
+        "pitch": 1.475634125666693,
+        "t": 4.364779077490959,
+        "pan": 0.02911898448941083,
+        "seed": 701
+      },
+      {
+        "type": "pop",
+        "gain": 0.18133452564583716,
+        "pitch": 2.1060473456047477,
+        "dur": 0.07,
+        "t": 4.411104093544866,
+        "pan": 0.041925679394201755,
+        "seed": 708
+      },
+      {
+        "type": "click",
+        "gain": 0.32418716393152186,
+        "pitch": 2.747017020592466,
+        "t": 4.505778354469931,
+        "pan": 0.06481484386951876,
+        "seed": 715
+      },
+      {
+        "type": "click",
+        "gain": 0.33923402984148177,
+        "pitch": 3.0275200047064574,
+        "t": 4.554093075377649,
+        "pan": 0.07194465681600258,
+        "seed": 722
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2261540185660124,
+        "density": 0.85,
+        "pitch": 2.551283488050103,
+        "gain": 0.1,
+        "t": 4.5975106684355715,
+        "pan": -0.04117378617000013,
+        "seed": 729
+      },
+      {
+        "type": "tick",
+        "gain": 0.26257024393204964,
+        "pitch": 1.6580924642737958,
+        "t": 4.630833784312239,
+        "pan": 0.18451939312361804,
+        "seed": 736
+      },
+      {
+        "type": "tick",
+        "gain": 0.25972478846700886,
+        "pitch": 1.6617814887315037,
+        "t": 4.702762134427803,
+        "pan": 0.10176698203892073,
+        "seed": 743
+      },
+      {
+        "type": "tick",
+        "gain": 0.27534259195135796,
+        "pitch": 1.9579309212975207,
+        "t": 4.804841680697575,
+        "pan": 0.12319859376945873,
+        "seed": 750
+      },
+      {
+        "type": "pop",
+        "gain": 0.1776022378872558,
+        "pitch": 1.6576699775643646,
+        "dur": 0.07,
+        "t": 4.856734176709077,
+        "pan": 0.13569884637205512,
+        "seed": 757
+      },
+      {
+        "type": "tick",
+        "gain": 0.2404273127125107,
+        "pitch": 1.3276970920152964,
+        "t": 4.909180046933637,
+        "pan": 0.14856364370290617,
+        "seed": 764
+      },
+      {
+        "type": "rustle",
+        "dur": 0.22887381879612803,
+        "density": 0.85,
+        "pitch": 2.5739484899677336,
+        "gain": 0.1,
+        "t": 4.923090237969697,
+        "pan": -0.12033345881659259,
+        "seed": 771
+      },
+      {
+        "type": "click",
+        "gain": 0.3438232831790492,
+        "pitch": 3.2382175939157607,
+        "t": 5.015689866296501,
+        "pan": 0.1713387668833785,
+        "seed": 778
+      },
+      {
+        "type": "click",
+        "gain": 0.2753773207505916,
+        "pitch": 2.3624732348136606,
+        "t": 5.069734016751386,
+        "pan": 0.17740759028697056,
+        "seed": 785
+      },
+      {
+        "type": "click",
+        "gain": 0.2849451953729605,
+        "pitch": 2.544343155249954,
+        "t": 5.1242918731188425,
+        "pan": 0.18866269927112736,
+        "seed": 792
+      },
+      {
+        "type": "rustle",
+        "dur": 0.23702708952128887,
+        "density": 0.85,
+        "pitch": 2.6418924126774073,
+        "gain": 0.1,
+        "t": 5.189132716903557,
+        "pan": 0.040324467519187356,
+        "seed": 799
+      },
+      {
+        "type": "click",
+        "gain": 0.285852414511032,
+        "pitch": 2.5739901676308365,
+        "t": 5.234913760009395,
+        "pan": 0.2112233621897469,
+        "seed": 806
+      },
+      {
+        "type": "tick",
+        "gain": 0.2184970290635284,
+        "pitch": 1.3456981915049255,
+        "t": 5.290961232206215,
+        "pan": 0.22010269520854459,
+        "seed": 813
+      },
+      {
+        "type": "tick",
+        "gain": 0.26219998480817214,
+        "pitch": 2.1535094298888,
+        "t": 5.347489245918614,
+        "pan": 0.23204577304365237,
+        "seed": 820
+      },
+      {
+        "type": "rustle",
+        "dur": 1.9500000000000002,
+        "density": 0.56,
+        "pitch": 1.7,
+        "gain": 0.195,
+        "t": 5.3500000000000005,
+        "pan": 0,
+        "seed": 827
+      },
+      {
+        "type": "click",
+        "gain": 0.297757695670085,
+        "pitch": 2.818007823452354,
+        "t": 5.404490331686688,
+        "pan": 0.24504449332250966,
+        "seed": 834
+      },
+      {
+        "type": "tick",
+        "gain": 0.22063572602496556,
+        "pitch": 1.4193682049866767,
+        "t": 5.461957307923691,
+        "pan": 0.25775419484998174,
+        "seed": 841
+      },
+      {
+        "type": "click",
+        "gain": 0.2919318286391011,
+        "pitch": 2.7540998718235645,
+        "t": 5.5495686466096386,
+        "pan": 0.018868719256028545,
+        "seed": 848
+      },
+      {
+        "type": "rustle",
+        "dur": 0.22133442049846053,
+        "density": 0.85,
+        "pitch": 2.5111201708205044,
+        "gain": 0.1,
+        "t": 5.593943603999573,
+        "pan": 0.06462311772554277,
+        "seed": 855
+      },
+      {
+        "type": "tick",
+        "gain": 0.23881175398503998,
+        "pitch": 1.7871587059460583,
+        "t": 5.653641476132284,
+        "pan": 0.030172929109057757,
+        "seed": 862
+      },
+      {
+        "type": "pop",
+        "gain": 0.15736593048524555,
+        "pitch": 1.6239816997200252,
+        "dur": 0.07,
+        "t": 5.696349624803944,
+        "pan": 0.30170228185753234,
+        "seed": 869
+      },
+      {
+        "type": "click",
+        "gain": 0.290801705469725,
+        "pitch": 2.7472743692807855,
+        "t": 5.75771430565493,
+        "pan": 0.04255524757915687,
+        "seed": 876
+      },
+      {
+        "type": "rustle",
+        "dur": 0.23286176099441946,
+        "density": 0.85,
+        "pitch": 2.607181341620162,
+        "gain": 0.1,
+        "t": 5.823147453711397,
+        "pan": 0.020709712645007473,
+        "seed": 883
+      },
+      {
+        "type": "click",
+        "gain": 0.2618354660540512,
+        "pitch": 2.223233572719619,
+        "t": 5.861787135177576,
+        "pan": 0.05540553818832823,
+        "seed": 890
+      },
+      {
+        "type": "click",
+        "gain": 0.2985551677779104,
+        "pitch": 3.1896957818884406,
+        "t": 5.937685795595219,
+        "pan": 0.34526844340120344,
+        "seed": 897
+      },
+      {
+        "type": "tick",
+        "gain": 0.2294762953734912,
+        "pitch": 1.648675077687949,
+        "t": 5.965859964700221,
+        "pan": 0.06812502069939941,
+        "seed": 904
+      },
+      {
+        "type": "rustle",
+        "dur": 0.21193400570191442,
+        "density": 0.85,
+        "pitch": 2.432783380849287,
+        "gain": 0.1,
+        "t": 6.055041421253336,
+        "pan": 0.042705666449379155,
+        "seed": 911
+      },
+      {
+        "type": "tick",
+        "gain": 0.22543616507504652,
+        "pitch": 1.6108528998680414,
+        "t": 6.069932794222868,
+        "pan": 0.07746885276419427,
+        "seed": 918
+      },
+      {
+        "type": "click",
+        "gain": 0.26612307620754644,
+        "pitch": 2.675734769040719,
+        "t": 6.096681866956759,
+        "pan": 0.10383974332996342,
+        "seed": 925
+      },
+      {
+        "type": "click",
+        "gain": 0.31481482333087724,
+        "pitch": 3.256849329872057,
+        "t": 6.174005623745514,
+        "pan": 0.09001064851849233,
+        "seed": 932
+      },
+      {
+        "type": "pop",
+        "gain": 0.16219519653443507,
+        "pitch": 2.6612097144126894,
+        "dur": 0.07,
+        "t": 6.278078453268159,
+        "pan": 0.09930780409233307,
+        "seed": 939
+      },
+      {
+        "type": "click",
+        "gain": 0.24732685333811408,
+        "pitch": 2.478463665908203,
+        "t": 6.311950132937783,
+        "pan": 0.4361729246868236,
+        "seed": 946
+      },
+      {
+        "type": "rustle",
+        "dur": 0.1905547637771815,
+        "density": 0.85,
+        "pitch": 2.2546230314765126,
+        "gain": 0.1,
+        "t": 6.314954358297684,
+        "pan": 0.05353469388876173,
+        "seed": 953
+      },
+      {
+        "type": "tick",
+        "gain": 0.20919737889151166,
+        "pitch": 1.3354504591785372,
+        "t": 6.382151282790805,
+        "pan": 0.11219493973271186,
+        "seed": 960
+      },
+      {
+        "type": "pop",
+        "gain": 0.16179465674661306,
+        "pitch": 2.4737644446082414,
+        "dur": 0.07,
+        "t": 6.48622411231345,
+        "pan": 0.12487333605479616,
+        "seed": 967
+      },
+      {
+        "type": "tick",
+        "gain": 0.2161255801198297,
+        "pitch": 1.8781766142230483,
+        "t": 6.526675671655968,
+        "pan": 0.16959912677371378,
+        "seed": 974
+      },
+      {
+        "type": "rustle",
+        "dur": 0.17708854781463743,
+        "density": 0.85,
+        "pitch": 2.1424045651219785,
+        "gain": 0.1,
+        "t": 6.566703384425634,
+        "pan": 0.10810122207227915,
+        "seed": 981
+      },
+      {
+        "type": "click",
+        "gain": 0.28093246407063355,
+        "pitch": 2.681675413064659,
+        "t": 6.590296941836096,
+        "pan": 0.13770595393131124,
+        "seed": 988
+      },
+      {
+        "type": "click",
+        "gain": 0.2739754566131206,
+        "pitch": 2.709109161468223,
+        "t": 6.694369771358742,
+        "pan": 0.14881889122332248,
+        "seed": 995
+      },
+      {
+        "type": "click",
+        "gain": 0.24150425895507158,
+        "pitch": 2.3676916581578555,
+        "t": 6.766311056567162,
+        "pan": 0.19240358780685637,
+        "seed": 1002
+      },
+      {
+        "type": "tick",
+        "gain": 0.20213091888323376,
+        "pitch": 1.4010012383572759,
+        "t": 6.798442600881387,
+        "pan": 0.16154517244131916,
+        "seed": 1009
+      },
+      {
+        "type": "rustle",
+        "dur": 0.26845089471898975,
+        "density": 0.85,
+        "pitch": 2.903757455991581,
+        "gain": 0.1,
+        "t": 6.805578961281344,
+        "pan": 0.13488154147292183,
+        "seed": 1016
+      },
+      {
+        "type": "tick",
+        "gain": 0.23582165617971207,
+        "pitch": 2.032423651404679,
+        "t": 6.9025154304040335,
+        "pan": 0.172330336220539,
+        "seed": 1023
+      },
+      {
+        "type": "rustle",
+        "dur": 1.9500000000000002,
+        "density": 0.4,
+        "pitch": 1.7,
+        "gain": 0.075,
+        "t": 6.950000000000001,
+        "pan": 0,
+        "seed": 1030
+      },
+      {
+        "type": "click",
+        "gain": 0.2341933721081306,
+        "pitch": 2.514761387323961,
+        "t": 6.966005624011608,
+        "pan": 0.5121852818003481,
+        "seed": 1037
+      },
+      {
+        "type": "tick",
+        "gain": 0.19707793566673132,
+        "pitch": 1.3313913924153895,
+        "t": 7.00658825992668,
+        "pan": 0.18529407795668476,
+        "seed": 1044
+      },
+      {
+        "type": "click",
+        "gain": 0.2733141013010431,
+        "pitch": 2.7447918744757773,
+        "t": 7.110661089449326,
+        "pan": 0.19825073038235472,
+        "seed": 1051
+      },
+      {
+        "type": "tick",
+        "gain": 0.16961336270714747,
+        "pitch": 1.3133267731405796,
+        "t": 7.168581961022893,
+        "pan": 0.19145627360561832,
+        "seed": 1058
+      },
+      {
+        "type": "rustle",
+        "dur": 0.21416067585349083,
+        "density": 0.85,
+        "pitch": 2.451338965445757,
+        "gain": 0.1,
+        "t": 7.169127896608362,
+        "pan": 0.5812104974693103,
+        "seed": 1065
+      },
+      {
+        "type": "click",
+        "gain": 0.26869872531870076,
+        "pitch": 2.669708866812289,
+        "t": 7.214733918971972,
+        "pan": 0.2109129085950345,
+        "seed": 1072
+      },
+      {
+        "type": "tick",
+        "gain": 0.19919324841796018,
+        "pitch": 1.4173123259563,
+        "t": 7.318806748494617,
+        "pan": 0.2238723098693773,
+        "seed": 1079
+      },
+      {
+        "type": "click",
+        "gain": 0.27513857797310676,
+        "pitch": 3.1156735352240505,
+        "t": 7.37614826819685,
+        "pan": 0.2490209705797377,
+        "seed": 1086
+      },
+      {
+        "type": "click",
+        "gain": 0.29317991545152483,
+        "pitch": 3.160965326195583,
+        "t": 7.422879578017263,
+        "pan": 0.23638726908349642,
+        "seed": 1093
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2615225476399064,
+        "density": 0.85,
+        "pitch": 2.8460212303325534,
+        "gain": 0.1,
+        "t": 7.499806935215397,
+        "pan": 0.23574756238895347,
+        "seed": 1100
+      },
+      {
+        "type": "tick",
+        "gain": 0.20973824482396067,
+        "pitch": 1.6693326100707055,
+        "t": 7.526952407539909,
+        "pan": 0.24866878556566385,
+        "seed": 1107
+      },
+      {
+        "type": "click",
+        "gain": 0.23906366994573694,
+        "pitch": 2.485713504813612,
+        "t": 7.6242652726377385,
+        "pan": 0.2621047848882189,
+        "seed": 1114
+      },
+      {
+        "type": "click",
+        "gain": 0.26051383441769643,
+        "pitch": 2.630615771841258,
+        "t": 7.631025237062555,
+        "pan": 0.2616675672895915,
+        "seed": 1121
+      },
+      {
+        "type": "click",
+        "gain": 0.26068430450577407,
+        "pitch": 2.652084824070335,
+        "t": 7.7350980665852,
+        "pan": 0.2744560068887215,
+        "seed": 1128
+      },
+      {
+        "type": "tick",
+        "gain": 0.22150313007496716,
+        "pitch": 1.9450798453763127,
+        "t": 7.839170896107847,
+        "pan": 0.28603768106367317,
+        "seed": 1135
+      },
+      {
+        "type": "click",
+        "gain": 0.24195687366809557,
+        "pitch": 2.599715567426756,
+        "t": 7.874709104968189,
+        "pan": 0.28497663297899994,
+        "seed": 1142
+      },
+      {
+        "type": "tick",
+        "gain": 0.20749307577870646,
+        "pitch": 1.6997209758497775,
+        "t": 7.9432437256304915,
+        "pan": 0.29822303941680334,
+        "seed": 1149
+      },
+      {
+        "type": "rustle",
+        "dur": 0.2432214166596532,
+        "density": 0.85,
+        "pitch": 2.69351180549711,
+        "gain": 0.1,
+        "t": 8.000791180471715,
+        "pan": 0.269261770957741,
+        "seed": 1156
+      },
+      {
+        "type": "pop",
+        "gain": 0.14898430614063016,
+        "pitch": 2.5322773681953548,
+        "dur": 0.07,
+        "t": 8.047316555153138,
+        "pan": 0.31117383046667774,
+        "seed": 1163
+      },
+      {
+        "type": "tick",
+        "gain": 0.20003007788806165,
+        "pitch": 2.095295200496912,
+        "t": 8.099693346282951,
+        "pan": 0.3037964686636916,
+        "seed": 1170
+      },
+      {
+        "type": "tick",
+        "gain": 0.20854842108369745,
+        "pitch": 1.8248804472386837,
+        "t": 8.151389384675783,
+        "pan": 0.3236960044307457,
+        "seed": 1177
+      },
+      {
+        "type": "pop",
+        "gain": 0.14826155994897122,
+        "pitch": 1.6533843398094177,
+        "dur": 0.07,
+        "t": 8.25546221419843,
+        "pan": 0.33666800979483014,
+        "seed": 1184
+      },
+      {
+        "type": "click",
+        "gain": 0.24510625386619275,
+        "pitch": 2.9268172861542556,
+        "t": 8.311616737524012,
+        "pan": 0.2808612731506963,
+        "seed": 1191
+      },
+      {
+        "type": "rustle",
+        "dur": 0.23685699796304105,
+        "density": 0.85,
+        "pitch": 2.6404749830253422,
+        "gain": 0.1,
+        "t": 8.328648298690299,
+        "pan": 0.29520603821868213,
+        "seed": 1198
+      },
+      {
+        "type": "click",
+        "gain": 0.2798627148490561,
+        "pitch": 3.1733545092400166,
+        "t": 8.359535043721074,
+        "pan": 0.34909021839714693,
+        "seed": 1205
+      },
+      {
+        "type": "click",
+        "gain": 0.2758258135091133,
+        "pitch": 3.114032871834934,
+        "t": 8.46360787324372,
+        "pan": 0.36044177972834435,
+        "seed": 1212
+      },
+      {
+        "type": "click",
+        "gain": 0.26350131363780344,
+        "pitch": 3.110118321841583,
+        "t": 8.510743571327978,
+        "pan": 0.33809238957703225,
+        "seed": 1219
+      },
+      {
+        "type": "rustle",
+        "dur": 1.9500000000000002,
+        "density": 0.36,
+        "pitch": 1.7,
+        "gain": 0.045,
+        "t": 8.55,
+        "pan": 0,
+        "seed": 1226
+      },
+      {
+        "type": "tick",
+        "gain": 0.1840898967721069,
+        "pitch": 1.4472861629910767,
+        "t": 8.567680702766365,
+        "pan": 0.3720379355757358,
+        "seed": 1233
+      },
+      {
+        "type": "pop",
+        "gain": 0.14632516742156568,
+        "pitch": 1.6640783127397298,
+        "dur": 0.07,
+        "t": 8.671753532289012,
+        "pan": 0.385037292682366,
+        "seed": 1240
+      },
+      {
+        "type": "tick",
+        "gain": 0.15174099667266533,
+        "pitch": 1.2501885200385006,
+        "t": 8.717666506006216,
+        "pan": 0.34939398499117086,
+        "seed": 1247
+      },
+      {
+        "type": "riser",
+        "dur": 1.3,
+        "gain": 0.3,
+        "t": 8.75,
+        "pan": 0.5444202222786961,
+        "seed": 1366
+      },
+      {
+        "type": "click",
+        "gain": 0.27334002258119655,
+        "pitch": 3.1150022816844287,
+        "t": 8.775826361811657,
+        "pan": 0.3979880049450139,
+        "seed": 1254
+      },
+      {
+        "type": "pop",
+        "gain": 0.14546038998510907,
+        "pitch": 1.7120450279675423,
+        "dur": 0.07,
+        "t": 8.879899191334301,
+        "pan": 0.4109562480656291,
+        "seed": 1261
+      },
+      {
+        "type": "pop",
+        "gain": 0.13761183273090574,
+        "pitch": 2.591696727555245,
+        "dur": 0.07,
+        "t": 8.89898747551044,
+        "pan": 0.3676649729066962,
+        "seed": 1268
+      },
+      {
+        "type": "click",
+        "gain": 0.2683602797125194,
+        "pitch": 3.0571963047143074,
+        "t": 8.983972020856948,
+        "pan": 0.4223268574960449,
+        "seed": 1275
+      },
+      {
+        "type": "click",
+        "gain": 0.2550818351117823,
+        "pitch": 2.831396601907909,
+        "t": 9.088044850379593,
+        "pan": 0.43469810570404643,
+        "seed": 1282
+      },
+      {
+        "type": "click",
+        "gain": 0.23713276339662834,
+        "pitch": 2.865193211100996,
+        "t": 9.110822875425221,
+        "pan": 0.36411255544519666,
+        "seed": 1289
+      },
+      {
+        "type": "tick",
+        "gain": 0.21687376914436857,
+        "pitch": 2.149241963401437,
+        "t": 9.192117679902239,
+        "pan": 0.43704388777950354,
+        "seed": 1296
+      },
+      {
+        "type": "click",
+        "gain": 0.23825031643250694,
+        "pitch": 2.560247454373166,
+        "t": 9.296190509424886,
+        "pan": 0.4323752155517803,
+        "seed": 1303
+      },
+      {
+        "type": "tick",
+        "gain": 0.18617582589223416,
+        "pitch": 1.6255338180810215,
+        "t": 9.40026333894753,
+        "pan": 0.4448206990545532,
+        "seed": 1310
+      },
+      {
+        "type": "click",
+        "gain": 0.24307193392930607,
+        "pitch": 2.6896328967064624,
+        "t": 9.504336168470177,
+        "pan": 0.4553546767922216,
+        "seed": 1317
+      },
+      {
+        "type": "tick",
+        "gain": 0.17900834355535686,
+        "pitch": 1.5373295463155956,
+        "t": 9.608408997992823,
+        "pan": 0.46726844530937556,
+        "seed": 1324
+      },
+      {
+        "type": "tick",
+        "gain": 0.20210391936495017,
+        "pitch": 1.9843657002318653,
+        "t": 9.712481827515468,
+        "pan": 0.47718539669185056,
+        "seed": 1331
+      },
+      {
+        "type": "tick",
+        "gain": 0.20762793466158835,
+        "pitch": 2.110992098739371,
+        "t": 9.816554657038115,
+        "pan": 0.4893606939784881,
+        "seed": 1338
+      },
+      {
+        "type": "click",
+        "gain": 0.2545137499858369,
+        "pitch": 2.9981038824189454,
+        "t": 9.900762568311219,
+        "pan": 0.500501517240322,
+        "seed": 1345
+      },
+      {
+        "type": "click",
+        "gain": 0.21252471110895782,
+        "pitch": 2.2931452957913283,
+        "t": 9.973905425454076,
+        "pan": 0.5182076703293886,
+        "seed": 1352
+      },
+      {
+        "type": "tick",
+        "gain": 0.1515060610306585,
+        "pitch": 1.2151186251547188,
+        "t": 10.01195271272704,
+        "pan": 0.5310168650682395,
+        "seed": 1359
+      },
+      {
+        "type": "thud",
+        "gain": 0.95,
+        "dur": 0.6,
+        "t": 10.05,
+        "pan": 0.5444202222786961,
+        "seed": 1367
+      },
+      {
+        "type": "clack",
+        "gain": 0.7,
+        "pitch": 0.7,
+        "t": 10.05,
+        "pan": 0.5444202222786961,
+        "seed": 1368
+      },
+      {
+        "type": "buzz",
+        "dur": 0.55,
+        "hz": 190,
+        "flicker": 0.9,
+        "gain": 0.6,
+        "t": 10.05,
+        "pan": 0.5444202222786961,
+        "seed": 1369
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1,
+        "q": 1.1,
+        "pitch": 1.3,
+        "gain": 0.45,
+        "t": 10.05,
+        "pan": 0.5444202222786961,
+        "seed": 1370
+      },
+      {
+        "type": "chime",
+        "sparkle": true,
+        "dur": 1.8,
+        "gain": 0.22,
+        "t": 10.56,
+        "pan": 0,
+        "seed": 1373
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "dur": 4.949999999999999,
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "attack": 0.5,
+        "release": 1.5,
+        "brightness": 900,
+        "gain": 0.42,
+        "t": 10.56,
+        "pan": 0,
+        "seed": 1374
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "burnplan.js: seeded space-colonisation tree from the question electrode (one branch reaches the answer electrode), half-width from downstream length, a burn time per node (winning path: steady crawl + leap at `connect`; side branches slow down and die before it). Baked once into a distance + burn-time field; the board shader draws arc / ember / char / scorch / return stroke from one time uniform.",
+      "plan": {
+        "nodes": 1594,
+        "segs": 1593,
+        "leaves": 361,
+        "winNodes": 96,
+        "winLength": 1.521,
+        "totalLen": 23.2,
+        "lastDeath": 9.11
+      },
+      "times": {
+        "start": 0.45,
+        "connect": 10.05,
+        "lastDeath": 9.11
+      },
+      "framing": "ok (worst 0.8196 at 14.066667s)",
+      "honesty": "A picture of the idea, not of the mechanism: a real model does not burn paths; the tree stands for many candidate continuations being weighed and one being kept."
+    }
+  }
+}
