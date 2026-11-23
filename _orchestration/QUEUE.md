@@ -60,5 +60,5 @@ From 91 on, builders run on Opus 5.5 (high effort) to save the owner's Fable usa
 
 16 styles added (85–100), all DONE above. Index (`references/style-index.json`, `STYLES.md`), `gallery.html` and `contact-sheet.jpg`
 rebuilt for 100 styles; `SKILL.md` updated (count, four good-for rows, weaker-demos paragraph, Limits heading). `gallery.html` keeps the
-one line of links another agent added under the subtitle. NOT committed or pushed (waiting for the owner's yes). `_ALL VIDEOS/`, the
+one line of links another agent added under the subtitle. Committed and pushed to GitHub as 233f334 (demos 85-100, refreshed `skill/` snapshot, gallery, briefs). `_ALL VIDEOS/`, the
 numbered reels and the website still stop at 84. Kit promotion candidates reported by builders are listed in each style's STYLE.md.
