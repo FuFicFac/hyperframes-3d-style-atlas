@@ -99,3 +99,5 @@ Index (`references/style-index.json`, `STYLES.md`), `gallery.html` (links line k
 103, 104 and 107 after their revisions. Skill copied into `skill/`. Not watched in motion; audio measured, not heard.
 `_ALL VIDEOS/`, the numbered reels and the website still stop at 84. Other uncommitted changes in this repository (Site/, README.md,
 .gitignore, the model-comparison render folders) belong to other sessions and were left alone.
+
+Committed and pushed to GitHub as aa9cc66 (demos 101-112, refreshed `skill/` snapshot, index, gallery, briefs and storyboards).
