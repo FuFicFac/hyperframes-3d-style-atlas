@@ -1,0 +1,3322 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "granular-sorting",
+    "name": "Granular Sorting",
+    "description": "A bright kitchen-lab: a clear, straight-sided, flat-fronted glass jar one bead layer deep, clamped to the aluminium platform of a small white lab shaker on a pale stone counter in front of a sage tiled wall, filled with small cream beads and twelve large glossy red ones mixed at every height. Each tap of the platform lifts and loosens the bed; small beads fall into the gaps that open under the large ones, so the large ones ratchet up and end on top. Bead positions come from a seeded Monte Carlo tap-and-settle simulation run once at load (shaker.js); the hop between stored rest states is drawn.",
+    "palette": {
+      "bg": "#eef1ec",
+      "wall": "#cfe0d4",
+      "grout": "#f4f6f2",
+      "counter": "#ebe7df",
+      "cream": "#f1e4c6",
+      "red": "#d3242c",
+      "redDeep": "#9c1218",
+      "shaker": "#f4f5f6",
+      "accent": "#2e8c83",
+      "alu": "#c9cfd5",
+      "ink": "#1f2a2e",
+      "glass": "#dff2ee",
+      "plate": "#ffffff"
+    },
+    "world": {
+      "background": "#eef1ec",
+      "fog": {
+        "color": "#eef1ec",
+        "near": 18,
+        "far": 40
+      },
+      "environment": "room",
+      "environmentIntensity": 0.8,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "counter": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.55,
+        "metalness": 0
+      },
+      "wall": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.4,
+        "metalness": 0
+      },
+      "shakerBody": {
+        "type": "physical",
+        "baseColor": "#f4f5f6",
+        "roughness": 0.38,
+        "metalness": 0,
+        "clearcoat": 0.5,
+        "clearcoatRoughness": 0.3
+      },
+      "shakerTrim": {
+        "type": "physical",
+        "baseColor": "#2e8c83",
+        "roughness": 0.4,
+        "metalness": 0,
+        "clearcoat": 0.4,
+        "clearcoatRoughness": 0.3
+      },
+      "panel": {
+        "type": "physical",
+        "baseColor": "#1f2a2e",
+        "roughness": 0.35,
+        "metalness": 0.1,
+        "clearcoat": 0.6,
+        "clearcoatRoughness": 0.2
+      },
+      "platform": {
+        "type": "physical",
+        "baseColor": "#c9cfd5",
+        "roughness": 0.3,
+        "metalness": 0.85
+      },
+      "rubber": {
+        "type": "standard",
+        "baseColor": "#2a2f33",
+        "roughness": 0.85,
+        "metalness": 0
+      },
+      "knob": {
+        "type": "physical",
+        "baseColor": "#e9edf1",
+        "roughness": 0.18,
+        "metalness": 1
+      },
+      "led": {
+        "type": "standard",
+        "baseColor": "#5fe0b4",
+        "roughness": 0.4,
+        "metalness": 0,
+        "emission": {
+          "color": "#5fe0b4",
+          "strength": 1.4
+        }
+      },
+      "ledOff": {
+        "type": "standard",
+        "baseColor": "#3c4a46",
+        "roughness": 0.4,
+        "metalness": 0
+      },
+      "glass": {
+        "type": "physical",
+        "baseColor": "#e8f6f3",
+        "roughness": 0.04,
+        "metalness": 0,
+        "opacity": 0.035,
+        "side": "front"
+      },
+      "glassEdge": {
+        "type": "physical",
+        "baseColor": "#bfe3da",
+        "roughness": 0.08,
+        "metalness": 0,
+        "opacity": 0.55,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.05
+      },
+      "lid": {
+        "type": "physical",
+        "baseColor": "#d9dee3",
+        "roughness": 0.28,
+        "metalness": 0.9
+      },
+      "beadSmall": {
+        "type": "physical",
+        "baseColor": "#f1e4c6",
+        "roughness": 0.38,
+        "metalness": 0,
+        "clearcoat": 0.55,
+        "clearcoatRoughness": 0.25,
+        "sheen": 0.2
+      },
+      "beadLarge": {
+        "type": "physical",
+        "baseColor": "#d3242c",
+        "roughness": 0.22,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.08
+      },
+      "ring": {
+        "type": "basic",
+        "baseColor": "#1f2a2e",
+        "opacity": 0.9
+      },
+      "beaker": {
+        "type": "physical",
+        "baseColor": "#e8f6f3",
+        "roughness": 0.05,
+        "metalness": 0,
+        "opacity": 0.18,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.03,
+        "side": "double"
+      },
+      "wood": {
+        "type": "standard",
+        "baseColor": "#c99a62",
+        "roughness": 0.6,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#e3ddd0",
+        "intensity": 0.95
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff6ea",
+        "intensity": 2.6,
+        "position": [
+          -4.5,
+          7.5,
+          6.5
+        ],
+        "target": [
+          0,
+          1.2,
+          0
+        ],
+        "shadow": {
+          "softness": 4,
+          "mapSize": 2048,
+          "extent": 3.6,
+          "near": 0.5,
+          "far": 26,
+          "bias": -0.0004,
+          "normalBias": 0.02
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#e8f4ff",
+        "intensity": 0.9,
+        "position": [
+          4.5,
+          5,
+          -5
+        ],
+        "target": [
+          0,
+          1.2,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.16,
+        "offset": 1.2
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.1,
+      "far": 60,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#1f2a2e",
+      "height": 0.3
+    },
+    "sim": {
+      "seed": 111,
+      "width": 72,
+      "small": 480,
+      "large": 12,
+      "bigR": 2.3,
+      "spread": 0.06,
+      "looseHeight": 64,
+      "settleSweeps": 120,
+      "taps": 64,
+      "lift": 2,
+      "dilate": 0.2,
+      "sweeps": 40,
+      "tries": 3,
+      "step": [
+        1,
+        0.15
+      ],
+      "cell": 2.2,
+      "ceiling": 140
+    },
+    "jar": {
+      "unit": 0.045,
+      "innerH": 40,
+      "glass": 0.028,
+      "base": 0.05,
+      "edgeR": 0.022,
+      "lidH": 0.07,
+      "depthPad": 0.012,
+      "zJitter": 0.3,
+      "clampW": 0.16
+    },
+    "shaker": {
+      "body": {
+        "w": 3.9,
+        "h": 0.5,
+        "d": 1.05,
+        "r": 0.06
+      },
+      "platform": {
+        "w": 3.7,
+        "h": 0.07,
+        "d": 0.78
+      },
+      "feet": 0.04,
+      "panel": {
+        "w": 1.5,
+        "h": 0.3
+      }
+    },
+    "set": {
+      "counterTop": 0,
+      "counterDepth": 3.4,
+      "wallZ": -1.3,
+      "tile": {
+        "w": 0.42,
+        "h": 0.21,
+        "grout": 0.012
+      }
+    },
+    "hop": {
+      "up": 0.3,
+      "stagger": 0.25,
+      "fall": 0.42,
+      "vis": 0.35,
+      "plate": 1.4,
+      "plateShare": 0.42,
+      "fastStep": 0.55,
+      "fastHop": 0.22
+    },
+    "trails": {
+      "width": 7,
+      "color": "#b8141c",
+      "level": 1,
+      "z": 0.072
+    },
+    "rings": {
+      "color": "#1f2a2e",
+      "width": 0.06,
+      "grow": 1.75,
+      "dur": 0.65
+    },
+    "highlight": {
+      "color": "#f6b938"
+    },
+    "glassLook": {
+      "env": 0.25,
+      "edgeEnv": 0.8
+    },
+    "caption": {
+      "x": 960,
+      "y": 46,
+      "h": 112,
+      "cap": 62,
+      "maxW": 1240,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#ffffff",
+      "edge": "#1f2a2e",
+      "ink": "#1f2a2e",
+      "chip": "#d3242c",
+      "chip2": "#e9d8b2"
+    },
+    "sound": {
+      "rattle": {
+        "crackle": 0.55,
+        "crackleDur": 0.22,
+        "density": 0.7,
+        "cracklePitch": 0.9,
+        "clicks": 9,
+        "fastClicks": 3,
+        "spread": 0.16,
+        "clickPitch": 0.75,
+        "clickVar": 0.5,
+        "click": 0.32,
+        "thump": 0.25,
+        "brighten": 0.55,
+        "fastGain": 0.5
+      },
+      "settle": {
+        "hz": 523.25,
+        "notes": [
+          0,
+          7,
+          12
+        ],
+        "gain": 0.22
+      },
+      "bed": {
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "gain": 0.34,
+        "brightness": 700
+      }
+    },
+    "sfx": {
+      "enter": "click",
+      "exit": "tick",
+      "move": "whoosh",
+      "land": "click",
+      "emphasis": "marimba",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "One tap per shake: the platform rises and falls (raised cosine); the bed rides up, loosens (higher beads rise more), then falls back lowest first into the next simulated rest state.",
+      "Rest states come from a seeded Monte Carlo tap-and-settle simulation (shaker.js): lift + loosen, then down-or-sideways random moves with no overlaps, lowest bead first.",
+      "Small beads fill the gaps that open under large ones; large ones rarely find a gap their size, so they ratchet up a step per tap.",
+      "Fast forward strobes the rest states: one quick step per tap, accelerating; red trails draw each large bead's path.",
+      "The plate stops on the first tap after which all twelve red beads stay uncovered."
+    ]
+  },
+  "scene": {
+    "id": "111-granular-sorting",
+    "style": "granular-sorting",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "mixed",
+        "t": 0,
+        "dur": 2.5,
+        "label": "Mixed all the way through"
+      },
+      {
+        "id": "shake",
+        "t": 2.5,
+        "dur": 3,
+        "label": "Shake. Tiny hops."
+      },
+      {
+        "id": "slip",
+        "t": 5.5,
+        "dur": 3,
+        "label": "Small ones slip under"
+      },
+      {
+        "id": "ride",
+        "t": 8.5,
+        "dur": 3.5,
+        "label": "Big ones ride up"
+      },
+      {
+        "id": "nobody",
+        "t": 12,
+        "dur": 3,
+        "label": "No one sorted them"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          1.41492,
+          2.52898,
+          4.84097
+        ],
+        "target": [
+          0.11412,
+          1.60824,
+          -0.04886
+        ],
+        "fov": 30
+      },
+      {
+        "t": 2.6,
+        "pos": [
+          0.65207,
+          2.16108,
+          4.8938
+        ],
+        "target": [
+          0.05924,
+          1.66421,
+          -0.02273
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 5.45,
+        "pos": [
+          0.65207,
+          2.16108,
+          4.8938
+        ],
+        "target": [
+          0.05924,
+          1.66421,
+          -0.02273
+        ],
+        "fov": 30
+      },
+      {
+        "t": 6,
+        "pos": [
+          0.01052,
+          1.56847,
+          2.25363
+        ],
+        "target": [
+          -0.2162,
+          1.43205,
+          -0.00606
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 8.4,
+        "pos": [
+          0.02087,
+          1.85476,
+          2.24303
+        ],
+        "target": [
+          -0.1594,
+          1.71925,
+          -0.00549
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 10.5,
+        "pos": [
+          -0.54105,
+          2.16108,
+          4.87215
+        ],
+        "target": [
+          -0.05011,
+          1.66767,
+          -0.02093
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 12.1,
+        "pos": [
+          -0.54105,
+          2.16108,
+          4.87215
+        ],
+        "target": [
+          -0.05011,
+          1.66767,
+          -0.02093
+        ],
+        "fov": 30
+      },
+      {
+        "t": 15,
+        "pos": [
+          -1.09535,
+          2.30151,
+          4.91152
+        ],
+        "target": [
+          -0.09238,
+          1.64149,
+          -0.03627
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "type": "pad",
+        "dur": 14.8,
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "brightness": 700,
+        "attack": 0.8,
+        "release": 2.2,
+        "gain": 0.34,
+        "t": 0,
+        "pan": 0,
+        "seed": 615
+      },
+      {
+        "type": "marimba",
+        "hz": 659.25,
+        "decay": 0.12,
+        "dur": 0.4,
+        "gain": 0.08,
+        "t": 0.2,
+        "pan": 0,
+        "seed": 447
+      },
+      {
+        "type": "marimba",
+        "hz": 698.4510449563654,
+        "decay": 0.12,
+        "dur": 0.4,
+        "gain": 0.08,
+        "t": 0.35,
+        "pan": 0,
+        "seed": 454
+      },
+      {
+        "type": "marimba",
+        "hz": 739.9831053479542,
+        "decay": 0.12,
+        "dur": 0.4,
+        "gain": 0.08,
+        "t": 0.5,
+        "pan": 0,
+        "seed": 461
+      },
+      {
+        "type": "marimba",
+        "hz": 783.9847905655438,
+        "decay": 0.12,
+        "dur": 0.4,
+        "gain": 0.08,
+        "t": 0.6499999999999999,
+        "pan": 0,
+        "seed": 468
+      },
+      {
+        "type": "marimba",
+        "hz": 830.6029521431951,
+        "decay": 0.12,
+        "dur": 0.4,
+        "gain": 0.08,
+        "t": 0.8,
+        "pan": 0,
+        "seed": 475
+      },
+      {
+        "type": "marimba",
+        "hz": 879.9931738615952,
+        "decay": 0.12,
+        "dur": 0.4,
+        "gain": 0.08,
+        "t": 0.95,
+        "pan": 0,
+        "seed": 482
+      },
+      {
+        "type": "marimba",
+        "hz": 932.320290994463,
+        "decay": 0.12,
+        "dur": 0.4,
+        "gain": 0.08,
+        "t": 1.0999999999999999,
+        "pan": 0,
+        "seed": 489
+      },
+      {
+        "type": "marimba",
+        "hz": 987.7589404309523,
+        "decay": 0.12,
+        "dur": 0.4,
+        "gain": 0.08,
+        "t": 1.25,
+        "pan": 0,
+        "seed": 496
+      },
+      {
+        "type": "marimba",
+        "hz": 1046.4941435100354,
+        "decay": 0.12,
+        "dur": 0.4,
+        "gain": 0.08,
+        "t": 1.4,
+        "pan": 0,
+        "seed": 503
+      },
+      {
+        "type": "marimba",
+        "hz": 1108.7219235120226,
+        "decay": 0.12,
+        "dur": 0.4,
+        "gain": 0.08,
+        "t": 1.5499999999999998,
+        "pan": 0,
+        "seed": 510
+      },
+      {
+        "type": "marimba",
+        "hz": 1174.6499598680375,
+        "decay": 0.12,
+        "dur": 0.4,
+        "gain": 0.08,
+        "t": 1.7,
+        "pan": 0,
+        "seed": 517
+      },
+      {
+        "type": "marimba",
+        "hz": 1244.4982812708129,
+        "decay": 0.12,
+        "dur": 0.4,
+        "gain": 0.08,
+        "t": 1.8499999999999999,
+        "pan": 0,
+        "seed": 524
+      },
+      {
+        "type": "paper",
+        "dur": 0.22,
+        "density": 0.7,
+        "pitch": 0.94125,
+        "gain": 0.55,
+        "t": 2.7,
+        "pan": 0,
+        "seed": 111
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.25,
+        "t": 2.7,
+        "pan": 0,
+        "seed": 112
+      },
+      {
+        "type": "click",
+        "pitch": 0.9081687561847502,
+        "gain": 0.22230234414339067,
+        "t": 2.7800000000000002,
+        "pan": 0,
+        "seed": 113
+      },
+      {
+        "type": "click",
+        "pitch": 0.8502829695983868,
+        "gain": 0.2081330105662346,
+        "t": 2.7924592233962486,
+        "pan": 0,
+        "seed": 114
+      },
+      {
+        "type": "click",
+        "pitch": 0.9703159171268151,
+        "gain": 0.23751478067040446,
+        "t": 2.8114477290378677,
+        "pan": 0,
+        "seed": 115
+      },
+      {
+        "type": "click",
+        "pitch": 0.7952194177720231,
+        "gain": 0.19465450608730314,
+        "t": 2.8128848353624347,
+        "pan": 0,
+        "seed": 116
+      },
+      {
+        "type": "click",
+        "pitch": 0.8237879479725962,
+        "gain": 0.20164753594994544,
+        "t": 2.873908920844396,
+        "pan": 0,
+        "seed": 121
+      },
+      {
+        "type": "click",
+        "pitch": 1.2734541012042124,
+        "gain": 0.3117172110676766,
+        "t": 2.8758743160300786,
+        "pan": 0,
+        "seed": 117
+      },
+      {
+        "type": "click",
+        "pitch": 1.122650456210249,
+        "gain": 0.27480336266756056,
+        "t": 2.8793352014819784,
+        "pan": 0,
+        "seed": 118
+      },
+      {
+        "type": "click",
+        "pitch": 1.1053719246488376,
+        "gain": 0.2705739085674286,
+        "t": 2.896382605711619,
+        "pan": 0,
+        "seed": 119
+      },
+      {
+        "type": "click",
+        "pitch": 1.2103302222569863,
+        "gain": 0.29626569265127184,
+        "t": 2.935762205395434,
+        "pan": 0,
+        "seed": 120
+      },
+      {
+        "type": "paper",
+        "dur": 0.22,
+        "density": 0.7,
+        "pitch": 0.94125,
+        "gain": 0.55,
+        "t": 3.25,
+        "pan": 0,
+        "seed": 118
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.25,
+        "t": 3.25,
+        "pan": 0,
+        "seed": 119
+      },
+      {
+        "type": "click",
+        "pitch": 0.8717454189749939,
+        "gain": 0.2133866077363491,
+        "t": 3.33,
+        "pan": 0,
+        "seed": 120
+      },
+      {
+        "type": "click",
+        "pitch": 1.1171017097803997,
+        "gain": 0.273445135653019,
+        "t": 3.3497161261836688,
+        "pan": 0,
+        "seed": 121
+      },
+      {
+        "type": "click",
+        "pitch": 1.1958582036240841,
+        "gain": 0.29272321924567224,
+        "t": 3.3737162709434827,
+        "pan": 0,
+        "seed": 122
+      },
+      {
+        "type": "click",
+        "pitch": 1.1954345383065326,
+        "gain": 0.2926195140779019,
+        "t": 3.395539838025967,
+        "pan": 0,
+        "seed": 123
+      },
+      {
+        "type": "click",
+        "pitch": 1.1597962400119286,
+        "gain": 0.2838959401845932,
+        "t": 3.413509306748708,
+        "pan": 0,
+        "seed": 124
+      },
+      {
+        "type": "click",
+        "pitch": 0.9299814492890922,
+        "gain": 0.22764167428016663,
+        "t": 3.4177611161867776,
+        "pan": 0,
+        "seed": 126
+      },
+      {
+        "type": "click",
+        "pitch": 1.051593625698297,
+        "gain": 0.25741000941395764,
+        "t": 3.4196722274521987,
+        "pan": 0,
+        "seed": 125
+      },
+      {
+        "type": "click",
+        "pitch": 1.1574340722994143,
+        "gain": 0.283317726701498,
+        "t": 3.496504645956887,
+        "pan": 0,
+        "seed": 128
+      },
+      {
+        "type": "click",
+        "pitch": 1.2699748880564585,
+        "gain": 0.3108655662238598,
+        "t": 3.4971176626185576,
+        "pan": 0,
+        "seed": 127
+      },
+      {
+        "type": "paper",
+        "dur": 0.22,
+        "density": 0.7,
+        "pitch": 0.9825000000000002,
+        "gain": 0.55,
+        "t": 3.8,
+        "pan": 0,
+        "seed": 125
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.25,
+        "t": 3.8,
+        "pan": 0,
+        "seed": 126
+      },
+      {
+        "type": "click",
+        "pitch": 1.344511990211322,
+        "gain": 0.31529319342970846,
+        "t": 3.88,
+        "pan": 0,
+        "seed": 127
+      },
+      {
+        "type": "click",
+        "pitch": 0.9648644920942996,
+        "gain": 0.22626440608501433,
+        "t": 3.894473822898335,
+        "pan": 0,
+        "seed": 128
+      },
+      {
+        "type": "click",
+        "pitch": 0.8187837025102152,
+        "gain": 0.19200790336728094,
+        "t": 3.9013350896371732,
+        "pan": 0,
+        "seed": 129
+      },
+      {
+        "type": "click",
+        "pitch": 0.8298741609207355,
+        "gain": 0.19460865819454193,
+        "t": 3.9128695527315136,
+        "pan": 0,
+        "seed": 130
+      },
+      {
+        "type": "click",
+        "pitch": 0.989801820627569,
+        "gain": 0.23211230480670927,
+        "t": 3.9556179471148383,
+        "pan": 0,
+        "seed": 132
+      },
+      {
+        "type": "click",
+        "pitch": 1.3571964374452365,
+        "gain": 0.31826774471998215,
+        "t": 3.9787856643199917,
+        "pan": 0,
+        "seed": 131
+      },
+      {
+        "type": "click",
+        "pitch": 1.1940198339201744,
+        "gain": 0.2800022083818912,
+        "t": 4.002668138921261,
+        "pan": 0,
+        "seed": 133
+      },
+      {
+        "type": "click",
+        "pitch": 1.167756264911926,
+        "gain": 0.27384330120682715,
+        "t": 4.038082934406068,
+        "pan": 0,
+        "seed": 135
+      },
+      {
+        "type": "click",
+        "pitch": 1.2809531871539852,
+        "gain": 0.3003884115219116,
+        "t": 4.038968764517042,
+        "pan": 0,
+        "seed": 134
+      },
+      {
+        "type": "paper",
+        "dur": 0.22,
+        "density": 0.7,
+        "pitch": 1.02375,
+        "gain": 0.55,
+        "t": 4.35,
+        "pan": 0,
+        "seed": 132
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.25,
+        "t": 4.35,
+        "pan": 0,
+        "seed": 133
+      },
+      {
+        "type": "click",
+        "pitch": 1.250290786194091,
+        "gain": 0.2813841241896152,
+        "t": 4.43,
+        "pan": 0,
+        "seed": 134
+      },
+      {
+        "type": "click",
+        "pitch": 1.0458565588050988,
+        "gain": 0.23537519037723542,
+        "t": 4.445486132264137,
+        "pan": 0,
+        "seed": 135
+      },
+      {
+        "type": "click",
+        "pitch": 0.9546495398244588,
+        "gain": 0.21484859973192216,
+        "t": 4.456410799940427,
+        "pan": 0,
+        "seed": 136
+      },
+      {
+        "type": "click",
+        "pitch": 0.870544228691142,
+        "gain": 0.19592028355598448,
+        "t": 4.47440901491377,
+        "pan": 0,
+        "seed": 138
+      },
+      {
+        "type": "click",
+        "pitch": 1.4043187793795369,
+        "gain": 0.3160488857328892,
+        "t": 4.503349628577629,
+        "pan": 0,
+        "seed": 137
+      },
+      {
+        "type": "click",
+        "pitch": 1.1445637177064782,
+        "gain": 0.2575897246003151,
+        "t": 4.537726483066876,
+        "pan": 0,
+        "seed": 140
+      },
+      {
+        "type": "click",
+        "pitch": 1.3471884872909867,
+        "gain": 0.3031914309859276,
+        "t": 4.545106350547737,
+        "pan": 0,
+        "seed": 139
+      },
+      {
+        "type": "click",
+        "pitch": 1.0183647330268286,
+        "gain": 0.2291880190372467,
+        "t": 4.54838935025533,
+        "pan": 0,
+        "seed": 142
+      },
+      {
+        "type": "click",
+        "pitch": 1.295322204043623,
+        "gain": 0.2915186674594879,
+        "t": 4.582070074690712,
+        "pan": 0,
+        "seed": 141
+      },
+      {
+        "type": "paper",
+        "dur": 0.22,
+        "density": 0.7,
+        "pitch": 1.065,
+        "gain": 0.55,
+        "t": 4.9,
+        "pan": 0,
+        "seed": 139
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.25,
+        "t": 4.9,
+        "pan": 0,
+        "seed": 140
+      },
+      {
+        "type": "click",
+        "pitch": 1.3956438787456136,
+        "gain": 0.30193084475398063,
+        "t": 4.98,
+        "pan": 0,
+        "seed": 141
+      },
+      {
+        "type": "click",
+        "pitch": 1.154091158672236,
+        "gain": 0.2496738055944443,
+        "t": 4.997074867288272,
+        "pan": 0,
+        "seed": 142
+      },
+      {
+        "type": "click",
+        "pitch": 1.4357131063103832,
+        "gain": 0.3105993424355984,
+        "t": 5.027688742763466,
+        "pan": 0,
+        "seed": 143
+      },
+      {
+        "type": "click",
+        "pitch": 1.3156383639317937,
+        "gain": 0.284622609436512,
+        "t": 5.042874203145504,
+        "pan": 0,
+        "seed": 144
+      },
+      {
+        "type": "click",
+        "pitch": 1.2462579940620344,
+        "gain": 0.2696129970252514,
+        "t": 5.057161332011223,
+        "pan": 0,
+        "seed": 145
+      },
+      {
+        "type": "click",
+        "pitch": 1.1806408527326615,
+        "gain": 0.25541751405596735,
+        "t": 5.068565285586649,
+        "pan": 0,
+        "seed": 146
+      },
+      {
+        "type": "click",
+        "pitch": 1.1671132132643833,
+        "gain": 0.2524909712076187,
+        "t": 5.084327314138413,
+        "pan": 0,
+        "seed": 147
+      },
+      {
+        "type": "click",
+        "pitch": 1.02878310874803,
+        "gain": 0.2225649091601372,
+        "t": 5.092502141475678,
+        "pan": 0,
+        "seed": 149
+      },
+      {
+        "type": "click",
+        "pitch": 1.1717341560249528,
+        "gain": 0.25349065685272215,
+        "t": 5.102492733107673,
+        "pan": 0,
+        "seed": 148
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.6,
+        "gain": 0.12,
+        "t": 5.52,
+        "pan": 0,
+        "seed": 629
+      },
+      {
+        "type": "paper",
+        "dur": 0.22,
+        "density": 0.7,
+        "pitch": 1.065,
+        "gain": 0.55,
+        "t": 5.95,
+        "pan": 0,
+        "seed": 146
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.25,
+        "t": 5.95,
+        "pan": 0,
+        "seed": 147
+      },
+      {
+        "type": "click",
+        "pitch": 1.2807827911999388,
+        "gain": 0.2770820235610008,
+        "t": 6.03,
+        "pan": 0,
+        "seed": 148
+      },
+      {
+        "type": "click",
+        "pitch": 1.0363056373801858,
+        "gain": 0.22419231817126276,
+        "t": 6.044243590907918,
+        "pan": 0,
+        "seed": 149
+      },
+      {
+        "type": "click",
+        "pitch": 0.9633931480716759,
+        "gain": 0.20841857400536537,
+        "t": 6.054981905334526,
+        "pan": 0,
+        "seed": 150
+      },
+      {
+        "type": "click",
+        "pitch": 1.0579984835290817,
+        "gain": 0.22888530573248866,
+        "t": 6.074295101910829,
+        "pan": 0,
+        "seed": 151
+      },
+      {
+        "type": "click",
+        "pitch": 1.164573745165641,
+        "gain": 0.25194158768653874,
+        "t": 6.0993073723051285,
+        "pan": 0,
+        "seed": 152
+      },
+      {
+        "type": "click",
+        "pitch": 1.2184115780323435,
+        "gain": 0.263588758289814,
+        "t": 6.123104865716564,
+        "pan": 0,
+        "seed": 153
+      },
+      {
+        "type": "click",
+        "pitch": 1.16598687619941,
+        "gain": 0.2522473016679287,
+        "t": 6.134164867778619,
+        "pan": 0,
+        "seed": 154
+      },
+      {
+        "type": "click",
+        "pitch": 1.2082074268953875,
+        "gain": 0.26138121235370637,
+        "t": 6.177005522092184,
+        "pan": 0,
+        "seed": 156
+      },
+      {
+        "type": "click",
+        "pitch": 1.3335937091110586,
+        "gain": 0.28850703340768813,
+        "t": 6.179727692650424,
+        "pan": 0,
+        "seed": 155
+      },
+      {
+        "type": "paper",
+        "dur": 0.22,
+        "density": 0.7,
+        "pitch": 1.065,
+        "gain": 0.55,
+        "t": 6.6,
+        "pan": 0,
+        "seed": 153
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.25,
+        "t": 6.6,
+        "pan": 0,
+        "seed": 154
+      },
+      {
+        "type": "click",
+        "pitch": 1.2804584074455003,
+        "gain": 0.27701184701919557,
+        "t": 6.68,
+        "pan": 0,
+        "seed": 155
+      },
+      {
+        "type": "click",
+        "pitch": 0.9684158041491173,
+        "gain": 0.20950516551733017,
+        "t": 6.69261168505748,
+        "pan": 0,
+        "seed": 156
+      },
+      {
+        "type": "click",
+        "pitch": 0.9098310014601642,
+        "gain": 0.1968310448229313,
+        "t": 6.71361034827431,
+        "pan": 0,
+        "seed": 158
+      },
+      {
+        "type": "click",
+        "pitch": 0.8976414331661848,
+        "gain": 0.19419397765398025,
+        "t": 6.723641767846213,
+        "pan": 0,
+        "seed": 159
+      },
+      {
+        "type": "click",
+        "pitch": 1.439991681681325,
+        "gain": 0.3115249609947205,
+        "t": 6.727894435776604,
+        "pan": 0,
+        "seed": 157
+      },
+      {
+        "type": "click",
+        "pitch": 0.9571614375085725,
+        "gain": 0.20707041803002357,
+        "t": 6.741705787794457,
+        "pan": 0,
+        "seed": 160
+      },
+      {
+        "type": "click",
+        "pitch": 1.3794524738080023,
+        "gain": 0.2984280281364918,
+        "t": 6.814952018757661,
+        "pan": 0,
+        "seed": 161
+      },
+      {
+        "type": "click",
+        "pitch": 1.1562236754766977,
+        "gain": 0.2501351500749588,
+        "t": 6.817009022288852,
+        "pan": 0,
+        "seed": 163
+      },
+      {
+        "type": "click",
+        "pitch": 1.473404686395467,
+        "gain": 0.31875346454977993,
+        "t": 6.853252694649829,
+        "pan": 0,
+        "seed": 162
+      },
+      {
+        "type": "paper",
+        "dur": 0.22,
+        "density": 0.7,
+        "pitch": 1.065,
+        "gain": 0.55,
+        "t": 7.25,
+        "pan": 0,
+        "seed": 160
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.25,
+        "t": 7.25,
+        "pan": 0,
+        "seed": 161
+      },
+      {
+        "type": "click",
+        "pitch": 1.150834918350059,
+        "gain": 0.24896935698390008,
+        "t": 7.33,
+        "pan": 0,
+        "seed": 162
+      },
+      {
+        "type": "click",
+        "pitch": 1.3245510973385535,
+        "gain": 0.28655077260732653,
+        "t": 7.351172308067481,
+        "pan": 0,
+        "seed": 163
+      },
+      {
+        "type": "click",
+        "pitch": 0.9438876967450294,
+        "gain": 0.204198803126812,
+        "t": 7.354044178472625,
+        "pan": 0,
+        "seed": 164
+      },
+      {
+        "type": "click",
+        "pitch": 1.155951584984238,
+        "gain": 0.25007628655433656,
+        "t": 7.381358762184779,
+        "pan": 0,
+        "seed": 165
+      },
+      {
+        "type": "click",
+        "pitch": 1.058377883748229,
+        "gain": 0.22896738442778589,
+        "t": 7.403870769126548,
+        "pan": 0,
+        "seed": 167
+      },
+      {
+        "type": "click",
+        "pitch": 0.9231439210493894,
+        "gain": 0.1997111355960369,
+        "t": 7.410664216574696,
+        "pan": 0,
+        "seed": 169
+      },
+      {
+        "type": "click",
+        "pitch": 1.4566132501582616,
+        "gain": 0.31512083834409715,
+        "t": 7.427387039264043,
+        "pan": 0,
+        "seed": 166
+      },
+      {
+        "type": "click",
+        "pitch": 1.1474807942635379,
+        "gain": 0.24824373239278794,
+        "t": 7.431495821595192,
+        "pan": 0,
+        "seed": 168
+      },
+      {
+        "type": "click",
+        "pitch": 1.0338648943346924,
+        "gain": 0.22366429263353346,
+        "t": 7.443479371229808,
+        "pan": 0,
+        "seed": 170
+      },
+      {
+        "type": "paper",
+        "dur": 0.22,
+        "density": 0.7,
+        "pitch": 1.065,
+        "gain": 0.55,
+        "t": 7.9,
+        "pan": 0,
+        "seed": 167
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.25,
+        "t": 7.9,
+        "pan": 0,
+        "seed": 168
+      },
+      {
+        "type": "click",
+        "pitch": 0.9747673314996064,
+        "gain": 0.21087924242019654,
+        "t": 7.98,
+        "pan": 0,
+        "seed": 169
+      },
+      {
+        "type": "click",
+        "pitch": 1.289119537473501,
+        "gain": 0.27888557881116866,
+        "t": 8.000320619867908,
+        "pan": 0,
+        "seed": 170
+      },
+      {
+        "type": "click",
+        "pitch": 1.3433807928231545,
+        "gain": 0.2906243517994881,
+        "t": 8.023249855955441,
+        "pan": 0,
+        "seed": 171
+      },
+      {
+        "type": "click",
+        "pitch": 1.1694471918298708,
+        "gain": 0.252995899528265,
+        "t": 8.032331966509423,
+        "pan": 0,
+        "seed": 172
+      },
+      {
+        "type": "click",
+        "pitch": 1.243910735337219,
+        "gain": 0.2691051957011223,
+        "t": 8.056935642533832,
+        "pan": 0,
+        "seed": 173
+      },
+      {
+        "type": "click",
+        "pitch": 0.9374031786593453,
+        "gain": 0.2027959552705288,
+        "t": 8.063063520765967,
+        "pan": 0,
+        "seed": 176
+      },
+      {
+        "type": "click",
+        "pitch": 1.1055652198187698,
+        "gain": 0.23917579966783525,
+        "t": 8.07545053311189,
+        "pan": 0,
+        "seed": 175
+      },
+      {
+        "type": "click",
+        "pitch": 1.3555099948154141,
+        "gain": 0.2932483594417572,
+        "t": 8.089582421912088,
+        "pan": 0,
+        "seed": 174
+      },
+      {
+        "type": "click",
+        "pitch": 1.2045250465356123,
+        "gain": 0.2605845734477043,
+        "t": 8.126297398620181,
+        "pan": 0,
+        "seed": 177
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.1062500000000002,
+        "gain": 0.275,
+        "t": 8.55,
+        "pan": 0,
+        "seed": 174
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 8.55,
+        "pan": 0,
+        "seed": 175
+      },
+      {
+        "type": "click",
+        "pitch": 1.0311291274119867,
+        "gain": 0.10737724336981773,
+        "t": 8.562000000000001,
+        "pan": 0,
+        "seed": 176
+      },
+      {
+        "type": "click",
+        "pitch": 1.2852989684591498,
+        "gain": 0.1338453705459833,
+        "t": 8.583461342636497,
+        "pan": 0,
+        "seed": 177
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1.6,
+        "gain": 0.16,
+        "t": 8.6,
+        "pan": 0,
+        "seed": 622
+      },
+      {
+        "type": "click",
+        "pitch": 1.267138425554246,
+        "gain": 0.13195421163737772,
+        "t": 8.60397710581869,
+        "pan": 0,
+        "seed": 178
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.1062500000000002,
+        "gain": 0.275,
+        "t": 8.780739017069683,
+        "pan": 0,
+        "seed": 181
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 8.780739017069683,
+        "pan": 0,
+        "seed": 182
+      },
+      {
+        "type": "click",
+        "pitch": 1.5307894666548236,
+        "gain": 0.1594096692055464,
+        "t": 8.792739017069684,
+        "pan": 0,
+        "seed": 183
+      },
+      {
+        "type": "click",
+        "pitch": 1.2836904855964046,
+        "gain": 0.1336778702288866,
+        "t": 8.814158484626905,
+        "pan": 0,
+        "seed": 184
+      },
+      {
+        "type": "click",
+        "pitch": 1.3986079509704723,
+        "gain": 0.14564486865699292,
+        "t": 8.84156145139818,
+        "pan": 0,
+        "seed": 185
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.1062500000000002,
+        "gain": 0.275,
+        "t": 8.972642047989522,
+        "pan": 0,
+        "seed": 188
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 8.972642047989522,
+        "pan": 0,
+        "seed": 189
+      },
+      {
+        "type": "click",
+        "pitch": 1.158401867391755,
+        "gain": 0.12063086564838887,
+        "t": 8.984642047989523,
+        "pan": 0,
+        "seed": 190
+      },
+      {
+        "type": "click",
+        "pitch": 1.39282429341741,
+        "gain": 0.14504258404672146,
+        "t": 9.008902694001202,
+        "pan": 0,
+        "seed": 191
+      },
+      {
+        "type": "click",
+        "pitch": 1.199202815873529,
+        "gain": 0.12487969662249089,
+        "t": 9.023081896300768,
+        "pan": 0,
+        "seed": 192
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.1475,
+        "gain": 0.275,
+        "t": 9.1404967800546,
+        "pan": 0,
+        "seed": 195
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 9.1404967800546,
+        "pan": 0,
+        "seed": 196
+      },
+      {
+        "type": "click",
+        "pitch": 0.9908034602733096,
+        "gain": 0.09946889640390874,
+        "t": 9.1524967800546,
+        "pan": 0,
+        "seed": 197
+      },
+      {
+        "type": "click",
+        "pitch": 1.0430107460852014,
+        "gain": 0.10471009843051433,
+        "t": 9.166674304662228,
+        "pan": 0,
+        "seed": 198
+      },
+      {
+        "type": "click",
+        "pitch": 1.2907366933330193,
+        "gain": 0.1295798405855894,
+        "t": 9.193286700347395,
+        "pan": 0,
+        "seed": 199
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.18875,
+        "gain": 0.275,
+        "t": 9.291568627544164,
+        "pan": 0,
+        "seed": 202
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 9.291568627544164,
+        "pan": 0,
+        "seed": 203
+      },
+      {
+        "type": "click",
+        "pitch": 1.2756183217114692,
+        "gain": 0.12361828026175499,
+        "t": 9.303568627544164,
+        "pan": 0,
+        "seed": 204
+      },
+      {
+        "type": "click",
+        "pitch": 1.1250619838120959,
+        "gain": 0.10902808877825738,
+        "t": 9.318825649738729,
+        "pan": 0,
+        "seed": 205
+      },
+      {
+        "type": "click",
+        "pitch": 1.1639753160440403,
+        "gain": 0.1127991221100092,
+        "t": 9.33596818859917,
+        "pan": 0,
+        "seed": 206
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.18875,
+        "gain": 0.275,
+        "t": 9.430067368957074,
+        "pan": 0,
+        "seed": 209
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 9.430067368957074,
+        "pan": 0,
+        "seed": 210
+      },
+      {
+        "type": "click",
+        "pitch": 1.3012969424788026,
+        "gain": 0.12610675732791424,
+        "t": 9.442067368957074,
+        "pan": 0,
+        "seed": 211
+      },
+      {
+        "type": "click",
+        "pitch": 1.3849750738644313,
+        "gain": 0.1342158809751272,
+        "t": 9.463621339200856,
+        "pan": 0,
+        "seed": 212
+      },
+      {
+        "type": "click",
+        "pitch": 1.1034803885951987,
+        "gain": 0.10693664838373661,
+        "t": 9.471535693148942,
+        "pan": 0,
+        "seed": 213
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.18875,
+        "gain": 0.275,
+        "t": 9.558691129426997,
+        "pan": 0,
+        "seed": 216
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 9.558691129426997,
+        "pan": 0,
+        "seed": 217
+      },
+      {
+        "type": "click",
+        "pitch": 1.2692252990047563,
+        "gain": 0.12299874190986156,
+        "t": 9.570691129426997,
+        "pan": 0,
+        "seed": 218
+      },
+      {
+        "type": "click",
+        "pitch": 1.497701392226736,
+        "gain": 0.14514002135396004,
+        "t": 9.594976134765487,
+        "pan": 0,
+        "seed": 219
+      },
+      {
+        "type": "click",
+        "pitch": 1.3723693995338786,
+        "gain": 0.13299428376555444,
+        "t": 9.613188271309774,
+        "pan": 0,
+        "seed": 220
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.18875,
+        "gain": 0.275,
+        "t": 9.6792921590878,
+        "pan": 0,
+        "seed": 223
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 9.6792921590878,
+        "pan": 0,
+        "seed": 224
+      },
+      {
+        "type": "click",
+        "pitch": 1.149012109246784,
+        "gain": 0.1113490599244833,
+        "t": 9.6912921590878,
+        "pan": 0,
+        "seed": 225
+      },
+      {
+        "type": "click",
+        "pitch": 1.6344963530408374,
+        "gain": 0.1583966181874275,
+        "t": 9.718891313634655,
+        "pan": 0,
+        "seed": 226
+      },
+      {
+        "type": "click",
+        "pitch": 1.5828512694395613,
+        "gain": 0.15339176970720292,
+        "t": 9.7439880439414,
+        "pan": 0,
+        "seed": 227
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.18875,
+        "gain": 0.275,
+        "t": 9.793207230916693,
+        "pan": 0,
+        "seed": 230
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 9.793207230916693,
+        "pan": 0,
+        "seed": 231
+      },
+      {
+        "type": "click",
+        "pitch": 1.3969694389626965,
+        "gain": 0.1353782371133566,
+        "t": 9.805207230916693,
+        "pan": 0,
+        "seed": 232
+      },
+      {
+        "type": "click",
+        "pitch": 1.181170564883602,
+        "gain": 0.11446548818051815,
+        "t": 9.821823602961823,
+        "pan": 0,
+        "seed": 233
+      },
+      {
+        "type": "click",
+        "pitch": 1.4418989758875493,
+        "gain": 0.13973229192197323,
+        "t": 9.851073376877679,
+        "pan": 0,
+        "seed": 234
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.23,
+        "gain": 0.275,
+        "t": 9.901438586565195,
+        "pan": 0,
+        "seed": 237
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 9.901438586565195,
+        "pan": 0,
+        "seed": 238
+      },
+      {
+        "type": "click",
+        "pitch": 1.4774224614646907,
+        "gain": 0.13837322565913202,
+        "t": 9.913438586565196,
+        "pan": 0,
+        "seed": 239
+      },
+      {
+        "type": "click",
+        "pitch": 1.100994171566951,
+        "gain": 0.10311750289797783,
+        "t": 9.92721796228969,
+        "pan": 0,
+        "seed": 240
+      },
+      {
+        "type": "click",
+        "pitch": 1.4798143571514326,
+        "gain": 0.1385972471088171,
+        "t": 9.958737210119605,
+        "pan": 0,
+        "seed": 241
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.23,
+        "gain": 0.275,
+        "t": 10.004760585623671,
+        "pan": 0,
+        "seed": 244
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 10.004760585623671,
+        "pan": 0,
+        "seed": 245
+      },
+      {
+        "type": "click",
+        "pitch": 1.5081164457912868,
+        "gain": 0.14124797931313515,
+        "t": 10.016760585623672,
+        "pan": 0,
+        "seed": 246
+      },
+      {
+        "type": "click",
+        "pitch": 1.3342850300987872,
+        "gain": 0.12496718330681324,
+        "t": 10.036002381450375,
+        "pan": 0,
+        "seed": 247
+      },
+      {
+        "type": "click",
+        "pitch": 1.0839064496569335,
+        "gain": 0.10151709187030791,
+        "t": 10.043519131558826,
+        "pan": 0,
+        "seed": 248
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.2712500000000002,
+        "gain": 0.275,
+        "t": 10.103786255420085,
+        "pan": 0,
+        "seed": 251
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 10.103786255420085,
+        "pan": 0,
+        "seed": 252
+      },
+      {
+        "type": "click",
+        "pitch": 1.3531569177022904,
+        "gain": 0.12262236139178276,
+        "t": 10.115786255420085,
+        "pan": 0,
+        "seed": 253
+      },
+      {
+        "type": "click",
+        "pitch": 1.223018922956544,
+        "gain": 0.11082932540774346,
+        "t": 10.13149358677202,
+        "pan": 0,
+        "seed": 254
+      },
+      {
+        "type": "click",
+        "pitch": 1.2313223601973733,
+        "gain": 0.11158177848160268,
+        "t": 10.147577144660886,
+        "pan": 0,
+        "seed": 255
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.2712500000000002,
+        "gain": 0.275,
+        "t": 10.199010760459254,
+        "pan": 0,
+        "seed": 258
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 10.199010760459254,
+        "pan": 0,
+        "seed": 259
+      },
+      {
+        "type": "click",
+        "pitch": 1.7160785591986496,
+        "gain": 0.1555101278424263,
+        "t": 10.211010760459255,
+        "pan": 0,
+        "seed": 260
+      },
+      {
+        "type": "click",
+        "pitch": 1.48731990953238,
+        "gain": 0.13478014047443868,
+        "t": 10.232705795577864,
+        "pan": 0,
+        "seed": 261
+      },
+      {
+        "type": "click",
+        "pitch": 1.147149543091655,
+        "gain": 0.10395408248901367,
+        "t": 10.238987801703761,
+        "pan": 0,
+        "seed": 262
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.2712500000000002,
+        "gain": 0.275,
+        "t": 10.290840880569176,
+        "pan": 0,
+        "seed": 265
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 10.290840880569176,
+        "pan": 0,
+        "seed": 266
+      },
+      {
+        "type": "click",
+        "pitch": 1.5690695341807441,
+        "gain": 0.14218824805319308,
+        "t": 10.302840880569176,
+        "pan": 0,
+        "seed": 267
+      },
+      {
+        "type": "click",
+        "pitch": 1.3568195046493203,
+        "gain": 0.12295426307618618,
+        "t": 10.321579446338223,
+        "pan": 0,
+        "seed": 268
+      },
+      {
+        "type": "click",
+        "pitch": 1.4791620608768428,
+        "gain": 0.13404088056087493,
+        "t": 10.345861320849613,
+        "pan": 0,
+        "seed": 269
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.2712500000000002,
+        "gain": 0.275,
+        "t": 10.379615637228436,
+        "pan": 0,
+        "seed": 272
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 10.379615637228436,
+        "pan": 0,
+        "seed": 273
+      },
+      {
+        "type": "click",
+        "pitch": 1.432413650956005,
+        "gain": 0.12980456447601318,
+        "t": 10.391615637228437,
+        "pan": 0,
+        "seed": 274
+      },
+      {
+        "type": "click",
+        "pitch": 1.702826852099679,
+        "gain": 0.15430926518142224,
+        "t": 10.418192953523793,
+        "pan": 0,
+        "seed": 275
+      },
+      {
+        "type": "click",
+        "pitch": 1.5905474238839816,
+        "gain": 0.14413456301391125,
+        "t": 10.439682918735393,
+        "pan": 0,
+        "seed": 276
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.23,
+        "gain": 0.275,
+        "t": 10.465621115065822,
+        "pan": 0,
+        "seed": 279
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 10.465621115065822,
+        "pan": 0,
+        "seed": 280
+      },
+      {
+        "type": "click",
+        "pitch": 1.6050161608999285,
+        "gain": 0.1503234648257494,
+        "t": 10.477621115065823,
+        "pan": 0,
+        "seed": 281
+      },
+      {
+        "type": "click",
+        "pitch": 1.096728121857935,
+        "gain": 0.10271795092523098,
+        "t": 10.49130060279713,
+        "pan": 0,
+        "seed": 282
+      },
+      {
+        "type": "click",
+        "pitch": 1.3413112367348126,
+        "gain": 0.12562524753808976,
+        "t": 10.516433738834866,
+        "pan": 0,
+        "seed": 283
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.2712500000000002,
+        "gain": 0.275,
+        "t": 10.549101358491571,
+        "pan": 0,
+        "seed": 286
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 10.549101358491571,
+        "pan": 0,
+        "seed": 287
+      },
+      {
+        "type": "click",
+        "pitch": 1.6747289500475746,
+        "gain": 0.15176304821670056,
+        "t": 10.561101358491571,
+        "pan": 0,
+        "seed": 288
+      },
+      {
+        "type": "click",
+        "pitch": 1.6200951123406413,
+        "gain": 0.14681215885281565,
+        "t": 10.585804398204775,
+        "pan": 0,
+        "seed": 289
+      },
+      {
+        "type": "click",
+        "pitch": 1.4678464234020794,
+        "gain": 0.133015463501215,
+        "t": 10.603609090242179,
+        "pan": 0,
+        "seed": 290
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.2712500000000002,
+        "gain": 0.275,
+        "t": 10.630266543627602,
+        "pan": 0,
+        "seed": 293
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 10.630266543627602,
+        "pan": 0,
+        "seed": 294
+      },
+      {
+        "type": "click",
+        "pitch": 1.2992108234248008,
+        "gain": 0.11773379497230053,
+        "t": 10.642266543627603,
+        "pan": 0,
+        "seed": 295
+      },
+      {
+        "type": "click",
+        "pitch": 1.6099901659530589,
+        "gain": 0.14589645397663117,
+        "t": 10.66674065712176,
+        "pan": 0,
+        "seed": 296
+      },
+      {
+        "type": "click",
+        "pitch": 1.6496346090571024,
+        "gain": 0.14948901236057283,
+        "t": 10.693011049807888,
+        "pan": 0,
+        "seed": 297
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.2712500000000002,
+        "gain": 0.275,
+        "t": 10.709299214686698,
+        "pan": 0,
+        "seed": 300
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 10.709299214686698,
+        "pan": 0,
+        "seed": 301
+      },
+      {
+        "type": "click",
+        "pitch": 1.3950051706109663,
+        "gain": 0.1264146278500557,
+        "t": 10.721299214686699,
+        "pan": 0,
+        "seed": 302
+      },
+      {
+        "type": "click",
+        "pitch": 1.5549926493156818,
+        "gain": 0.14091260822117327,
+        "t": 10.744527366741991,
+        "pan": 0,
+        "seed": 303
+      },
+      {
+        "type": "click",
+        "pitch": 1.0762342263522442,
+        "gain": 0.09752777414023876,
+        "t": 10.746063101756818,
+        "pan": 0,
+        "seed": 304
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.2712500000000002,
+        "gain": 0.275,
+        "t": 10.786359117267242,
+        "pan": 0,
+        "seed": 307
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 10.786359117267242,
+        "pan": 0,
+        "seed": 308
+      },
+      {
+        "type": "click",
+        "pitch": 1.362857129769691,
+        "gain": 0.12350138945877552,
+        "t": 10.798359117267243,
+        "pan": 0,
+        "seed": 309
+      },
+      {
+        "type": "click",
+        "pitch": 1.2450947330667987,
+        "gain": 0.11282982359826565,
+        "t": 10.81456657316681,
+        "pan": 0,
+        "seed": 310
+      },
+      {
+        "type": "click",
+        "pitch": 1.395536918095604,
+        "gain": 0.1264628145247698,
+        "t": 10.837590524529627,
+        "pan": 0,
+        "seed": 311
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.2712500000000002,
+        "gain": 0.275,
+        "t": 10.86158699611654,
+        "pan": 0,
+        "seed": 314
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 10.86158699611654,
+        "pan": 0,
+        "seed": 315
+      },
+      {
+        "type": "click",
+        "pitch": 1.4192604928743096,
+        "gain": 0.1286126322746277,
+        "t": 10.87358699611654,
+        "pan": 0,
+        "seed": 316
+      },
+      {
+        "type": "click",
+        "pitch": 1.6379338367944003,
+        "gain": 0.14842869459092617,
+        "t": 10.898694169764271,
+        "pan": 0,
+        "seed": 317
+      },
+      {
+        "type": "click",
+        "pitch": 1.2875370929323253,
+        "gain": 0.11667592771351337,
+        "t": 10.907924959973297,
+        "pan": 0,
+        "seed": 318
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.3125000000000002,
+        "gain": 0.275,
+        "t": 10.935107616270482,
+        "pan": 0,
+        "seed": 321
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 10.935107616270482,
+        "pan": 0,
+        "seed": 322
+      },
+      {
+        "type": "click",
+        "pitch": 1.4268173073651271,
+        "gain": 0.12523379337787627,
+        "t": 10.947107616270483,
+        "pan": 0,
+        "seed": 323
+      },
+      {
+        "type": "click",
+        "pitch": 1.7205613540378788,
+        "gain": 0.1510161279886961,
+        "t": 10.972861648267656,
+        "pan": 0,
+        "seed": 324
+      },
+      {
+        "type": "click",
+        "pitch": 1.4032242112201252,
+        "gain": 0.1231629936248064,
+        "t": 10.984689113082885,
+        "pan": 0,
+        "seed": 325
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.3125000000000002,
+        "gain": 0.275,
+        "t": 11.007032193283786,
+        "pan": 0,
+        "seed": 328
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.007032193283786,
+        "pan": 0,
+        "seed": 329
+      },
+      {
+        "type": "click",
+        "pitch": 1.8121635938344602,
+        "gain": 0.15905618743598463,
+        "t": 11.019032193283786,
+        "pan": 0,
+        "seed": 330
+      },
+      {
+        "type": "click",
+        "pitch": 1.646449218533235,
+        "gain": 0.1445111999809742,
+        "t": 11.04315999327903,
+        "pan": 0,
+        "seed": 331
+      },
+      {
+        "type": "click",
+        "pitch": 1.4783955086750213,
+        "gain": 0.12976088578999043,
+        "t": 11.059912636178781,
+        "pan": 0,
+        "seed": 332
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.3125000000000002,
+        "gain": 0.275,
+        "t": 11.077460367956636,
+        "pan": 0,
+        "seed": 335
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.077460367956636,
+        "pan": 0,
+        "seed": 336
+      },
+      {
+        "type": "click",
+        "pitch": 1.2759147786467415,
+        "gain": 0.11198886285722257,
+        "t": 11.089460367956637,
+        "pan": 0,
+        "seed": 337
+      },
+      {
+        "type": "click",
+        "pitch": 1.133225292505813,
+        "gain": 0.0994648028165102,
+        "t": 11.102326568660764,
+        "pan": 0,
+        "seed": 338
+      },
+      {
+        "type": "click",
+        "pitch": 1.1963298508150426,
+        "gain": 0.1050035800486803,
+        "t": 11.117962157980976,
+        "pan": 0,
+        "seed": 339
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.3125000000000002,
+        "gain": 0.275,
+        "t": 11.146481825753703,
+        "pan": 0,
+        "seed": 342
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.146481825753703,
+        "pan": 0,
+        "seed": 343
+      },
+      {
+        "type": "click",
+        "pitch": 1.6967565220693361,
+        "gain": 0.14892674387991428,
+        "t": 11.158481825753704,
+        "pan": 0,
+        "seed": 344
+      },
+      {
+        "type": "click",
+        "pitch": 1.198387922680316,
+        "gain": 0.105184219956398,
+        "t": 11.172777880742803,
+        "pan": 0,
+        "seed": 345
+      },
+      {
+        "type": "click",
+        "pitch": 1.2974751585958681,
+        "gain": 0.11388124820590019,
+        "t": 11.191422449856653,
+        "pan": 0,
+        "seed": 346
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.3125000000000002,
+        "gain": 0.275,
+        "t": 11.214177636061551,
+        "pan": 0,
+        "seed": 349
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.214177636061551,
+        "pan": 0,
+        "seed": 350
+      },
+      {
+        "type": "click",
+        "pitch": 1.6350399397682245,
+        "gain": 0.14350979128479957,
+        "t": 11.226177636061552,
+        "pan": 0,
+        "seed": 351
+      },
+      {
+        "type": "click",
+        "pitch": 1.38168936316409,
+        "gain": 0.12127284924685956,
+        "t": 11.244495848373266,
+        "pan": 0,
+        "seed": 352
+      },
+      {
+        "type": "click",
+        "pitch": 1.549904978455743,
+        "gain": 0.13603737410902977,
+        "t": 11.270196323116066,
+        "pan": 0,
+        "seed": 353
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.3125000000000002,
+        "gain": 0.275,
+        "t": 11.280621368340078,
+        "pan": 0,
+        "seed": 356
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.280621368340078,
+        "pan": 0,
+        "seed": 357
+      },
+      {
+        "type": "click",
+        "pitch": 1.4771259059246709,
+        "gain": 0.12964945094287397,
+        "t": 11.292621368340079,
+        "pan": 0,
+        "seed": 358
+      },
+      {
+        "type": "click",
+        "pitch": 1.4910056963951017,
+        "gain": 0.13086769998073577,
+        "t": 11.313338293335262,
+        "pan": 0,
+        "seed": 359
+      },
+      {
+        "type": "click",
+        "pitch": 1.7079659169879355,
+        "gain": 0.14991060848534107,
+        "t": 11.34357667258275,
+        "pan": 0,
+        "seed": 360
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.2712500000000002,
+        "gain": 0.275,
+        "t": 11.345880028979769,
+        "pan": 0,
+        "seed": 363
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.345880028979769,
+        "pan": 0,
+        "seed": 364
+      },
+      {
+        "type": "click",
+        "pitch": 1.7244331609006622,
+        "gain": 0.15626721741259098,
+        "t": 11.35788002897977,
+        "pan": 0,
+        "seed": 365
+      },
+      {
+        "type": "click",
+        "pitch": 1.5307567077194109,
+        "gain": 0.13871636006236077,
+        "t": 11.38055911899536,
+        "pan": 0,
+        "seed": 366
+      },
+      {
+        "type": "click",
+        "pitch": 1.5332836190820673,
+        "gain": 0.13894534742832185,
+        "t": 11.40335270269393,
+        "pan": 0,
+        "seed": 367
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.3125000000000002,
+        "gain": 0.275,
+        "t": 11.41001485285785,
+        "pan": 0,
+        "seed": 370
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.41001485285785,
+        "pan": 0,
+        "seed": 371
+      },
+      {
+        "type": "click",
+        "pitch": 1.1657036512769994,
+        "gain": 0.10231547476351262,
+        "t": 11.422014852857851,
+        "pan": 0,
+        "seed": 372
+      },
+      {
+        "type": "click",
+        "pitch": 1.1093948607352409,
+        "gain": 0.09737317177653312,
+        "t": 11.434358145801983,
+        "pan": 0,
+        "seed": 373
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.3125000000000002,
+        "gain": 0.275,
+        "t": 11.47308197622263,
+        "pan": 0,
+        "seed": 377
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.47308197622263,
+        "pan": 0,
+        "seed": 378
+      },
+      {
+        "type": "click",
+        "pitch": 1.7992063401713192,
+        "gain": 0.15791891077160836,
+        "t": 11.476974308243655,
+        "pan": 0,
+        "seed": 374
+      },
+      {
+        "type": "click",
+        "pitch": 1.248524571225668,
+        "gain": 0.1095847852230072,
+        "t": 11.48508197622263,
+        "pan": 0,
+        "seed": 379
+      },
+      {
+        "type": "click",
+        "pitch": 1.5144991115569915,
+        "gain": 0.1329297505915165,
+        "t": 11.50631441387051,
+        "pan": 0,
+        "seed": 380
+      },
+      {
+        "type": "click",
+        "pitch": 1.642178070615046,
+        "gain": 0.14413631522655487,
+        "t": 11.533150133835909,
+        "pan": 0,
+        "seed": 381
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.3125000000000002,
+        "gain": 0.275,
+        "t": 11.535133011952805,
+        "pan": 0,
+        "seed": 384
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.535133011952805,
+        "pan": 0,
+        "seed": 385
+      },
+      {
+        "type": "click",
+        "pitch": 1.4716119977917212,
+        "gain": 0.12916548734903335,
+        "t": 11.547133011952806,
+        "pan": 0,
+        "seed": 386
+      },
+      {
+        "type": "click",
+        "pitch": 1.698785025534259,
+        "gain": 0.14910478852689266,
+        "t": 11.572409209084528,
+        "pan": 0,
+        "seed": 387
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.35375,
+        "gain": 0.275,
+        "t": 11.596215543964515,
+        "pan": 0,
+        "seed": 391
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.596215543964515,
+        "pan": 0,
+        "seed": 392
+      },
+      {
+        "type": "click",
+        "pitch": 1.7988584465880801,
+        "gain": 0.15788837565481662,
+        "t": 11.602077199780213,
+        "pan": 0,
+        "seed": 388
+      },
+      {
+        "type": "click",
+        "pitch": 1.4980415446193849,
+        "gain": 0.12747877077758313,
+        "t": 11.608215543964516,
+        "pan": 0,
+        "seed": 393
+      },
+      {
+        "type": "click",
+        "pitch": 1.7034818205128734,
+        "gain": 0.14496111226081848,
+        "t": 11.63245582202972,
+        "pan": 0,
+        "seed": 394
+      },
+      {
+        "type": "click",
+        "pitch": 1.4737798640562687,
+        "gain": 0.12541417568922042,
+        "t": 11.646922631809126,
+        "pan": 0,
+        "seed": 395
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.3125000000000002,
+        "gain": 0.275,
+        "t": 11.65637355423599,
+        "pan": 0,
+        "seed": 398
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.65637355423599,
+        "pan": 0,
+        "seed": 399
+      },
+      {
+        "type": "click",
+        "pitch": 1.601774344429335,
+        "gain": 0.1405900224596262,
+        "t": 11.668373554235991,
+        "pan": 0,
+        "seed": 400
+      },
+      {
+        "type": "click",
+        "pitch": 1.5963970060935633,
+        "gain": 0.14011804579198361,
+        "t": 11.691403065683987,
+        "pan": 0,
+        "seed": 401
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.35375,
+        "gain": 0.275,
+        "t": 11.715647793345328,
+        "pan": 0,
+        "seed": 405
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.715647793345328,
+        "pan": 0,
+        "seed": 406
+      },
+      {
+        "type": "click",
+        "pitch": 1.67603681809851,
+        "gain": 0.14710814586281776,
+        "t": 11.7179276271674,
+        "pan": 0,
+        "seed": 402
+      },
+      {
+        "type": "click",
+        "pitch": 1.8501966371991632,
+        "gain": 0.1574460961073637,
+        "t": 11.727647793345328,
+        "pan": 0,
+        "seed": 407
+      },
+      {
+        "type": "click",
+        "pitch": 1.2900430326223917,
+        "gain": 0.10977873119711877,
+        "t": 11.743092476144607,
+        "pan": 0,
+        "seed": 408
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.35375,
+        "gain": 0.275,
+        "t": 11.774076103394016,
+        "pan": 0,
+        "seed": 412
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.774076103394016,
+        "pan": 0,
+        "seed": 413
+      },
+      {
+        "type": "click",
+        "pitch": 1.8508254640279727,
+        "gain": 0.15749960735440255,
+        "t": 11.782397597022529,
+        "pan": 0,
+        "seed": 409
+      },
+      {
+        "type": "click",
+        "pitch": 1.5690200743401268,
+        "gain": 0.13351882737874984,
+        "t": 11.786076103394016,
+        "pan": 0,
+        "seed": 414
+      },
+      {
+        "type": "click",
+        "pitch": 1.545838759818192,
+        "gain": 0.1315461681485176,
+        "t": 11.806962645431145,
+        "pan": 0,
+        "seed": 415
+      },
+      {
+        "type": "click",
+        "pitch": 1.57447954818878,
+        "gain": 0.13398341196775437,
+        "t": 11.829067809377893,
+        "pan": 0,
+        "seed": 416
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.35375,
+        "gain": 0.275,
+        "t": 11.831693700587467,
+        "pan": 0,
+        "seed": 419
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.831693700587467,
+        "pan": 0,
+        "seed": 420
+      },
+      {
+        "type": "click",
+        "pitch": 1.471393073789659,
+        "gain": 0.12521106711030006,
+        "t": 11.843693700587467,
+        "pan": 0,
+        "seed": 421
+      },
+      {
+        "type": "click",
+        "pitch": 1.5979154825933317,
+        "gain": 0.13597773857414722,
+        "t": 11.865688135231004,
+        "pan": 0,
+        "seed": 422
+      },
+      {
+        "type": "click",
+        "pitch": 1.5435454812759417,
+        "gain": 0.13135101713240147,
+        "t": 11.885369209153668,
+        "pan": 0,
+        "seed": 423
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.35375,
+        "gain": 0.275,
+        "t": 11.888533423466722,
+        "pan": 0,
+        "seed": 426
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.888533423466722,
+        "pan": 0,
+        "seed": 427
+      },
+      {
+        "type": "click",
+        "pitch": 1.3316228930387297,
+        "gain": 0.1133170506209135,
+        "t": 11.900533423466722,
+        "pan": 0,
+        "seed": 428
+      },
+      {
+        "type": "click",
+        "pitch": 1.4703189564791197,
+        "gain": 0.1251196630001068,
+        "t": 11.919813339216748,
+        "pan": 0,
+        "seed": 429
+      },
+      {
+        "type": "click",
+        "pitch": 1.3340063256085462,
+        "gain": 0.11351987347006798,
+        "t": 11.933293360201755,
+        "pan": 0,
+        "seed": 430
+      },
+      {
+        "type": "paper",
+        "dur": 0.09,
+        "density": 0.7,
+        "pitch": 1.395,
+        "gain": 0.275,
+        "t": 11.944625951760651,
+        "pan": 0,
+        "seed": 433
+      },
+      {
+        "type": "thud",
+        "dur": 0.16,
+        "pitch": 1.6,
+        "gain": 0.125,
+        "t": 11.944625951760651,
+        "pan": 0,
+        "seed": 434
+      },
+      {
+        "type": "click",
+        "pitch": 1.7283291325089523,
+        "gain": 0.1427265348136425,
+        "t": 11.956625951760651,
+        "pan": 0,
+        "seed": 435
+      },
+      {
+        "type": "click",
+        "pitch": 1.4171385470428504,
+        "gain": 0.11702821549773215,
+        "t": 11.973883005635084,
+        "pan": 0,
+        "seed": 436
+      },
+      {
+        "type": "click",
+        "pitch": 1.8295912546978799,
+        "gain": 0.15108882619440556,
+        "t": 12.008170364857854,
+        "pan": 0,
+        "seed": 437
+      },
+      {
+        "type": "marimba",
+        "hz": 523.25,
+        "notes": [
+          0,
+          7,
+          12
+        ],
+        "step": 0.11,
+        "decay": 0.5,
+        "dur": 1.6,
+        "gain": 0.22,
+        "t": 12.12,
+        "pan": 0,
+        "seed": 440
+      },
+      {
+        "type": "marimba",
+        "hz": 1046.5,
+        "decay": 0.18,
+        "dur": 0.5,
+        "gain": 0.06,
+        "t": 12.35,
+        "pan": 0,
+        "seed": 531
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5073787149847,
+        "decay": 0.18,
+        "dur": 0.5,
+        "gain": 0.06,
+        "t": 12.42,
+        "pan": 0,
+        "seed": 538
+      },
+      {
+        "type": "marimba",
+        "hz": 1567.9783559514472,
+        "decay": 0.18,
+        "dur": 0.5,
+        "gain": 0.06,
+        "t": 12.49,
+        "pan": 0,
+        "seed": 545
+      },
+      {
+        "type": "marimba",
+        "hz": 2093,
+        "decay": 0.18,
+        "dur": 0.5,
+        "gain": 0.06,
+        "t": 12.56,
+        "pan": 0,
+        "seed": 552
+      },
+      {
+        "type": "marimba",
+        "hz": 1046.5,
+        "decay": 0.18,
+        "dur": 0.5,
+        "gain": 0.06,
+        "t": 12.629999999999999,
+        "pan": 0,
+        "seed": 559
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5073787149847,
+        "decay": 0.18,
+        "dur": 0.5,
+        "gain": 0.06,
+        "t": 12.7,
+        "pan": 0,
+        "seed": 566
+      },
+      {
+        "type": "marimba",
+        "hz": 1567.9783559514472,
+        "decay": 0.18,
+        "dur": 0.5,
+        "gain": 0.06,
+        "t": 12.77,
+        "pan": 0,
+        "seed": 573
+      },
+      {
+        "type": "marimba",
+        "hz": 2093,
+        "decay": 0.18,
+        "dur": 0.5,
+        "gain": 0.06,
+        "t": 12.84,
+        "pan": 0,
+        "seed": 580
+      },
+      {
+        "type": "marimba",
+        "hz": 1046.5,
+        "decay": 0.18,
+        "dur": 0.5,
+        "gain": 0.06,
+        "t": 12.91,
+        "pan": 0,
+        "seed": 587
+      },
+      {
+        "type": "marimba",
+        "hz": 1318.5073787149847,
+        "decay": 0.18,
+        "dur": 0.5,
+        "gain": 0.06,
+        "t": 12.98,
+        "pan": 0,
+        "seed": 594
+      },
+      {
+        "type": "marimba",
+        "hz": 1567.9783559514472,
+        "decay": 0.18,
+        "dur": 0.5,
+        "gain": 0.06,
+        "t": 13.049999999999999,
+        "pan": 0,
+        "seed": 601
+      },
+      {
+        "type": "marimba",
+        "hz": 2093,
+        "decay": 0.18,
+        "dur": 0.5,
+        "gain": 0.06,
+        "t": 13.12,
+        "pan": 0,
+        "seed": 608
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "shaker.js: Monte Carlo tap-and-settle (lift 2 + 0.2 x height, then 40 lowest-first passes of down-or-sideways hard-disc moves). 2D: one bead layer; cream depth jitter is look only.",
+      "run": "492 beads (12 red), 64 taps simulated; shown: 47 (all twelve uncovered from tap 47); focus bead 3 rises 6.4 radii over taps 6-9 with 5 cream arrivals beneath",
+      "framing": "ok",
+      "numbers": "no data shown"
+    }
+  }
+}

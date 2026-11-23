@@ -1,6 +1,6 @@
 ---
 name: 3d-style-atlas
-description: Make short (15–60 s) 3D animated explainers, title cards and channel graphics in a named visual style — Three.js scenes written in code, rendered to MP4 through HyperFrames with synthesized sound and optional voiceover sync. 100 styles (low-poly, paper pop-up, neon sign, soft clay, blueprint, split-flap board, voxel, marble run, studio product, liquid chrome, stained glass, subway map, circuit board, clockwork, weather map, domino run, conveyor factory, mixing console, city lights, ink wash, pin art, anamorphic, zoetrope, cymatics, ferrofluid, point cloud, thermal camera, murmuration, impossible geometry, light painting, microscope slide, ukiyo-e woodblock, cubism, kintsugi, impasto, op art, multiplane cel, mosaic, constructivist poster, flipbook, art deco, tiny planet, fireworks, UV reveal, tessellation morph, fogged glass, endless zoom, the Why AI Matters house style, and more). Use when asked for a "3D explainer", "3D animation", "style atlas", "animate how X works", "make a clip in the <style> style", a Why AI Matters ident / lower third / chapter card / key stat, or to add a new 3D style. NOT for editing footage (use claude-cuts-video), 2D HTML motion graphics (use hyperframes), or Remotion projects (use remotion).
+description: Make short (15–60 s) 3D animated explainers, title cards and channel graphics in a named visual style — Three.js scenes written in code, rendered to MP4 through HyperFrames with synthesized sound and optional voiceover sync. 112 styles (low-poly, paper pop-up, neon sign, soft clay, blueprint, split-flap board, voxel, marble run, studio product, liquid chrome, stained glass, subway map, circuit board, clockwork, weather map, domino run, conveyor factory, mixing console, city lights, ink wash, pin art, anamorphic, zoetrope, cymatics, ferrofluid, point cloud, thermal camera, murmuration, impossible geometry, light painting, microscope slide, ukiyo-e woodblock, cubism, kintsugi, impasto, op art, multiplane cel, mosaic, constructivist poster, flipbook, art deco, tiny planet, fireworks, UV reveal, tessellation morph, fogged glass, endless zoom, ripple interference, photoelastic stress, percolation, chromatography, tensegrity, snap-through, magnetic memory, vortex rings, reaction-diffusion, differential growth, granular sorting, schlieren, the Why AI Matters house style, and more). Use when asked for a "3D explainer", "3D animation", "style atlas", "animate how X works", "make a clip in the <style> style", a Why AI Matters ident / lower third / chapter card / key stat, or to add a new 3D style. NOT for editing footage (use claude-cuts-video), 2D HTML motion graphics (use hyperframes), or Remotion projects (use remotion).
 ---
 
 # 3D Style Atlas
@@ -33,7 +33,7 @@ first). The scripts find the kit and the pilot folder relative to themselves, so
 
 ## Making a clip
 
-1. **Pick the style.** Read `references/STYLES.md` (all 100, with good-for / avoid-for). Match on "good for", not on taste alone.
+1. **Pick the style.** Read `references/STYLES.md` (all 112, with good-for / avoid-for). Match on "good for", not on taste alone.
    Rough map (one style can sit in several rows; read its `STYLE.md` before writing anything):
 
    | Good for | Styles |
@@ -63,6 +63,9 @@ first). The scripts find the kit and the pilot folder relative to themselves, so
    | Search, routing and control | lichtenberg (many paths tried, one connects), laser-mirrors (re-route with one small turn; tool use), marionette (who pulls which string) |
    | Sampling, noise and smooth change | fireworks (temperature: exact → loose → scatter), flip-dot (a picture settles out of noise; diffusion), tessellation-morph (one idea slides into another; latent space), pendulum-wave (many rhythms, one pattern per moment) |
    | Simple parts add up, shaped step by step | string-art (straight lines make curves), loom-weave (holes are a program), pottery-wheel (same clay, reshaped; fine-tuning), tiny-planet (a world grows from what it reads) |
+   | Thresholds, tipping points, hysteresis & irreversible change | percolation (one more link connects top to bottom), snap-through (nothing, nothing, then flips — no way back), magnetic-memory (hysteresis, path dependence, partial overwrite) |
+   | Hidden forces, stress & decomposition | photoelastic-stress (where load concentrates & how sharing relieves it), schlieren (invisible airflow & heat made visible), chromatography (what is it made of; separating mixed components), tensegrity (distributed load, interdependence, remove one cord) |
+   | Waves, fluids & emergence from local rules | ripple-interference (coordination vs conflict, phase cancelling), vortex-rings (momentum, leapfrogging, mutual interaction), reaction-diffusion (local rules → spots/stripes maze), differential-growth (growth vs fixed boundary, buckling & packing), granular-sorting (small repeated pushes add up; Brazil-nut effect) |
    | Channel packaging (Why AI Matters) | wam-house (ident, lower third, chapter card, key stat, quote, end card) |
 
    Some demos are weaker than others — see "Known weaker demos" below before choosing one for an important clip.
@@ -165,7 +168,17 @@ loop seam) · tiny-planet and fireworks audio mean about −19.4 dB, slightly lo
 batch (fireworks, flip-dot, laser-mirrors, loom-weave, pottery-wheel). Strongest of the sixteen: uv-reveal, fogged-glass, lichtenberg,
 tessellation-morph, endless-zoom, tiny-planet.
 
-## Limits (true as of 2026-11-13, kit pass 7; styles 51–70 added 2026-11-15, 71–84 added 2026-11-18 and 85–100 added 2026-11-23 on the same kit)
+Styles 101–112 (added 2026-11-23, analytical and CPU-simulated planners; audio measured, not listened to; check each `STYLE.md` for full
+motion-type notes): ripple-interference (no wall reflections, approximate caustics) · photoelastic-stress (unloaded dark field is a navy
+band; isotropic notch rings) · percolation (16 × 8 grid of 264 pipes after a revision, deciding valve ringed in magenta; valve hardware still busy, amber branches stay dry) · chromatography (fresnel-only glass
+without refraction; invisible hand lifts strip; soft airbrushed bands) · tensegrity (tall subject leaves left third to props/caption; overdamped slump) ·
+snap-through (symmetric von Mises arch; invisible hand carries weights) · magnetic-memory (dense grid, ~10 MB at CRF 23; the opposite-pole second pass cuts a pale lane through the track
+and also wipes the speckle along it) · vortex-rings (additive smoke brightens on overlap; mallet hits hidden back skin) · reaction-diffusion (~1.8 s load-time
+Gray–Scott sim; linear blend between 0.25 s stored states) · differential-growth (~2.3 s load-time sim; brief crinkle at glass before waves
+organise) · granular-sorting (2D Monte Carlo void-filling, ~0.6 s load-time sim; loose packing) · schlieren (round mirror leaves left third
+navy wall; laminar base saturates).
+
+## Limits (true as of 2026-11-13, kit pass 7; styles 51–70 added 2026-11-15, 71–84 added 2026-11-18, 85–100 and 101–112 added 2026-11-23 on the same kit)
 
 - The Blender side has never been run — Blender isn't installed on the machine this was built on. The export and the conversion
   maths were checked; the bpy script was not executed.

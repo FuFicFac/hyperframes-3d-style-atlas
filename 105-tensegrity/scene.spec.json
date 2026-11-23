@@ -1,0 +1,1012 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "tensegrity",
+    "name": "Tensegrity",
+    "description": "A tensegrity tower on a bright studio table: three levels of pale wooden struts, each pair of strut ends joined only by taut red cords, so no strut touches another. The shape is SOLVED, not keyframed (tower.js): a static balance of nearly rigid struts and tension-only elastic cords gives the standing shape under prestress, the shape with a brass weight on the top three nodes, and the slumped shape after one cord is cut, where strut-on-strut contact is what finally holds it. Every cord's tension sets its glow and the pitch of its pluck; the slump runs along the solver's own damped descent between the two solved poses on an art-directed clock.",
+    "palette": {
+      "bg": "#a9cbe0",
+      "skyTop": "#6fa3c6",
+      "skyHorizon": "#cfe2ee",
+      "table": "#e9edf0",
+      "tableEdge": "#b9c6cf",
+      "wood": "#ecd6aa",
+      "woodDark": "#c9a46a",
+      "cord": "#d3202a",
+      "cordHot": "#ffd2a8",
+      "brass": "#d8a845",
+      "steel": "#c9d0d6",
+      "grip": "#137a75",
+      "ink": "#18222c",
+      "plate": "#ffffff",
+      "contact": "#fff3c4"
+    },
+    "world": {
+      "background": "#a9cbe0",
+      "sky": {
+        "top": "#6fa3c6",
+        "horizon": "#d3e4ee",
+        "horizonAt": 0.62,
+        "bottom": "#e4edf2"
+      },
+      "fog": {
+        "color": "#dfe9ef",
+        "near": 16,
+        "far": 46
+      },
+      "environment": "room",
+      "environmentIntensity": 0.6,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "table": {
+        "type": "standard",
+        "baseColor": "#e9edf0",
+        "roughness": 0.85,
+        "metalness": 0
+      },
+      "wood": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.55,
+        "metalness": 0
+      },
+      "brass": {
+        "type": "physical",
+        "baseColor": "#d8a845",
+        "roughness": 0.28,
+        "metalness": 1,
+        "clearcoat": 0.3,
+        "clearcoatRoughness": 0.2
+      },
+      "steel": {
+        "type": "physical",
+        "baseColor": "#c9d0d6",
+        "roughness": 0.22,
+        "metalness": 1
+      },
+      "grip": {
+        "type": "physical",
+        "baseColor": "#137a75",
+        "roughness": 0.4,
+        "metalness": 0,
+        "clearcoat": 0.5,
+        "clearcoatRoughness": 0.3
+      },
+      "cordCut": {
+        "type": "standard",
+        "baseColor": "#c41e27",
+        "roughness": 0.7,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#c7d4dc",
+        "intensity": 1.2
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff4e6",
+        "intensity": 2.4,
+        "position": [
+          -5,
+          10,
+          6
+        ],
+        "target": [
+          0,
+          1.4,
+          0
+        ],
+        "shadow": {
+          "softness": 2.5,
+          "mapSize": 2048,
+          "extent": 3.6,
+          "near": 0.5,
+          "far": 30,
+          "bias": -0.0004,
+          "normalBias": 0.02
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#dbe9ff",
+        "intensity": 0.7,
+        "position": [
+          5,
+          6,
+          -7
+        ],
+        "target": [
+          0,
+          1.4,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.6,
+        "radius": 0.3,
+        "threshold": 4
+      },
+      "vignette": {
+        "darkness": 0.18,
+        "offset": 1.2
+      }
+    },
+    "camera": {
+      "fov": 34,
+      "near": 0.1,
+      "far": 80,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#18222c",
+      "height": 0.4
+    },
+    "tower": {
+      "levels": 3,
+      "H": 1.2,
+      "overlap": 0.5,
+      "radius": 0.85,
+      "twist": 30,
+      "step": 90,
+      "phase": 0,
+      "prestrain": 0.85,
+      "load": 9,
+      "cut": 23,
+      "cutAt": 0.5,
+      "strutRadius": 0.035,
+      "cordRadius": 0.013,
+      "capRadius": 0.05,
+      "contactTol": 0.006,
+      "solver": {
+        "ks": 40000,
+        "EA": 700,
+        "mass": 2,
+        "dt": 0.004,
+        "damp": 0.97,
+        "dampSlump": 0.97,
+        "kContact": 40000,
+        "floor": 0.02,
+        "iters": 30000,
+        "itersLoad": 20000,
+        "itersSlump": 60000,
+        "itersSettle": 0,
+        "snapEvery": 100,
+        "pathStates": 240
+      },
+      "flex": {
+        "period": 0.42,
+        "decay": 0.22,
+        "lead": 0
+      },
+      "slumpSettle": 0.012,
+      "recoil": 0.3,
+      "glow": {
+        "rise": 0.22,
+        "pulse": 0.9,
+        "pulseDecay": 0.55,
+        "pulseFloor": 0.35,
+        "dim": "#a3161e",
+        "lit": "#ff2414",
+        "hot": "#ff7a2c",
+        "halo": "#ff3412",
+        "haloRadius": 4.2,
+        "haloLevel": 0.5,
+        "haloPower": 1.6
+      },
+      "contactGlow": {
+        "radius": 0.11,
+        "burst": 1.4,
+        "level": 2.4,
+        "tint": "#ff9a3c"
+      },
+      "sag": {
+        "segments": 10
+      },
+      "weight": {
+        "home": [
+          -2.6,
+          0,
+          -1.2
+        ],
+        "seat": 0.06,
+        "arc": 0.25,
+        "radius": 0.2,
+        "height": 0.32,
+        "knob": 0.07,
+        "arm": 0.022
+      },
+      "snips": {
+        "home": [
+          -2.3,
+          0.03,
+          -0.35
+        ],
+        "rest": [
+          -1.9,
+          0.03,
+          -1.2
+        ],
+        "tilt": 0.7,
+        "bite": 0.22,
+        "open": 0.62,
+        "arc": 0.4,
+        "blade": 0.42,
+        "handle": 0.36
+      },
+      "sound": {
+        "root": 392,
+        "refLength": 1,
+        "bed": {
+          "gain": 0.32,
+          "chord": [
+            0,
+            7,
+            12,
+            16
+          ],
+          "root": 98,
+          "chordAfter": [
+            0,
+            5.6,
+            11.3,
+            14.7
+          ],
+          "rootAfter": 87,
+          "brightness": 700
+        },
+        "pluck": {
+          "gain": 0.55,
+          "dur": 1.4,
+          "decay": 1.3,
+          "bright": 0.55
+        },
+        "strum": {
+          "gain": 0.5,
+          "step": 0.03,
+          "dur": 2.4,
+          "decay": 1.8
+        },
+        "move": {
+          "gain": 0.25
+        },
+        "land": {
+          "gain": 0.6
+        },
+        "snip": {
+          "gain": 0.6
+        },
+        "knock": {
+          "gain": 0.5,
+          "hz": 165
+        }
+      }
+    },
+    "wood": {
+      "seed": 105,
+      "boards": 1,
+      "dark": "#c9a46a",
+      "mid": "#e3c690",
+      "light": "#f3e2bd",
+      "seam": "#e3c690",
+      "contrast": 0.35,
+      "grainFreq": 10
+    },
+    "caption": {
+      "x": 92,
+      "y": 70,
+      "h": 100,
+      "cap": 54,
+      "maxW": 900,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#ffffff",
+      "edge": "#18222c",
+      "ink": "#18222c",
+      "cord": "#d3202a"
+    },
+    "sfx": {
+      "enter": "pluck",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "thud",
+      "emphasis": "pluck",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "Every pose is solved: damped relaxation of stiff struts + tension-only elastic cords (+ strut contact after the cut), fixed step count, no RNG.",
+      "Cords glow by solved tension (brightness ~ T / Tmax) and pluck at f ~ sqrt(T) / L (an ideal string).",
+      "The press: an art-directed damped blend from the standing pose to the loaded pose; every cord flashes as the load arrives.",
+      "The slump: the solver's own damped descent from the loaded pose to the cut pose, resampled by distance, on an eased clock.",
+      "Camera: slow orbit while nothing moves, a close-up on the snips for the cut, a pull-back during the slump."
+    ]
+  },
+  "scene": {
+    "id": "105-tensegrity",
+    "style": "tensegrity",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "gaps",
+        "t": 0,
+        "dur": 3,
+        "label": "Sticks that never touch"
+      },
+      {
+        "id": "cords",
+        "t": 3,
+        "dur": 3,
+        "label": "The cords carry it"
+      },
+      {
+        "id": "press",
+        "t": 6,
+        "dur": 3,
+        "label": "Press down. All share."
+      },
+      {
+        "id": "cut",
+        "t": 9,
+        "dur": 2.5,
+        "label": "Cut one cord"
+      },
+      {
+        "id": "lean",
+        "t": 11.5,
+        "dur": 3.5,
+        "label": "Each leans on all"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -4.95395,
+          2.46451,
+          5.24078
+        ],
+        "target": [
+          -0.81892,
+          1.5341,
+          -0.55132
+        ],
+        "fov": 34
+      },
+      {
+        "t": 3,
+        "pos": [
+          -1.08755,
+          2.58724,
+          6.71207
+        ],
+        "target": [
+          -0.74968,
+          1.56554,
+          -0.0397
+        ],
+        "fov": 34,
+        "ease": "linear",
+        "path": "arc"
+      },
+      {
+        "t": 6,
+        "pos": [
+          1.88789,
+          2.8869,
+          6.69268
+        ],
+        "target": [
+          -0.91928,
+          1.49137,
+          0.40663
+        ],
+        "fov": 34,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 7.25,
+        "pos": [
+          0.53425,
+          4.05949,
+          7.44905
+        ],
+        "target": [
+          -0.93527,
+          1.77139,
+          0.19969
+        ],
+        "fov": 34,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 8.95,
+        "pos": [
+          -0.46945,
+          3.72652,
+          7.35211
+        ],
+        "target": [
+          -0.83482,
+          1.78181,
+          0.05088
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 9.95,
+        "pos": [
+          -2.0408835546524,
+          4.797995966482692,
+          1.049377283569196
+        ],
+        "target": [
+          -0.41902515931596157,
+          3.315887181307254,
+          0.21545348945938733
+        ],
+        "fov": 34,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 11.1,
+        "pos": [
+          -1.806630016334281,
+          4.594559297141293,
+          0.928929283904361
+        ],
+        "target": [
+          -0.3918173735939834,
+          3.3016558887967618,
+          0.20146384648942145
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.41,
+        "pos": [
+          -1.1877,
+          2.17575,
+          4.58092
+        ],
+        "target": [
+          -0.05473,
+          1.1517,
+          0.14384
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          -2.04982,
+          2.1029,
+          4.32549
+        ],
+        "target": [
+          -0.12983,
+          1.14842,
+          0.0261
+        ],
+        "fov": 34,
+        "ease": "outSine",
+        "path": "arc"
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "type": "pad",
+        "dur": 11.7,
+        "gain": 0.32,
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "brightness": 700,
+        "attack": 0.8,
+        "release": 1,
+        "t": 0,
+        "pan": 0,
+        "seed": 105
+      },
+      {
+        "type": "pluck",
+        "hz": 280.54491506962603,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 3.15,
+        "pan": 0.3901101192671182,
+        "seed": 112
+      },
+      {
+        "type": "pluck",
+        "hz": 280.5449150696263,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 3.245,
+        "pan": -0.10000000000000019,
+        "seed": 119
+      },
+      {
+        "type": "pluck",
+        "hz": 280.5449150696266,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 3.34,
+        "pan": -0.2901101192671181,
+        "seed": 126
+      },
+      {
+        "type": "pluck",
+        "hz": 392.6168915101168,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 3.435,
+        "pan": -0.18464863607907153,
+        "seed": 133
+      },
+      {
+        "type": "pluck",
+        "hz": 392.6168915101161,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 3.53,
+        "pan": 0.19011011926711816,
+        "seed": 140
+      },
+      {
+        "type": "pluck",
+        "hz": 392.6168915101161,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 3.625,
+        "pan": -0.19011011926711816,
+        "seed": 147
+      },
+      {
+        "type": "pluck",
+        "hz": 392.6168915101161,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 3.7199999999999998,
+        "pan": -0.3747587553461896,
+        "seed": 154
+      },
+      {
+        "type": "pluck",
+        "hz": 392.6168915101167,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 3.815,
+        "pan": 0.18464863607907112,
+        "seed": 161
+      },
+      {
+        "type": "pluck",
+        "hz": 392.6168915101161,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 3.91,
+        "pan": 0.3747587553461894,
+        "seed": 168
+      },
+      {
+        "type": "pluck",
+        "hz": 264.6072023790487,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 4.005,
+        "pan": -0.10398412661820088,
+        "seed": 175
+      },
+      {
+        "type": "pluck",
+        "hz": 264.60720237904906,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 4.1,
+        "pan": -0.2886327626972724,
+        "seed": 182
+      },
+      {
+        "type": "pluck",
+        "hz": 264.607202379049,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 4.195,
+        "pan": 0.3926168893154723,
+        "seed": 189
+      },
+      {
+        "type": "pluck",
+        "hz": 415.6421062345509,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 4.29,
+        "pan": -0.33314729862127435,
+        "seed": 196
+      },
+      {
+        "type": "pluck",
+        "hz": 415.64210623455057,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 4.385,
+        "pan": -0.3331472986212744,
+        "seed": 203
+      },
+      {
+        "type": "pluck",
+        "hz": 415.6421062345504,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 4.48,
+        "pan": 0.010597459383335367,
+        "seed": 210
+      },
+      {
+        "type": "pluck",
+        "hz": 415.64210623455045,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 4.575,
+        "pan": 0.010597459383335471,
+        "seed": 217
+      },
+      {
+        "type": "pluck",
+        "hz": 415.64210623455114,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 4.67,
+        "pan": 0.3225498392379373,
+        "seed": 224
+      },
+      {
+        "type": "pluck",
+        "hz": 415.64210623455114,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 4.765,
+        "pan": 0.3225498392379375,
+        "seed": 231
+      },
+      {
+        "type": "pluck",
+        "hz": 322.0938364823217,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 4.859999999999999,
+        "pan": -0.38981980167877917,
+        "seed": 238
+      },
+      {
+        "type": "pluck",
+        "hz": 322.09383648232154,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 4.955,
+        "pan": 0.11458158600153562,
+        "seed": 245
+      },
+      {
+        "type": "pluck",
+        "hz": 322.09383648232176,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 5.05,
+        "pan": 0.2752382156772409,
+        "seed": 252
+      },
+      {
+        "type": "pluck",
+        "hz": 255.99640646666606,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 5.145,
+        "pan": -0.16065662967570635,
+        "seed": 259
+      },
+      {
+        "type": "pluck",
+        "hz": 255.99640646666623,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 5.24,
+        "pan": -1.280021840156063e-15,
+        "seed": 266
+      },
+      {
+        "type": "pluck",
+        "hz": 255.99640646666614,
+        "gain": 0.55,
+        "dur": 1.4,
+        "decay": 1.3,
+        "bright": 0.55,
+        "t": 5.335,
+        "pan": 0.1606566296757038,
+        "seed": 273
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "gain": 0.25,
+        "t": 6.05,
+        "pan": 0,
+        "seed": 280
+      },
+      {
+        "type": "thud",
+        "gain": 0.6,
+        "dur": 0.35,
+        "t": 6.95,
+        "pan": 0,
+        "seed": 287
+      },
+      {
+        "type": "clack",
+        "gain": 0.33,
+        "pitch": 0.7,
+        "t": 6.95,
+        "pan": 0,
+        "seed": 288
+      },
+      {
+        "type": "pluck",
+        "hz": 257.5324609275708,
+        "notes": [
+          0,
+          1.1889028843395455,
+          3.6524254381005603,
+          7.498115539575926,
+          8.447972718319106
+        ],
+        "step": 0.03,
+        "gain": 0.5,
+        "dur": 2.4,
+        "decay": 1.8,
+        "bright": 0.55,
+        "t": 7.03,
+        "pan": 0,
+        "seed": 294
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.5,
+        "gain": 0.2,
+        "t": 8.95,
+        "pan": 0,
+        "seed": 301
+      },
+      {
+        "type": "click",
+        "gain": 0.3,
+        "pitch": 1.4,
+        "t": 9.95,
+        "pan": 0,
+        "seed": 308
+      },
+      {
+        "type": "pad",
+        "dur": 3.9000000000000004,
+        "gain": 0.32,
+        "root": 87,
+        "chord": [
+          0,
+          5.6,
+          11.3,
+          14.7
+        ],
+        "brightness": 700,
+        "attack": 0.5,
+        "release": 1,
+        "t": 11.1,
+        "pan": 0,
+        "seed": 315
+      },
+      {
+        "type": "clack",
+        "gain": 0.6,
+        "pitch": 1.9,
+        "t": 11.1,
+        "pan": 0,
+        "seed": 322
+      },
+      {
+        "type": "pluck",
+        "hz": 940.8,
+        "gain": 0.36,
+        "dur": 0.5,
+        "decay": 0.12,
+        "bright": 0.9,
+        "t": 11.105,
+        "pan": 0,
+        "seed": 324
+      },
+      {
+        "type": "click",
+        "gain": 0.48,
+        "pitch": 2.2,
+        "t": 11.11,
+        "pan": 0,
+        "seed": 323
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.5,
+        "gain": 0.2,
+        "t": 11.15,
+        "pan": 0,
+        "seed": 329
+      },
+      {
+        "type": "marimba",
+        "hz": 165,
+        "gain": 0.5,
+        "dur": 0.4,
+        "decay": 0.07,
+        "mallet": 0.9,
+        "t": 11.664166666666638,
+        "pan": 0.20938980476514082,
+        "seed": 336
+      },
+      {
+        "type": "clack",
+        "gain": 0.25,
+        "pitch": 0.55,
+        "t": 11.664166666666638,
+        "pan": 0.20938980476514082,
+        "seed": 337
+      },
+      {
+        "type": "marimba",
+        "hz": 165,
+        "gain": 0.5,
+        "dur": 0.4,
+        "decay": 0.07,
+        "mallet": 0.9,
+        "t": 11.993333333333286,
+        "pan": 0.2863432358004623,
+        "seed": 343
+      },
+      {
+        "type": "clack",
+        "gain": 0.25,
+        "pitch": 0.55,
+        "t": 11.993333333333286,
+        "pan": 0.2863432358004623,
+        "seed": 344
+      },
+      {
+        "type": "pluck",
+        "hz": 206.62602449415536,
+        "notes": [
+          0,
+          0.3653143789626251,
+          2.268403376822909,
+          2.3669990074417306,
+          3.0861559224733623,
+          3.851330671172378,
+          4.192468873618204,
+          4.838601266797982,
+          5.460723966011754,
+          5.642945135050754,
+          6.520862740721901,
+          6.740656473936925,
+          9.149513884847485,
+          9.91219054642432,
+          10.072809963465335,
+          10.280887879171942,
+          10.770759927153822,
+          10.853587071127233,
+          11.451734675802003,
+          11.747486520958887
+        ],
+        "step": 0.03,
+        "gain": 0.45,
+        "dur": 2.4,
+        "decay": 1.08,
+        "bright": 0.35,
+        "t": 12.71,
+        "pan": 0,
+        "seed": 350
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "tower.js: three twisted three-strut levels joined by zig-zag cord rings; P1/P2/P3 solved by damped relaxation (struts stiff, cords tension-only, contact after the cut); glow ~ T/Tmax; pitch ~ sqrt(T)/L.",
+      "plan": "Tmax 80.3; cut cord 23 (top); contacts 6-7@11.99s, 6-8@11.66s",
+      "framing": "ok",
+      "numbers": "no numbers on screen"
+    }
+  }
+}

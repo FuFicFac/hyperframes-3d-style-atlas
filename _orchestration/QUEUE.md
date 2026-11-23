@@ -62,3 +62,40 @@ From 91 on, builders run on Opus 5.5 (high effort) to save the owner's Fable usa
 rebuilt for 100 styles; `SKILL.md` updated (count, four good-for rows, weaker-demos paragraph, Limits heading). `gallery.html` keeps the
 one line of links another agent added under the subtitle. Committed and pushed to GitHub as 233f334 (demos 85-100, refreshed `skill/` snapshot, gallery, briefs). `_ALL VIDEOS/`, the
 numbered reels and the website still stop at 84. Kit promotion candidates reported by builders are listed in each style's STYLE.md.
+
+## Run 4 started 2026-11-23 (styles 101–112) — orchestrated from the session in /Volumes/Panther/New horizons
+
+Owner approved the storyboards (`STORYBOARDS-101-112.md`) and asked for all twelve. Briefs: `STYLE-BRIEFS-101-112.md`. Builders on Opus 5.5.
+Nothing here is indexed, committed or published yet.
+
+| # | id | signature mechanic | status |
+|---|---|---|---|
+| 101 | ripple-interference | two wave sources reinforce or cancel as timing slides | DONE — passed checks, stills reviewed by orchestrator (9.3 MB, CRF 22, audio mean −24.8 / max −6.0 dB; calm lines are soft rather than crisp, corks small in the wides, label gap at exactly 12.0 s, far water washes pale in low shots) |
+| 102 | photoelastic-stress | stress shows as rainbow bands; support redistributes it | DONE — passed checks, stills reviewed by orchestrator (2.8 MB, CRF 22, audio mean −20.9 / max −1.1 dB; opening is a plain dark band by design, notch bands are simple rings, final pattern calmer but not even, approximate stress field) |
+| 103 | percolation | one link joins top to bottom in a seeded grid | DONE — revised and re-reviewed (8.7 MB, CRF 22, audio mean −23.0 / max −1.9 dB; grid cut to 16 × 8 = 264 pipes, deciding valve ringed in magenta from beat 4 on, check still inside beat 4; valve hardware still busy, ~13 % plain enamel each side, new blue front only moderately distinct from settled blue) |
+| 104 | chromatography | one black dot separates into its hidden colours | DONE — revised and re-reviewed (3.1 MB, CRF 22, audio mean −22.7 / max −5.1 dB; the three finished strips now carry three different inks, deeper tiles for contrast; soft airbrushed bands, the red reads salmon) |
+| 105 | tensegrity | struts held only by cords; cut one and all shift | DONE — passed checks, stills reviewed by orchestrator (6.1 MB, CRF 22, audio mean −26.1 / max −1.6 dB; tower off-centre with empty left third in wides, cord glow under load is an art-directed pulse, slump has no inertia, top cord cut instead of a ring cord) |
+| 106 | snap-through | load builds, then the arch flips and will not flip back | DONE — passed checks, stills reviewed by orchestrator (3.0 MB, CRF 22, audio mean −26.0 / max −1.6 dB; clean rather than gritty rig, empty wall above in wides, symmetric strip shape) |
+| 107 | magnetic-memory | a passing magnet leaves a lasting track in latching tiles | DONE — revised and re-reviewed (10.0 MB, CRF 23, audio mean −24.7 / max −3.9 dB; second pass is the opposite pole and cuts a pale lane across both arms of the track, larger magnet, no handle in the final wide; the lane also wipes the speckle along it, right-hand cut fainter) |
+| 108 | vortex-rings | one smoke ring threads another (leapfrog) | DONE — passed checks, stills reviewed by orchestrator (5.5 MB, CRF 22, audio mean −20.8 / max −1.1 dB; label still fading in at 8.0 s, drum large in beats 3–4, smoke glows rather than blocks light, ring sizes drift back after the pass so beat 5 shows the swapped order) |
+| 109 | reaction-diffusion | seeds grow into spots, then stripes (stepped in the planner) | DONE — passed checks, stills reviewed by orchestrator (4.4 MB, CRF 22, audio mean −24.8 / max −1.9 dB; CPU Gray–Scott in the planner with states every 0.25 s and blending between them, feed/kill and time-lapse art-directed, muddy colour seams where territories meet, label dips at beat swaps, browser load time not measured) |
+| 110 | differential-growth | a growing ribbon buckles into folds inside a hoop | DONE — passed checks, stills reviewed by orchestrator (5.0 MB, CRF 22, audio mean −22.6 / max −3.3 dB; hoop is round so early frames are ~40 % table, small empty patch at the centre at the end, brief crinkle at the glass near 6.3 s, planner uses exactly-rounded arithmetic only and checks a frame hash in Node and in the page) |
+| 111 | granular-sorting | shaking brings the large beads to the top | DONE — passed checks, stills reviewed by orchestrator (9.6 MB, CRF 22, audio mean −23.3 / max −2.7 dB; a tap-and-settle Monte Carlo simulation replaced the force-based one, rest states simulated and hops drawn, Node/Chrome mismatch from Math.pow found and fixed with a recorded run hash, loose packing, caption dims at beat changes, flat cell rather than a round jar) |
+| 112 | schlieren | a knife edge makes moving air visible | DONE — passed checks, stills reviewed by orchestrator (2.1 MB, CRF 22, audio mean −23.0 / max −12.9 dB (quiet peaks); dark set with the left third empty navy wall, plume reads as soft smoke near the flame, heavy blade stand in beat 2, label dim at 12.0 s, art-directed flow) |
+
+All twelve built and reviewed 2026-11-23. Not yet done: build-index, build-gallery, SKILL.md count, skill snapshot, git, reels, site. Waiting for the owner's yes.
+
+Index and gallery rebuilt 2026-11-23 on the owner's yes: `references/style-index.json` and `STYLES.md` (113 entries = 112 styles + neutral),
+`gallery.html` (112 styles, 0 without MP4; the hand-added links line under the subtitle was put back) and `contact-sheet.jpg` (6 × 19).
+The keyword-guessed category is wrong for two new styles: photoelastic-stress ("pixel / voxel") and magnetic-memory ("reference / neutral").
+Still not done: SKILL.md (count 100 → 112, good-for rows, weaker-demos paragraph), rsync of the skill into `skill/`, git, reels, site.
+
+## Run 4 closed 2026-11-23 — the atlas is at 112
+
+12 styles added (101–112), all DONE above; 103, 104 and 107 were sent back once on the owner's instruction to fix the weak ones.
+Index (`references/style-index.json`, `STYLES.md`), `gallery.html` (links line kept) and `contact-sheet.jpg` rebuilt for 112 styles.
+`scripts/build-index.mjs` got one category rule so photoelastic-stress and magnetic-memory file under "material / abstract".
+`SKILL.md` (count, three good-for rows, a 101–112 paragraph) was updated by another session; this run only corrected the notes for
+103, 104 and 107 after their revisions. Skill copied into `skill/`. Not watched in motion; audio measured, not heard.
+`_ALL VIDEOS/`, the numbered reels and the website still stop at 84. Other uncommitted changes in this repository (Site/, README.md,
+.gitignore, the model-comparison render folders) belong to other sessions and were left alone.

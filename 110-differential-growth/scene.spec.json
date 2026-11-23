@@ -1,0 +1,1392 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "differential-growth",
+    "name": "Differential Growth",
+    "description": "A bright pastel studio: a coral-pink paper ribbon stands on edge inside a low clear glass hoop on a warm white table in front of a mint sweep. The ribbon keeps growing longer but the hoop does not get bigger, so the ring swells to the glass, buckles into a row of waves that fold inward, each wave sprouts smaller waves, and the hoop ends packed with one continuous, never-crossing ribbon (seen from straight above as a coral maze). The ribbon is a stepped 2D simulation run once at load (springs, bending, short-range repulsion, a circular wall, points inserted as it grows), stored per video frame and extruded upward; a light band can run along its whole length to show it is a single strip.",
+    "palette": {
+      "bg": "#cfeee3",
+      "sweep": "#cfeee3",
+      "table": "#fbf7f1",
+      "tableEdge": "#e9e1d6",
+      "ribbon": "#ff6f61",
+      "ribbonB": "#ff8f7e",
+      "ribbonEdge": "#ffa394",
+      "glass": "#e8f6f2",
+      "ink": "#2b2230",
+      "sweepLight": "#ffc93c"
+    },
+    "world": {
+      "background": "#cfeee3",
+      "sky": null,
+      "fog": {
+        "color": "#cfeee3",
+        "near": 9,
+        "far": 24
+      },
+      "environment": "room",
+      "environmentIntensity": 0.6,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "sweep": {
+        "type": "standard",
+        "baseColor": "#cfeee3",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "table": {
+        "type": "standard",
+        "baseColor": "#fbf7f1",
+        "roughness": 0.8,
+        "metalness": 0
+      },
+      "tableEdge": {
+        "type": "standard",
+        "baseColor": "#e9e1d6",
+        "roughness": 0.8,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#e9d6d0",
+        "intensity": 1
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff6ec",
+        "intensity": 2.7,
+        "position": [
+          -2.6,
+          4.2,
+          2.4
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 2048,
+          "extent": 1.5,
+          "near": 0.5,
+          "far": 14,
+          "bias": -0.0003,
+          "normalBias": 0.01
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#e6fff6",
+        "intensity": 0.7,
+        "position": [
+          2.6,
+          2,
+          -3.4
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.16,
+        "offset": 1.25
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.05,
+      "far": 40,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#2b2230",
+      "height": 0.1
+    },
+    "table": {
+      "r": 1.75,
+      "thick": 0.05,
+      "segments": 128
+    },
+    "sweepWall": {
+      "width": 30,
+      "depth": 16,
+      "height": 9,
+      "radius": 3,
+      "z": -3.6
+    },
+    "hoop": {
+      "r": 1,
+      "wall": 0.034,
+      "h": 0.09,
+      "segments": 192,
+      "lip": "#8ed3c1",
+      "lipOpacity": 0.8,
+      "shade": 0.2
+    },
+    "glass": {
+      "color": "#bfe6dc",
+      "alphaFace": 0.16,
+      "alphaRim": 0.85,
+      "fresnelPower": 2,
+      "rimStrength": 0.55,
+      "envIntensity": 1.4
+    },
+    "ribbon": {
+      "h": 0.13,
+      "thick": 0.009,
+      "roughness": 0.72,
+      "glow": 0.1,
+      "gradient": 0.35,
+      "sweepWidth": 0.03,
+      "sweepGain": 1,
+      "sweepGlow": 0.35
+    },
+    "growth": {
+      "R": 0.9925,
+      "wallGap": 0.0045,
+      "seed": 110,
+      "M": 4096,
+      "substeps": 8,
+      "lengthKeys": [
+        [
+          0,
+          2.639
+        ],
+        [
+          2.5,
+          3.1416
+        ],
+        [
+          5.4,
+          6.2832
+        ],
+        [
+          6.5,
+          8.6
+        ],
+        [
+          8.5,
+          14
+        ],
+        [
+          12,
+          37
+        ],
+        [
+          13.6,
+          52
+        ],
+        [
+          15,
+          57
+        ]
+      ],
+      "scaleKeys": [
+        [
+          0,
+          0.2
+        ],
+        [
+          7.5,
+          0.2
+        ],
+        [
+          8.6,
+          0.17
+        ],
+        [
+          11.5,
+          0.08
+        ],
+        [
+          15,
+          0.07
+        ]
+      ],
+      "bendKeys": [
+        [
+          0,
+          1
+        ],
+        [
+          15,
+          1
+        ]
+      ],
+      "sim": {
+        "grip": 0,
+        "jitter": 0.04,
+        "noise": 0.006,
+        "modes": [
+          [
+            7,
+            0.012
+          ]
+        ]
+      }
+    },
+    "caption": {
+      "x": 72,
+      "y": 56,
+      "h": 92,
+      "cap": 40,
+      "maxW": 860,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#2b2230",
+      "edge": "#4a3d50",
+      "ink": "#fff8f2"
+    },
+    "sound": {
+      "rustle": {
+        "gain": 0.42,
+        "density": 0.5,
+        "pitch": 1.2
+      },
+      "fold": {
+        "gain": 0.32,
+        "pitch": 1.4
+      },
+      "contact": {
+        "gain": 0.32,
+        "hz": 523.25
+      },
+      "rise": {
+        "gain": 0.14
+      },
+      "settle": {
+        "gain": 0.26,
+        "root": 392,
+        "notes": [
+          0,
+          4,
+          7,
+          12
+        ]
+      },
+      "trace": {
+        "gain": 0.1
+      },
+      "bed": {
+        "gain": 0.3,
+        "root": 196,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "brightness": 1000
+      }
+    },
+    "sfx": {
+      "enter": "whoosh",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "tick",
+      "emphasis": "marimba",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "The ribbon's natural length grows on a schedule; the curve is stepped at load (springs, bending, repulsion, wall, point insertion) and stored per video frame.",
+      "Until it first touches the glass the ring expands as a uniform scale (the stress-free solution for a free ring); after that the wall turns growth into compression and the ring buckles inward.",
+      "The repulsion radius shrinks on a schedule, so the long walls of the first waves buckle again at a smaller scale: waves upon waves.",
+      "Camera: locked holds, one move per beat; drifts down to ribbon height for the folds, ends straight overhead on the packed hoop."
+    ]
+  },
+  "scene": {
+    "id": "110-differential-growth",
+    "style": "differential-growth",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "ribbon",
+        "t": 0,
+        "dur": 2.5,
+        "label": "A simple ribbon"
+      },
+      {
+        "id": "grow",
+        "t": 2.5,
+        "dur": 3,
+        "label": "It keeps growing"
+      },
+      {
+        "id": "buckle",
+        "t": 5.5,
+        "dur": 3,
+        "label": "No room. It buckles."
+      },
+      {
+        "id": "folds",
+        "t": 8.5,
+        "dur": 3.5,
+        "label": "Folds upon folds"
+      },
+      {
+        "id": "limit",
+        "t": 12,
+        "dur": 3,
+        "label": "Growth meets its limit"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0,
+          1.86256,
+          1.54638
+        ],
+        "target": [
+          0,
+          0.06558,
+          -0.00067
+        ],
+        "fov": 30
+      },
+      {
+        "t": 2.6,
+        "pos": [
+          0.11183,
+          2.65894,
+          2.05131
+        ],
+        "target": [
+          -0.05252,
+          0.0673,
+          0.0013
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 5.4,
+        "pos": [
+          0.73046,
+          4.44047,
+          2.67616
+        ],
+        "target": [
+          -0.09661,
+          0.0818,
+          0.00249
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 5.6,
+        "pos": [
+          0.73046,
+          4.44047,
+          2.67616
+        ],
+        "target": [
+          -0.09661,
+          0.0818,
+          0.00249
+        ],
+        "fov": 30
+      },
+      {
+        "t": 8,
+        "pos": [
+          0.97829,
+          4.15587,
+          2.35297
+        ],
+        "target": [
+          -0.05014,
+          0.0495,
+          0.05003
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 8.6,
+        "pos": [
+          0.97829,
+          4.15587,
+          2.35297
+        ],
+        "target": [
+          -0.05014,
+          0.0495,
+          0.05003
+        ],
+        "fov": 30
+      },
+      {
+        "t": 11.3,
+        "pos": [
+          0.78,
+          0.46,
+          1.72
+        ],
+        "target": [
+          -0.1,
+          0,
+          -0.3
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12,
+        "pos": [
+          0.78,
+          0.46,
+          1.72
+        ],
+        "target": [
+          -0.1,
+          0,
+          -0.3
+        ],
+        "fov": 30
+      },
+      {
+        "t": 13.4,
+        "pos": [
+          0,
+          3.6,
+          0.02
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0,
+          3.6,
+          0.02
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "fov": 30
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.3,
+        "root": 196,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "brightness": 1000,
+        "attack": 1,
+        "release": 1.6
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.02,
+        "q": 1.3,
+        "pitch": 1.3,
+        "gain": 0.14,
+        "t": 0.08,
+        "pan": 0,
+        "seed": 117
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "fold": true,
+        "density": 0.4,
+        "gain": 0.336,
+        "t": 0.65,
+        "pan": 0,
+        "seed": 118
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.18203926777504617,
+        "t": 2,
+        "pan": 0,
+        "seed": 173
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.19054162465834687,
+        "t": 2.25,
+        "pan": 0,
+        "seed": 180
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.1974202376941927,
+        "t": 2.5,
+        "pan": 0,
+        "seed": 187
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.20227762422093987,
+        "t": 2.75,
+        "pan": 0,
+        "seed": 194
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.20685209181354378,
+        "t": 3,
+        "pan": 0,
+        "seed": 201
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.2111892289776081,
+        "t": 3.25,
+        "pan": 0,
+        "seed": 208
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.21532361337469424,
+        "t": 3.5,
+        "pan": 0,
+        "seed": 215
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.21928220767200565,
+        "t": 3.75,
+        "pan": 0,
+        "seed": 222
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.22308651718623732,
+        "t": 4,
+        "pan": 0,
+        "seed": 229
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.22675402006809772,
+        "t": 4.25,
+        "pan": 0,
+        "seed": 236
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.23029914903656054,
+        "t": 4.5,
+        "pan": 0,
+        "seed": 243
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.23373398539438403,
+        "t": 4.75,
+        "pan": 0,
+        "seed": 250
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.23706876211385025,
+        "t": 5,
+        "pan": 0,
+        "seed": 257
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.2404198333272458,
+        "t": 5.25,
+        "pan": 0,
+        "seed": 264
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.24994368689346155,
+        "t": 5.5,
+        "pan": 0,
+        "seed": 271
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.2575829851531522,
+        "t": 5.75,
+        "pan": 0,
+        "seed": 278
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.512,
+        "gain": 0.28800000000000003,
+        "t": 5.9333,
+        "pan": 0,
+        "seed": 285
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.2628148245304902,
+        "t": 6,
+        "pan": 0,
+        "seed": 292
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.4,
+        "gain": 0.41600000000000004,
+        "t": 6.0667,
+        "pan": 0,
+        "seed": 299
+      },
+      {
+        "type": "marimba",
+        "hz": 523.25,
+        "decay": 0.6,
+        "dur": 1.4,
+        "mallet": 0.35,
+        "gain": 0.32,
+        "t": 6.1667,
+        "pan": 0,
+        "seed": 306
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.4,
+        "gain": 0.41600000000000004,
+        "t": 6.2,
+        "pan": 0,
+        "seed": 313
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.26590954295267805,
+        "t": 6.25,
+        "pan": 0,
+        "seed": 320
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.456,
+        "gain": 0.384,
+        "t": 6.3333,
+        "pan": 0,
+        "seed": 327
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.568,
+        "gain": 0.28800000000000003,
+        "t": 6.4667,
+        "pan": 0,
+        "seed": 334
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.26232918046821974,
+        "t": 6.5,
+        "pan": 0,
+        "seed": 341
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.2567185729604004,
+        "t": 6.75,
+        "pan": 0,
+        "seed": 348
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.25582679938920944,
+        "t": 7,
+        "pan": 0,
+        "seed": 355
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.259748282290517,
+        "t": 7.25,
+        "pan": 0,
+        "seed": 362
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.2680850479285469,
+        "t": 7.5,
+        "pan": 0,
+        "seed": 369
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.2801222609723415,
+        "t": 7.75,
+        "pan": 0,
+        "seed": 376
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.29507138865808025,
+        "t": 8,
+        "pan": 0,
+        "seed": 383
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.31223251663308305,
+        "t": 8.25,
+        "pan": 0,
+        "seed": 390
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.32508126817051924,
+        "t": 8.5,
+        "pan": 0,
+        "seed": 397
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.33192653952388046,
+        "t": 8.75,
+        "pan": 0,
+        "seed": 404
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.3382344219434608,
+        "t": 9,
+        "pan": 0,
+        "seed": 411
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.4,
+        "gain": 0.28800000000000003,
+        "t": 9.2333,
+        "pan": 0,
+        "seed": 418
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.3440515578219214,
+        "t": 9.25,
+        "pan": 0,
+        "seed": 425
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.4,
+        "gain": 0.336,
+        "t": 9.3667,
+        "pan": 0,
+        "seed": 432
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.3494162834552485,
+        "t": 9.5,
+        "pan": 0,
+        "seed": 439
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.568,
+        "gain": 0.41600000000000004,
+        "t": 9.6,
+        "pan": 0,
+        "seed": 446
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.3543604856161472,
+        "t": 9.75,
+        "pan": 0,
+        "seed": 453
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.4,
+        "gain": 0.41600000000000004,
+        "t": 9.8667,
+        "pan": 0,
+        "seed": 460
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.35891094629112097,
+        "t": 10,
+        "pan": 0,
+        "seed": 467
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.456,
+        "gain": 0.41600000000000004,
+        "t": 10.1667,
+        "pan": 0,
+        "seed": 474
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.36309033773459914,
+        "t": 10.25,
+        "pan": 0,
+        "seed": 481
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.4,
+        "gain": 0.336,
+        "t": 10.3,
+        "pan": 0,
+        "seed": 488
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.36691797240032487,
+        "t": 10.5,
+        "pan": 0,
+        "seed": 495
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.512,
+        "gain": 0.28800000000000003,
+        "t": 10.7,
+        "pan": 0,
+        "seed": 502
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.3704103771065336,
+        "t": 10.75,
+        "pan": 0,
+        "seed": 509
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.6239999999999999,
+        "gain": 0.28800000000000003,
+        "t": 10.8333,
+        "pan": 0,
+        "seed": 516
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.3735817385889549,
+        "t": 11,
+        "pan": 0,
+        "seed": 523
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.4,
+        "gain": 0.41600000000000004,
+        "t": 11.0667,
+        "pan": 0,
+        "seed": 530
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.376444253201383,
+        "t": 11.25,
+        "pan": 0,
+        "seed": 537
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.456,
+        "gain": 0.41600000000000004,
+        "t": 11.3333,
+        "pan": 0,
+        "seed": 544
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.3790084039591662,
+        "t": 11.5,
+        "pan": 0,
+        "seed": 551
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.512,
+        "gain": 0.28800000000000003,
+        "t": 11.5,
+        "pan": 0,
+        "seed": 558
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.3812831816235206,
+        "t": 11.75,
+        "pan": 0,
+        "seed": 565
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.456,
+        "gain": 0.28800000000000003,
+        "t": 11.7667,
+        "pan": 0,
+        "seed": 572
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.39499738329759543,
+        "t": 12,
+        "pan": 0,
+        "seed": 579
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.568,
+        "gain": 0.28800000000000003,
+        "t": 12.0333,
+        "pan": 0,
+        "seed": 586
+      },
+      {
+        "type": "marimba",
+        "hz": 392,
+        "notes": [
+          0,
+          4,
+          7,
+          12
+        ],
+        "step": 0.08,
+        "decay": 0.8,
+        "dur": 2,
+        "mallet": 0.35,
+        "gain": 0.26,
+        "t": 12.15,
+        "pan": 0,
+        "seed": 593
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.6239999999999999,
+        "gain": 0.41600000000000004,
+        "t": 12.2,
+        "pan": 0,
+        "seed": 600
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.4121051536190004,
+        "t": 12.25,
+        "pan": 0,
+        "seed": 607
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.4,
+        "gain": 0.41600000000000004,
+        "t": 12.3333,
+        "pan": 0,
+        "seed": 614
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.6239999999999999,
+        "gain": 0.41600000000000004,
+        "t": 12.4667,
+        "pan": 0,
+        "seed": 621
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.41952730773440927,
+        "t": 12.5,
+        "pan": 0,
+        "seed": 628
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.4,
+        "gain": 0.41600000000000004,
+        "t": 12.6,
+        "pan": 0,
+        "seed": 635
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.4180033503169618,
+        "t": 12.75,
+        "pan": 0,
+        "seed": 642
+      },
+      {
+        "type": "whir",
+        "dur": 2,
+        "hz": 330,
+        "hz2": 660,
+        "gain": 0.1,
+        "t": 12.75,
+        "pan": 0,
+        "seed": 649
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.6239999999999999,
+        "gain": 0.41600000000000004,
+        "t": 12.7667,
+        "pan": 0,
+        "seed": 656
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.456,
+        "gain": 0.41600000000000004,
+        "t": 12.9333,
+        "pan": 0,
+        "seed": 663
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.407387966265281,
+        "t": 13,
+        "pan": 0,
+        "seed": 670
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.4,
+        "gain": 0.336,
+        "t": 13.0667,
+        "pan": 0,
+        "seed": 677
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.3865723954557613,
+        "t": 13.25,
+        "pan": 0,
+        "seed": 684
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.6239999999999999,
+        "gain": 0.336,
+        "t": 13.3333,
+        "pan": 0,
+        "seed": 691
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.3533722020452485,
+        "t": 13.5,
+        "pan": 0,
+        "seed": 698
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.31926096801602116,
+        "t": 13.75,
+        "pan": 0,
+        "seed": 705
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.512,
+        "gain": 0.336,
+        "t": 13.7667,
+        "pan": 0,
+        "seed": 712
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.29210392629538284,
+        "t": 14,
+        "pan": 0,
+        "seed": 719
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.27568598092256713,
+        "t": 14.25,
+        "pan": 0,
+        "seed": 726
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.27363447233121546,
+        "t": 14.5,
+        "pan": 0,
+        "seed": 733
+      },
+      {
+        "type": "tick",
+        "dur": 0.03,
+        "pitch": 1.6239999999999999,
+        "gain": 0.28800000000000003,
+        "t": 14.6667,
+        "pan": 0,
+        "seed": 740
+      },
+      {
+        "type": "paper",
+        "dur": 0.4,
+        "density": 0.5,
+        "pitch": 1.2,
+        "gain": 0.2865012396775753,
+        "t": 14.75,
+        "pan": 0,
+        "seed": 747
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "growth.js: closed curve, natural length L(t) on a schedule; springs + biharmonic bending + short-range repulsion (radius d(t), scheduled) + circular wall with grip; edges split as they grow; uniform-scale free expansion until first contact. Stepped once at load (8 substeps per video frame), resampled to 4096 fixed material points per frame, blended linearly between frames; every frame and every half-way blend tested for self-crossing (throws).",
+      "contactTime": 5.225,
+      "planHash": 161238584,
+      "stats": {
+        "steps": 3600,
+        "contactTime": 5.225,
+        "maxNodes": 2688,
+        "minGap": 0.048614323139190674,
+        "checked": 901
+      },
+      "foldCount": {
+        "5": 0,
+        "6": 6,
+        "7": 13,
+        "10": 50,
+        "13": 203,
+        "15": 226,
+        "8.5": 14,
+        "11.5": 111
+      },
+      "foldTicks": 28,
+      "framing": "ok (worst {\"t\":13.4,\"id\":\"packed\",\"ndc\":0.8823})"
+    }
+  }
+}

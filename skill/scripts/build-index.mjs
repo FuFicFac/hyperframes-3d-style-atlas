@@ -21,6 +21,8 @@ const ROOT = resolve(SKILL, "../.."); // D Second Brain: paths in the index are 
 const demoPath = (p) => { const r = relative(ROOT, p); return r.startsWith("..") ? p : r; };
 
 const CATEGORY_RULES = [
+  // two physics-demo styles whose descriptions trip the "pixel" and "reference" keywords below
+  ["material / abstract", /^(photoelastic-stress|magnetic-memory)\b/i],
   ["reference / neutral", /\bneutral\b|reference/i],
   ["brand / channel", /\bhouse\b|brand|channel ident/i],
   ["material / abstract", /glass|chrome|liquid|optic|refract/i],

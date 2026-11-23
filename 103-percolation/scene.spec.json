@@ -1,0 +1,2321 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "percolation",
+    "name": "Percolation",
+    "description": "A white enamel board of glass sight-pipes, brass cross fittings and red-lever valves in a square grid, a trough of blue water along the top and a dry trough along the bottom. Valves click open in a seeded random order; open pipes are tinted by cluster on the enamel behind them; water fills only what it can reach from the top. An incremental union-find finds the exact valve that first joins top to bottom; when it turns, water runs the newly joined cluster down to the bottom trough. Bright, front-lit, clean diagram look.",
+    "palette": {
+      "bg": "#e8e4dc",
+      "enamel": "#f7f5ef",
+      "navy": "#1d3570",
+      "ink": "#14213f",
+      "brass": "#c9a04a",
+      "lever": "#d4372c",
+      "water": "#1f77e0",
+      "wetBand": "#4f94ff",
+      "waterFront": "#1d8bff",
+      "bandFront": "#2a5cff",
+      "highlight": "#ff1f8f",
+      "bottom": "#ffb938",
+      "pending": "#d9e2ec",
+      "gold": "#f2b632",
+      "tints": [
+        "#7fd36b",
+        "#cfe05a",
+        "#ffa877"
+      ]
+    },
+    "world": {
+      "background": "#e8e4dc",
+      "sky": null,
+      "fog": null,
+      "environment": "room",
+      "environmentIntensity": 0.75,
+      "toneMapping": "neutral",
+      "exposure": 0.95,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "enamel": {
+        "type": "physical",
+        "baseColor": "#f7f5ef",
+        "roughness": 0.32,
+        "metalness": 0,
+        "clearcoat": 0.5,
+        "clearcoatRoughness": 0.18
+      },
+      "navy": {
+        "type": "physical",
+        "baseColor": "#1d3570",
+        "roughness": 0.3,
+        "metalness": 0,
+        "clearcoat": 0.6,
+        "clearcoatRoughness": 0.15
+      },
+      "brass": {
+        "type": "standard",
+        "baseColor": "#c9a04a",
+        "roughness": 0.3,
+        "metalness": 0.9
+      },
+      "lever": {
+        "type": "physical",
+        "baseColor": "#d4372c",
+        "roughness": 0.35,
+        "metalness": 0,
+        "clearcoat": 0.7,
+        "clearcoatRoughness": 0.12
+      },
+      "water": {
+        "type": "physical",
+        "baseColor": "#0b55e6",
+        "roughness": 0.12,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.05,
+        "emission": {
+          "color": "#0a44c8",
+          "strength": 0.7
+        }
+      },
+      "troughInside": {
+        "type": "standard",
+        "baseColor": "#e4eaef",
+        "roughness": 0.4,
+        "metalness": 0
+      },
+      "band": {
+        "type": "lambert",
+        "baseColor": "#ffffff"
+      }
+    },
+    "glass": {
+      "color": "#cbe2ee",
+      "alphaFace": 0.24,
+      "alphaRim": 0.82,
+      "fresnelPower": 1.8,
+      "rim": "#3f6a8c",
+      "rimStrength": 0.6,
+      "envIntensity": 1
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#b8b0a2",
+        "intensity": 1.15
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff6ea",
+        "intensity": 2.1,
+        "position": [
+          -5,
+          7,
+          9
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 1.4,
+          "mapSize": 4096,
+          "extent": 7.2,
+          "near": 1,
+          "far": 30,
+          "bias": -0.0004,
+          "normalBias": 0.015
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#e8f0ff",
+        "intensity": 0.5,
+        "position": [
+          6,
+          3,
+          6
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.18,
+        "radius": 0.25,
+        "threshold": 2.6
+      },
+      "vignette": {
+        "darkness": 0.22,
+        "offset": 1.2
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.2,
+      "far": 80,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 800,
+      "color": "#ffffff",
+      "height": 0.4
+    },
+    "grid": {
+      "W": 16,
+      "H": 8,
+      "pitch": 0.6
+    },
+    "board": {
+      "margin": [
+        3.6,
+        2.2
+      ],
+      "depth": 0.2,
+      "border": 0.16,
+      "rivet": 0.06
+    },
+    "pipe": {
+      "z": 0.13,
+      "glassR": 0.095,
+      "waterR": 0.077,
+      "joint": 0.106,
+      "valveR": 0.085,
+      "valveD": 0.13,
+      "collarR": 0.106,
+      "collarL": 0.14,
+      "lever": [
+        0.26,
+        0.048,
+        0.032
+      ],
+      "pop": 0.4
+    },
+    "band": {
+      "width": 0.32,
+      "z": 0.004,
+      "fade": 0.25
+    },
+    "front": {
+      "settle": 0.6,
+      "boost": 1.15
+    },
+    "trough": {
+      "h": 0.46,
+      "d": 0.34,
+      "extra": 0.42,
+      "rim": 0.03
+    },
+    "ring": {
+      "r0": 0.25,
+      "r1": 0.335,
+      "z": 0.25,
+      "grow": 0.5
+    },
+    "plan": {
+      "seed": 483,
+      "turn": 0.2,
+      "open": {
+        "knots": [
+          [
+            0,
+            0.12
+          ],
+          [
+            0.18,
+            2.4
+          ],
+          [
+            0.58,
+            5.4
+          ],
+          [
+            1,
+            7.1
+          ]
+        ]
+      },
+      "decide": {
+        "at": 9.55,
+        "turn": 0.55,
+        "dt": 0.6
+      },
+      "flow": {
+        "dt": 0.16,
+        "reachB": 12.4
+      },
+      "tints": 3
+    },
+    "caption": {
+      "x": 960,
+      "y": 56,
+      "h": 88,
+      "cap": 50,
+      "maxW": 900,
+      "font": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "weight": 800,
+      "plate": "#1d3570",
+      "edge": "#ffffff",
+      "ink": "#ffffff",
+      "drop": "#5fb0ff"
+    },
+    "sound": {
+      "valve": {
+        "gain": 0.5,
+        "base": 0.4,
+        "per": 0.25,
+        "pitch": 1.15
+      },
+      "gurgle": {
+        "gain": 0.16,
+        "pitch": 0.9
+      },
+      "race": {
+        "gain": 0.24,
+        "pitch": 0.8
+      },
+      "decide": {
+        "gain": 0.95,
+        "thud": 0.6
+      },
+      "trough": {
+        "gain": 0.32,
+        "rumble": 0.35
+      },
+      "bed": {
+        "gain": 0.55,
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "brightness": 700
+      },
+      "rush": {
+        "gain": 0.5
+      }
+    },
+    "sfx": {
+      "enter": "click",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "clack",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Every valve has one turn time from percolate.js; its lever swings 90 degrees (outBack) from across the pipe to along it.",
+      "Water is an earliest-arrival flood from the top trough over open pipes: each pipe fills from the end the water reaches, at a fixed time per pipe.",
+      "Open pipes not yet reached by water are tinted by cluster (a pastel band on the enamel); merged clusters cross-fade to the larger one's colour.",
+      "Camera: locked holds joined by short eased moves (no drift): top half, whole board, close-up on the deciding valve, pull back."
+    ]
+  },
+  "scene": {
+    "id": "103-percolation",
+    "style": "percolation",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "random",
+        "t": 0,
+        "dur": 2.5,
+        "label": "Links open at random"
+      },
+      {
+        "id": "clusters",
+        "t": 2.5,
+        "dur": 3,
+        "label": "Clusters grow, still apart"
+      },
+      {
+        "id": "close",
+        "t": 5.5,
+        "dur": 3,
+        "label": "So close. Still no path."
+      },
+      {
+        "id": "one",
+        "t": 8.5,
+        "dur": 2.5,
+        "label": "One more link"
+      },
+      {
+        "id": "runs",
+        "t": 11,
+        "dur": 4,
+        "label": "Now it runs end to end"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -4.51266,
+          3.28383,
+          7.04749
+        ],
+        "target": [
+          -2.17828,
+          1.77953,
+          0.00327
+        ],
+        "fov": 30
+      },
+      {
+        "t": 2.3,
+        "pos": [
+          -4.51266,
+          3.28383,
+          7.04749
+        ],
+        "target": [
+          -2.17828,
+          1.77953,
+          0.00327
+        ],
+        "fov": 30
+      },
+      {
+        "t": 3.8,
+        "pos": [
+          -2.45472,
+          2.56543,
+          9.85223
+        ],
+        "target": [
+          -0.87296,
+          1.36828,
+          0.05074
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 5.3,
+        "pos": [
+          -2.45472,
+          2.56543,
+          9.85223
+        ],
+        "target": [
+          -0.87296,
+          1.36828,
+          0.05074
+        ],
+        "fov": 30
+      },
+      {
+        "t": 6.5,
+        "pos": [
+          0.96093,
+          1.24772,
+          14.55882
+        ],
+        "target": [
+          0.09225,
+          0.52279,
+          0.09825
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 8.5,
+        "pos": [
+          0.96093,
+          1.24772,
+          14.55882
+        ],
+        "target": [
+          0.09225,
+          0.52279,
+          0.09825
+        ],
+        "fov": 30
+      },
+      {
+        "t": 9.4,
+        "pos": [
+          -0.66137,
+          1.34077,
+          3.04655
+        ],
+        "target": [
+          0.2494,
+          0.65159,
+          0.10227
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 11,
+        "pos": [
+          -0.66137,
+          1.34077,
+          3.04655
+        ],
+        "target": [
+          0.2494,
+          0.65159,
+          0.10227
+        ],
+        "fov": 30
+      },
+      {
+        "t": 13,
+        "pos": [
+          1.28342,
+          1.53937,
+          14.57634
+        ],
+        "target": [
+          0.12152,
+          0.51996,
+          0.08368
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 15,
+        "pos": [
+          1.28342,
+          1.53937,
+          14.57634
+        ],
+        "target": [
+          0.12152,
+          0.51996,
+          0.08368
+        ],
+        "fov": 30
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "dur": 8.2,
+        "attack": 0.5,
+        "release": 0.6,
+        "brightness": 700,
+        "gain": 0.55,
+        "seed": 3
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0450773195876288,
+        "pan": 0.14262295081967216,
+        "t": 0.275,
+        "seed": 203
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2655927835051546,
+        "pan": 0.23114754098360654,
+        "t": 0.325,
+        "seed": 210
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0166237113402061,
+        "pan": -0.1918032786885246,
+        "t": 0.425,
+        "seed": 217
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2371391752577319,
+        "pan": -0.10327868852459017,
+        "t": 0.475,
+        "seed": 224
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1126546391752576,
+        "pan": -0.014754098360655754,
+        "t": 0.525,
+        "seed": 231
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 0.9881701030927834,
+        "pan": 0.0737704918032787,
+        "t": 0.575,
+        "seed": 238
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.084201030927835,
+        "pan": 0.25081967213114753,
+        "t": 0.675,
+        "seed": 245
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.3047164948453607,
+        "pan": -0.260655737704918,
+        "t": 0.725,
+        "seed": 252
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1802319587628864,
+        "pan": -0.1721311475409836,
+        "t": 0.775,
+        "seed": 259
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.7696551724137931,
+        "t": 0.775,
+        "pan": 0,
+        "seed": 266
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2762628865979382,
+        "pan": 0.0049180327868852515,
+        "t": 0.875,
+        "seed": 273
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1517783505154637,
+        "pan": 0.09344262295081963,
+        "t": 0.925,
+        "seed": 280
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0272938144329895,
+        "pan": 0.18196721311475408,
+        "t": 0.975,
+        "seed": 287
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.123324742268041,
+        "pan": -0.24098360655737705,
+        "t": 1.075,
+        "seed": 294
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 0.998840206185567,
+        "pan": -0.15245901639344261,
+        "t": 1.125,
+        "seed": 301
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0948711340206183,
+        "pan": 0.024590163934426257,
+        "t": 1.225,
+        "seed": 308
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.315386597938144,
+        "pan": 0.11311475409836064,
+        "t": 1.275,
+        "seed": 315
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0664175257731958,
+        "pan": 0.2901639344262295,
+        "t": 1.375,
+        "seed": 322
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1624484536082473,
+        "pan": -0.13278688524590165,
+        "t": 1.475,
+        "seed": 329
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.037963917525773,
+        "pan": -0.044262295081967225,
+        "t": 1.525,
+        "seed": 336
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1339948453608246,
+        "pan": 0.13278688524590165,
+        "t": 1.625,
+        "seed": 343
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0095103092783504,
+        "pan": 0.22131147540983603,
+        "t": 1.675,
+        "seed": 350
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.105541237113402,
+        "pan": -0.2016393442622951,
+        "t": 1.775,
+        "seed": 357
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2015721649484534,
+        "pan": -0.024590163934426222,
+        "t": 1.875,
+        "seed": 364
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0770876288659792,
+        "pan": 0.06393442622950819,
+        "t": 1.925,
+        "seed": 371
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1731185567010307,
+        "pan": 0.24098360655737705,
+        "t": 2.025,
+        "seed": 378
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0486340206185567,
+        "pan": -0.2704918032786885,
+        "t": 2.075,
+        "seed": 385
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1446649484536082,
+        "pan": -0.09344262295081968,
+        "t": 2.175,
+        "seed": 392
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.020180412371134,
+        "pan": -0.0049180327868852515,
+        "t": 2.225,
+        "seed": 399
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.8689655172413794,
+        "t": 2.275,
+        "pan": 0,
+        "seed": 406
+      },
+      {
+        "t": 2.3,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.5,
+        "gain": 0.12,
+        "seed": 11
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1162113402061855,
+        "pan": 0.1721311475409836,
+        "t": 2.325,
+        "seed": 413
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 1.0675862068965518,
+        "t": 2.375,
+        "pan": 0,
+        "seed": 420
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.212242268041237,
+        "pan": -0.25081967213114753,
+        "t": 2.425,
+        "seed": 427
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0877577319587628,
+        "pan": -0.1622950819672131,
+        "t": 2.475,
+        "seed": 434
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1837886597938143,
+        "pan": 0.014754098360655754,
+        "t": 2.575,
+        "seed": 441
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.05930412371134,
+        "pan": 0.10327868852459014,
+        "t": 2.625,
+        "seed": 448
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2798195876288658,
+        "pan": 0.1918032786885246,
+        "t": 2.675,
+        "seed": 455
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1553350515463916,
+        "pan": 0.280327868852459,
+        "t": 2.725,
+        "seed": 462
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 1.0427586206896553,
+        "t": 2.725,
+        "pan": 0,
+        "seed": 469
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0308505154639174,
+        "pan": -0.23114754098360654,
+        "t": 2.775,
+        "seed": 476
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2513659793814431,
+        "pan": -0.1426229508196721,
+        "t": 2.825,
+        "seed": 483
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1268814432989689,
+        "pan": -0.0540983606557377,
+        "t": 2.875,
+        "seed": 490
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0023969072164949,
+        "pan": 0.03442622950819669,
+        "t": 2.925,
+        "seed": 497
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2229123711340206,
+        "pan": 0.12295081967213115,
+        "t": 2.975,
+        "seed": 504
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.8193103448275862,
+        "t": 2.975,
+        "pan": 0,
+        "seed": 511
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0984278350515462,
+        "pan": 0.21147540983606553,
+        "t": 3.025,
+        "seed": 518
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.318943298969072,
+        "pan": -0.3,
+        "t": 3.075,
+        "seed": 525
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1944587628865977,
+        "pan": -0.21147540983606558,
+        "t": 3.125,
+        "seed": 532
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0699742268041237,
+        "pan": -0.12295081967213115,
+        "t": 3.175,
+        "seed": 539
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2904896907216494,
+        "pan": -0.03442622950819672,
+        "t": 3.225,
+        "seed": 546
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1660051546391752,
+        "pan": 0.0540983606557377,
+        "t": 3.275,
+        "seed": 553
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.041520618556701,
+        "pan": 0.14262295081967216,
+        "t": 3.325,
+        "seed": 560
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2620360824742267,
+        "pan": 0.23114754098360654,
+        "t": 3.375,
+        "seed": 567
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1375515463917525,
+        "pan": -0.28032786885245903,
+        "t": 3.425,
+        "seed": 574
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0130670103092783,
+        "pan": -0.1918032786885246,
+        "t": 3.475,
+        "seed": 581
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.7324137931034483,
+        "t": 3.475,
+        "pan": 0,
+        "seed": 588
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.233582474226804,
+        "pan": -0.10327868852459017,
+        "t": 3.525,
+        "seed": 595
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1090979381443298,
+        "pan": -0.014754098360655754,
+        "t": 3.575,
+        "seed": 602
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.9310344827586208,
+        "t": 3.575,
+        "pan": 0,
+        "seed": 609
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 0.9846134020618555,
+        "pan": 0.0737704918032787,
+        "t": 3.625,
+        "seed": 616
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 1.030344827586207,
+        "t": 3.625,
+        "pan": 0,
+        "seed": 623
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2051288659793815,
+        "pan": 0.1622950819672131,
+        "t": 3.675,
+        "seed": 630
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.080644329896907,
+        "pan": 0.25081967213114753,
+        "t": 3.725,
+        "seed": 637
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.3011597938144328,
+        "pan": -0.260655737704918,
+        "t": 3.775,
+        "seed": 644
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.1365685424949238,
+        "pitch": 0.9682758620689654,
+        "t": 3.775,
+        "pan": 0,
+        "seed": 651
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1766752577319586,
+        "pan": -0.1721311475409836,
+        "t": 3.825,
+        "seed": 658
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 1.0675862068965518,
+        "t": 3.825,
+        "pan": 0,
+        "seed": 665
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0521907216494844,
+        "pan": -0.08360655737704917,
+        "t": 3.875,
+        "seed": 672
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2727061855670103,
+        "pan": 0.0049180327868852515,
+        "t": 3.925,
+        "seed": 679
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.148221649484536,
+        "pan": 0.09344262295081963,
+        "t": 3.975,
+        "seed": 686
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.14928203230275508,
+        "pitch": 1.0055172413793103,
+        "t": 3.975,
+        "pan": 0,
+        "seed": 693
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0237371134020616,
+        "pan": 0.18196721311475408,
+        "t": 4.025,
+        "seed": 700
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2442525773195874,
+        "pan": 0.2704918032786885,
+        "t": 4.075,
+        "seed": 707
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1197680412371134,
+        "pan": -0.24098360655737705,
+        "t": 4.125,
+        "seed": 714
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.943448275862069,
+        "t": 4.125,
+        "pan": 0,
+        "seed": 721
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 0.9952835051546391,
+        "pan": -0.15245901639344261,
+        "t": 4.175,
+        "seed": 728
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.215798969072165,
+        "pan": -0.06393442622950819,
+        "t": 4.225,
+        "seed": 735
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0913144329896907,
+        "pan": 0.024590163934426257,
+        "t": 4.275,
+        "seed": 742
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.3118298969072164,
+        "pan": 0.11311475409836064,
+        "t": 4.325,
+        "seed": 749
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.187345360824742,
+        "pan": 0.2016393442622951,
+        "t": 4.375,
+        "seed": 756
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.062860824742268,
+        "pan": 0.2901639344262295,
+        "t": 4.425,
+        "seed": 763
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2833762886597937,
+        "pan": -0.22131147540983603,
+        "t": 4.475,
+        "seed": 770
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.9186206896551725,
+        "t": 4.475,
+        "pan": 0,
+        "seed": 777
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1588917525773195,
+        "pan": -0.13278688524590165,
+        "t": 4.525,
+        "seed": 784
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0344072164948452,
+        "pan": -0.044262295081967225,
+        "t": 4.575,
+        "seed": 791
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.254922680412371,
+        "pan": 0.0442622950819672,
+        "t": 4.625,
+        "seed": 798
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1304381443298968,
+        "pan": 0.13278688524590165,
+        "t": 4.675,
+        "seed": 805
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0059536082474225,
+        "pan": 0.22131147540983603,
+        "t": 4.725,
+        "seed": 812
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 1.0551724137931036,
+        "t": 4.725,
+        "pan": 0,
+        "seed": 819
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2264690721649483,
+        "pan": -0.2901639344262295,
+        "t": 4.775,
+        "seed": 826
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.101984536082474,
+        "pan": -0.2016393442622951,
+        "t": 4.825,
+        "seed": 833
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 0.9774999999999999,
+        "pan": -0.11311475409836064,
+        "t": 4.875,
+        "seed": 840
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1980154639175256,
+        "pan": -0.024590163934426222,
+        "t": 4.925,
+        "seed": 847
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0735309278350516,
+        "pan": 0.06393442622950819,
+        "t": 4.975,
+        "seed": 854
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2940463917525773,
+        "pan": 0.1524590163934426,
+        "t": 5.025,
+        "seed": 861
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.9310344827586208,
+        "t": 5.025,
+        "pan": 0,
+        "seed": 868
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1695618556701028,
+        "pan": 0.24098360655737705,
+        "t": 5.075,
+        "seed": 875
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0450773195876288,
+        "pan": -0.2704918032786885,
+        "t": 5.125,
+        "seed": 882
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2655927835051546,
+        "pan": -0.18196721311475408,
+        "t": 5.175,
+        "seed": 889
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.8689655172413794,
+        "t": 5.175,
+        "pan": 0,
+        "seed": 896
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1411082474226804,
+        "pan": -0.09344262295081968,
+        "t": 5.225,
+        "seed": 903
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0166237113402061,
+        "pan": -0.0049180327868852515,
+        "t": 5.275,
+        "seed": 910
+      },
+      {
+        "t": 5.3,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.2,
+        "gain": 0.12,
+        "seed": 13
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2371391752577319,
+        "pan": 0.08360655737704921,
+        "t": 5.325,
+        "seed": 917
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.1126546391752576,
+        "pan": 0.1721311475409836,
+        "t": 5.375,
+        "seed": 924
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 0.9881701030927834,
+        "pan": 0.26065573770491807,
+        "t": 5.425,
+        "seed": 931
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.2086855670103092,
+        "pan": -0.25081967213114753,
+        "t": 5.475,
+        "seed": 938
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.084201030927835,
+        "pan": -0.1622950819672131,
+        "t": 5.525,
+        "seed": 945
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.3047164948453607,
+        "pan": -0.0737704918032787,
+        "t": 5.575,
+        "seed": 952
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.943448275862069,
+        "t": 5.575,
+        "pan": 0,
+        "seed": 959
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.1802319587628864,
+        "pan": 0.014754098360655754,
+        "t": 5.625,
+        "seed": 966
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0557474226804122,
+        "pan": 0.10327868852459014,
+        "t": 5.675,
+        "seed": 973
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.1365685424949238,
+        "pitch": 0.7820689655172415,
+        "t": 5.675,
+        "pan": 0,
+        "seed": 980
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.2762628865979382,
+        "pan": 0.1918032786885246,
+        "t": 5.725,
+        "seed": 987
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.16,
+        "pitch": 0.8813793103448276,
+        "t": 5.725,
+        "pan": 0,
+        "seed": 994
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.1517783505154637,
+        "pan": 0.280327868852459,
+        "t": 5.775,
+        "seed": 1001
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.0272938144329895,
+        "pan": -0.23114754098360654,
+        "t": 5.825,
+        "seed": 1008
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.7200000000000001,
+        "t": 5.825,
+        "pan": 0,
+        "seed": 1015
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.2478092783505152,
+        "pan": -0.1426229508196721,
+        "t": 5.875,
+        "seed": 1022
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.8193103448275862,
+        "t": 5.875,
+        "pan": 0,
+        "seed": 1029
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.123324742268041,
+        "pan": -0.0540983606557377,
+        "t": 5.925,
+        "seed": 1036
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.1365685424949238,
+        "pitch": 0.9186206896551725,
+        "t": 5.925,
+        "pan": 0,
+        "seed": 1043
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 0.998840206185567,
+        "pan": 0.03442622950819669,
+        "t": 5.975,
+        "seed": 1050
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.2193556701030928,
+        "pan": 0.12295081967213115,
+        "t": 6.025,
+        "seed": 1057
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.7572413793103449,
+        "t": 6.025,
+        "pan": 0,
+        "seed": 1064
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.0948711340206183,
+        "pan": 0.21147540983606553,
+        "t": 6.075,
+        "seed": 1071
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.8565517241379311,
+        "t": 6.075,
+        "pan": 0,
+        "seed": 1078
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.315386597938144,
+        "pan": -0.3,
+        "t": 6.125,
+        "seed": 1085
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.9558620689655174,
+        "t": 6.125,
+        "pan": 0,
+        "seed": 1092
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.1909020618556698,
+        "pan": -0.21147540983606558,
+        "t": 6.175,
+        "seed": 1099
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 1.0551724137931036,
+        "t": 6.175,
+        "pan": 0,
+        "seed": 1106
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.0664175257731958,
+        "pan": -0.12295081967213115,
+        "t": 6.225,
+        "seed": 1113
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.2869329896907216,
+        "pan": -0.03442622950819672,
+        "t": 6.275,
+        "seed": 1120
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.1624484536082473,
+        "pan": 0.0540983606557377,
+        "t": 6.325,
+        "seed": 1127
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.037963917525773,
+        "pan": 0.14262295081967216,
+        "t": 6.375,
+        "seed": 1134
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.7324137931034483,
+        "t": 6.375,
+        "pan": 0,
+        "seed": 1141
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.2584793814432989,
+        "pan": 0.23114754098360654,
+        "t": 6.425,
+        "seed": 1148
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.1339948453608246,
+        "pan": -0.28032786885245903,
+        "t": 6.475,
+        "seed": 1155
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.9310344827586208,
+        "t": 6.475,
+        "pan": 0,
+        "seed": 1162
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.325,
+        "pitch": 1.0095103092783504,
+        "pan": -0.1918032786885246,
+        "t": 6.525,
+        "seed": 1169
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.2300257731958761,
+        "pan": -0.10327868852459017,
+        "t": 6.575,
+        "seed": 1176
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.1365685424949238,
+        "pitch": 0.7696551724137931,
+        "t": 6.575,
+        "pan": 0,
+        "seed": 1183
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.105541237113402,
+        "pan": -0.014754098360655754,
+        "t": 6.625,
+        "seed": 1190
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.14928203230275508,
+        "pitch": 0.8689655172413794,
+        "t": 6.625,
+        "pan": 0,
+        "seed": 1197
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 0.9810567010309277,
+        "pan": 0.0737704918032787,
+        "t": 6.675,
+        "seed": 1204
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.1365685424949238,
+        "pitch": 0.9682758620689654,
+        "t": 6.675,
+        "pan": 0,
+        "seed": 1211
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.2015721649484534,
+        "pan": 0.1622950819672131,
+        "t": 6.725,
+        "seed": 1218
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 1.0675862068965518,
+        "t": 6.725,
+        "pan": 0,
+        "seed": 1225
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.0770876288659792,
+        "pan": 0.25081967213114753,
+        "t": 6.775,
+        "seed": 1232
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.806896551724138,
+        "t": 6.775,
+        "pan": 0,
+        "seed": 1239
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.297603092783505,
+        "pan": -0.260655737704918,
+        "t": 6.825,
+        "seed": 1246
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.1731185567010307,
+        "pan": -0.1721311475409836,
+        "t": 6.875,
+        "seed": 1253
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.1365685424949238,
+        "pitch": 1.0055172413793103,
+        "t": 6.875,
+        "pan": 0,
+        "seed": 1260
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.0486340206185567,
+        "pan": -0.08360655737704917,
+        "t": 6.925,
+        "seed": 1267
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.7448275862068967,
+        "t": 6.925,
+        "pan": 0,
+        "seed": 1274
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.2691494845360825,
+        "pan": 0.0049180327868852515,
+        "t": 6.975,
+        "seed": 1281
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.8441379310344829,
+        "t": 6.975,
+        "pan": 0,
+        "seed": 1288
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.1446649484536082,
+        "pan": 0.09344262295081963,
+        "t": 7.025,
+        "seed": 1295
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.1365685424949238,
+        "pitch": 0.943448275862069,
+        "t": 7.025,
+        "pan": 0,
+        "seed": 1302
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.020180412371134,
+        "pan": 0.18196721311475408,
+        "t": 7.075,
+        "seed": 1309
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.2406958762886597,
+        "pan": 0.2704918032786885,
+        "t": 7.125,
+        "seed": 1316
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.7820689655172415,
+        "t": 7.125,
+        "pan": 0,
+        "seed": 1323
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 1.1162113402061855,
+        "pan": -0.24098360655737705,
+        "t": 7.175,
+        "seed": 1330
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.1365685424949238,
+        "pitch": 0.8813793103448276,
+        "t": 7.175,
+        "pan": 0,
+        "seed": 1337
+      },
+      {
+        "type": "click",
+        "dur": 0.03,
+        "gain": 0.37677669529663693,
+        "pitch": 0.9917268041237112,
+        "pan": -0.15245901639344261,
+        "t": 7.225,
+        "seed": 1344
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.7200000000000001,
+        "t": 7.275,
+        "pan": 0,
+        "seed": 1351
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.8193103448275862,
+        "t": 7.325,
+        "pan": 0,
+        "seed": 1358
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.7572413793103449,
+        "t": 7.475,
+        "pan": 0,
+        "seed": 1365
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 1.0551724137931036,
+        "t": 7.625,
+        "pan": 0,
+        "seed": 1372
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.12,
+        "pitch": 0.993103448275862,
+        "t": 7.775,
+        "pan": 0,
+        "seed": 1379
+      },
+      {
+        "type": "clack",
+        "dur": 0.14,
+        "gain": 0.95,
+        "pitch": 0.8,
+        "t": 10.0175,
+        "pan": 0,
+        "seed": 1386
+      },
+      {
+        "type": "thud",
+        "dur": 0.4,
+        "gain": 0.6,
+        "pitch": 1,
+        "t": 10.0275,
+        "pan": 0,
+        "seed": 1387
+      },
+      {
+        "t": 10.15,
+        "type": "pad",
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12,
+          16,
+          19
+        ],
+        "dur": 4.85,
+        "attack": 1.2,
+        "release": 1.2,
+        "brightness": 1400,
+        "gain": 0.49500000000000005,
+        "seed": 9
+      },
+      {
+        "t": 10.500000000000002,
+        "type": "riser",
+        "dur": 1.8999999999999886,
+        "gain": 0.5,
+        "seed": 5
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.2288528137423857,
+        "pitch": 0.9187096774193549,
+        "t": 10.725,
+        "pan": 0,
+        "seed": 1393
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.2288528137423857,
+        "pitch": 0.8670967741935485,
+        "t": 10.925,
+        "pan": 0,
+        "seed": 1400
+      },
+      {
+        "t": 11,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 2,
+        "gain": 0.3,
+        "seed": 7
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.24,
+        "pitch": 0.8154838709677421,
+        "t": 11.125,
+        "pan": 0,
+        "seed": 1407
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.24,
+        "pitch": 0.7638709677419356,
+        "t": 11.325,
+        "pan": 0,
+        "seed": 1414
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.2288528137423857,
+        "pitch": 0.7122580645161292,
+        "t": 11.525,
+        "pan": 0,
+        "seed": 1421
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.24,
+        "pitch": 0.8877419354838711,
+        "t": 11.775,
+        "pan": 0,
+        "seed": 1428
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.24,
+        "pitch": 0.8361290322580646,
+        "t": 11.975,
+        "pan": 0,
+        "seed": 1435
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.24,
+        "pitch": 0.7845161290322582,
+        "t": 12.175,
+        "pan": 0,
+        "seed": 1442
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.24,
+        "pitch": 0.7329032258064516,
+        "t": 12.375,
+        "pan": 0,
+        "seed": 1449
+      },
+      {
+        "type": "chime",
+        "dur": 1.6,
+        "notes": 4,
+        "sparkle": 0.6,
+        "gain": 0.32,
+        "pitch": 1,
+        "t": 12.39999999999999,
+        "pan": 0,
+        "seed": 1456
+      },
+      {
+        "type": "rumble",
+        "dur": 1.6,
+        "gain": 0.35,
+        "t": 12.39999999999999,
+        "pan": 0,
+        "seed": 1457
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.24,
+        "pitch": 0.9083870967741936,
+        "t": 12.625,
+        "pan": 0,
+        "seed": 1463
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.24,
+        "pitch": 0.8567741935483872,
+        "t": 12.825,
+        "pan": 0,
+        "seed": 1470
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.24,
+        "pitch": 0.8051612903225808,
+        "t": 13.025,
+        "pan": 0,
+        "seed": 1477
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.24,
+        "pitch": 0.7535483870967743,
+        "t": 13.225,
+        "pan": 0,
+        "seed": 1484
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.204,
+        "pitch": 0.9290322580645163,
+        "t": 13.475,
+        "pan": 0,
+        "seed": 1491
+      },
+      {
+        "type": "bubble",
+        "dur": 0.1,
+        "gain": 0.204,
+        "pitch": 0.8774193548387098,
+        "t": 13.675,
+        "pan": 0,
+        "seed": 1498
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "percolate.js: 16 x 8 joints, 264 valved pipes (13 rows of vertical pipes incl. both trough rows, 12 rows of horizontal). Seeded opening order; incremental union-find gives the exact pipe that first joins the top trough to the bottom one; pipes before it open in beats 1-3, it opens alone in beat 4, later ones never open. Water = earliest-arrival flood from the top trough over open pipes (B is a sink).",
+      "plan": {
+        "bonds": 264,
+        "opened": 158,
+        "share": 0.598,
+        "kStar": 157,
+        "upHops": 3,
+        "downHops": 8,
+        "deciding": {
+          "kind": "v",
+          "i": 8,
+          "j": 3
+        },
+        "lastBefore": 7.087,
+        "settle": 8.118,
+        "tJoin": 10.7,
+        "tB": 12.4,
+        "dtRace": 0.2125,
+        "raceBonds": 70,
+        "clusters": 31
+      },
+      "framing": "ok (worst 0.97 at 6.5s)",
+      "captionRect": {
+        "x0": -0.46875,
+        "x1": 0.46875,
+        "y0": 0.7333333333333334,
+        "y1": 0.8962962962962963
+      },
+      "sound": "one click per 1/20 s bin of valve turns (gain ~ sqrt(count)); bubbles per bin of pipes starting to fill; pad bed released before beat 4 (silence), one loud clack + thud for the deciding valve, a riser landing as water reaches the bottom trough, chime + rumble there, a brighter pad under beat 5."
+    }
+  }
+}

@@ -1,0 +1,1212 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "vortex-rings",
+    "name": "Vortex Rings",
+    "description": "A black-walled glass tank lit from the side: a red lacquered drum with a round hole fires white smoke rings that roll around their own cores and travel; two rings on the same line change each other — the rear one tightens and threads the front one, which spreads wide.",
+    "palette": {
+      "bg": "#030509",
+      "ink": "#f3f6ff",
+      "smokeLit": "#fff0da",
+      "smokeShade": "#3d66d6",
+      "smokeCore": "#ffffff",
+      "shell": "#b3241c",
+      "face": "#e9dfca",
+      "brass": "#c99a3c",
+      "skin": "#efe4c8",
+      "felt": "#2f6fd0",
+      "wood": "#6b4a2c",
+      "wall": "#05070c",
+      "floor": "#0a0d14",
+      "sheet": "#24406e",
+      "glass": "#9cc4ff",
+      "lamp": "#ffd9a6",
+      "primary": "#fff0da",
+      "secondary": "#4f74c8",
+      "accent": "#b3241c"
+    },
+    "world": {
+      "background": "#030509",
+      "fog": null,
+      "environment": "room",
+      "environmentIntensity": 0.1,
+      "toneMapping": "agx",
+      "exposure": 1.05
+    },
+    "materials": {
+      "shell": {
+        "type": "physical",
+        "baseColor": "#b3241c",
+        "roughness": 0.32,
+        "metalness": 0,
+        "clearcoat": 0.45,
+        "clearcoatRoughness": 0.3
+      },
+      "face": {
+        "type": "standard",
+        "baseColor": "#e9dfca",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "hole": {
+        "type": "standard",
+        "baseColor": "#07080b",
+        "roughness": 0.9,
+        "metalness": 0,
+        "side": "double"
+      },
+      "brass": {
+        "type": "standard",
+        "baseColor": "#c99a3c",
+        "roughness": 0.3,
+        "metalness": 0.95
+      },
+      "skin": {
+        "type": "standard",
+        "baseColor": "#efe4c8",
+        "roughness": 0.75,
+        "metalness": 0,
+        "side": "double"
+      },
+      "felt": {
+        "type": "standard",
+        "baseColor": "#2f6fd0",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "wood": {
+        "type": "standard",
+        "baseColor": "#6b4a2c",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "steel": {
+        "type": "standard",
+        "baseColor": "#3a3f48",
+        "roughness": 0.4,
+        "metalness": 0.8
+      },
+      "floor": {
+        "type": "standard",
+        "baseColor": "#0a0d14",
+        "roughness": 0.55,
+        "metalness": 0.1
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#a9bff0",
+        "groundColor": "#0a0d14",
+        "intensity": 0.35
+      },
+      {
+        "id": "lamp",
+        "type": "directional",
+        "color": "#ffe3bd",
+        "intensity": 2.2,
+        "position": [
+          -2,
+          7,
+          6.5
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#7fa2ff",
+        "intensity": 1.3,
+        "position": [
+          -6,
+          3,
+          -6
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.45,
+        "radius": 0.35,
+        "threshold": 0.8
+      },
+      "vignette": {
+        "darkness": 0.42,
+        "offset": 1.1
+      }
+    },
+    "camera": {
+      "fov": 35,
+      "near": 0.3,
+      "far": 120,
+      "drift": {
+        "amp": 0,
+        "speed": 0.3
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#f3f6ff",
+      "height": 0.4
+    },
+    "sfx": {
+      "enter": "thud",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "thud",
+      "emphasis": "rustle",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "Ring radius and position come from rings.js: thin-ring self-induction plus Biot–Savart induction between the rings, RK4 at load, read back for any t.",
+      "Smoke is a cloud of soft sprites, each pinned to (azimuth, roll phase, distance from the core); it rolls around the core at the core's rotation rate.",
+      "A tap: the mallet swings in, the skin dimples, a puff leaves the hole and rolls up into a ring within half a second.",
+      "Some smoke is shed behind each ring as it travels and hangs in the tank, fading: a short wake.",
+      "Camera tracks alongside, pulls back for the second tap, swings round to the front three-quarter view for the threading, then widens."
+    ],
+    "rings": {
+      "nu": 0.001,
+      "dt": 0.0020833333333333333,
+      "x0": 0.25,
+      "soft": {
+        "R0": 1.1,
+        "a0": 0.2,
+        "G": 2.4
+      },
+      "hard": {
+        "R0": 0.715,
+        "a0": 0.13,
+        "G": 3.3
+      },
+      "launchDelay": 0.15
+    },
+    "smoke": {
+      "count": 7600,
+      "wake": 0.22,
+      "rhoMax": 1.6,
+      "rhoPow": 1.15,
+      "size": [
+        0.03,
+        0.075
+      ],
+      "level": 0.062,
+      "streak": 1.3,
+      "arms": 3,
+      "wind": 1.8,
+      "armSpread": 0.16,
+      "loose": 0.12,
+      "lit": 1.3,
+      "shade": 0.5,
+      "spinScale": 1,
+      "wobble": 0.018,
+      "form": 0.55,
+      "wakeLife": 2,
+      "wakeDrift": 0.22,
+      "light": [
+        -0.25,
+        0.72,
+        0.65
+      ]
+    },
+    "drum": {
+      "r": 1.5,
+      "len": 2.6,
+      "hole": 0.95,
+      "hoop": 0.065,
+      "tube": 0.32,
+      "rods": 8,
+      "skinDip": 0.16,
+      "mallet": {
+        "pivot": [
+          -3.05,
+          1.95,
+          0
+        ],
+        "arm": 1.75,
+        "head": 0.2,
+        "raised": 0.95,
+        "rebound": 0.45
+      }
+    },
+    "tank": {
+      "x": [
+        -4.2,
+        17
+      ],
+      "y": [
+        -2.05,
+        2.25
+      ],
+      "z": [
+        -2.7,
+        2.7
+      ],
+      "edge": 0.024,
+      "edgeLevel": 0.22
+    },
+    "wall": {
+      "band": 0.7,
+      "bandY": 0.15,
+      "level": 1
+    },
+    "caption": {
+      "font": "-apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "weight": 700,
+      "cap": 56,
+      "h": 100,
+      "x": 96,
+      "y": 70,
+      "plate": "rgba(3,5,9,0.74)",
+      "edge": "rgba(255,240,218,0.24)",
+      "ink": "#f3f6ff",
+      "dot": "#ffd9a6"
+    },
+    "sound": {
+      "bed": {
+        "gain": 0.42,
+        "root": 65.4,
+        "brightness": 520
+      },
+      "tap": {
+        "soft": 0.85,
+        "hard": 1
+      },
+      "air": {
+        "gain": 0.36,
+        "dur": 0.9
+      },
+      "pass": {
+        "gain": 0.55
+      }
+    }
+  },
+  "scene": {
+    "id": "108-vortex-rings",
+    "style": "vortex-rings",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "tap",
+        "t": 0,
+        "dur": 2.5,
+        "label": "One tap. One ring."
+      },
+      {
+        "id": "shape",
+        "t": 2.5,
+        "dur": 3,
+        "label": "It keeps its shape"
+      },
+      {
+        "id": "second",
+        "t": 5.5,
+        "dur": 2.5,
+        "label": "Send a faster second"
+      },
+      {
+        "id": "through",
+        "t": 8,
+        "dur": 3.5,
+        "label": "One passes through"
+      },
+      {
+        "id": "changed",
+        "t": 11.5,
+        "dur": 3.5,
+        "label": "Each changed the other"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          4.2827,
+          1.37317,
+          6.28703
+        ],
+        "target": [
+          -0.45389,
+          0.26195,
+          0.66354
+        ],
+        "fov": 35
+      },
+      {
+        "t": 2.4,
+        "pos": [
+          4.79673,
+          1.21724,
+          5.71345
+        ],
+        "target": [
+          0.25016,
+          0.33571,
+          0.73412
+        ],
+        "fov": 35,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 3,
+        "pos": [
+          5.59978,
+          0.67677,
+          4.85657
+        ],
+        "target": [
+          0.97065,
+          0.0639,
+          0.87128
+        ],
+        "fov": 35,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 3.5,
+        "pos": [
+          5.91632,
+          0.67967,
+          4.87866
+        ],
+        "target": [
+          1.26472,
+          0.06382,
+          0.87404
+        ],
+        "fov": 35,
+        "ease": "linear"
+      },
+      {
+        "t": 4,
+        "pos": [
+          6.23079,
+          0.6825,
+          4.90033
+        ],
+        "target": [
+          1.55717,
+          0.06374,
+          0.87675
+        ],
+        "fov": 35,
+        "ease": "linear"
+      },
+      {
+        "t": 4.5,
+        "pos": [
+          6.54329,
+          0.68529,
+          4.9216
+        ],
+        "target": [
+          1.84804,
+          0.06366,
+          0.8794
+        ],
+        "fov": 35,
+        "ease": "linear"
+      },
+      {
+        "t": 5,
+        "pos": [
+          6.85389,
+          0.68802,
+          4.9425
+        ],
+        "target": [
+          2.1374,
+          0.06358,
+          0.882
+        ],
+        "fov": 35,
+        "ease": "linear"
+      },
+      {
+        "t": 6.05,
+        "pos": [
+          7.1505,
+          1.74618,
+          7.7979
+        ],
+        "target": [
+          2.12861,
+          0.5282,
+          0.76355
+        ],
+        "fov": 35,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 7.8,
+        "pos": [
+          7.1505,
+          1.74618,
+          7.7979
+        ],
+        "target": [
+          2.12861,
+          0.5282,
+          0.76355
+        ],
+        "fov": 35
+      },
+      {
+        "t": 9.341239808498687,
+        "pos": [
+          10.22425,
+          1.34585,
+          5.42401
+        ],
+        "target": [
+          4.50128,
+          0.16296,
+          1.58556
+        ],
+        "fov": 35,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 11.3,
+        "pos": [
+          12.24942,
+          1.4701,
+          4.48077
+        ],
+        "target": [
+          7.18556,
+          0.46022,
+          0.12122
+        ],
+        "fov": 35,
+        "ease": "linear"
+      },
+      {
+        "t": 12.7,
+        "pos": [
+          14.65825,
+          1.70584,
+          7.41278
+        ],
+        "target": [
+          8.47268,
+          0.45055,
+          0.06901
+        ],
+        "fov": 24,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 15,
+        "pos": [
+          16.8171,
+          1.59413,
+          7.80011
+        ],
+        "target": [
+          10.51017,
+          0.38469,
+          0.00089
+        ],
+        "fov": 24,
+        "ease": "linear"
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.42,
+        "root": 65.4,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "attack": 1.2,
+        "release": 2,
+        "brightness": 520
+      },
+      {
+        "type": "thud",
+        "gain": 0.85,
+        "pitch": 0.5,
+        "dur": 0.6,
+        "t": 0.4,
+        "pan": -0.3,
+        "seed": 201
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.55,
+        "gain": 0.35,
+        "pitch": 0.7,
+        "t": 0.55,
+        "pan": -0.3,
+        "seed": 202
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10862157339248933,
+        "pitch": 0.5813095487222398,
+        "t": 0.6000000000000001,
+        "pan": -0.33991623770138835,
+        "seed": 208
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10841635191883034,
+        "pitch": 0.5805839871600675,
+        "t": 1,
+        "pan": -0.30934221091072617,
+        "seed": 215
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.1082199139761174,
+        "pitch": 0.5798856832704329,
+        "t": 1.4,
+        "pan": -0.2789343716770958,
+        "seed": 222
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10803158525509532,
+        "pitch": 0.579212662975563,
+        "t": 1.7999999999999998,
+        "pan": -0.24868659043898234,
+        "seed": 229
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.1078507647693567,
+        "pitch": 0.5785631591769296,
+        "t": 2.1999999999999997,
+        "pan": -0.2185931738010551,
+        "seed": 236
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10767691468888337,
+        "pitch": 0.5779355837944156,
+        "t": 2.5999999999999996,
+        "pan": -0.18864881956984278,
+        "seed": 243
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.1075095518679824,
+        "pitch": 0.5773285043731751,
+        "t": 2.9999999999999996,
+        "pan": -0.1588485777656727,
+        "seed": 250
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10734824074070988,
+        "pitch": 0.5767406243910281,
+        "t": 3.3999999999999995,
+        "pan": -0.12918781664974607,
+        "seed": 257
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10719258732801298,
+        "pitch": 0.5761707665854209,
+        "t": 3.7999999999999994,
+        "pan": -0.09966219298495871,
+        "seed": 264
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.1070422341548298,
+        "pitch": 0.5756178587608355,
+        "t": 4.199999999999999,
+        "pan": -0.07026762589078167,
+        "seed": 271
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10689685591675877,
+        "pitch": 0.5750809216465957,
+        "t": 4.6,
+        "pan": -0.04100027376510623,
+        "seed": 278
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.1067561557678798,
+        "pitch": 0.5745590584595643,
+        "t": 5,
+        "pan": -0.011856513836095817,
+        "seed": 285
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10661986212620773,
+        "pitch": 0.5740514458922996,
+        "t": 5.4,
+        "pan": 0.017167076020276006,
+        "seed": 292
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.1064877259127978,
+        "pitch": 0.5735573262992535,
+        "t": 5.800000000000001,
+        "pan": 0.04607373350237487,
+        "seed": 299
+      },
+      {
+        "type": "thud",
+        "gain": 1,
+        "pitch": 0.62,
+        "dur": 0.6,
+        "t": 6,
+        "pan": -0.3,
+        "seed": 306
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.55,
+        "gain": 0.5,
+        "pitch": 0.7,
+        "t": 6.15,
+        "pan": -0.3,
+        "seed": 307
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.17727250039353842,
+        "pitch": 0.7342672523080311,
+        "t": 6.2,
+        "pan": -0.33539324828065087,
+        "seed": 313
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.1073003332088225,
+        "pitch": 0.5765655049577333,
+        "t": 6.200000000000001,
+        "pan": 0.07496818311367698,
+        "seed": 320
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.17680613244140422,
+        "pitch": 0.7335066993156525,
+        "t": 6.6000000000000005,
+        "pan": -0.26913084376542507,
+        "seed": 327
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.1073189157382028,
+        "pitch": 0.5766334596026206,
+        "t": 6.600000000000001,
+        "pan": 0.10452554066666009,
+        "seed": 334
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.17713368286133196,
+        "pitch": 0.7340410815053252,
+        "t": 7.000000000000001,
+        "pan": -0.20290186643441763,
+        "seed": 341
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10736885932445045,
+        "pitch": 0.5768159183709558,
+        "t": 7.000000000000002,
+        "pan": 0.13411207855088336,
+        "seed": 348
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.178568896083785,
+        "pitch": 0.7363708035303456,
+        "t": 7.400000000000001,
+        "pan": -0.13635146532186607,
+        "seed": 355
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10744717265344136,
+        "pitch": 0.5771014928863041,
+        "t": 7.400000000000002,
+        "pan": 0.16375384915445124,
+        "seed": 362
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.18172966028655316,
+        "pitch": 0.7414358773996389,
+        "t": 7.800000000000002,
+        "pan": -0.06896257807702966,
+        "seed": 369
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10753385686363608,
+        "pitch": 0.5774168460271831,
+        "t": 7.8000000000000025,
+        "pan": 0.1934683128366339,
+        "seed": 376
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.1879317398115206,
+        "pitch": 0.7511271108062492,
+        "t": 8.200000000000001,
+        "pan": 0.00009708212117232051,
+        "seed": 383
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10755729170474108,
+        "pitch": 0.5775019669591963,
+        "t": 8.200000000000003,
+        "pan": 0.22323798497555158,
+        "seed": 390
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.20039518026763883,
+        "pitch": 0.7697151224247503,
+        "t": 8.600000000000001,
+        "pan": 0.07233401978194931,
+        "seed": 397
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10728307897343883,
+        "pitch": 0.5765023750817836,
+        "t": 8.600000000000003,
+        "pan": 0.2529288108934735,
+        "seed": 404
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.22871449249522566,
+        "pitch": 0.808384353596787,
+        "t": 9.000000000000002,
+        "pan": 0.15091230485873575,
+        "seed": 411
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10594006389400791,
+        "pitch": 0.5714879352873268,
+        "t": 9.000000000000004,
+        "pan": 0.2820152488314468,
+        "seed": 418
+      },
+      {
+        "type": "rustle",
+        "dur": 0.8,
+        "density": 0.6,
+        "gain": 0.55,
+        "t": 9.341239808498687,
+        "pan": -0.3,
+        "seed": 425
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.7,
+        "gain": 0.44000000000000006,
+        "pitch": 0.55,
+        "t": 9.341239808498687,
+        "pan": -0.3,
+        "seed": 426
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.30261513139488244,
+        "pitch": 0.8936956867073073,
+        "t": 9.400000000000002,
+        "pan": 0.24337257981277105,
+        "seed": 432
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10161588323880602,
+        "pitch": 0.5537084733439795,
+        "t": 9.400000000000004,
+        "pan": 0.30866793514669644,
+        "seed": 439
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.3472463325290746,
+        "pitch": 0.9380482031910702,
+        "t": 9.800000000000002,
+        "pan": 0.3562727307598842,
+        "seed": 446
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.09913712036617527,
+        "pitch": 0.5419798708161055,
+        "t": 9.800000000000004,
+        "pan": 0.3305298961322395,
+        "seed": 453
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.24879305699029122,
+        "pitch": 0.8334457045323937,
+        "t": 10.200000000000003,
+        "pan": 0.45785751369269356,
+        "seed": 460
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10418275281272597,
+        "pitch": 0.5645957177659874,
+        "t": 10.200000000000005,
+        "pan": 0.3547747425164989,
+        "seed": 467
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.2032890501930664,
+        "pitch": 0.7738784782866619,
+        "t": 10.600000000000003,
+        "pan": 0.5395508913439044,
+        "seed": 474
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10642940069179592,
+        "pitch": 0.5733385910733505,
+        "t": 10.600000000000005,
+        "pan": 0.38278091646955903,
+        "seed": 481
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.18358103048159824,
+        "pitch": 0.7443621957687097,
+        "t": 11.000000000000004,
+        "pan": 0.6,
+        "seed": 488
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10690135977717072,
+        "pitch": 0.5750975907085505,
+        "t": 11.000000000000005,
+        "pan": 0.4118514310568425,
+        "seed": 495
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.17304108345401017,
+        "pitch": 0.7272902668451355,
+        "t": 11.400000000000004,
+        "pan": 0.6,
+        "seed": 502
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10683108648368231,
+        "pitch": 0.5748372513985424,
+        "t": 11.400000000000006,
+        "pan": 0.44104914922616245,
+        "seed": 509
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.16652176116873907,
+        "pitch": 0.7161831748320079,
+        "t": 11.800000000000004,
+        "pan": 0.6,
+        "seed": 516
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10660932412091594,
+        "pitch": 0.5740121115684388,
+        "t": 11.800000000000006,
+        "pan": 0.4701057790664702,
+        "seed": 523
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.16207786774739394,
+        "pitch": 0.7083384726144601,
+        "t": 12.200000000000005,
+        "pan": 0.6,
+        "seed": 530
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10635840232210747,
+        "pitch": 0.5730718035000958,
+        "t": 12.200000000000006,
+        "pan": 0.49895169153602414,
+        "seed": 537
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.15883288829345016,
+        "pitch": 0.7024562453718836,
+        "t": 12.600000000000005,
+        "pan": 0.6,
+        "seed": 544
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.1061170356339066,
+        "pitch": 0.5721604729137298,
+        "t": 12.600000000000007,
+        "pan": 0.5275799923989039,
+        "seed": 551
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.15633839008358988,
+        "pitch": 0.6978395353098114,
+        "t": 13.000000000000005,
+        "pan": 0.6,
+        "seed": 558
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10589607210121238,
+        "pitch": 0.571320176718056,
+        "t": 13.000000000000007,
+        "pan": 0.5560034578982492,
+        "seed": 565
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.1543427163950102,
+        "pitch": 0.6940831605306664,
+        "t": 13.400000000000006,
+        "pan": 0.6,
+        "seed": 572
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10569677870162676,
+        "pitch": 0.5705572658671311,
+        "t": 13.400000000000007,
+        "pan": 0.5842397997369004,
+        "seed": 579
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.15269446519892468,
+        "pitch": 0.6909365699509833,
+        "t": 13.800000000000006,
+        "pan": 0.6,
+        "seed": 586
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10551727689983935,
+        "pitch": 0.5698659625637434,
+        "t": 13.800000000000008,
+        "pan": 0.6,
+        "seed": 593
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.15129749238183218,
+        "pitch": 0.688237145278786,
+        "t": 14.200000000000006,
+        "pan": 0.6,
+        "seed": 600
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10535488969251368,
+        "pitch": 0.5692371186167764,
+        "t": 14.200000000000008,
+        "pan": 0.6,
+        "seed": 607
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.15008804723626662,
+        "pitch": 0.6858751381013288,
+        "t": 14.600000000000007,
+        "pan": 0.6,
+        "seed": 614
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.9,
+        "gain": 0.10520698567982571,
+        "pitch": 0.5686614608714006,
+        "t": 14.600000000000009,
+        "pan": 0.6,
+        "seed": 621
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "rings.js integrates two coaxial thin vortex rings (self-induction + Biot–Savart mutual induction, slow core growth) with RK4 at load; the smoke sprites are placed around each ring's core from (x, R, a, spin) read at t.",
+      "pass": {
+        "t": 9.691,
+        "rearR": 0.49,
+        "frontR": 1.258
+      },
+      "impulseDrift": 8.705654300970095e-14,
+      "framing": "ok (worst 0.8332 at 8.033333s)",
+      "ticks": 61
+    }
+  }
+}

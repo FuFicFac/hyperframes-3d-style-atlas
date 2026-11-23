@@ -1,0 +1,1094 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "snap-through",
+    "name": "Snap-Through",
+    "description": "A bright workbench test rig for a bistable arch: a thin tempered-blue spring-steel strip clamped flat between machined steel jaws on two aluminium pedestals, bowed upward into a shallow arch, with a small aluminium tray and post on its crown and a dial gauge under it reading the deflection through a chrome plunger (red mark = the limit point). Slotted brass weights fly from a ready stack and drop down the post one at a time; each barely moves the arch, until one more passes the limit load and the strip snaps through to the other side with a short damped ring, the weights hopping ballistically on the tray. Taking every weight off leaves it flipped. The motion is the shallow two-bar (von Mises) arch: load = v^3 - v, closed form (snap.js).",
+    "palette": {
+      "bg": "#eef0f1",
+      "wall": "#e9ebec",
+      "bench": "#d9b98c",
+      "steelBlue": "#2f63c9",
+      "steel": "#a9b0b8",
+      "alu": "#cfd5db",
+      "brass": "#d9aa4a",
+      "ink": "#1d2430",
+      "red": "#cc1d24",
+      "face": "#fbfaf6",
+      "plate": "#ffffff"
+    },
+    "world": {
+      "background": "#eef0f1",
+      "fog": {
+        "color": "#eef0f1",
+        "near": 16,
+        "far": 40
+      },
+      "environment": "room",
+      "environmentIntensity": 0.75,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "bench": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.62,
+        "metalness": 0
+      },
+      "wall": {
+        "type": "standard",
+        "baseColor": "#e9ebec",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "basePlate": {
+        "type": "physical",
+        "baseColor": "#5b636d",
+        "roughness": 0.42,
+        "metalness": 0.75,
+        "clearcoat": 0.2,
+        "clearcoatRoughness": 0.4
+      },
+      "pedestal": {
+        "type": "physical",
+        "baseColor": "#cfd5db",
+        "roughness": 0.32,
+        "metalness": 0.85
+      },
+      "jaw": {
+        "type": "physical",
+        "baseColor": "#9aa2ab",
+        "roughness": 0.26,
+        "metalness": 0.95
+      },
+      "bolt": {
+        "type": "physical",
+        "baseColor": "#3d434b",
+        "roughness": 0.35,
+        "metalness": 0.9
+      },
+      "strip": {
+        "type": "physical",
+        "baseColor": "#3d78e6",
+        "roughness": 0.3,
+        "metalness": 0.6,
+        "clearcoat": 0.6,
+        "clearcoatRoughness": 0.12,
+        "iridescence": 0.35,
+        "side": "double"
+      },
+      "stripGhost": {
+        "type": "basic",
+        "baseColor": "#8fb2f2",
+        "opacity": 0.4
+      },
+      "tray": {
+        "type": "physical",
+        "baseColor": "#d6dbe0",
+        "roughness": 0.3,
+        "metalness": 0.9
+      },
+      "brass": {
+        "type": "physical",
+        "baseColor": "#d9aa4a",
+        "roughness": 0.26,
+        "metalness": 1,
+        "clearcoat": 0.3,
+        "clearcoatRoughness": 0.2
+      },
+      "chrome": {
+        "type": "physical",
+        "baseColor": "#e9edf1",
+        "roughness": 0.12,
+        "metalness": 1
+      },
+      "gaugeBody": {
+        "type": "physical",
+        "baseColor": "#1f2630",
+        "roughness": 0.4,
+        "metalness": 0.3,
+        "clearcoat": 0.5,
+        "clearcoatRoughness": 0.2
+      },
+      "needle": {
+        "type": "basic",
+        "baseColor": "#141a22"
+      },
+      "redMark": {
+        "type": "basic",
+        "baseColor": "#e0262b"
+      },
+      "glass": {
+        "type": "physical",
+        "baseColor": "#ffffff",
+        "roughness": 0.05,
+        "metalness": 0,
+        "transmission": 0,
+        "opacity": 0.12,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.05
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#d8c7ae",
+        "intensity": 0.75
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff4e6",
+        "intensity": 3.3,
+        "position": [
+          -5.5,
+          6.5,
+          3.6
+        ],
+        "target": [
+          0,
+          0.9,
+          0
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 2048,
+          "extent": 3.9,
+          "near": 0.5,
+          "far": 24,
+          "bias": -0.0004,
+          "normalBias": 0.02
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#dfe9ff",
+        "intensity": 0.9,
+        "position": [
+          3.5,
+          4.5,
+          -5
+        ],
+        "target": [
+          0,
+          1,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.18,
+        "offset": 1.2
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.2,
+      "far": 60,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#1d2430",
+      "height": 0.3
+    },
+    "rig": {
+      "span": 2.6,
+      "rise": 0.24,
+      "clampY": 1.3,
+      "weightsToLimit": 5.05,
+      "g": 36,
+      "strip": {
+        "width": 0.3,
+        "thick": 0.018,
+        "segs": 160,
+        "inClamp": 0.36
+      },
+      "clamp": {
+        "len": 0.34,
+        "w": 0.46,
+        "jawH": 0.09,
+        "bolts": 2,
+        "boltR": 0.045
+      },
+      "pedestal": {
+        "w": 0.42,
+        "d": 0.42,
+        "chamfer": 0.02
+      },
+      "basePlate": {
+        "w": 3.4,
+        "d": 1.1,
+        "h": 0.06,
+        "x": 0
+      },
+      "tray": {
+        "r": 0.21,
+        "thick": 0.03,
+        "saddle": 0.05,
+        "saddleR": 0.07
+      },
+      "post": {
+        "r": 0.022,
+        "height": 0.66
+      },
+      "weight": {
+        "count": 7,
+        "r": 0.16,
+        "thick": 0.062,
+        "hole": 0.03,
+        "slot": 0.05
+      },
+      "ready": {
+        "x": -2,
+        "z": 0.68,
+        "baseY": 0.04,
+        "plateR": 0.22,
+        "plateH": 0.03,
+        "postH": 0.5
+      },
+      "flight": {
+        "place": 0.62,
+        "remove": 0.62,
+        "hover": 0.05,
+        "arc": 0.36,
+        "liftShare": 0.32
+      },
+      "settle": {
+        "stiffness": 420,
+        "damping": 22
+      },
+      "snap": {
+        "creep": 0.1,
+        "spring": {
+          "stiffness": 400,
+          "damping": 12
+        }
+      },
+      "hop": {
+        "restitution": 0.55,
+        "stickSpeed": 0.35,
+        "maxContacts": 8,
+        "spread": 0.06,
+        "tilt": 0.6,
+        "spin": 0.5
+      },
+      "dial": {
+        "rev": 3,
+        "r": 0.3,
+        "depth": 0.1,
+        "y": 0.47,
+        "z": 0.06,
+        "stemR": 0.025,
+        "plungerR": 0.011,
+        "columnR": 0.045
+      },
+      "ghosts": {
+        "count": 3,
+        "step": 0.022,
+        "window": 0.5
+      }
+    },
+    "wood": {
+      "seed": 106,
+      "boards": 5,
+      "dark": "#cfa874",
+      "mid": "#e2c497",
+      "light": "#f0dbb8",
+      "seam": "#b98f5e",
+      "contrast": 0.16,
+      "grainFreq": 46,
+      "grainWarp": 0.35,
+      "tileLen": 3,
+      "boardW": 0.3
+    },
+    "caption": {
+      "x": 960,
+      "y": 50,
+      "h": 112,
+      "cap": 62,
+      "maxW": 1240,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#ffffff",
+      "edge": "#1d2430",
+      "ink": "#1d2430",
+      "chip": "#2f63c9",
+      "chip2": "#d9aa4a"
+    },
+    "sound": {
+      "tone": {
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "stepSemis": 1,
+        "gain": 0.2,
+        "swell": 0.08,
+        "brightness": 650,
+        "brighten": 110
+      },
+      "after": {
+        "root": 73.4,
+        "chord": [
+          0,
+          3,
+          7,
+          12
+        ],
+        "gain": 0.28,
+        "brightness": 520
+      },
+      "clink": {
+        "hz": 1568,
+        "decay": 0.07,
+        "gain": 0.32
+      },
+      "pick": {
+        "gain": 0.12
+      },
+      "snap": {
+        "gain": 1,
+        "ring": 392,
+        "ringGain": 0.9
+      },
+      "hop": {
+        "gain": 0.3,
+        "ref": 2.5
+      }
+    },
+    "sfx": {
+      "enter": "marimba",
+      "exit": "tick",
+      "move": "whoosh",
+      "land": "marimba",
+      "emphasis": "clack",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Crown state v: load = v^3 - v (shallow two-bar arch). Near branch v in [-1, -1/sqrt 3]; the limit load is 2/(3 sqrt 3).",
+      "Each weight adds Qmax / 5.05: five weights hold at 99 % of the limit, the sixth passes it and the arch snaps to the far branch.",
+      "Strip shape = crown x (1 + cos(2 pi s / span)) / 2: zero slope at both clamps.",
+      "Settles are damped springs (closed form); the snap is a 0.1 s creep to the limit point then an under-damped ring to the far state.",
+      "The weights on the tray fly ballistically when the tray drops away; contacts with the ringing tray are precomputed with restitution.",
+      "Removing weights walks back along the far branch only: v stays above +1. The dial reads the same v."
+    ]
+  },
+  "scene": {
+    "id": "106-snap-through",
+    "style": "snap-through",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "holds",
+        "t": 0,
+        "dur": 2.5,
+        "label": "A shallow arch holds"
+      },
+      {
+        "id": "little",
+        "t": 2.5,
+        "dur": 3,
+        "label": "Add a little. Nothing."
+      },
+      {
+        "id": "more",
+        "t": 5.5,
+        "dur": 3,
+        "label": "More. Still holding."
+      },
+      {
+        "id": "one",
+        "t": 8.5,
+        "dur": 2.5,
+        "label": "One more"
+      },
+      {
+        "id": "back",
+        "t": 11,
+        "dur": 4,
+        "label": "No small step back"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          1.91201,
+          2.86296,
+          6.24629
+        ],
+        "target": [
+          -0.29825,
+          1.24105,
+          -0.00203
+        ],
+        "fov": 30
+      },
+      {
+        "t": 2.3,
+        "pos": [
+          1.19127,
+          2.61173,
+          6.09626
+        ],
+        "target": [
+          -0.28179,
+          1.29088,
+          0.07683
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 5.2,
+        "pos": [
+          1.19127,
+          2.61173,
+          6.09626
+        ],
+        "target": [
+          -0.28179,
+          1.29088,
+          0.07683
+        ],
+        "fov": 30
+      },
+      {
+        "t": 6,
+        "pos": [
+          0.40431,
+          2.54186,
+          5.98121
+        ],
+        "target": [
+          -0.30125,
+          1.34713,
+          0.12979
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 10.649999999999999,
+        "pos": [
+          0.40431,
+          2.54186,
+          5.98121
+        ],
+        "target": [
+          -0.30125,
+          1.34713,
+          0.12979
+        ],
+        "fov": 30
+      },
+      {
+        "t": 11.9,
+        "pos": [
+          -2.0023,
+          2.22927,
+          5.59847
+        ],
+        "target": [
+          -0.40962,
+          1.02409,
+          0.44977
+        ],
+        "fov": 30,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 15,
+        "pos": [
+          -2.36653,
+          2.11363,
+          5.55928
+        ],
+        "target": [
+          -0.45396,
+          1.01308,
+          0.47809
+        ],
+        "fov": 30,
+        "ease": "outSine"
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "type": "pad",
+        "dur": 1.5499999999999998,
+        "gain": 0.2,
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "brightness": 650,
+        "attack": 0.6,
+        "release": 0.6,
+        "t": 0,
+        "pan": 0,
+        "seed": 106
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.2,
+        "t": 0.13139374520311686,
+        "pan": -0.5128205128205127,
+        "seed": 113
+      },
+      {
+        "type": "pad",
+        "dur": 2.8000000000000003,
+        "gain": 0.21600000000000003,
+        "root": 116.54094037952248,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "brightness": 760,
+        "attack": 0.35,
+        "release": 0.6,
+        "t": 0.95,
+        "pan": 0,
+        "seed": 120
+      },
+      {
+        "type": "marimba",
+        "hz": 1568,
+        "dur": 0.5,
+        "decay": 0.07,
+        "mallet": 0.9,
+        "gain": 0.32,
+        "t": 0.95,
+        "pan": 0,
+        "seed": 127
+      },
+      {
+        "type": "click",
+        "gain": 0.192,
+        "pitch": 2.2,
+        "t": 0.95,
+        "pan": 0,
+        "seed": 128
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.2,
+        "t": 2.340263340389897,
+        "pan": -0.5128205128205127,
+        "seed": 134
+      },
+      {
+        "type": "pad",
+        "dur": 1.9000000000000004,
+        "gain": 0.23199999999999998,
+        "root": 123.47082531403103,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "brightness": 870,
+        "attack": 0.35,
+        "release": 0.6,
+        "t": 3.15,
+        "pan": 0,
+        "seed": 141
+      },
+      {
+        "type": "marimba",
+        "hz": 1760.020491749097,
+        "dur": 0.5,
+        "decay": 0.07,
+        "mallet": 0.9,
+        "gain": 0.32,
+        "t": 3.15,
+        "pan": 0,
+        "seed": 148
+      },
+      {
+        "type": "click",
+        "gain": 0.192,
+        "pitch": 2.2,
+        "t": 3.15,
+        "pan": 0,
+        "seed": 149
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.2,
+        "t": 3.6495684186303423,
+        "pan": -0.5128205128205127,
+        "seed": 155
+      },
+      {
+        "type": "pad",
+        "dur": 2.3000000000000003,
+        "gain": 0.248,
+        "root": 130.8127826502993,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "brightness": 980,
+        "attack": 0.35,
+        "release": 0.6,
+        "t": 4.45,
+        "pan": 0,
+        "seed": 162
+      },
+      {
+        "type": "marimba",
+        "hz": 1975.5562062351612,
+        "dur": 0.5,
+        "decay": 0.07,
+        "mallet": 0.9,
+        "gain": 0.32,
+        "t": 4.45,
+        "pan": 0,
+        "seed": 169
+      },
+      {
+        "type": "click",
+        "gain": 0.192,
+        "pitch": 2.2,
+        "t": 4.45,
+        "pan": 0,
+        "seed": 170
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.2,
+        "t": 5.359380214772404,
+        "pan": -0.5128205128205127,
+        "seed": 176
+      },
+      {
+        "type": "pad",
+        "dur": 1.9,
+        "gain": 0.264,
+        "root": 138.59131548843604,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "brightness": 1090,
+        "attack": 0.35,
+        "release": 0.6,
+        "t": 6.15,
+        "pan": 0,
+        "seed": 183
+      },
+      {
+        "type": "marimba",
+        "hz": 2217.486865801013,
+        "dur": 0.5,
+        "decay": 0.07,
+        "mallet": 0.9,
+        "gain": 0.32,
+        "t": 6.15,
+        "pan": 0,
+        "seed": 190
+      },
+      {
+        "type": "click",
+        "gain": 0.192,
+        "pitch": 2.2,
+        "t": 6.15,
+        "pan": 0,
+        "seed": 191
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.2,
+        "t": 6.669791802124028,
+        "pan": -0.5128205128205127,
+        "seed": 197
+      },
+      {
+        "type": "pad",
+        "dur": 2.4999999999999996,
+        "gain": 0.27999999999999997,
+        "root": 146.8323839587038,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "brightness": 1200,
+        "attack": 0.35,
+        "release": 0.6,
+        "t": 7.45,
+        "pan": 0,
+        "seed": 204
+      },
+      {
+        "type": "marimba",
+        "hz": 2489.0448494861366,
+        "dur": 0.5,
+        "decay": 0.07,
+        "mallet": 0.9,
+        "gain": 0.32,
+        "t": 7.45,
+        "pan": 0,
+        "seed": 211
+      },
+      {
+        "type": "click",
+        "gain": 0.192,
+        "pitch": 2.2,
+        "t": 7.45,
+        "pan": 0,
+        "seed": 212
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 1.2,
+        "t": 8.580928801500015,
+        "pan": -0.5128205128205127,
+        "seed": 218
+      },
+      {
+        "type": "pad",
+        "dur": 5.65,
+        "gain": 0.28,
+        "root": 73.4,
+        "chord": [
+          0,
+          3,
+          7,
+          12
+        ],
+        "brightness": 520,
+        "attack": 0.08,
+        "release": 1.2,
+        "t": 9.35,
+        "pan": 0,
+        "seed": 225
+      },
+      {
+        "type": "marimba",
+        "hz": 2959.989844569791,
+        "dur": 0.5,
+        "decay": 0.07,
+        "mallet": 0.9,
+        "gain": 0.35200000000000004,
+        "t": 9.35,
+        "pan": 0,
+        "seed": 232
+      },
+      {
+        "type": "click",
+        "gain": 0.22399999999999998,
+        "pitch": 2.2,
+        "t": 9.35,
+        "pan": 0,
+        "seed": 233
+      },
+      {
+        "type": "clack",
+        "gain": 1,
+        "pitch": 0.55,
+        "t": 9.45,
+        "pan": 0,
+        "seed": 239
+      },
+      {
+        "type": "click",
+        "gain": 0.9,
+        "pitch": 0.7,
+        "t": 9.453999999999999,
+        "pan": 0,
+        "seed": 240
+      },
+      {
+        "type": "pluck",
+        "hz": 392,
+        "decay": 0.9,
+        "bright": 0.85,
+        "dur": 1.4,
+        "gain": 0.9,
+        "t": 9.469999999999999,
+        "pan": 0,
+        "seed": 242
+      },
+      {
+        "type": "pluck",
+        "hz": 588,
+        "decay": 0.6,
+        "bright": 0.9,
+        "dur": 1,
+        "gain": 0.54,
+        "t": 9.475,
+        "pan": 0,
+        "seed": 243
+      },
+      {
+        "type": "thud",
+        "gain": 0.75,
+        "dur": 0.5,
+        "t": 9.479999999999999,
+        "pan": 0,
+        "seed": 241
+      },
+      {
+        "type": "marimba",
+        "hz": 1317.12,
+        "dur": 0.4,
+        "decay": 0.05600000000000001,
+        "mallet": 0.95,
+        "gain": 0.3,
+        "t": 9.628365673323673,
+        "pan": 0,
+        "seed": 246
+      },
+      {
+        "type": "click",
+        "gain": 0.3,
+        "pitch": 1.8,
+        "t": 9.628365673323673,
+        "pan": 0,
+        "seed": 247
+      },
+      {
+        "type": "marimba",
+        "hz": 1317.12,
+        "dur": 0.4,
+        "decay": 0.05600000000000001,
+        "mallet": 0.95,
+        "gain": 0.2869240780627346,
+        "t": 9.848353359949266,
+        "pan": 0,
+        "seed": 253
+      },
+      {
+        "type": "click",
+        "gain": 0.20084685464391425,
+        "pitch": 1.8,
+        "t": 9.848353359949266,
+        "pan": 0,
+        "seed": 254
+      },
+      {
+        "type": "marimba",
+        "hz": 1317.12,
+        "dur": 0.4,
+        "decay": 0.05600000000000001,
+        "mallet": 0.95,
+        "gain": 0.170077002282745,
+        "t": 9.911449096755605,
+        "pan": 0,
+        "seed": 260
+      },
+      {
+        "type": "click",
+        "gain": 0.11905390159792151,
+        "pitch": 1.8,
+        "t": 9.911449096755605,
+        "pan": 0,
+        "seed": 261
+      },
+      {
+        "type": "marimba",
+        "hz": 1317.12,
+        "dur": 0.4,
+        "decay": 0.05600000000000001,
+        "mallet": 0.95,
+        "gain": 0.09218939933409552,
+        "t": 9.945197025122123,
+        "pan": 0,
+        "seed": 267
+      },
+      {
+        "type": "click",
+        "gain": 0.06453257953386687,
+        "pitch": 1.8,
+        "t": 9.945197025122123,
+        "pan": 0,
+        "seed": 268
+      },
+      {
+        "type": "marimba",
+        "hz": 1317.12,
+        "dur": 0.4,
+        "decay": 0.05600000000000001,
+        "mallet": 0.95,
+        "gain": 0.04978287779747849,
+        "t": 9.964479728770026,
+        "pan": 0,
+        "seed": 274
+      },
+      {
+        "type": "click",
+        "gain": 0.03484801445823495,
+        "pitch": 1.8,
+        "t": 9.964479728770026,
+        "pan": 0,
+        "seed": 275
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.9,
+        "t": 11.15,
+        "pan": 0,
+        "seed": 281
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.9,
+        "t": 11.65,
+        "pan": 0,
+        "seed": 288
+      },
+      {
+        "type": "marimba",
+        "hz": 1176,
+        "dur": 0.45,
+        "decay": 0.07,
+        "mallet": 0.9,
+        "gain": 0.272,
+        "t": 11.77,
+        "pan": -0.5128205128205127,
+        "seed": 295
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.9,
+        "t": 12.15,
+        "pan": 0,
+        "seed": 302
+      },
+      {
+        "type": "marimba",
+        "hz": 1109.9961917136716,
+        "dur": 0.45,
+        "decay": 0.07,
+        "mallet": 0.9,
+        "gain": 0.272,
+        "t": 12.27,
+        "pan": -0.5128205128205127,
+        "seed": 309
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.9,
+        "t": 12.65,
+        "pan": 0,
+        "seed": 316
+      },
+      {
+        "type": "marimba",
+        "hz": 1047.696892533039,
+        "dur": 0.45,
+        "decay": 0.07,
+        "mallet": 0.9,
+        "gain": 0.272,
+        "t": 12.77,
+        "pan": -0.5128205128205127,
+        "seed": 323
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.9,
+        "t": 13.15,
+        "pan": 0,
+        "seed": 330
+      },
+      {
+        "type": "marimba",
+        "hz": 988.8941843383684,
+        "dur": 0.45,
+        "decay": 0.07,
+        "mallet": 0.9,
+        "gain": 0.272,
+        "t": 13.27,
+        "pan": -0.5128205128205127,
+        "seed": 337
+      },
+      {
+        "type": "tick",
+        "gain": 0.12,
+        "pitch": 0.9,
+        "t": 13.65,
+        "pan": 0,
+        "seed": 344
+      },
+      {
+        "type": "marimba",
+        "hz": 933.3918185573013,
+        "dur": 0.45,
+        "decay": 0.07,
+        "mallet": 0.9,
+        "gain": 0.272,
+        "t": 13.77,
+        "pan": -0.5128205128205127,
+        "seed": 351
+      },
+      {
+        "type": "marimba",
+        "hz": 881.0045612034887,
+        "dur": 0.45,
+        "decay": 0.07,
+        "mallet": 0.9,
+        "gain": 0.272,
+        "t": 14.27,
+        "pan": -0.5128205128205127,
+        "seed": 358
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "snap.js: shallow two-bar arch, load = v^3 - v; each weight = Qmax / 5.05; near branch until the 6th weight, then the far branch; removals walk the far branch back only to v = +1.",
+      "plan": "levels v = -1.000, -0.959, -0.913, -0.856, -0.781, -0.624, 1.178, 1.153, 1.127, 1.099, 1.069, 1.036, 1.000; snap at 9.35 s (goes 9.45 s); 5 stack contacts, stuck at 9.96 s",
+      "framing": "ok",
+      "numbers": "no data shown; the dial has graduations only (no numerals)"
+    }
+  }
+}

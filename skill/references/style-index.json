@@ -1,10 +1,10 @@
 {
   "format": "3d-style-atlas/style-index@1",
   "generatedBy": "Skills/3d-style-atlas/scripts/build-index.mjs (re-run after adding or changing a style)",
-  "generatedAt": "2026-11-23T08:24:46.694Z",
+  "generatedAt": "2026-11-23T19:35:37.424Z",
   "pathsRelativeTo": "D Second Brain/ (demo project and mp4 paths are absolute when the demos live outside it)",
   "notes": "category is a keyword guess; props come from the STYLE.md props tables; demo topic is the first line of the demo's scene.js.",
-  "count": 101,
+  "count": 113,
   "styles": [
     {
       "id": "anamorphic",
@@ -324,6 +324,46 @@
         "spec": "Skills/3d-style-atlas/styles/chalkboard/spec.js",
         "style": "Skills/3d-style-atlas/styles/chalkboard/style.js",
         "card": "Skills/3d-style-atlas/styles/chalkboard/STYLE.md"
+      }
+    },
+    {
+      "id": "chromatography",
+      "name": "Chromatography",
+      "description": "Paper chromatography on a bright daylight lab bench: a white filter-paper strip hangs from a binder clip into a short glass jar with a little clear solvent, beside a steel rule, in front of a pale blue-grey tiled wall; a felt pen dots black ink near the bottom, the damp solvent front climbs the paper (square-root-of-time wicking on a speeding time-lapse clock) and the black dot stretches and splits into blue, magenta and yellow bands, each travelling at its own fixed fraction of the front and widening as it goes; the strip is lifted out and hung on a rack beside two finished strips with different band sets. The strip is one shader: code-baked fibre texture, darker damp region with a tide line, and Gaussian dye bands that subtract light per RGB channel (overlaps go dark, separated dyes show their colour). Clean white paper on blue-grey tiles, cool steel and glass, saturated dye colours.",
+      "summary": "**Look.** Paper chromatography on a bright daylight lab bench: a pale blue-grey tiled wall, a mid grey resin bench, a short wide glass jar with a little clear solvent, a strip of white filter paper hanging from a black binder clip on a c...",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": "numbers or text in the picture, dark or moody looks, fast action, anything needing many (> 4) components.",
+      "toneMapping": "neutral",
+      "props": [
+        "labBench",
+        "strip",
+        "stripMaterial",
+        "fibreTexture",
+        "jar",
+        "stand",
+        "rule",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "chromaplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/104-chromatography",
+          "topic": "\"What is in the black?\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/104-chromatography/renders/104-chromatography.mp4",
+          "mp4MB": 3.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/chromatography/spec.js",
+        "style": "Skills/3d-style-atlas/styles/chromatography/style.js",
+        "card": "Skills/3d-style-atlas/styles/chromatography/STYLE.md"
       }
     },
     {
@@ -745,6 +785,44 @@
         "spec": "Skills/3d-style-atlas/styles/cymatics/spec.js",
         "style": "Skills/3d-style-atlas/styles/cymatics/style.js",
         "card": "Skills/3d-style-atlas/styles/cymatics/STYLE.md"
+      }
+    },
+    {
+      "id": "differential-growth",
+      "name": "Differential Growth",
+      "description": "A bright pastel studio: a coral-pink paper ribbon stands on edge inside a low clear glass hoop on a warm white table in front of a mint sweep. The ribbon keeps growing longer but the hoop does not get bigger, so the ring swells to the glass, buckles into a row of waves that fold inward, each wave sprouts smaller waves, and the hoop ends packed with one continuous, never-crossing ribbon (seen from straight above as a coral maze). The ribbon is a stepped 2D simulation run once at load (springs, bending, short-range repulsion, a circular wall, points inserted as it grows), stored per video frame and extruded upward; a light band can run along its whole length to show it is a single strip.",
+      "summary": "**Look.** A bright pastel studio: a mint sweep, a round warm-white table, and on it a low clear glass hoop with a mint lip.",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": "numbers or text in the picture, anything where the exact final pattern must be designed in advance (it is\nwhatever the simulation produces), fast action, many separate objects.",
+      "toneMapping": "neutral",
+      "props": [
+        "growthTable",
+        "ribbon",
+        "ribbonMaterial",
+        "hoop",
+        "room",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "growth.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/110-differential-growth",
+          "topic": "\"When room runs out\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/110-differential-growth/renders/110-differential-growth.mp4",
+          "mp4MB": 5.2
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/differential-growth/spec.js",
+        "style": "Skills/3d-style-atlas/styles/differential-growth/style.js",
+        "card": "Skills/3d-style-atlas/styles/differential-growth/STYLE.md"
       }
     },
     {
@@ -1372,6 +1450,46 @@
         "spec": "Skills/3d-style-atlas/styles/glass-light/spec.js",
         "style": "Skills/3d-style-atlas/styles/glass-light/style.js",
         "card": "Skills/3d-style-atlas/styles/glass-light/STYLE.md"
+      }
+    },
+    {
+      "id": "granular-sorting",
+      "name": "Granular Sorting",
+      "description": "A bright kitchen-lab: a clear, straight-sided, flat-fronted glass jar one bead layer deep, clamped to the aluminium platform of a small white lab shaker on a pale stone counter in front of a sage tiled wall, filled with small cream beads and twelve large glossy red ones mixed at every height. Each tap of the platform lifts and loosens the bed; small beads fall into the gaps that open under the large ones, so the large ones ratchet up and end on top. Bead positions come from a seeded Monte Carlo tap-and-settle simulation run once at load (shaker.js); the hop between stored rest states is drawn.",
+      "summary": "**Look.** A bright kitchen-lab at toy scale (the jar is 3.3 m wide, about 15x a real bench jar, so one bead reads at 1080p).",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "rig",
+        "set",
+        "shakerBody",
+        "jarGlass",
+        "beads",
+        "rings",
+        "trails",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "shaker.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/111-granular-sorting",
+          "topic": "\"Shaken into order\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/111-granular-sorting/renders/111-granular-sorting.mp4",
+          "mp4MB": 10.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/granular-sorting/spec.js",
+        "style": "Skills/3d-style-atlas/styles/granular-sorting/style.js",
+        "card": "Skills/3d-style-atlas/styles/granular-sorting/STYLE.md"
       }
     },
     {
@@ -2049,6 +2167,43 @@
         "spec": "Skills/3d-style-atlas/styles/low-poly/spec.js",
         "style": "Skills/3d-style-atlas/styles/low-poly/style.js",
         "card": "Skills/3d-style-atlas/styles/low-poly/STYLE.md"
+      }
+    },
+    {
+      "id": "magnetic-memory",
+      "name": "Magnetic Memory",
+      "description": "A bright white tabletop board holding a lattice of small two-tone latching tiles (matte cream one face, glossy indigo lacquer the other, vermilion edges), each on its own axle. A red-and-silver bar magnet on a dark handle sweeps a curve over the board: tiles under it swing over in a wave and stay flipped when it leaves. A weaker, higher pass with the magnet turned over flips only some back. Every tile's flip time is the first moment the pull at its cell beats its own seeded threshold along the magnet's known path, so any frame is computed directly. Neutral tone mapping, soft key light, hard tiles, no liquid.",
+      "summary": "**Look.** A bright white tabletop board lying flat on a pale warm table, holding a lattice of 56 x 30 small square cells.",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "memoryBoard",
+        "tiles",
+        "magnet",
+        "board",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "memory.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/107-magnetic-memory",
+          "topic": "\"It remembers\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/107-magnetic-memory/renders/107-magnetic-memory.mp4",
+          "mp4MB": 10.5
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/magnetic-memory/spec.js",
+        "style": "Skills/3d-style-atlas/styles/magnetic-memory/style.js",
+        "card": "Skills/3d-style-atlas/styles/magnetic-memory/STYLE.md"
       }
     },
     {
@@ -2739,6 +2894,82 @@
       }
     },
     {
+      "id": "percolation",
+      "name": "Percolation",
+      "description": "A white enamel board of glass sight-pipes, brass cross fittings and red-lever valves in a square grid, a trough of blue water along the top and a dry trough along the bottom. Valves click open in a seeded random order; open pipes are tinted by cluster on the enamel behind them; water fills only what it can reach from the top. An incremental union-find finds the exact valve that first joins top to bottom; when it turns, water runs the newly joined cluster down to the bottom trough. Bright, front-lit, clean diagram look.",
+      "summary": "**Look.** A white enamel board standing upright, front-lit, carrying a square grid of short glass sight-pipes joined by brass ball fittings.",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "percolationBoard",
+        "network",
+        "board",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "percolate.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/103-percolation",
+          "topic": "\"One link away\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/103-percolation/renders/103-percolation.mp4",
+          "mp4MB": 9.2
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/percolation/spec.js",
+        "style": "Skills/3d-style-atlas/styles/percolation/style.js",
+        "card": "Skills/3d-style-atlas/styles/percolation/STYLE.md"
+      }
+    },
+    {
+      "id": "photoelastic-stress",
+      "name": "Photoelastic Stress",
+      "description": "Stress shows as colour: a clear notched plastic beam in an aluminium loading frame stands in front of a bright upright light box; a second polarising sheet slides across and, under it, the beam turns black and blooms with interference-colour bands (isochromatics of a dark-field circular polariscope) when the screw press loads it. Band colour is computed per pixel from the retardation R = Cf (σ1 − σ2) through a colour table integrated over the visible spectrum (blackbody light box × CIE colour-matching functions × sin²(πR/λ)); the stress is an analytical approximation (Flamant point loads for the press and every support + beam bending from the support reactions + a notch concentration factor). Bands crowd at the notch and the contacts and spread out when a third support shares the load.",
+      "summary": "**Look.** A bright lab: an upright white light box, an aluminium loading frame (channel rail, two steel posts, crosshead, screw press with an orange-knobbed handwheel) and a clear notched plastic beam on black rollers.",
+      "category": "material / abstract",
+      "goodFor": "where load / stress / pressure concentrates and how sharing or redundancy relieves it (workload, fragility,\nresilience, single points of failure); \"invisible forces made visible\"; before/after comparisons of a structure.",
+      "avoidFor": "anything needing real numbers (no scale, no units on screen), organic or soft subjects, long text.",
+      "toneMapping": "neutral",
+      "props": [
+        "polariscope",
+        "colourTable",
+        "beam",
+        "lightBox",
+        "analyserSheet",
+        "loadingFrame",
+        "fixedSupport",
+        "lab"
+      ],
+      "fourthModule": [
+        {
+          "file": "stressplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/102-photoelastic-stress",
+          "topic": "\"Where the load really goes\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/102-photoelastic-stress/renders/102-photoelastic-stress.mp4",
+          "mp4MB": 2.9
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/photoelastic-stress/spec.js",
+        "style": "Skills/3d-style-atlas/styles/photoelastic-stress/style.js",
+        "card": "Skills/3d-style-atlas/styles/photoelastic-stress/STYLE.md"
+      }
+    },
+    {
       "id": "pin-art",
       "name": "Pin Art",
       "description": "A giant pin-impression toy (pinscreen): a clear acrylic frame holding a dense grid of thousands of slim polished metal pins with domed heads, on a dark matte desk under a strong low raking key light and a soft coloured rim light, so any relief pushed into the pins reads as a field of bright pin heads and long shadows. Polished steel by default, brass and anodised colour finishes. Shapes are pressed through the field as a pure function of time: every pin's extension is sampled from a target height field built from text and icons (distance fields with a rounded bevel), a hand, a ball rolling underneath, ripples from a tap, bars rising as columns of pins, terrain or a bitmap; transitions morph between fields with a wave that travels across the grid (per-pin delay from position, eased, tiny overshoot, metallic settle) and pins drop back in a cascade. The camera orbits low so relief and shadows read.",
@@ -2903,6 +3134,123 @@
       }
     },
     {
+      "id": "reaction-diffusion",
+      "name": "Reaction-Diffusion",
+      "description": "Rules, not a plan: a macro shot of a shallow glass petri dish on a pale lab bench, filled with cream gel in which a deep-teal pattern grows. Five drops land; each spreads into a ring that pinches into spots, the spots split again and again, fronts from different drops meet and lock into one winding maze. The pattern is a real Gray–Scott reaction-diffusion simulation (two substances, 9-point Laplacian, explicit Euler, seeded drops) run once on the CPU at page load; the activator field is stored every 0.25 s of video and the gel shader blends the two neighbouring states, B-spline-filters them, raises the surface from the same value (wet glossy relief) and optionally tints each drop's territory. Soft drop plinks, then a quiet granular crackle whose density follows how much of the dish is patterned and still changing.",
+      "summary": "A macro shot of a shallow glass petri dish on a pale, cool-grey lab bench.",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "petriDish",
+        "gel",
+        "dish",
+        "drops",
+        "bottle",
+        "bench",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "grayscott.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/109-reaction-diffusion",
+          "topic": "\"Rules, not a plan\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/109-reaction-diffusion/renders/109-reaction-diffusion.mp4",
+          "mp4MB": 4.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/reaction-diffusion/spec.js",
+        "style": "Skills/3d-style-atlas/styles/reaction-diffusion/style.js",
+        "card": "Skills/3d-style-atlas/styles/reaction-diffusion/STYLE.md"
+      }
+    },
+    {
+      "id": "ripple-interference",
+      "name": "Ripple Interference",
+      "description": "A shallow ripple tank on a dark walnut bench, seen at a low angle: clear turquoise water over a pale tiled floor, two brass dippers on one brass bar, two corks with small flags floating as markers. The water surface is the exact sum of two travelling ring waves (closed form in t, ripple.js): one water mesh displaced in the vertex shader, normals from the same function per pixel, refraction to the floor with caustic bands, Fresnel reflection of an analytic studio whose low side strip picks out every crest. Corks and dippers evaluate the same function in JS. Sliding one source's timing moves the still lines of calm: the corks swap roles.",
+      "summary": "**Look.** A shallow ripple tank on a dark walnut bench in a pale studio sweep (toy scale: the tank is 5 m x 3.4 m inside, the wavelength 0.7 m, so a band of calm reads at 1080p).",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "rig",
+        "bench",
+        "tank",
+        "water",
+        "dippers",
+        "corks",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "ripple.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/101-ripple-interference",
+          "topic": "\"Timing decides the pattern\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/101-ripple-interference/renders/101-ripple-interference.mp4",
+          "mp4MB": 9.8
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/ripple-interference/spec.js",
+        "style": "Skills/3d-style-atlas/styles/ripple-interference/style.js",
+        "card": "Skills/3d-style-atlas/styles/ripple-interference/STYLE.md"
+      }
+    },
+    {
+      "id": "schlieren",
+      "name": "Schlieren",
+      "description": "Invisible air made visible: a big round mirror on an optics bench in a dim lab, a candle in front of it, a razor blade on a micrometer stand at the focus. With the blade out the mirror is an even ivory disc showing only the candle and its flame; slide the blade into the focus and the disc dims to grey and the 'still' air above the flame appears as a rising, rolling plume drawn in light and dark. One shader on the disc: a procedural plume density (closed form of position and t: rising, widening, rolling, pushed sideways by a breath puff in closed form) and the picture is its sideways derivative ∂n/∂x — what a vertical knife edge really selects.",
+      "summary": "**Look.** An optics bench in a dim lab: a large round mirror (2.1 m, toy scale) in a black anodised cell on a yoke, a candle on a brass post in front of it, a razor blade on a small micrometer stage near the camera, and a navy back wall ...",
+      "category": "material / abstract",
+      "goodFor": "hidden processes and disturbances made visible (\"it was always happening, you just couldn't see it\"),\nheat, airflow, invisible influence, before/after reveals, \"the right instrument shows what the eye misses\".",
+      "avoidFor": "anything needing numbers, bright cheerful topics (it is a dim set by design), many simultaneous subjects,\nlong text. Overlaps in theme with cloud-chamber, thermal-camera and uv-reveal (\"invisible made visible\").",
+      "toneMapping": "neutral",
+      "props": [
+        "schlierenBench",
+        "mirror",
+        "candle",
+        "knifeEdge",
+        "straw",
+        "pinholeLamp",
+        "lab"
+      ],
+      "fourthModule": [
+        {
+          "file": "plumeplan.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/112-schlieren",
+          "topic": "\"The air was moving\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/112-schlieren/renders/112-schlieren.mp4",
+          "mp4MB": 2.2
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/schlieren/spec.js",
+        "style": "Skills/3d-style-atlas/styles/schlieren/style.js",
+        "card": "Skills/3d-style-atlas/styles/schlieren/STYLE.md"
+      }
+    },
+    {
       "id": "shadow-puppets",
       "name": "Shadow Puppets",
       "description": "A shadow theatre: a warm glowing cloth screen (soft weave, slight sag, a wooden frame) lit from behind by one lamp, on which flat cut-out puppets on rods cast real shadows — crisp at the cloth, big and soft near the lamp — with jewel-coloured gel windows, jointed limbs, sliding scenery layers and a gentle cloth ripple.",
@@ -3014,6 +3362,47 @@
         "spec": "Skills/3d-style-atlas/styles/slit-scan/spec.js",
         "style": "Skills/3d-style-atlas/styles/slit-scan/style.js",
         "card": "Skills/3d-style-atlas/styles/slit-scan/STYLE.md"
+      }
+    },
+    {
+      "id": "snap-through",
+      "name": "Snap-Through",
+      "description": "A bright workbench test rig for a bistable arch: a thin tempered-blue spring-steel strip clamped flat between machined steel jaws on two aluminium pedestals, bowed upward into a shallow arch, with a small aluminium tray and post on its crown and a dial gauge under it reading the deflection through a chrome plunger (red mark = the limit point). Slotted brass weights fly from a ready stack and drop down the post one at a time; each barely moves the arch, until one more passes the limit load and the strip snaps through to the other side with a short damped ring, the weights hopping ballistically on the tray. Taking every weight off leaves it flipped. The motion is the shallow two-bar (von Mises) arch: load = v^3 - v, closed form (snap.js).",
+      "summary": "**Look.** A bright workbench test rig at toy scale (the strip spans 2.6 m, about 6x a real bench demo).",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "rig",
+        "bench",
+        "frame",
+        "strip",
+        "tray",
+        "weights",
+        "gauge",
+        "caption",
+        "helpers.shake"
+      ],
+      "fourthModule": [
+        {
+          "file": "snap.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/106-snap-through",
+          "topic": "\"Then, all at once\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/106-snap-through/renders/106-snap-through.mp4",
+          "mp4MB": 3.2
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/snap-through/spec.js",
+        "style": "Skills/3d-style-atlas/styles/snap-through/style.js",
+        "card": "Skills/3d-style-atlas/styles/snap-through/STYLE.md"
       }
     },
     {
@@ -3386,6 +3775,44 @@
       }
     },
     {
+      "id": "tensegrity",
+      "name": "Tensegrity",
+      "description": "A tensegrity tower on a bright studio table: three levels of pale wooden struts, each pair of strut ends joined only by taut red cords, so no strut touches another. The shape is SOLVED, not keyframed (tower.js): a static balance of nearly rigid struts and tension-only elastic cords gives the standing shape under prestress, the shape with a brass weight on the top three nodes, and the slumped shape after one cord is cut, where strut-on-strut contact is what finally holds it. Every cord's tension sets its glow and the pitch of its pluck; the slump runs along the solver's own damped descent between the two solved poses on an art-directed clock.",
+      "summary": "**Look.** A bright studio table (cool off-white top) under a soft blue sky sweep.",
+      "category": "other",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "rig",
+        "table",
+        "tower",
+        "weight",
+        "snips",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "tower.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/105-tensegrity",
+          "topic": "\"Nothing touches\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/105-tensegrity/renders/105-tensegrity.mp4",
+          "mp4MB": 6.4
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/tensegrity/spec.js",
+        "style": "Skills/3d-style-atlas/styles/tensegrity/style.js",
+        "card": "Skills/3d-style-atlas/styles/tensegrity/STYLE.md"
+      }
+    },
+    {
       "id": "terrarium",
       "name": "Terrarium",
       "description": "A sealed glass bottle garden on a sunlit windowsill: a thick clear jar with rim highlights and a cork, visible strata (pebbles, charcoal, soil) poured in band by band, moss cushions, unfurling ferns and leafy stems growing on a seeded plan, condensation that beads on the inner glass and runs back into the soil, soft daylight through a window with leaf shadows that passes to night and back; hand-lettered paper tags on string as labels.",
@@ -3739,6 +4166,43 @@
         "spec": "Skills/3d-style-atlas/styles/uv-reveal/spec.js",
         "style": "Skills/3d-style-atlas/styles/uv-reveal/style.js",
         "card": "Skills/3d-style-atlas/styles/uv-reveal/STYLE.md"
+      }
+    },
+    {
+      "id": "vortex-rings",
+      "name": "Vortex Rings",
+      "description": "A black-walled glass tank lit from the side: a red lacquered drum with a round hole fires white smoke rings that roll around their own cores and travel; two rings on the same line change each other — the rear one tightens and threads the front one, which spreads wide.",
+      "summary": "**Look.** A long glass tank with black walls, lit from the side.",
+      "category": "material / abstract",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "agx",
+      "props": [
+        "smoke",
+        "drum",
+        "tank",
+        "caption",
+        "helpers.malletAngle"
+      ],
+      "fourthModule": [
+        {
+          "file": "rings.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/108-vortex-rings",
+          "topic": "\"A push that travels\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/108-vortex-rings/renders/108-vortex-rings.mp4",
+          "mp4MB": 5.8
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/vortex-rings/spec.js",
+        "style": "Skills/3d-style-atlas/styles/vortex-rings/style.js",
+        "card": "Skills/3d-style-atlas/styles/vortex-rings/STYLE.md"
       }
     },
     {

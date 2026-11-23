@@ -1,0 +1,1591 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "photoelastic-stress",
+    "name": "Photoelastic Stress",
+    "description": "Stress shows as colour: a clear notched plastic beam in an aluminium loading frame stands in front of a bright upright light box; a second polarising sheet slides across and, under it, the beam turns black and blooms with interference-colour bands (isochromatics of a dark-field circular polariscope) when the screw press loads it. Band colour is computed per pixel from the retardation R = Cf (σ1 − σ2) through a colour table integrated over the visible spectrum (blackbody light box × CIE colour-matching functions × sin²(πR/λ)); the stress is an analytical approximation (Flamant point loads for the press and every support + beam bending from the support reactions + a notch concentration factor). Bands crowd at the notch and the contacts and spread out when a third support shares the load.",
+    "palette": {
+      "bg": "#e9eaec",
+      "wall": "#eceef0",
+      "bench": "#d9dbde",
+      "benchEdge": "#9da2a8",
+      "alu": "#c4c9cf",
+      "aluDark": "#7e858d",
+      "steel": "#8b9097",
+      "housing": "#f4f5f6",
+      "lightbox": "#ffffff",
+      "leak": "#0f1230",
+      "film": "#3a3f44",
+      "acrylic": "#dff1f2",
+      "ink": "#14161c",
+      "accent": "#e8622c",
+      "roller": "#2b2f36",
+      "jack": "#3c6fd1"
+    },
+    "world": {
+      "background": "#e9eaec",
+      "sky": null,
+      "fog": null,
+      "environment": "room",
+      "environmentIntensity": 0.55,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "bench": {
+        "type": "standard",
+        "baseColor": "#d9dbde",
+        "roughness": 0.78,
+        "metalness": 0,
+        "bump": {
+          "source": "bumpNoise",
+          "scale": 36,
+          "octaves": 3,
+          "seed": 102,
+          "strength": 0.12,
+          "description": "fine fbm noise: matte lab bench laminate"
+        }
+      },
+      "wall": {
+        "type": "standard",
+        "baseColor": "#eceef0",
+        "roughness": 0.95,
+        "metalness": 0
+      },
+      "housing": {
+        "type": "standard",
+        "baseColor": "#f4f5f6",
+        "roughness": 0.45,
+        "metalness": 0
+      },
+      "alu": {
+        "type": "standard",
+        "baseColor": "#c4c9cf",
+        "roughness": 0.32,
+        "metalness": 0.85
+      },
+      "aluDark": {
+        "type": "standard",
+        "baseColor": "#7e858d",
+        "roughness": 0.4,
+        "metalness": 0.8
+      },
+      "steel": {
+        "type": "standard",
+        "baseColor": "#8b9097",
+        "roughness": 0.25,
+        "metalness": 1
+      },
+      "roller": {
+        "type": "standard",
+        "baseColor": "#2b2f36",
+        "roughness": 0.35,
+        "metalness": 0.6
+      },
+      "jack": {
+        "type": "standard",
+        "baseColor": "#3c6fd1",
+        "roughness": 0.4,
+        "metalness": 0.2
+      },
+      "accent": {
+        "type": "standard",
+        "baseColor": "#e8622c",
+        "roughness": 0.45,
+        "metalness": 0
+      },
+      "rubber": {
+        "type": "standard",
+        "baseColor": "#24262b",
+        "roughness": 0.8,
+        "metalness": 0
+      },
+      "acrylicEdge": {
+        "type": "physical",
+        "baseColor": "#8fa7ab",
+        "roughness": 0.22,
+        "metalness": 0,
+        "clearcoat": 0.5,
+        "clearcoatRoughness": 0.1
+      },
+      "film": {
+        "type": "physical",
+        "baseColor": "#3a3f44",
+        "roughness": 0.18,
+        "metalness": 0,
+        "opacity": 0.16,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.1
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#a9adb3",
+        "intensity": 1.1
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff6ea",
+        "intensity": 2.2,
+        "position": [
+          -3.5,
+          6.5,
+          6.5
+        ],
+        "target": [
+          0,
+          1.4,
+          0.5
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 2048,
+          "extent": 4.6,
+          "near": 0.5,
+          "far": 24,
+          "bias": -0.0008,
+          "normalBias": 0.045
+        }
+      },
+      {
+        "id": "rim",
+        "type": "directional",
+        "color": "#dfe9ff",
+        "intensity": 0.6,
+        "position": [
+          4,
+          3.5,
+          4
+        ],
+        "target": [
+          0,
+          1.4,
+          0.5
+        ]
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.3,
+        "radius": 0.35,
+        "threshold": 1.25
+      },
+      "vignette": {
+        "darkness": 0.22,
+        "offset": 1.15
+      }
+    },
+    "camera": {
+      "fov": 34,
+      "near": 0.2,
+      "far": 60,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 700,
+      "color": "#14161c",
+      "height": 0.3
+    },
+    "lightbox": {
+      "w": 7,
+      "h": 3.3,
+      "y0": 0.62,
+      "z": 0,
+      "depth": 0.3,
+      "rim": 0.12,
+      "level": 1,
+      "tint": [
+        0.97,
+        0.985,
+        1
+      ],
+      "falloff": 0.12,
+      "leak": [
+        0.012,
+        0.014,
+        0.05
+      ]
+    },
+    "analyser": {
+      "w": 5.6,
+      "h": 1.04,
+      "y": 1.55,
+      "z": 0.98,
+      "frame": 0.05,
+      "frameDepth": 0.04,
+      "from": -5,
+      "to": 0,
+      "soft": 0.004
+    },
+    "beam": {
+      "L": 4,
+      "H": 0.7,
+      "T": 0.12,
+      "y0": 1.2,
+      "z": 0.5,
+      "edge": 0.006
+    },
+    "notch": {
+      "x": 0.8,
+      "depth": 0.2,
+      "width": 0.2,
+      "rho": 0.03,
+      "Kt": 2.4,
+      "decay": 1.35
+    },
+    "photo": {
+      "Cf": 180,
+      "rMax": 4200,
+      "tableN": 512,
+      "kelvin": 5600,
+      "gain": 1.55,
+      "edgeGlow": 0.16,
+      "clearEdge": 0.5,
+      "clearTint": [
+        0.93,
+        0.975,
+        0.98
+      ]
+    },
+    "frame": {
+      "rail": {
+        "x": 3.1,
+        "y0": 0.5,
+        "y1": 0.84,
+        "front": 0.63,
+        "z0": 0.24,
+        "z1": 0.76,
+        "lip": 0.07
+      },
+      "posts": {
+        "x": 2.75,
+        "r": 0.07,
+        "top": 3.08
+      },
+      "crosshead": {
+        "y": 2.86,
+        "h": 0.22,
+        "d": 0.3
+      },
+      "screw": {
+        "r": 0.045,
+        "wheelR": 0.3,
+        "wheelY": 3.25
+      },
+      "plunger": {
+        "r": 0.12,
+        "h": 0.22,
+        "noseR": 0.06
+      },
+      "roller": {
+        "r": 0.075,
+        "len": 0.2
+      }
+    },
+    "supports": [
+      {
+        "x": -1.7,
+        "a": 0.03
+      },
+      {
+        "x": 1.7,
+        "a": 0.03
+      }
+    ],
+    "press": {
+      "x": 0,
+      "a": 0.035
+    },
+    "third": {
+      "x": 0.42,
+      "from": 2.65,
+      "a": 0.03,
+      "share": 0.58,
+      "drop": 0.33
+    },
+    "bench": {
+      "y": 0.5,
+      "size": 40
+    },
+    "caption": {
+      "x": 64,
+      "y": 56,
+      "h": 92,
+      "cap": 40,
+      "maxW": 880,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "#14161c",
+      "edge": "#3a3f4a",
+      "ink": "#f5f6f8"
+    },
+    "sound": {
+      "bed": {
+        "gain": 0.5,
+        "root": 82.4,
+        "brightness": 700
+      },
+      "slide": {
+        "gain": 0.5,
+        "whoosh": 0.22
+      },
+      "servo": {
+        "gain": 0.42,
+        "grit": 0.35
+      },
+      "touch": {
+        "gain": 0.5
+      },
+      "tone": {
+        "gain": 0.11,
+        "base": 392,
+        "perOrder": 0.12,
+        "brightness": 3800
+      },
+      "glide": {
+        "gain": 0.32
+      },
+      "seat": {
+        "gain": 0.95,
+        "clack": 0.4
+      },
+      "settle": {
+        "gain": 0.12
+      }
+    },
+    "sfx": {
+      "enter": "whoosh",
+      "exit": "whooshOut",
+      "move": "servo",
+      "land": "thud",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Band colour = interference-colour table (integrated over the spectrum) at R = Cf × (σ1 − σ2); the stress is a closed form of the load and support positions at t, evaluated per pixel in one shader.",
+      "The analyser slides across; coverage is a ray test in the shader, so the light box and the beam switch to dark-field exactly behind its edge.",
+      "Load ramps are eased keys; the handwheel turns with plunger travel + load; supports move on eased keys. Nothing is simulated.",
+      "Camera: front, slightly above, one move per beat, still during holds (fringes are dense detail)."
+    ]
+  },
+  "scene": {
+    "id": "102-photoelastic-stress",
+    "style": "photoelastic-stress",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "clear",
+        "t": 0,
+        "dur": 2.5,
+        "label": "Clear plastic. No load."
+      },
+      {
+        "id": "load",
+        "t": 2.5,
+        "dur": 3,
+        "label": "Load on. Stress shows."
+      },
+      {
+        "id": "notch",
+        "t": 5.5,
+        "dur": 3,
+        "label": "Bands crowd at the notch"
+      },
+      {
+        "id": "support",
+        "t": 8.5,
+        "dur": 3.5,
+        "label": "Add one more support"
+      },
+      {
+        "id": "shared",
+        "t": 12,
+        "dur": 3,
+        "label": "Same load. Shared."
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -0.99931,
+          1.97934,
+          4.48252
+        ],
+        "target": [
+          -0.1823,
+          1.56673,
+          0.45212
+        ],
+        "fov": 34
+      },
+      {
+        "t": 2.7,
+        "pos": [
+          -0.40769,
+          1.9646,
+          4.63703
+        ],
+        "target": [
+          -0.07454,
+          1.58838,
+          0.4815
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 5.5,
+        "pos": [
+          -0.40769,
+          1.9646,
+          4.63703
+        ],
+        "target": [
+          -0.07454,
+          1.58838,
+          0.4815
+        ],
+        "fov": 34
+      },
+      {
+        "t": 6.9,
+        "pos": [
+          0.76113,
+          1.68705,
+          2.32347
+        ],
+        "target": [
+          0.68797,
+          1.57715,
+          0.49544
+        ],
+        "fov": 34,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 8.5,
+        "pos": [
+          0.76113,
+          1.68705,
+          2.32347
+        ],
+        "target": [
+          0.68797,
+          1.57715,
+          0.49544
+        ],
+        "fov": 34
+      },
+      {
+        "t": 9.5,
+        "pos": [
+          1.46761,
+          1.69819,
+          3.90828
+        ],
+        "target": [
+          1.19964,
+          1.36174,
+          0.56578
+        ],
+        "fov": 34,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 12,
+        "pos": [
+          1.46761,
+          1.69819,
+          3.90828
+        ],
+        "target": [
+          1.19964,
+          1.36174,
+          0.56578
+        ],
+        "fov": 34
+      },
+      {
+        "t": 13.5,
+        "pos": [
+          0.51856,
+          1.95217,
+          4.70191
+        ],
+        "target": [
+          0.09453,
+          1.48306,
+          0.47575
+        ],
+        "fov": 34,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0.51856,
+          1.95217,
+          4.70191
+        ],
+        "target": [
+          0.09453,
+          1.48306,
+          0.47575
+        ],
+        "fov": 34
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "root": 82.4,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "dur": 15,
+        "attack": 0.8,
+        "release": 1.5,
+        "brightness": 700,
+        "gain": 0.5,
+        "seed": 7
+      },
+      {
+        "type": "rustle",
+        "dur": 1.85,
+        "density": 0.28,
+        "pitch": 1.6,
+        "gain": 0.5,
+        "t": 0.15,
+        "pan": 0,
+        "seed": 211
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.85,
+        "q": 0.9,
+        "pitch": 0.8,
+        "gain": 0.22,
+        "t": 0.15,
+        "pan": 0,
+        "seed": 212
+      },
+      {
+        "type": "servo",
+        "dur": 0.40000000000000036,
+        "hz": 62,
+        "hz2": 78,
+        "grit": 0.35,
+        "gain": 0.42,
+        "t": 2.55,
+        "pan": 0,
+        "seed": 218
+      },
+      {
+        "type": "servo",
+        "dur": 2.05,
+        "hz": 70,
+        "hz2": 86.5,
+        "grit": 0.35,
+        "gain": 0.42,
+        "t": 2.95,
+        "pan": 0,
+        "seed": 225
+      },
+      {
+        "type": "tick",
+        "gain": 0.5,
+        "pitch": 0.7,
+        "t": 2.95,
+        "pan": 0,
+        "seed": 232
+      },
+      {
+        "type": "thud",
+        "dur": 0.25,
+        "pitch": 1.8,
+        "gain": 0.25,
+        "t": 2.95,
+        "pan": 0,
+        "seed": 233
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 396.61548868778266,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.3,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.0352400421405886,
+        "t": 2.95,
+        "pan": 0,
+        "seed": 239
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 410.0939692667405,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.05733790039523604,
+        "t": 3.2,
+        "pan": 0,
+        "seed": 246
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 431.2437232932494,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.09058949364523182,
+        "t": 3.45,
+        "pan": 0,
+        "seed": 253
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 457.8479528369799,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 3.7,
+        "pan": 0,
+        "seed": 260
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 486.52952233562405,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 3.95,
+        "pan": 0,
+        "seed": 267
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 512.932753727475,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 4.2,
+        "pan": 0,
+        "seed": 274
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 532.4111748015972,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 4.45,
+        "pan": 0,
+        "seed": 281
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 541.1558929558332,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 4.7,
+        "pan": 0,
+        "seed": 288
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 541.4123288575327,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 4.95,
+        "pan": 0,
+        "seed": 295
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 541.4123288575327,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 5.2,
+        "pan": 0,
+        "seed": 302
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 541.4123288575327,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 5.45,
+        "pan": 0,
+        "seed": 309
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 541.594590367327,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 5.7,
+        "pan": 0,
+        "seed": 316
+      },
+      {
+        "type": "servo",
+        "dur": 2.1999999999999993,
+        "hz": 86.5,
+        "hz2": 100,
+        "grit": 0.35,
+        "gain": 0.42,
+        "t": 5.9,
+        "pan": 0,
+        "seed": 323
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 547.9143973825809,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 5.95,
+        "pan": 0,
+        "seed": 330
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 562.7712981414373,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 6.2,
+        "pan": 0,
+        "seed": 337
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 584.88005175191,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 6.45,
+        "pan": 0,
+        "seed": 344
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 612.0783869422307,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 6.7,
+        "pan": 0,
+        "seed": 351
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 641.3031759747934,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 6.95,
+        "pan": 0,
+        "seed": 358
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 668.7772817487387,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 7.2,
+        "pan": 0,
+        "seed": 365
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 690.5006512444052,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 7.45,
+        "pan": 0,
+        "seed": 372
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 703.0084284969621,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 7.7,
+        "pan": 0,
+        "seed": 379
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 705.1340007355138,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 7.95,
+        "pan": 0,
+        "seed": 386
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 705.1340007355138,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 8.2,
+        "pan": 0,
+        "seed": 393
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 705.1340007355138,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 8.45,
+        "pan": 0,
+        "seed": 400
+      },
+      {
+        "type": "whir",
+        "dur": 1.5,
+        "hz": 88,
+        "hz2": 104,
+        "gain": 0.32,
+        "t": 8.6,
+        "pan": 0,
+        "seed": 407
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 705.1340007355138,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 8.7,
+        "pan": 0,
+        "seed": 414
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 705.1340007355138,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 8.95,
+        "pan": 0,
+        "seed": 421
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 705.1340007355138,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 9.2,
+        "pan": 0,
+        "seed": 428
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 705.1340007355138,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 9.45,
+        "pan": 0,
+        "seed": 435
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 705.1340007355138,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 9.7,
+        "pan": 0,
+        "seed": 442
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 705.1340007355138,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 9.95,
+        "pan": 0,
+        "seed": 449
+      },
+      {
+        "type": "whir",
+        "dur": 0.40000000000000036,
+        "hz": 120,
+        "hz2": 165,
+        "gain": 0.256,
+        "t": 10.1,
+        "pan": 0,
+        "seed": 456
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 705.1340007355138,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 10.2,
+        "pan": 0,
+        "seed": 463
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 684.9398451454309,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 10.45,
+        "pan": 0,
+        "seed": 470
+      },
+      {
+        "type": "thud",
+        "dur": 0.5,
+        "pitch": 1.1,
+        "gain": 0.95,
+        "t": 10.5,
+        "pan": 0,
+        "seed": 477
+      },
+      {
+        "type": "clack",
+        "gain": 0.4,
+        "pitch": 0.8,
+        "t": 10.5,
+        "pan": 0,
+        "seed": 478
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 616.7741241282289,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 10.7,
+        "pan": 0,
+        "seed": 484
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 536.6656690011862,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 10.95,
+        "pan": 0,
+        "seed": 491
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 477.9248480414329,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 11.2,
+        "pan": 0,
+        "seed": 498
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 469.811213503542,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 11.45,
+        "pan": 0,
+        "seed": 505
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 469.811213503542,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 11.7,
+        "pan": 0,
+        "seed": 512
+      },
+      {
+        "type": "chime",
+        "dur": 1.8,
+        "pitch": 0.75,
+        "gain": 0.12,
+        "t": 11.7,
+        "pan": 0,
+        "seed": 519
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 469.811213503542,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 11.95,
+        "pan": 0,
+        "seed": 526
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 469.811213503542,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 12.2,
+        "pan": 0,
+        "seed": 533
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 469.811213503542,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 12.45,
+        "pan": 0,
+        "seed": 540
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 469.811213503542,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 12.7,
+        "pan": 0,
+        "seed": 547
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 469.811213503542,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 12.95,
+        "pan": 0,
+        "seed": 554
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 469.811213503542,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 13.2,
+        "pan": 0,
+        "seed": 561
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 469.811213503542,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 13.45,
+        "pan": 0,
+        "seed": 568
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 469.811213503542,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 13.7,
+        "pan": 0,
+        "seed": 575
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 469.811213503542,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 13.95,
+        "pan": 0,
+        "seed": 582
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 469.811213503542,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 14.2,
+        "pan": 0,
+        "seed": 589
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 469.811213503542,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.5,
+        "attack": 0.25,
+        "release": 0.25,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 14.45,
+        "pan": 0,
+        "seed": 596
+      },
+      {
+        "type": "pad",
+        "bus": "sfx",
+        "root": 469.811213503542,
+        "chord": [
+          0,
+          12,
+          19
+        ],
+        "dur": 0.3000000000000007,
+        "attack": 0.15000000000000036,
+        "release": 0.15000000000000036,
+        "brightness": 3800,
+        "gain": 0.11,
+        "t": 14.7,
+        "pan": 0,
+        "seed": 603
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "title": "Where the load really goes",
+      "mechanism": "stressplan.js: σ = Σ Flamant point loads (press + supports, contact half-width a) + bending −M(x)(y−H/2)/I from the reactions (statics; the third support's share is a set value) + notch term Kt·σ_net decaying from the root; R = Cf(σ1−σ2); colour = interference table integrated over 380–780 nm.",
+      "orders": {
+        "notchBeat3": 7.06,
+        "notchShared": 1.84,
+        "midBeat3": 3.69,
+        "midShared": 2.18
+      },
+      "reactions": {
+        "before": [
+          1,
+          0.5,
+          0.5,
+          0
+        ],
+        "after": [
+          1,
+          0.282,
+          0.138,
+          0.58
+        ]
+      },
+      "framing": "ok (worst 0.9416 at 1.366667s)"
+    }
+  }
+}
