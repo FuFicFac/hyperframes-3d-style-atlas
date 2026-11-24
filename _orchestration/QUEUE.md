@@ -138,7 +138,7 @@ Twelve art-and-craft styles, planned in `STYLE-PLANS-113-124.md` (storyboards, e
 Index (`references/style-index.json`, `STYLES.md`), `gallery.html` (links line kept) and `contact-sheet.jpg` rebuilt for 124 styles.
 `scripts/build-index.mjs` got three category rules (guilloche, ct-scan + strange-attractor, pointillism). `SKILL.md` updated (count,
 three good-for rows, a 113–124 paragraph, Limits heading). Skill copied into `skill/`. Not watched in motion; audio measured, not heard.
-NOT committed or pushed (waiting for the owner's yes). `_ALL VIDEOS/` reels stop at 112; the website still shows 84.
+Committed and pushed 2026-11-24 as `186df2e` on the owner's yes. `_ALL VIDEOS/` has flat copies, `Breakout 113-124` and `Master Video 01-124` (plain + numbered; built by `build-reels-113-124.sh`); the website still shows 84.
 Lessons for the next run are in "Rules for this run" of `STYLE-PLANS-113-124.md`, plus: keep builder temp files inside the project
 folder (two builders deleted or overwrote each other's files in a shared scratch folder), and give the caption-size rule in the launch
 prompt itself (builders that only read it in the plan still shipped small captions).
