@@ -112,3 +112,33 @@ Committed and pushed to GitHub as aa9cc66 (demos 101-112, refreshed `skill/` sna
   file limit). The numbered badge slightly overlaps top-left captions on a few styles (112 for one).
 - A 112-style version of the website exists only as a local preview in `/Volumes/Panther/New horizons/site-preview` (homepage hero,
   film dialog, chapter links, media for 85–112). `Site/` and the live site were not touched and still show 84.
+
+## Run 5 started 2026-11-23 (styles 113–124)
+
+Twelve art-and-craft styles, planned in `STYLE-PLANS-113-124.md` (storyboards, engineering notes, run rules). Builders: Opus 5.5 at extra-high effort, four at a time. No separate storyboard approval (owner asked to plan and build).
+
+| # | id | signature mechanic | status |
+|---|---|---|---|
+| 113 | fourier-epicycles | a chain of spinning circles whose tip draws a picture | DONE — passed checks, stills reviewed by orchestrator (3.9 MB, CRF 22, audio mean −23.6 / max −1.4 dB; thin outline on a plain beige page, tiny outer arms only read in the close-up) |
+| 114 | barrier-grid | a striped sheet slides over a scrambled print and the picture moves | DONE — passed checks, stills reviewed by orchestrator after one fix round (3.5 MB, CRF 22, audio mean −21.1 / max −1.2 dB; bird is slivers in a still and reads best in motion; dark mass in the top-left corner during beat 1) |
+| 115 | caustics | light through a lumpy glass slab gathers into a picture at one height | DONE — passed checks, stills reviewed by orchestrator after one fix round (5.4 MB, CRF 22, audio mean −22.2 / max −1.1 dB; caption covers part of the slab in the final wide, final picture about half frame width, glass could not exist physically) |
+| 116 | guilloche | a lathe engraves phase-shifted wavy rings that weave rosettes | DONE — passed checks, stills reviewed by orchestrator (11.6 MB at CRF 26, audio mean −24.3 / max −2.5 dB; caption on the small side, beat-1 groove reads like a raised wire, file at the size limit) |
+| 117 | risograph | three ink layers print off-register, then snap into register | DONE — passed checks, stills reviewed by orchestrator (10.7 MB at CRF 25, audio mean −22.5 / max −2.4 dB; blank paper for the first half second, beat-5 label arrives a little late, busy sea) |
+| 118 | linocut | carve, ink the raised part, press, peel: a mirrored print | DONE — passed checks, stills reviewed by orchestrator (6.6 MB, CRF 22, audio mean −21.0 / max −1.2 dB; caption on the small side, time-lapse carving jumps, finished print hangs unsupported) |
+| 119 | pointillism | pure-colour dots that mix only in the eye | DONE — passed checks, stills reviewed by orchestrator (10.0 MB at CRF 24, audio mean −23.1 / max −2.8 dB; first second is mostly bare canvas, the tree reads blue-and-yellow rather than green until the squint) |
+| 120 | cyanotype | exposure dose builds a print around objects; rinse turns it blue | DONE — passed checks, stills reviewed by orchestrator after a caption fix (4.4 MB, CRF 22, audio mean −23.1 / max −2.4 dB; two-line caption covers the tip of the fern stem, beats 3–4 are drab bronze by nature) |
+| 121 | strange-attractor | two almost identical starts stay together, then part for good | DONE — passed checks, stills reviewed by orchestrator (7.7 MB, CRF 22, audio mean −21.7 / max −3.2 dB; Node/Chrome fingerprints match; final butterfly about half the frame width, caption text small inside its plate) |
+| 122 | glassblowing | a glowing gather inflated, shaped and cooled to clear glass | DONE — passed checks, stills reviewed by orchestrator (4.3 MB, CRF 22, audio mean −20.9 / max −1.1 dB; hot glass is flat orange in stills, caption is clipped mid-roll for ~0.3 s at each beat change, step order staged not faithful) |
+| 123 | papercut-lightbox | white paper layers that gain depth only when lit from behind | DONE — passed checks, stills reviewed by orchestrator (4.9 MB, CRF 22, audio mean −22.6 / max −1.1 dB; backlit beats 3–4 are muddy brown before the sunset colour arrives, foreground layers glow lighter at the top than expected) |
+| 124 | ct-scan | thin slices of a sealed box stack into the hidden object | DONE — passed checks, stills reviewed by orchestrator after one fix round (4.5 MB, CRF 22, audio mean −23.6 / max −2.6 dB; later slices flash past in the hero view, gear teeth slightly jagged in the final close-up) |
+
+## Run 5 closed 2026-11-24 — the atlas is at 124
+
+12 styles added (113–124), all DONE above; 114, 115 and 124 were sent back once for a fix round, 120 for a caption-only fix.
+Index (`references/style-index.json`, `STYLES.md`), `gallery.html` (links line kept) and `contact-sheet.jpg` rebuilt for 124 styles.
+`scripts/build-index.mjs` got three category rules (guilloche, ct-scan + strange-attractor, pointillism). `SKILL.md` updated (count,
+three good-for rows, a 113–124 paragraph, Limits heading). Skill copied into `skill/`. Not watched in motion; audio measured, not heard.
+NOT committed or pushed (waiting for the owner's yes). `_ALL VIDEOS/` reels stop at 112; the website still shows 84.
+Lessons for the next run are in "Rules for this run" of `STYLE-PLANS-113-124.md`, plus: keep builder temp files inside the project
+folder (two builders deleted or overwrote each other's files in a shared scratch folder), and give the caption-size rule in the launch
+prompt itself (builders that only read it in the plan still shipped small captions).

@@ -1,10 +1,10 @@
 {
   "format": "3d-style-atlas/style-index@1",
   "generatedBy": "Skills/3d-style-atlas/scripts/build-index.mjs (re-run after adding or changing a style)",
-  "generatedAt": "2026-11-23T22:19:12.809Z",
+  "generatedAt": "2026-11-24T08:57:27.768Z",
   "pathsRelativeTo": "D Second Brain/ (demo project and mp4 paths are absolute when the demos live outside it)",
   "notes": "category is a keyword guess; props come from the STYLE.md props tables; demo topic is the first line of the demo's scene.js.",
-  "count": 113,
+  "count": 125,
   "styles": [
     {
       "id": "anamorphic",
@@ -83,6 +83,43 @@
         "spec": "Skills/3d-style-atlas/styles/art-deco/spec.js",
         "style": "Skills/3d-style-atlas/styles/art-deco/style.js",
         "card": "Skills/3d-style-atlas/styles/art-deco/STYLE.md"
+      }
+    },
+    {
+      "id": "barrier-grid",
+      "name": "Barrier Grid",
+      "description": "Scanimation: a cream card printed with six interlaced frames of a flapping bird in near-black navy (strip i = frame i mod 6) and a clear acetate sheet of bright opaque coral stripes, five strips opaque and one clear, lying a hair above it. Alone the card is a striped blur; with the sheet on, each slit shows one strip and so one frame: the bird is a bold dark shape of slivers on a bright coral-and-cream field. Slide the sheet and the bird flaps, by real occlusion: the card never changes. Two analytic shaders (the print and the barrier, both anti-aliased per pixel), a pale wooden desk, bright even light, navy ink, one teal spot colour for the secondary print.",
+      "summary": "**Look.** Scanimation on a desk.",
+      "category": "print / flat graphic",
+      "goodFor": "\"one thing holds many states and a mask chooses which one you see\" — multiplexing, time-sharing, sampling,\nhow a static medium can store motion, persistence of vision, before/after mechanisms, any \"look how simple the trick is\"\nexplainer. **Avoid for:** subjects that need full-colour pictures (one dark ink + one spot colour), long text, fine\ndetail or thin shapes (every frame is seen through 1/6 of its columns: draw bold), numbers.",
+      "avoidFor": "subjects that need full-colour pictures (one dark ink + one spot colour), long text, fine\ndetail or thin shapes (every frame is seen through 1/6 of its columns: draw bold), numbers.",
+      "toneMapping": "neutral",
+      "props": [
+        "barrierGrid",
+        "card",
+        "acetate",
+        "desk",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "barrier.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/114-barrier-grid",
+          "topic": "\"The stripes hold the motion\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/114-barrier-grid/renders/114-barrier-grid.mp4",
+          "mp4MB": 3.7
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/barrier-grid/spec.js",
+        "style": "Skills/3d-style-atlas/styles/barrier-grid/style.js",
+        "card": "Skills/3d-style-atlas/styles/barrier-grid/STYLE.md"
       }
     },
     {
@@ -289,6 +326,45 @@
         "spec": "Skills/3d-style-atlas/styles/cardboard-stop-motion/spec.js",
         "style": "Skills/3d-style-atlas/styles/cardboard-stop-motion/style.js",
         "card": "Skills/3d-style-atlas/styles/cardboard-stop-motion/STYLE.md"
+      }
+    },
+    {
+      "id": "caustics",
+      "name": "Caustics",
+      "description": "A sunlit room (white table, slate-blue wall): a clear, lumpy aqua glass slab in a slim steel frame rides a vertical brass rail above a white tabletop. A warm beam comes straight down through it. Close to the table the light is an even patch; as the slab rises the patch swirls into bright curved lines and dark gaps, and at exactly one height it unwinds into a white-hot picture on a dim ground while the room light falls. The light on the table is the glass's own ray mesh warped by its deflection field (light conserved per triangle: brightness = area on the glass / area on the table), so folds make real caustic lines, and the slab's bumps are shaded from the same field.",
+      "summary": "**Look.** A sunlit room seen close: a white tabletop against a slate-blue wall, a clear 0.6 m square glass slab (aqua tint, a dark teal refracted line just inside the rim, teal edges, a bright fresnel rim) in a slim light-steel frame on ...",
+      "category": "material / abstract",
+      "goodFor": "\"hidden information that only appears under the right conditions\" (encoding, focus, one correct setting),\nlenses and light, \"the shape holds the message\", reveals that need a physical, slightly magical feel.",
+      "avoidFor": "anything needing numbers or fine text in the picture (bold icons only: the light picture is soft-edged),, dark moody topics (the set is a bright room), stories with several subjects at once.\nDiffers from glass-light (refraction of a beam through prisms), laser-mirrors (beam paths), cymatics and\nripple-interference (wave patterns).",
+      "toneMapping": "neutral",
+      "props": [
+        "causticBench",
+        "causticEngine",
+        "tableMaterial",
+        "glassSlab",
+        "frame",
+        "rayLines",
+        "beamShaft"
+      ],
+      "fourthModule": [
+        {
+          "file": "caustic.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/115-caustics",
+          "topic": "\"The glass hides a picture\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/115-caustics/renders/115-caustics.mp4",
+          "mp4MB": 5.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/caustics/spec.js",
+        "style": "Skills/3d-style-atlas/styles/caustics/style.js",
+        "card": "Skills/3d-style-atlas/styles/caustics/STYLE.md"
       }
     },
     {
@@ -714,6 +790,48 @@
       }
     },
     {
+      "id": "ct-scan",
+      "name": "CT Scan",
+      "description": "Slice by slice: a sealed cardboard box rises on a lift through a white scanner ring in a bright white-and-teal room while a teal scan line crawls down it. Each slice appears as an exact grey cross-section (bright on a dark screen) of a baked voxel volume on a big floating panel; the slices peel off as thin translucent film cards, line up in a spaced row, close up into one block and become a ray-marched volume: a ghostly sand-coloured box with a coral toy robot inside and bright white-gold metal parts (gears, wind-up key, eyes, pins). A dial raises the threshold: cardboard fades, then plastic, leaving the metal turning in space. Scanner whirr, slice ticks, a run of snaps as the stack closes, a chord at the reveal, dial clicks.",
+      "summary": "Slice by slice.",
+      "category": "technical / diagrammatic",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "ctScan",
+        "room",
+        "scanner",
+        "cardboardBox",
+        "panel",
+        "plinth",
+        "sliceCard",
+        "volumeMesh",
+        "caption",
+        "dial"
+      ],
+      "fourthModule": [
+        {
+          "file": "volume.js",
+          "nodeSafe": false
+        }
+      ],
+      "hasNodeSafeFourthModule": false,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/124-ct-scan",
+          "topic": "\"Slice by slice\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/124-ct-scan/renders/124-ct-scan.mp4",
+          "mp4MB": 4.7
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/ct-scan/spec.js",
+        "style": "Skills/3d-style-atlas/styles/ct-scan/style.js",
+        "card": "Skills/3d-style-atlas/styles/ct-scan/STYLE.md"
+      }
+    },
+    {
       "id": "cubism",
       "name": "Cubism",
       "description": "Analytic-to-synthetic Cubism made from a real 3D still life: a guitar, bottle, wine glass, fruit bowl and folded newspaper on a round café table are rendered from six cameras into render targets, and the flat picture plane fractures into angular convex facets that EACH show the same still life from a different viewpoint (front three-quarter, bird's-eye table top, left, right, eye level, tilted) - simultaneous viewpoints. Facets crack in with dark contour lines, their cameras swing apart, they slide, rotate and overlap; the palette drains to analytic ochre/umber/grey bands with facet passage shading and ink edges, then pieces flip over like card to synthetic collage (flat coloured paper, faux-bois wood grain, newsprint with stencilled letters, wallpaper, charcoal drawing) and the whole settles into a bold flat composition. Canvas weave and brush grain over everything. Every facet pose, crack, swing and flip comes from one seeded plan (facets.js) that also writes the sound.",
@@ -747,6 +865,47 @@
         "spec": "Skills/3d-style-atlas/styles/cubism/spec.js",
         "style": "Skills/3d-style-atlas/styles/cubism/style.js",
         "card": "Skills/3d-style-atlas/styles/cubism/STYLE.md"
+      }
+    },
+    {
+      "id": "cyanotype",
+      "name": "Cyanotype",
+      "description": "Sunlight makes the print: a sheet of pale yellow-green sensitised paper pinned to a light wooden board in strong sun, with a fern frond, a brass key, a grey-blue feather and a strip of lace lying on it as flat procedural objects with real thickness and shadows. Every uncovered point collects a dose (the closed-form integral of the sun over the time it was uncovered); the paper darkens to bronze-grey around the objects, the feather lifted early prints as a half-dark ghost, the others leave crisp pale silhouettes. The sheet slides into a white enamel tray, a wave of water crosses it and the exposed paper floods to deep Prussian blue with paper-white shapes. One shader on the sheet looks colour up from (dose, washed). Soft thuds, a warm pad that brightens with the sun, lift whooshes, a water slosh and a rising chime.",
+      "summary": "A sun print.",
+      "category": "print / flat graphic",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "sunPrint",
+        "sheet",
+        "fern",
+        "key",
+        "feather",
+        "pin",
+        "board",
+        "tray",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "exposure.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/120-cyanotype",
+          "topic": "\"Sunlight makes the print\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/120-cyanotype/renders/120-cyanotype.mp4",
+          "mp4MB": 4.6
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/cyanotype/spec.js",
+        "style": "Skills/3d-style-atlas/styles/cyanotype/style.js",
+        "card": "Skills/3d-style-atlas/styles/cyanotype/STYLE.md"
       }
     },
     {
@@ -1373,6 +1532,42 @@
       }
     },
     {
+      "id": "fourier-epicycles",
+      "name": "Fourier Epicycles",
+      "description": "A chain of spinning brass arms on a drafting table: each arm turns at a whole-number speed on the end of the last, each with its circle drawn as a thin brass ring, and a coral-tipped pen at the end of the chain leaves a blue-black ink line on cream paper. The arms are the terms of a discrete Fourier transform of a closed outline (epicycles.js: arc-length resampling, DFT in plain JS, terms sorted by size), so one arm draws a circle, a few draw a lumpy loop and sixty draw the picture. The ink line is the same finite sum evaluated up to the current phase; earlier, coarser outlines stay on the paper in faint grey. Bright warm daylight, brass, ink blue-black and one coral accent.",
+      "summary": "**Look.** A sheet of cream paper on a pale drafting table, seen from above at a slight angle in bright, warm daylight.",
+      "category": "technical / diagrammatic",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "table",
+        "chain",
+        "inkLines",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "epicycles.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/113-fourier-epicycles",
+          "topic": "\"Circles that draw\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/113-fourier-epicycles/renders/113-fourier-epicycles.mp4",
+          "mp4MB": 4.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/fourier-epicycles/spec.js",
+        "style": "Skills/3d-style-atlas/styles/fourier-epicycles/style.js",
+        "card": "Skills/3d-style-atlas/styles/fourier-epicycles/STYLE.md"
+      }
+    },
+    {
       "id": "galton-board",
       "name": "Galton Board",
       "description": "A Galton board (bean machine) on a bright oak desk: a glass-fronted maple frame, an enamel-blue backboard with a triangular field of brass pegs, a walnut hopper with a brass spout and polished steel balls. A seeded, precomputed ball plan (plinko.js) gives every ball its left/right choice at each peg row, a closed-form path (drop, one parabolic hop per row, ballistic fall into its bin, two small bounces) and a stack slot, so the histogram grows ball by ball into a bell curve. Pegs flash and swell when struck; every peg tick, release click and bin landing (one marimba note per bin) is a sound cue from the same plan. A red enamel bell curve is drawn on the glass over the finished stacks.",
@@ -1453,6 +1648,49 @@
       }
     },
     {
+      "id": "glassblowing",
+      "name": "Glassblowing",
+      "description": "A daylit hot shop (pale plaster, oak bench, steel rails, a dark steel marver, a furnace mouth glowing at the back). A steel blowpipe lies across two rails, turning, with a glowing gather of glass on its end. The glass is a surface of revolution whose outer and inner profiles blend through named shapes with its volume kept constant, so the wall thins as a breath inflates it; jacks that move on their own pinch a neck and open a flared lip. Its colour comes from temperature through a hot-body ramp (white-yellow, orange, dull red, none); as it cools from the tip inward it clears to aqua glass with two spiral canes, and the light through it lands on the marver.",
+      "summary": "**Look.** A daylit hot shop seen close: a cool slate-blue plaster wall with a bright window, an oak bench, two steel rails, a dark graphite steel marver under the work, and a dark steel furnace whose round mouth glows orange-gold at the ...",
+      "category": "material / abstract",
+      "goodFor": "\"how a thing is made\" process stories where one object transforms through a few clear stages; heat,\ncooling and phase-change explainers; \"shaped by breath / by hand\" metaphors (a model being formed by training, a\ndraft being refined); craft and making channels; anything that ends in a satisfying reveal of a finished object.",
+      "avoidFor": "numbers or text on the subject (the glass carries only two canes); many objects at once (one piece per\npipe); fast cutting (each shape change needs ~1 s to read); dark moody topics (the shop is daylit by design).\nDiffers from `pottery-wheel` (also a turned profile, but inflated from inside, horizontal axis, heat colour,\ntransparency), `lab-glassware` (finished clear vessels), `liquid-chrome` (raymarched metal blobs), `caustics` (light\nthrough a slab is the subject there; here it is the coda).",
+      "toneMapping": "neutral",
+      "props": [
+        "hotShop",
+        "glassPiece",
+        "glassMaterial",
+        "marverMaterial",
+        "blowpipe",
+        "jacks",
+        "breathPulse",
+        "room",
+        "bench",
+        "caption",
+        "hotBody"
+      ],
+      "fourthModule": [
+        {
+          "file": "gather.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/122-glassblowing",
+          "topic": "\"Breath and fire\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/122-glassblowing/renders/122-glassblowing.mp4",
+          "mp4MB": 4.5
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/glassblowing/spec.js",
+        "style": "Skills/3d-style-atlas/styles/glassblowing/style.js",
+        "card": "Skills/3d-style-atlas/styles/glassblowing/STYLE.md"
+      }
+    },
+    {
       "id": "granular-sorting",
       "name": "Granular Sorting",
       "description": "A bright kitchen-lab: a clear, straight-sided, flat-fronted glass jar one bead layer deep, clamped to the aluminium platform of a small white lab shaker on a pale stone counter in front of a sage tiled wall, filled with small cream beads and twelve large glossy red ones mixed at every height. Each tap of the platform lifts and loosens the bed; small beads fall into the gaps that open under the large ones, so the large ones ratchet up and end on top. Bead positions come from a seeded Monte Carlo tap-and-settle simulation run once at load (shaker.js); the hop between stored rest states is drawn.",
@@ -1490,6 +1728,45 @@
         "spec": "Skills/3d-style-atlas/styles/granular-sorting/spec.js",
         "style": "Skills/3d-style-atlas/styles/granular-sorting/style.js",
         "card": "Skills/3d-style-atlas/styles/granular-sorting/STYLE.md"
+      }
+    },
+    {
+      "id": "guilloche",
+      "name": "Guilloche",
+      "description": "Two dials, endless lace: a silver dial on a small brass rose engine on a dark-teal bench, seen close. A fixed steel graver on a brass slide touches the turning disc and cuts one wavy ring per turn, r(θ) = R_k + a·sin(n·θ + k·s); ring after ring, each shifted a little, the waves weave a rosette. The grooves are not geometry: one shader on the disc evaluates the nearby rings in closed form for every pixel, gives each a V cross-section and tilts the normal, so the cut walls glint under a procedural studio environment as the disc turns. Two brass dials set the lobe count n and the phase step s; turning one re-forms every ring at once. Finally translucent deep-blue enamel floods across and a light sweeps over the finished dial. Lathe hum, a rising cutting hiss per ring, ratchet clicks per dial step, a soft pour and a bell.",
+      "summary": "A silver dial lying face-up on the brass chuck of a small rose engine, on a dark-teal bench, seen close.",
+      "category": "mechanical / kinetic",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "roseEngine",
+        "disc",
+        "chuck",
+        "cutterArm",
+        "dialBox",
+        "bench",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "guilloche.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/116-guilloche",
+          "topic": "\"Two dials, endless lace\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/116-guilloche/renders/116-guilloche.mp4",
+          "mp4MB": 12.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/guilloche/spec.js",
+        "style": "Skills/3d-style-atlas/styles/guilloche/style.js",
+        "card": "Skills/3d-style-atlas/styles/guilloche/STYLE.md"
       }
     },
     {
@@ -2049,6 +2326,47 @@
         "spec": "Skills/3d-style-atlas/styles/light-painting/spec.js",
         "style": "Skills/3d-style-atlas/styles/light-painting/style.js",
         "card": "Skills/3d-style-atlas/styles/light-painting/STYLE.md"
+      }
+    },
+    {
+      "id": "linocut",
+      "name": "Linocut",
+      "description": "A grey-green lino block on a pale bench: a V-gouge ploughs grooves and lifts curls, a black roller inks only the raised parts, paper is pressed with a round baren and peeled back: the print is the mirror of the block.",
+      "summary": "A grey-green lino block mounted on birch ply sits on a pale wooden bench under a low, warm light from the left.",
+      "category": "print / flat graphic",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "linocutBench",
+        "bench",
+        "block",
+        "gouge",
+        "chips",
+        "roller",
+        "paper",
+        "baren",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "lino.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/118-linocut",
+          "topic": "\"Cut away what isn't\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/118-linocut/renders/118-linocut.mp4",
+          "mp4MB": 7
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/linocut/spec.js",
+        "style": "Skills/3d-style-atlas/styles/linocut/style.js",
+        "card": "Skills/3d-style-atlas/styles/linocut/STYLE.md"
       }
     },
     {
@@ -2855,6 +3173,41 @@
       }
     },
     {
+      "id": "papercut-lightbox",
+      "name": "Papercut Lightbox",
+      "description": "Seven sheets of white cut paper slide into the slots of a deep walnut shadow box: white on white under the room light, then lit from behind they become a glowing misty valley, far sheets bright and cool, near sheets dark and warm.",
+      "summary": "A deep walnut shadow box hangs on a slate wall.",
+      "category": "handmade / tactile",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "lightbox",
+        "frameBox",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "layers.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/123-papercut-lightbox",
+          "topic": "\"Depth made of light\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/123-papercut-lightbox/renders/123-papercut-lightbox.mp4",
+          "mp4MB": 5.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/papercut-lightbox/spec.js",
+        "style": "Skills/3d-style-atlas/styles/papercut-lightbox/style.js",
+        "card": "Skills/3d-style-atlas/styles/papercut-lightbox/STYLE.md"
+      }
+    },
+    {
       "id": "pendulum-wave",
       "name": "Pendulum Wave",
       "description": "A classic pendulum-wave demonstration on a bright, cool-white bench: a row of 15 large glossy balls, saturated rainbow by index, hangs on V-strings from a curved wooden beam carried by two A-frames, each pendulum a little shorter than the last. Pendulum k completes (N + k) swings in one cycle, so released together from a wooden plank they drift into a travelling snake wave, split into groups, look like chaos, and then all return to one line at the same instant, where the plank catches them. Everything is a closed form of t (wave.js): angles, string lengths (from the periods), motion-trail ghosts (the same formula at earlier times), a lamp on the bench under each ball that flashes at its centre crossing, and one pitched bar note per crossing, so the sound goes from a chord strike to a ripple and back to a unison. A planned clock can freeze the motion: a camera flash, and the frozen positions fly down into an overlay 'fingerprint' card.",
@@ -3096,6 +3449,43 @@
       }
     },
     {
+      "id": "pointillism",
+      "name": "Pointillism",
+      "description": "A big stretched canvas in a bright warm studio, painted only with small round dabs of pure, unmixed paint from a ten-hue palette (no browns, greys or black). Each dab has a little raised relief, a darker rim and a wet highlight; cream canvas weave shows between them. A planner (dots.js) builds an original sunlit scene from gradients and shapes, scatters ~10,000 dots on a jittered grid and gives each one a pure palette colour by a seeded rule so the local average matches the scene: mostly the two nearest pure hues in proportion, plus a share of the complementary hue in shadows. Dots pop on region by region; two round brushes dab on their own in close-up; a display-space defocus (the squint) melts the dots into the colours the eye mixes.",
+      "summary": "**Look.** A big stretched canvas on a warm studio wall, filling the frame.",
+      "category": "handmade / tactile",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "none",
+      "props": [
+        "studio",
+        "dots",
+        "brushes",
+        "defocus",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "dots.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/119-pointillism",
+          "topic": "\"Only dots\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/119-pointillism/renders/119-pointillism.mp4",
+          "mp4MB": 10.5
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/pointillism/spec.js",
+        "style": "Skills/3d-style-atlas/styles/pointillism/style.js",
+        "card": "Skills/3d-style-atlas/styles/pointillism/STYLE.md"
+      }
+    },
+    {
       "id": "pottery-wheel",
       "name": "Pottery Wheel",
       "description": "A potter's wheel in a sunlit plaster studio: wet, glossy grey-brown clay spins on a steel wheel head inside a pale splash pan, a window's light patch on the wall behind it and a shelf of finished glazed pots out of focus. The clay is one lathe surface whose profile is a pure function of t, morphing between named key profiles (lump, cone, opened cylinder, bowl, collar, vase) bottom-up like a real pull, with its volume held constant so it is always the same clay. Spin reads through slip streaks, throwing rings that appear once it is thrown, a lumpy off-centre wobble that damps as it is centred, and marks on the wheel head. A wooden rib on a handle rides the wall exactly where the profile is changing fastest. At the end the wheel slows and a brush sweeps glaze on in a spiral from foot to lip. Wheel hum pitched by spin speed, wet squelches at shape changes and the brush come from the same plan.",
@@ -3209,6 +3599,45 @@
         "spec": "Skills/3d-style-atlas/styles/ripple-interference/spec.js",
         "style": "Skills/3d-style-atlas/styles/ripple-interference/style.js",
         "card": "Skills/3d-style-atlas/styles/ripple-interference/STYLE.md"
+      }
+    },
+    {
+      "id": "risograph",
+      "name": "Risograph",
+      "description": "Three flat inks printed one pass at a time by a rolling drum onto rough off-white paper: coarse halftone dots at three screen angles, uneven ink, paper tooth, multiply overprint into purple, green, orange and near-black; layers that land off-register and snap into line.",
+      "summary": "**Look.** A sheet of rough off-white paper on a slate-teal print tray, filling the frame at a slight tilt, printed one flat ink at a time by a drum that rolls across it on two steel rails.",
+      "category": "print / flat graphic",
+      "goodFor": "how layered printing works (separations, overprint, registration), \"three ingredients make every colour\",\nbefore/after alignment reveals, poster / zine / indie-print looks, anything where layers add up to a picture.",
+      "avoidFor": "photographic subjects (the poster is flat shapes), fine type (the screen breaks thin strokes unless tone 1),\nlong holds on the macro (fine dots under camera moves cost bitrate).",
+      "toneMapping": "neutral",
+      "props": [
+        "risoPress",
+        "printMaterial",
+        "sheet",
+        "tray",
+        "drum",
+        "table",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "riso.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/117-risograph",
+          "topic": "\"Three inks, one picture\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/117-risograph/renders/117-risograph.mp4",
+          "mp4MB": 11.3
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/risograph/spec.js",
+        "style": "Skills/3d-style-atlas/styles/risograph/style.js",
+        "card": "Skills/3d-style-atlas/styles/risograph/STYLE.md"
       }
     },
     {
@@ -3648,6 +4077,43 @@
         "spec": "Skills/3d-style-atlas/styles/sticky-notes/spec.js",
         "style": "Skills/3d-style-atlas/styles/sticky-notes/style.js",
         "card": "Skills/3d-style-atlas/styles/sticky-notes/STYLE.md"
+      }
+    },
+    {
+      "id": "strange-attractor",
+      "name": "Strange Attractor",
+      "description": "The Lorenz butterfly as a glossy wire sculpture in a bright studio: each path is a thick lacquered tube (coral, teal) with a glowing bead at its head, drawn as the last few seconds of the path, over a pale floor that catches its soft shadow. Paths are integrated once at load (lorenz.js, fixed-step RK4) and read back by time; two starts a hair apart run as one twisted two-colour strand until they part at a fork, and a speck of 200 beads bursts across both wings. A small unlabelled dial shows the gap between the two beads.",
+      "summary": "**Look.** The Lorenz butterfly as a glossy wire sculpture floating in a bright, pale studio.",
+      "category": "technical / diagrammatic",
+      "goodFor": null,
+      "avoidFor": null,
+      "toneMapping": "neutral",
+      "props": [
+        "studio",
+        "attractor",
+        "cloud",
+        "gauge",
+        "caption"
+      ],
+      "fourthModule": [
+        {
+          "file": "lorenz.js",
+          "nodeSafe": true
+        }
+      ],
+      "hasNodeSafeFourthModule": true,
+      "demos": [
+        {
+          "project": "/Volumes/Panther/3D Style Atlas/121-strange-attractor",
+          "topic": "\"A tiny difference\".",
+          "mp4": "/Volumes/Panther/3D Style Atlas/121-strange-attractor/renders/121-strange-attractor.mp4",
+          "mp4MB": 8.1
+        }
+      ],
+      "files": {
+        "spec": "Skills/3d-style-atlas/styles/strange-attractor/spec.js",
+        "style": "Skills/3d-style-atlas/styles/strange-attractor/style.js",
+        "card": "Skills/3d-style-atlas/styles/strange-attractor/STYLE.md"
       }
     },
     {

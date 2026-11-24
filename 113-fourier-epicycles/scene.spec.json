@@ -1,0 +1,2318 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "fourier-epicycles",
+    "name": "Fourier Epicycles",
+    "description": "A chain of spinning brass arms on a drafting table: each arm turns at a whole-number speed on the end of the last, each with its circle drawn as a thin brass ring, and a coral-tipped pen at the end of the chain leaves a blue-black ink line on cream paper. The arms are the terms of a discrete Fourier transform of a closed outline (epicycles.js: arc-length resampling, DFT in plain JS, terms sorted by size), so one arm draws a circle, a few draw a lumpy loop and sixty draw the picture. The ink line is the same finite sum evaluated up to the current phase; earlier, coarser outlines stay on the paper in faint grey. Bright warm daylight, brass, ink blue-black and one coral accent.",
+    "palette": {
+      "bg": "#e9dcc0",
+      "table": "#e6d2ae",
+      "tableDark": "#c9ad82",
+      "paper": "#f8f2e4",
+      "paperEdge": "#e9dfc8",
+      "tape": "#efe3c2",
+      "ink": "#18202f",
+      "grey": "#b3ab9c",
+      "brass": "#d0a548",
+      "brassLight": "#f7dc8f",
+      "brassDeep": "#7f5c1c",
+      "steel": "#5b5f66",
+      "coral": "#ff6450",
+      "nib": "#23262c",
+      "plate": "#1c2433",
+      "plateEdge": "#c99d45",
+      "plateText": "#fbf4e4"
+    },
+    "world": {
+      "background": "#e9dcc0",
+      "sky": null,
+      "fog": null,
+      "environment": "room",
+      "environmentIntensity": 0.5,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "table": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.62,
+        "metalness": 0
+      },
+      "paper": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      "tape": {
+        "type": "standard",
+        "baseColor": "#efe3c2",
+        "roughness": 0.55,
+        "metalness": 0,
+        "opacity": 0.82
+      },
+      "brass": {
+        "type": "physical",
+        "baseColor": "#d0a548",
+        "roughness": 0.38,
+        "metalness": 1
+      },
+      "brassDark": {
+        "type": "physical",
+        "baseColor": "#9c7431",
+        "roughness": 0.38,
+        "metalness": 1
+      },
+      "steel": {
+        "type": "physical",
+        "baseColor": "#8d9198",
+        "roughness": 0.3,
+        "metalness": 1
+      },
+      "coral": {
+        "type": "standard",
+        "baseColor": "#ff6450",
+        "roughness": 0.42,
+        "metalness": 0,
+        "emission": {
+          "color": "#ff6450",
+          "strength": 0.18
+        }
+      },
+      "nib": {
+        "type": "standard",
+        "baseColor": "#23262c",
+        "roughness": 0.35,
+        "metalness": 0.4
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#fffaf2",
+        "groundColor": "#e4d6ba",
+        "intensity": 1.3
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff5e6",
+        "intensity": 2.2,
+        "position": [
+          -2.6,
+          5.2,
+          -1.4
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 2.2,
+          "mapSize": 4096,
+          "extent": 1.9,
+          "near": 1,
+          "far": 14,
+          "bias": -0.0003,
+          "normalBias": 0.006
+        }
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0.1,
+        "radius": 0.3,
+        "threshold": 3
+      },
+      "vignette": {
+        "darkness": 0.1,
+        "offset": 1.2
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.02,
+      "far": 40,
+      "drift": {
+        "amp": 0,
+        "speed": 0.2
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 800,
+      "color": "#fbf4e4",
+      "height": 0.3
+    },
+    "table": {
+      "size": [
+        12,
+        8
+      ],
+      "wood": {
+        "size": 1024,
+        "boards": 6,
+        "seed": 113,
+        "grainFreq": 26,
+        "grainWarp": 1.4,
+        "contrast": 0.28,
+        "repeat": [
+          3,
+          2
+        ]
+      }
+    },
+    "paper": {
+      "w": 3.7,
+      "h": 2.5,
+      "thick": 0.004,
+      "texture": {
+        "size": 1024,
+        "fiber": 0.025,
+        "grain": 0.018,
+        "seed": 113,
+        "variant": "even",
+        "repeat": [
+          3,
+          2
+        ]
+      },
+      "tape": [
+        0.26,
+        0.09
+      ]
+    },
+    "chain": {
+      "scale": 1,
+      "armW": 0.04,
+      "armWRatio": 0.62,
+      "armH": 0.26,
+      "minH": 0.0004,
+      "minArmPx": 3.2,
+      "base": 0.018,
+      "gap": 0.0003,
+      "gapK": 0.12,
+      "hub": 0.78,
+      "ringW": 0.12,
+      "minRingPx": 1.6,
+      "ringMaxLocal": 0.32,
+      "post": {
+        "r": 0.045,
+        "base": 0.072,
+        "plate": 0.005
+      },
+      "pen": {
+        "r": 0.0105,
+        "nib": 0.024,
+        "collar": 0.0135,
+        "collarH": 0.007,
+        "above": 0.012,
+        "lift": 0.012
+      },
+      "sheenAngle": 2.4
+    },
+    "ink": {
+      "world": 0.0095,
+      "minPx": 8,
+      "maxPx": 22,
+      "greyScale": 0.6,
+      "greyMinPx": 4.5,
+      "lift": 0.0015,
+      "bias": 0.004
+    },
+    "caption": {
+      "w": 940,
+      "h": 100,
+      "x": 490,
+      "y": 920,
+      "radius": 50,
+      "cap": 56,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "weight": 700,
+      "plate": "#1c2433",
+      "edge": "#c99d45",
+      "text": "#fbf4e4",
+      "ring": "#e2bd68",
+      "dot": "#ff6450"
+    },
+    "sound": {
+      "partial": {
+        "f0": 196,
+        "gain": 0.3,
+        "curve": 0.7,
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000
+      },
+      "unfurl": {
+        "gain": 0.16
+      },
+      "scratch": {
+        "gain": 0.09
+      },
+      "close": {
+        "gain": 0.9
+      },
+      "lift": {
+        "gain": 0.32
+      },
+      "done": {
+        "gain": 0.55
+      }
+    },
+    "sfx": {
+      "enter": "tick",
+      "exit": "whooshOut",
+      "move": "penScratch",
+      "land": "tick",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Every arm turns at a whole-number speed k (once per cycle for k = 1, twice for k = 2, backwards for negative k) on the end of the arm before it; the pen is the sum of all arms.",
+      "The ink line is the same finite Fourier sum evaluated from phase 0 up to the current phase — never accumulated; each drawing is exactly one full turn.",
+      "New arms unfurl largest first (length 0 -> r with a small overshoot) while the pen is lifted; the previous outline fades to faint grey.",
+      "Arms are stacked one on the end of the last; tiny outer arms keep a minimum on-screen width, rings a minimum line width."
+    ]
+  },
+  "scene": {
+    "id": "113-fourier-epicycles",
+    "style": "fourier-epicycles",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "one",
+        "t": 0,
+        "dur": 2.6,
+        "label": "One circle draws a circle",
+        "K": 1
+      },
+      {
+        "id": "three",
+        "t": 2.6,
+        "dur": 2.8,
+        "label": "Add two: a wobbly loop",
+        "K": 3,
+        "grow": 0.32
+      },
+      {
+        "id": "twelve",
+        "t": 5.4,
+        "dur": 2.8,
+        "label": "Twelve: a rough shape",
+        "K": 12,
+        "grow": 0.42
+      },
+      {
+        "id": "sixty",
+        "t": 8.2,
+        "dur": 3.8,
+        "label": "Sixty: it draws a bird",
+        "K": 60,
+        "grow": 0.6
+      },
+      {
+        "id": "added",
+        "t": 12,
+        "dur": 3,
+        "label": "Only circles, added up"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0.01859,
+          2.63644,
+          1.06688
+        ],
+        "target": [
+          0.01859,
+          -0.04797,
+          0.08457
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 2.5500000000000003,
+        "pos": [
+          0.01859,
+          2.63644,
+          1.06688
+        ],
+        "target": [
+          0.01859,
+          -0.04797,
+          0.08457
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 3.35,
+        "pos": [
+          -0.08846,
+          2.63644,
+          1.06688
+        ],
+        "target": [
+          -0.08846,
+          -0.04846,
+          0.08439
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 5.3500000000000005,
+        "pos": [
+          -0.08846,
+          2.63644,
+          1.06688
+        ],
+        "target": [
+          -0.08846,
+          -0.04846,
+          0.08439
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 6.15,
+        "pos": [
+          -0.03953,
+          2.70995,
+          1.07514
+        ],
+        "target": [
+          -0.03953,
+          -0.04202,
+          0.06811
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 7.849999999999999,
+        "pos": [
+          -0.03953,
+          2.70995,
+          1.07514
+        ],
+        "target": [
+          -0.03953,
+          -0.04202,
+          0.06811
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 8.45,
+        "pos": [
+          1.1078275725371804,
+          0.6198783200124277,
+          0.012996505305554018
+        ],
+        "target": [
+          1.0106881449080498,
+          0.03531201651471188,
+          -0.4213996977139334
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 8.6,
+        "pos": [
+          1.1078275725371804,
+          0.6198783200124277,
+          0.012996505305554018
+        ],
+        "target": [
+          1.0106881449080498,
+          0.03531201651471188,
+          -0.4213996977139334
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 8.7,
+        "pos": [
+          1.0586245849398623,
+          0.6285361585568465,
+          0.005716417744385083
+        ],
+        "target": [
+          0.9611953124999999,
+          0.042225625,
+          -0.4299759375
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 8.8,
+        "pos": [
+          1.0444268366361833,
+          0.6402688655474078,
+          -0.0009012501279019869
+        ],
+        "target": [
+          0.94597421875,
+          0.039618125000000004,
+          -0.44507453125000007
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 8.9,
+        "pos": [
+          1.0101066650351807,
+          0.6783742169765609,
+          -0.0037010416408506663
+        ],
+        "target": [
+          0.90835390625,
+          0.031498437500000004,
+          -0.4751437500000001
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 9,
+        "pos": [
+          0.9518167015138357,
+          0.747766315474841,
+          0.011143077415242786
+        ],
+        "target": [
+          0.84418515625,
+          0.014847187500000001,
+          -0.5103746875
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 9.1,
+        "pos": [
+          0.8718180470947243,
+          0.8406687525041268,
+          0.051652541823321796
+        ],
+        "target": [
+          0.75876390625,
+          -0.007132499999999999,
+          -0.5321271875
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 9.2,
+        "pos": [
+          0.7781408183530875,
+          0.9652282526615448,
+          0.1257202932417697
+        ],
+        "target": [
+          0.66162953125,
+          -0.024434375,
+          -0.5283265625
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 9.3,
+        "pos": [
+          0.6780940334294087,
+          1.147487546059173,
+          0.23865470519544174
+        ],
+        "target": [
+          0.5591895312499999,
+          -0.029992187499999996,
+          -0.50271171875
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 9.4,
+        "pos": [
+          0.5738231752358887,
+          1.3898470645784051,
+          0.37973699091039725
+        ],
+        "target": [
+          0.45471968749999997,
+          -0.027071093749999997,
+          -0.46480765625
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 9.5,
+        "pos": [
+          0.465325092080702,
+          1.6613224106162,
+          0.5295509895859604
+        ],
+        "target": [
+          0.351076875,
+          -0.024335624999999996,
+          -0.41675265625
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 9.6,
+        "pos": [
+          0.3535581659560567,
+          1.9331860182934224,
+          0.6765824335983285
+        ],
+        "target": [
+          0.25012296875,
+          -0.026501406249999998,
+          -0.3558734375
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 9.7,
+        "pos": [
+          0.24103462144233517,
+          2.194228974391372,
+          0.8147677736074445
+        ],
+        "target": [
+          0.1530546875,
+          -0.0321165625,
+          -0.2840540625
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 9.8,
+        "pos": [
+          0.13575010320575218,
+          2.4297211873767166,
+          0.932373542708248
+        ],
+        "target": [
+          0.06608671875,
+          -0.03754875,
+          -0.2088178125
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 9.9,
+        "pos": [
+          0.05248903594459379,
+          2.6104408357125544,
+          1.0113811690140622
+        ],
+        "target": [
+          0.0021025,
+          -0.03972375,
+          -0.14062578125
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 10,
+        "pos": [
+          0.0011724442326340664,
+          2.7185027413137566,
+          1.0416573147006434
+        ],
+        "target": [
+          -0.031336406250000004,
+          -0.03706453125,
+          -0.09038828125000001
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 10.1,
+        "pos": [
+          -0.023712387054211668,
+          2.769432001367203,
+          1.0338754544555717
+        ],
+        "target": [
+          -0.04178109375,
+          -0.03099375,
+          -0.0626859375
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 10.2,
+        "pos": [
+          -0.03510078253990066,
+          2.792617787394464,
+          1.0117365169764017
+        ],
+        "target": [
+          -0.04300046875,
+          -0.02490859375,
+          -0.051737187500000004
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 10.3,
+        "pos": [
+          -0.040748447581909604,
+          2.804785390377396,
+          0.9939954334673545
+        ],
+        "target": [
+          -0.042700312500000004,
+          -0.02071625,
+          -0.04813234375
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 10.4,
+        "pos": [
+          -0.04250671875,
+          2.809604057516251,
+          0.9881393150255545
+        ],
+        "target": [
+          -0.04250671875,
+          -0.018549999999999997,
+          -0.04677046875
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 10.799999999999999,
+        "pos": [
+          -0.04333,
+          2.68535,
+          1.06039
+        ],
+        "target": [
+          -0.04333,
+          -0.03935,
+          0.06334
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12,
+        "pos": [
+          -0.04333,
+          2.68535,
+          1.06039
+        ],
+        "target": [
+          -0.04333,
+          -0.03935,
+          0.06334
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 15,
+        "pos": [
+          -0.03735,
+          2.74958,
+          0.9228
+        ],
+        "target": [
+          -0.03735,
+          -0.03212,
+          0.05989
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 15,
+        "root": 196,
+        "chord": [
+          0
+        ],
+        "attack": 0.25,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.3,
+        "pan": 0.28,
+        "t": 0,
+        "seed": 113
+      },
+      {
+        "type": "penScratch",
+        "dur": 2.1500000000000004,
+        "speed": 0.7,
+        "gain": 0.09,
+        "t": 0.05,
+        "pan": 0,
+        "seed": 120
+      },
+      {
+        "type": "tick",
+        "gain": 0.9,
+        "pitch": 0.9,
+        "t": 2.2,
+        "pan": 0,
+        "seed": 127
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 12.4,
+        "root": 196,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.14668058826108676,
+        "pan": -0.28,
+        "t": 2.6,
+        "seed": 134
+      },
+      {
+        "type": "tick",
+        "gain": 0.14015551834801926,
+        "pitch": 0.812,
+        "pan": -0.35,
+        "t": 2.6,
+        "seed": 135
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 12.24,
+        "root": 392,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.09743305462514192,
+        "pan": -0.28,
+        "t": 2.76,
+        "seed": 141
+      },
+      {
+        "type": "tick",
+        "gain": 0.13089097794698945,
+        "pitch": 0.8240000000000001,
+        "pan": -0.35,
+        "t": 2.76,
+        "seed": 142
+      },
+      {
+        "type": "penScratch",
+        "dur": 2.08,
+        "speed": 0.8,
+        "gain": 0.09,
+        "t": 2.92,
+        "pan": 0,
+        "seed": 148
+      },
+      {
+        "type": "tick",
+        "gain": 0.9,
+        "pitch": 0.9,
+        "t": 5,
+        "pan": 0,
+        "seed": 155
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 9.6,
+        "root": 392,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.07418081231326916,
+        "pan": 0.28,
+        "t": 5.4,
+        "seed": 162
+      },
+      {
+        "type": "tick",
+        "gain": 0.1254266311107462,
+        "pitch": 0.8360000000000001,
+        "pan": 0.35,
+        "t": 5.4,
+        "seed": 163
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 9.567499999999999,
+        "root": 588,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.07329803826587634,
+        "pan": -0.28,
+        "t": 5.4325,
+        "seed": 169
+      },
+      {
+        "type": "tick",
+        "gain": 0.12519868790580282,
+        "pitch": 0.8480000000000001,
+        "pan": -0.35,
+        "t": 5.4325,
+        "seed": 170
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 9.535,
+        "root": 588,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.044948375858492845,
+        "pan": 0.28,
+        "t": 5.465000000000001,
+        "seed": 176
+      },
+      {
+        "type": "tick",
+        "gain": 0.11667365758492165,
+        "pitch": 0.8600000000000001,
+        "pan": 0.35,
+        "t": 5.465000000000001,
+        "seed": 177
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 9.5025,
+        "root": 784,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.04391694990356913,
+        "pan": 0.28,
+        "t": 5.4975000000000005,
+        "seed": 183
+      },
+      {
+        "type": "tick",
+        "gain": 0.1163048077330868,
+        "pitch": 0.8720000000000001,
+        "pan": 0.35,
+        "t": 5.4975000000000005,
+        "seed": 184
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 9.469999999999999,
+        "root": 784,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.03666978157331394,
+        "pan": -0.28,
+        "t": 5.53,
+        "seed": 190
+      },
+      {
+        "type": "tick",
+        "gain": 0.11354110586506515,
+        "pitch": 0.884,
+        "pan": -0.35,
+        "t": 5.53,
+        "seed": 191
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 9.4375,
+        "root": 1176,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.028821213947908743,
+        "pan": -0.28,
+        "t": 5.5625,
+        "seed": 197
+      },
+      {
+        "type": "tick",
+        "gain": 0.11011731667358853,
+        "pitch": 0.896,
+        "pan": -0.35,
+        "t": 5.5625,
+        "seed": 198
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 9.405,
+        "root": 1176,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.026062825152871765,
+        "pan": 0.28,
+        "t": 5.595000000000001,
+        "seed": 204
+      },
+      {
+        "type": "tick",
+        "gain": 0.10877210323030284,
+        "pitch": 0.908,
+        "pan": 0.35,
+        "t": 5.595000000000001,
+        "seed": 205
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 9.372499999999999,
+        "root": 980,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.023964377797777776,
+        "pan": -0.28,
+        "t": 5.6275,
+        "seed": 211
+      },
+      {
+        "type": "tick",
+        "gain": 0.10768606883805744,
+        "pitch": 0.92,
+        "pan": -0.35,
+        "t": 5.6275,
+        "seed": 212
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 9.34,
+        "root": 1372,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.021181023997990413,
+        "pan": -0.28,
+        "t": 5.66,
+        "seed": 218
+      },
+      {
+        "type": "tick",
+        "gain": 0.10614671994566804,
+        "pitch": 0.932,
+        "pan": -0.35,
+        "t": 5.66,
+        "seed": 219
+      },
+      {
+        "type": "penScratch",
+        "dur": 1.9799999999999986,
+        "speed": 0.9700439718141092,
+        "gain": 0.09,
+        "t": 5.82,
+        "pan": 0,
+        "seed": 225
+      },
+      {
+        "type": "tick",
+        "gain": 0.9,
+        "pitch": 0.9,
+        "t": 7.799999999999999,
+        "pan": 0,
+        "seed": 232
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.800000000000001,
+        "root": 1568,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.019539048657121097,
+        "pan": 0.28,
+        "t": 8.2,
+        "seed": 239
+      },
+      {
+        "type": "tick",
+        "gain": 0.10517671969151682,
+        "pitch": 0.9440000000000001,
+        "pan": 0.35,
+        "t": 8.2,
+        "seed": 240
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.790638297872341,
+        "root": 1764,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.01708802517992102,
+        "pan": 0.28,
+        "t": 8.209361702127659,
+        "seed": 246
+      },
+      {
+        "type": "tick",
+        "gain": 0.10362595204508519,
+        "pitch": 0.9560000000000001,
+        "pan": 0.35,
+        "t": 8.209361702127659,
+        "seed": 247
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.781276595744682,
+        "root": 1372,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.017048889889268413,
+        "pan": 0.28,
+        "t": 8.218723404255318,
+        "seed": 253
+      },
+      {
+        "type": "tick",
+        "gain": 0.10360006501366727,
+        "pitch": 0.9680000000000001,
+        "pan": 0.35,
+        "t": 8.218723404255318,
+        "seed": 254
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.771914893617023,
+        "root": 2156,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.015682166461486628,
+        "pan": 0.28,
+        "t": 8.228085106382977,
+        "seed": 260
+      },
+      {
+        "type": "tick",
+        "gain": 0.10267095121954416,
+        "pitch": 0.98,
+        "pan": 0.35,
+        "t": 8.228085106382977,
+        "seed": 261
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.762553191489362,
+        "root": 2352,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.01532062752204617,
+        "pan": 0.28,
+        "t": 8.237446808510638,
+        "seed": 267
+      },
+      {
+        "type": "tick",
+        "gain": 0.10241652283637599,
+        "pitch": 0.992,
+        "pan": 0.35,
+        "t": 8.237446808510638,
+        "seed": 268
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.753191489361702,
+        "root": 2352,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.011272067058634599,
+        "pan": -0.28,
+        "t": 8.246808510638298,
+        "seed": 274
+      },
+      {
+        "type": "tick",
+        "gain": 0.09925913485963916,
+        "pitch": 1.004,
+        "pan": -0.35,
+        "t": 8.246808510638298,
+        "seed": 275
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.743829787234043,
+        "root": 980,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.011071213947344246,
+        "pan": 0.28,
+        "t": 8.256170212765957,
+        "seed": 281
+      },
+      {
+        "type": "tick",
+        "gain": 0.09908465964129212,
+        "pitch": 1.016,
+        "pan": 0.35,
+        "t": 8.256170212765957,
+        "seed": 282
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.734468085106384,
+        "root": 2744,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.01034384411023286,
+        "pan": -0.28,
+        "t": 8.265531914893616,
+        "seed": 288
+      },
+      {
+        "type": "tick",
+        "gain": 0.09843521984158912,
+        "pitch": 1.028,
+        "pan": -0.35,
+        "t": 8.265531914893616,
+        "seed": 289
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.7251063829787245,
+        "root": 2940,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.010153109899336571,
+        "pan": -0.28,
+        "t": 8.274893617021275,
+        "seed": 295
+      },
+      {
+        "type": "tick",
+        "gain": 0.0982600883989598,
+        "pitch": 1.04,
+        "pan": -0.35,
+        "t": 8.274893617021275,
+        "seed": 296
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.715744680851065,
+        "root": 1568,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.00928934147718893,
+        "pan": -0.28,
+        "t": 8.284255319148935,
+        "seed": 302
+      },
+      {
+        "type": "tick",
+        "gain": 0.0974393149768002,
+        "pitch": 1.052,
+        "pan": -0.35,
+        "t": 8.284255319148935,
+        "seed": 303
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.706382978723404,
+        "root": 1764,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.008935453553543287,
+        "pan": -0.28,
+        "t": 8.293617021276596,
+        "seed": 309
+      },
+      {
+        "type": "tick",
+        "gain": 0.09708886475332036,
+        "pitch": 1.064,
+        "pan": -0.35,
+        "t": 8.293617021276596,
+        "seed": 310
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.697021276595745,
+        "root": 1960,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.008833446240959256,
+        "pan": -0.28,
+        "t": 8.302978723404255,
+        "seed": 316
+      },
+      {
+        "type": "tick",
+        "gain": 0.09698619597750974,
+        "pitch": 1.076,
+        "pan": -0.35,
+        "t": 8.302978723404255,
+        "seed": 317
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.687659574468086,
+        "root": 2940,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.007715675322889417,
+        "pan": 0.28,
+        "t": 8.312340425531914,
+        "seed": 323
+      },
+      {
+        "type": "tick",
+        "gain": 0.09580760867959054,
+        "pitch": 1.088,
+        "pan": 0.35,
+        "t": 8.312340425531914,
+        "seed": 324
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.678297872340426,
+        "root": 2548,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.007647340303319252,
+        "pan": 0.28,
+        "t": 8.321702127659574,
+        "seed": 330
+      },
+      {
+        "type": "tick",
+        "gain": 0.09573208768134488,
+        "pitch": 1.1,
+        "pan": 0.35,
+        "t": 8.321702127659574,
+        "seed": 331
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.668936170212767,
+        "root": 3528,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0065159662506264725,
+        "pan": -0.28,
+        "t": 8.331063829787233,
+        "seed": 337
+      },
+      {
+        "type": "tick",
+        "gain": 0.0944131673272321,
+        "pitch": 1.112,
+        "pan": -0.35,
+        "t": 8.331063829787233,
+        "seed": 338
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.659574468085108,
+        "root": 2156,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.006244404750849883,
+        "pan": -0.28,
+        "t": 8.340425531914892,
+        "seed": 344
+      },
+      {
+        "type": "tick",
+        "gain": 0.09407498690186941,
+        "pitch": 1.124,
+        "pan": -0.35,
+        "t": 8.340425531914892,
+        "seed": 345
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.650212765957448,
+        "root": 3332,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.006010115728356408,
+        "pan": 0.28,
+        "t": 8.349787234042552,
+        "seed": 351
+      },
+      {
+        "type": "tick",
+        "gain": 0.09377554085527613,
+        "pitch": 1.1360000000000001,
+        "pan": 0.35,
+        "t": 8.349787234042552,
+        "seed": 352
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.640851063829787,
+        "root": 3724,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.005890313648177537,
+        "pan": -0.28,
+        "t": 8.359148936170213,
+        "seed": 358
+      },
+      {
+        "type": "tick",
+        "gain": 0.09361951493681621,
+        "pitch": 1.1480000000000001,
+        "pan": -0.35,
+        "t": 8.359148936170213,
+        "seed": 359
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.631489361702128,
+        "root": 3136,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.005569338843017863,
+        "pan": 0.28,
+        "t": 8.368510638297872,
+        "seed": 365
+      },
+      {
+        "type": "tick",
+        "gain": 0.09319117086123402,
+        "pitch": 1.1600000000000001,
+        "pan": 0.35,
+        "t": 8.368510638297872,
+        "seed": 366
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.622127659574469,
+        "root": 3136,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.005537702111284577,
+        "pan": -0.28,
+        "t": 8.377872340425531,
+        "seed": 372
+      },
+      {
+        "type": "tick",
+        "gain": 0.09314810039126592,
+        "pitch": 1.1720000000000002,
+        "pan": -0.35,
+        "t": 8.377872340425531,
+        "seed": 373
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.612765957446809,
+        "root": 3724,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0051141400288095005,
+        "pan": 0.28,
+        "t": 8.38723404255319,
+        "seed": 379
+      },
+      {
+        "type": "tick",
+        "gain": 0.09255557295557289,
+        "pitch": 1.1840000000000002,
+        "pan": 0.35,
+        "t": 8.38723404255319,
+        "seed": 380
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.60340425531915,
+        "root": 2548,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0047982611116224585,
+        "pan": -0.28,
+        "t": 8.39659574468085,
+        "seed": 386
+      },
+      {
+        "type": "tick",
+        "gain": 0.09209281343580263,
+        "pitch": 1.1960000000000002,
+        "pan": -0.35,
+        "t": 8.39659574468085,
+        "seed": 387
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.594042553191491,
+        "root": 2744,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.004710220387227109,
+        "pan": 0.28,
+        "t": 8.40595744680851,
+        "seed": 393
+      },
+      {
+        "type": "tick",
+        "gain": 0.09196036032178866,
+        "pitch": 1.2080000000000002,
+        "pan": 0.35,
+        "t": 8.40595744680851,
+        "seed": 394
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.5846808510638315,
+        "root": 5684,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.004447575752437872,
+        "pan": -0.28,
+        "t": 8.415319148936169,
+        "seed": 400
+      },
+      {
+        "type": "tick",
+        "gain": 0.0915555095254552,
+        "pitch": 1.22,
+        "pan": -0.35,
+        "t": 8.415319148936169,
+        "seed": 401
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.57531914893617,
+        "root": 3332,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.004177295203582672,
+        "pan": -0.28,
+        "t": 8.42468085106383,
+        "seed": 407
+      },
+      {
+        "type": "tick",
+        "gain": 0.09112250502847388,
+        "pitch": 1.232,
+        "pan": -0.35,
+        "t": 8.42468085106383,
+        "seed": 408
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.565957446808511,
+        "root": 4508,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.004125119660030752,
+        "pan": 0.28,
+        "t": 8.434042553191489,
+        "seed": 414
+      },
+      {
+        "type": "tick",
+        "gain": 0.09103685832958515,
+        "pitch": 1.244,
+        "pan": 0.35,
+        "t": 8.434042553191489,
+        "seed": 415
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.556595744680852,
+        "root": 5880,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.003997278720508528,
+        "pan": -0.28,
+        "t": 8.443404255319148,
+        "seed": 421
+      },
+      {
+        "type": "tick",
+        "gain": 0.0908240201122248,
+        "pitch": 1.256,
+        "pan": -0.35,
+        "t": 8.443404255319148,
+        "seed": 422
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.5472340425531925,
+        "root": 5096,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.003939222122528093,
+        "pan": -0.28,
+        "t": 8.452765957446807,
+        "seed": 428
+      },
+      {
+        "type": "tick",
+        "gain": 0.09072591752434628,
+        "pitch": 1.268,
+        "pan": -0.35,
+        "t": 8.452765957446807,
+        "seed": 429
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.537872340425533,
+        "root": 4312,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0038123084143201354,
+        "pan": -0.28,
+        "t": 8.462127659574467,
+        "seed": 435
+      },
+      {
+        "type": "tick",
+        "gain": 0.09050817778107868,
+        "pitch": 1.28,
+        "pan": -0.35,
+        "t": 8.462127659574467,
+        "seed": 436
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.528510638297874,
+        "root": 6468,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0036105745097128,
+        "pan": -0.28,
+        "t": 8.471489361702126,
+        "seed": 442
+      },
+      {
+        "type": "tick",
+        "gain": 0.09015226849984258,
+        "pitch": 1.292,
+        "pan": -0.35,
+        "t": 8.471489361702126,
+        "seed": 443
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.519148936170215,
+        "root": 4116,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0033523809008071327,
+        "pan": 0.28,
+        "t": 8.480851063829785,
+        "seed": 449
+      },
+      {
+        "type": "tick",
+        "gain": 0.08967757583253136,
+        "pitch": 1.304,
+        "pan": 0.35,
+        "t": 8.480851063829785,
+        "seed": 450
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.5097872340425535,
+        "root": 5096,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0032786610046613017,
+        "pan": 0.28,
+        "t": 8.490212765957446,
+        "seed": 456
+      },
+      {
+        "type": "tick",
+        "gain": 0.08953774845454503,
+        "pitch": 1.316,
+        "pan": 0.35,
+        "t": 8.490212765957446,
+        "seed": 457
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.500425531914894,
+        "root": 4900,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0032687314148825337,
+        "pan": 0.28,
+        "t": 8.499574468085106,
+        "seed": 463
+      },
+      {
+        "type": "tick",
+        "gain": 0.08951876068891483,
+        "pitch": 1.328,
+        "pan": 0.35,
+        "t": 8.499574468085106,
+        "seed": 464
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.491063829787235,
+        "root": 3920,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0032195648527814113,
+        "pan": 0.28,
+        "t": 8.508936170212765,
+        "seed": 470
+      },
+      {
+        "type": "tick",
+        "gain": 0.0894241918647202,
+        "pitch": 1.34,
+        "pan": 0.35,
+        "t": 8.508936170212765,
+        "seed": 471
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.481702127659576,
+        "root": 4116,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0030295705211743837,
+        "pan": -0.28,
+        "t": 8.518297872340424,
+        "seed": 477
+      },
+      {
+        "type": "tick",
+        "gain": 0.08904976192720435,
+        "pitch": 1.352,
+        "pan": -0.35,
+        "t": 8.518297872340424,
+        "seed": 478
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.472340425531916,
+        "root": 5488,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0028903896025039666,
+        "pan": 0.28,
+        "t": 8.527659574468084,
+        "seed": 484
+      },
+      {
+        "type": "tick",
+        "gain": 0.08876578106185287,
+        "pitch": 1.364,
+        "pan": 0.35,
+        "t": 8.527659574468084,
+        "seed": 485
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.462978723404257,
+        "root": 4704,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0028862477350802664,
+        "pan": 0.28,
+        "t": 8.537021276595743,
+        "seed": 491
+      },
+      {
+        "type": "tick",
+        "gain": 0.08875719674550793,
+        "pitch": 1.3760000000000001,
+        "pan": 0.35,
+        "t": 8.537021276595743,
+        "seed": 492
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.453617021276596,
+        "root": 6272,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0028712460809228015,
+        "pan": -0.28,
+        "t": 8.546382978723404,
+        "seed": 498
+      },
+      {
+        "type": "tick",
+        "gain": 0.08872603829111003,
+        "pitch": 1.388,
+        "pan": -0.35,
+        "t": 8.546382978723404,
+        "seed": 499
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.444255319148937,
+        "root": 5488,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.002815118085727801,
+        "pan": -0.28,
+        "t": 8.555744680851063,
+        "seed": 505
+      },
+      {
+        "type": "tick",
+        "gain": 0.08860852313526552,
+        "pitch": 1.4,
+        "pan": -0.35,
+        "t": 8.555744680851063,
+        "seed": 506
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.434893617021277,
+        "root": 3528,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0028019799820170415,
+        "pan": 0.28,
+        "t": 8.565106382978723,
+        "seed": 512
+      },
+      {
+        "type": "tick",
+        "gain": 0.08858079876319995,
+        "pitch": 1.412,
+        "pan": 0.35,
+        "t": 8.565106382978723,
+        "seed": 513
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.425531914893618,
+        "root": 4900,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0026347231310888167,
+        "pan": -0.28,
+        "t": 8.574468085106382,
+        "seed": 519
+      },
+      {
+        "type": "tick",
+        "gain": 0.08822030454749687,
+        "pitch": 1.424,
+        "pan": -0.35,
+        "t": 8.574468085106382,
+        "seed": 520
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.416170212765959,
+        "root": 4312,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.002556410110181231,
+        "pan": 0.28,
+        "t": 8.583829787234041,
+        "seed": 526
+      },
+      {
+        "type": "tick",
+        "gain": 0.08804644532274797,
+        "pitch": 1.436,
+        "pan": 0.35,
+        "t": 8.583829787234041,
+        "seed": 527
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.4068085106382995,
+        "root": 4508,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0025536470193714363,
+        "pan": -0.28,
+        "t": 8.5931914893617,
+        "seed": 533
+      },
+      {
+        "type": "tick",
+        "gain": 0.0880402489664117,
+        "pitch": 1.448,
+        "pan": -0.35,
+        "t": 8.5931914893617,
+        "seed": 534
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.39744680851064,
+        "root": 5292,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0023504503343474274,
+        "pan": 0.28,
+        "t": 8.60255319148936,
+        "seed": 540
+      },
+      {
+        "type": "tick",
+        "gain": 0.08757221769820442,
+        "pitch": 1.46,
+        "pan": 0.35,
+        "t": 8.60255319148936,
+        "seed": 541
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.388085106382979,
+        "root": 7840,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.002150936467830609,
+        "pan": -0.28,
+        "t": 8.611914893617021,
+        "seed": 547
+      },
+      {
+        "type": "tick",
+        "gain": 0.08708662429107744,
+        "pitch": 1.472,
+        "pan": -0.35,
+        "t": 8.611914893617021,
+        "seed": 548
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.37872340425532,
+        "root": 6076,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.002105526261583675,
+        "pan": 0.28,
+        "t": 8.62127659574468,
+        "seed": 554
+      },
+      {
+        "type": "tick",
+        "gain": 0.08697209108968863,
+        "pitch": 1.484,
+        "pan": 0.35,
+        "t": 8.62127659574468,
+        "seed": 555
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.3693617021276605,
+        "root": 7448,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.0020800009795592872,
+        "pan": -0.28,
+        "t": 8.63063829787234,
+        "seed": 561
+      },
+      {
+        "type": "tick",
+        "gain": 0.08690701302728963,
+        "pitch": 1.496,
+        "pan": -0.35,
+        "t": 8.63063829787234,
+        "seed": 562
+      },
+      {
+        "type": "pad",
+        "bus": "music",
+        "dur": 6.360000000000001,
+        "root": 6860,
+        "chord": [
+          0
+        ],
+        "attack": 0.3,
+        "release": 2.8,
+        "brightness": 7000,
+        "gain": 0.002059454693990731,
+        "pan": -0.28,
+        "t": 8.639999999999999,
+        "seed": 568
+      },
+      {
+        "type": "tick",
+        "gain": 0.0868542552368572,
+        "pitch": 1.508,
+        "pan": -0.35,
+        "t": 8.639999999999999,
+        "seed": 569
+      },
+      {
+        "type": "penScratch",
+        "dur": 2.8000000000000007,
+        "speed": 1.1930737337562887,
+        "gain": 0.09,
+        "t": 8.799999999999999,
+        "pan": 0,
+        "seed": 575
+      },
+      {
+        "type": "tick",
+        "gain": 0.9,
+        "pitch": 0.9,
+        "t": 11.6,
+        "pan": 0,
+        "seed": 582
+      },
+      {
+        "type": "chime",
+        "dur": 1.6,
+        "notes": 4,
+        "gain": 0.55,
+        "t": 11.62,
+        "pan": 0,
+        "seed": 583
+      },
+      {
+        "t": 12.05,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1.4,
+        "gain": 0.32,
+        "pitch": 0.8,
+        "seed": 9
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "epicycles.js: an original songbird outline (33 control points, closed Hermite spline) resampled to 256 points by arc length; DFT in plain JS with a sqrt-only twiddle table (bit-identical in Node and Chrome); c_0 is the pivot, the other 255 terms sorted by amplitude. Beat k shows the first K terms; the pen is their sum at the beat's phase, the ink is that sum sampled over one turn and drawn up to the current phase.",
+      "hash": "64340916",
+      "terms": "1:0.609m -1:0.219m -2:0.122m 2:0.083m -3:0.081m 3:0.040m 4:0.039m -4:0.030m -6:0.021m 6:0.019m -5:0.016m -7:0.014m",
+      "captured": "K1: 81.80%, K3: 95.68%, K12: 99.83%, K60: 100.00%",
+      "birdBox": {
+        "x": [
+          -1.008126942695968,
+          1.0064786710385625
+        ],
+        "z": [
+          -0.7048709191196459,
+          0.5622551029960923
+        ]
+      },
+      "framing": "ok (worst 0.8883 at 14.833333s, bird)"
+    }
+  }
+}

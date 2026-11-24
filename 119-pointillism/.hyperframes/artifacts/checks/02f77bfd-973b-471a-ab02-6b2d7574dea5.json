@@ -1,0 +1,1489 @@
+{
+  "ok": false,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "filesScanned": 1
+  },
+  "runtime": {
+    "ok": false,
+    "errorCount": 1,
+    "warningCount": 57,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "console_error",
+        "severity": "error",
+        "message": "THREE.THREE.WebGLProgram: Shader Error 0 - VALIDATE_STATUS false\n\nMaterial Name: \nMaterial Type: ShaderMaterial\n\nProgram Info Log: Fragment shader is not compiled.\n\nFRAGMENT\n\nERROR: 0:58: '#' : invalid character\nERROR: 0:58: 'include' : undeclared identifier\nERROR: 0:58: 'colorspace_fragment' : undeclared identifier\nERROR: 0:58: '}' : syntax error\n\n  53: float luminance( const in vec3 rgb ) {\n  54: \tconst vec3 weights = vec3( 0.2126, 0.7152, 0.0722 );\n  55: \treturn dot( weights, rgb );\n  56: }\n  57: \n> 58: uniform float uO; uniform vec3 uC; varying vec2 vU; void main(){ float r = length(vU); float a = uO * (1.0 - smoothstep(0.0, 1.0, r)); a *= a > 0.002 ? 1.0 : 0.0; gl_FragColor = vec4(uC, a); #include <colorspace_fragment> }",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.core.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0.833,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2.5,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0.125,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0.25,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0.375,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0.5,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0.625,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0.75,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0.875,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1.125,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1.25,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1.375,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1.5,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1.625,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1.75,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1.875,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2.125,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2.25,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2.375,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2.5,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2.625,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2.75,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2.875,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 3,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 3.125,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 3.25,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0.125,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0.25,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0.375,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0.5,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0.625,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0.75,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0.875,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1.125,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1.25,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1.375,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1.5,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1.625,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1.75,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 1.875,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2.125,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2.25,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2.375,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2.625,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2.75,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 2.875,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 3,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 3.125,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      },
+      {
+        "code": "console_warning",
+        "severity": "warning",
+        "message": "WebGL: INVALID_OPERATION: useProgram: program not valid",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "15",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 3.25,
+        "url": "http://127.0.0.1:58254/_atlas/vendor/three/three.module.min.js",
+        "line": 5
+      }
+    ]
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 1,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "canvas_content_at_edge",
+        "severity": "warning",
+        "time": 0.833,
+        "selector": "#stage",
+        "message": "Canvas content touches the frame edge (top).",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "containerSelector": "#main",
+        "fixHint": "Keep drawn text inside the visible part of the canvas, or mark intentional full-bleed art with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "dataAttributes": {
+          "data-start": "0",
+          "data-duration": "15",
+          "data-track-index": "0",
+          "data-engine": "three.js r181"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "firstSeen": 0.833,
+        "lastSeen": 14.167,
+        "occurrences": 7,
+        "heldMs": 0,
+        "times": [
+          0.833,
+          2.5,
+          4.167,
+          5.833,
+          7.5,
+          12.5,
+          14.167
+        ]
+      }
+    ],
+    "duration": 15,
+    "samples": [
+      0.833,
+      2.5,
+      4.167,
+      5.833,
+      7.5,
+      9.167,
+      10.833,
+      12.5,
+      14.167
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 1,
+    "truncated": false,
+    "faceCheck": {
+      "ran": true,
+      "candidates": 0,
+      "faces": 0
+    }
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "samples": [
+      0.833,
+      4.167,
+      7.5,
+      10.833,
+      14.167
+    ],
+    "checked": 0,
+    "passed": 0
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "step": 0.125,
+    "samples": 120
+  },
+  "audio": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  }
+}

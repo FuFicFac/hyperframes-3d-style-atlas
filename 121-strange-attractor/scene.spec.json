@@ -1,0 +1,5561 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "strange-attractor",
+    "name": "Strange Attractor",
+    "description": "The Lorenz butterfly as a glossy wire sculpture in a bright studio: each path is a thick lacquered tube (coral, teal) with a glowing bead at its head, drawn as the last few seconds of the path, over a pale floor that catches its soft shadow. Paths are integrated once at load (lorenz.js, fixed-step RK4) and read back by time; two starts a hair apart run as one twisted two-colour strand until they part at a fork, and a speck of 200 beads bursts across both wings. A small unlabelled dial shows the gap between the two beads.",
+    "palette": {
+      "bg": "#f1ece4",
+      "bgTop": "#f7f3ed",
+      "floor": "#ebe5dc",
+      "ink": "#222833",
+      "coral": "#f15a45",
+      "coralDeep": "#c43a2a",
+      "teal": "#0f9e95",
+      "tealDeep": "#0a6f69",
+      "gold": "#f0a92c",
+      "plum": "#7d5ba6",
+      "plate": "#232a36",
+      "plateEdge": "#f0a92c",
+      "plateText": "#fbf7f0",
+      "dial": "#fbf8f3",
+      "dialEdge": "#232a36",
+      "dialTrack": "#e2dbd0"
+    },
+    "world": {
+      "background": "#f1ece4",
+      "sky": null,
+      "fog": null,
+      "environment": null,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto",
+      "scale": 0.1,
+      "lift": 1.5
+    },
+    "materials": {
+      "floor": {
+        "type": "standard",
+        "baseColor": "#ebe5dc",
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      "coral": {
+        "type": "physical",
+        "baseColor": "#f15a45",
+        "roughness": 0.28,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.08
+      },
+      "teal": {
+        "type": "physical",
+        "baseColor": "#0f9e95",
+        "roughness": 0.28,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.08
+      },
+      "beadCoral": {
+        "type": "physical",
+        "baseColor": "#ff5a3c",
+        "roughness": 0.2,
+        "metalness": 0,
+        "clearcoat": 1,
+        "emission": {
+          "color": "#ff4a2a",
+          "strength": 1.3
+        }
+      },
+      "beadTeal": {
+        "type": "physical",
+        "baseColor": "#12c2b4",
+        "roughness": 0.2,
+        "metalness": 0,
+        "clearcoat": 1,
+        "emission": {
+          "color": "#00b3a4",
+          "strength": 1.3
+        }
+      },
+      "cloud": {
+        "type": "physical",
+        "baseColor": "#ffffff",
+        "roughness": 0.25,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.1
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#fffaf4",
+        "groundColor": "#e6ddd0",
+        "intensity": 1.1
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff6ec",
+        "intensity": 2,
+        "position": [
+          -2.5,
+          12,
+          3.5
+        ],
+        "target": [
+          0,
+          1.8,
+          0
+        ],
+        "shadow": {
+          "softness": 6,
+          "mapSize": 2048,
+          "extent": 3.4,
+          "near": 2,
+          "far": 22,
+          "bias": -0.0004,
+          "normalBias": 0.02
+        }
+      }
+    ],
+    "studio": {
+      "size": 256,
+      "sigma": 0.01,
+      "room": {
+        "w": 26,
+        "h": 14,
+        "d": 26,
+        "color": "#9a948b"
+      },
+      "panels": [
+        {
+          "id": "top",
+          "kind": "softbox",
+          "size": [
+            8,
+            4
+          ],
+          "pos": [
+            0,
+            6.5,
+            1
+          ],
+          "intensity": 2.2,
+          "color": "#fffaf2",
+          "soft": 0.25
+        },
+        {
+          "id": "keyStrip",
+          "kind": "strip",
+          "size": [
+            0.9,
+            7
+          ],
+          "pos": [
+            -7,
+            3,
+            5
+          ],
+          "intensity": 3.2,
+          "color": "#fff4e8",
+          "soft": 0.3
+        },
+        {
+          "id": "rimStrip",
+          "kind": "strip",
+          "size": [
+            0.7,
+            7
+          ],
+          "pos": [
+            7,
+            3,
+            -5
+          ],
+          "intensity": 2.6,
+          "color": "#eef4ff",
+          "soft": 0.3
+        },
+        {
+          "id": "front",
+          "kind": "card",
+          "size": [
+            14,
+            5
+          ],
+          "pos": [
+            0,
+            1.5,
+            12
+          ],
+          "intensity": 0.9,
+          "gradient": [
+            [
+              0,
+              "#6d6a66"
+            ],
+            [
+              1,
+              "#ffffff"
+            ]
+          ]
+        },
+        {
+          "id": "floorBounce",
+          "kind": "card",
+          "size": [
+            18,
+            18
+          ],
+          "pos": [
+            0,
+            -6.5,
+            0
+          ],
+          "intensity": 0.7,
+          "gradient": [
+            [
+              0,
+              "#ffffff"
+            ],
+            [
+              1,
+              "#8a847c"
+            ]
+          ],
+          "radial": true
+        }
+      ],
+      "sweep": {
+        "size": [
+          1,
+          1
+        ],
+        "radius": 9,
+        "from": 0.1,
+        "to": 2.7,
+        "intensity": 0,
+        "color": "#ffffff",
+        "soft": 0.3
+      },
+      "quantum": 0.0015
+    },
+    "backdrop": {
+      "width": 60,
+      "depth": 40,
+      "height": 22,
+      "radius": 8,
+      "z": -9
+    },
+    "tube": {
+      "radius": 0.045,
+      "radial": 14,
+      "every": 2,
+      "taper": 0.16,
+      "strandOffset": 1.1,
+      "twist": 9,
+      "open": [
+        0.35,
+        1.6
+      ],
+      "ramp": 0.3,
+      "trail": [
+        [
+          0,
+          5
+        ],
+        [
+          11.5,
+          5
+        ],
+        [
+          13.2,
+          5.5
+        ],
+        [
+          15,
+          5.5
+        ]
+      ],
+      "thin": [
+        [
+          0,
+          1
+        ],
+        [
+          12.1,
+          1
+        ],
+        [
+          13.1,
+          0.55
+        ],
+        [
+          15,
+          0.55
+        ]
+      ]
+    },
+    "bead": {
+      "radius": 0.12
+    },
+    "cloud": {
+      "bead": 0.042,
+      "tail": 0.32,
+      "tailWidth": 5,
+      "pop": 0.35,
+      "colors": [
+        "#f15a45",
+        "#f0a92c",
+        "#0f9e95",
+        "#7d5ba6"
+      ]
+    },
+    "sim": {
+      "h": 0.002,
+      "knots": [
+        [
+          -0.6,
+          0.5
+        ],
+        [
+          2.8,
+          0.55
+        ],
+        [
+          6,
+          0.65
+        ],
+        [
+          9.5,
+          0.65
+        ],
+        [
+          9.7,
+          0.3
+        ],
+        [
+          10.3,
+          0.3
+        ],
+        [
+          10.75,
+          0.75
+        ],
+        [
+          12,
+          0.8
+        ],
+        [
+          13.2,
+          2
+        ],
+        [
+          15,
+          2
+        ]
+      ],
+      "start": [
+        1,
+        1,
+        20
+      ],
+      "preroll": [
+        68,
+        72,
+        0.05
+      ],
+      "dir": [
+        1,
+        1,
+        1
+      ],
+      "split": {
+        "tol": 0.2,
+        "sep": 1,
+        "forkTau": 0.5,
+        "forkX": 4,
+        "minSwitches": 1,
+        "minTogether": 2,
+        "agreeLead": 0.5,
+        "agreeMax": 0.35,
+        "crossWin": 0.2,
+        "rejoinMin": 1.2,
+        "rejoinAfter": 0.8,
+        "delta": [
+          0.000001,
+          0.05
+        ],
+        "ratio": 1.03
+      },
+      "cloud": {
+        "count": 200,
+        "radius": 2.2,
+        "lead": 0.2,
+        "seed": 121,
+        "h": 0.004
+      }
+    },
+    "gauge": {
+      "x": 1596,
+      "y": 918,
+      "w": 236,
+      "h": 106,
+      "max": 30,
+      "power": 0.5
+    },
+    "caption": {
+      "x": 470,
+      "y": 926,
+      "w": 980,
+      "h": 98,
+      "radius": 22,
+      "cap": 50,
+      "weight": 800,
+      "font": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "plate": "#232a36",
+      "edge": "#f0a92c",
+      "text": "#fbf7f0"
+    },
+    "post": {
+      "bloom": {
+        "strength": 0.55,
+        "radius": 0.45,
+        "threshold": 1.6
+      },
+      "vignette": {
+        "darkness": 0.18,
+        "offset": 1.15
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.3,
+      "far": 120,
+      "drift": {
+        "amp": 0,
+        "speed": 0.3
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 800,
+      "color": "#222833",
+      "height": 0.4
+    },
+    "sound": {
+      "bed": {
+        "gain": 0.42,
+        "root": 98,
+        "brightness": 700
+      },
+      "voice": {
+        "hz": 196,
+        "step": 0.25,
+        "zMid": 25,
+        "semiPerUnit": 0.45,
+        "scale": [
+          0,
+          2,
+          4,
+          7,
+          9
+        ],
+        "gain": 0.7,
+        "decay": 1.4,
+        "bright": 0.45,
+        "detune": 1.2,
+        "detuneRef": 30
+      },
+      "cloud": {
+        "voices": 16,
+        "step": 0.34,
+        "gain": 0.16
+      },
+      "swell": {
+        "gain": 0.3,
+        "root": 196,
+        "brightness": 1400
+      },
+      "fork": {
+        "gain": 0.5
+      }
+    },
+    "sfx": {
+      "enter": "pop",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "pluck",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Every path is integrated once at load (fixed-step RK4) and read back by t: the tube is the last few tau of the path up to now.",
+      "Two starts a hair apart share one twisted two-colour strand while the twin stays on the coral's path; it opens for good at the fork.",
+      "The cloud: 200 starts packed into a speck at the fork, released together, spread across both wings.",
+      "Camera: one move per beat; the fork shot faces the split so one bead goes left and one right."
+    ]
+  },
+  "scene": {
+    "id": "121-strange-attractor",
+    "style": "strange-attractor",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "rule",
+        "t": 0,
+        "dur": 2.8,
+        "label": "One rule, followed exactly"
+      },
+      {
+        "id": "twin",
+        "t": 2.8,
+        "dur": 3.2,
+        "label": "A twin starts a hair apart"
+      },
+      {
+        "id": "agree",
+        "t": 6,
+        "dur": 3,
+        "label": "They agree... for a while"
+      },
+      {
+        "id": "part",
+        "t": 9,
+        "dur": 3,
+        "label": "Then they part for good"
+      },
+      {
+        "id": "cloud",
+        "t": 12,
+        "dur": 3,
+        "label": "Unpredictable, same shape"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          3.59491,
+          3.74212,
+          7.48126
+        ],
+        "target": [
+          -0.68822,
+          2.4197,
+          0.4953
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 2.6,
+        "pos": [
+          4.33443,
+          3.69549,
+          6.54215
+        ],
+        "target": [
+          -0.24045,
+          2.42484,
+          0.13394
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 5.8,
+        "pos": [
+          4.83225,
+          3.67036,
+          5.83982
+        ],
+        "target": [
+          -0.14912,
+          2.45121,
+          0.16026
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 6.8,
+        "pos": [
+          4.89022,
+          3.58004,
+          5.66108
+        ],
+        "target": [
+          -0.15158,
+          2.44997,
+          0.13939
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 8.8,
+        "pos": [
+          5.64723,
+          3.40623,
+          4.60406
+        ],
+        "target": [
+          -0.04458,
+          2.45627,
+          0.08732
+        ],
+        "fov": 30,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 9.55,
+        "pos": [
+          2.93405,
+          1.14583,
+          1.13275
+        ],
+        "target": [
+          0.20954,
+          0.89683,
+          -0.35848
+        ],
+        "fov": 30,
+        "ease": "inOutCubic",
+        "path": "arc"
+      },
+      {
+        "t": 10,
+        "pos": [
+          2.93405,
+          1.14583,
+          1.13275
+        ],
+        "target": [
+          0.20954,
+          0.89683,
+          -0.35848
+        ],
+        "fov": 30,
+        "ease": "linear"
+      },
+      {
+        "t": 10.55,
+        "pos": [
+          9.90744,
+          3.5695,
+          4.92303
+        ],
+        "target": [
+          0.51043,
+          2.23976,
+          -0.84862
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.75,
+        "pos": [
+          8.59369,
+          3.70919,
+          5.59459
+        ],
+        "target": [
+          -0.003,
+          2.26949,
+          0.07471
+        ],
+        "fov": 30,
+        "ease": "inOutSine",
+        "path": "arc"
+      },
+      {
+        "t": 15,
+        "pos": [
+          8.37028,
+          4.34067,
+          5.44414
+        ],
+        "target": [
+          0.01829,
+          2.32868,
+          0.08139
+        ],
+        "fov": 30,
+        "ease": "inOutSine",
+        "path": "arc"
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "dur": 15,
+        "gain": 0.42,
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "attack": 1,
+        "release": 2,
+        "brightness": 700,
+        "seed": 3
+      },
+      {
+        "t": 0.05,
+        "type": "pluck",
+        "hz": 146.8340935339148,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.06412406321007558,
+        "seed": 1000
+      },
+      {
+        "t": 0.3,
+        "type": "pluck",
+        "hz": 123.47226288969757,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.17677044093269245,
+        "seed": 1001
+      },
+      {
+        "t": 0.55,
+        "type": "pluck",
+        "hz": 164.81569738972806,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.501087066644494,
+        "seed": 1002
+      },
+      {
+        "t": 0.8,
+        "type": "pluck",
+        "hz": 293.6681870678296,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.6901965837934049,
+        "seed": 1003
+      },
+      {
+        "t": 1.05,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.16267664927490966,
+        "seed": 1004
+      },
+      {
+        "t": 1.3,
+        "type": "pluck",
+        "hz": 164.81569738972806,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.06185589509750142,
+        "seed": 1005
+      },
+      {
+        "t": 1.55,
+        "type": "pluck",
+        "hz": 164.81569738972806,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.1659657973022202,
+        "seed": 1006
+      },
+      {
+        "t": 1.8,
+        "type": "pluck",
+        "hz": 164.81569738972806,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.3833424562886234,
+        "seed": 1007
+      },
+      {
+        "t": 2.05,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.6406714038927285,
+        "seed": 1008
+      },
+      {
+        "t": 2.3,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.3355507739754224,
+        "seed": 1009
+      },
+      {
+        "t": 2.55,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.09442018246165026,
+        "seed": 1010
+      },
+      {
+        "t": 2.8,
+        "type": "pluck",
+        "hz": 164.81569738972806,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.07519362866404321,
+        "seed": 1011
+      },
+      {
+        "t": 2.8,
+        "type": "pluck",
+        "hz": 164.91176438117293,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.07524907814767955,
+        "seed": 1011
+      },
+      {
+        "t": 3.05,
+        "type": "pluck",
+        "hz": 146.8340935339148,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.17307478875972826,
+        "seed": 1012
+      },
+      {
+        "t": 3.05,
+        "type": "pluck",
+        "hz": 146.9605172988588,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.17317131779564657,
+        "seed": 1012
+      },
+      {
+        "t": 3.3,
+        "type": "pluck",
+        "hz": 164.81569738972806,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.4872800387328828,
+        "seed": 1013
+      },
+      {
+        "t": 3.3,
+        "type": "pluck",
+        "hz": 165.03284551498763,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.4874489182462961,
+        "seed": 1013
+      },
+      {
+        "t": 3.55,
+        "type": "pluck",
+        "hz": 293.6681870678296,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.6359695948861069,
+        "seed": 1014
+      },
+      {
+        "t": 3.55,
+        "type": "pluck",
+        "hz": 294.04223190123236,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.6357763569229155,
+        "seed": 1014
+      },
+      {
+        "t": 3.8,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.13568073578978937,
+        "seed": 1015
+      },
+      {
+        "t": 3.8,
+        "type": "pluck",
+        "hz": 220.20467161397676,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.1356058128081121,
+        "seed": 1015
+      },
+      {
+        "t": 4.05,
+        "type": "pluck",
+        "hz": 164.81569738972806,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.030183576999527173,
+        "seed": 1016
+      },
+      {
+        "t": 4.05,
+        "type": "pluck",
+        "hz": 164.94864113467986,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.030125499348981045,
+        "seed": 1016
+      },
+      {
+        "t": 4.3,
+        "type": "pluck",
+        "hz": 146.8340935339148,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.10712923460526777,
+        "seed": 1017
+      },
+      {
+        "t": 4.3,
+        "type": "pluck",
+        "hz": 146.98947689573265,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.10698396482728051,
+        "seed": 1017
+      },
+      {
+        "t": 4.55,
+        "type": "pluck",
+        "hz": 146.8340935339148,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.3340829144300969,
+        "seed": 1018
+      },
+      {
+        "t": 4.55,
+        "type": "pluck",
+        "hz": 147.08918262295902,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.3337314912983444,
+        "seed": 1018
+      },
+      {
+        "t": 4.8,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.7,
+        "seed": 1019
+      },
+      {
+        "t": 4.8,
+        "type": "pluck",
+        "hz": 247.4495466045214,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.7,
+        "seed": 1019
+      },
+      {
+        "t": 5.05,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.22228697443929235,
+        "seed": 1020
+      },
+      {
+        "t": 5.05,
+        "type": "pluck",
+        "hz": 220.3358136457047,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.2225921886095502,
+        "seed": 1020
+      },
+      {
+        "t": 5.3,
+        "type": "pluck",
+        "hz": 164.81569738972806,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.02471574667142357,
+        "seed": 1021
+      },
+      {
+        "t": 5.3,
+        "type": "pluck",
+        "hz": 165.01340623273063,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.024813845328459597,
+        "seed": 1021
+      },
+      {
+        "t": 5.55,
+        "type": "pluck",
+        "hz": 146.8340935339148,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.11265086941154148,
+        "seed": 1022
+      },
+      {
+        "t": 5.55,
+        "type": "pluck",
+        "hz": 147.05283454651675,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.11293105643009622,
+        "seed": 1022
+      },
+      {
+        "t": 5.8,
+        "type": "pluck",
+        "hz": 146.8340935339148,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.36587266233884697,
+        "seed": 1023
+      },
+      {
+        "t": 5.8,
+        "type": "pluck",
+        "hz": 147.18779929189174,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.36651929395759525,
+        "seed": 1023
+      },
+      {
+        "t": 6.05,
+        "type": "pluck",
+        "hz": 293.6681870678296,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.6794721616481398,
+        "seed": 1024
+      },
+      {
+        "t": 6.05,
+        "type": "pluck",
+        "hz": 294.4327267498704,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.6789194304804405,
+        "seed": 1024
+      },
+      {
+        "t": 6.3,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.15044213318733698,
+        "seed": 1025
+      },
+      {
+        "t": 6.3,
+        "type": "pluck",
+        "hz": 220.41248365455803,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.15015058874246298,
+        "seed": 1025
+      },
+      {
+        "t": 6.55,
+        "type": "pluck",
+        "hz": 164.81569738972806,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.026673706221776897,
+        "seed": 1026
+      },
+      {
+        "t": 6.55,
+        "type": "pluck",
+        "hz": 165.09722247726688,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.026356922615976962,
+        "seed": 1026
+      },
+      {
+        "t": 6.8,
+        "type": "pluck",
+        "hz": 146.8340935339148,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.10631464422621993,
+        "seed": 1027
+      },
+      {
+        "t": 6.8,
+        "type": "pluck",
+        "hz": 147.20865451004207,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.10544661187300854,
+        "seed": 1027
+      },
+      {
+        "t": 7.05,
+        "type": "pluck",
+        "hz": 146.8340935339148,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.3800225659287151,
+        "seed": 1028
+      },
+      {
+        "t": 7.05,
+        "type": "pluck",
+        "hz": 147.5079375585422,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.3776265313756261,
+        "seed": 1028
+      },
+      {
+        "t": 7.3,
+        "type": "pluck",
+        "hz": 293.6681870678296,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.6865343422206297,
+        "seed": 1029
+      },
+      {
+        "t": 7.3,
+        "type": "pluck",
+        "hz": 295.162871827417,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.6887191689009188,
+        "seed": 1029
+      },
+      {
+        "t": 7.55,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.1097339925063907,
+        "seed": 1030
+      },
+      {
+        "t": 7.55,
+        "type": "pluck",
+        "hz": 220.7636050367575,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.11094331694680522,
+        "seed": 1030
+      },
+      {
+        "t": 7.8,
+        "type": "pluck",
+        "hz": 164.81569738972806,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.0702093851923456,
+        "seed": 1031
+      },
+      {
+        "t": 7.8,
+        "type": "pluck",
+        "hz": 165.2856223438367,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.07080166249036185,
+        "seed": 1031
+      },
+      {
+        "t": 8.05,
+        "type": "pluck",
+        "hz": 146.8340935339148,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.21282198298048238,
+        "seed": 1032
+      },
+      {
+        "t": 8.05,
+        "type": "pluck",
+        "hz": 147.33561188734657,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.214095743241265,
+        "seed": 1032
+      },
+      {
+        "t": 8.3,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.596109479876877,
+        "seed": 1033
+      },
+      {
+        "t": 8.3,
+        "type": "pluck",
+        "hz": 196.82793942427062,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.5967528397178907,
+        "seed": 1033
+      },
+      {
+        "t": 8.55,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.4123597301387095,
+        "seed": 1034
+      },
+      {
+        "t": 8.55,
+        "type": "pluck",
+        "hz": 247.8065871900314,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.41065483840815065,
+        "seed": 1034
+      },
+      {
+        "t": 8.8,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.05308733856708819,
+        "seed": 1035
+      },
+      {
+        "t": 8.8,
+        "type": "pluck",
+        "hz": 196.58494251384758,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.05403780127267977,
+        "seed": 1035
+      },
+      {
+        "t": 9.05,
+        "type": "pluck",
+        "hz": 146.8340935339148,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.0032010146683511113,
+        "seed": 1036
+      },
+      {
+        "t": 9.05,
+        "type": "pluck",
+        "hz": 147.46564535360665,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.005905248023948918,
+        "seed": 1036
+      },
+      {
+        "t": 9.3,
+        "type": "pluck",
+        "hz": 123.47226288969757,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.00027162380564975516,
+        "seed": 1037
+      },
+      {
+        "t": 9.3,
+        "type": "pluck",
+        "hz": 124.48618003670506,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.008775566785892589,
+        "seed": 1037
+      },
+      {
+        "t": 9.347692307692308,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1,
+        "gain": 0.5,
+        "pitch": 0.7,
+        "seed": 11
+      },
+      {
+        "t": 9.55,
+        "type": "pluck",
+        "hz": 123.47226288969757,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.0017945309626803017,
+        "seed": 1038
+      },
+      {
+        "t": 9.55,
+        "type": "pluck",
+        "hz": 123.47226288969757,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.03736601724257291,
+        "seed": 1038
+      },
+      {
+        "t": 9.8,
+        "type": "pluck",
+        "hz": 110.00128073431856,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.0046336579245960345,
+        "seed": 1039
+      },
+      {
+        "t": 9.8,
+        "type": "pluck",
+        "hz": 123.47226288969757,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.09590319452301972,
+        "seed": 1039
+      },
+      {
+        "t": 10.05,
+        "type": "pluck",
+        "hz": 110.00128073431856,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.010096749635752371,
+        "seed": 1040
+      },
+      {
+        "t": 10.05,
+        "type": "pluck",
+        "hz": 123.47226288969757,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.20619529389265698,
+        "seed": 1040
+      },
+      {
+        "t": 10.3,
+        "type": "pluck",
+        "hz": 110.00128073431856,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.02245385499622091,
+        "seed": 1041
+      },
+      {
+        "t": 10.3,
+        "type": "pluck",
+        "hz": 146.8340935339148,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.43145229343324887,
+        "seed": 1041
+      },
+      {
+        "t": 10.55,
+        "type": "pluck",
+        "hz": 110.00128073431856,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.07149726687457642,
+        "seed": 1042
+      },
+      {
+        "t": 10.55,
+        "type": "pluck",
+        "hz": 293.6681870678296,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.7,
+        "seed": 1042
+      },
+      {
+        "t": 10.8,
+        "type": "pluck",
+        "hz": 123.47226288969757,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.43640810311768663,
+        "seed": 1043
+      },
+      {
+        "t": 10.8,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.0908680449641829,
+        "seed": 1043
+      },
+      {
+        "t": 11.05,
+        "type": "pluck",
+        "hz": 293.6681870678296,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.5275414174938263,
+        "seed": 1044
+      },
+      {
+        "t": 11.05,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.24443513296296596,
+        "seed": 1044
+      },
+      {
+        "t": 11.3,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.21172003046783505,
+        "seed": 1045
+      },
+      {
+        "t": 11.3,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.481015882050526,
+        "seed": 1045
+      },
+      {
+        "t": 11.55,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.40080971862391357,
+        "seed": 1046
+      },
+      {
+        "t": 11.55,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.3909727544994542,
+        "seed": 1046
+      },
+      {
+        "t": 11.8,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.44390724059947645,
+        "seed": 1047
+      },
+      {
+        "t": 11.8,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.23570249272726793,
+        "seed": 1047
+      },
+      {
+        "t": 12,
+        "type": "pad",
+        "bus": "sfx",
+        "dur": 3,
+        "gain": 0.3,
+        "root": 196,
+        "chord": [
+          0,
+          4,
+          7,
+          11,
+          14
+        ],
+        "attack": 1.4,
+        "release": 0.8,
+        "brightness": 1400,
+        "seed": 13
+      },
+      {
+        "t": 12.02,
+        "type": "sparkle",
+        "dur": 0.9,
+        "notes": 8,
+        "gain": 0.1,
+        "seed": 17
+      },
+      {
+        "t": 12.05,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.29496284752358953,
+        "seed": 1048
+      },
+      {
+        "t": 12.05,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.41931761805965734,
+        "seed": 1048
+      },
+      {
+        "t": 12.08,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.0864,
+        "pan": -0.024740565512303577,
+        "seed": 5194
+      },
+      {
+        "t": 12.10125,
+        "type": "pluck",
+        "hz": 293.6681870678296,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.08810000000000003,
+        "pan": -0.001323177941041493,
+        "seed": 5291
+      },
+      {
+        "t": 12.1225,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.08980000000000005,
+        "pan": 0.09134664052859831,
+        "seed": 5388
+      },
+      {
+        "t": 12.14375,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.09150000000000005,
+        "pan": -0.01364291321675946,
+        "seed": 5485
+      },
+      {
+        "t": 12.165000000000001,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.09320000000000007,
+        "pan": -0.009640863522501705,
+        "seed": 5582
+      },
+      {
+        "t": 12.18625,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.09489999999999996,
+        "pan": 0.10437003418104651,
+        "seed": 5679
+      },
+      {
+        "t": 12.2075,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.09659999999999996,
+        "pan": 0.0004169074355543891,
+        "seed": 5776
+      },
+      {
+        "t": 12.22875,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.09829999999999998,
+        "pan": -0.056528565230120426,
+        "seed": 5873
+      },
+      {
+        "t": 12.25,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.1,
+        "pan": -0.06504254251509788,
+        "seed": 5970
+      },
+      {
+        "t": 12.27125,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.10170000000000001,
+        "pan": 0.12103572016916343,
+        "seed": 6067
+      },
+      {
+        "t": 12.2925,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.10340000000000003,
+        "pan": 0.1305846057999464,
+        "seed": 6164
+      },
+      {
+        "t": 12.3,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.41907682441743627,
+        "seed": 1049
+      },
+      {
+        "t": 12.3,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.3928702013669721,
+        "seed": 1049
+      },
+      {
+        "t": 12.31375,
+        "type": "pluck",
+        "hz": 293.6681870678296,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.10510000000000005,
+        "pan": 0.352050354765955,
+        "seed": 6261
+      },
+      {
+        "t": 12.335,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.10680000000000008,
+        "pan": 0.16890552943033377,
+        "seed": 6358
+      },
+      {
+        "t": 12.35625,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.10849999999999994,
+        "pan": -0.5890939151071265,
+        "seed": 6455
+      },
+      {
+        "t": 12.3775,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.11019999999999996,
+        "pan": 0.12923176505373385,
+        "seed": 6552
+      },
+      {
+        "t": 12.39875,
+        "type": "pluck",
+        "hz": 440.0051229372742,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.11189999999999999,
+        "pan": 0.6908664379723489,
+        "seed": 6649
+      },
+      {
+        "t": 12.42,
+        "type": "pluck",
+        "hz": 293.6681870678296,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.11359999999999999,
+        "pan": -0.4924569562906317,
+        "seed": 5195
+      },
+      {
+        "t": 12.44125,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.11530000000000001,
+        "pan": -0.32600721627365015,
+        "seed": 5292
+      },
+      {
+        "t": 12.4625,
+        "type": "pluck",
+        "hz": 587.3363741356592,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.11700000000000003,
+        "pan": 0.5137502599494549,
+        "seed": 5389
+      },
+      {
+        "t": 12.48375,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.11870000000000004,
+        "pan": -0.6204719294376612,
+        "seed": 5486
+      },
+      {
+        "t": 12.505,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.12040000000000006,
+        "pan": -0.28507623392405346,
+        "seed": 5583
+      },
+      {
+        "t": 12.52625,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.12209999999999994,
+        "pan": 0.3039706241082922,
+        "seed": 5680
+      },
+      {
+        "t": 12.5475,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.12379999999999995,
+        "pan": -0.04255674754519705,
+        "seed": 5777
+      },
+      {
+        "t": 12.55,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.32953250520129046,
+        "seed": 1050
+      },
+      {
+        "t": 12.55,
+        "type": "pluck",
+        "hz": 164.81569738972806,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.28496990938604605,
+        "seed": 1050
+      },
+      {
+        "t": 12.56875,
+        "type": "pluck",
+        "hz": 587.3363741356592,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.12549999999999997,
+        "pan": -0.5032927600449153,
+        "seed": 5874
+      },
+      {
+        "t": 12.59,
+        "type": "pluck",
+        "hz": 587.3363741356592,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.12719999999999998,
+        "pan": -0.35633963143960473,
+        "seed": 5971
+      },
+      {
+        "t": 12.61125,
+        "type": "pluck",
+        "hz": 440.0051229372742,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.12890000000000001,
+        "pan": 0.10397467904187946,
+        "seed": 6068
+      },
+      {
+        "t": 12.6325,
+        "type": "pluck",
+        "hz": 440.0051229372742,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.13060000000000002,
+        "pan": 0.018028317837956824,
+        "seed": 6165
+      },
+      {
+        "t": 12.65375,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.13230000000000003,
+        "pan": -0.13400234331134328,
+        "seed": 6262
+      },
+      {
+        "t": 12.675,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.13400000000000006,
+        "pan": -0.0937361512971032,
+        "seed": 6359
+      },
+      {
+        "t": 12.69625,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.13569999999999993,
+        "pan": 0.16261418604701608,
+        "seed": 6456
+      },
+      {
+        "t": 12.7175,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.13739999999999994,
+        "pan": -0.10266228811900796,
+        "seed": 6553
+      },
+      {
+        "t": 12.73875,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.13909999999999997,
+        "pan": -0.22966933615660148,
+        "seed": 6650
+      },
+      {
+        "t": 12.76,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.14079999999999998,
+        "pan": 0.25637985471971575,
+        "seed": 5196
+      },
+      {
+        "t": 12.78125,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.14250000000000002,
+        "pan": 0.21414511278352882,
+        "seed": 5293
+      },
+      {
+        "t": 12.8,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.4614879745966223,
+        "seed": 1051
+      },
+      {
+        "t": 12.8,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.3434100203373926,
+        "seed": 1051
+      },
+      {
+        "t": 12.8025,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.14420000000000002,
+        "pan": -0.49694247028183314,
+        "seed": 5390
+      },
+      {
+        "t": 12.82375,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.14590000000000003,
+        "pan": 0.31492436153888614,
+        "seed": 5487
+      },
+      {
+        "t": 12.845,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.14760000000000006,
+        "pan": 0.2532390423953447,
+        "seed": 5584
+      },
+      {
+        "t": 12.866249999999999,
+        "type": "pluck",
+        "hz": 440.0051229372742,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.14929999999999993,
+        "pan": -0.580404706880806,
+        "seed": 5681
+      },
+      {
+        "t": 12.8875,
+        "type": "pluck",
+        "hz": 440.0051229372742,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.15099999999999994,
+        "pan": 0.04852899221706923,
+        "seed": 5778
+      },
+      {
+        "t": 12.90875,
+        "type": "pluck",
+        "hz": 440.0051229372742,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.15269999999999997,
+        "pan": 0.5394869038035073,
+        "seed": 5875
+      },
+      {
+        "t": 12.93,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.15439999999999998,
+        "pan": 0.5290165427275961,
+        "seed": 5972
+      },
+      {
+        "t": 12.95125,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.1561,
+        "pan": -0.5102934107633248,
+        "seed": 6069
+      },
+      {
+        "t": 12.9725,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.15780000000000002,
+        "pan": -0.41630331808519344,
+        "seed": 6166
+      },
+      {
+        "t": 12.99375,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.15950000000000003,
+        "pan": -0.23032232042908116,
+        "seed": 6263
+      },
+      {
+        "t": 13.015,
+        "type": "pluck",
+        "hz": 440.0051229372742,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.30908527652704754,
+        "seed": 6360
+      },
+      {
+        "t": 13.036249999999999,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.1302528630226323,
+        "seed": 6457
+      },
+      {
+        "t": 13.05,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.2913787196189658,
+        "seed": 1052
+      },
+      {
+        "t": 13.05,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.49689365239596417,
+        "seed": 1052
+      },
+      {
+        "t": 13.0575,
+        "type": "pluck",
+        "hz": 440.0051229372742,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.304578668490216,
+        "seed": 6554
+      },
+      {
+        "t": 13.07875,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.14195970563121174,
+        "seed": 6651
+      },
+      {
+        "t": 13.1,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.2267678917458962,
+        "seed": 5197
+      },
+      {
+        "t": 13.12125,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.21674245073004023,
+        "seed": 5294
+      },
+      {
+        "t": 13.1425,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.3305238012895895,
+        "seed": 5391
+      },
+      {
+        "t": 13.16375,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.27126326635665204,
+        "seed": 5488
+      },
+      {
+        "t": 13.185,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.2601290001908914,
+        "seed": 5585
+      },
+      {
+        "t": 13.206249999999999,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.5036499254242999,
+        "seed": 5682
+      },
+      {
+        "t": 13.2275,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.30862824130953753,
+        "seed": 5779
+      },
+      {
+        "t": 13.24875,
+        "type": "pluck",
+        "hz": 440.0051229372742,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.5455149585765,
+        "seed": 5876
+      },
+      {
+        "t": 13.27,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.5457485160114819,
+        "seed": 5973
+      },
+      {
+        "t": 13.29125,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.573187181111479,
+        "seed": 6070
+      },
+      {
+        "t": 13.3,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.2948489176068114,
+        "seed": 1053
+      },
+      {
+        "t": 13.3,
+        "type": "pluck",
+        "hz": 164.81569738972806,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.2266567344948667,
+        "seed": 1053
+      },
+      {
+        "t": 13.3125,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.4247424614547247,
+        "seed": 6167
+      },
+      {
+        "t": 13.33375,
+        "type": "pluck",
+        "hz": 440.0051229372742,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.23367131287660453,
+        "seed": 6264
+      },
+      {
+        "t": 13.355,
+        "type": "pluck",
+        "hz": 440.0051229372742,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.27970221463820405,
+        "seed": 6361
+      },
+      {
+        "t": 13.376249999999999,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.13094657821542485,
+        "seed": 6458
+      },
+      {
+        "t": 13.397499999999999,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.2664969359279729,
+        "seed": 6555
+      },
+      {
+        "t": 13.41875,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.09716968895412105,
+        "seed": 6652
+      },
+      {
+        "t": 13.44,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.22061490855000637,
+        "seed": 5198
+      },
+      {
+        "t": 13.46125,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.20281231421057921,
+        "seed": 5295
+      },
+      {
+        "t": 13.4825,
+        "type": "pluck",
+        "hz": 293.6681870678296,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.2434707365218449,
+        "seed": 5392
+      },
+      {
+        "t": 13.50375,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.2843528522149142,
+        "seed": 5489
+      },
+      {
+        "t": 13.525,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.2736285492463529,
+        "seed": 5586
+      },
+      {
+        "t": 13.546249999999999,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.40676526473703584,
+        "seed": 5683
+      },
+      {
+        "t": 13.55,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.4356447096079776,
+        "seed": 1054
+      },
+      {
+        "t": 13.55,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.18393906620950584,
+        "seed": 1054
+      },
+      {
+        "t": 13.567499999999999,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.2825338082138359,
+        "seed": 5780
+      },
+      {
+        "t": 13.58875,
+        "type": "pluck",
+        "hz": 440.0051229372742,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.5727378948784028,
+        "seed": 5877
+      },
+      {
+        "t": 13.61,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.5448373670029566,
+        "seed": 5974
+      },
+      {
+        "t": 13.63125,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.6250258283370531,
+        "seed": 6071
+      },
+      {
+        "t": 13.6525,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.40062245993521745,
+        "seed": 6168
+      },
+      {
+        "t": 13.67375,
+        "type": "pluck",
+        "hz": 440.0051229372742,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.24298248312291634,
+        "seed": 6265
+      },
+      {
+        "t": 13.695,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.23578705796968738,
+        "seed": 6362
+      },
+      {
+        "t": 13.716249999999999,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.42562696762699015,
+        "seed": 6459
+      },
+      {
+        "t": 13.737499999999999,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.2305394477859884,
+        "seed": 6556
+      },
+      {
+        "t": 13.75875,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.0640734899813851,
+        "seed": 6653
+      },
+      {
+        "t": 13.780000000000001,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.21269275343894867,
+        "seed": 5199
+      },
+      {
+        "t": 13.8,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.49642215050103,
+        "seed": 1055
+      },
+      {
+        "t": 13.8,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.5333131805216036,
+        "seed": 1055
+      },
+      {
+        "t": 13.80125,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.1869877263550463,
+        "seed": 5296
+      },
+      {
+        "t": 13.822500000000002,
+        "type": "pluck",
+        "hz": 293.6681870678296,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.07887205105062269,
+        "seed": 5393
+      },
+      {
+        "t": 13.84375,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.28766197737045496,
+        "seed": 5490
+      },
+      {
+        "t": 13.865000000000002,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.2948383265632397,
+        "seed": 5587
+      },
+      {
+        "t": 13.88625,
+        "type": "pluck",
+        "hz": 293.6681870678296,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.12242167192679512,
+        "seed": 5684
+      },
+      {
+        "t": 13.907499999999999,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.2757536964374168,
+        "seed": 5781
+      },
+      {
+        "t": 13.92875,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.5963257709886869,
+        "seed": 5878
+      },
+      {
+        "t": 13.95,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.5477437070931719,
+        "seed": 5975
+      },
+      {
+        "t": 13.971250000000001,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.5899051864285271,
+        "seed": 6072
+      },
+      {
+        "t": 13.9925,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.41881824111939225,
+        "seed": 6169
+      },
+      {
+        "t": 14.013750000000002,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.4174094648391661,
+        "seed": 6266
+      },
+      {
+        "t": 14.035,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.20140643549937975,
+        "seed": 6363
+      },
+      {
+        "t": 14.05,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.3410329891855396,
+        "seed": 1056
+      },
+      {
+        "t": 14.05,
+        "type": "pluck",
+        "hz": 164.81569738972806,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.34813682918229366,
+        "seed": 1056
+      },
+      {
+        "t": 14.056249999999999,
+        "type": "pluck",
+        "hz": 587.3363741356592,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.6364852403544922,
+        "seed": 6460
+      },
+      {
+        "t": 14.0775,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.20462413549267178,
+        "seed": 6557
+      },
+      {
+        "t": 14.098749999999999,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.6747427865872743,
+        "seed": 6654
+      },
+      {
+        "t": 14.120000000000001,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.19045957633554583,
+        "seed": 5200
+      },
+      {
+        "t": 14.14125,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.159696110235072,
+        "seed": 5297
+      },
+      {
+        "t": 14.162500000000001,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.06534170871636023,
+        "seed": 5394
+      },
+      {
+        "t": 14.18375,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.2642037938543269,
+        "seed": 5491
+      },
+      {
+        "t": 14.205000000000002,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.3169985911827488,
+        "seed": 5588
+      },
+      {
+        "t": 14.22625,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.12408123684333186,
+        "seed": 5685
+      },
+      {
+        "t": 14.247499999999999,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.28720153210546756,
+        "seed": 5782
+      },
+      {
+        "t": 14.26875,
+        "type": "pluck",
+        "hz": 440.0051229372742,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.6053159581659173,
+        "seed": 5879
+      },
+      {
+        "t": 14.29,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.5809318504727896,
+        "seed": 5976
+      },
+      {
+        "t": 14.3,
+        "type": "pluck",
+        "hz": 196,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.23656817326437382,
+        "seed": 1057
+      },
+      {
+        "t": 14.3,
+        "type": "pluck",
+        "hz": 164.81569738972806,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.0635937500415209,
+        "seed": 1057
+      },
+      {
+        "t": 14.311250000000001,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.08916080122043407,
+        "seed": 6073
+      },
+      {
+        "t": 14.3325,
+        "type": "pluck",
+        "hz": 587.3363741356592,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.5507872244674978,
+        "seed": 6170
+      },
+      {
+        "t": 14.353750000000002,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.1478742762937795,
+        "seed": 6267
+      },
+      {
+        "t": 14.375,
+        "type": "pluck",
+        "hz": 392,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.17871864038219681,
+        "seed": 6364
+      },
+      {
+        "t": 14.396249999999998,
+        "type": "pluck",
+        "hz": 246.94452577939515,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.15243113640515607,
+        "seed": 6461
+      },
+      {
+        "t": 14.4175,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.18249887325827052,
+        "seed": 6558
+      },
+      {
+        "t": 14.438749999999999,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.5578972713408453,
+        "seed": 6655
+      },
+      {
+        "t": 14.46,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.14167381347212699,
+        "seed": 5201
+      },
+      {
+        "t": 14.481250000000001,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.11260973108423743,
+        "seed": 5298
+      },
+      {
+        "t": 14.502500000000001,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.04447877846733758,
+        "seed": 5395
+      },
+      {
+        "t": 14.523750000000001,
+        "type": "pluck",
+        "hz": 293.6681870678296,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.19165712793119238,
+        "seed": 5492
+      },
+      {
+        "t": 14.545000000000002,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.3300684857044142,
+        "seed": 5589
+      },
+      {
+        "t": 14.55,
+        "type": "pluck",
+        "hz": 220.0025614686371,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": 0.3108255972975527,
+        "seed": 1058
+      },
+      {
+        "t": 14.55,
+        "type": "pluck",
+        "hz": 293.6681870678296,
+        "dur": 1.5999999999999999,
+        "decay": 1.4,
+        "bright": 0.45,
+        "gain": 0.7,
+        "pan": -0.6026211973198814,
+        "seed": 1058
+      },
+      {
+        "t": 14.56625,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.04112200033924932,
+        "seed": 5686
+      },
+      {
+        "t": 14.5875,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.31418083238116035,
+        "seed": 5783
+      },
+      {
+        "t": 14.60875,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.44496381652749584,
+        "seed": 5880
+      },
+      {
+        "t": 14.63,
+        "type": "pluck",
+        "hz": 493.8890515587903,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": 0.6513276594489406,
+        "seed": 5977
+      },
+      {
+        "t": 14.651250000000001,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.19013683759160252,
+        "seed": 6074
+      },
+      {
+        "t": 14.672500000000001,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.5349970131845897,
+        "seed": 6171
+      },
+      {
+        "t": 14.693750000000001,
+        "type": "pluck",
+        "hz": 329.6313947794561,
+        "dur": 0.9,
+        "decay": 0.7,
+        "bright": 0.6,
+        "gain": 0.16,
+        "pan": -0.33360394043597963,
+        "seed": 6268
+      }
+    ],
+    "duck": [],
+    "notes": [
+      {
+        "t": 0.05,
+        "kind": "note",
+        "who": 0,
+        "k": 0,
+        "z": 12.793273801417557,
+        "semi": -5,
+        "x": -1.4107293906216627
+      },
+      {
+        "t": 0.3,
+        "kind": "note",
+        "who": 0,
+        "k": 1,
+        "z": 10.41240106429493,
+        "semi": -8,
+        "x": -3.888949700519234
+      },
+      {
+        "t": 0.55,
+        "kind": "note",
+        "who": 0,
+        "k": 2,
+        "z": 18.16685227556956,
+        "semi": -3,
+        "x": -11.023915466178869
+      },
+      {
+        "t": 0.8,
+        "kind": "note",
+        "who": 0,
+        "k": 3,
+        "z": 41.147118583616404,
+        "semi": 7,
+        "x": -15.184324843454908
+      },
+      {
+        "t": 1.05,
+        "kind": "note",
+        "who": 0,
+        "k": 4,
+        "z": 30.510479965716108,
+        "semi": 2,
+        "x": -3.5788862840480125
+      },
+      {
+        "t": 1.3,
+        "kind": "note",
+        "who": 0,
+        "k": 5,
+        "z": 21.324449504869552,
+        "semi": -3,
+        "x": 1.3608296921450311
+      },
+      {
+        "t": 1.55,
+        "kind": "note",
+        "who": 0,
+        "k": 6,
+        "z": 16.236264658222645,
+        "semi": -3,
+        "x": 3.6512475406488445
+      },
+      {
+        "t": 1.8,
+        "kind": "note",
+        "who": 0,
+        "k": 7,
+        "z": 17.980515085477247,
+        "semi": -3,
+        "x": 8.433534038349714
+      },
+      {
+        "t": 2.05,
+        "kind": "note",
+        "who": 0,
+        "k": 8,
+        "z": 34.35019981223406,
+        "semi": 4,
+        "x": 14.094770885640028
+      },
+      {
+        "t": 2.3,
+        "kind": "note",
+        "who": 0,
+        "k": 9,
+        "z": 32.75717747336367,
+        "semi": 4,
+        "x": 7.382117027459292
+      },
+      {
+        "t": 2.55,
+        "kind": "note",
+        "who": 0,
+        "k": 10,
+        "z": 22.90536415103489,
+        "semi": 0,
+        "x": 2.0772440141563058
+      },
+      {
+        "t": 2.8,
+        "kind": "note",
+        "who": 0,
+        "k": 11,
+        "z": 16.14322840035592,
+        "semi": -3,
+        "x": 1.6542598306089507
+      },
+      {
+        "t": 2.8,
+        "kind": "note",
+        "who": 1,
+        "k": 11,
+        "z": 16.14444971737186,
+        "semi": -2.9899120048786036,
+        "x": 1.65547971924895,
+        "together": true
+      },
+      {
+        "t": 3.05,
+        "kind": "note",
+        "who": 0,
+        "k": 12,
+        "z": 12.480468904442022,
+        "semi": -5,
+        "x": 3.807645352714022
+      },
+      {
+        "t": 3.05,
+        "kind": "note",
+        "who": 1,
+        "k": 12,
+        "z": 12.482814870848033,
+        "semi": -4.98510053405192,
+        "x": 3.8097689915042245,
+        "together": true
+      },
+      {
+        "t": 3.3,
+        "kind": "note",
+        "who": 0,
+        "k": 13,
+        "z": 19.173900923499794,
+        "semi": -3,
+        "x": 10.72016085212342
+      },
+      {
+        "t": 3.3,
+        "kind": "note",
+        "who": 1,
+        "k": 13,
+        "z": 19.183595670312705,
+        "semi": -2.9772056423751896,
+        "x": 10.723876201418514,
+        "together": true
+      },
+      {
+        "t": 3.55,
+        "kind": "note",
+        "who": 0,
+        "k": 14,
+        "z": 39.76019794913141,
+        "semi": 7,
+        "x": 13.991331087494352
+      },
+      {
+        "t": 3.55,
+        "kind": "note",
+        "who": 1,
+        "k": 14,
+        "z": 39.75823345633444,
+        "semi": 7.02203667717969,
+        "x": 13.98707985230414,
+        "together": true
+      },
+      {
+        "t": 3.8,
+        "kind": "note",
+        "who": 0,
+        "k": 15,
+        "z": 28.367748200180223,
+        "semi": 2,
+        "x": 2.984976187375366
+      },
+      {
+        "t": 3.8,
+        "kind": "note",
+        "who": 1,
+        "k": 15,
+        "z": 28.363095089711376,
+        "semi": 2.0158970577293527,
+        "x": 2.983327881778466,
+        "together": true
+      },
+      {
+        "t": 4.05,
+        "kind": "note",
+        "who": 0,
+        "k": 16,
+        "z": 19.064583266647215,
+        "semi": -3,
+        "x": -0.6640386939895978
+      },
+      {
+        "t": 4.05,
+        "kind": "note",
+        "who": 1,
+        "k": 16,
+        "z": 19.0615355763925,
+        "semi": -2.986041137657888,
+        "x": -0.662760985677583,
+        "together": true
+      },
+      {
+        "t": 4.3,
+        "kind": "note",
+        "who": 0,
+        "k": 17,
+        "z": 13.36070638330649,
+        "semi": -5,
+        "x": -2.356843161315891
+      },
+      {
+        "t": 4.3,
+        "kind": "note",
+        "who": 1,
+        "k": 17,
+        "z": 13.357213369263132,
+        "semi": -4.981689352469501,
+        "x": -2.353647226200171,
+        "together": true
+      },
+      {
+        "t": 4.55,
+        "kind": "note",
+        "who": 0,
+        "k": 18,
+        "z": 13.888513788674226,
+        "semi": -5,
+        "x": -7.3498241174621315
+      },
+      {
+        "t": 4.55,
+        "kind": "note",
+        "who": 1,
+        "k": 18,
+        "z": 13.87534716750224,
+        "semi": -4.969950047294632,
+        "x": -7.342092808563576,
+        "together": true
+      },
+      {
+        "t": 4.8,
+        "kind": "note",
+        "who": 0,
+        "k": 19,
+        "z": 36.862918644423615,
+        "semi": 4,
+        "x": -15.535538823178435
+      },
+      {
+        "t": 4.8,
+        "kind": "note",
+        "who": 1,
+        "k": 19,
+        "z": 36.84903130161693,
+        "semi": 4.03536893344333,
+        "x": -15.538322227573634,
+        "together": true
+      },
+      {
+        "t": 5.05,
+        "kind": "note",
+        "who": 0,
+        "k": 20,
+        "z": 31.311132257092602,
+        "semi": 2,
+        "x": -4.890313437664432
+      },
+      {
+        "t": 5.05,
+        "kind": "note",
+        "who": 1,
+        "k": 20,
+        "z": 31.32353525356691,
+        "semi": 2.0262042855503664,
+        "x": -4.8970281494101044,
+        "together": true
+      },
+      {
+        "t": 5.3,
+        "kind": "note",
+        "who": 0,
+        "k": 21,
+        "z": 20.302573433818907,
+        "semi": -3,
+        "x": 0.5437464267713186
+      },
+      {
+        "t": 5.3,
+        "kind": "note",
+        "who": 1,
+        "k": 21,
+        "z": 20.309828057192178,
+        "semi": -2.979244989720809,
+        "x": 0.5459045972261112,
+        "together": true
+      },
+      {
+        "t": 5.55,
+        "kind": "note",
+        "who": 0,
+        "k": 22,
+        "z": 13.909143324582452,
+        "semi": -5,
+        "x": 2.4783191270539127
+      },
+      {
+        "t": 5.55,
+        "kind": "note",
+        "who": 1,
+        "k": 22,
+        "z": 13.91690901020363,
+        "semi": -4.974228730665395,
+        "x": 2.484483241462117,
+        "together": true
+      },
+      {
+        "t": 5.8,
+        "kind": "note",
+        "who": 0,
+        "k": 23,
+        "z": 15.123268304213894,
+        "semi": -5,
+        "x": 8.049198571454633
+      },
+      {
+        "t": 5.8,
+        "kind": "note",
+        "who": 1,
+        "k": 23,
+        "z": 15.151040837149026,
+        "semi": -4.9583467924058535,
+        "x": 8.063424467067096,
+        "together": true
+      },
+      {
+        "t": 6.05,
+        "kind": "note",
+        "who": 0,
+        "k": 24,
+        "z": 38.711586097348004,
+        "semi": 7,
+        "x": 14.948387556259076
+      },
+      {
+        "t": 6.05,
+        "kind": "note",
+        "who": 1,
+        "k": 24,
+        "z": 38.71786431398267,
+        "semi": 7.045012610725711,
+        "x": 14.93622747056969,
+        "together": true
+      },
+      {
+        "t": 6.3,
+        "kind": "note",
+        "who": 0,
+        "k": 25,
+        "z": 28.686465216173612,
+        "semi": 2,
+        "x": 3.3097269301214136
+      },
+      {
+        "t": 6.3,
+        "kind": "note",
+        "who": 1,
+        "k": 25,
+        "z": 28.6674606677308,
+        "semi": 2.0322273936154938,
+        "x": 3.3033129523341853,
+        "together": true
+      },
+      {
+        "t": 6.55,
+        "kind": "note",
+        "who": 0,
+        "k": 26,
+        "z": 18.439177812015657,
+        "semi": -3,
+        "x": -0.5868215368790918
+      },
+      {
+        "t": 6.55,
+        "kind": "note",
+        "who": 1,
+        "k": 26,
+        "z": 18.427257826532383,
+        "semi": -2.9704536617898496,
+        "x": -0.5798522975514931,
+        "together": true
+      },
+      {
+        "t": 6.8,
+        "kind": "note",
+        "who": 0,
+        "k": 27,
+        "z": 12.47262574901977,
+        "semi": -5,
+        "x": -2.3389221729768384
+      },
+      {
+        "t": 6.8,
+        "kind": "note",
+        "who": 1,
+        "k": 27,
+        "z": 12.456343146068143,
+        "semi": -4.955893959611391,
+        "x": -2.3198254612061877,
+        "together": true
+      },
+      {
+        "t": 7.05,
+        "kind": "note",
+        "who": 0,
+        "k": 28,
+        "z": 14.52915669766779,
+        "semi": -5,
+        "x": -8.360496450431732
+      },
+      {
+        "t": 7.05,
+        "kind": "note",
+        "who": 1,
+        "k": 28,
+        "z": 14.433642027764435,
+        "semi": -4.92073277792572,
+        "x": -8.307783690263774,
+        "together": true
+      },
+      {
+        "t": 7.3,
+        "kind": "note",
+        "who": 0,
+        "k": 29,
+        "z": 40.11235650851724,
+        "semi": 7,
+        "x": -15.103755528853855
+      },
+      {
+        "t": 7.3,
+        "kind": "note",
+        "who": 1,
+        "k": 29,
+        "z": 40.09650075473731,
+        "semi": 7.087891243749358,
+        "x": -15.151821715820212,
+        "together": true
+      },
+      {
+        "t": 7.55,
+        "kind": "note",
+        "who": 0,
+        "k": 30,
+        "z": 28.125256450507056,
+        "semi": 2,
+        "x": -2.414147835140595
+      },
+      {
+        "t": 7.55,
+        "kind": "note",
+        "who": 1,
+        "k": 30,
+        "z": 28.191223440556303,
+        "semi": 2.059784345868658,
+        "x": -2.440752972829715,
+        "together": true
+      },
+      {
+        "t": 7.8,
+        "kind": "note",
+        "who": 0,
+        "k": 31,
+        "z": 18.299599266001305,
+        "semi": -3,
+        "x": 1.5446064742316032
+      },
+      {
+        "t": 7.8,
+        "kind": "note",
+        "who": 1,
+        "k": 31,
+        "z": 18.34286971403195,
+        "semi": -2.950709034953903,
+        "x": 1.5576365747879608,
+        "together": true
+      },
+      {
+        "t": 8.05,
+        "kind": "note",
+        "who": 0,
+        "k": 32,
+        "z": 13.969984345642036,
+        "semi": -5,
+        "x": 4.682083625570613
+      },
+      {
+        "t": 8.05,
+        "kind": "note",
+        "who": 1,
+        "k": 32,
+        "z": 14.024843164039227,
+        "semi": -4.940969686892073,
+        "x": 4.7101063513078305,
+        "together": true
+      },
+      {
+        "t": 8.3,
+        "kind": "note",
+        "who": 0,
+        "k": 33,
+        "z": 26.567436258075325,
+        "semi": 0,
+        "x": 13.114408557291295
+      },
+      {
+        "t": 8.3,
+        "kind": "note",
+        "who": 1,
+        "k": 33,
+        "z": 26.670163735225792,
+        "semi": 0.07297643066630127,
+        "x": 13.128562473793595,
+        "together": true
+      },
+      {
+        "t": 8.55,
+        "kind": "note",
+        "who": 0,
+        "k": 34,
+        "z": 35.50255619434229,
+        "semi": 4,
+        "x": 9.07191406305161
+      },
+      {
+        "t": 8.55,
+        "kind": "note",
+        "who": 1,
+        "k": 34,
+        "z": 35.4366650718131,
+        "semi": 4.060330600081658,
+        "x": 9.034406444979314,
+        "together": true
+      },
+      {
+        "t": 8.8,
+        "kind": "note",
+        "who": 0,
+        "k": 35,
+        "z": 22.75660445619563,
+        "semi": 0,
+        "x": 1.1679214484759401
+      },
+      {
+        "t": 8.8,
+        "kind": "note",
+        "who": 1,
+        "k": 35,
+        "z": 22.72736441640242,
+        "semi": 0.051590014615654274,
+        "x": 1.188831627998955,
+        "together": true
+      },
+      {
+        "t": 9.05,
+        "kind": "note",
+        "who": 0,
+        "k": 36,
+        "z": 14.735831667254343,
+        "semi": -5,
+        "x": 0.07042232270372445
+      },
+      {
+        "t": 9.05,
+        "kind": "note",
+        "who": 1,
+        "k": 36,
+        "z": 14.718759176940054,
+        "semi": -4.925697134731736,
+        "x": 0.1299154565268762,
+        "together": true
+      },
+      {
+        "t": 9.3,
+        "kind": "note",
+        "who": 0,
+        "k": 37,
+        "z": 9.553779593315667,
+        "semi": -8,
+        "x": -0.0059757237242946135
+      },
+      {
+        "t": 9.3,
+        "kind": "note",
+        "who": 1,
+        "k": 37,
+        "z": 9.546188065201322,
+        "semi": -7.858416785451161,
+        "x": 0.19306246928963697,
+        "together": true
+      },
+      {
+        "t": 9.55,
+        "kind": "note",
+        "who": 0,
+        "k": 38,
+        "z": 6.230523660924907,
+        "semi": -8,
+        "x": -0.039479681178966636
+      },
+      {
+        "t": 9.55,
+        "kind": "note",
+        "who": 1,
+        "k": 38,
+        "z": 6.2843101918504285,
+        "semi": -8,
+        "x": 0.822052379336604,
+        "together": false
+      },
+      {
+        "t": 9.8,
+        "kind": "note",
+        "who": 0,
+        "k": 39,
+        "z": 4.841036607467737,
+        "semi": -10,
+        "x": -0.10194047434111275
+      },
+      {
+        "t": 9.8,
+        "kind": "note",
+        "who": 1,
+        "k": 39,
+        "z": 5.228169180652936,
+        "semi": -8,
+        "x": 2.109870279506434,
+        "together": false
+      },
+      {
+        "t": 10.05,
+        "kind": "note",
+        "who": 0,
+        "k": 40,
+        "z": 3.967037563038188,
+        "semi": -10,
+        "x": -0.22212849198655216
+      },
+      {
+        "t": 10.05,
+        "kind": "note",
+        "who": 1,
+        "k": 40,
+        "z": 5.762676435978837,
+        "semi": -8,
+        "x": 4.536296465638453,
+        "together": false
+      },
+      {
+        "t": 10.3,
+        "kind": "note",
+        "who": 0,
+        "k": 41,
+        "z": 3.2654696320593337,
+        "semi": -10,
+        "x": -0.49398480991686006
+      },
+      {
+        "t": 10.3,
+        "kind": "note",
+        "who": 1,
+        "k": 41,
+        "z": 11.25519459826923,
+        "semi": -5,
+        "x": 9.491950455531475,
+        "together": false
+      },
+      {
+        "t": 10.55,
+        "kind": "note",
+        "who": 0,
+        "k": 42,
+        "z": 2.6551419496889443,
+        "semi": -10,
+        "x": -1.5729398712406812
+      },
+      {
+        "t": 10.55,
+        "kind": "note",
+        "who": 1,
+        "k": 42,
+        "z": 39.08857642080009,
+        "semi": 7,
+        "x": 18.119050773740287,
+        "together": false
+      },
+      {
+        "t": 10.8,
+        "kind": "note",
+        "who": 0,
+        "k": 43,
+        "z": 9.554959169919725,
+        "semi": -8,
+        "x": -9.600978268589106
+      },
+      {
+        "t": 10.8,
+        "kind": "note",
+        "who": 1,
+        "k": 43,
+        "z": 31.369919289756734,
+        "semi": 2,
+        "x": 1.9990969892120236,
+        "together": false
+      },
+      {
+        "t": 11.05,
+        "kind": "note",
+        "who": 0,
+        "k": 44,
+        "z": 42.70702749639812,
+        "semi": 7,
+        "x": -11.605911184864178
+      },
+      {
+        "t": 11.05,
+        "kind": "note",
+        "who": 1,
+        "k": 44,
+        "z": 21.840439467107963,
+        "semi": 0,
+        "x": -5.377572925185251,
+        "together": false
+      },
+      {
+        "t": 11.3,
+        "kind": "note",
+        "who": 0,
+        "k": 45,
+        "z": 25.380440944309427,
+        "semi": 0,
+        "x": 4.657840670292371
+      },
+      {
+        "t": 11.3,
+        "kind": "note",
+        "who": 1,
+        "k": 45,
+        "z": 26.707247467469255,
+        "semi": 0,
+        "x": -10.582349405111572,
+        "together": false
+      },
+      {
+        "t": 11.55,
+        "kind": "note",
+        "who": 0,
+        "k": 46,
+        "z": 24.928543067782858,
+        "semi": 0,
+        "x": 8.817813809726099
+      },
+      {
+        "t": 11.55,
+        "kind": "note",
+        "who": 1,
+        "k": 46,
+        "z": 31.032788462735027,
+        "semi": 2,
+        "x": -8.601400598987992,
+        "together": false
+      },
+      {
+        "t": 11.8,
+        "kind": "note",
+        "who": 0,
+        "k": 47,
+        "z": 30.501870229036722,
+        "semi": 2,
+        "x": 9.765959293188482
+      },
+      {
+        "t": 11.8,
+        "kind": "note",
+        "who": 1,
+        "k": 47,
+        "z": 22.57416384503002,
+        "semi": 0,
+        "x": -5.1854548399998945,
+        "together": false
+      },
+      {
+        "t": 12.05,
+        "kind": "note",
+        "who": 0,
+        "k": 48,
+        "z": 25.391650840893682,
+        "semi": 0,
+        "x": 6.48918264551897
+      },
+      {
+        "t": 12.05,
+        "kind": "note",
+        "who": 1,
+        "k": 48,
+        "z": 23.269100039096077,
+        "semi": 0,
+        "x": -9.224987597312461,
+        "together": false
+      },
+      {
+        "t": 12.08,
+        "kind": "cloud",
+        "who": 2,
+        "k": 0,
+        "z": 9.037591201361625,
+        "semi": -8,
+        "x": -0.5442924412706787,
+        "u": 0.02666666666666669
+      },
+      {
+        "t": 12.10125,
+        "kind": "cloud",
+        "who": 3,
+        "k": 0,
+        "z": 10.667514252005983,
+        "semi": -5,
+        "x": -0.029109914702912847,
+        "u": 0.03375000000000009
+      },
+      {
+        "t": 12.1225,
+        "kind": "cloud",
+        "who": 4,
+        "k": 0,
+        "z": 8.727356194309703,
+        "semi": -8,
+        "x": 2.009626091629163,
+        "u": 0.0408333333333335
+      },
+      {
+        "t": 12.14375,
+        "kind": "cloud",
+        "who": 5,
+        "k": 0,
+        "z": 8.992231100874301,
+        "semi": -8,
+        "x": -0.3001440907687081,
+        "u": 0.047916666666666906
+      },
+      {
+        "t": 12.165000000000001,
+        "kind": "cloud",
+        "who": 6,
+        "k": 0,
+        "z": 8.96360782493813,
+        "semi": -8,
+        "x": -0.2120989974950375,
+        "u": 0.055000000000000306
+      },
+      {
+        "t": 12.18625,
+        "kind": "cloud",
+        "who": 7,
+        "k": 0,
+        "z": 8.529738567879944,
+        "semi": -8,
+        "x": 2.2961407519830233,
+        "u": 0.06208333333333312
+      },
+      {
+        "t": 12.2075,
+        "kind": "cloud",
+        "who": 8,
+        "k": 0,
+        "z": 8.624079900273196,
+        "semi": -8,
+        "x": 0.00917196358219656,
+        "u": 0.06916666666666653
+      },
+      {
+        "t": 12.22875,
+        "kind": "cloud",
+        "who": 9,
+        "k": 0,
+        "z": 7.030653888646886,
+        "semi": -8,
+        "x": -1.2436284350626494,
+        "u": 0.07624999999999993
+      },
+      {
+        "t": 12.25,
+        "kind": "cloud",
+        "who": 10,
+        "k": 0,
+        "z": 6.381204100544701,
+        "semi": -8,
+        "x": -1.4309359353321531,
+        "u": 0.08333333333333333
+      },
+      {
+        "t": 12.27125,
+        "kind": "cloud",
+        "who": 11,
+        "k": 0,
+        "z": 7.827042007786032,
+        "semi": -8,
+        "x": 2.6627858437215957,
+        "u": 0.09041666666666674
+      },
+      {
+        "t": 12.2925,
+        "kind": "cloud",
+        "who": 12,
+        "k": 0,
+        "z": 6.5461411310282545,
+        "semi": -8,
+        "x": 2.872861327598821,
+        "u": 0.09750000000000014
+      },
+      {
+        "t": 12.3,
+        "kind": "note",
+        "who": 0,
+        "k": 49,
+        "z": 25.182381659747588,
+        "semi": 0,
+        "x": 9.219690137183598
+      },
+      {
+        "t": 12.3,
+        "kind": "note",
+        "who": 1,
+        "k": 49,
+        "z": 31.39458100158169,
+        "semi": 2,
+        "x": -8.643144430073386,
+        "together": false
+      },
+      {
+        "t": 12.31375,
+        "kind": "cloud",
+        "who": 13,
+        "k": 0,
+        "z": 10.683865657153024,
+        "semi": -5,
+        "x": 7.745107804851009,
+        "u": 0.10458333333333354
+      },
+      {
+        "t": 12.335,
+        "kind": "cloud",
+        "who": 14,
+        "k": 0,
+        "z": 5.924425076089355,
+        "semi": -8,
+        "x": 3.715921647467343,
+        "u": 0.11166666666666696
+      },
+      {
+        "t": 12.35625,
+        "kind": "cloud",
+        "who": 15,
+        "k": 0,
+        "z": 21.709902378363005,
+        "semi": 0,
+        "x": -12.960066132356783,
+        "u": 0.11874999999999976
+      },
+      {
+        "t": 12.3775,
+        "kind": "cloud",
+        "who": 16,
+        "k": 0,
+        "z": 4.682759338382373,
+        "semi": -10,
+        "x": 2.843098831182145,
+        "u": 0.12583333333333316
+      },
+      {
+        "t": 12.39875,
+        "kind": "cloud",
+        "who": 17,
+        "k": 0,
+        "z": 28.09568086983213,
+        "semi": 2,
+        "x": 15.199061635391676,
+        "u": 0.13291666666666657
+      },
+      {
+        "t": 12.42,
+        "kind": "cloud",
+        "who": 2,
+        "k": 1,
+        "z": 14.09796189673103,
+        "semi": -5,
+        "x": -10.834053038393897,
+        "u": 0.13999999999999999
+      },
+      {
+        "t": 12.44125,
+        "kind": "cloud",
+        "who": 3,
+        "k": 1,
+        "z": 8.60392583464011,
+        "semi": -8,
+        "x": -7.172158758020303,
+        "u": 0.14708333333333337
+      },
+      {
+        "t": 12.4625,
+        "kind": "cloud",
+        "who": 4,
+        "k": 1,
+        "z": 40.303244177910656,
+        "semi": 7,
+        "x": 11.302505718888007,
+        "u": 0.15416666666666679
+      },
+      {
+        "t": 12.48375,
+        "kind": "cloud",
+        "who": 5,
+        "k": 1,
+        "z": 20.681431398610023,
+        "semi": -3,
+        "x": -13.650382447628544,
+        "u": 0.1612500000000002
+      },
+      {
+        "t": 12.505,
+        "kind": "cloud",
+        "who": 6,
+        "k": 1,
+        "z": 6.634885970327688,
+        "semi": -8,
+        "x": -6.271677146329176,
+        "u": 0.16833333333333358
+      },
+      {
+        "t": 12.52625,
+        "kind": "cloud",
+        "who": 7,
+        "k": 1,
+        "z": 35.35788151391129,
+        "semi": 4,
+        "x": 6.687353730382427,
+        "u": 0.17541666666666642
+      },
+      {
+        "t": 12.5475,
+        "kind": "cloud",
+        "who": 8,
+        "k": 1,
+        "z": 3.040505396955392,
+        "semi": -10,
+        "x": -0.9362484459943352,
+        "u": 0.1824999999999998
+      },
+      {
+        "t": 12.55,
+        "kind": "note",
+        "who": 0,
+        "k": 50,
+        "z": 27.847285794946238,
+        "semi": 2,
+        "x": 7.24971511442839
+      },
+      {
+        "t": 12.55,
+        "kind": "note",
+        "who": 1,
+        "k": 50,
+        "z": 20.16700838756505,
+        "semi": -3,
+        "x": -6.269338006493013,
+        "together": false
+      },
+      {
+        "t": 12.56875,
+        "kind": "cloud",
+        "who": 9,
+        "k": 1,
+        "z": 40.87484733969377,
+        "semi": 7,
+        "x": -11.072440720988137,
+        "u": 0.18958333333333321
+      },
+      {
+        "t": 12.59,
+        "kind": "cloud",
+        "who": 10,
+        "k": 1,
+        "z": 37.57948089054406,
+        "semi": 7,
+        "x": -7.8394718916713035,
+        "u": 0.19666666666666663
+      },
+      {
+        "t": 12.61125,
+        "kind": "cloud",
+        "who": 11,
+        "k": 1,
+        "z": 30.338710179450107,
+        "semi": 2,
+        "x": 2.287442938921348,
+        "u": 0.20375000000000001
+      },
+      {
+        "t": 12.6325,
+        "kind": "cloud",
+        "who": 12,
+        "k": 1,
+        "z": 28.646472016334087,
+        "semi": 2,
+        "x": 0.3966229924350501,
+        "u": 0.21083333333333343
+      },
+      {
+        "t": 12.65375,
+        "kind": "cloud",
+        "who": 13,
+        "k": 1,
+        "z": 22.02595903003649,
+        "semi": 0,
+        "x": -2.948051552849552,
+        "u": 0.21791666666666684
+      },
+      {
+        "t": 12.675,
+        "kind": "cloud",
+        "who": 14,
+        "k": 1,
+        "z": 25.85211490879668,
+        "semi": 0,
+        "x": -2.0621953285362706,
+        "u": 0.22500000000000023
+      },
+      {
+        "t": 12.69625,
+        "kind": "cloud",
+        "who": 15,
+        "k": 1,
+        "z": 18.356269252400978,
+        "semi": -3,
+        "x": 3.5775120930343536,
+        "u": 0.23208333333333306
+      },
+      {
+        "t": 12.7175,
+        "kind": "cloud",
+        "who": 16,
+        "k": 1,
+        "z": 26.575049564705367,
+        "semi": 0,
+        "x": -2.258570338618175,
+        "u": 0.23916666666666644
+      },
+      {
+        "t": 12.73875,
+        "kind": "cloud",
+        "who": 17,
+        "k": 1,
+        "z": 18.067537184509398,
+        "semi": -3,
+        "x": -5.052725395445233,
+        "u": 0.24624999999999986
+      },
+      {
+        "t": 12.76,
+        "kind": "cloud",
+        "who": 2,
+        "k": 2,
+        "z": 21.04592398171825,
+        "semi": -3,
+        "x": 5.640356803833746,
+        "u": 0.25333333333333324
+      },
+      {
+        "t": 12.78125,
+        "kind": "cloud",
+        "who": 3,
+        "k": 2,
+        "z": 21.63510794632429,
+        "semi": -3,
+        "x": 4.711192481237634,
+        "u": 0.2604166666666667
+      },
+      {
+        "t": 12.8,
+        "kind": "note",
+        "who": 0,
+        "k": 51,
+        "z": 27.07130513049228,
+        "semi": 0,
+        "x": 10.15273544112569
+      },
+      {
+        "t": 12.8,
+        "kind": "note",
+        "who": 1,
+        "k": 51,
+        "z": 30.40561159354358,
+        "semi": 2,
+        "x": -7.5550204474226375,
+        "together": false
+      },
+      {
+        "t": 12.8025,
+        "kind": "cloud",
+        "who": 4,
+        "k": 2,
+        "z": 24.722447553277934,
+        "semi": 0,
+        "x": -10.932734346200329,
+        "u": 0.26750000000000007
+      },
+      {
+        "t": 12.82375,
+        "kind": "cloud",
+        "who": 5,
+        "k": 2,
+        "z": 20.967127410455593,
+        "semi": -3,
+        "x": 6.928335953855495,
+        "u": 0.27458333333333346
+      },
+      {
+        "t": 12.845,
+        "kind": "cloud",
+        "who": 6,
+        "k": 2,
+        "z": 22.31414448460533,
+        "semi": 0,
+        "x": 5.571258932697583,
+        "u": 0.2816666666666669
+      },
+      {
+        "t": 12.866249999999999,
+        "kind": "cloud",
+        "who": 7,
+        "k": 2,
+        "z": 31.144289112513572,
+        "semi": 2,
+        "x": -12.768903551377733,
+        "u": 0.2887499999999997
+      },
+      {
+        "t": 12.8875,
+        "kind": "cloud",
+        "who": 8,
+        "k": 2,
+        "z": 29.29801281622983,
+        "semi": 2,
+        "x": 1.067637828775523,
+        "u": 0.2958333333333331
+      },
+      {
+        "t": 12.90875,
+        "kind": "cloud",
+        "who": 9,
+        "k": 2,
+        "z": 30.595453359537576,
+        "semi": 2,
+        "x": 11.868711883677161,
+        "u": 0.3029166666666665
+      },
+      {
+        "t": 12.93,
+        "kind": "cloud",
+        "who": 10,
+        "k": 2,
+        "z": 32.282461317009194,
+        "semi": 4,
+        "x": 11.638363940007114,
+        "u": 0.3099999999999999
+      },
+      {
+        "t": 12.95125,
+        "kind": "cloud",
+        "who": 11,
+        "k": 2,
+        "z": 34.54318202540442,
+        "semi": 4,
+        "x": -11.226455036793146,
+        "u": 0.31708333333333333
+      },
+      {
+        "t": 12.9725,
+        "kind": "cloud",
+        "who": 12,
+        "k": 2,
+        "z": 32.38072369169114,
+        "semi": 4,
+        "x": -9.158672997874255,
+        "u": 0.3241666666666667
+      },
+      {
+        "t": 12.99375,
+        "kind": "cloud",
+        "who": 13,
+        "k": 2,
+        "z": 27.024064328891633,
+        "semi": 0,
+        "x": -5.067091049439785,
+        "u": 0.3312500000000001
+      },
+      {
+        "t": 13.015,
+        "kind": "cloud",
+        "who": 14,
+        "k": 2,
+        "z": 28.85661414591735,
+        "semi": 2,
+        "x": -6.799876083595046,
+        "u": 0.33833333333333354
+      },
+      {
+        "t": 13.036249999999999,
+        "kind": "cloud",
+        "who": 15,
+        "k": 2,
+        "z": 22.815736296868636,
+        "semi": 0,
+        "x": 2.8655629864979106,
+        "u": 0.3454166666666663
+      },
+      {
+        "t": 13.05,
+        "kind": "note",
+        "who": 0,
+        "k": 52,
+        "z": 22.855896933085656,
+        "semi": 0,
+        "x": 6.410331831617247
+      },
+      {
+        "t": 13.05,
+        "kind": "note",
+        "who": 1,
+        "k": 52,
+        "z": 25.671832500813522,
+        "semi": 0,
+        "x": -10.931660352711212,
+        "together": false
+      },
+      {
+        "t": 13.0575,
+        "kind": "cloud",
+        "who": 16,
+        "k": 2,
+        "z": 27.918763159245753,
+        "semi": 2,
+        "x": -6.700730706784752,
+        "u": 0.35249999999999976
+      },
+      {
+        "t": 13.07875,
+        "kind": "cloud",
+        "who": 17,
+        "k": 2,
+        "z": 19.695926972222153,
+        "semi": -3,
+        "x": -3.1231135238866585,
+        "u": 0.35958333333333314
+      },
+      {
+        "t": 13.1,
+        "kind": "cloud",
+        "who": 2,
+        "k": 3,
+        "z": 21.483750471778166,
+        "semi": -3,
+        "x": 4.988893618409716,
+        "u": 0.36666666666666653
+      },
+      {
+        "t": 13.12125,
+        "kind": "cloud",
+        "who": 3,
+        "k": 3,
+        "z": 22.452466739565246,
+        "semi": 0,
+        "x": 4.768333916060885,
+        "u": 0.37374999999999997
+      },
+      {
+        "t": 13.1425,
+        "kind": "cloud",
+        "who": 4,
+        "k": 3,
+        "z": 17.9071477519683,
+        "semi": -3,
+        "x": -7.27152362837097,
+        "u": 0.38083333333333336
+      },
+      {
+        "t": 13.16375,
+        "kind": "cloud",
+        "who": 5,
+        "k": 3,
+        "z": 20.11454842366664,
+        "semi": -3,
+        "x": 5.967791859846344,
+        "u": 0.38791666666666674
+      },
+      {
+        "t": 13.185,
+        "kind": "cloud",
+        "who": 6,
+        "k": 3,
+        "z": 22.012207067864406,
+        "semi": 0,
+        "x": 5.722838004199612,
+        "u": 0.3950000000000002
+      },
+      {
+        "t": 13.206249999999999,
+        "kind": "cloud",
+        "who": 7,
+        "k": 3,
+        "z": 23.802366776093216,
+        "semi": 0,
+        "x": -11.080298359334597,
+        "u": 0.40208333333333296
+      },
+      {
+        "t": 13.2275,
+        "kind": "cloud",
+        "who": 8,
+        "k": 3,
+        "z": 26.675697301990027,
+        "semi": 0,
+        "x": 6.789821308809826,
+        "u": 0.4091666666666664
+      },
+      {
+        "t": 13.24875,
+        "kind": "cloud",
+        "who": 9,
+        "k": 3,
+        "z": 29.611400760662892,
+        "semi": 2,
+        "x": 12.001329088683,
+        "u": 0.4162499999999998
+      },
+      {
+        "t": 13.27,
+        "kind": "cloud",
+        "who": 10,
+        "k": 3,
+        "z": 32.521098434561495,
+        "semi": 4,
+        "x": 12.006467352252601,
+        "u": 0.4233333333333332
+      },
+      {
+        "t": 13.29125,
+        "kind": "cloud",
+        "who": 11,
+        "k": 3,
+        "z": 35.28939059967583,
+        "semi": 4,
+        "x": -12.61011798445254,
+        "u": 0.4304166666666666
+      },
+      {
+        "t": 13.3,
+        "kind": "note",
+        "who": 0,
+        "k": 53,
+        "z": 26.699789374979037,
+        "semi": 0,
+        "x": 6.486676187349851
+      },
+      {
+        "t": 13.3,
+        "kind": "note",
+        "who": 1,
+        "k": 53,
+        "z": 18.78116836726199,
+        "semi": -3,
+        "x": -4.986448158887067,
+        "together": false
+      },
+      {
+        "t": 13.3125,
+        "kind": "cloud",
+        "who": 12,
+        "k": 3,
+        "z": 33.0106862353001,
+        "semi": 4,
+        "x": -9.344334152003944,
+        "u": 0.4375
+      },
+      {
+        "t": 13.33375,
+        "kind": "cloud",
+        "who": 13,
+        "k": 3,
+        "z": 28.095343007867136,
+        "semi": 2,
+        "x": -5.1407688832853,
+        "u": 0.4445833333333334
+      },
+      {
+        "t": 13.355,
+        "kind": "cloud",
+        "who": 14,
+        "k": 3,
+        "z": 28.160271785424975,
+        "semi": 2,
+        "x": -6.153448722040489,
+        "u": 0.4516666666666668
+      },
+      {
+        "t": 13.376249999999999,
+        "kind": "cloud",
+        "who": 15,
+        "k": 3,
+        "z": 25.69660881879884,
+        "semi": 0,
+        "x": 2.8808247207393465,
+        "u": 0.4587499999999996
+      },
+      {
+        "t": 13.397499999999999,
+        "kind": "cloud",
+        "who": 16,
+        "k": 3,
+        "z": 26.458616765633014,
+        "semi": 0,
+        "x": -5.862932590415404,
+        "u": 0.46583333333333304
+      },
+      {
+        "t": 13.41875,
+        "kind": "cloud",
+        "who": 17,
+        "k": 3,
+        "z": 20.198735339447037,
+        "semi": -3,
+        "x": -2.137733156990663,
+        "u": 0.47291666666666643
+      },
+      {
+        "t": 13.44,
+        "kind": "cloud",
+        "who": 2,
+        "k": 4,
+        "z": 20.294626652695882,
+        "semi": -3,
+        "x": 4.85352798810014,
+        "u": 0.4799999999999998
+      },
+      {
+        "t": 13.46125,
+        "kind": "cloud",
+        "who": 3,
+        "k": 4,
+        "z": 21.113088968059902,
+        "semi": -3,
+        "x": 4.461870912632743,
+        "u": 0.48708333333333326
+      },
+      {
+        "t": 13.4825,
+        "kind": "cloud",
+        "who": 4,
+        "k": 4,
+        "z": 15.19678350161229,
+        "semi": -5,
+        "x": -5.356356203480588,
+        "u": 0.49416666666666664
+      },
+      {
+        "t": 13.50375,
+        "kind": "cloud",
+        "who": 5,
+        "k": 4,
+        "z": 19.329720387956094,
+        "semi": -3,
+        "x": 6.255762748728112,
+        "u": 0.5012500000000001
+      },
+      {
+        "t": 13.525,
+        "kind": "cloud",
+        "who": 6,
+        "k": 4,
+        "z": 20.954583373821716,
+        "semi": -3,
+        "x": 6.019828083419764,
+        "u": 0.5083333333333334
+      },
+      {
+        "t": 13.546249999999999,
+        "kind": "cloud",
+        "who": 7,
+        "k": 4,
+        "z": 18.20150006315983,
+        "semi": -3,
+        "x": -8.948835824214788,
+        "u": 0.5154166666666663
+      },
+      {
+        "t": 13.55,
+        "kind": "note",
+        "who": 0,
+        "k": 54,
+        "z": 31.356043479534605,
+        "semi": 2,
+        "x": 9.584183611375506
+      },
+      {
+        "t": 13.55,
+        "kind": "note",
+        "who": 1,
+        "k": 54,
+        "z": 24.829716790823596,
+        "semi": 0,
+        "x": -4.046659456609128,
+        "together": false
+      },
+      {
+        "t": 13.567499999999999,
+        "kind": "cloud",
+        "who": 8,
+        "k": 4,
+        "z": 24.88687612475969,
+        "semi": 0,
+        "x": 6.21574378070439,
+        "u": 0.5224999999999996
+      },
+      {
+        "t": 13.58875,
+        "kind": "cloud",
+        "who": 9,
+        "k": 4,
+        "z": 31.361303203874677,
+        "semi": 2,
+        "x": 12.600233687324861,
+        "u": 0.5295833333333331
+      },
+      {
+        "t": 13.61,
+        "kind": "cloud",
+        "who": 10,
+        "k": 4,
+        "z": 33.95963539634704,
+        "semi": 4,
+        "x": 11.986422074065045,
+        "u": 0.5366666666666665
+      },
+      {
+        "t": 13.63125,
+        "kind": "cloud",
+        "who": 11,
+        "k": 4,
+        "z": 35.46094207942324,
+        "semi": 4,
+        "x": -13.750568223415168,
+        "u": 0.5437499999999998
+      },
+      {
+        "t": 13.6525,
+        "kind": "cloud",
+        "who": 12,
+        "k": 4,
+        "z": 33.020317864421784,
+        "semi": 4,
+        "x": -8.813694118574784,
+        "u": 0.5508333333333333
+      },
+      {
+        "t": 13.67375,
+        "kind": "cloud",
+        "who": 13,
+        "k": 4,
+        "z": 29.520789002305754,
+        "semi": 2,
+        "x": -5.345614628704159,
+        "u": 0.5579166666666667
+      },
+      {
+        "t": 13.695,
+        "kind": "cloud",
+        "who": 14,
+        "k": 4,
+        "z": 26.80734146558053,
+        "semi": 0,
+        "x": -5.187315275333122,
+        "u": 0.5650000000000001
+      },
+      {
+        "t": 13.716249999999999,
+        "kind": "cloud",
+        "who": 15,
+        "k": 4,
+        "z": 36.87297084628908,
+        "semi": 4,
+        "x": 9.363793287793783,
+        "u": 0.5720833333333329
+      },
+      {
+        "t": 13.737499999999999,
+        "kind": "cloud",
+        "who": 16,
+        "k": 4,
+        "z": 24.622723794673337,
+        "semi": 0,
+        "x": -5.071867851291745,
+        "u": 0.5791666666666663
+      },
+      {
+        "t": 13.75875,
+        "kind": "cloud",
+        "who": 17,
+        "k": 4,
+        "z": 23.225628931779084,
+        "semi": 0,
+        "x": -1.4096167795904722,
+        "u": 0.5862499999999997
+      },
+      {
+        "t": 13.780000000000001,
+        "kind": "cloud",
+        "who": 2,
+        "k": 5,
+        "z": 19.103314679906614,
+        "semi": -3,
+        "x": 4.679240575656871,
+        "u": 0.5933333333333337
+      },
+      {
+        "t": 13.8,
+        "kind": "note",
+        "who": 0,
+        "k": 55,
+        "z": 28.34242924353105,
+        "semi": 2,
+        "x": 10.92128731102266
+      },
+      {
+        "t": 13.8,
+        "kind": "note",
+        "who": 1,
+        "k": 55,
+        "z": 35.83409737148269,
+        "semi": 4,
+        "x": -11.732889971475279,
+        "together": false
+      },
+      {
+        "t": 13.80125,
+        "kind": "cloud",
+        "who": 3,
+        "k": 5,
+        "z": 19.87199632782473,
+        "semi": -3,
+        "x": 4.113729979811018,
+        "u": 0.6004166666666665
+      },
+      {
+        "t": 13.822500000000002,
+        "kind": "cloud",
+        "who": 4,
+        "k": 5,
+        "z": 13.572032715723042,
+        "semi": -5,
+        "x": -1.735185123113699,
+        "u": 0.6075000000000005
+      },
+      {
+        "t": 13.84375,
+        "kind": "cloud",
+        "who": 5,
+        "k": 5,
+        "z": 18.444685834308547,
+        "semi": -3,
+        "x": 6.3285635021500095,
+        "u": 0.6145833333333334
+      },
+      {
+        "t": 13.865000000000002,
+        "kind": "cloud",
+        "who": 6,
+        "k": 5,
+        "z": 20.25198108891245,
+        "semi": -3,
+        "x": 6.486443184391273,
+        "u": 0.6216666666666674
+      },
+      {
+        "t": 13.88625,
+        "kind": "cloud",
+        "who": 7,
+        "k": 5,
+        "z": 11.424866825384612,
+        "semi": -5,
+        "x": -2.6932767823894928,
+        "u": 0.6287500000000001
+      },
+      {
+        "t": 13.907499999999999,
+        "kind": "cloud",
+        "who": 8,
+        "k": 5,
+        "z": 23.33176452266735,
+        "semi": 0,
+        "x": 6.06658132162317,
+        "u": 0.6358333333333329
+      },
+      {
+        "t": 13.92875,
+        "kind": "cloud",
+        "who": 9,
+        "k": 5,
+        "z": 32.082308831203875,
+        "semi": 4,
+        "x": 13.11916696175111,
+        "u": 0.6429166666666669
+      },
+      {
+        "t": 13.95,
+        "kind": "cloud",
+        "who": 10,
+        "k": 5,
+        "z": 34.98638898356111,
+        "semi": 4,
+        "x": 12.050361556049781,
+        "u": 0.6499999999999998
+      },
+      {
+        "t": 13.971250000000001,
+        "kind": "cloud",
+        "who": 11,
+        "k": 5,
+        "z": 25.700809304540314,
+        "semi": 0,
+        "x": -12.977914101427595,
+        "u": 0.6570833333333338
+      },
+      {
+        "t": 13.9925,
+        "kind": "cloud",
+        "who": 12,
+        "k": 5,
+        "z": 34.146118202043496,
+        "semi": 4,
+        "x": -9.21400130462663,
+        "u": 0.6641666666666666
+      },
+      {
+        "t": 14.013750000000002,
+        "kind": "cloud",
+        "who": 13,
+        "k": 5,
+        "z": 35.69152273664534,
+        "semi": 4,
+        "x": -9.183008226461654,
+        "u": 0.6712500000000006
+      },
+      {
+        "t": 14.035,
+        "kind": "cloud",
+        "who": 14,
+        "k": 5,
+        "z": 25.96156329989491,
+        "semi": 0,
+        "x": -4.430941580986355,
+        "u": 0.6783333333333333
+      },
+      {
+        "t": 14.05,
+        "kind": "note",
+        "who": 0,
+        "k": 56,
+        "z": 21.689051315502756,
+        "semi": 0,
+        "x": 7.502725762081871
+      },
+      {
+        "t": 14.05,
+        "kind": "note",
+        "who": 1,
+        "k": 56,
+        "z": 16.936356990970992,
+        "semi": -3,
+        "x": -7.65901024201046,
+        "together": false
+      },
+      {
+        "t": 14.056249999999999,
+        "kind": "cloud",
+        "who": 15,
+        "k": 5,
+        "z": 38.66055685131599,
+        "semi": 7,
+        "x": -14.002675287798828,
+        "u": 0.6854166666666662
+      },
+      {
+        "t": 14.0775,
+        "kind": "cloud",
+        "who": 16,
+        "k": 5,
+        "z": 22.994949367242466,
+        "semi": 0,
+        "x": -4.501730980838779,
+        "u": 0.6925000000000002
+      },
+      {
+        "t": 14.098749999999999,
+        "kind": "cloud",
+        "who": 17,
+        "k": 5,
+        "z": 25.26153191847621,
+        "semi": 0,
+        "x": -14.844341304920034,
+        "u": 0.699583333333333
+      },
+      {
+        "t": 14.120000000000001,
+        "kind": "cloud",
+        "who": 2,
+        "k": 6,
+        "z": 17.98450398147097,
+        "semi": -3,
+        "x": 4.190110679382008,
+        "u": 0.706666666666667
+      },
+      {
+        "t": 14.14125,
+        "kind": "cloud",
+        "who": 3,
+        "k": 6,
+        "z": 18.8857465679595,
+        "semi": -3,
+        "x": 3.5133144251715835,
+        "u": 0.7137499999999998
+      },
+      {
+        "t": 14.162500000000001,
+        "kind": "cloud",
+        "who": 4,
+        "k": 6,
+        "z": 19.01691814277771,
+        "semi": -3,
+        "x": 1.4375175917599252,
+        "u": 0.7208333333333338
+      },
+      {
+        "t": 14.18375,
+        "kind": "cloud",
+        "who": 5,
+        "k": 6,
+        "z": 17.102924866238663,
+        "semi": -3,
+        "x": 5.812483464795192,
+        "u": 0.7279166666666667
+      },
+      {
+        "t": 14.205000000000002,
+        "kind": "cloud",
+        "who": 6,
+        "k": 6,
+        "z": 19.769903101577473,
+        "semi": -3,
+        "x": 6.973969006020473,
+        "u": 0.7350000000000007
+      },
+      {
+        "t": 14.22625,
+        "kind": "cloud",
+        "who": 7,
+        "k": 6,
+        "z": 16.48628245816323,
+        "semi": -3,
+        "x": 2.729787210553301,
+        "u": 0.7420833333333334
+      },
+      {
+        "t": 14.247499999999999,
+        "kind": "cloud",
+        "who": 8,
+        "k": 6,
+        "z": 22.197326226321778,
+        "semi": 0,
+        "x": 6.3184337063202864,
+        "u": 0.7491666666666662
+      },
+      {
+        "t": 14.26875,
+        "kind": "cloud",
+        "who": 9,
+        "k": 6,
+        "z": 29.900679164158273,
+        "semi": 2,
+        "x": 13.316951079650181,
+        "u": 0.7562500000000002
+      },
+      {
+        "t": 14.29,
+        "kind": "cloud",
+        "who": 10,
+        "k": 6,
+        "z": 35.9564187243299,
+        "semi": 4,
+        "x": 12.780500710401371,
+        "u": 0.7633333333333331
+      },
+      {
+        "t": 14.3,
+        "kind": "note",
+        "who": 0,
+        "k": 57,
+        "z": 22.710192973077017,
+        "semi": 0,
+        "x": 5.204499811816224
+      },
+      {
+        "t": 14.3,
+        "kind": "note",
+        "who": 1,
+        "k": 57,
+        "z": 18.643135650237646,
+        "semi": -3,
+        "x": -1.3990625009134598,
+        "together": false
+      },
+      {
+        "t": 14.311250000000001,
+        "kind": "cloud",
+        "who": 11,
+        "k": 6,
+        "z": 9.277424881908257,
+        "semi": -8,
+        "x": 1.9615376268495497,
+        "u": 0.7704166666666671
+      },
+      {
+        "t": 14.3325,
+        "kind": "cloud",
+        "who": 12,
+        "k": 6,
+        "z": 37.50859566081584,
+        "semi": 7,
+        "x": -12.117318938284953,
+        "u": 0.7774999999999999
+      },
+      {
+        "t": 14.353750000000002,
+        "kind": "cloud",
+        "who": 13,
+        "k": 6,
+        "z": 6.69054851397844,
+        "semi": -8,
+        "x": 3.2532340784631493,
+        "u": 0.7845833333333339
+      },
+      {
+        "t": 14.375,
+        "kind": "cloud",
+        "who": 14,
+        "k": 6,
+        "z": 26.091580895566842,
+        "semi": 0,
+        "x": -3.93181008840833,
+        "u": 0.7916666666666666
+      },
+      {
+        "t": 14.396249999999998,
+        "kind": "cloud",
+        "who": 15,
+        "k": 6,
+        "z": 7.90085569026511,
+        "semi": -8,
+        "x": 3.353485000913434,
+        "u": 0.7987499999999995
+      },
+      {
+        "t": 14.4175,
+        "kind": "cloud",
+        "who": 16,
+        "k": 6,
+        "z": 21.635072013147223,
+        "semi": -3,
+        "x": -4.014975211681952,
+        "u": 0.8058333333333335
+      },
+      {
+        "t": 14.438749999999999,
+        "kind": "cloud",
+        "who": 17,
+        "k": 6,
+        "z": 31.719088112407352,
+        "semi": 4,
+        "x": 12.273739969498598,
+        "u": 0.8129166666666663
+      },
+      {
+        "t": 14.46,
+        "kind": "cloud",
+        "who": 2,
+        "k": 7,
+        "z": 17.122422791755397,
+        "semi": -3,
+        "x": 3.116823896386794,
+        "u": 0.8200000000000003
+      },
+      {
+        "t": 14.481250000000001,
+        "kind": "cloud",
+        "who": 3,
+        "k": 7,
+        "z": 18.51110959101218,
+        "semi": -3,
+        "x": 2.4774140838532235,
+        "u": 0.8270833333333337
+      },
+      {
+        "t": 14.502500000000001,
+        "kind": "cloud",
+        "who": 4,
+        "k": 7,
+        "z": 21.577758878049124,
+        "semi": -3,
+        "x": 0.9785331262814267,
+        "u": 0.8341666666666671
+      },
+      {
+        "t": 14.523750000000001,
+        "kind": "cloud",
+        "who": 5,
+        "k": 7,
+        "z": 15.333589975979594,
+        "semi": -5,
+        "x": 4.216456814486232,
+        "u": 0.8412500000000005
+      },
+      {
+        "t": 14.545000000000002,
+        "kind": "cloud",
+        "who": 6,
+        "k": 7,
+        "z": 19.183777866359634,
+        "semi": -3,
+        "x": 7.261506685497112,
+        "u": 0.8483333333333339
+      },
+      {
+        "t": 14.55,
+        "kind": "note",
+        "who": 0,
+        "k": 58,
+        "z": 28.87062463220153,
+        "semi": 2,
+        "x": 6.838163140546159
+      },
+      {
+        "t": 14.55,
+        "kind": "note",
+        "who": 1,
+        "k": 58,
+        "z": 39.83080022662545,
+        "semi": 7,
+        "x": -13.25766634103739,
+        "together": false
+      },
+      {
+        "t": 14.56625,
+        "kind": "cloud",
+        "who": 7,
+        "k": 7,
+        "z": 17.402911469379262,
+        "semi": -3,
+        "x": 0.9046840074634851,
+        "u": 0.8554166666666667
+      },
+      {
+        "t": 14.5875,
+        "kind": "cloud",
+        "who": 8,
+        "k": 7,
+        "z": 21.62124674305316,
+        "semi": -3,
+        "x": 6.911978312385528,
+        "u": 0.8625000000000002
+      },
+      {
+        "t": 14.60875,
+        "kind": "cloud",
+        "who": 9,
+        "k": 7,
+        "z": 18.29854025817316,
+        "semi": -3,
+        "x": 9.789203963604908,
+        "u": 0.8695833333333335
+      },
+      {
+        "t": 14.63,
+        "kind": "cloud",
+        "who": 10,
+        "k": 7,
+        "z": 34.56549388614284,
+        "semi": 4,
+        "x": 14.329208507876693,
+        "u": 0.8766666666666669
+      },
+      {
+        "t": 14.651250000000001,
+        "kind": "cloud",
+        "who": 11,
+        "k": 7,
+        "z": 18.546461238162784,
+        "semi": -3,
+        "x": -4.1830104270152555,
+        "u": 0.8837500000000004
+      },
+      {
+        "t": 14.672500000000001,
+        "kind": "cloud",
+        "who": 12,
+        "k": 7,
+        "z": 20.161044723520405,
+        "semi": -3,
+        "x": -11.769934290060974,
+        "u": 0.8908333333333337
+      },
+      {
+        "t": 14.693750000000001,
+        "kind": "cloud",
+        "who": 13,
+        "k": 7,
+        "z": 20.469813769138852,
+        "semi": -3,
+        "x": -7.339286689591552,
+        "u": 0.8979166666666671
+      }
+    ]
+  }
+}

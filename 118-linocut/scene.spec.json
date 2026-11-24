@@ -1,0 +1,1451 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "linocut",
+    "name": "Linocut",
+    "description": "A grey-green lino block on a pale bench: a V-gouge ploughs grooves and lifts curls, a black roller inks only the raised parts, paper is pressed with a round baren and peeled back: the print is the mirror of the block.",
+    "palette": {
+      "bg": "#e8dcc6",
+      "bench": "#dcc6a2",
+      "lino": "#7f8c73",
+      "linoEdge": "#6a7660",
+      "cut": "#cdbd98",
+      "cutDeep": "#b9a47c",
+      "ply": "#e0c9a2",
+      "ink": "#141416",
+      "paper": "#f3ecdc",
+      "handle": "#a0602f",
+      "brass": "#c99a45",
+      "steel": "#b9bec4",
+      "baren": "#3a2418",
+      "bamboo": "#d1b07a",
+      "plate": "#f6f0e2",
+      "caption": "#141414",
+      "accent": "#d2452b"
+    },
+    "world": {
+      "background": "#e8dcc6",
+      "fog": null,
+      "environment": "room",
+      "environmentIntensity": 0.55,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "bench": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.72,
+        "metalness": 0
+      },
+      "ply": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.8,
+        "metalness": 0
+      },
+      "linoSide": {
+        "type": "standard",
+        "baseColor": "#6f7b65",
+        "roughness": 0.78,
+        "metalness": 0
+      },
+      "handle": {
+        "type": "standard",
+        "baseColor": "#a0602f",
+        "roughness": 0.45,
+        "metalness": 0
+      },
+      "brass": {
+        "type": "standard",
+        "baseColor": "#c99a45",
+        "roughness": 0.32,
+        "metalness": 0.9
+      },
+      "steel": {
+        "type": "standard",
+        "baseColor": "#c4c8cc",
+        "roughness": 0.24,
+        "metalness": 0.95
+      },
+      "rubber": {
+        "type": "standard",
+        "baseColor": "#17171a",
+        "roughness": 0.26,
+        "metalness": 0
+      },
+      "baren": {
+        "type": "standard",
+        "baseColor": "#3a2418",
+        "roughness": 0.38,
+        "metalness": 0
+      },
+      "bamboo": {
+        "type": "standard",
+        "baseColor": "#d1b07a",
+        "roughness": 0.6,
+        "metalness": 0
+      },
+      "slab": {
+        "type": "standard",
+        "baseColor": "#dfe6e4",
+        "roughness": 0.12,
+        "metalness": 0,
+        "opacity": 0.5
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#fff7ea",
+        "groundColor": "#d9c3a0",
+        "intensity": 0.85
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff1dc",
+        "intensity": 3,
+        "position": [
+          -0.8,
+          0.36,
+          0.22
+        ],
+        "target": [
+          0,
+          0,
+          -0.02
+        ],
+        "shadow": {
+          "softness": 2,
+          "mapSize": 2048,
+          "extent": 0.42,
+          "near": 0.05,
+          "far": 3,
+          "bias": -0.0002,
+          "normalBias": 0.0015
+        }
+      },
+      {
+        "id": "sheen",
+        "type": "directional",
+        "color": "#ffffff",
+        "intensity": 0.6,
+        "position": [
+          0.15,
+          0.7,
+          -0.9
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.22,
+        "offset": 1.15
+      },
+      "grain": {
+        "amount": 0.012,
+        "fps": 30
+      }
+    },
+    "camera": {
+      "fov": 34,
+      "near": 0.02,
+      "far": 8,
+      "drift": {
+        "amp": 0.0012,
+        "speed": 0.35
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 800,
+      "color": "#141414",
+      "height": 0.03
+    },
+    "block": {
+      "w": 0.3,
+      "h": 0.225,
+      "ply": 0.018,
+      "lino": 0.0032,
+      "segX": 640,
+      "segY": 480,
+      "bakeX": 1200,
+      "bakeY": 900,
+      "chamfer": 0.0015
+    },
+    "linoShade": {
+      "top": "#6b7861",
+      "cut": "#d2c29d",
+      "cutDeep": "#a48f66",
+      "ao": 0.42,
+      "mottle": 0.07,
+      "roughTop": 0.72,
+      "roughCut": 0.9,
+      "frontSoft": 0.012,
+      "normalGain": 2
+    },
+    "inkShade": {
+      "color": "#131315",
+      "sheen": "#2a2a30",
+      "rough": 0.36,
+      "roughVar": 0.12,
+      "inkMaxDepth": 0.00034,
+      "inkMinDepth": 0.0001,
+      "streakNormal": 0.09
+    },
+    "print": {
+      "paper": "#f3ecdc",
+      "ink": "#0a0a0b",
+      "ghost": 0.32,
+      "speck": 0.9,
+      "transferSoft": 0.32
+    },
+    "gouge": {
+      "handleLen": 0.088,
+      "handleR": 0.0142,
+      "ferrule": 0.009,
+      "shaft": 0.04,
+      "shaftR": 0.0034,
+      "blade": 0.014,
+      "bladeW": 0.0042,
+      "bladeH": 0.0036,
+      "tilt": 0.36
+    },
+    "chip": {
+      "r": 0.0064,
+      "width": 0.0054,
+      "turns": 1.3
+    },
+    "roller": {
+      "r": 0.0215,
+      "len": 0.245,
+      "frame": 0.0028,
+      "handleR": 0.011,
+      "handleLen": 0.095
+    },
+    "barenShape": {
+      "r": 0.048,
+      "h": 0.009
+    },
+    "bench": {
+      "w": 2.4,
+      "d": 2.4,
+      "woodRepeat": [
+        4,
+        4
+      ]
+    },
+    "wood": {
+      "size": 1024,
+      "boards": 5,
+      "seed": 41,
+      "grainFreq": 26,
+      "grainWarp": 1.4,
+      "contrast": 0.2,
+      "dark": "#d4c2a3",
+      "mid": "#e4d6bc",
+      "light": "#f1e8d6",
+      "seam": "#c4ae8a"
+    },
+    "caption": {
+      "x": 84,
+      "y": 912,
+      "h": 96,
+      "cap": 44,
+      "maxW": 1000,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 800,
+      "plate": "#f6f0e2",
+      "ink": "#141414",
+      "accent": "#d2452b",
+      "shadow": "rgba(40,28,10,0.35)",
+      "roll": 0.3,
+      "lead": 0.2
+    },
+    "sound": {
+      "bed": {
+        "gain": 0.46,
+        "root": 110,
+        "brightness": 720
+      },
+      "scrape": {
+        "gain": 0.55,
+        "pitch": 0.55
+      },
+      "tick": {
+        "gain": 0.22
+      },
+      "blur": {
+        "gain": 0.3
+      },
+      "roll": {
+        "gain": 0.5
+      },
+      "paper": {
+        "gain": 0.6
+      },
+      "rub": {
+        "gain": 0.32
+      },
+      "peel": {
+        "gain": 0.5
+      },
+      "chord": {
+        "gain": 0.72,
+        "hz": 220
+      }
+    },
+    "sfx": {
+      "enter": "pop",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "thud",
+      "emphasis": "marimba",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Gouge: the tip follows each planned stroke at the groove bottom, tilted ~20°, hops between strokes; one lino curl per stroke rides the tip and is flicked onto the bench.",
+      "Carving is a per-texel bake (first-pass time + depth, deepest-stroke time + depth); the shader shows depth(t), never accumulates.",
+      "Roller: rolls without slipping across the block; only texels shallower than ~0.3 mm behind its contact line turn glossy black.",
+      "Paper: hinges down from the far edge, a baren rubs loops (ink ghosts through where it has passed), the near-right corner peels on a cylinder, then the sheet lifts, flips and faces the camera: the mirrored block prints the right way round."
+    ]
+  },
+  "scene": {
+    "id": "118-linocut",
+    "style": "linocut",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "gouge",
+        "t": 0,
+        "dur": 3,
+        "label": "A gouge cuts the block"
+      },
+      {
+        "id": "clear",
+        "t": 3,
+        "dur": 3.2,
+        "label": "Cut away the white parts"
+      },
+      {
+        "id": "ink",
+        "t": 6.2,
+        "dur": 2.8,
+        "label": "Ink only the raised part"
+      },
+      {
+        "id": "press",
+        "t": 9,
+        "dur": 3,
+        "label": "Press, rub and peel"
+      },
+      {
+        "id": "mirror",
+        "t": 12,
+        "dur": 3,
+        "label": "It prints as a mirror"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -0.0568,
+          0.1075,
+          0.0979
+        ],
+        "target": [
+          -0.08,
+          0.0292,
+          -0.056
+        ],
+        "fov": 34
+      },
+      {
+        "t": 2.9,
+        "pos": [
+          -0.0791,
+          0.1086,
+          0.0878
+        ],
+        "target": [
+          -0.08,
+          0.0272,
+          -0.058
+        ],
+        "fov": 34
+      },
+      {
+        "t": 4.5,
+        "pos": [
+          0,
+          0.3487,
+          0.259
+        ],
+        "target": [
+          0,
+          -0.0084,
+          0.0296
+        ],
+        "fov": 34,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 6.2,
+        "pos": [
+          0,
+          0.3487,
+          0.259
+        ],
+        "target": [
+          0,
+          -0.0084,
+          0.0296
+        ],
+        "fov": 34
+      },
+      {
+        "t": 7.4,
+        "pos": [
+          0.0236,
+          0.3043,
+          0.3053
+        ],
+        "target": [
+          -0.0039,
+          -0.0157,
+          0.0311
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 9,
+        "pos": [
+          0.0236,
+          0.3043,
+          0.3053
+        ],
+        "target": [
+          -0.0039,
+          -0.0157,
+          0.0311
+        ],
+        "fov": 34
+      },
+      {
+        "t": 9.9,
+        "pos": [
+          0.0407,
+          0.4145,
+          0.3449
+        ],
+        "target": [
+          -0.0084,
+          -0.0169,
+          0.0403
+        ],
+        "fov": 34,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 12.2,
+        "pos": [
+          0.0407,
+          0.4145,
+          0.3449
+        ],
+        "target": [
+          -0.0084,
+          -0.0169,
+          0.0403
+        ],
+        "fov": 34
+      },
+      {
+        "t": 13.7,
+        "pos": [
+          0.165,
+          0.496,
+          0.6273
+        ],
+        "target": [
+          0.165,
+          0.085,
+          0
+        ],
+        "fov": 34,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0.165,
+          0.496,
+          0.6273
+        ],
+        "target": [
+          0.165,
+          0.085,
+          0
+        ],
+        "fov": 34
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "root": 110,
+        "chord": [
+          0,
+          7,
+          12,
+          16
+        ],
+        "dur": 15,
+        "attack": 0.6,
+        "release": 1.6,
+        "brightness": 720,
+        "gain": 0.46,
+        "seed": 7
+      },
+      {
+        "t": 3.04,
+        "type": "rustle",
+        "dur": 2.8200000000000003,
+        "density": 0.85,
+        "pitch": 0.5,
+        "gain": 0.3,
+        "seed": 9
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.42,
+        "q": 1.4,
+        "pitch": 0.9,
+        "gain": 0.22,
+        "t": 0,
+        "pan": 0,
+        "seed": 311
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.663195888017037,
+        "speed": 0.55,
+        "pitch": 0.55,
+        "gain": 0.55,
+        "t": 0.32,
+        "pan": -0.38526858050756074,
+        "seed": 318
+      },
+      {
+        "type": "rustle",
+        "dur": 0.663195888017037,
+        "density": 0.6,
+        "pitch": 0.42,
+        "gain": 0.385,
+        "t": 0.32,
+        "pan": -0.38526858050756074,
+        "seed": 319
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6,
+        "gain": 0.264,
+        "t": 0.32,
+        "pan": -0.38526858050756074,
+        "seed": 320
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.6630853831802077,
+        "speed": 0.55,
+        "pitch": 0.55,
+        "gain": 0.55,
+        "t": 1.084795888017037,
+        "pan": -0.2765811159060557,
+        "seed": 325
+      },
+      {
+        "type": "rustle",
+        "dur": 0.6630853831802077,
+        "density": 0.6,
+        "pitch": 0.42,
+        "gain": 0.385,
+        "t": 1.084795888017037,
+        "pan": -0.2765811159060557,
+        "seed": 326
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6,
+        "gain": 0.264,
+        "t": 1.084795888017037,
+        "pan": -0.2765811159060557,
+        "seed": 327
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.4039628745506154,
+        "speed": 0.55,
+        "pitch": 0.55,
+        "gain": 0.55,
+        "t": 1.8494812711972446,
+        "pan": -0.2765811159060557,
+        "seed": 332
+      },
+      {
+        "type": "rustle",
+        "dur": 0.4039628745506154,
+        "density": 0.6,
+        "pitch": 0.42,
+        "gain": 0.385,
+        "t": 1.8494812711972446,
+        "pan": -0.2765811159060557,
+        "seed": 333
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6,
+        "gain": 0.264,
+        "t": 1.8494812711972446,
+        "pan": -0.2765811159060557,
+        "seed": 334
+      },
+      {
+        "type": "penScratch",
+        "dur": 0.4033558542521396,
+        "speed": 0.55,
+        "pitch": 0.55,
+        "gain": 0.55,
+        "t": 2.35504414574786,
+        "pan": -0.2462122494599425,
+        "seed": 339
+      },
+      {
+        "type": "rustle",
+        "dur": 0.4033558542521396,
+        "density": 0.6,
+        "pitch": 0.42,
+        "gain": 0.385,
+        "t": 2.35504414574786,
+        "pan": -0.2462122494599425,
+        "seed": 340
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6,
+        "gain": 0.264,
+        "t": 2.35504414574786,
+        "pan": -0.2462122494599425,
+        "seed": 341
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6859080971912801,
+        "gain": 0.13989978138208162,
+        "t": 3.04,
+        "pan": -0.3923091756229069,
+        "seed": 346
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6858313454926416,
+        "gain": 0.13988289600838114,
+        "t": 3.0779690637568264,
+        "pan": -0.365881583012898,
+        "seed": 353
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6857868833250429,
+        "gain": 0.13987311433150942,
+        "t": 3.1022493322161453,
+        "pan": -0.42014588636254274,
+        "seed": 360
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6858173635615474,
+        "gain": 0.13987981998354043,
+        "t": 3.1214961617332726,
+        "pan": -0.3923091756229069,
+        "seed": 367
+      },
+      {
+        "type": "tick",
+        "pitch": 0.7030580563818629,
+        "gain": 0.14367277240400983,
+        "t": 3.1381428919634127,
+        "pan": -0.27321263704893417,
+        "seed": 374
+      },
+      {
+        "type": "tick",
+        "pitch": 0.8070791600607136,
+        "gain": 0.16655741521335699,
+        "t": 3.1563978990067083,
+        "pan": -0.27059411230515373,
+        "seed": 381
+      },
+      {
+        "type": "tick",
+        "pitch": 0.7338333030678579,
+        "gain": 0.1504433266749287,
+        "t": 3.1892665739453077,
+        "pan": -0.32622234152057,
+        "seed": 388
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6771984359596014,
+        "gain": 0.1379836559111123,
+        "t": 3.20889458082387,
+        "pan": -0.24245359406108558,
+        "seed": 395
+      },
+      {
+        "type": "tick",
+        "pitch": 0.8076513283401289,
+        "gain": 0.16668329223482833,
+        "t": 3.2204796853030437,
+        "pan": -0.18952603514291105,
+        "seed": 402
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6965504317846052,
+        "gain": 0.14224109499261314,
+        "t": 3.247419405936308,
+        "pan": -0.24195536839177745,
+        "seed": 409
+      },
+      {
+        "type": "tick",
+        "pitch": 0.7425204711078146,
+        "gain": 0.1523545036437192,
+        "t": 3.2612822864178854,
+        "pan": -0.24660393856157825,
+        "seed": 416
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6918917378306896,
+        "gain": 0.1412161823227517,
+        "t": 3.2805559500221353,
+        "pan": -0.24660393856157825,
+        "seed": 423
+      },
+      {
+        "type": "tick",
+        "pitch": 0.7473156993533818,
+        "gain": 0.153409453857744,
+        "t": 3.293870491128967,
+        "pan": -0.2906068277361502,
+        "seed": 430
+      },
+      {
+        "type": "tick",
+        "pitch": 0.7375065862424595,
+        "gain": 0.15125144897334108,
+        "t": 3.313708564519296,
+        "pan": -0.32622234152057,
+        "seed": 437
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6994818953702542,
+        "gain": 0.14288601698145592,
+        "t": 3.332392081932507,
+        "pan": -0.18952603514291105,
+        "seed": 444
+      },
+      {
+        "type": "tick",
+        "pitch": 0.9041942447028274,
+        "gain": 0.18792273383462202,
+        "t": 3.34660000266046,
+        "pan": -0.07492331903285028,
+        "seed": 451
+      },
+      {
+        "type": "tick",
+        "pitch": 0.8323892761374988,
+        "gain": 0.17212564075024972,
+        "t": 3.384903054501603,
+        "pan": -0.08702824124868276,
+        "seed": 458
+      },
+      {
+        "type": "tick",
+        "pitch": 0.9041939125981496,
+        "gain": 0.18792266077159292,
+        "t": 3.414754490513017,
+        "pan": -0.07492331903285028,
+        "seed": 465
+      },
+      {
+        "type": "tick",
+        "pitch": 0.8280131464233718,
+        "gain": 0.17116289221314177,
+        "t": 3.4530575032646484,
+        "pan": 0.10065216432005027,
+        "seed": 472
+      },
+      {
+        "type": "tick",
+        "pitch": 0.696816614107805,
+        "gain": 0.1422996551037171,
+        "t": 3.482393858385369,
+        "pan": 0.20534004798553074,
+        "seed": 479
+      },
+      {
+        "type": "tick",
+        "pitch": 0.7628643668096066,
+        "gain": 0.15683016069811342,
+        "t": 3.4962880691603972,
+        "pan": 0.2027072153886089,
+        "seed": 486
+      },
+      {
+        "type": "tick",
+        "pitch": 0.7087250546265498,
+        "gain": 0.14491951201784095,
+        "t": 3.517956257745118,
+        "pan": 0.2699424796944965,
+        "seed": 493
+      },
+      {
+        "type": "tick",
+        "pitch": 0.7588761411455307,
+        "gain": 0.15595275105201675,
+        "t": 3.533252120333475,
+        "pan": 0.2760933810513395,
+        "seed": 500
+      },
+      {
+        "type": "tick",
+        "pitch": 0.8080255761596229,
+        "gain": 0.16676562675511702,
+        "t": 3.554450885258127,
+        "pan": 0.32665307082387846,
+        "seed": 507
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6965393303394835,
+        "gain": 0.14223865267468636,
+        "t": 3.5814346557511527,
+        "pan": 0.32665307082387846,
+        "seed": 514
+      },
+      {
+        "type": "tick",
+        "pitch": 1.0507516395579848,
+        "gain": 0.2201653607027566,
+        "t": 3.5952962295661974,
+        "pan": 0.44396177461015895,
+        "seed": 521
+      },
+      {
+        "type": "tick",
+        "pitch": 1.0507572421683302,
+        "gain": 0.2201665932770327,
+        "t": 3.6508494358614114,
+        "pan": -0.0005980599579590204,
+        "seed": 528
+      },
+      {
+        "type": "tick",
+        "pitch": 0.7328980525114223,
+        "gain": 0.15023757155251288,
+        "t": 3.7064033015972075,
+        "pan": -0.27321263704893417,
+        "seed": 535
+      },
+      {
+        "type": "tick",
+        "pitch": 0.699641352655836,
+        "gain": 0.14292109758428392,
+        "t": 3.72454438361338,
+        "pan": -0.18199478756425133,
+        "seed": 542
+      },
+      {
+        "type": "tick",
+        "pitch": 0.679280590182533,
+        "gain": 0.13844172984015723,
+        "t": 3.738771072843651,
+        "pan": -0.11256062960079137,
+        "seed": 549
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6789745470893044,
+        "gain": 0.13837440035964696,
+        "t": 3.75060125183427,
+        "pan": -0.06830861688888258,
+        "seed": 556
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6794158737576534,
+        "gain": 0.13847149222668376,
+        "t": 3.7623954088238634,
+        "pan": -0.090592038534468,
+        "seed": 563
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6793585632303993,
+        "gain": 0.13845888391068784,
+        "t": 3.774241511013501,
+        "pan": -0.090592038534468,
+        "seed": 570
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6911853345792496,
+        "gain": 0.1410607736074349,
+        "t": 3.786080867617575,
+        "pan": -0.057079416530465533,
+        "seed": 577
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6936212897592516,
+        "gain": 0.14159668374703535,
+        "t": 3.7993122633791563,
+        "pan": 0.0038739561314574122,
+        "seed": 584
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6913622540398919,
+        "gain": 0.14109969588877622,
+        "t": 3.812830376867535,
+        "pan": -0.026002890980998842,
+        "seed": 591
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6937528196732539,
+        "gain": 0.14162562032811585,
+        "t": 3.8260825964710317,
+        "pan": -0.026002890980998842,
+        "seed": 598
+      },
+      {
+        "type": "tick",
+        "pitch": 0.8879964731102821,
+        "gain": 0.18435922408426206,
+        "t": 3.8396161913435747,
+        "pan": 0.12268239553652856,
+        "seed": 605
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6948101917090166,
+        "gain": 0.14185824217598364,
+        "t": 3.8760127268874043,
+        "pan": 0.1508286565130113,
+        "seed": 612
+      },
+      {
+        "type": "tick",
+        "pitch": 0.9436631668505409,
+        "gain": 0.19660589670711898,
+        "t": 3.8896707769670718,
+        "pan": 0.1383059876000766,
+        "seed": 619
+      },
+      {
+        "type": "tick",
+        "pitch": 0.9042238882253231,
+        "gain": 0.18792925540957106,
+        "t": 3.9326194149545612,
+        "pan": 0.09460379570059119,
+        "seed": 626
+      },
+      {
+        "type": "tick",
+        "pitch": 0.9042239643480188,
+        "gain": 0.18792927215656413,
+        "t": 3.9709259559089087,
+        "pan": 0.09460379570059119,
+        "seed": 633
+      },
+      {
+        "type": "tick",
+        "pitch": 0.9243387650780898,
+        "gain": 0.19235452831717975,
+        "t": 4.009232505823078,
+        "pan": 0.3309244680512396,
+        "seed": 640
+      },
+      {
+        "type": "tick",
+        "pitch": 0.7014160296127563,
+        "gain": 0.1433115265148064,
+        "t": 4.0499066156938754,
+        "pan": 0.3895280573986551,
+        "seed": 647
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6858602160349274,
+        "gain": 0.13988924752768403,
+        "t": 4.064342188629014,
+        "pan": 0.41737783304596626,
+        "seed": 654
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6884382479567579,
+        "gain": 0.14045641455048674,
+        "t": 4.076946805254226,
+        "pan": 0.36382828886809987,
+        "seed": 661
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6883397913224886,
+        "gain": 0.14043475409094747,
+        "t": 4.089854862377157,
+        "pan": 0.38870805442962697,
+        "seed": 668
+      },
+      {
+        "type": "tick",
+        "pitch": 0.6830408624336197,
+        "gain": 0.13926898973539634,
+        "t": 4.102751330919724,
+        "pan": 0.38870805442962697,
+        "seed": 675
+      },
+      {
+        "type": "tick",
+        "pitch": 0.9177745370536683,
+        "gain": 0.19091039815180702,
+        "t": 4.115024102910749,
+        "pan": 0.2043310624006606,
+        "seed": 682
+      },
+      {
+        "type": "tick",
+        "pitch": 0.7401746418979326,
+        "gain": 0.15183842121754515,
+        "t": 4.1549255875079805,
+        "pan": 0.12268239553652856,
+        "seed": 689
+      },
+      {
+        "type": "tick",
+        "pitch": 1.0476424584716513,
+        "gain": 0.21948134086376328,
+        "t": 4.1739231414267834,
+        "pan": 0.4416666666666667,
+        "seed": 696
+      },
+      {
+        "type": "tick",
+        "pitch": 1.047642458471651,
+        "gain": 0.21948134086376322,
+        "t": 4.229110389702493,
+        "pan": 0,
+        "seed": 703
+      },
+      {
+        "type": "tick",
+        "pitch": 1.0480695279941878,
+        "gain": 0.21957529615872132,
+        "t": 4.284297637978202,
+        "pan": 0.4416666666666667,
+        "seed": 710
+      },
+      {
+        "type": "tick",
+        "pitch": 1.0480695279941878,
+        "gain": 0.21957529615872132,
+        "t": 4.3395351533539355,
+        "pan": 0,
+        "seed": 717
+      },
+      {
+        "type": "tick",
+        "pitch": 0.66881,
+        "gain": 0.1361382,
+        "t": 4.394772668729669,
+        "pan": 0.15878333333333333,
+        "seed": 724
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2290907005173497,
+        "gain": 0.2593999541138169,
+        "t": 4.405370434316294,
+        "pan": -0.42664904797366965,
+        "seed": 731
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2291121418617914,
+        "gain": 0.25940467120959415,
+        "t": 4.481914572865614,
+        "pan": -0.37903149003725817,
+        "seed": 738
+      },
+      {
+        "type": "tick",
+        "pitch": 1.229254687572276,
+        "gain": 0.2594360312659007,
+        "t": 4.558461235112246,
+        "pan": -0.33196022573072853,
+        "seed": 745
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2291996680747324,
+        "gain": 0.2594239269764412,
+        "t": 4.635024675328527,
+        "pan": -0.2828166494144083,
+        "seed": 752
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2292381805384793,
+        "gain": 0.25943239971846543,
+        "t": 4.711581639618897,
+        "pan": -0.23507339882266454,
+        "seed": 759
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2293555720310052,
+        "gain": 0.2594582258468211,
+        "t": 4.7881431369179825,
+        "pan": -0.18890131810030417,
+        "seed": 766
+      },
+      {
+        "type": "tick",
+        "pitch": 1.229253276863629,
+        "gain": 0.2594357209099984,
+        "t": 4.8647184514753485,
+        "pan": -0.14423316670898984,
+        "seed": 773
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2290419220714766,
+        "gain": 0.2593892228557249,
+        "t": 4.941281725647861,
+        "pan": -0.09582791353013728,
+        "seed": 780
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2292684871969914,
+        "gain": 0.2594390671833381,
+        "t": 5.017820122857919,
+        "pan": -0.045348426788861314,
+        "seed": 787
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2292514569816688,
+        "gain": 0.25943532053596713,
+        "t": 5.094385187322897,
+        "pan": -0.00015149991379541185,
+        "seed": 794
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2291681171259445,
+        "gain": 0.25941698576770783,
+        "t": 5.170948247290967,
+        "pan": 0.04542610139440631,
+        "seed": 801
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2292304468821806,
+        "gain": 0.2594306983140797,
+        "t": 5.247501497959516,
+        "pan": 0.0946040307401444,
+        "seed": 808
+      },
+      {
+        "type": "tick",
+        "pitch": 1.229258657939814,
+        "gain": 0.2594369047467591,
+        "t": 5.324062084988834,
+        "pan": 0.14273608305925234,
+        "seed": 815
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2291952764575198,
+        "gain": 0.2594229608206543,
+        "t": 5.400625992526831,
+        "pan": 0.1891250403107691,
+        "seed": 822
+      },
+      {
+        "type": "tick",
+        "pitch": 1.229377937163484,
+        "gain": 0.2594631461759665,
+        "t": 5.4771824399133955,
+        "pan": 0.23534544280486908,
+        "seed": 829
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2293370930795273,
+        "gain": 0.259454160477496,
+        "t": 5.553760386900125,
+        "pan": 0.28280851295457954,
+        "seed": 836
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2293145490486768,
+        "gain": 0.2594492007907088,
+        "t": 5.630333526440888,
+        "pan": 0.3325370713313407,
+        "seed": 843
+      },
+      {
+        "type": "tick",
+        "pitch": 1.229182925279569,
+        "gain": 0.25942024356150517,
+        "t": 5.706904012495522,
+        "pan": 0.3769335866345419,
+        "seed": 850
+      },
+      {
+        "type": "tick",
+        "pitch": 1.2290639834001422,
+        "gain": 0.2593940763480313,
+        "t": 5.783459006119022,
+        "pan": 0.4271418954184699,
+        "seed": 857
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.6399999999999997,
+        "q": 1.1,
+        "pitch": 0.85,
+        "gain": 0.25,
+        "t": 5.86,
+        "pan": 0,
+        "seed": 864
+      },
+      {
+        "type": "thud",
+        "pitch": 1.7,
+        "gain": 0.32,
+        "t": 6.54,
+        "pan": 0,
+        "seed": 871
+      },
+      {
+        "type": "rustle",
+        "dur": 1.7200000000000006,
+        "density": 0.95,
+        "pitch": 0.3,
+        "gain": 0.5,
+        "t": 6.58,
+        "pan": 0,
+        "seed": 878
+      },
+      {
+        "type": "whir",
+        "dur": 1.7200000000000006,
+        "hz": 58,
+        "hz2": 66,
+        "grit": 0.6,
+        "gain": 0.175,
+        "t": 6.58,
+        "pan": 0,
+        "seed": 879
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.6599999999999987,
+        "q": 1,
+        "pitch": 0.7,
+        "gain": 0.22,
+        "t": 8.3,
+        "pan": 0,
+        "seed": 885
+      },
+      {
+        "type": "paper",
+        "dur": 0.68,
+        "fold": true,
+        "density": 0.3,
+        "gain": 0.6,
+        "t": 8.86,
+        "pan": 0,
+        "seed": 892
+      },
+      {
+        "type": "rustle",
+        "dur": 0.19999999999999998,
+        "density": 0.45,
+        "pitch": 0.85,
+        "gain": 0.32,
+        "t": 9.62,
+        "pan": -0.31466666666666665,
+        "seed": 899
+      },
+      {
+        "type": "rustle",
+        "dur": 0.19999999999999998,
+        "density": 0.45,
+        "pitch": 0.9299999999999999,
+        "gain": 0.32,
+        "t": 9.84222222222222,
+        "pan": 0.24448538530512653,
+        "seed": 906
+      },
+      {
+        "type": "rustle",
+        "dur": 0.19999999999999998,
+        "density": 0.45,
+        "pitch": 1.01,
+        "gain": 0.32,
+        "t": 10.064444444444444,
+        "pan": 0.17162233843314445,
+        "seed": 913
+      },
+      {
+        "type": "rustle",
+        "dur": 0.19999999999999998,
+        "density": 0.45,
+        "pitch": 0.85,
+        "gain": 0.32,
+        "t": 10.286666666666665,
+        "pan": -0.23994466000562784,
+        "seed": 920
+      },
+      {
+        "type": "rustle",
+        "dur": 0.19999999999999998,
+        "density": 0.45,
+        "pitch": 0.9299999999999999,
+        "gain": 0.32,
+        "t": 10.508888888888889,
+        "pan": 0.3050486514347708,
+        "seed": 927
+      },
+      {
+        "type": "paper",
+        "dur": 1.6999999999999993,
+        "density": 0.22,
+        "pitch": 0.55,
+        "gain": 0.5,
+        "t": 11,
+        "pan": 0,
+        "seed": 934
+      },
+      {
+        "type": "rustle",
+        "dur": 1.6999999999999993,
+        "density": 0.3,
+        "pitch": 0.7,
+        "gain": 0.2,
+        "t": 11,
+        "pan": 0,
+        "seed": 935
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.3000000000000007,
+        "q": 1.1,
+        "pitch": 0.75,
+        "gain": 0.3,
+        "t": 12.45,
+        "pan": 0,
+        "seed": 941
+      },
+      {
+        "type": "marimba",
+        "hz": 220,
+        "notes": [
+          0,
+          4,
+          7,
+          12
+        ],
+        "step": 0.09,
+        "decay": 0.55,
+        "mallet": 0.35,
+        "dur": 1.9,
+        "gain": 0.72,
+        "t": 13.620000000000001,
+        "pan": 0,
+        "seed": 948
+      },
+      {
+        "type": "chime",
+        "dur": 1.6,
+        "pitch": 0.8,
+        "notes": 4,
+        "gain": 0.12,
+        "t": 13.620000000000001,
+        "pan": 0,
+        "seed": 949
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "title": "Cut away what isn't",
+      "planHash": "60e1fbcf",
+      "strokes": 78,
+      "beat1Strokes": 4,
+      "carveEnd": 5.852,
+      "framing": {
+        "ok": true,
+        "worst": {
+          "t": 6.9,
+          "id": "block",
+          "ndc": 0.9472
+        }
+      },
+      "mechanism": "lino.js: design SDF -> marching-squares contour cuts + detail cuts + clearing columns, each with [t0, t1]; per-texel carve bake (first-pass time/depth, deepest-stroke time/depth); roller contact line inks texels shallower than 0.34 mm; baren path baked to a first-rub time map; corner curl on a cylinder; rigid slerp to the present pose."
+    }
+  }
+}

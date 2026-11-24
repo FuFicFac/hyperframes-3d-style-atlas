@@ -1,0 +1,836 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "papercut-lightbox",
+    "name": "Papercut Lightbox",
+    "description": "Seven sheets of white cut paper slide into the slots of a deep walnut shadow box: white on white under the room light, then lit from behind they become a glowing misty valley, far sheets bright and cool, near sheets dark and warm.",
+    "palette": {
+      "bg": "#34404c",
+      "wall": "#34404c",
+      "paper": "#f7f4ee",
+      "walnut": "#4f3221",
+      "slot": "#140c07",
+      "panel": "#b4b0a9",
+      "dawn": "#c8dcff",
+      "dawnGlow": "#ffe0c4",
+      "sunset": "#ffae6a",
+      "sunsetGlow": "#ff7f36",
+      "lamp": "#ffb347",
+      "plate": "#1f150e",
+      "caption": "#fbf3e4",
+      "accent": "#f2a03d"
+    },
+    "world": {
+      "background": "#34404c",
+      "fog": null,
+      "environment": null,
+      "toneMapping": "neutral",
+      "exposure": 1,
+      "shadowType": "auto"
+    },
+    "materials": {
+      "wall": {
+        "type": "standard",
+        "baseColor": "#55677a",
+        "roughness": 0.96,
+        "metalness": 0
+      },
+      "walnut": {
+        "type": "standard",
+        "baseColor": "#ffffff",
+        "roughness": 0.55,
+        "metalness": 0
+      },
+      "slot": {
+        "type": "standard",
+        "baseColor": "#2a1a10",
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      "backboard": {
+        "type": "standard",
+        "baseColor": "#2a1a10",
+        "roughness": 0.8,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "fill",
+        "type": "hemisphere",
+        "color": "#f3f5ff",
+        "groundColor": "#e6dfd3",
+        "intensity": 1.45
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fffaf2",
+        "intensity": 4.6,
+        "position": [
+          -0.52,
+          -0.42,
+          0.74
+        ],
+        "target": [
+          0,
+          0,
+          -0.04
+        ],
+        "shadow": {
+          "softness": 3,
+          "mapSize": 2048,
+          "extent": 0.42,
+          "near": 0.05,
+          "far": 3,
+          "bias": -0.0003,
+          "normalBias": 0.002
+        }
+      }
+    ],
+    "post": {
+      "bloom": {
+        "strength": 0,
+        "radius": 0.45,
+        "threshold": 1.15
+      },
+      "vignette": {
+        "darkness": 0.2,
+        "offset": 1.15
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.02,
+      "far": 6,
+      "drift": {
+        "amp": 0.0007,
+        "speed": 0.3
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 800,
+      "color": "#fbf3e4",
+      "height": 0.03
+    },
+    "frame": {
+      "opening": [
+        0.48,
+        0.27
+      ],
+      "lipDepth": 0.012,
+      "wallT": 0.025,
+      "backT": 0.008,
+      "castShadow": true,
+      "woodTile": 0.45,
+      "wood": {
+        "size": 1024,
+        "boards": 1,
+        "seed": 61,
+        "grainFreq": 30,
+        "grainWarp": 1.6,
+        "contrast": 0.4,
+        "dark": "#5a3822",
+        "mid": "#7c5234",
+        "light": "#a0714a",
+        "seam": "#3e2616"
+      }
+    },
+    "paper": {
+      "color": "#fbfaf7",
+      "roughness": 0.93,
+      "formation": 0.1,
+      "formationScale": 9,
+      "roomMottle": 0.03
+    },
+    "backlight": {
+      "tau": [
+        0.56,
+        0.47,
+        0.38
+      ],
+      "gain": 3,
+      "base": 0.44,
+      "hot": 1.05,
+      "hotSigma": 0.15,
+      "soft": 14,
+      "panelGain": 2.3,
+      "dawn": "#a9c3ff",
+      "dawnGlow": "#ffd6ae",
+      "sunset": "#ffa45e",
+      "sunsetGlow": "#ff7a30",
+      "lamp": "#ffb347",
+      "lampGain": 4,
+      "lampR": 0.011,
+      "lampHalo": 0.014,
+      "lampHaloGain": 0.45,
+      "bloom": 0.26
+    },
+    "room": {
+      "key": 4.4,
+      "fill": 1.45,
+      "fillDark": 0,
+      "shadow": 0.8,
+      "soft": 11,
+      "frame": 0.3
+    },
+    "caption": {
+      "x": 100,
+      "y": 896,
+      "h": 98,
+      "cap": 46,
+      "maxW": 980,
+      "font": "\"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif",
+      "weight": 700,
+      "plate": "rgba(31,21,14,0.92)",
+      "ink": "#fbf3e4",
+      "accent": "#f2a03d",
+      "shadow": "rgba(0,0,0,0.32)",
+      "roll": 0.28,
+      "lead": 0.3
+    },
+    "sound": {
+      "bed": {
+        "gain": 0.3,
+        "root": 98,
+        "brightness": 650
+      },
+      "swell": {
+        "gain": 0.62,
+        "root": 98,
+        "brightness": 1100
+      },
+      "slide": {
+        "gain": 0.5
+      },
+      "click": {
+        "gain": 0.55
+      },
+      "switch": {
+        "gain": 0.7
+      },
+      "wind": {
+        "gain": 0.34
+      },
+      "lamp": {
+        "gain": 0.42,
+        "hz": 392
+      }
+    },
+    "sfx": {
+      "enter": "paper",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "click",
+      "emphasis": "chime",
+      "ui": "tick",
+      "bed": "pad"
+    },
+    "motion": [
+      "Sheets slide into their slots from the right (outCubic, a click as each lands), back sheet first.",
+      "Room light: a raking key from the upper left; every cut edge throws a thin shadow onto the sheet behind.",
+      "Backlight: a sheet glows by the light left after every sheet between it and the lamp (soft projected masks), so near sheets go darker and warmer; moving the lamp sweeps every projected edge.",
+      "Camera: oblique close-up while the first sheets slide, front view for the stack, a sideways track for parallax."
+    ]
+  },
+  "scene": {
+    "id": "123-papercut-lightbox",
+    "style": "papercut-lightbox",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "cut",
+        "t": 0,
+        "dur": 2.6,
+        "label": "Plain white paper, cut"
+      },
+      {
+        "id": "stack",
+        "t": 2.6,
+        "dur": 3.4,
+        "label": "Stack the layers apart"
+      },
+      {
+        "id": "light",
+        "t": 6,
+        "dur": 3,
+        "label": "Light it from behind"
+      },
+      {
+        "id": "move",
+        "t": 9,
+        "dur": 3,
+        "label": "Move: the layers slide"
+      },
+      {
+        "id": "depth",
+        "t": 12,
+        "dur": 3,
+        "label": "Depth, made only of light"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          -0.131,
+          0.15,
+          0.146
+        ],
+        "target": [
+          0.05,
+          0.052,
+          -0.07
+        ],
+        "fov": 30
+      },
+      {
+        "t": 2.6,
+        "pos": [
+          -0.112,
+          0.128,
+          0.138
+        ],
+        "target": [
+          0.062,
+          0.03,
+          -0.07
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 4.800000000000001,
+        "pos": [
+          0,
+          0.002,
+          0.62
+        ],
+        "target": [
+          0,
+          0.002,
+          -0.04
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 5.5,
+        "pos": [
+          0,
+          0.002,
+          0.62
+        ],
+        "target": [
+          0,
+          0.002,
+          -0.04
+        ],
+        "fov": 30
+      },
+      {
+        "t": 6.7,
+        "pos": [
+          0,
+          0.002,
+          0.46
+        ],
+        "target": [
+          0,
+          0.002,
+          -0.04
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 9,
+        "pos": [
+          -0.1,
+          0.004,
+          0.44
+        ],
+        "target": [
+          -0.035,
+          0.002,
+          -0.04
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.9,
+        "pos": [
+          0.1,
+          0.004,
+          0.44
+        ],
+        "target": [
+          0.035,
+          0.002,
+          -0.04
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 14.6,
+        "pos": [
+          0,
+          -0.002,
+          0.445
+        ],
+        "target": [
+          0,
+          -0.002,
+          -0.04
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0,
+          -0.002,
+          0.445
+        ],
+        "target": [
+          0,
+          -0.002,
+          -0.04
+        ],
+        "fov": 30
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12
+        ],
+        "dur": 15,
+        "attack": 0.5,
+        "release": 1.6,
+        "brightness": 650,
+        "gain": 0.3,
+        "seed": 7
+      },
+      {
+        "type": "paper",
+        "dur": 0.16999999999999998,
+        "density": 0.26,
+        "pitch": 0.82,
+        "gain": 0.5,
+        "t": 0,
+        "pan": 0.35,
+        "seed": 211
+      },
+      {
+        "type": "rustle",
+        "dur": 0.096,
+        "density": 0.5,
+        "pitch": 1.1,
+        "gain": 0.175,
+        "t": 0,
+        "pan": 0.35,
+        "seed": 212
+      },
+      {
+        "type": "click",
+        "pitch": 0.72,
+        "gain": 0.55,
+        "t": 0.12,
+        "pan": 0.35,
+        "seed": 218
+      },
+      {
+        "type": "thud",
+        "pitch": 2.4,
+        "dur": 0.12,
+        "gain": 0.1925,
+        "t": 0.12,
+        "pan": 0.35,
+        "seed": 219
+      },
+      {
+        "type": "paper",
+        "dur": 0.8,
+        "density": 0.26,
+        "pitch": 0.8899999999999999,
+        "gain": 0.5,
+        "t": 0.2,
+        "pan": 0.35,
+        "seed": 225
+      },
+      {
+        "type": "rustle",
+        "dur": 0.6000000000000001,
+        "density": 0.5,
+        "pitch": 1.1500000000000001,
+        "gain": 0.175,
+        "t": 0.2,
+        "pan": 0.35,
+        "seed": 226
+      },
+      {
+        "type": "click",
+        "pitch": 0.82,
+        "gain": 0.55,
+        "t": 0.95,
+        "pan": 0.35,
+        "seed": 232
+      },
+      {
+        "type": "thud",
+        "pitch": 2.55,
+        "dur": 0.12,
+        "gain": 0.1925,
+        "t": 0.95,
+        "pan": 0.35,
+        "seed": 233
+      },
+      {
+        "type": "paper",
+        "dur": 0.8,
+        "density": 0.26,
+        "pitch": 0.96,
+        "gain": 0.5,
+        "t": 1.15,
+        "pan": 0.35,
+        "seed": 239
+      },
+      {
+        "type": "rustle",
+        "dur": 0.6000000000000001,
+        "density": 0.5,
+        "pitch": 1.2000000000000002,
+        "gain": 0.175,
+        "t": 1.15,
+        "pan": 0.35,
+        "seed": 240
+      },
+      {
+        "type": "click",
+        "pitch": 0.9199999999999999,
+        "gain": 0.55,
+        "t": 1.9,
+        "pan": 0.35,
+        "seed": 246
+      },
+      {
+        "type": "thud",
+        "pitch": 2.6999999999999997,
+        "dur": 0.12,
+        "gain": 0.1925,
+        "t": 1.9,
+        "pan": 0.35,
+        "seed": 247
+      },
+      {
+        "type": "paper",
+        "dur": 0.6000000000000001,
+        "density": 0.26,
+        "pitch": 1.03,
+        "gain": 0.5,
+        "t": 2.75,
+        "pan": 0.35,
+        "seed": 253
+      },
+      {
+        "type": "rustle",
+        "dur": 0.44000000000000006,
+        "density": 0.5,
+        "pitch": 1.25,
+        "gain": 0.175,
+        "t": 2.75,
+        "pan": 0.35,
+        "seed": 254
+      },
+      {
+        "type": "click",
+        "pitch": 1.02,
+        "gain": 0.55,
+        "t": 3.3,
+        "pan": 0.35,
+        "seed": 260
+      },
+      {
+        "type": "thud",
+        "pitch": 2.8499999999999996,
+        "dur": 0.12,
+        "gain": 0.1925,
+        "t": 3.3,
+        "pan": 0.35,
+        "seed": 261
+      },
+      {
+        "type": "paper",
+        "dur": 0.6000000000000001,
+        "density": 0.26,
+        "pitch": 1.1,
+        "gain": 0.5,
+        "t": 3.45,
+        "pan": 0.35,
+        "seed": 267
+      },
+      {
+        "type": "rustle",
+        "dur": 0.44000000000000006,
+        "density": 0.5,
+        "pitch": 1.3,
+        "gain": 0.175,
+        "t": 3.45,
+        "pan": 0.35,
+        "seed": 268
+      },
+      {
+        "type": "click",
+        "pitch": 1.12,
+        "gain": 0.55,
+        "t": 4,
+        "pan": 0.35,
+        "seed": 274
+      },
+      {
+        "type": "thud",
+        "pitch": 3,
+        "dur": 0.12,
+        "gain": 0.1925,
+        "t": 4,
+        "pan": 0.35,
+        "seed": 275
+      },
+      {
+        "type": "paper",
+        "dur": 0.6000000000000001,
+        "density": 0.26,
+        "pitch": 1.17,
+        "gain": 0.5,
+        "t": 4.15,
+        "pan": 0.35,
+        "seed": 281
+      },
+      {
+        "type": "rustle",
+        "dur": 0.44000000000000006,
+        "density": 0.5,
+        "pitch": 1.35,
+        "gain": 0.175,
+        "t": 4.15,
+        "pan": 0.35,
+        "seed": 282
+      },
+      {
+        "type": "click",
+        "pitch": 1.22,
+        "gain": 0.55,
+        "t": 4.7,
+        "pan": 0.35,
+        "seed": 288
+      },
+      {
+        "type": "thud",
+        "pitch": 3.15,
+        "dur": 0.12,
+        "gain": 0.1925,
+        "t": 4.7,
+        "pan": 0.35,
+        "seed": 289
+      },
+      {
+        "type": "paper",
+        "dur": 0.6000000000000001,
+        "density": 0.26,
+        "pitch": 1.24,
+        "gain": 0.5,
+        "t": 4.85,
+        "pan": 0.35,
+        "seed": 295
+      },
+      {
+        "type": "rustle",
+        "dur": 0.44000000000000006,
+        "density": 0.5,
+        "pitch": 1.4000000000000001,
+        "gain": 0.175,
+        "t": 4.85,
+        "pan": 0.35,
+        "seed": 296
+      },
+      {
+        "type": "click",
+        "pitch": 1.32,
+        "gain": 0.55,
+        "t": 5.4,
+        "pan": 0.35,
+        "seed": 302
+      },
+      {
+        "type": "thud",
+        "pitch": 3.3,
+        "dur": 0.12,
+        "gain": 0.1925,
+        "t": 5.4,
+        "pan": 0.35,
+        "seed": 303
+      },
+      {
+        "type": "clack",
+        "pitch": 0.62,
+        "gain": 0.7,
+        "t": 6.1,
+        "pan": 0,
+        "seed": 309
+      },
+      {
+        "type": "pad",
+        "dur": 8.879999999999999,
+        "root": 98,
+        "chord": [
+          0,
+          7,
+          12,
+          16,
+          19
+        ],
+        "attack": 1.3,
+        "release": 1.8,
+        "brightness": 1100,
+        "gain": 0.62,
+        "t": 6.12,
+        "pan": 0,
+        "seed": 316
+      },
+      {
+        "type": "chime",
+        "dur": 1.6,
+        "pitch": 0.7,
+        "notes": 5,
+        "gain": 0.1,
+        "t": 6.17,
+        "pan": 0,
+        "seed": 317
+      },
+      {
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.8599999999999999,
+        "q": 0.55,
+        "pitch": 0.42,
+        "gain": 0.34,
+        "t": 9,
+        "pan": 0,
+        "seed": 323
+      },
+      {
+        "type": "rustle",
+        "dur": 3,
+        "density": 0.12,
+        "pitch": 0.35,
+        "gain": 0.17,
+        "t": 9,
+        "pan": 0,
+        "seed": 325
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1.7999999999999998,
+        "q": 0.5,
+        "pitch": 0.38,
+        "gain": 0.28900000000000003,
+        "t": 10.26,
+        "pan": 0,
+        "seed": 324
+      },
+      {
+        "type": "pad",
+        "dur": 2.9000000000000004,
+        "root": 87.3082,
+        "chord": [
+          0,
+          4,
+          7,
+          11,
+          14
+        ],
+        "attack": 1.2,
+        "release": 1.4,
+        "brightness": 900,
+        "gain": 0.372,
+        "t": 12.1,
+        "pan": 0,
+        "seed": 330
+      },
+      {
+        "type": "pluck",
+        "hz": 392,
+        "notes": [
+          0,
+          4,
+          7,
+          12
+        ],
+        "step": 0.1,
+        "decay": 1.1,
+        "bright": 0.45,
+        "dur": 1.8,
+        "gain": 0.42,
+        "t": 12.75,
+        "pan": 0,
+        "seed": 337
+      },
+      {
+        "type": "chime",
+        "dur": 1.4,
+        "pitch": 0.9,
+        "notes": 4,
+        "gain": 0.08,
+        "t": 12.85,
+        "pan": 0,
+        "seed": 338
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "title": "Depth made of light",
+      "planHash": "0c98d36b",
+      "sheets": [
+        "sky",
+        "farMountains",
+        "nearMountains",
+        "forest",
+        "hillHouse",
+        "foreTrees",
+        "leafBorder"
+      ],
+      "fill": {
+        "worst": 0,
+        "at": null
+      },
+      "mechanism": "layers.js: seven seeded cut outlines (ridges, conifers, house with window holes, leaf border) -> extruded sheets + a 7-layer coverage array texture (sharp/soft/softer); each sheet emits backlight(p) * tau * product over sheets behind of (1 - (1 - tau) * mask_j(q_j)), q_j on the line from the lamp to p."
+    }
+  }
+}

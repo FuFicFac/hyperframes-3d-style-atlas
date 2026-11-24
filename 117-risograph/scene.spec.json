@@ -1,0 +1,754 @@
+{
+  "format": "3d-style-atlas/spec@1",
+  "conventions": {
+    "units": "metres (1 unit = 1 m)",
+    "axes": "Y-up, right-handed; camera looks down -Z by default; ground is the XZ plane at y = 0",
+    "color": "sRGB hex strings",
+    "angles": "radians (Euler XYZ order for rotation)",
+    "lightIntensity": "three.js physical units (directional/hemisphere/ambient: lux-like; spot/point: candela, decay 2)",
+    "time": "seconds from composition start",
+    "easing": "named functions from kit/time.js `ease` (formulas in references/kit-api.md)",
+    "camera": "fov is vertical field of view in degrees (three.js convention); sensor-agnostic"
+  },
+  "style": {
+    "id": "risograph",
+    "name": "Risograph",
+    "description": "Three flat inks printed one pass at a time by a rolling drum onto rough off-white paper: coarse halftone dots at three screen angles, uneven ink, paper tooth, multiply overprint into purple, green, orange and near-black; layers that land off-register and snap into line.",
+    "palette": {
+      "bg": "#c9c3b6",
+      "paper": "#f4efe3",
+      "ink": "#211c2a",
+      "pink": "#ff4aa6",
+      "blue": "#2f6ab8",
+      "yellow": "#ffe11a",
+      "tray": "#3d5560",
+      "trayRim": "#2f444e",
+      "steel": "#b9bec4",
+      "table": "#9a9184"
+    },
+    "world": {
+      "background": "#c9c3b6",
+      "environment": "room",
+      "environmentIntensity": 0.18,
+      "toneMapping": "neutral",
+      "exposure": 1.04,
+      "shadowType": "pcf"
+    },
+    "materials": {
+      "table": {
+        "type": "standard",
+        "baseColor": "#9a9184",
+        "roughness": 0.92,
+        "metalness": 0
+      },
+      "tray": {
+        "type": "standard",
+        "baseColor": "#3d5560",
+        "roughness": 0.55,
+        "metalness": 0.15
+      },
+      "trayRim": {
+        "type": "standard",
+        "baseColor": "#2f444e",
+        "roughness": 0.5,
+        "metalness": 0.2
+      },
+      "steel": {
+        "type": "standard",
+        "baseColor": "#b9bec4",
+        "roughness": 0.32,
+        "metalness": 0.85
+      },
+      "darkSteel": {
+        "type": "standard",
+        "baseColor": "#4a4f57",
+        "roughness": 0.4,
+        "metalness": 0.7
+      },
+      "paperEdge": {
+        "type": "standard",
+        "baseColor": "#efe9dc",
+        "roughness": 0.9,
+        "metalness": 0
+      }
+    },
+    "lights": [
+      {
+        "id": "hemi",
+        "type": "hemisphere",
+        "color": "#ffffff",
+        "groundColor": "#b9b1a2",
+        "intensity": 1.35
+      },
+      {
+        "id": "key",
+        "type": "directional",
+        "color": "#fff6ea",
+        "intensity": 1.55,
+        "position": [
+          -2.6,
+          6.5,
+          3.2
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "shadow": {
+          "softness": 5,
+          "mapSize": 2048,
+          "extent": 3.2,
+          "bias": -0.0004,
+          "normalBias": 0.02
+        }
+      }
+    ],
+    "post": {
+      "vignette": {
+        "darkness": 0.14,
+        "offset": 1.2
+      }
+    },
+    "camera": {
+      "fov": 30,
+      "near": 0.04,
+      "far": 60,
+      "drift": {
+        "amp": 0,
+        "speed": 0.3
+      }
+    },
+    "text": {
+      "font": "sans",
+      "weight": 800,
+      "color": "#211c2a",
+      "height": 0.3
+    },
+    "sheet": {
+      "width": 3.2,
+      "height": 2.1,
+      "thick": 0.004,
+      "tilt": 0.05,
+      "y": 0
+    },
+    "tray": {
+      "marginX": 0.62,
+      "marginY": 0.42,
+      "thick": 0.06,
+      "rim": 0.05,
+      "rimH": 0.035
+    },
+    "inks": [
+      {
+        "id": "pink",
+        "color": "#ff4aa6",
+        "density": 0.95,
+        "angle": 0.2618,
+        "pitch": 220
+      },
+      {
+        "id": "blue",
+        "color": "#2f6ab8",
+        "density": 0.93,
+        "angle": 1.309,
+        "pitch": 277.18
+      },
+      {
+        "id": "yellow",
+        "color": "#ffe11a",
+        "density": 0.97,
+        "angle": 0.7854,
+        "pitch": 329.63
+      }
+    ],
+    "halftone": {
+      "cell": 0.03,
+      "gain": 0.05,
+      "rough": 0.07,
+      "roughScale": 220,
+      "toothScale": 150,
+      "toothSkip": 0.34,
+      "mottle": 0.12,
+      "mottleScale": 1.6,
+      "paperTone": 0.035
+    },
+    "drum": {
+      "radius": 0.17,
+      "flange": 0.195,
+      "overhang": 0.2,
+      "park": 0.12,
+      "railY": 0,
+      "clampW": 0.05
+    },
+    "caption": {
+      "x": 960,
+      "y": 1010,
+      "w": 1160,
+      "h": 92,
+      "cap": 40,
+      "font": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "weight": 800,
+      "plate": "#f7f2e7",
+      "ink": "#211c2a",
+      "edge": "#211c2a",
+      "roll": 0.5
+    },
+    "sound": {
+      "bed": {
+        "root": 110,
+        "chord": [
+          0,
+          4,
+          7,
+          11,
+          14
+        ],
+        "brightness": 900,
+        "gain": 0.5
+      },
+      "roll": 0.34,
+      "land": 0.42,
+      "slide": 0.16,
+      "pluck": 0.32,
+      "nudge": 0.34,
+      "snap": 0.75,
+      "chord": 0.36,
+      "lift": 0.18
+    },
+    "sfx": {
+      "enter": "thud",
+      "exit": "whooshOut",
+      "move": "whoosh",
+      "land": "thud",
+      "emphasis": "marimba",
+      "ui": "click",
+      "bed": "pad"
+    },
+    "motion": [
+      "The drum rolls across the sheet on two rails; each ink appears exactly behind its contact line (pass direction alternates).",
+      "Between passes the parked drum spins in place while its sleeve changes ink colour.",
+      "Registration: each ink layer carries an offset (dx, dy, rotation) as a function of t; two eased nudges, then a sprung snap into register.",
+      "Camera: hold the wide while the drum works, push in on an edge to show misregistration, macro on the rosette, back out to the full print."
+    ]
+  },
+  "scene": {
+    "id": "117-risograph",
+    "style": "risograph",
+    "duration": 15,
+    "fps": 30,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "beats": [
+      {
+        "id": "pink",
+        "t": 0,
+        "dur": 3,
+        "label": "First ink: pink shapes"
+      },
+      {
+        "id": "blue",
+        "t": 3,
+        "dur": 3,
+        "label": "Second ink: blue on top"
+      },
+      {
+        "id": "yellow",
+        "t": 6,
+        "dur": 3,
+        "label": "Third ink: out of line"
+      },
+      {
+        "id": "snap",
+        "t": 9,
+        "dur": 3,
+        "label": "Line them up: it snaps"
+      },
+      {
+        "id": "macro",
+        "t": 12,
+        "dur": 3,
+        "label": "Three inks made them all"
+      }
+    ],
+    "camera": [
+      {
+        "t": 0,
+        "pos": [
+          0.0364,
+          3.24661,
+          1.55358
+        ],
+        "target": [
+          0.0364,
+          -0.04684,
+          0.11903
+        ],
+        "fov": 30
+      },
+      {
+        "t": 6.9,
+        "pos": [
+          0.0364,
+          3.24661,
+          1.55358
+        ],
+        "target": [
+          0.0364,
+          -0.04684,
+          0.11903
+        ],
+        "fov": 30
+      },
+      {
+        "t": 8.2,
+        "pos": [
+          0.1409,
+          1.18587,
+          0.11182
+        ],
+        "target": [
+          0.1409,
+          -0.01976,
+          -0.32935
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 9,
+        "pos": [
+          0.1409,
+          1.18587,
+          0.11182
+        ],
+        "target": [
+          0.1409,
+          -0.01976,
+          -0.32935
+        ],
+        "fov": 30
+      },
+      {
+        "t": 9.75,
+        "pos": [
+          0.03483,
+          2.46097,
+          0.93983
+        ],
+        "target": [
+          0.03483,
+          -0.01924,
+          -0.08199
+        ],
+        "fov": 30,
+        "ease": "inOutSine"
+      },
+      {
+        "t": 11.85,
+        "pos": [
+          0.03483,
+          2.46097,
+          0.93983
+        ],
+        "target": [
+          0.03483,
+          -0.01924,
+          -0.08199
+        ],
+        "fov": 30
+      },
+      {
+        "t": 12.5,
+        "pos": [
+          1.00559,
+          0.46425,
+          0.16939
+        ],
+        "target": [
+          1.00559,
+          -0.00241,
+          0.02972
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 13.25,
+        "pos": [
+          1.00559,
+          0.46425,
+          0.16939
+        ],
+        "target": [
+          1.00559,
+          -0.00241,
+          0.02972
+        ],
+        "fov": 30
+      },
+      {
+        "t": 14.45,
+        "pos": [
+          0.0364,
+          3.24661,
+          1.55358
+        ],
+        "target": [
+          0.0364,
+          -0.04684,
+          0.11903
+        ],
+        "fov": 30,
+        "ease": "inOutCubic"
+      },
+      {
+        "t": 15,
+        "pos": [
+          0.0364,
+          3.24661,
+          1.55358
+        ],
+        "target": [
+          0.0364,
+          -0.04684,
+          0.11903
+        ],
+        "fov": 30
+      }
+    ],
+    "objects": [],
+    "score": [
+      {
+        "t": 0,
+        "type": "pad",
+        "root": 110,
+        "chord": [
+          0,
+          4,
+          7,
+          11,
+          14
+        ],
+        "dur": 15,
+        "attack": 0.5,
+        "release": 1.6,
+        "brightness": 900,
+        "gain": 0.5,
+        "seed": 3
+      },
+      {
+        "type": "thud",
+        "gain": 0.42,
+        "pitch": 1,
+        "dur": 0.4,
+        "t": 0.24,
+        "pan": 0,
+        "seed": 117
+      },
+      {
+        "type": "whir",
+        "gain": 0.34,
+        "hz": 110,
+        "hz2": 114.4,
+        "dur": 2.26,
+        "grit": 0.22,
+        "t": 0.27999999999999997,
+        "pan": 0,
+        "seed": 124
+      },
+      {
+        "type": "paper",
+        "gain": 0.16,
+        "dur": 1.2,
+        "density": 0.3,
+        "t": 0.33999999999999997,
+        "pan": 0,
+        "seed": 131
+      },
+      {
+        "type": "clack",
+        "gain": 0.2,
+        "dur": 0.1,
+        "t": 2.5,
+        "pan": 0,
+        "seed": 138
+      },
+      {
+        "type": "whir",
+        "gain": 0.12,
+        "hz": 160,
+        "hz2": 240,
+        "dur": 0.5500000000000003,
+        "grit": 0.1,
+        "t": 2.55,
+        "pan": 0,
+        "seed": 145
+      },
+      {
+        "type": "pluck",
+        "gain": 0.32,
+        "hz": 277.18,
+        "dur": 1.1,
+        "decay": 0.9,
+        "bright": 0.55,
+        "t": 3.02,
+        "pan": 0,
+        "seed": 152
+      },
+      {
+        "type": "thud",
+        "gain": 0.42,
+        "pitch": 1.0649772727272726,
+        "dur": 0.4,
+        "t": 3.15,
+        "pan": 0,
+        "seed": 159
+      },
+      {
+        "type": "whir",
+        "gain": 0.34,
+        "hz": 138.59,
+        "hz2": 144.1336,
+        "dur": 2.35,
+        "grit": 0.22,
+        "t": 3.19,
+        "pan": 0,
+        "seed": 166
+      },
+      {
+        "type": "paper",
+        "gain": 0.16,
+        "dur": 1.2,
+        "density": 0.3,
+        "t": 3.25,
+        "pan": 0,
+        "seed": 173
+      },
+      {
+        "type": "clack",
+        "gain": 0.2,
+        "dur": 0.1,
+        "t": 5.5,
+        "pan": 0,
+        "seed": 180
+      },
+      {
+        "type": "whir",
+        "gain": 0.12,
+        "hz": 160,
+        "hz2": 240,
+        "dur": 0.5300000000000002,
+        "grit": 0.1,
+        "t": 5.55,
+        "pan": 0,
+        "seed": 187
+      },
+      {
+        "type": "pluck",
+        "gain": 0.32,
+        "hz": 329.63,
+        "dur": 1.1,
+        "decay": 0.9,
+        "bright": 0.55,
+        "t": 6,
+        "pan": 0,
+        "seed": 194
+      },
+      {
+        "type": "thud",
+        "gain": 0.42,
+        "pitch": 1.1245795454545455,
+        "dur": 0.4,
+        "t": 6.12,
+        "pan": 0,
+        "seed": 201
+      },
+      {
+        "type": "whir",
+        "gain": 0.34,
+        "hz": 164.815,
+        "hz2": 171.4076,
+        "dur": 1.7800000000000002,
+        "grit": 0.22,
+        "t": 6.16,
+        "pan": 0,
+        "seed": 208
+      },
+      {
+        "type": "paper",
+        "gain": 0.16,
+        "dur": 1.068,
+        "density": 0.3,
+        "t": 6.22,
+        "pan": 0,
+        "seed": 215
+      },
+      {
+        "t": 6.9,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 1.299999999999999,
+        "gain": 0.2,
+        "seed": 5
+      },
+      {
+        "type": "clack",
+        "gain": 0.2,
+        "dur": 0.1,
+        "t": 7.9,
+        "pan": 0,
+        "seed": 222
+      },
+      {
+        "type": "whoosh",
+        "dir": "out",
+        "gain": 0.18,
+        "dur": 0.9999999999999989,
+        "t": 8.3,
+        "pan": 0,
+        "seed": 229
+      },
+      {
+        "t": 9,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 0.75,
+        "gain": 0.16,
+        "seed": 7
+      },
+      {
+        "type": "paper",
+        "gain": 0.20800000000000002,
+        "dur": 0.6,
+        "density": 0.4,
+        "t": 9.05,
+        "pan": 0,
+        "seed": 236
+      },
+      {
+        "type": "clack",
+        "gain": 0.34,
+        "dur": 0.1,
+        "pitch": 1,
+        "t": 9.85,
+        "pan": 0,
+        "seed": 243
+      },
+      {
+        "type": "thud",
+        "gain": 0.12,
+        "dur": 0.18,
+        "pitch": 1.4,
+        "t": 9.85,
+        "pan": 0,
+        "seed": 244
+      },
+      {
+        "type": "clack",
+        "gain": 0.28900000000000003,
+        "dur": 0.1,
+        "pitch": 1.12,
+        "t": 10.25,
+        "pan": 0,
+        "seed": 250
+      },
+      {
+        "type": "thud",
+        "gain": 0.12,
+        "dur": 0.18,
+        "pitch": 1.4,
+        "t": 10.25,
+        "pan": 0,
+        "seed": 251
+      },
+      {
+        "type": "click",
+        "gain": 0.75,
+        "dur": 0.03,
+        "t": 10.7,
+        "pan": 0,
+        "seed": 257
+      },
+      {
+        "type": "clack",
+        "gain": 0.44999999999999996,
+        "dur": 0.12,
+        "pitch": 1.3,
+        "t": 10.7,
+        "pan": 0,
+        "seed": 258
+      },
+      {
+        "type": "thud",
+        "gain": 0.2,
+        "dur": 0.25,
+        "t": 10.7,
+        "pan": 0,
+        "seed": 259
+      },
+      {
+        "type": "marimba",
+        "gain": 0.36,
+        "hz": 440,
+        "notes": [
+          0,
+          4,
+          7,
+          12
+        ],
+        "step": 0.035,
+        "dur": 1.6,
+        "decay": 0.45,
+        "t": 10.719999999999999,
+        "pan": 0,
+        "seed": 264
+      },
+      {
+        "type": "chime",
+        "gain": 0.162,
+        "dur": 1.6,
+        "notes": 5,
+        "t": 10.799999999999999,
+        "pan": 0,
+        "seed": 265
+      },
+      {
+        "t": 11.85,
+        "type": "whoosh",
+        "dir": "in",
+        "dur": 0.6500000000000004,
+        "gain": 0.22,
+        "seed": 9
+      },
+      {
+        "t": 13.25,
+        "type": "whoosh",
+        "dir": "out",
+        "dur": 1.1999999999999993,
+        "gain": 0.2,
+        "seed": 11
+      }
+    ],
+    "duck": [],
+    "notes": {
+      "mechanism": "riso.js: POSTER (analytic shapes, tone per ink) -> posterGLSL (same numbers, anti-aliased) -> per pixel and per ink: registration transform, tone, cosine-spot threshold screen at the ink's angle, rough dot edge, tooth skip, mottle, reveal behind the drum line, multiply overprint.",
+      "meanTone": {
+        "pink": 0.385,
+        "blue": 0.45,
+        "yellow": 0.374
+      },
+      "framing": "ok (worst 0.934 at 8.2s)",
+      "fingerprint": "0:0.240-2.500,1:3.150-5.500,2:6.120-7.900|snap 10.7",
+      "shots": {
+        "WIDE": 3.59233,
+        "CLOSE": 1.28381,
+        "MEDIUM": 2.68245,
+        "MACRO": 0.48711
+      },
+      "sound": "per pass: thud + paper slide + drum whir pitched to the ink (A3 / C#4 / E4); pluck at each re-ink; paper slide, two clacks and a click at the snap; marimba chord of the three ink pitches; a whoosh per camera move; low pad bed."
+    }
+  }
+}
